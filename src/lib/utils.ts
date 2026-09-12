@@ -15,9 +15,15 @@ export function getAssetPath(path: string): string {
   if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
     return path;
   }
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
-  return `${basePath}${cleanPath}`;
+  const envBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
+  if (envBasePath) {
+    return `${envBasePath}${cleanPath}`;
+  }
+  if (typeof window !== "undefined" && (window.location.pathname.startsWith("/arcano") || window.location.hostname.includes("github.io"))) {
+    return `/arcano${cleanPath}`;
+  }
+  return cleanPath;
 }
 
 /**

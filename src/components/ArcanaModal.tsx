@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Arcana } from "@/data/arcana";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
+import { getAssetPath } from "@/lib/utils";
 
 interface ArcanaModalProps {
   arcana: Arcana | null;
@@ -47,7 +48,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
         <div className="my-6 flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div className="relative w-32 sm:w-36 aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep">
             <Image
-              src={arcana.imageUrl}
+              src={getAssetPath(arcana.imageUrl)}
               alt={arcana.name}
               fill
               className="object-cover object-center filter brightness-[0.88] contrast-[1.15]"

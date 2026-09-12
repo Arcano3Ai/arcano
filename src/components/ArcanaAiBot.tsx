@@ -5,6 +5,7 @@ import { arcanaList, Arcana } from "@/data/arcana";
 import { shopProducts, shopCategories, ShopProduct } from "@/data/shop";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { sacredAudio } from "@/lib/sacredAudio";
+import { getAssetPath } from "@/lib/utils";
 
 interface ChatMessage {
   id: string;
@@ -332,8 +333,8 @@ export const ArcanaAiBot: React.FC = () => {
         aria-label="El Sello de ARCANO — Custodio y Tienda"
         style={{
           position: "fixed",
-          bottom: "max(5.25rem, calc(env(safe-area-inset-bottom, 0px) + 5.25rem))",
-          right: "max(1rem, env(safe-area-inset-right, 0px))",
+          bottom: "max(5rem, calc(env(safe-area-inset-bottom, 0px) + 5rem))",
+          right: "max(1.25rem, calc(env(safe-area-inset-right, 0px) + 1.25rem))",
           top: "auto",
         }}
         className="z-40 flex items-center gap-3"
@@ -454,7 +455,7 @@ export const ArcanaAiBot: React.FC = () => {
                     <div className="mt-3 pt-2.5 border-t border-gold/20 flex items-center gap-3 bg-obsidian/60 p-2 rounded border border-charcoal-border">
                       <div className="w-10 h-14 relative rounded overflow-hidden border border-gold/40 flex-shrink-0 bg-black">
                         <img
-                          src={msg.arcanaCard.imageUrl}
+                          src={getAssetPath(msg.arcanaCard.imageUrl)}
                           alt={msg.arcanaCard.name}
                           className="w-full h-full object-cover"
                         />
@@ -481,7 +482,7 @@ export const ArcanaAiBot: React.FC = () => {
                     <div className="mt-3 pt-2.5 border-t border-gold/20 flex items-center gap-3 bg-obsidian/70 p-2.5 rounded border border-gold/30">
                       <div className="w-12 h-12 relative rounded overflow-hidden border border-gold/40 flex-shrink-0 bg-black">
                         <img
-                          src={msg.shopItem.imageUrl}
+                          src={getAssetPath(msg.shopItem.imageUrl)}
                           alt={msg.shopItem.name}
                           className="w-full h-full object-cover"
                         />

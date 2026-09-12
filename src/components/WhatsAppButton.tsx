@@ -19,7 +19,7 @@ export const WhatsAppButton: React.FC = () => {
       style={{
         position: "fixed",
         bottom: "max(1.25rem, calc(env(safe-area-inset-bottom, 0px) + 1.25rem))",
-        right: "max(1rem, env(safe-area-inset-right, 0px))",
+        right: "max(1.25rem, calc(env(safe-area-inset-right, 0px) + 1.25rem))",
         top: "auto",
       }}
       className="z-40 flex items-center gap-3"

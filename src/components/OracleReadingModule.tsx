@@ -5,6 +5,7 @@ import Image from "next/image";
 import { arcanaList, Arcana } from "@/data/arcana";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { getWhatsAppUrl } from "@/config/brandConfig";
+import { getAssetPath } from "@/lib/utils";
 
 interface OracleSlot {
   position: "Pasado" | "Presente" | "Futuro";
@@ -389,7 +390,7 @@ export const OracleReadingModule: React.FC = () => {
                       {/* Imagen original clásica COMPLETA */}
                       <div className="relative my-1 w-full flex-1 rounded overflow-hidden border border-gold/20 bg-obsidian-deep/60 flex items-center justify-center">
                         <Image
-                          src={slot.arcana.imageUrl}
+                          src={getAssetPath(slot.arcana.imageUrl)}
                           alt={slot.arcana.name}
                           fill
                           className="object-contain object-center filter brightness-[0.95] contrast-[1.10]"

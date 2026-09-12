@@ -6,6 +6,7 @@ import Link from "next/link";
 import { shopCategories, shopProducts, ShopProduct } from "@/data/shop";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getWhatsAppUrl } from "@/config/brandConfig";
+import { getAssetPath } from "@/lib/utils";
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todas");
@@ -45,7 +46,7 @@ export default function ShopPage() {
           >
             <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-3 border border-charcoal-border/60">
               <Image
-                src={cat.imageUrl}
+                src={getAssetPath(cat.imageUrl)}
                 alt={cat.name}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -105,7 +106,7 @@ export default function ShopPage() {
               {/* Imagen del Producto */}
               <div className="relative aspect-square overflow-hidden border-b border-charcoal-border/70 bg-black">
                 <Image
-                  src={product.imageUrl}
+                  src={getAssetPath(product.imageUrl)}
                   alt={product.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -187,7 +188,7 @@ export default function ShopPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
               <div className="relative aspect-square rounded-xl overflow-hidden border border-gold/30 bg-black">
                 <Image
-                  src={selectedProduct.imageUrl}
+                  src={getAssetPath(selectedProduct.imageUrl)}
                   alt={selectedProduct.name}
                   fill
                   className="object-cover"

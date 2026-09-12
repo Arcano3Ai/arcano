@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MinorArcanaCard, suitsInfo } from "@/data/minorArcana";
+import { getAssetPath } from "@/lib/utils";
 
 interface Props {
   card: MinorArcanaCard | null;
@@ -48,7 +49,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
         <div className="my-6 flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div className="relative w-32 sm:w-36 aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep">
             <Image
-              src={card.imageUrl}
+              src={getAssetPath(card.imageUrl)}
               alt={card.name}
               fill
               className="object-cover object-center filter brightness-[0.88] contrast-[1.15]"

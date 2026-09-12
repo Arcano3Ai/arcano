@@ -7,6 +7,7 @@ import { arcanaList, Arcana } from "@/data/arcana";
 import { trackEvent } from "@/lib/analytics";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
+import { getAssetPath } from "@/lib/utils";
 
 export const DailyCardModule: React.FC = () => {
   const [revealed, setRevealed] = useState<boolean>(false);
@@ -133,7 +134,7 @@ export const DailyCardModule: React.FC = () => {
                 {/* Ilustración de la Carta Original */}
                 <div className="relative my-1 w-full flex-1 rounded overflow-hidden border border-gold/30 bg-obsidian-deep">
                   <Image
-                    src={dailyArcana.imageUrl}
+                    src={getAssetPath(dailyArcana.imageUrl)}
                     alt={dailyArcana.name}
                     fill
                     className="object-cover object-center filter brightness-[0.88] contrast-[1.15]"

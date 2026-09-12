@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { blogPosts } from "@/data/blog";
 import { SectionHeader } from "@/components/SectionHeader";
+import { getAssetPath } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Revista Editorial & Ensayos Simbólicos",
@@ -30,7 +31,7 @@ export default function BlogIndexPage() {
             <div>
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
-                  src={post.imageUrl}
+                  src={getAssetPath(post.imageUrl)}
                   alt={post.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"

@@ -24,6 +24,7 @@ import { NewsletterSection } from "@/components/NewsletterSection";
 import { InstagramGrid } from "@/components/InstagramGrid";
 import { AcademySection } from "@/components/academy/AcademySection";
 import { trackEvent } from "@/lib/analytics";
+import { getAssetPath } from "@/lib/utils";
 
 export default function HomePage() {
   const [selectedArcanaForModal, setSelectedArcanaForModal] =
@@ -174,7 +175,7 @@ export default function HomePage() {
           <div className="lg:col-span-5">
             <div className="group relative aspect-square sm:aspect-[4/5] rounded-lg overflow-hidden border border-gold/35 shadow-[0_15px_50px_rgba(0,0,0,0.9)] bg-obsidian-deep">
               <Image
-                src={tarotistProfile.imagePlaceholder.imageUrl}
+                src={getAssetPath(tarotistProfile.imagePlaceholder.imageUrl)}
                 alt={tarotistProfile.imagePlaceholder.alt}
                 fill
                 unoptimized
@@ -291,7 +292,7 @@ export default function HomePage() {
         {/* Fondo tenue del sahumerio */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-full opacity-10 pointer-events-none">
           <Image
-            src="/images/malachai-sahumerio.png"
+            src={getAssetPath("/images/malachai-sahumerio.png")}
             alt="Sahumerio ceremonial en el santuario"
             fill
             className="object-cover filter brightness-[0.2] contrast-[1.4]"

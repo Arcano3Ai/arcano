@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { socialFeedList } from "@/data/social";
 import { brandConfig } from "@/config/brandConfig";
+import { getAssetPath } from "@/lib/utils";
 
 export const InstagramGrid: React.FC = () => {
   return (
@@ -38,7 +39,7 @@ export const InstagramGrid: React.FC = () => {
             {/* Imagen con fallback estilizado */}
             <div className="absolute inset-0 bg-[#161622]">
               <Image
-                src={item.imageUrl}
+                src={getAssetPath(item.imageUrl)}
                 alt={item.caption}
                 fill
                 className="object-cover filter brightness-[0.6] contrast-[1.25] saturate-[0.85] opacity-85 group-hover:opacity-100 group-hover:brightness-[0.75] group-hover:scale-105 transition-all duration-700 ease-out"

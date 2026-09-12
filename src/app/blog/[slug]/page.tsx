@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { blogPosts, BlogPost } from "@/data/blog";
 import { brandConfig } from "@/config/brandConfig";
+import { getAssetPath } from "@/lib/utils";
 
 interface Props {
   params: {
@@ -78,7 +79,7 @@ export default function BlogPostDetailPage({ params }: Props) {
       {/* Imagen Principal */}
       <div className="relative aspect-[16/9] rounded-xl overflow-hidden my-8 border border-charcoal-border shadow-xl">
         <Image
-          src={post.imageUrl}
+          src={getAssetPath(post.imageUrl)}
           alt={post.title}
           fill
           priority

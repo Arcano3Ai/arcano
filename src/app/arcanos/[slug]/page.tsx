@@ -6,6 +6,7 @@ import Link from "next/link";
 import { arcanaList, Arcana } from "@/data/arcana";
 import { brandConfig } from "@/config/brandConfig";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
+import { getAssetPath } from "@/lib/utils";
 
 interface Props {
   params: {
@@ -70,7 +71,7 @@ export default function ArcanaDetailPage({ params }: Props) {
         {/* Ilustración de la Carta Original */}
         <div className="relative w-48 sm:w-56 aspect-[9/14] rounded-lg overflow-hidden border-2 border-gold/40 mx-auto my-8 shadow-[0_15px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(198,160,82,0.2)] bg-obsidian-deep">
           <Image
-            src={arcana.imageUrl}
+            src={getAssetPath(arcana.imageUrl)}
             alt={arcana.name}
             fill
             className="object-cover object-center filter brightness-[0.88] contrast-[1.18]"
