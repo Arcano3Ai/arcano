@@ -1,0 +1,17 @@
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="102.4" fill="#07060b"/>
+    <g transform="translate(0, 0) scale(16)">
+      <circle cx="16" cy="16" r="15" stroke="#c6a052" stroke-width="1" stroke-opacity="0.5"/>
+      <circle cx="16" cy="16" r="13" stroke="#dfb76c" stroke-width="0.5" stroke-dasharray="1 2" stroke-opacity="0.4"/>
+      <path d="M18 8C13.0294 8 9 12.0294 9 17C9 21.9706 13.0294 26 18 26C20.082 26 22.008 25.292 23.55 24.1C19.33 23.47 16 19.88 16 15.5C16 11.12 19.33 7.53 23.55 6.9C22.008 5.708 20.082 5 18 5V8Z" fill="url(#goldGradient)"/>
+      <circle cx="21" cy="10" r="1.2" fill="#fff" opacity="0.9"/>
+      <defs>
+        <linearGradient id="goldGradient" x1="9" y1="5" x2="24" y2="26" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#dfb76c"/>
+          <stop offset="0.5" stop-color="#c6a052"/>
+          <stop offset="1" stop-color="#99732e"/>
+        </linearGradient>
+      </defs>
+    </g>
+  </svg>

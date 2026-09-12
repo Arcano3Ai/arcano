@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { siteConfig } from "@/config/siteConfig";
 import { brandConfig } from "@/config/brandConfig";
@@ -10,6 +10,15 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AtmosphereAudioPlayer } from "@/components/AtmosphereAudioPlayer";
 import { ArcanaAiBot } from "@/components/ArcanaAiBot";
+import { PwaRegister } from "@/components/PwaRegister";
+
+export const viewport: Viewport = {
+  themeColor: "#07060b",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -21,6 +30,21 @@ export const metadata: Metadata = {
   keywords: siteConfig.keywords,
   authors: [{ name: brandConfig.name }],
   creator: brandConfig.name,
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ARCANO",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
@@ -63,6 +87,13 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="ARCANO" />
+        <meta name="theme-color" content="#07060b" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -80,11 +111,12 @@ export default function RootLayout({
         {/* Contenido principal */}
         <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
 
-        {/* Footer, audio ceremonial, asistente IA y botón WhatsApp flotante */}
+        {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
         <Footer />
         <AtmosphereAudioPlayer />
         <ArcanaAiBot />
         <WhatsAppButton />
+        <PwaRegister />
       </body>
     </html>
   );
