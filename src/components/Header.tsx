@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { brandConfig } from "@/config/brandConfig";
 import { headerNavLinks } from "@/config/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,8 +76,11 @@ export const Header: React.FC = () => {
           })}
         </nav>
 
-        {/* CTA DE RESERVA Y HAMBURGUER MÓVIL */}
-        <div className="flex items-center space-x-4">
+        {/* CTA DE RESERVA, MODO CLARO/OSCURO Y HAMBURGUER MÓVIL */}
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          {/* Botón Solecito / Luna para Modo Claro / Oscuro */}
+          <ThemeToggle />
+
           <Link
             href="/reservar"
             onClick={handleBookingClick}
@@ -137,6 +141,13 @@ export const Header: React.FC = () => {
           </div>
 
           <div className="pt-8 border-t border-charcoal-border flex flex-col items-center space-y-4">
+            <div className="flex items-center justify-between w-full px-4 py-2 rounded-lg bg-charcoal/40 border border-charcoal-border/50">
+              <span className="text-xs uppercase tracking-wider text-parchment-dim font-sans">
+                Iluminación del Santuario
+              </span>
+              <ThemeToggle />
+            </div>
+
             <Link
               href="/reservar"
               onClick={handleBookingClick}

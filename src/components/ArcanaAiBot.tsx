@@ -327,10 +327,16 @@ export const ArcanaAiBot: React.FC = () => {
 
   return (
     <>
-      {/* Botón flotante ceremonial: El Sello de ARCANO (arriba del botón de WhatsApp) */}
+      {/* Botón flotante ceremonial: El Sello de ARCANO (arriba del botón de WhatsApp, anclado abajo) */}
       <aside
         aria-label="El Sello de ARCANO — Custodio y Tienda"
-        className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-40 flex items-center gap-3"
+        style={{
+          position: "fixed",
+          bottom: "max(5.25rem, calc(env(safe-area-inset-bottom, 0px) + 5.25rem))",
+          right: "max(1rem, env(safe-area-inset-right, 0px))",
+          top: "auto",
+        }}
+        className="z-40 flex items-center gap-3"
       >
         {/* Tooltip místico expandible */}
         <div
@@ -392,7 +398,13 @@ export const ArcanaAiBot: React.FC = () => {
           role="dialog"
           aria-modal="true"
           aria-label="Ventana de consulta del Custodio de ARCANO"
-          className="fixed bottom-20 sm:bottom-28 right-3 sm:right-6 w-[94vw] sm:w-[420px] h-[520px] max-h-[78vh] rounded-2xl border border-gold/50 bg-[#0d0c15]/98 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_35px_rgba(198,160,82,0.25)] flex flex-col z-50 overflow-hidden animate-fadeIn"
+          style={{
+            position: "fixed",
+            bottom: "max(5rem, calc(env(safe-area-inset-bottom, 0px) + 5rem))",
+            right: "max(0.75rem, env(safe-area-inset-right, 0px))",
+            top: "auto",
+          }}
+          className="w-[94vw] sm:w-[420px] h-[520px] max-h-[78vh] rounded-2xl border border-gold/50 bg-[#0d0c15]/98 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_35px_rgba(198,160,82,0.25)] flex flex-col z-50 overflow-hidden animate-fadeIn"
         >
           {/* Cabecera */}
           <div className="p-4 border-b border-charcoal-border/70 bg-gradient-to-r from-[#1c1628] via-[#13111d] to-[#0c0b14] flex items-center justify-between">

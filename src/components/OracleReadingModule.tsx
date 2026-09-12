@@ -148,7 +148,7 @@ export const OracleReadingModule: React.FC = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1">
                 Tu Nombre o Apelativo
@@ -163,15 +163,86 @@ export const OracleReadingModule: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1">
-                Fecha de Nacimiento
+              <label className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1 flex items-center justify-between">
+                <span>Fecha de Nacimiento</span>
+                {birthDate && (
+                  <span className="text-[9px] text-gold font-sans capitalize">
+                    ✦ {birthDate}
+                  </span>
+                )}
               </label>
-              <input
-                type="date"
-                value={birthDate}
-                onChange={(e) => setBirthDate(e.target.value)}
-                className="w-full bg-[#161424] border border-charcoal-border rounded px-3 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
-              />
+
+              {/* Selector ceremonial de Día, Mes y Año: infalible en móviles */}
+              <div className="grid grid-cols-3 gap-1.5">
+                {/* Día */}
+                <select
+                  value={birthDate ? parseInt(birthDate.split("-")[2] || "0", 10) : ""}
+                  onChange={(e) => {
+                    const dayVal = e.target.value ? e.target.value.padStart(2, "0") : "";
+                    const parts = (birthDate || "--").split("-");
+                    const y = parts[0] || "1995";
+                    const m = parts[1] || "01";
+                    if (dayVal) {
+                      setBirthDate(`${y}-${m}-${dayVal}`);
+                    }
+                  }}
+                  className="bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
+                >
+                  <option value="" disabled>Día</option>
+                  {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                    <option key={d} value={d} className="bg-[#161424] text-parchment">
+                      {d}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Mes */}
+                <select
+                  value={birthDate ? parseInt(birthDate.split("-")[1] || "0", 10) : ""}
+                  onChange={(e) => {
+                    const monthVal = e.target.value ? e.target.value.padStart(2, "0") : "";
+                    const parts = (birthDate || "--").split("-");
+                    const y = parts[0] || "1995";
+                    const d = parts[2] || "15";
+                    if (monthVal) {
+                      setBirthDate(`${y}-${monthVal}-${d}`);
+                    }
+                  }}
+                  className="bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
+                >
+                  <option value="" disabled>Mes</option>
+                  {[
+                    "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+                  ].map((mName, i) => (
+                    <option key={i + 1} value={i + 1} className="bg-[#161424] text-parchment">
+                      {mName}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Año */}
+                <select
+                  value={birthDate ? parseInt(birthDate.split("-")[0] || "0", 10) : ""}
+                  onChange={(e) => {
+                    const yearVal = e.target.value;
+                    const parts = (birthDate || "--").split("-");
+                    const m = parts[1] || "01";
+                    const d = parts[2] || "15";
+                    if (yearVal) {
+                      setBirthDate(`${yearVal}-${m}-${d}`);
+                    }
+                  }}
+                  className="bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
+                >
+                  <option value="" disabled>Año</option>
+                  {Array.from({ length: 85 }, (_, i) => 2014 - i).map((y) => (
+                    <option key={y} value={y} className="bg-[#161424] text-parchment">
+                      {y}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
 

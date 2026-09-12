@@ -46,16 +46,15 @@ export const CourseModal: React.FC<CourseModalProps> = ({
         className="relative w-full max-w-2xl bg-[#0e0b17] border border-gold/40 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.9)] overflow-hidden my-8"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Cabecera decorativa */}
-        <div className="relative aspect-[21/9] w-full overflow-hidden bg-black">
-          <Image
+        {/* Cabecera decorativa: altura fija garantizada para móviles */}
+        <div className="relative w-full h-52 sm:h-64 min-h-[200px] overflow-hidden bg-black/95 flex items-center justify-center">
+          <img
             src={getAssetPath(course.cardImage)}
             alt={course.title}
-            fill
-            sizes="100vw"
-            className="object-contain p-4"
+            decoding="async"
+            className="w-full h-full object-contain p-3 sm:p-4"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0e0b17] via-[#0e0b17]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0e0b17] via-[#0e0b17]/40 to-transparent pointer-events-none" />
 
           {/* Botón cerrar */}
           <button

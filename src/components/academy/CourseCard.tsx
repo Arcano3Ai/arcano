@@ -29,17 +29,16 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-gold/50 via-gold-light to-gold/50 shadow-[0_0_15px_rgba(198,160,82,0.8)]" />
       )}
 
-      {/* Cabecera / Imagen y Badges */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/90">
-        <Image
+      {/* Cabecera / Imagen y Badges: altura física fija y garantizada para evitar colapso en WebKit/móviles */}
+      <div className="relative w-full h-48 sm:h-52 min-h-[190px] overflow-hidden bg-black/90 flex items-center justify-center">
+        <img
           src={getAssetPath(course.cardImage)}
           alt={`${course.romanLevel} — ${course.title}`}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           loading={course.level <= 3 ? "eager" : "lazy"}
-          className="object-contain p-2 transition-transform duration-700 group-hover:scale-105"
+          decoding="async"
+          className="w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a14] via-[#0c0a14]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a14] via-[#0c0a14]/40 to-transparent pointer-events-none" />
 
         {/* Badges superiores */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">

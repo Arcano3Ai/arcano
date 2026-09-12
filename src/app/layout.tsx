@@ -11,6 +11,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AtmosphereAudioPlayer } from "@/components/AtmosphereAudioPlayer";
 import { ArcanaAiBot } from "@/components/ArcanaAiBot";
 import { PwaRegister } from "@/components/PwaRegister";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export const viewport: Viewport = {
   themeColor: "#07060b",
@@ -99,24 +100,26 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-obsidian text-parchment flex flex-col relative antialiased selection:bg-gold/30 selection:text-parchment">
-        {/* Atmósfera mística fija */}
-        <MysticalBackground />
-        <StarField />
-        <CustomCursor />
+      <body className="min-h-screen bg-obsidian text-parchment flex flex-col relative antialiased selection:bg-gold/30 selection:text-parchment transition-colors duration-500">
+        <ThemeProvider>
+          {/* Atmósfera mística fija */}
+          <MysticalBackground />
+          <StarField />
+          <CustomCursor />
 
-        {/* Cabecera persistente */}
-        <Header />
+          {/* Cabecera persistente */}
+          <Header />
 
-        {/* Contenido principal */}
-        <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
+          {/* Contenido principal */}
+          <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
 
-        {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
-        <Footer />
-        <AtmosphereAudioPlayer />
-        <ArcanaAiBot />
-        <WhatsAppButton />
-        <PwaRegister />
+          {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
+          <Footer />
+          <AtmosphereAudioPlayer />
+          <ArcanaAiBot />
+          <WhatsAppButton />
+          <PwaRegister />
+        </ThemeProvider>
       </body>
     </html>
   );

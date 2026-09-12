@@ -110,3 +110,104 @@ button, a {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   MODO CLARO CEREMONIAL: "LUZ SAGRADA / PAPIRO Y ORO"
+   Diseñado con estética Dark Luxury adaptada para lectura diurna de alto contraste.
+   ========================================================================== */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #f7f4ed !important;
+  color: #1e1a27 !important;
+}
+
+/* Fondos y contenedores en Modo Claro */
+html.light .bg-obsidian,
+html.light .bg-obsidian-deep {
+  background-color: #f2eee5 !important;
+  color: #1e1a27 !important;
+}
+
+html.light .bg-obsidian-light,
+html.light .bg-charcoal,
+html.light .bg-night {
+  background-color: #ece6da !important;
+  color: #1e1a27 !important;
+}
+
+/* Tarjetas, secciones y modales con aspecto de papiro / marfil fino */
+html.light [class*="bg-[#0c0a14]"],
+html.light [class*="bg-[#0e0b17]"],
+html.light [class*="bg-[#0f0e18]"],
+html.light [class*="bg-[#14121d]"],
+html.light [class*="bg-[#151520]"],
+html.light [class*="bg-[#12101c]"],
+html.light [class*="bg-[#161424]"],
+html.light [class*="bg-[#0b0a10]"],
+html.light [class*="bg-[#0d0c15]"] {
+  background-color: #ffffff !important;
+  border-color: #dcd3c2 !important;
+  box-shadow: 0 4px 20px rgba(160, 130, 70, 0.08) !important;
+}
+
+/* Textos adaptados para máxima legibilidad diurna */
+html.light .text-parchment {
+  color: #1a1624 !important;
+}
+
+html.light .text-parchment-muted {
+  color: #4b4458 !important;
+}
+
+html.light .text-parchment-dim {
+  color: #6a6279 !important;
+}
+
+/* Bordes y divisores */
+html.light .border-charcoal-border,
+html.light [class*="border-charcoal-border"] {
+  border-color: #ded6c6 !important;
+}
+
+/* Cabecera persistente y menú móvil */
+html.light header {
+  background-color: rgba(247, 244, 237, 0.95) !important;
+  border-color: #ded6c6 !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light header nav a {
+  color: #4b4458 !important;
+}
+
+html.light header nav a:hover {
+  color: #9a7836 !important;
+}
+
+html.light [role="dialog"] {
+  background-color: #fdfbf7 !important;
+  border-color: #c6a052 !important;
+}
+
+/* Formularios e inputs en modo claro */
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #f8f6f0 !important;
+  color: #1a1624 !important;
+  border-color: #d4caa8 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #8c829e !important;
+}
+
+/* Reducción sutil de partículas para no deslumbrar en modo claro */
+html.light canvas {
+  opacity: 0.25 !important;
+}
+
