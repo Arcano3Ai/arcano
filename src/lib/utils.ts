@@ -8,6 +8,19 @@ export function cn(...classes: (string | boolean | undefined | null)[]): string 
 }
 
 /**
+ * Retorna la ruta completa de un asset considerando el basePath en GitHub Pages
+ */
+export function getAssetPath(path: string): string {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return `${basePath}${cleanPath}`;
+}
+
+/**
  * Formatea un número al estándar monetario configurado (por defecto MXN)
  */
 export function formatCurrency(amount: number): string {
