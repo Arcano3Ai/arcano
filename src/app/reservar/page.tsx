@@ -1,31 +1,21 @@
+"use client";
+
 import React, { Suspense } from "react";
-import type { Metadata } from "next";
+import { useSearchParams } from "next/navigation";
 import { BookingWidget } from "@/components/BookingWidget";
 import { SectionHeader } from "@/components/SectionHeader";
 
-export const metadata: Metadata = {
-  title: "Reservar una Lectura de Tarot",
-  description:
-    "Solicita tu sesión personalizada de tarot con ARCANO. Selección de lectura, fecha, modalidad y acompañamiento ceremonial.",
-};
-
-function BookingWidgetWrapper({
-  searchParams,
-}: {
-  searchParams?: { servicio?: string; arcano?: string };
-}) {
+function BookingWidgetWrapper() {
+  const searchParams = useSearchParams();
+  const servicio = searchParams.get("servicio") || undefined;
   return (
     <BookingWidget
-      initialServiceSlug={searchParams?.servicio || "lectura-general"}
+      initialServiceSlug={servicio || "lectura-general"}
     />
   );
 }
 
-export default function ReservarPage({
-  searchParams,
-}: {
-  searchParams?: { servicio?: string; arcano?: string };
-}) {
+export default function ReservarPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
@@ -42,7 +32,7 @@ export default function ReservarPage({
           </div>
         }
       >
-        <BookingWidgetWrapper searchParams={searchParams} />
+        <BookingWidgetWrapper />
       </Suspense>
     </div>
   );
