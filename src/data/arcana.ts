@@ -4,7 +4,7 @@ export interface Arcana {
   numericValue: number;
   name: string;
   quote: string;
-  element: "Fuego" | "Agua" | "Aire" | "Tierra" | "Éter";
+  element: "Fuego" | "Agua" | "Aire" | "Tierra";
   archetype: string;
   keywordsLight: string[];
   keywordsShadow: string[];

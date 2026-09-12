@@ -17,7 +17,7 @@ export default function ArcanosIndexPage() {
   const [modalArcana, setModalArcana] = useState<Arcana | null>(null);
   const [modalMinor, setModalMinor] = useState<MinorArcanaCard | null>(null);
 
-  const majorElements = ["Todos", "Fuego", "Agua", "Aire", "Tierra", "Éter"];
+  const majorElements = ["Todos", "Fuego", "Agua", "Aire", "Tierra"];
   const suits = ["Todos", "Bastos", "Copas", "Espadas", "Oros"];
 
   const filteredMajors = arcanaList.filter((arcana) => {

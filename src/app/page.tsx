@@ -22,6 +22,7 @@ import { ArcanaCard } from "@/components/ArcanaCard";
 import { ArcanaModal } from "@/components/ArcanaModal";
 import { NewsletterSection } from "@/components/NewsletterSection";
 import { InstagramGrid } from "@/components/InstagramGrid";
+import { AcademySection } from "@/components/academy/AcademySection";
 import { trackEvent } from "@/lib/analytics";
 
 export default function HomePage() {
@@ -650,7 +651,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 14. PREGUNTAS FRECUENTES (FAQ) */}
+      {/* 14. ACADEMIA ESOTÉRICA */}
+      <AcademySection />
+
+      {/* 15. PREGUNTAS FRECUENTES (FAQ) */}
       <section
         id="faq"
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
