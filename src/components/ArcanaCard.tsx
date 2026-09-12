@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Arcana } from "@/data/arcana";
+import { getAssetPath } from "@/lib/utils";
 
 interface ArcanaCardProps {
   arcana: Arcana;
@@ -29,7 +30,7 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView }) =
         {/* Ilustración de la carta original con tratamiento Dark Luxury */}
         <div className="my-3 relative w-full aspect-[9/14] rounded overflow-hidden border border-gold/25 bg-obsidian-deep shadow-inner group-hover:border-gold/50 transition-colors">
           <Image
-            src={arcana.imageUrl}
+            src={getAssetPath(arcana.imageUrl)}
             alt={arcana.name}
             fill
             className="object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out"

@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { AcademyCourse } from "@/data/academy";
 import { brandConfig } from "@/config/brandConfig";
+import { getAssetPath } from "@/lib/utils";
 
 interface CourseModalProps {
   course: AcademyCourse | null;
@@ -48,7 +49,7 @@ export const CourseModal: React.FC<CourseModalProps> = ({
         {/* Cabecera decorativa */}
         <div className="relative aspect-[21/9] w-full overflow-hidden bg-black">
           <Image
-            src={course.cardImage}
+            src={getAssetPath(course.cardImage)}
             alt={course.title}
             fill
             sizes="100vw"

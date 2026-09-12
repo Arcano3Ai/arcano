@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { AcademyCourse } from "@/data/academy";
+import { getAssetPath } from "@/lib/utils";
 
 interface CourseCardProps {
   course: AcademyCourse;
@@ -31,7 +32,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       {/* Cabecera / Imagen y Badges */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/90">
         <Image
-          src={course.cardImage}
+          src={getAssetPath(course.cardImage)}
           alt={`${course.romanLevel} — ${course.title}`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

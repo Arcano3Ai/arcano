@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { getAssetPath } from "@/lib/utils";
 
 export const AtmosphereAudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -9,7 +10,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const audio = new Audio("/audio/el-viaje-entre-los-arcanos.mp3");
+    const audio = new Audio(getAssetPath("/audio/el-viaje-entre-los-arcanos.mp3"));
     audio.loop = true;
     audio.volume = 0.28; // Volumen sutil ceremonial
     audioRef.current = audio;
