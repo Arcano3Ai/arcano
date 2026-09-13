@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Arcana } from "@/data/arcana";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
+import { ArcanaImageZoom } from "@/components/ArcanaImageZoom";
 import { getAssetPath } from "@/lib/utils";
 
 interface ArcanaModalProps {
@@ -44,18 +45,16 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
           </p>
         </div>
 
-        {/* Carta Original y Simbolismo */}
+        {/* Carta Original con Zoom Interactivo y Simbolismo */}
         <div className="my-6 flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          <div className="relative w-32 sm:w-36 aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep">
-            <Image
-              src={getAssetPath(arcana.imageUrl)}
-              alt={arcana.name}
-              fill
-              className="object-cover object-center filter brightness-[0.88] contrast-[1.15]"
-              sizes="150px"
-            />
-            <div className="absolute inset-0 border border-gold/20 rounded pointer-events-none" />
-          </div>
+          <ArcanaImageZoom
+            imageUrl={arcana.imageUrl}
+            name={arcana.name}
+            number={arcana.number}
+            glyph={arcana.glyph}
+            element={arcana.element}
+            className="relative w-32 sm:w-36 aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep"
+          />
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
               <span className="text-gold text-lg">{arcana.glyph}</span>

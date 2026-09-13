@@ -6,6 +6,7 @@ import Link from "next/link";
 import { arcanaList, Arcana } from "@/data/arcana";
 import { brandConfig } from "@/config/brandConfig";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
+import { ArcanaImageZoom } from "@/components/ArcanaImageZoom";
 import { getAssetPath } from "@/lib/utils";
 
 interface Props {
@@ -68,21 +69,15 @@ export default function ArcanaDetailPage({ params }: Props) {
           {arcana.name}
         </h1>
 
-        {/* Ilustración de la Carta Original */}
-        <div className="relative w-48 sm:w-56 aspect-[9/14] rounded-lg overflow-hidden border-2 border-gold/40 mx-auto my-8 shadow-[0_15px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(198,160,82,0.2)] bg-obsidian-deep">
-          <Image
-            src={getAssetPath(arcana.imageUrl)}
-            alt={arcana.name}
-            fill
-            className="object-cover object-center filter brightness-[0.88] contrast-[1.18]"
-            priority
-            sizes="250px"
-          />
-          <div className="absolute inset-0 border border-gold/20 rounded-md pointer-events-none" />
-          <div className="absolute top-2 right-2 bg-obsidian/85 px-2 py-0.5 rounded border border-charcoal-border">
-            <span className="text-xs text-gold font-serif">{arcana.glyph}</span>
-          </div>
-        </div>
+        {/* Ilustración de la Carta con Zoom Interactivo (Toca para ampliar / minimizar) */}
+        <ArcanaImageZoom
+          imageUrl={arcana.imageUrl}
+          name={arcana.name}
+          number={arcana.number}
+          glyph={arcana.glyph}
+          element={arcana.element}
+          priority
+        />
 
         <p className="font-serif italic text-lg sm:text-2xl text-parchment-muted max-w-xl mx-auto leading-relaxed">
           &ldquo;{arcana.quote}&rdquo;

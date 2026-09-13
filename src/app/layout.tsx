@@ -11,6 +11,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AtmosphereAudioPlayer } from "@/components/AtmosphereAudioPlayer";
 import { ArcanaAiBot } from "@/components/ArcanaAiBot";
 import { PwaRegister } from "@/components/PwaRegister";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 export const viewport: Viewport = {
@@ -119,6 +120,7 @@ export default function RootLayout({
           <ArcanaAiBot />
           <WhatsAppButton />
           <PwaRegister />
+          <CookieConsentBanner />
         </ThemeProvider>
       </body>
     </html>
