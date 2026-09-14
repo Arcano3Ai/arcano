@@ -43,6 +43,14 @@ const config: Config = {
           light: "#b4bcc7",
         },
       },
+      spacing: {
+        84: "21rem",
+        88: "22rem",
+      },
+      height: {
+        84: "21rem",
+        88: "22rem",
+      },
       fontFamily: {
         serif: ["var(--font-cinzel)", "var(--font-cormorant)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],

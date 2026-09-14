@@ -93,7 +93,7 @@ export const DailyCardModule: React.FC = () => {
         {/* Contenedor de la Carta con Flip 3D */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12 mt-6">
           {/* Carta 3D */}
-          <div className="perspective-1000 w-56 sm:w-64 h-84 sm:h-96 shrink-0">
+          <div className="perspective-1000 w-56 sm:w-64 h-[360px] sm:h-[390px] shrink-0">
             <div
               className={`relative w-full h-full transition-transform duration-1000 ease-out transform-style-3d ${
                 revealed ? "rotate-y-180" : ""

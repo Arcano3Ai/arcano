@@ -346,7 +346,7 @@ export const OracleReadingModule: React.FC = () => {
               {/* Carta 3D Flip */}
               <div
                 onClick={() => hasStarted && flipCard(index)}
-                className={`perspective-1000 w-56 sm:w-64 h-88 sm:h-96 cursor-pointer select-none transition-transform duration-300 ${
+                className={`perspective-1000 w-56 sm:w-64 h-[360px] sm:h-[390px] cursor-pointer select-none transition-transform duration-300 ${
                   !slot.isFlipped && hasStarted ? "hover:scale-105 hover:-translate-y-1" : ""
                 }`}
               >
