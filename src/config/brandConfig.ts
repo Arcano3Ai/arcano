@@ -63,11 +63,11 @@ export const brandConfig: BrandConfig = {
     hours: "Lunes a Sábado · Con cita previa",
   },
   social: {
-    instagram: "https://instagram.com/arcanotarot",
-    instagramHandle: "@arcanotarot",
-    facebook: "https://facebook.com/arcanotarot",
-    tiktok: "https://tiktok.com/@arcanotarot",
-    youtube: "https://youtube.com/@arcanotarot",
+    instagram: "https://www.instagram.com/arcanosabiduria/",
+    instagramHandle: "@arcanosabiduria",
+    facebook: "https://www.facebook.com/profile.php?id=61594271284117",
+    tiktok: "https://www.facebook.com/profile.php?id=61594271284117",
+    youtube: "https://www.facebook.com/profile.php?id=61594271284117",
     spotify: "https://spotify.com/show/arcanopodcast",
   },
   pricing: {

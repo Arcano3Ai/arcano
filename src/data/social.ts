@@ -13,7 +13,7 @@ export const socialFeedList: SocialFeedItem[] = [
     type: "arcana",
     caption: "Apertura del espacio sagrado: el humo del copal purifica la mirada antes de que los arcanos toquen la mesa.",
     imageUrl: "/images/malachai-caliz-humo.png",
-    permalink: "https://instagram.com/arcanotarot",
+    permalink: "https://www.instagram.com/arcanosabiduria/",
     symbol: "☽",
   },
   {
@@ -21,7 +21,7 @@ export const socialFeedList: SocialFeedItem[] = [
     type: "quote",
     caption: "El Arcano XV en la noche: mirar la propia sombra con serenidad para desarticular las prisiones del ego.",
     imageUrl: "/images/malachai-diablo.jpg",
-    permalink: "https://instagram.com/arcanotarot",
+    permalink: "https://www.instagram.com/arcanosabiduria/",
     symbol: "✦",
   },
   {
@@ -29,7 +29,7 @@ export const socialFeedList: SocialFeedItem[] = [
     type: "image",
     caption: "El sahumerio ceremonial disuelve la prisa del mundo exterior. En el santuario solo habita tu verdad.",
     imageUrl: "/images/malachai-sahumerio.png",
-    permalink: "https://instagram.com/arcanotarot",
+    permalink: "https://www.instagram.com/arcanosabiduria/",
     symbol: "✧",
   },
   {
@@ -37,7 +37,7 @@ export const socialFeedList: SocialFeedItem[] = [
     type: "arcana",
     caption: "Lectura nocturna: la fogata de fondo, la tenue luz de las velas y el diálogo lúcido con los símbolos vivos.",
     imageUrl: "/images/malachai-lectura-nocturna.png",
-    permalink: "https://instagram.com/arcanotarot",
+    permalink: "https://www.instagram.com/arcanosabiduria/",
     symbol: "◇",
   },
 ];

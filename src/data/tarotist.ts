@@ -42,7 +42,7 @@ export const tarotistProfile: TarotistProfile = {
     "Código ético de confidencialidad estricta y respeto al libre albedrío",
   ],
   social: {
-    instagram: "https://instagram.com/arcanotarot",
+    instagram: "https://www.instagram.com/arcanosabiduria/",
     substack: "https://arcanotarot.substack.com",
   },
   imagePlaceholder: {

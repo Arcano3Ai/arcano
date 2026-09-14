@@ -45,8 +45,8 @@ export const TarotSocialIcons: React.FC<Props> = ({ className = "", size = "md" 
     },
     {
       name: "Facebook",
-      handle: "@arcanotarot",
-      url: brandConfig.social.facebook || "https://facebook.com/arcanotarot",
+      handle: "ARCANO",
+      url: brandConfig.social.facebook,
       sublabel: "Círculo Sagrado",
       icon: (
         <svg
@@ -60,7 +60,7 @@ export const TarotSocialIcons: React.FC<Props> = ({ className = "", size = "md" 
     },
     {
       name: "YouTube",
-      handle: "@arcanotarot",
+      handle: "ARCANO",
       url: brandConfig.social.youtube,
       sublabel: "Visiones & Rituales",
       icon: (
@@ -75,7 +75,7 @@ export const TarotSocialIcons: React.FC<Props> = ({ className = "", size = "md" 
     },
     {
       name: "TikTok",
-      handle: brandConfig.social.tiktok.replace("https://tiktok.com/", ""),
+      handle: "ARCANO",
       url: brandConfig.social.tiktok,
       sublabel: "Destellos de Luz",
       icon: (
