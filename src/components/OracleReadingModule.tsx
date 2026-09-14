@@ -110,8 +110,8 @@ export const OracleReadingModule: React.FC = () => {
 
   // Mensaje estructurado para WhatsApp con la consagración personalizada del consultante
   const consultationMessage = allFlipped
-    ? `Hola Malachai, realicé la Tirada de las 3 Revelaciones en ARCANO.\n\n✦ Nombre: ${consultantName || "Buscador Silencioso"}${birthDate ? `\n✦ Fecha de nacimiento: ${birthDate}` : ""}\n✦ Inquietud o pregunta: "${question || "Mi momento presente"}"\n\nCartas reveladas:\n1. Pasado (${slots[0].title}): ${slots[0].arcana?.name} (${slots[0].arcana?.number})\n2. Presente (${slots[1].title}): ${slots[1].arcana?.name} (${slots[1].arcana?.number})\n3. Futuro (${slots[2].title}): ${slots[2].arcana?.name} (${slots[2].arcana?.number})\n\nDeseo agendar una consulta personalizada contigo para profundizar en el tejido de estos símbolos.`
-    : `Hola Malachai, deseo realizar una lectura ceremonial de tarot contigo.`;
+    ? `Hola, El Señor de los Arcanos, realicé la Tirada de las 3 Revelaciones en ARCANO.\n\n✦ Nombre: ${consultantName || "Buscador Silencioso"}${birthDate ? `\n✦ Fecha de nacimiento: ${birthDate}` : ""}\n✦ Inquietud o pregunta: "${question || "Mi momento presente"}"\n\nCartas reveladas:\n1. Pasado (${slots[0].title}): ${slots[0].arcana?.name} (${slots[0].arcana?.number})\n2. Presente (${slots[1].title}): ${slots[1].arcana?.name} (${slots[1].arcana?.number})\n3. Futuro (${slots[2].title}): ${slots[2].arcana?.name} (${slots[2].arcana?.number})\n\nDeseo agendar una consulta personalizada contigo para profundizar en el tejido de estos símbolos.`
+    : `Hola, El Señor de los Arcanos, deseo realizar una lectura ceremonial de tarot contigo.`;
 
   const waLink = getWhatsAppUrl(consultationMessage);
 
@@ -444,7 +444,7 @@ export const OracleReadingModule: React.FC = () => {
               ¿Deseas descifrar el hilo invisible entre estas tres cartas?
             </h4>
             <p className="text-xs text-parchment-muted font-sans font-light mt-2 leading-relaxed">
-              Las cartas han señalado las corrientes para tu pregunta. En una sesión personal con Malachai exploramos a fondo el matiz exacto de tu encrucijada y los pasos a seguir.
+              Las cartas han señalado las corrientes para tu pregunta. En una sesión personal con El Señor de los Arcanos exploramos a fondo el matiz exacto de tu encrucijada y los pasos a seguir.
             </p>
 
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -454,7 +454,7 @@ export const OracleReadingModule: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-3.5 rounded text-xs uppercase tracking-[0.25em] text-obsidian bg-gradient-to-r from-gold via-gold-light to-gold hover:shadow-[0_0_30px_rgba(198,160,82,0.5)] transition-all font-medium font-sans flex items-center justify-center gap-2"
               >
-                <span>Consultar esta tirada con Malachai</span>
+                <span>Consultar esta tirada con El Señor de los Arcanos</span>
                 <span>→</span>
               </a>
             </div>

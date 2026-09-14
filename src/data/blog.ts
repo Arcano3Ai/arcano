@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
     category: "Arcanos",
     publishedAt: "12 de Septiembre, 2026",
     readTime: "9 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/arcanos-mayores-viaje.jpg",
     content: {
@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
     category: "Simbolismo",
     publishedAt: "08 de Septiembre, 2026",
     readTime: "8 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/el-loco-incertidumbre.jpg",
     content: {
@@ -119,7 +119,7 @@ export const blogPosts: BlogPost[] = [
     category: "Práctica",
     publishedAt: "02 de Septiembre, 2026",
     readTime: "7 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/preparar-pregunta-tarot.jpg",
     content: {
@@ -145,7 +145,7 @@ export const blogPosts: BlogPost[] = [
         {
           heading: "El ritual del silencio previo",
           body: [
-            "Antes de tocar la baraja o formular una consulta con Malachai, es indispensable habitar unos instantes de silencio ceremonial. Apaga los dispositivos electrónicos, enciende una vela o respira profundo durante tres minutos.",
+            "Antes de tocar la baraja o formular una consulta con El Señor de los Arcanos, es indispensable habitar unos instantes de silencio ceremonial. Apaga los dispositivos electrónicos, enciende una vela o respira profundo durante tres minutos.",
             "Permite que la espuma del ego baje. Muchas veces, la pregunta que creíamos urgente al inicio del día no es más que la cáscara externa de un dolor mucho más hondo que aguardaba ser reconocido.",
           ],
         },
@@ -164,7 +164,7 @@ export const blogPosts: BlogPost[] = [
     category: "Filosofía",
     publishedAt: "28 de Agosto, 2026",
     readTime: "9 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/tarot-autoconocimiento.jpg",
     content: {
@@ -207,7 +207,7 @@ export const blogPosts: BlogPost[] = [
     category: "Arcanos",
     publishedAt: "20 de Agosto, 2026",
     readTime: "8 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/que-significa-la-torre.jpg",
     content: {
@@ -250,7 +250,7 @@ export const blogPosts: BlogPost[] = [
     category: "Simbolismo",
     publishedAt: "15 de Agosto, 2026",
     readTime: "8 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/la-sacerdotisa-intuicion.jpg",
     content: {
@@ -293,7 +293,7 @@ export const blogPosts: BlogPost[] = [
     category: "Filosofía",
     publishedAt: "10 de Agosto, 2026",
     readTime: "8 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/la-estrella-esperanza.jpg",
     content: {
@@ -336,7 +336,7 @@ export const blogPosts: BlogPost[] = [
     category: "Práctica",
     publishedAt: "05 de Agosto, 2026",
     readTime: "8 min de lectura",
-    author: "Malachai",
+    author: "El Señor de los Arcanos",
     authorRole: "Lector y Custodio de los Símbolos",
     imageUrl: "/images/blog/tirada-tres-cartas.jpg",
     content: {

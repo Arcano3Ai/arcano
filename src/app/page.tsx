@@ -115,11 +115,11 @@ export default function HomePage() {
         />
 
         <div className="relative overflow-hidden rounded-xl border border-charcoal-border bg-gradient-to-b from-[#121218]/95 to-[#08080a] p-8 sm:p-12 shadow-[0_15px_45px_rgba(0,0,0,0.8)] space-y-6 text-center max-w-3xl mx-auto">
-          {/* Fondo sutil del cáliz ritual con humo de Malachai */}
+          {/* Fondo sutil del cáliz ritual con humo de El Señor de los Arcanos */}
           <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
             <Image
               src="/images/malachai-caliz-humo.png"
-              alt="Malachai sosteniendo el cáliz ceremonial con humo"
+              alt="El Señor de los Arcanos sosteniendo el cáliz ceremonial con humo"
               fill
               className="object-cover object-center filter brightness-[0.22] contrast-[1.4]"
             />
@@ -266,7 +266,7 @@ export default function HomePage() {
         <SectionHeader
           subtitle="Consultas y Encuentros"
           title="Lecturas de los Arcanos"
-          description="Cada sesión con Malachai es un espacio ceremonial concebido como una carta viva: con tiempo, respeto y orientación profunda."
+          description="Cada sesión con El Señor de los Arcanos es un espacio ceremonial concebido como una carta viva: con tiempo, respeto y orientación profunda."
           symbol="✧"
         />
 
@@ -489,7 +489,7 @@ export default function HomePage() {
         <SectionHeader
           subtitle="Sabiduría Escrita"
           title="Crónicas de los Símbolos"
-          description="Ensayos, reflexiones arquetípicas y guías para el buscador consciente escritas por Malachai."
+          description="Ensayos, reflexiones arquetípicas y guías para el buscador consciente escritas por El Señor de los Arcanos."
           symbol="☾"
         />
 
@@ -596,7 +596,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/images/malachai-diablo.jpg"
-            alt="Malachai en el santuario de ARCANO en la penumbra ceremonial"
+            alt="El Señor de los Arcanos en el santuario de ARCANO en la penumbra ceremonial"
             fill
             className="object-cover object-center filter brightness-[0.16] contrast-[1.4] saturate-[0.7] opacity-40 scale-105"
           />
@@ -610,8 +610,8 @@ export default function HomePage() {
             <span className="text-gold text-4xl">☾</span>
           </div>
 
-          <span className="text-xs uppercase tracking-[0.3em] text-gold/90 font-sans block">
-            El Umbral de la Decisión
+          <span className="text-xs uppercase tracking-[0.3em] text-gold font-sans block">
+            El Umbral de la Sabiduría ✦
           </span>
 
           <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-parchment tracking-[0.08em] font-light leading-tight drop-shadow-md">
@@ -623,7 +623,7 @@ export default function HomePage() {
           <div className="h-[1px] w-20 mx-auto bg-gold/50 my-6" />
 
           <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light max-w-lg mx-auto leading-relaxed">
-            Te invitamos a una conversación lúcida, confidencial y sin prejuicios frente a los arcanos con Malachai.
+            Te invitamos a una conversación lúcida, confidencial y sin prejuicios frente a los arcanos con El Señor de los Arcanos.
           </p>
 
           <div className="pt-6">
@@ -632,7 +632,7 @@ export default function HomePage() {
               onClick={() => handleBookingCta("footer_final_cta")}
               className="inline-block px-10 py-4 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_30px_rgba(198,160,82,0.5)] hover:scale-105"
             >
-              Reservar una lectura con Malachai ✦
+              Reservar una lectura con El Señor de los Arcanos ✦
             </Link>
           </div>
         </div>

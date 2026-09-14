@@ -20,12 +20,12 @@ export interface TarotistProfile {
 }
 
 export const tarotistProfile: TarotistProfile = {
-  name: "Malachai",
+  name: "El Señor de los Arcanos",
   role: "Lector y Custodio de los Símbolos",
   sacredTitles: [
     "El Maestro",
     "El Guía",
-    "El Señor de los Arcanos",
+    "Custodio de los Símbolos",
   ],
   specialty: "Tarot Simbólico, Mitología Comparada y Hermetismo Tradicional",
   experienceYears: "Más de 12 años de consagración ceremonial y estudio continuo",
@@ -46,8 +46,8 @@ export const tarotistProfile: TarotistProfile = {
     substack: "https://arcanotarot.substack.com",
   },
   imagePlaceholder: {
-    alt: "Malachai, lector y custodio de los símbolos en el santuario de ARCANO",
-    caption: "Malachai · Presencia ceremonial, ojos del oráculo y sabiduría arcana",
+    alt: "El Señor de los Arcanos, lector y custodio de los símbolos en el santuario de ARCANO",
+    caption: "El Señor de los Arcanos · Presencia ceremonial, ojos del oráculo y sabiduría arcana",
     aspectRatio: "1/1",
     imageUrl: "/images/malachai-perfil.gif",
   },

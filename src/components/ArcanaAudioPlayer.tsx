@@ -221,7 +221,7 @@ export const ArcanaAudioPlayer: React.FC<ArcanaAudioPlayerProps> = ({
               {audioTitle || `Música Sagrada de ${arcanaName}`}
             </h3>
             <p className="text-xs text-parchment-muted font-sans font-light mt-0.5">
-              Custodiada por Malachai para la meditación oracular y contemplación de la carta.
+              Custodiada por El Señor de los Arcanos para la meditación oracular y contemplación de la carta.
             </p>
           </div>
         </div>

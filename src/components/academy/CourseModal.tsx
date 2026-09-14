@@ -29,7 +29,7 @@ export const CourseModal: React.FC<CourseModalProps> = ({
 
   const handleEnrollClick = () => {
     const text = encodeURIComponent(
-      `Hola Malachai / ARCANO. Deseo inscribirme en la Academia Esotérica para el curso: *${course.categoryName} — ${course.romanLevel}: ${course.title}* ($799 MXN). ¿Cuáles son los pasos para comenzar?`
+      `Hola, El Señor de los Arcanos / ARCANO. Deseo inscribirme en la Academia Esotérica para el curso: *${course.categoryName} — ${course.romanLevel}: ${course.title}* ($799 MXN). ¿Cuáles son los pasos para comenzar?`
     );
     window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${text}`, "_blank");
   };

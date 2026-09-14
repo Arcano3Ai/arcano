@@ -119,7 +119,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
             href={`/reservar?carta=${card.id}`}
             className="w-full sm:w-auto px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium font-sans text-center"
           >
-            Consultar con Malachai ✦
+            Consultar con El Señor de los Arcanos ✦
           </Link>
         </div>
       </div>

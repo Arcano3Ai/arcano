@@ -186,7 +186,7 @@ export const shopProducts: ShopProduct[] = [
     details: [
       "Estuche rígido forrado en terciopelo con broche magnético",
       "4 minerales auténticos de grado coleccionista",
-      "Incluye guía de activación y limpieza mineral por Malachai",
+      "Incluye guía de activación y limpieza mineral por El Señor de los Arcanos",
     ],
     inStock: true,
     badge: "Colección Exclusiva",
@@ -233,7 +233,7 @@ export const shopProducts: ShopProduct[] = [
       "78 cartas de gran formato (12.5 x 7.5 cm)",
       "Bordes dorados espejados que protegen del desgaste y la humedad",
       "Caja rígida protectora de dos piezas con acabados en oro caliente",
-      "Incluye libreto ceremonial de 120 páginas redactado por Malachai",
+      "Incluye libreto ceremonial de 120 páginas redactado por El Señor de los Arcanos",
     ],
     inStock: true,
     badge: "Obra Maestra",
@@ -242,7 +242,7 @@ export const shopProducts: ShopProduct[] = [
   },
   {
     id: "oraculo-tres-puertas",
-    slug: "oraculo-de-las-tres-puertas-malachai",
+    slug: "oraculo-de-las-tres-puertas-senor-de-los-arcanos",
     name: "Oráculo de las Tres Puertas (Mazo Introspectivo de 33 Cartas)",
     categoryId: "cartas-y-oraculos",
     categoryName: "Cartas y oráculos",
@@ -250,7 +250,7 @@ export const shopProducts: ShopProduct[] = [
     formattedPrice: "$780 MXN",
     tagline: "Mazo oracular complementario concebido para respuestas directas del alma.",
     description:
-      "Diseñado por Malachai como complemento para tiradas complejas. Cada carta encarna una llave simbólica para destrabar bloqueos en momentos de incertidumbre inmediata.",
+      "Diseñado por El Señor de los Arcanos como complemento para tiradas complejas. Cada carta encarna una llave simbólica para destrabar bloqueos en momentos de incertidumbre inmediata.",
     ritualUse:
       "Extracción de una sola carta matutina para fijar la intención y el foco meditativo de la jornada.",
     details: [
@@ -264,16 +264,16 @@ export const shopProducts: ShopProduct[] = [
 
   // 5. Libros y artículos rituales
   {
-    id: "libro-arcano-simbolos-malachai",
+    id: "libro-arcano-simbolos-senor-de-los-arcanos",
     slug: "arcano-el-libro-de-los-simbolos-tapa-dura",
-    name: "ARCANO: El Libro de los Símbolos (Tratado Hermético de Malachai)",
+    name: "ARCANO: El Libro de los Símbolos (Tratado Hermético de El Señor de los Arcanos)",
     categoryId: "libros-y-articulos-rituales",
     categoryName: "Libros y artículos rituales",
     price: 850,
     formattedPrice: "$850 MXN",
     tagline: "Encuadernación de lujo en pasta dura con broche antiguo y grabados en pan de oro.",
     description:
-      "El tratado definitivo sobre la tradición de los 22 Arcanos Mayores escrito por Malachai, Lector y Custodio de los Símbolos. Más de 320 páginas impresas en papel pergamino color marfil, profusamente ilustradas con grabados herméticos del siglo XV al XX, análisis psicológico arquetípico y rituales de consagración paso a paso.",
+      "El tratado definitivo sobre la tradición de los 22 Arcanos Mayores escrito por El Señor de los Arcanos, Lector y Custodio de los Símbolos. Más de 320 páginas impresas en papel pergamino color marfil, profusamente ilustradas con grabados herméticos del siglo XV al XX, análisis psicológico arquetípico y rituales de consagración paso a paso.",
     ritualUse:
       "Texto de consulta obligatoria en la mesa del estudiante y oráculo de cabecera para profundizar en cada tirada.",
     details: [

@@ -40,7 +40,7 @@ export const AcademySection: React.FC = () => {
 
   const handleClaimWebPromotion = () => {
     const text = encodeURIComponent(
-      `Hola Malachai / ARCANO. Deseo información sobre la promoción de la Academia Esotérica: *Completa los primeros 3 niveles y recibe tu página web personalizada GRATIS con dominio*. ¿Cómo inicio mi formación?`
+      `Hola, El Señor de los Arcanos / ARCANO. Deseo información sobre la promoción de la Academia Esotérica: *Completa los primeros 3 niveles y recibe tu página web personalizada GRATIS con dominio*. ¿Cómo inicio mi formación?`
     );
     window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${text}`, "_blank");
   };

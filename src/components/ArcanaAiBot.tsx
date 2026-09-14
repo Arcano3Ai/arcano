@@ -117,7 +117,7 @@ export const ArcanaAiBot: React.FC = () => {
         quickReplies: [
           "Ver lecturas disponibles",
           "Calcular mi Arcano de Nacimiento",
-          "Consultar con Malachai",
+          "Consultar con El Señor de los Arcanos",
         ],
       };
     }
@@ -145,7 +145,7 @@ export const ArcanaAiBot: React.FC = () => {
         return {
           response: `✦ Tu Arcano de Nacimiento es ${natalArcana.name} (Número ${natalArcana.number} · ${natalArcana.archetype}).\n\nEste arcano rige tu propósito vital y la fuerza arquetípica que viniste a encarnar en esta vida.\n\n«${natalArcana.quote}»\n\n• Lección primordial: ${natalArcana.description}\n• Pregunta clave: «${natalArcana.reflectionQuestion}»`,
           arcana: natalArcana,
-          quickReplies: [`Consejo de ${natalArcana.name}`, "Consultar con Malachai", "Ver lecturas disponibles"],
+          quickReplies: [`Consejo de ${natalArcana.name}`, "Consultar con El Señor de los Arcanos", "Ver lecturas disponibles"],
         };
       }
 
@@ -167,7 +167,7 @@ export const ArcanaAiBot: React.FC = () => {
         return {
           response: `✦ Polaridad de ${foundArcana.name} (${foundArcana.number}):\n\n• En la Luz (Aspecto armónico): ${foundArcana.keywordsLight.join(", ")}.\n\n• En la Sombra (Aspecto a integrar): ${foundArcana.keywordsShadow.join(", ")}.\n\n• Esencia: ${foundArcana.description}\n\nPregunta de introspección: «${foundArcana.reflectionQuestion}»`,
           arcana: foundArcana,
-          quickReplies: [`Consejo en el amor de ${foundArcana.name}`, `Consejo en el trabajo de ${foundArcana.name}`, "¿Consultar con Malachai?"],
+          quickReplies: [`Consejo en el amor de ${foundArcana.name}`, `Consejo en el trabajo de ${foundArcana.name}`, "¿Consultar con El Señor de los Arcanos?"],
         };
       }
 
@@ -202,13 +202,13 @@ export const ArcanaAiBot: React.FC = () => {
     if (q.includes("tirada") || q.includes("cartas") || q.includes("oraculo") || q.includes("como leer")) {
       return {
         response: "✦ La Tirada de las Tres Revelaciones (Pasado, Presente y Futuro) está disponible en vivo en nuestro santuario:\n\n1. Pasado: La raíz profunda de tu situación.\n2. Presente: El espejo sagrado y la prueba en este instante.\n3. Futuro: Hacia dónde fluye tu destino si actúas con conciencia.\n\nPuedes realizarla en la sección «Oráculo Ritual en Vivo» ingresando tu nombre y pregunta.",
-        quickReplies: ["¿Qué significa La Estrella?", "Ver lecturas disponibles", "Consultar con Malachai"],
+        quickReplies: ["¿Qué significa La Estrella?", "Ver lecturas disponibles", "Consultar con El Señor de los Arcanos"],
       };
     }
 
-    if (q.includes("malachai") || q.includes("sesion") || q.includes("cita") || q.includes("reserva")) {
+    if (q.includes("señor") || q.includes("arcanos") || q.includes("malachai") || q.includes("lector") || q.includes("tarotista") || q.includes("sesion") || q.includes("cita") || q.includes("reserva")) {
       return {
-        response: "✦ Malachai es Lector y Custodio de los Símbolos en ARCANO. Brinda sesiones privadas de tarot ceremonial con estricta confidencialidad y rigor ético.\n\nPuedes coordinar una lectura personal vía WhatsApp o explorar las lecturas disponibles en la web.",
+        response: "✦ El Señor de los Arcanos es Lector y Custodio de los Símbolos en ARCANO. Brinda sesiones privadas de tarot ceremonial con estricta confidencialidad y rigor ético.\n\nPuedes coordinar una lectura personal vía WhatsApp o explorar las lecturas disponibles en la web.",
         quickReplies: ["Consultar por WhatsApp", "Ver lecturas disponibles", "Calcular mi Arcano"],
       };
     }
@@ -455,7 +455,7 @@ export const ArcanaAiBot: React.FC = () => {
             </a>
             <span className="text-gold/40">✦</span>
             <a
-              href={getWhatsAppUrl("Hola Malachai, deseo consultar sobre una lectura personalizada de ARCANO.")}
+              href={getWhatsAppUrl("Hola, deseo consultar sobre una lectura personalizada con El Señor de los Arcanos en ARCANO.")}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold hover:text-gold-light font-medium underline flex items-center gap-1"
