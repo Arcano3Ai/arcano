@@ -55,8 +55,8 @@ export const brandConfig: BrandConfig = {
     "Quizá la pregunta no sea qué va a suceder. Quizá sea qué estás preparado para ver.",
   contact: {
     email: "contacto@arcanosolutions.com",
-    phone: "+52 (55) 8432-1920",
-    whatsappNumber: "5215584321920",
+    phone: "+52 (81) 2191-2778",
+    whatsappNumber: "5218121912778",
     whatsappDefaultMessage:
       "Hola ARCANO, deseo consultar sobre una lectura privada.",
     location: "Santuario Digital & Sesiones Privadas",
