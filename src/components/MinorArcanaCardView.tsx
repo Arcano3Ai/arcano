@@ -8,9 +8,10 @@ import { getAssetPath } from "@/lib/utils";
 interface Props {
   card: MinorArcanaCard;
   onSelect?: (card: MinorArcanaCard) => void;
+  priority?: boolean;
 }
 
-export const MinorArcanaCardView: React.FC<Props> = ({ card, onSelect }) => {
+export const MinorArcanaCardView: React.FC<Props> = ({ card, onSelect, priority = false }) => {
   const suitMeta = suitsInfo[card.suit];
 
   return (
@@ -35,6 +36,8 @@ export const MinorArcanaCardView: React.FC<Props> = ({ card, onSelect }) => {
             src={getAssetPath(card.imageUrl)}
             alt={card.name}
             fill
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
             className="object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />

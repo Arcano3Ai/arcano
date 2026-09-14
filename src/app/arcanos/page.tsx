@@ -160,10 +160,11 @@ export default function ArcanosIndexPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {filteredMajors.map((arcana) => (
+              {filteredMajors.map((arcana, idx) => (
                 <ArcanaCard
                   key={arcana.slug}
                   arcana={arcana}
+                  priority={idx < 4}
                   onQuickView={(a) => setModalArcana(a)}
                 />
               ))}
@@ -202,10 +203,11 @@ export default function ArcanosIndexPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {filteredMinors.map((card) => (
+              {filteredMinors.map((card, idx) => (
                 <MinorArcanaCardView
                   key={card.id}
                   card={card}
+                  priority={idx < 4}
                   onSelect={(c) => setModalMinor(c)}
                 />
               ))}

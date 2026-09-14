@@ -43,7 +43,7 @@ export default function HomePage() {
         {/* Fotografía de fondo real del santuario y ritual de niebla con tratamiento oscuro */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
-            src="/images/malachai-ritual-niebla.jpg"
+            src={getAssetPath("/images/malachai-ritual-niebla.jpg")}
             alt="Ritual ceremonial nocturno en el santuario de ARCANO"
             fill
             priority
@@ -118,7 +118,7 @@ export default function HomePage() {
           {/* Fondo sutil del cáliz ritual con humo de El Señor de los Arcanos */}
           <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
             <Image
-              src="/images/malachai-caliz-humo.png"
+              src={getAssetPath("/images/malachai-caliz-humo.png")}
               alt="El Señor de los Arcanos sosteniendo el cáliz ceremonial con humo"
               fill
               className="object-cover object-center filter brightness-[0.22] contrast-[1.4]"
@@ -358,10 +358,11 @@ export default function HomePage() {
         />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-          {arcanaList.slice(0, 12).map((arcana) => (
+          {arcanaList.slice(0, 12).map((arcana, idx) => (
             <ArcanaCard
               key={arcana.slug}
               arcana={arcana}
+              priority={idx < 6}
               onQuickView={(a) => setSelectedArcanaForModal(a)}
             />
           ))}
@@ -595,7 +596,7 @@ export default function HomePage() {
         {/* Fotografía nocturna con velo oscuro */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
-            src="/images/malachai-diablo.jpg"
+            src={getAssetPath("/images/malachai-diablo.jpg")}
             alt="El Señor de los Arcanos en el santuario de ARCANO en la penumbra ceremonial"
             fill
             className="object-cover object-center filter brightness-[0.16] contrast-[1.4] saturate-[0.7] opacity-40 scale-105"

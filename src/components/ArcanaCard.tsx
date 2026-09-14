@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Arcana } from "@/data/arcana";
@@ -9,9 +9,12 @@ import { getAssetPath } from "@/lib/utils";
 interface ArcanaCardProps {
   arcana: Arcana;
   onQuickView?: (arcana: Arcana) => void;
+  priority?: boolean;
 }
 
-export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView }) => {
+export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, priority = false }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <div
       className="group relative rounded-md p-4 sm:p-5 flex flex-col justify-between transition-all duration-500 ease-out bg-gradient-to-b from-[#161620] via-[#0e0e14] to-[#070709] border border-charcoal-border hover:border-gold/50 shadow-[0_8px_25px_rgba(0,0,0,0.6)] hover:shadow-[0_12px_35px_rgba(198,160,82,0.15)] hover:-translate-y-1.5"
@@ -33,7 +36,12 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView }) =
             src={getAssetPath(arcana.imageUrl)}
             alt={arcana.name}
             fill
-            className="object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out"
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            onLoad={() => setIsLoaded(true)}
+            className={`object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out ${
+              isLoaded ? "opacity-100" : "opacity-80"
+            }`}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian-deep/85 via-transparent to-obsidian/30 pointer-events-none" />

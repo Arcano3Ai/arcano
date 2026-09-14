@@ -65,6 +65,16 @@ export const OracleReadingModule: React.FC = () => {
       const shuffled = [...arcanaList].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3);
 
+      // Precarga anticipada en segundo plano de las 3 cartas seleccionadas
+      if (typeof window !== "undefined") {
+        selected.forEach((arc) => {
+          if (arc?.imageUrl) {
+            const preloadImg = new window.Image();
+            preloadImg.src = getAssetPath(arc.imageUrl);
+          }
+        });
+      }
+
       setSlots([
         {
           position: "Pasado",
@@ -396,6 +406,7 @@ export const OracleReadingModule: React.FC = () => {
                           className="object-contain object-center filter brightness-[0.95] contrast-[1.10]"
                           sizes="(max-width: 640px) 240px, 280px"
                           priority
+                          loading="eager"
                         />
                       </div>
 

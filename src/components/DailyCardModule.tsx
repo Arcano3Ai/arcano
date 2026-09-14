@@ -34,6 +34,10 @@ export const DailyCardModule: React.FC = () => {
       if (found) {
         setDailyArcana(found);
         setRevealed(true);
+        if (typeof window !== "undefined") {
+          const preloadImg = new window.Image();
+          preloadImg.src = getAssetPath(found.imageUrl);
+        }
         return;
       }
     }
@@ -43,7 +47,12 @@ export const DailyCardModule: React.FC = () => {
       (today.getMonth() + 1) * 100 +
       today.getDate();
     const index = pseudoSeed % arcanaList.length;
-    setDailyArcana(arcanaList[index]);
+    const selected = arcanaList[index];
+    setDailyArcana(selected);
+    if (typeof window !== "undefined") {
+      const preloadImg = new window.Image();
+      preloadImg.src = getAssetPath(selected.imageUrl);
+    }
   }, []);
 
   const handleReveal = () => {
@@ -137,6 +146,8 @@ export const DailyCardModule: React.FC = () => {
                     src={getAssetPath(dailyArcana.imageUrl)}
                     alt={dailyArcana.name}
                     fill
+                    priority
+                    loading="eager"
                     className="object-cover object-center filter brightness-[0.88] contrast-[1.15]"
                     sizes="250px"
                   />

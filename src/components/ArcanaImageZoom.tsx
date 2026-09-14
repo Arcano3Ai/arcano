@@ -74,6 +74,7 @@ export const ArcanaImageZoom: React.FC<ArcanaImageZoomProps> = ({
           fill
           className="object-cover object-center filter brightness-[0.92] contrast-[1.15] group-hover:scale-105 group-hover:brightness-100 transition-all duration-500 ease-out"
           priority={priority}
+          loading={priority ? "eager" : "lazy"}
           sizes="(max-width: 640px) 250px, 320px"
         />
 
@@ -157,6 +158,7 @@ export const ArcanaImageZoom: React.FC<ArcanaImageZoomProps> = ({
               fill
               className="object-contain object-center filter brightness-[0.95] contrast-[1.12]"
               priority
+              loading="eager"
               sizes="(max-width: 640px) 90vw, (max-width: 1024px) 500px, 600px"
             />
             {/* Marco interior ornamental de doble línea dorada */}
