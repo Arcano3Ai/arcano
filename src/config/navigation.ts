@@ -8,7 +8,6 @@ export const headerNavLinks: NavLink[] = [
   { label: "El Tarotista", href: "/#el-tarotista" },
   { label: "Lecturas", href: "/lecturas" },
   { label: "Arcanos", href: "/arcanos" },
-  { label: "Tienda", href: "/tienda" },
   { label: "Academia", href: "/#academia" },
   { label: "Carta del Día", href: "/carta-del-dia" },
   { label: "Blog", href: "/blog" },
@@ -20,7 +19,6 @@ export const footerNavLinks = {
     { label: "Inicio", href: "/" },
     { label: "Lecturas de Tarot", href: "/lecturas" },
     { label: "Los 22 Arcanos", href: "/arcanos" },
-    { label: "Tienda Ceremonial", href: "/tienda" },
     { label: "Academia Esotérica", href: "/#academia" },
     { label: "Tarot del Amor", href: "/tarot-del-amor" },
     { label: "Tarot Profesional", href: "/tarot-profesional" },
@@ -29,7 +27,6 @@ export const footerNavLinks = {
   santuario: [
     { label: "Tu Experiencia", href: "/experiencia" },
     { label: "Quien Lee los Arcanos", href: "/#el-tarotista" },
-    { label: "Boutique & Artículos Rituales", href: "/tienda" },
     { label: "Revista Editorial & Blog", href: "/blog" },
     { label: "Preguntas Frecuentes", href: "/#faq" },
     { label: "Contacto Directo", href: "/contacto" },

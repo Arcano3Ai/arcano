@@ -11,7 +11,6 @@ import { testimonialsList } from "@/data/testimonials";
 import { faqList } from "@/data/faq";
 import { blogPosts } from "@/data/blog";
 import { experienceSteps } from "@/data/experienceSteps";
-import { shopCategories, shopProducts } from "@/data/shop";
 
 import { IntroScreen } from "@/components/IntroScreen";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -550,109 +549,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 13. TIENDA CEREMONIAL & ARTÍCULOS RITUALES */}
-      <section
-        id="tienda"
-        className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <SectionHeader
-          subtitle="Boutique Sagrada"
-          title="Tienda de Artículos Rituales"
-          description="Velas consagradas, inciensos puros, cristales de poder, barajas de tarot y tratados herméticos con el sello ceremonial de ARCANO."
-          symbol="🜂"
-        />
-
-        {/* 5 Categorías destacadas */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 my-10">
-          {shopCategories.map((cat) => (
-            <Link
-              key={cat.id}
-              href="/tienda"
-              className="group relative rounded-xl overflow-hidden border border-charcoal-border bg-[#0f0e16]/80 p-3 flex flex-col items-center text-center hover:border-gold/50 hover:bg-[#151320] transition-all duration-300"
-            >
-              <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-2.5 border border-charcoal-border/60">
-                <Image
-                  src={cat.imageUrl}
-                  alt={cat.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 45vw, 20vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent pointer-events-none" />
-                <span className="absolute bottom-1 right-1 text-xs text-gold">
-                  {cat.symbol}
-                </span>
-              </div>
-              <h4 className="font-serif text-xs text-parchment group-hover:text-gold-light transition-colors font-medium leading-tight">
-                {cat.name}
-              </h4>
-            </Link>
-          ))}
-        </div>
-
-        {/* Productos destacados */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-6">
-          {shopProducts.filter((p) => p.featured).slice(0, 3).map((product) => (
-            <article
-              key={product.id}
-              className="group rounded-xl overflow-hidden border border-charcoal-border bg-[#0f0e16]/90 hover:border-gold/50 transition-all flex flex-col justify-between shadow-lg"
-            >
-              <div>
-                <div className="relative aspect-square overflow-hidden bg-black">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  {product.badge && (
-                    <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-obsidian/90 border border-gold/40 text-[9px] uppercase tracking-widest text-gold-light font-sans backdrop-blur">
-                      ✦ {product.badge}
-                    </div>
-                  )}
-                  <div className="absolute bottom-3 right-3 px-2.5 py-0.5 rounded-full bg-obsidian-deep/95 border border-gold/40 text-gold font-serif text-xs font-medium">
-                    {product.formattedPrice}
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <span className="text-[10px] uppercase tracking-widest text-gold/80 font-sans block mb-1">
-                    {product.categoryName}
-                  </span>
-                  <h4 className="font-serif text-base text-parchment group-hover:text-gold transition-colors font-medium leading-snug">
-                    {product.name}
-                  </h4>
-                  <p className="text-xs text-parchment-dim font-sans mt-2 line-clamp-2">
-                    {product.tagline}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-5 pt-0">
-                <Link
-                  href="/tienda"
-                  className="w-full py-2.5 px-3 rounded bg-gradient-to-r from-gold/90 via-gold-light to-gold/90 text-obsidian text-xs uppercase tracking-widest font-sans font-medium hover:shadow-[0_0_20px_rgba(198,160,82,0.4)] transition-all flex items-center justify-center gap-1.5"
-                >
-                  <span>Explorar pieza</span>
-                  <span>→</span>
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <Link
-            href="/tienda"
-            className="text-xs uppercase tracking-[0.25em] text-parchment hover:text-gold border-b border-gold/40 pb-1 font-sans transition-colors"
-          >
-            Ver catálogo completo de la tienda ({shopProducts.length} artículos) →
-          </Link>
-        </div>
-      </section>
-
-      {/* 14. ACADEMIA ESOTÉRICA */}
+      {/* 13. ACADEMIA ESOTÉRICA */}
       <AcademySection />
 
       {/* 15. PREGUNTAS FRECUENTES (FAQ) */}

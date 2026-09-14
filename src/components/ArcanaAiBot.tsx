@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { arcanaList, Arcana } from "@/data/arcana";
-import { shopProducts, shopCategories, ShopProduct } from "@/data/shop";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { getAssetPath } from "@/lib/utils";
@@ -12,7 +11,6 @@ interface ChatMessage {
   sender: "bot" | "user";
   text: string;
   arcanaCard?: Arcana;
-  shopItem?: ShopProduct;
   quickReplies?: string[];
   timestamp: string;
 }
@@ -28,12 +26,12 @@ export const ArcanaAiBot: React.FC = () => {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Bienvenido al santuario digital. Soy el Custodio de ARCANO. Puedo orientarte sobre la sabiduría simbólica de los 22 Arcanos Mayores, calcular tu Arcano de Nacimiento o guiarte a través de los artículos rituales de nuestra Boutique Ceremonial.",
+      text: "Bienvenido al santuario digital. Soy el Custodio de ARCANO. Puedo orientarte sobre la sabiduría simbólica de los 22 Arcanos Mayores, calcular tu Arcano de Nacimiento o guiarte hacia las lecturas y consultas oraculares.",
       quickReplies: [
-        "¿Qué productos hay en la tienda?",
+        "¿Cómo es una lectura de Tarot?",
         "¿Qué significa El Loco?",
         "Calcular mi Arcano de Nacimiento",
-        "Baraja ARCANO de bordes dorados",
+        "Ver lecturas disponibles",
       ],
       timestamp: "Ahora",
     },
@@ -51,10 +49,10 @@ export const ArcanaAiBot: React.FC = () => {
     }
   }, [messages, isOpen]);
 
-  // Procesador oracular para la Tienda y los Arcanos
+  // Procesador oracular para Arcanos y Consultas
   const processQuery = (
     rawQuery: string
-  ): { response: string; arcana?: Arcana; shopItem?: ShopProduct; quickReplies?: string[] } => {
+  ): { response: string; arcana?: Arcana; quickReplies?: string[] } => {
     const q = rawQuery.toLowerCase().trim();
 
     // 0. Preguntas sobre la Academia Esotérica y Promoción Web
@@ -89,12 +87,13 @@ export const ArcanaAiBot: React.FC = () => {
       };
     }
 
-    // 1. Preguntas de la Tienda
+    // 1. Preguntas sobre tienda o productos físicos (desactivada)
     if (
       q.includes("tienda") ||
       q.includes("producto") ||
       q.includes("comprar") ||
       q.includes("catalogo") ||
+      q.includes("catálogo") ||
       q.includes("precio") ||
       q.includes("costo") ||
       q.includes("vela") ||
@@ -109,78 +108,16 @@ export const ArcanaAiBot: React.FC = () => {
       q.includes("mazo") ||
       q.includes("libro") ||
       q.includes("grimorio") ||
-      q.includes("tapiz")
+      q.includes("tapiz") ||
+      q.includes("envio") ||
+      q.includes("envío")
     ) {
-      // Buscar producto específico
-      if (q.includes("vela") || q.includes("soja") || q.includes("ritualis")) {
-        const item = shopProducts.find((p) => p.id === "vela-arcano-ritualis")!;
-        return {
-          response: `✦ ${item.name} (${item.formattedPrice}):\n\n${item.description}\n\n• Uso ceremonial: ${item.ritualUse}\n• Disponibilidad: En stock con sello de consagración.`,
-          shopItem: item,
-          quickReplies: ["¿Cómo comprar por WhatsApp?", "Ver Inciensos y Resinas", "Baraja de Tarot ARCANO"],
-        };
-      }
-
-      if (q.includes("sahumerio") || q.includes("salvia") || q.includes("limpieza")) {
-        const item = shopProducts.find((p) => p.id === "sahumerio-salvia-copal")!;
-        return {
-          response: `✦ ${item.name} (${item.formattedPrice}):\n\n${item.description}\n\n• Uso ceremonial: ${item.ritualUse}`,
-          shopItem: item,
-          quickReplies: ["Comprar por WhatsApp", "Resinas de Copal Negro", "Vela ARCANO RITUALIS"],
-        };
-      }
-
-      if (q.includes("incienso") || q.includes("resina") || q.includes("copal") || q.includes("mirra") || q.includes("frankincense")) {
-        const item = shopProducts.find((p) => p.id === "resinas-sagradas-arcano")!;
-        return {
-          response: `✦ ${item.name} (${item.formattedPrice}):\n\n${item.description}\n\n• Incluye: 150g de resina pura virgen y 10 pastillas de carbón vegetal ceremonial.\n• Uso: ${item.ritualUse}`,
-          shopItem: item,
-          quickReplies: ["Comprar Resinas por WhatsApp", "Ver Cristales y Minerales", "¿Tienen envíos a todo México?"],
-        };
-      }
-
-      if (q.includes("cristal") || q.includes("mineral") || q.includes("obsidiana") || q.includes("amatista") || q.includes("cuarzo")) {
-        const item = shopProducts.find((p) => p.id === "estuche-mineralia-arcano")!;
-        return {
-          response: `✦ ${item.name} (${item.formattedPrice}):\n\n${item.description}\n\n• Incluye: Geoda de amatista, esfera de obsidiana negra pulida, obelisco de cuarzo cristal y pepita de pirita en cofre de terciopelo con sello de pan de oro.`,
-          shopItem: item,
-          quickReplies: ["Comprar Estuche Mineralia", "Baraja ARCANO TAROT", "¿Cómo limpiar los cristales?"],
-        };
-      }
-
-      if (q.includes("baraja") || q.includes("mazo") || q.includes("cartas") || q.includes("dorad")) {
-        const item = shopProducts.find((p) => p.id === "baraja-arcano-tarot-deluxe")!;
-        return {
-          response: `✦ ${item.name} (${item.formattedPrice}):\n\n${item.description}\n\n• Características: Cartulina alemana de lino de 350g, bordes con baño de pan de oro brillante (gilded edges), caja rígida de dos piezas y libreto de 120 páginas por Malachai.`,
-          shopItem: item,
-          quickReplies: ["Adquirir Baraja por WhatsApp", "Libro de los Símbolos", "¿Hacen envíos internacionales?"],
-        };
-      }
-
-      if (q.includes("libro") || q.includes("grimorio") || q.includes("tratado") || q.includes("escrito")) {
-        const item = shopProducts.find((p) => p.id === "libro-arcano-simbolos-malachai")!;
-        return {
-          response: `✦ ${item.name} (${item.formattedPrice}):\n\n${item.description}\n\n• Edición especial: Tapa dura en cuero oscuro grabado en oro con broche metálico vintage, 320 páginas con los 22 tratados y guías rituales.`,
-          shopItem: item,
-          quickReplies: ["Comprar Libro por WhatsApp", "Tapiz de Altar", "Ver catálogo de la tienda"],
-        };
-      }
-
-      if (q.includes("envio") || q.includes("entrega") || q.includes("pais") || q.includes("mexico")) {
-        return {
-          response: "✦ Envíos de la Boutique ARCANO:\n\n• Realizamos envíos seguros a toda la República Mexicana (3 a 5 días hábiles) con empaque ceremonial protegido por sellos de lacre.\n• Envíos internacionales disponibles bajo cotización previa.\n• Para pedidos inmediatos, puedes contactarnos directamente por WhatsApp.",
-          quickReplies: ["Pedir por WhatsApp", "Ver Velas y Sahumerios", "Baraja de Tarot ARCANO"],
-        };
-      }
-
-      // Catálogo general de la tienda
       return {
-        response: `✦ La Boutique Ceremonial de ARCANO cuenta con 5 colecciones consagradas:\n\n1. Velas y sahumerios: Ambientación y purificación vegetal.\n2. Inciensos y resinas: Copal negro, mirra y sándalo ancestral.\n3. Cristales y minerales: Amatista, obsidiana, cuarzo y pirita.\n4. Cartas y oráculos: Baraja ARCANO de 78 cartas con cantos en pan de oro.\n5. Libros y artículos rituales: El Libro de los Símbolos y tapices bordados.\n\nPuedes explorar el catálogo completo en la sección «Tienda» o consultarme por una pieza específica.`,
+        response: `✦ Por el momento, nuestra Boutique Ceremonial de artículos físicos se encuentra en preparación y no está activa.\n\nNos dedicamos con devoción primordial a las Consultas y Lecturas de Tarot personalizadas, tiradas oraculares y la formación en la Academia. ¿Deseas explorar los servicios de lectura disponibles o calcular tu Arcano Natal?`,
         quickReplies: [
-          "Vela ARCANO RITUALIS",
-          "Baraja ARCANO TAROT",
-          "Estuche de Cristales",
-          "Caja de Resinas Sagradas",
+          "Ver lecturas disponibles",
+          "Calcular mi Arcano de Nacimiento",
+          "Consultar con Malachai",
         ],
       };
     }
@@ -208,7 +145,7 @@ export const ArcanaAiBot: React.FC = () => {
         return {
           response: `✦ Tu Arcano de Nacimiento es ${natalArcana.name} (Número ${natalArcana.number} · ${natalArcana.archetype}).\n\nEste arcano rige tu propósito vital y la fuerza arquetípica que viniste a encarnar en esta vida.\n\n«${natalArcana.quote}»\n\n• Lección primordial: ${natalArcana.description}\n• Pregunta clave: «${natalArcana.reflectionQuestion}»`,
           arcana: natalArcana,
-          quickReplies: [`Consejo de ${natalArcana.name}`, "Consultar con Malachai", "¿Qué productos tienen en la tienda?"],
+          quickReplies: [`Consejo de ${natalArcana.name}`, "Consultar con Malachai", "Ver lecturas disponibles"],
         };
       }
 
@@ -238,7 +175,7 @@ export const ArcanaAiBot: React.FC = () => {
         return {
           response: `✦ ${foundArcana.name} en el Amor y los Vínculos:\n\n${foundArcana.love}\n\nCrecimiento personal: «${foundArcana.personalGrowth}»`,
           arcana: foundArcana,
-          quickReplies: [`En el trabajo: ${foundArcana.name}`, `Sombra de ${foundArcana.name}`, "Ver baraja en la tienda"],
+          quickReplies: [`En el trabajo: ${foundArcana.name}`, `Sombra de ${foundArcana.name}`, "Tirada de 3 cartas"],
         };
       }
 
@@ -265,21 +202,21 @@ export const ArcanaAiBot: React.FC = () => {
     if (q.includes("tirada") || q.includes("cartas") || q.includes("oraculo") || q.includes("como leer")) {
       return {
         response: "✦ La Tirada de las Tres Revelaciones (Pasado, Presente y Futuro) está disponible en vivo en nuestro santuario:\n\n1. Pasado: La raíz profunda de tu situación.\n2. Presente: El espejo sagrado y la prueba en este instante.\n3. Futuro: Hacia dónde fluye tu destino si actúas con conciencia.\n\nPuedes realizarla en la sección «Oráculo Ritual en Vivo» ingresando tu nombre y pregunta.",
-        quickReplies: ["¿Qué significa La Estrella?", "¿Qué productos hay en la tienda?", "Consultar con Malachai"],
+        quickReplies: ["¿Qué significa La Estrella?", "Ver lecturas disponibles", "Consultar con Malachai"],
       };
     }
 
     if (q.includes("malachai") || q.includes("sesion") || q.includes("cita") || q.includes("reserva")) {
       return {
         response: "✦ Malachai es Lector y Custodio de los Símbolos en ARCANO. Brinda sesiones privadas de tarot ceremonial con estricta confidencialidad y rigor ético.\n\nPuedes coordinar una lectura personal vía WhatsApp o explorar las lecturas disponibles en la web.",
-        quickReplies: ["Consultar por WhatsApp", "Ver lecturas disponibles", "Ir a la tienda"],
+        quickReplies: ["Consultar por WhatsApp", "Ver lecturas disponibles", "Calcular mi Arcano"],
       };
     }
 
     // Respuesta general
     return {
-      response: `✦ En ARCANO, los símbolos custodian respuestas a todas las encrucijadas. Pregúntame sobre cualquier arcano (ej: «El Mago», «La Muerte»), tu fecha de nacimiento o sobre las piezas rituales de nuestra tienda (velas, inciensos, cristales, barajas).`,
-      quickReplies: ["Velas y sahumerios", "¿Qué significa El Loco?", "Calcular mi Arcano de Nacimiento", "Baraja ARCANO TAROT"],
+      response: `✦ En ARCANO, los símbolos custodian respuestas a todas las encrucijadas. Pregúntame sobre cualquier arcano (ej: «El Mago», «La Muerte»), tu fecha de nacimiento o sobre los servicios de lecturas y la Academia.`,
+      quickReplies: ["¿Cómo es una lectura de Tarot?", "¿Qué significa El Loco?", "Calcular mi Arcano de Nacimiento", "Ver lecturas disponibles"],
     };
   };
 
@@ -301,14 +238,13 @@ export const ArcanaAiBot: React.FC = () => {
     setIsTyping(true);
 
     setTimeout(() => {
-      const { response, arcana, shopItem, quickReplies } = processQuery(userMsg.text);
+      const { response, arcana, quickReplies } = processQuery(userMsg.text);
 
       const botMsg: ChatMessage = {
         id: `bot-${Date.now()}`,
         sender: "bot",
         text: response,
         arcanaCard: arcana,
-        shopItem: shopItem,
         quickReplies,
         timestamp: "Ahora",
       };
@@ -330,7 +266,7 @@ export const ArcanaAiBot: React.FC = () => {
     <>
       {/* Botón flotante ceremonial: El Sello de ARCANO (arriba del botón de WhatsApp, anclado abajo) */}
       <aside
-        aria-label="El Sello de ARCANO — Custodio y Tienda"
+        aria-label="El Sello de ARCANO — Custodio y Oráculo"
         style={{
           position: "fixed",
           bottom: "max(5rem, calc(env(safe-area-inset-bottom, 0px) + 5rem))",
@@ -358,7 +294,7 @@ export const ArcanaAiBot: React.FC = () => {
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          aria-label="Abrir asistente de Arcanos y Tienda"
+          aria-label="Abrir asistente de Arcanos"
           className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-gold/80 bg-gradient-to-br from-[#262014] via-[#15131e] to-[#090810] text-gold hover:text-gold-light flex items-center justify-center shadow-[0_0_24px_rgba(218,165,32,0.55)] hover:shadow-[0_0_35px_rgba(255,215,0,0.85)] transition-all duration-300 hover:scale-105 active:scale-95"
         >
           {/* Anillo de pulso místico */}
@@ -417,11 +353,11 @@ export const ArcanaAiBot: React.FC = () => {
                 <h3 className="font-serif text-sm text-parchment font-medium tracking-wide flex items-center gap-1.5">
                   <span>Custodio de ARCANO</span>
                   <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-gold/20 text-gold-light border border-gold/40 font-sans">
-                    ORÁCULO & TIENDA
+                    ORÁCULO DIGITAL
                   </span>
                 </h3>
                 <span className="text-[10px] text-parchment-dim font-sans block">
-                  Sabiduría de los Arcanos & Boutique Sagrada
+                  Sabiduría de los Arcanos & Guía Simbólica
                 </span>
               </div>
             </div>
@@ -476,35 +412,6 @@ export const ArcanaAiBot: React.FC = () => {
                       </div>
                     </div>
                   )}
-
-                  {/* Ficha pequeña de Producto de la Tienda */}
-                  {msg.shopItem && (
-                    <div className="mt-3 pt-2.5 border-t border-gold/20 flex items-center gap-3 bg-obsidian/70 p-2.5 rounded border border-gold/30">
-                      <div className="w-12 h-12 relative rounded overflow-hidden border border-gold/40 flex-shrink-0 bg-black">
-                        <img
-                          src={getAssetPath(msg.shopItem.imageUrl)}
-                          alt={msg.shopItem.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <span className="font-serif text-gold-light text-xs block truncate font-medium">
-                          {msg.shopItem.name}
-                        </span>
-                        <span className="text-xs text-parchment font-serif font-medium block">
-                          {msg.shopItem.formattedPrice}
-                        </span>
-                        <a
-                          href={getWhatsAppUrl(`Hola ARCANO, deseo comprar: ${msg.shopItem.name} (${msg.shopItem.formattedPrice})`)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[10px] text-gold hover:text-gold-light font-sans font-medium inline-flex items-center gap-1 mt-0.5 underline"
-                        >
-                          Comprar por WhatsApp →
-                        </a>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 {/* Sugerencias Rápidas / Quick Replies */}
@@ -514,8 +421,8 @@ export const ArcanaAiBot: React.FC = () => {
                       <button
                         key={i}
                         onClick={() => {
-                          if (reply.includes("WhatsApp") || reply.includes("Comprar")) {
-                            window.open(getWhatsAppUrl(`Hola ARCANO, tengo una consulta sobre la boutique y los arcanos.`), "_blank");
+                          if (reply.includes("WhatsApp")) {
+                            window.open(getWhatsAppUrl(`Hola ARCANO, tengo una consulta sobre las lecturas y los arcanos.`), "_blank");
                           } else {
                             handleSendMessage(reply);
                           }
@@ -540,15 +447,15 @@ export const ArcanaAiBot: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Enlaces rápidos: Tienda y WhatsApp */}
+          {/* Enlaces rápidos: Lecturas y WhatsApp */}
           <div className="px-4 py-2 bg-[#12101c] border-t border-charcoal-border/50 text-[10px] text-parchment-dim flex items-center justify-between font-sans">
-            <a href="/tienda" className="text-parchment-muted hover:text-gold flex items-center gap-1">
-              <span>🛍️</span>
-              <span>Ir a la Tienda</span>
+            <a href="/lecturas" className="text-parchment-muted hover:text-gold flex items-center gap-1">
+              <span>🔮</span>
+              <span>Ver Lecturas de Tarot</span>
             </a>
             <span className="text-gold/40">✦</span>
             <a
-              href={getWhatsAppUrl("Hola Malachai, deseo consultar sobre una lectura o un producto de ARCANO.")}
+              href={getWhatsAppUrl("Hola Malachai, deseo consultar sobre una lectura personalizada de ARCANO.")}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold hover:text-gold-light font-medium underline flex items-center gap-1"
@@ -565,7 +472,7 @@ export const ArcanaAiBot: React.FC = () => {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Pregunta por un arcano, tu fecha o un producto..."
+              placeholder="Pregunta por un arcano, tu fecha o una tirada..."
               className="flex-1 bg-[#151320] border border-charcoal-border rounded-lg px-3.5 py-2.5 text-xs text-parchment placeholder-parchment-dim/60 focus:outline-none focus:border-gold transition-colors"
             />
             <button
