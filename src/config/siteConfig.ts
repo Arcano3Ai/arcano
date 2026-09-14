@@ -5,8 +5,8 @@ export const siteConfig = {
   titleTemplate: `%s | ${brandConfig.name}`,
   description:
     "Santuario digital de tarot, simbolismo y autoconocimiento. Lecturas profundas, introspección personal y sabiduría ancestral.",
-  url: "https://arcanotarot.com",
-  ogImage: "https://arcanotarot.com/og-arcano.jpg",
+  url: "https://arcanosolutions.com",
+  ogImage: "https://arcanosolutions.com/og-arcano.jpg",
   author: "ARCANO",
   keywords: [
     "tarot profesional",

@@ -54,7 +54,7 @@ export const brandConfig: BrandConfig = {
   closingQuote:
     "Quizá la pregunta no sea qué va a suceder. Quizá sea qué estás preparado para ver.",
   contact: {
-    email: "contacto@arcanotarot.com",
+    email: "contacto@arcanosolutions.com",
     phone: "+52 (55) 8432-1920",
     whatsappNumber: "5215584321920",
     whatsappDefaultMessage:
