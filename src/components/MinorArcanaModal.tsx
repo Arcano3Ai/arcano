@@ -53,7 +53,8 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
             name={card.name}
             glyph={suitMeta.symbol}
             subtitle={`Palo de ${card.suit} · ${card.suitElement}`}
-            className="relative w-32 sm:w-36 aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep"
+            priority={true}
+            className="relative w-32 sm:w-36 min-w-[128px] min-h-[199px] aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep"
           />
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">

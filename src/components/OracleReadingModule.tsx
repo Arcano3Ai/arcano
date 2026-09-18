@@ -5,7 +5,7 @@ import Image from "next/image";
 import { arcanaList, Arcana } from "@/data/arcana";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { getWhatsAppUrl } from "@/config/brandConfig";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 interface OracleSlot {
   position: "Pasado" | "Presente" | "Futuro";
@@ -407,6 +407,7 @@ export const OracleReadingModule: React.FC = () => {
                           sizes="(max-width: 640px) 240px, 280px"
                           priority
                           loading="eager"
+                          onError={handleImageError}
                         />
                       </div>
 

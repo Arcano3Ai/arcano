@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { arcanaList, Arcana } from "@/data/arcana";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { sacredAudio } from "@/lib/sacredAudio";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 interface ChatMessage {
   id: string;
@@ -393,6 +393,7 @@ export const ArcanaAiBot: React.FC = () => {
                         <img
                           src={getAssetPath(msg.arcanaCard.imageUrl)}
                           alt={msg.arcanaCard.name}
+                          onError={handleImageError}
                           className="w-full h-full object-cover"
                         />
                       </div>

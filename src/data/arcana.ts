@@ -474,7 +474,7 @@ export const arcanaList: Arcana[] = rawArcanaList.map((a) => {
   const audioData = arcanaAudioMap[a.slug];
   return {
     ...a,
-    imageUrl: `/images/cards/ar${String(a.numericValue).padStart(2, "0")}.jpg`,
+    imageUrl: `/images/cards/ar${String(a.numericValue).padStart(2, "0")}.webp`,
     audioUrl: audioData?.audioUrl,
     audioTitle: audioData?.audioTitle,
   };

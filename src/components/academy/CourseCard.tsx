@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { AcademyCourse } from "@/data/academy";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 interface CourseCardProps {
   course: AcademyCourse;
@@ -36,6 +36,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           alt={`${course.romanLevel} — ${course.title}`}
           loading={course.level <= 3 ? "eager" : "lazy"}
           decoding="async"
+          onError={handleImageError}
           className="w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a14] via-[#0c0a14]/40 to-transparent pointer-events-none" />

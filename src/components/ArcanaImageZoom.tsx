@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 interface ArcanaImageZoomProps {
   imageUrl: string;
@@ -27,6 +27,8 @@ export const ArcanaImageZoom: React.FC<ArcanaImageZoomProps> = ({
   priority = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // Cerrar con Escape
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -51,6 +53,11 @@ export const ArcanaImageZoom: React.FC<ArcanaImageZoomProps> = ({
 
   const resolvedUrl = getAssetPath(imageUrl);
 
+  useEffect(() => {
+    setIsLoaded(false);
+    setHasError(false);
+  }, [resolvedUrl]);
+
   return (
     <>
       {/* Miniatura interactiva con indicador de zoom */}
@@ -68,15 +75,43 @@ export const ArcanaImageZoom: React.FC<ArcanaImageZoomProps> = ({
         title="Toca para ampliar y ver los detalles sagrados"
         className={`${className} group cursor-zoom-in transition-all duration-300 hover:border-gold hover:shadow-[0_20px_60px_rgba(198,160,82,0.35)] select-none`}
       >
-        <Image
-          src={resolvedUrl}
-          alt={name}
-          fill
-          className="object-cover object-center filter brightness-[0.92] contrast-[1.15] group-hover:scale-105 group-hover:brightness-100 transition-all duration-500 ease-out"
-          priority={priority}
-          loading={priority ? "eager" : "lazy"}
-          sizes="(max-width: 640px) 250px, 320px"
-        />
+        {/* Placeholder / Shimmer mientras carga */}
+        {!isLoaded && !hasError && (
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-obsidian/70 to-obsidian-deep animate-pulse flex items-center justify-center pointer-events-none">
+            {glyph && <span className="text-2xl text-gold/30 font-serif">{glyph}</span>}
+          </div>
+        )}
+
+        {/* Fallback ceremonial si la imagen falla */}
+        {hasError ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-obsidian-deep border border-gold/30">
+            <span className="text-3xl font-serif text-gold mb-1">{glyph || "✧"}</span>
+            <span className="text-[10px] text-gold/80 font-sans uppercase tracking-widest">{number}</span>
+            <span className="text-xs text-parchment font-serif mt-1">{name}</span>
+            <span className="text-[9px] text-parchment-dim mt-2 font-sans italic">Ilustración en consagración</span>
+          </div>
+        ) : (
+          <Image
+            src={resolvedUrl}
+            alt={name}
+            fill
+            className={`object-cover object-center filter brightness-[0.92] contrast-[1.15] group-hover:scale-105 group-hover:brightness-100 transition-all duration-500 ease-out ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            onLoad={() => {
+              setIsLoaded(true);
+              setHasError(false);
+            }}
+            onError={(e) => {
+              handleImageError(e);
+              // Si falla nuevamente tras el fallback
+              setHasError(true);
+            }}
+            sizes="(max-width: 640px) 250px, 320px"
+          />
+        )}
 
         {/* Marco dorado sutil interior */}
         <div className="absolute inset-0 border border-gold/20 rounded-md pointer-events-none group-hover:border-gold/50 transition-colors" />
@@ -159,6 +194,7 @@ export const ArcanaImageZoom: React.FC<ArcanaImageZoomProps> = ({
               className="object-contain object-center filter brightness-[0.95] contrast-[1.12]"
               priority
               loading="eager"
+              onError={handleImageError}
               sizes="(max-width: 640px) 90vw, (max-width: 1024px) 500px, 600px"
             />
             {/* Marco interior ornamental de doble línea dorada */}

@@ -1,17 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { MinorArcanaCard, suitsInfo } from "@/data/minorArcana";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
-interface Props {
+interface MinorArcanaCardViewProps {
   card: MinorArcanaCard;
   onSelect?: (card: MinorArcanaCard) => void;
   priority?: boolean;
 }
 
-export const MinorArcanaCardView: React.FC<Props> = ({ card, onSelect, priority = false }) => {
+export const MinorArcanaCardView: React.FC<MinorArcanaCardViewProps> = ({
+  card,
+  onSelect,
+  priority = false,
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const suitMeta = suitsInfo[card.suit];
 
   return (
@@ -32,15 +38,38 @@ export const MinorArcanaCardView: React.FC<Props> = ({ card, onSelect, priority 
 
         {/* Ilustración de la carta clásica original */}
         <div className="my-2.5 relative w-full aspect-[9/14] rounded overflow-hidden border border-gold/25 bg-obsidian-deep shadow-inner group-hover:border-gold/50 transition-colors">
-          <Image
-            src={getAssetPath(card.imageUrl)}
-            alt={card.name}
-            fill
-            priority={priority}
-            loading={priority ? "eager" : "lazy"}
-            className="object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          />
+          {!isLoaded && !hasError && (
+            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-obsidian/60 to-obsidian-deep animate-pulse flex items-center justify-center pointer-events-none">
+              <span className="text-2xl text-gold/20 font-serif">{suitMeta.symbol}</span>
+            </div>
+          )}
+          {hasError ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-obsidian-deep border border-gold/20">
+              <span className="text-2xl font-serif text-gold/80 mb-1">{suitMeta.symbol}</span>
+              <span className="text-[10px] text-gold/70 font-sans uppercase tracking-widest">{card.rank}</span>
+              <span className="text-xs text-parchment font-serif mt-1">{card.name}</span>
+            </div>
+          ) : (
+            <Image
+              src={getAssetPath(card.imageUrl)}
+              alt={card.name}
+              fill
+              priority={priority}
+              loading={priority ? "eager" : "lazy"}
+              onLoad={() => {
+                setIsLoaded(true);
+                setHasError(false);
+              }}
+              onError={(e) => {
+                handleImageError(e);
+                setHasError(true);
+              }}
+              className={`object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 33vw, 280px"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian-deep/85 via-transparent to-obsidian/30 pointer-events-none" />
           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gold/90 font-sans bg-obsidian/85 px-2 py-0.5 rounded border border-charcoal-border">

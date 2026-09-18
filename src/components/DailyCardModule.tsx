@@ -7,7 +7,7 @@ import { arcanaList, Arcana } from "@/data/arcana";
 import { trackEvent } from "@/lib/analytics";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 export const DailyCardModule: React.FC = () => {
   const [revealed, setRevealed] = useState<boolean>(false);
@@ -148,6 +148,7 @@ export const DailyCardModule: React.FC = () => {
                     fill
                     priority
                     loading="eager"
+                    onError={handleImageError}
                     className="object-cover object-center filter brightness-[0.88] contrast-[1.15]"
                     sizes="250px"
                   />

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { socialFeedList } from "@/data/social";
 import { brandConfig } from "@/config/brandConfig";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 export const InstagramGrid: React.FC = () => {
   return (
@@ -42,6 +42,7 @@ export const InstagramGrid: React.FC = () => {
                 src={getAssetPath(item.imageUrl)}
                 alt={item.caption}
                 fill
+                onError={handleImageError}
                 className="object-cover filter brightness-[0.6] contrast-[1.25] saturate-[0.85] opacity-85 group-hover:opacity-100 group-hover:brightness-[0.75] group-hover:scale-105 transition-all duration-700 ease-out"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />

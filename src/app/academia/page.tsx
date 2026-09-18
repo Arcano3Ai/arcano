@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { AcademySection } from "@/components/academy/AcademySection";
+import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
   title: "Academia Esotérica | Cursos de Tarot, Astrología, Numerología y Reiki | ARCANO",
@@ -23,7 +24,24 @@ export const metadata: Metadata = {
     title: "Academia Esotérica | ARCANO — Sabiduría Ancestral & Crecimiento Profesional",
     description:
       "Explora el conocimiento ancestral en 4 grandes disciplinas: Tarot, Astrología, Numerología y Reiki. Cada curso $799 MXN. Desbloquea tu página web gratis.",
-    images: ["/images/cards/ar19.jpg"],
+    url: `${siteConfig.url}/academia`,
+    type: "website",
+    images: [
+      {
+        url: "/og-academia.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Academia Esotérica ARCANO — Formación en Tarot, Astrología, Numerología y Reiki",
+        type: "image/jpeg",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Academia Esotérica | ARCANO — Sabiduría Ancestral",
+    description:
+      "Explora el conocimiento ancestral en 4 grandes disciplinas: Tarot, Astrología, Numerología y Reiki.",
+    images: ["/og-academia.jpg"],
   },
 };
 

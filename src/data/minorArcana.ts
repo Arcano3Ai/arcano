@@ -806,7 +806,7 @@ function getMinorCardImage(suit: string, num: number): string {
   else if (num === 12) suffix = "kn";
   else if (num === 13) suffix = "qu";
   else if (num === 14) suffix = "ki";
-  return `/images/cards/${prefix}${suffix}.jpg`;
+  return `/images/cards/${prefix}${suffix}.webp`;
 }
 
 export const minorArcanaList: MinorArcanaCard[] = rawMinorArcanaList.map((card) => ({

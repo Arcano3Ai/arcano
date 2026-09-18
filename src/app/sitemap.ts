@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/contacto",
     "/reservar",
+    "/tienda",
+    "/academia",
     "/privacidad",
     "/terminos",
     "/cancelaciones",

@@ -17,7 +17,7 @@ import { CourseCard } from "./CourseCard";
 import { CourseModal } from "./CourseModal";
 import { ProgressTracker } from "./ProgressTracker";
 import { brandConfig } from "@/config/brandConfig";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 export const AcademySection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<AcademyCategoryId | "todos">("todos");
@@ -119,9 +119,10 @@ export const AcademySection: React.FC = () => {
             {/* Carta 1: Tarot (Izquierda / El Loco) */}
             <div className="absolute -left-2 sm:left-2 top-8 w-28 sm:w-36 aspect-[2/3] rounded-lg overflow-hidden border border-gold/40 shadow-[0_10px_30px_rgba(0,0,0,0.85)] -rotate-12 transition-transform duration-500 hover:rotate-0 hover:scale-105 hover:z-30 hover:border-gold bg-black">
               <Image
-                src={getAssetPath("/images/cards/ar00.jpg")}
+                src={getAssetPath("/images/cards/ar00.webp")}
                 alt="Tarot — Arquetipos Sagrados"
                 fill
+                onError={handleImageError}
                 sizes="(max-width: 640px) 112px, 144px"
                 className="object-contain"
               />
@@ -135,9 +136,10 @@ export const AcademySection: React.FC = () => {
             {/* Centro: Geometría & Astrología (El Sol) */}
             <div className="relative z-20 w-32 sm:w-44 aspect-[2/3] rounded-lg overflow-hidden border-2 border-gold shadow-[0_15px_45px_rgba(198,160,82,0.35)] transition-transform duration-500 hover:scale-110 bg-black">
               <Image
-                src={getAssetPath("/images/cards/ar19.jpg")}
+                src={getAssetPath("/images/cards/ar19.webp")}
                 alt="Astrología — El Sol & Carta Natal"
                 fill
+                onError={handleImageError}
                 sizes="(max-width: 640px) 128px, 176px"
                 className="object-contain"
               />
@@ -151,9 +153,10 @@ export const AcademySection: React.FC = () => {
             {/* Carta 3: Energía y Numerología (Derecha / El Mundo) */}
             <div className="absolute -right-2 sm:right-2 bottom-6 w-28 sm:w-36 aspect-[2/3] rounded-lg overflow-hidden border border-gold/40 shadow-[0_10px_30px_rgba(0,0,0,0.85)] rotate-12 transition-transform duration-500 hover:rotate-0 hover:scale-105 hover:z-30 hover:border-gold bg-black">
               <Image
-                src={getAssetPath("/images/cards/ar21.jpg")}
+                src={getAssetPath("/images/cards/ar21.webp")}
                 alt="Reiki & Numerología — Síntesis Cósmica"
                 fill
+                onError={handleImageError}
                 sizes="(max-width: 640px) 112px, 144px"
                 className="object-contain"
               />
@@ -388,9 +391,10 @@ export const AcademySection: React.FC = () => {
                 <div className="my-auto py-6 text-center space-y-3">
                   <div className="w-16 h-16 rounded-full border-2 border-gold/60 mx-auto overflow-hidden relative shadow-[0_0_20px_rgba(198,160,82,0.3)]">
                     <Image
-                      src={getAssetPath("/images/cards/ar02.jpg")}
+                      src={getAssetPath("/images/cards/ar02.webp")}
                       alt="Tu perfil profesional"
                       fill
+                      onError={handleImageError}
                       className="object-cover"
                     />
                   </div>

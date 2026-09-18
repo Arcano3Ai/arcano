@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Arcana } from "@/data/arcana";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 interface ArcanaCardProps {
   arcana: Arcana;
@@ -14,6 +14,7 @@ interface ArcanaCardProps {
 
 export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, priority = false }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   return (
     <div
@@ -32,18 +33,38 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, pri
 
         {/* Ilustración de la carta original con tratamiento Dark Luxury */}
         <div className="my-3 relative w-full aspect-[9/14] rounded overflow-hidden border border-gold/25 bg-obsidian-deep shadow-inner group-hover:border-gold/50 transition-colors">
-          <Image
-            src={getAssetPath(arcana.imageUrl)}
-            alt={arcana.name}
-            fill
-            priority={priority}
-            loading={priority ? "eager" : "lazy"}
-            onLoad={() => setIsLoaded(true)}
-            className={`object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out ${
-              isLoaded ? "opacity-100" : "opacity-80"
-            }`}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          />
+          {!isLoaded && !hasError && (
+            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-obsidian/60 to-obsidian-deep animate-pulse flex items-center justify-center pointer-events-none">
+              <span className="text-2xl text-gold/20 font-serif">{arcana.glyph}</span>
+            </div>
+          )}
+          {hasError ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-obsidian-deep border border-gold/20">
+              <span className="text-2xl font-serif text-gold/80 mb-1">{arcana.glyph}</span>
+              <span className="text-[10px] text-gold/70 font-sans uppercase tracking-widest">{arcana.number}</span>
+              <span className="text-xs text-parchment font-serif mt-1">{arcana.name}</span>
+            </div>
+          ) : (
+            <Image
+              src={getAssetPath(arcana.imageUrl)}
+              alt={arcana.name}
+              fill
+              priority={priority}
+              loading={priority ? "eager" : "lazy"}
+              onLoad={() => {
+                setIsLoaded(true);
+                setHasError(false);
+              }}
+              onError={(e) => {
+                handleImageError(e);
+                setHasError(true);
+              }}
+              className={`object-cover object-center filter brightness-[0.80] contrast-[1.15] group-hover:brightness-[0.98] group-hover:scale-105 transition-all duration-700 ease-out ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 33vw, 280px"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian-deep/85 via-transparent to-obsidian/30 pointer-events-none" />
           {arcana.audioUrl && (
             <div className="absolute top-2 left-2 flex items-center gap-1 bg-obsidian-deep/90 border border-gold/40 px-2 py-0.5 rounded shadow-md pointer-events-none">

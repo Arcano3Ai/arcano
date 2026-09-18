@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { AcademyCourse } from "@/data/academy";
 import { brandConfig } from "@/config/brandConfig";
-import { getAssetPath } from "@/lib/utils";
+import { getAssetPath, handleImageError } from "@/lib/utils";
 
 interface CourseModalProps {
   course: AcademyCourse | null;
@@ -52,6 +52,7 @@ export const CourseModal: React.FC<CourseModalProps> = ({
             src={getAssetPath(course.cardImage)}
             alt={course.title}
             decoding="async"
+            onError={handleImageError}
             className="w-full h-full object-contain p-3 sm:p-4"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0e0b17] via-[#0e0b17]/40 to-transparent pointer-events-none" />
