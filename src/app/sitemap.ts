@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/arcanos",
     "/carta-del-dia",
     "/carta-astral",
+    "/sinastria",
     "/experiencia",
     "/blog",
     "/contacto",

@@ -7,6 +7,7 @@ export const headerNavLinks: NavLink[] = [
   { label: "Inicio", href: "/" },
   { label: "Lecturas", href: "/lecturas" },
   { label: "Carta Astral", href: "/carta-astral" },
+  { label: "Sinastría", href: "/sinastria" },
   { label: "Arcanos", href: "/arcanos" },
   { label: "Carta del Día", href: "/carta-del-dia" },
   { label: "Academia", href: "/#academia" },
@@ -18,6 +19,7 @@ export const footerNavLinks = {
   explorar: [
     { label: "Inicio", href: "/" },
     { label: "Carta Astral (Efemérides)", href: "/carta-astral" },
+    { label: "Sinastría de Pareja", href: "/sinastria" },
     { label: "Lecturas de Tarot", href: "/lecturas" },
     { label: "Los 22 Arcanos", href: "/arcanos" },
     { label: "Academia Esotérica", href: "/#academia" },

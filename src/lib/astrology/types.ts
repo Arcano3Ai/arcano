@@ -149,3 +149,34 @@ export interface NatalChartData {
   modalityBalance: ModalityBalance;
   calculatedAt: string;
 }
+
+export interface SynastryAspect {
+  bodyA: CelestialBodyName;
+  bodyB: CelestialBodyName;
+  aspectType: AspectType;
+  angle: number;
+  diff: number;
+  orb: number;
+  nature: 'harmonic' | 'tense' | 'neutral' | 'variable';
+  interpretation?: string;
+}
+
+export interface SynastryScores {
+  overall: number; // 0 to 100
+  chemistry: number; // 0 to 100 (passion / attraction)
+  communication: number; // 0 to 100 (intellectual harmony)
+  stability: number; // 0 to 100 (long term durability)
+  soulConnection: number; // 0 to 100 (spiritual & karmic depth)
+}
+
+export interface SynastryReport {
+  chartA: NatalChartData;
+  chartB: NatalChartData;
+  crossAspects: SynastryAspect[];
+  scores: SynastryScores;
+  overview: string;
+  strengths: string[];
+  challenges: string[];
+  arcanumCounsel: string;
+}
+
