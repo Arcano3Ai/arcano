@@ -5,11 +5,11 @@ export interface NavLink {
 
 export const headerNavLinks: NavLink[] = [
   { label: "Inicio", href: "/" },
-  { label: "El Tarotista", href: "/#el-tarotista" },
   { label: "Lecturas", href: "/lecturas" },
+  { label: "Carta Astral", href: "/carta-astral" },
   { label: "Arcanos", href: "/arcanos" },
-  { label: "Academia", href: "/#academia" },
   { label: "Carta del Día", href: "/carta-del-dia" },
+  { label: "Academia", href: "/#academia" },
   { label: "Blog", href: "/blog" },
   { label: "Contacto", href: "/contacto" },
 ];
@@ -17,6 +17,7 @@ export const headerNavLinks: NavLink[] = [
 export const footerNavLinks = {
   explorar: [
     { label: "Inicio", href: "/" },
+    { label: "Carta Astral (Efemérides)", href: "/carta-astral" },
     { label: "Lecturas de Tarot", href: "/lecturas" },
     { label: "Los 22 Arcanos", href: "/arcanos" },
     { label: "Academia Esotérica", href: "/#academia" },

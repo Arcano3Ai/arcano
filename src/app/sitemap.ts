@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tarot-profesional",
     "/arcanos",
     "/carta-del-dia",
+    "/carta-astral",
     "/experiencia",
     "/blog",
     "/contacto",
