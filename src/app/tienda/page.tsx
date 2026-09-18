@@ -42,9 +42,41 @@ export default function ShopPage() {
         <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light tracking-wide mb-4">
           Quemadores de Incienso & Piedras Sagradas de Río
         </h1>
-        <p className="text-parchment-muted text-sm sm:text-base font-sans font-light leading-relaxed">
+        <p className="text-parchment-muted text-sm sm:text-base font-sans font-light leading-relaxed mb-8">
           Piezas únicas recolectadas en cauces fluviales, taladradas y grabadas a mano con runas, símbolos Reiki y geometrías sagradas para consagrar tu altar y elevar tus rituales.
         </p>
+
+        {/* Banner Visual Ceremonial */}
+        <div className="relative aspect-[16/9] w-full max-w-4xl mx-auto rounded-xl overflow-hidden border border-gold/40 shadow-[0_0_40px_rgba(198,160,82,0.2)] mb-12 group">
+          <Image
+            src="/images/shop/banner-tienda-arcanos.jpg"
+            alt="Boutique Ceremonial ARCANO · Piedras de Río, Quemadores e Inciensos"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-obsidian/20 to-transparent" />
+          
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2 text-left">
+            <div>
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold font-sans font-medium block mb-1">
+                Altar Místico · Colección Viva
+              </span>
+              <h3 className="font-serif text-base sm:text-xl text-parchment font-light">
+                Piedras de Río con Doble Perforación & Símbolos Áureos
+              </h3>
+            </div>
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-obsidian/85 border border-gold/40 text-[11px] font-sans text-parchment-muted backdrop-blur-md">
+                ⚡ Doble Sahumerio
+              </span>
+              <span className="px-3 py-1 rounded-full bg-obsidian/85 border border-gold/40 text-[11px] font-sans text-parchment-muted backdrop-blur-md">
+                🌀 Reiki & Runas
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* 2. Manifiesto Artesanal (Aviso de Unicidad) */}
