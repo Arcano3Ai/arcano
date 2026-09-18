@@ -3,10 +3,29 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 
+import { siteConfig } from "@/config/siteConfig";
+
 export const metadata: Metadata = {
-  title: "Tarot del Amor y Dinámicas Vinculares",
+  title: "Tarot del Amor y Pareja · Lectura Simbólica de Vínculos y Relaciones",
   description:
-    "Explora los símbolos detrás de tus vínculos afectivos. Introspección sobre relaciones, comunicación, cierres de ciclo y nuevos encuentros sin fatalismos.",
+    "Explora los arquetipos detrás de tus vínculos afectivos con el Tarot del Amor. Comprensión profunda de relaciones, comunicación, cierres de ciclo y nuevos encuentros conscientes.",
+  keywords: [
+    "tarot del amor",
+    "lectura tarot del amor",
+    "tarot parejas",
+    "tirada del amor",
+    "relaciones y tarot",
+    "tarot sentimientos ocultos",
+    "tarot vinculos afectivos",
+  ],
+  alternates: {
+    canonical: `${siteConfig.url}/tarot-del-amor/`,
+  },
+  openGraph: {
+    title: "Tarot del Amor y Pareja | ARCANO",
+    description: "Lectura ceremonial y terapéutica de vínculos afectivos.",
+    url: `${siteConfig.url}/tarot-del-amor/`,
+  },
 };
 
 export default function TarotDelAmorPage() {

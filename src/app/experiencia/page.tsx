@@ -4,10 +4,20 @@ import Link from "next/link";
 import { experienceSteps } from "@/data/experienceSteps";
 import { SectionHeader } from "@/components/SectionHeader";
 
+import { siteConfig } from "@/config/siteConfig";
+
 export const metadata: Metadata = {
-  title: "Tu Experiencia en ARCANO · El Método de los 5 Pasos",
+  title: "El Método de Tarot Simbólico · Cómo Funciona Tu Sesión | ARCANO",
   description:
-    "Conoce cómo funciona una lectura ceremonial en ARCANO: desde la elección consciente hasta la integración reflexiva en tu vida diaria.",
+    "Descubre el método ceremonial y terapéutico de lectura de tarot en ARCANO: un proceso en 5 pasos desde la formulación de la pregunta hasta la integración consciente.",
+  alternates: {
+    canonical: `${siteConfig.url}/experiencia/`,
+  },
+  openGraph: {
+    title: "Tu Experiencia en ARCANO · El Método de los 5 Pasos",
+    description: "Cómo funciona una sesión ceremonial de tarot paso a paso.",
+    url: `${siteConfig.url}/experiencia/`,
+  },
 };
 
 export default function ExperienciaPage() {

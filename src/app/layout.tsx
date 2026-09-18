@@ -70,6 +70,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },
+  alternates: {
+    canonical: siteConfig.url,
+  },
   robots: {
     index: true,
     follow: true,
@@ -87,19 +90,49 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
+  const jsonLdGraph = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: brandConfig.name,
-    description: brandConfig.tagline,
-    url: siteConfig.url,
-    telephone: brandConfig.contact.phone,
-    email: brandConfig.contact.email,
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "MX",
-    },
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: brandConfig.name,
+        alternateName: `${brandConfig.name} — ${brandConfig.descriptor}`,
+        description: siteConfig.description,
+        inLanguage: "es-MX",
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${siteConfig.url}/#organization`,
+        name: brandConfig.name,
+        description: brandConfig.tagline,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}/icons/icon-512x512.png`,
+        image: siteConfig.ogImage,
+        telephone: brandConfig.contact.phone,
+        email: brandConfig.contact.email,
+        priceRange: "$$",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "MX",
+        },
+        knowsAbout: [
+          "Tarot Profesional",
+          "Lectura de Cartas",
+          "Arcanos Mayores",
+          "Arcanos Menores",
+          "Tarot Terapéutico",
+          "Psicología Arquetípica",
+          "Simbolismo Iniciático",
+        ],
+        sameAs: [
+          brandConfig.social.instagram,
+          brandConfig.social.facebook,
+          brandConfig.social.spotify,
+        ].filter(Boolean),
+      },
+    ],
   };
 
   return (
@@ -114,7 +147,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#07060b" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
       <body className="min-h-screen bg-obsidian text-parchment flex flex-col relative antialiased selection:bg-gold/30 selection:text-parchment transition-colors duration-500">

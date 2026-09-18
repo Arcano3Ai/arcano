@@ -9,6 +9,8 @@ import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
 import { ArcanaImageZoom } from "@/components/ArcanaImageZoom";
 import { getAssetPath } from "@/lib/utils";
 
+import { siteConfig } from "@/config/siteConfig";
+
 interface Props {
   params: {
     slug: string;
@@ -25,12 +27,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const arcana = arcanaList.find((a) => a.slug === params.slug);
   if (!arcana) return { title: "Arcano no encontrado" };
 
+  const arcanaImageUrl = arcana.imageUrl.startsWith("http")
+    ? arcana.imageUrl
+    : `${siteConfig.url}${arcana.imageUrl}`;
+
   return {
-    title: `${arcana.name} (${arcana.number}) — Significado, Simbolismo y Guía`,
-    description: `${arcana.name} en el Tarot: ${arcana.quote} Descubre su simbolismo arquetípico, aspectos de luz y sombra, amor, trabajo y crecimiento personal.`,
+    title: `${arcana.name} (${arcana.number}) — Significado, Simbolismo y Guía en el Tarot | ARCANO`,
+    description: `${arcana.name} en el Tarot: "${arcana.quote}" Descubre su significado completo, luz, sombra, amor, trabajo, crecimiento personal y simbolismo arquetípico.`,
+    keywords: [
+      arcana.name,
+      `significado de ${arcana.name.toLowerCase()}`,
+      `arcano ${arcana.name.toLowerCase()}`,
+      `arcano mayor ${arcana.number}`,
+      `${arcana.name.toLowerCase()} tarot amor`,
+      `${arcana.name.toLowerCase()} tarot trabajo`,
+      "arcanos mayores significado",
+    ],
+    alternates: {
+      canonical: `${siteConfig.url}/arcanos/${arcana.slug}/`,
+    },
     openGraph: {
+      type: "article",
+      title: `${arcana.name} (${arcana.number}) | ${brandConfig.name}`,
+      description: arcana.description,
+      url: `${siteConfig.url}/arcanos/${arcana.slug}/`,
+      images: [
+        {
+          url: arcanaImageUrl,
+          alt: `${arcana.name} — Arcano Mayor del Tarot`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${arcana.name} | ${brandConfig.name}`,
       description: arcana.description,
+      images: [arcanaImageUrl],
     },
   };
 }
@@ -49,8 +81,71 @@ export default function ArcanaDetailPage({ params }: Props) {
   const nextArcana =
     currentIndex < arcanaList.length - 1 ? arcanaList[currentIndex + 1] : arcanaList[0];
 
+  const arcanaImageUrl = arcana.imageUrl.startsWith("http")
+    ? arcana.imageUrl
+    : `${siteConfig.url}${arcana.imageUrl}`;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${siteConfig.url}/arcanos/${arcana.slug}/#article`,
+        headline: `${arcana.name} (${arcana.number}) en el Tarot: Significado y Simbolismo`,
+        description: arcana.description,
+        image: arcanaImageUrl,
+        author: {
+          "@type": "Organization",
+          name: brandConfig.name,
+          url: siteConfig.url,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: brandConfig.name,
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteConfig.url}/icons/icon-512x512.png`,
+          },
+        },
+        mainEntityOfPage: `${siteConfig.url}/arcanos/${arcana.slug}/`,
+        about: {
+          "@type": "Thing",
+          name: arcana.name,
+          description: `Arcano Mayor número ${arcana.number} (${arcana.archetype}) asociado al elemento ${arcana.element}.`,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Inicio",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Arcanos",
+            item: `${siteConfig.url}/arcanos/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: arcana.name,
+            item: `${siteConfig.url}/arcanos/${arcana.slug}/`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* Navegación de migas de pan */}
       <nav className="text-xs uppercase tracking-[0.2em] text-parchment-dim font-sans mb-8 flex items-center gap-2">
         <Link href="/arcanos" className="hover:text-gold transition-colors">

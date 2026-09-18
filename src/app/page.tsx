@@ -33,8 +33,27 @@ export default function HomePage() {
     trackEvent({ name: "click_booking", params: { source } });
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqList.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
+      {/* Schema.org FAQPage para Rich Snippets en Google */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* 1. INTRO CINEMATOGRÁFICA */}
       <IntroScreen />
 
@@ -65,6 +84,7 @@ export default function HomePage() {
 
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.2em] text-parchment font-light leading-none drop-shadow-lg">
             {brandConfig.name}
+            <span className="sr-only"> — Tarot Profesional, Sabiduría de los Arcanos y Lectura de Cartas</span>
           </h1>
 
           <p className="text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase text-gold/90 font-sans font-light">

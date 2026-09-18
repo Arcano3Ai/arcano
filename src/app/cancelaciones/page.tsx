@@ -2,9 +2,14 @@ import React from "react";
 import type { Metadata } from "next";
 import { brandConfig } from "@/config/brandConfig";
 
+import { siteConfig } from "@/config/siteConfig";
+
 export const metadata: Metadata = {
   title: "Política de Cancelación y Reprogramación",
   description: "Políticas de aviso previo, cambios de horario y reembolsos en ARCANO.",
+  alternates: {
+    canonical: `${siteConfig.url}/cancelaciones/`,
+  },
 };
 
 export default function CancelacionesPage() {

@@ -5,18 +5,60 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { brandConfig } from "@/config/brandConfig";
 
+import { siteConfig } from "@/config/siteConfig";
+
 export const metadata: Metadata = {
-  title: "Lecturas y Consultas de Tarot",
+  title: "Lecturas de Tarot Online y Presencial · Consultas Personalizadas",
   description:
-    "Catálogo ceremonial de lecturas de tarot en ARCANO. Lectura general, vínculos afectivos, propósito vocacional y lectura profunda.",
+    "Catálogo ceremonial de lecturas de tarot profesionales en ARCANO. Sesión general evolutiva, tarot del amor y vínculos, propósito vocacional y lectura profunda de 90 minutos.",
+  alternates: {
+    canonical: `${siteConfig.url}/lecturas/`,
+  },
+  openGraph: {
+    title: "Lecturas y Consultas de Tarot Profesional | ARCANO",
+    description:
+      "Sesiones ceremoniales y terapéuticas de tarot online y presencial con orientación arquetípica.",
+    url: `${siteConfig.url}/lecturas/`,
+  },
 };
 
 export default function LecturasPage() {
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Catálogo de Lecturas de Tarot — ARCANO",
+    description: "Servicios profesionales de orientación simbólica y lectura de tarot.",
+    itemListElement: servicesList.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.title,
+        description: service.shortDescription,
+        provider: {
+          "@type": "ProfessionalService",
+          name: brandConfig.name,
+          url: siteConfig.url,
+        },
+        offers: {
+          "@type": "Offer",
+          price: service.priceMXN.toString(),
+          priceCurrency: brandConfig.pricing.currency,
+          availability: "https://schema.org/InStock",
+        },
+      },
+    })),
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+      />
       <SectionHeader
         subtitle="Catálogo Ceremonial"
-        title="Nuestras Lecturas"
+        title="Nuestras Lecturas de Tarot"
         description="Cada sesión es un espacio de quietud donde los símbolos de los arcanos se despliegan para iluminar tus encrucijadas presentes con respeto y confidencialidad."
         symbol="✦"
       />

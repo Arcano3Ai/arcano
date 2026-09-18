@@ -20,15 +20,18 @@ export const metadata: Metadata = {
     "Carta natal",
     "Tarot profesional",
   ],
+  alternates: {
+    canonical: `${siteConfig.url}/academia/`,
+  },
   openGraph: {
     title: "Academia Esotérica | ARCANO — Sabiduría Ancestral & Crecimiento Profesional",
     description:
       "Explora el conocimiento ancestral en 4 grandes disciplinas: Tarot, Astrología, Numerología y Reiki. Cada curso $799 MXN. Desbloquea tu página web gratis.",
-    url: `${siteConfig.url}/academia`,
+    url: `${siteConfig.url}/academia/`,
     type: "website",
     images: [
       {
-        url: "/og-academia.jpg",
+        url: `${siteConfig.url}/og-academia.jpg`,
         width: 1200,
         height: 630,
         alt: "Academia Esotérica ARCANO — Formación en Tarot, Astrología, Numerología y Reiki",
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
     title: "Academia Esotérica | ARCANO — Sabiduría Ancestral",
     description:
       "Explora el conocimiento ancestral en 4 grandes disciplinas: Tarot, Astrología, Numerología y Reiki.",
-    images: ["/og-academia.jpg"],
+    images: [`${siteConfig.url}/og-academia.jpg`],
   },
 };
 

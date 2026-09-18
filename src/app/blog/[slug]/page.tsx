@@ -7,6 +7,8 @@ import { blogPosts, BlogPost } from "@/data/blog";
 import { brandConfig } from "@/config/brandConfig";
 import { getAssetPath } from "@/lib/utils";
 
+import { siteConfig } from "@/config/siteConfig";
+
 interface Props {
   params: {
     slug: string;
@@ -23,15 +25,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) return { title: "Artículo no encontrado" };
 
+  const postImageUrl = post.imageUrl.startsWith("http")
+    ? post.imageUrl
+    : `${siteConfig.url}${post.imageUrl}`;
+
   return {
-    title: `${post.title} — Crónicas de los Símbolos`,
+    title: `${post.title} | Blog de Tarot ARCANO`,
     description: post.excerpt,
+    alternates: {
+      canonical: `${siteConfig.url}/blog/${post.slug}/`,
+    },
     openGraph: {
       title: `${post.title} | ${brandConfig.name}`,
       description: post.excerpt,
       type: "article",
+      url: `${siteConfig.url}/blog/${post.slug}/`,
       publishedTime: post.publishedAt,
       authors: [post.author],
+      images: [
+        {
+          url: postImageUrl,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [postImageUrl],
     },
   };
 }
@@ -47,8 +69,67 @@ export default function BlogPostDetailPage({ params }: Props) {
     post.relatedSlugs.includes(p.slug)
   );
 
+  const postImageUrl = post.imageUrl.startsWith("http")
+    ? post.imageUrl
+    : `${siteConfig.url}${post.imageUrl}`;
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${siteConfig.url}/blog/${post.slug}/#article`,
+        headline: post.title,
+        description: post.excerpt,
+        image: postImageUrl,
+        datePublished: post.publishedAt,
+        dateModified: post.publishedAt,
+        author: {
+          "@type": "Person",
+          name: post.author,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: brandConfig.name,
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteConfig.url}/icons/icon-512x512.png`,
+          },
+        },
+        mainEntityOfPage: `${siteConfig.url}/blog/${post.slug}/`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Inicio",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Blog",
+            item: `${siteConfig.url}/blog/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: `${siteConfig.url}/blog/${post.slug}/`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       {/* Navegación breadcrumb */}
       <nav className="text-xs uppercase tracking-[0.2em] text-parchment-dim font-sans mb-8 flex items-center gap-2">
         <Link href="/blog" className="hover:text-gold transition-colors">

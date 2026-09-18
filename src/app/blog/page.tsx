@@ -6,10 +6,29 @@ import { blogPosts } from "@/data/blog";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getAssetPath } from "@/lib/utils";
 
+import { siteConfig } from "@/config/siteConfig";
+
 export const metadata: Metadata = {
-  title: "Revista Editorial & Ensayos Simbólicos",
+  title: "Blog de Tarot, Filosofía y Simbolismo Arquetípico | ARCANO",
   description:
-    "Artículos sobre tarot, psicología de los arquetipos, simbolismo sagrado y el arte de la introspección personal.",
+    "Ensayos profundos sobre el significado del tarot, los arcanos mayores, psicología de arquetipos, tiradas prácticas y filosofía hermética.",
+  keywords: [
+    "blog de tarot",
+    "articulos de tarot",
+    "aprender tarot",
+    "significado del tarot",
+    "psicologia arquetipica tarot",
+    "tiradas de tarot interpretacion",
+  ],
+  alternates: {
+    canonical: `${siteConfig.url}/blog/`,
+  },
+  openGraph: {
+    title: "Crónicas de los Símbolos · Revista Editorial de Tarot | ARCANO",
+    description:
+      "Ensayos meditativos y guías para profundizar en el lenguaje arquetípico de los arcanos.",
+    url: `${siteConfig.url}/blog/`,
+  },
 };
 
 export default function BlogIndexPage() {

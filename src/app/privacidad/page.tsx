@@ -2,9 +2,14 @@ import React from "react";
 import type { Metadata } from "next";
 import { brandConfig } from "@/config/brandConfig";
 
+import { siteConfig } from "@/config/siteConfig";
+
 export const metadata: Metadata = {
   title: "Aviso de Privacidad",
   description: "Tratamiento, custodia y confidencialidad de datos personales en ARCANO.",
+  alternates: {
+    canonical: `${siteConfig.url}/privacidad/`,
+  },
 };
 
 export default function PrivacidadPage() {
