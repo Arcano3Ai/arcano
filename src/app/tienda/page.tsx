@@ -15,10 +15,16 @@ export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
   const [activeProduct, setActiveProduct] = useState<ShopProduct | null>(null);
 
-  const filteredProducts =
-    selectedCategory === "todos"
-      ? shopProducts
-      : shopProducts.filter((p) => p.categoryId === selectedCategory);
+  const filteredProducts = shopProducts.filter((product) => {
+    if (selectedCategory === "todos") return true;
+    if (selectedCategory === "doble-perforacion") {
+      return product.isDoublePerforation === true || product.categoryId === "doble-perforacion";
+    }
+    return (
+      product.categoryId === selectedCategory ||
+      product.theme === selectedCategory
+    );
+  });
 
   const getProductWhatsAppMessage = (product: ShopProduct) => {
     return `Hola ARCANO, me interesa adquirir la pieza única "${product.name}" (${product.formattedPrice} ${product.shippingNote}). ¿Sigue disponible para envío?`;
@@ -37,12 +43,12 @@ export default function ShopPage() {
           Quemadores de Incienso & Piedras Sagradas de Río
         </h1>
         <p className="text-parchment-muted text-sm sm:text-base font-sans font-light leading-relaxed">
-          Piezas únicas recolectadas en cauces fluviales, taladradas y grabadas a mano con runas y geometrías sagradas para consagrar tu altar y elevar tus rituales.
+          Piezas únicas recolectadas en cauces fluviales, taladradas y grabadas a mano con runas, símbolos Reiki y geometrías sagradas para consagrar tu altar y elevar tus rituales.
         </p>
       </div>
 
       {/* 2. Manifiesto Artesanal (Aviso de Unicidad) */}
-      <div className="relative mb-16 rounded-lg border border-gold/30 bg-gradient-to-br from-charcoal/80 via-obsidian/90 to-charcoal/80 p-6 sm:p-8 shadow-[0_0_35px_rgba(198,160,82,0.12)] overflow-hidden">
+      <div className="relative mb-14 rounded-lg border border-gold/30 bg-gradient-to-br from-charcoal/80 via-obsidian/90 to-charcoal/80 p-6 sm:p-8 shadow-[0_0_35px_rgba(198,160,82,0.12)] overflow-hidden">
         <div className="absolute -top-10 -right-10 w-48 h-48 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-3">
@@ -73,10 +79,16 @@ export default function ShopPage() {
         </div>
       </div>
 
-      {/* 3. Filtros de Categoría */}
+      {/* 3. Filtros de Colección y Tema */}
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
         {shopCategories.map((cat) => {
           const isActive = selectedCategory === cat.id;
+          const count = shopProducts.filter((p) => {
+            if (cat.id === "todos") return true;
+            if (cat.id === "doble-perforacion") return p.isDoublePerforation === true || p.categoryId === "doble-perforacion";
+            return p.categoryId === cat.id || p.theme === cat.id;
+          }).length;
+
           return (
             <button
               key={cat.id}
@@ -89,15 +101,18 @@ export default function ShopPage() {
             >
               <span>{cat.symbol}</span>
               <span>{cat.name}</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-obsidian/30 text-obsidian font-bold" : "bg-gold/10 text-gold"}`}>
+                {count}
+              </span>
             </button>
           );
         })}
       </div>
 
-      {/* Conteo de piezas */}
-      <div className="flex items-center justify-between border-b border-gold/15 pb-3 mb-8 text-xs font-sans text-parchment-muted">
+      {/* Conteo de piezas y nota de envío */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gold/15 pb-3 mb-8 text-xs font-sans text-parchment-muted gap-2">
         <span>Mostrando {filteredProducts.length} piezas artesanales de río</span>
-        <span className="text-gold/80">Envíos a todo México · Empaque Ceremonial Seguro</span>
+        <span className="text-gold/90 font-medium">Envíos a todo México · Empaque Ceremonial Seguro · Piezas Únicas</span>
       </div>
 
       {/* 4. Grid de Productos */}
@@ -121,12 +136,19 @@ export default function ShopPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-              {/* Badge */}
-              {product.badge && (
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-obsidian/85 backdrop-blur-sm border border-gold/40 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
-                  {product.badge}
-                </div>
-              )}
+              {/* Badges superiores */}
+              <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+                {product.isDoublePerforation && (
+                  <span className="px-2.5 py-0.5 rounded bg-gold/90 text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
+                    ⚡ Doble Perforación
+                  </span>
+                )}
+                {product.badge && (
+                  <span className="px-2.5 py-0.5 rounded bg-obsidian/85 backdrop-blur-sm border border-gold/40 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
+                    {product.badge}
+                  </span>
+                )}
+              </div>
 
               {/* Quick View Hover Prompt */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
@@ -162,7 +184,7 @@ export default function ShopPage() {
                   </span>
                 </div>
                 <span className="text-[10px] text-parchment-muted/60 font-sans">
-                  Pieza Única
+                  {product.isDoublePerforation ? "2 Orificios" : "Pieza Única"}
                 </span>
               </div>
 
@@ -196,10 +218,10 @@ export default function ShopPage() {
           ¿Deseas una pieza personalizada o consultar existencias?
         </h3>
         <p className="text-xs text-parchment-muted font-sans font-light leading-relaxed mb-6">
-          Si buscas una piedra de río con una runa específica, símbolo astrológico o kit ceremonial especial para ti o para regalar, escríbenos directamente.
+          Si buscas una piedra de río con doble perforación, un símbolo Reiki específico, o un kit ceremonial a medida para ti o para obsequiar, escríbenos directamente.
         </p>
         <a
-          href={getWhatsAppUrl("Hola ARCANO, deseo consultar sobre una pieza o pedido especial de la boutique ceremonial.")}
+          href={getWhatsAppUrl("Hola ARCANO, deseo consultar sobre una pieza de río o pedido especial de la boutique ceremonial.")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)]"
@@ -233,11 +255,18 @@ export default function ShopPage() {
                 fill
                 className="object-cover"
               />
-              {activeProduct.badge && (
-                <div className="absolute top-3 left-3 px-3 py-1 rounded bg-obsidian/90 border border-gold/50 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
-                  {activeProduct.badge}
-                </div>
-              )}
+              <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+                {activeProduct.isDoublePerforation && (
+                  <span className="px-3 py-1 rounded bg-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
+                    ⚡ Doble Perforación
+                  </span>
+                )}
+                {activeProduct.badge && (
+                  <span className="px-3 py-1 rounded bg-obsidian/90 border border-gold/50 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
+                    {activeProduct.badge}
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Info */}
