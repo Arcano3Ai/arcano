@@ -277,3 +277,52 @@ html.light Image {
   filter: none !important;
 }
 
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN Y EXPORTACIÓN EDITORIAL A PDF (ARCANO DOSSIER)
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 8mm 10mm;
+    size: A4 portrait;
+  }
+
+  /* Ocultar cromo web y botones */
+  header,
+  footer,
+  nav,
+  button,
+  .no-print,
+  #whatsapp-btn,
+  #cookie-banner,
+  .fixed,
+  [role="dialog"] {
+    display: none !important;
+  }
+
+  /* Fondo oscuro cósmico con colores preservados */
+  html, body {
+    background-color: #060911 !important;
+    color: #f4efe6 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 10pt !important;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .print-page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  /* Centrado y escala de ruedas SVG */
+  svg {
+    max-width: 440px !important;
+    margin: 0 auto !important;
+  }
+}
+
+

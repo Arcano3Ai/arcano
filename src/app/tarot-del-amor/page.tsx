@@ -117,8 +117,29 @@ export default function TarotDelAmorPage() {
         ))}
       </div>
 
+      {/* Puente con Sinastría Astrológica */}
+      <div className="mt-12 p-6 sm:p-8 rounded-2xl border border-gold/30 bg-gradient-to-r from-amber-500/10 via-[#0C101D] to-sky-500/10 flex flex-col sm:flex-row items-center justify-between gap-6 max-w-3xl mx-auto">
+        <div>
+          <span className="text-[10px] uppercase tracking-widest text-gold font-serif block mb-1">
+            Astrología de Pareja
+          </span>
+          <h4 className="font-serif text-lg text-parchment font-medium">
+            Calculadora de Sinastría & Compatibilidad Bi-Wheel
+          </h4>
+          <p className="text-xs text-parchment-muted mt-1 leading-relaxed">
+            Cruza la carta natal de ambas personas y analiza la química, el diálogo y el lazo del alma con precisión matemática.
+          </p>
+        </div>
+        <Link
+          href="/sinastria"
+          className="px-5 py-2.5 rounded-xl bg-gold/15 border border-gold text-gold text-xs font-serif hover:bg-gold/25 transition-colors whitespace-nowrap"
+        >
+          Calcular Sinastría →
+        </Link>
+      </div>
+
       {/* Sección Reflexión */}
-      <div className="mt-16 p-8 sm:p-10 rounded-xl border border-charcoal-border bg-gradient-to-b from-[#180f15] to-[#08080a] text-center max-w-3xl mx-auto space-y-4">
+      <div className="mt-12 p-8 sm:p-10 rounded-xl border border-charcoal-border bg-gradient-to-b from-[#180f15] to-[#08080a] text-center max-w-3xl mx-auto space-y-4">
         <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans">
           Meditación Vinculante
         </span>
