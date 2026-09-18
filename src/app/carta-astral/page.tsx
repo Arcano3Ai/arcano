@@ -50,18 +50,20 @@ export default function CartaAstralPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 print:p-0 print:m-0 print:max-w-none">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(astrologySchema) }}
       />
 
-      <SectionHeader
-        subtitle="Cosmología Sagrada"
-        title="Carta Natal y Rueda Astral"
-        description="El cielo cósmico al instante de tu primer aliento es un mapa vivo de potencialidades. Explora tus posiciones planetarias, la geometría sagrada de tus aspectos y la tríada fundamental de tu alma."
-        symbol="❂"
-      />
+      <div className="print:hidden">
+        <SectionHeader
+          subtitle="Cosmología Sagrada"
+          title="Carta Natal y Rueda Astral"
+          description="El cielo cósmico al instante de tu primer aliento es un mapa vivo de potencialidades. Explora tus posiciones planetarias, la geometría sagrada de tus aspectos y la tríada fundamental de tu alma."
+          symbol="❂"
+        />
+      </div>
 
       <NatalChartApp />
     </div>

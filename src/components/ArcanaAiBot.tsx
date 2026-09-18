@@ -87,37 +87,28 @@ export const ArcanaAiBot: React.FC = () => {
       };
     }
 
-    // 1. Preguntas sobre tienda o productos físicos (desactivada)
+    // 1. Preguntas sobre tienda o productos físicos (Boutique de Piedras de Río & Inciensos)
     if (
       q.includes("tienda") ||
       q.includes("producto") ||
       q.includes("comprar") ||
       q.includes("catalogo") ||
       q.includes("catálogo") ||
-      q.includes("precio") ||
-      q.includes("costo") ||
-      q.includes("vela") ||
-      q.includes("sahumerio") ||
+      q.includes("piedra") ||
+      q.includes("quemador") ||
+      q.includes("portaincienso") ||
       q.includes("incienso") ||
-      q.includes("resina") ||
-      q.includes("cristal") ||
-      q.includes("mineral") ||
-      q.includes("obsidiana") ||
-      q.includes("amatista") ||
-      q.includes("baraja") ||
-      q.includes("mazo") ||
-      q.includes("libro") ||
-      q.includes("grimorio") ||
-      q.includes("tapiz") ||
-      q.includes("envio") ||
-      q.includes("envío")
+      q.includes("runa") ||
+      q.includes("sahumerio") ||
+      q.includes("salvia") ||
+      q.includes("palo santo")
     ) {
       return {
-        response: `✦ Por el momento, nuestra Boutique Ceremonial de artículos físicos se encuentra en preparación y no está activa.\n\nNos dedicamos con devoción primordial a las Consultas y Lecturas de Tarot personalizadas, tiradas oraculares y la formación en la Academia. ¿Deseas explorar los servicios de lectura disponibles o calcular tu Arcano Natal?`,
+        response: `✦ ¡Nuestra Boutique Ceremonial está activa!\n\nDisponemos de una colección exclusiva de Piezas Únicas de Río, taladradas y grabadas a mano como soportes y quemadores de incienso ritual:\n\n• ᚱ Quemador Piedra Aura Runas + 12 varitas: MXN $219 (+ envío)\n• 🌿 Quemador Piedra Aura + 12 varitas: MXN $149 (+ envío)\n• 🪶 Set de Incienso «Bosque Sagrado» (12 varitas): MXN $89 (+ envío)\n• 💫 Piedra Aura Dorada (Edición Ritual): MXN $199 (+ envío)\n• ✨ Piedras de Río Portales 11:11, 777, 444, Flor de la Vida y Lunas.\n\nCada piedra es única e irrepetible. Puedes ver la colección completa en la sección /tienda y solicitar tu pieza directamente por WhatsApp.`,
         quickReplies: [
-          "Ver lecturas disponibles",
-          "Calcular mi Arcano de Nacimiento",
-          "Consultar con El Señor de los Arcanos",
+          "Ir a la Tienda Ceremonial",
+          "Pedir por WhatsApp",
+          "Ver lecturas de tarot",
         ],
       };
     }
@@ -266,6 +257,7 @@ export const ArcanaAiBot: React.FC = () => {
     <>
       {/* Botón flotante ceremonial: El Sello de ARCANO (arriba del botón de WhatsApp, anclado abajo) */}
       <aside
+        id="arcana-bot-floating-btn"
         aria-label="El Sello de ARCANO — Custodio y Oráculo"
         style={{
           position: "fixed",
@@ -273,7 +265,7 @@ export const ArcanaAiBot: React.FC = () => {
           right: "max(1.25rem, calc(env(safe-area-inset-right, 0px) + 1.25rem))",
           top: "auto",
         }}
-        className="z-40 flex items-center gap-3"
+        className="z-40 flex items-center gap-3 print:hidden no-print"
       >
         {/* Tooltip místico expandible */}
         <div
@@ -341,7 +333,7 @@ export const ArcanaAiBot: React.FC = () => {
             right: "max(0.75rem, env(safe-area-inset-right, 0px))",
             top: "auto",
           }}
-          className="w-[94vw] sm:w-[420px] h-[520px] max-h-[78vh] rounded-2xl border border-gold/50 bg-[#0d0c15]/98 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_35px_rgba(198,160,82,0.25)] flex flex-col z-50 overflow-hidden animate-fadeIn"
+          className="w-[94vw] sm:w-[420px] h-[520px] max-h-[78vh] rounded-2xl border border-gold/50 bg-[#0d0c15]/98 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_35px_rgba(198,160,82,0.25)] flex flex-col z-50 overflow-hidden animate-fadeIn print:hidden no-print"
         >
           {/* Cabecera */}
           <div className="p-4 border-b border-charcoal-border/70 bg-gradient-to-r from-[#1c1628] via-[#13111d] to-[#0c0b14] flex items-center justify-between">

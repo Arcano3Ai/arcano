@@ -169,6 +169,28 @@ export interface SynastryScores {
   soulConnection: number; // 0 to 100 (spiritual & karmic depth)
 }
 
+export interface SynastrySection {
+  title: string;
+  subtitle: string;
+  verdict: string;
+  description: string;
+}
+
+export interface SynastryCategorizedAspects {
+  harmonics: SynastryAspect[];
+  tensions: SynastryAspect[];
+  conjunctions: SynastryAspect[];
+}
+
+export interface RelationalArcanum {
+  cardNumber: number;
+  name: string;
+  archetype: string;
+  element: string;
+  message: string;
+  counsel: string;
+}
+
 export interface SynastryReport {
   chartA: NatalChartData;
   chartB: NatalChartData;
@@ -178,5 +200,11 @@ export interface SynastryReport {
   strengths: string[];
   challenges: string[];
   arcanumCounsel: string;
+  sunDynamic: SynastrySection;
+  moonDynamic: SynastrySection;
+  eroticChemistry: SynastrySection;
+  karmicDestiny: SynastrySection;
+  categorizedAspects: SynastryCategorizedAspects;
+  relationalArcanum: RelationalArcanum;
 }
 

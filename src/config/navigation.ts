@@ -5,6 +5,7 @@ export interface NavLink {
 
 export const headerNavLinks: NavLink[] = [
   { label: "Inicio", href: "/" },
+  { label: "Tienda", href: "/tienda" },
   { label: "Lecturas", href: "/lecturas" },
   { label: "Carta Astral", href: "/carta-astral" },
   { label: "Sinastría", href: "/sinastria" },
@@ -18,6 +19,7 @@ export const headerNavLinks: NavLink[] = [
 export const footerNavLinks = {
   explorar: [
     { label: "Inicio", href: "/" },
+    { label: "Boutique & Piedras de Río", href: "/tienda" },
     { label: "Carta Astral (Efemérides)", href: "/carta-astral" },
     { label: "Sinastría de Pareja", href: "/sinastria" },
     { label: "Lecturas de Tarot", href: "/lecturas" },

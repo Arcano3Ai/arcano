@@ -15,6 +15,7 @@ export const WhatsAppButton: React.FC = () => {
 
   return (
     <aside
+      id="whatsapp-floating-btn"
       aria-label="Atención directa por WhatsApp"
       style={{
         position: "fixed",
@@ -22,7 +23,7 @@ export const WhatsAppButton: React.FC = () => {
         right: "max(1.25rem, calc(env(safe-area-inset-right, 0px) + 1.25rem))",
         top: "auto",
       }}
-      className="z-40 flex items-center gap-3"
+      className="z-40 flex items-center gap-3 print:hidden no-print"
     >
       {/* Tooltip místico expandible en hover */}
       <div

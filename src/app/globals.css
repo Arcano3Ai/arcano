@@ -282,30 +282,48 @@ html.light Image {
    ========================================================================== */
 @media print {
   @page {
-    margin: 8mm 10mm;
+    margin: 6mm 8mm;
     size: A4 portrait;
   }
 
-  /* Ocultar cromo web y botones */
+  /* Ocultar tajantemente todo cromo web, navegación y widgets flotantes */
   header,
   footer,
   nav,
+  aside,
   button,
-  .no-print,
+  canvas,
   #whatsapp-btn,
+  #whatsapp-floating-btn,
+  #arcana-bot-floating-btn,
   #cookie-banner,
+  .no-print,
   .fixed,
-  [role="dialog"] {
+  [role="dialog"],
+  [role="status"],
+  [aria-label*="WhatsApp" i],
+  [aria-label*="Custodio" i],
+  [aria-label*="audio" i] {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
   }
 
-  /* Fondo oscuro cósmico con colores preservados */
+  /* Resetear espaciados de layout web que interfieren con la página 1 */
+  main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+  }
+
+  /* Fondo oscuro cósmico con contraste preservado para PDF editorial */
   html, body {
     background-color: #060911 !important;
     color: #f4efe6 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    font-size: 10pt !important;
+    font-size: 9.5pt !important;
   }
 
   .print-avoid-break {
@@ -318,9 +336,23 @@ html.light Image {
     break-before: page !important;
   }
 
-  /* Centrado y escala de ruedas SVG */
-  svg {
-    max-width: 440px !important;
+  /* Portada exacta A4 sin saltos ni desbordes involuntarios */
+  .print-cover-page {
+    height: 275mm !important;
+    max-height: 275mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Centrado y escala controlada de ruedas SVG en impresión */
+  .print-cover-page svg,
+  .print-dossier svg {
+    max-width: 320px !important;
+    max-height: 320px !important;
     margin: 0 auto !important;
   }
 }

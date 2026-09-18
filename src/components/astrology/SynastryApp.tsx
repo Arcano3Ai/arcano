@@ -164,48 +164,70 @@ export default function SynastryApp() {
       {/* =========================================================================
           SECCIÓN EXCLUSIVA DE IMPRESIÓN Y EXPORTACIÓN A PDF (DOSSIER SINASTRÍA)
           ========================================================================= */}
-      <div className="hidden print:block space-y-8">
-        {/* PÁGINA 1: PORTADA Y RUEDA BI-WHEEL */}
-        <div className="border border-amber-500/40 rounded-3xl p-8 bg-[#0B0F1C] text-center space-y-6 print-avoid-break">
-          <div>
-            <span className="text-amber-400 text-xs uppercase tracking-[0.3em] font-serif block mb-1">
+      {/* =========================================================================
+          SECCIÓN EXCLUSIVA DE IMPRESIÓN Y EXPORTACIÓN A PDF (DOSSIER SINASTRÍA)
+          ========================================================================= */}
+      <div className="hidden print:block print-dossier">
+        {/* PÁGINA 1: PORTADA EDITORIAL A4 EXACTA */}
+        <div className="print-cover-page border border-amber-500/40 rounded-3xl p-6 bg-[#0B0F1C] text-center">
+          {/* Membrete y Título */}
+          <div className="space-y-1">
+            <span className="text-amber-400 text-[10px] uppercase tracking-[0.35em] font-serif block">
               ✦ ARCANO · DOSSIER DE SINASTRÍA SAGRADA ✦
             </span>
-            <h1 className="text-3xl font-serif font-bold text-amber-100">
+            <h1 className="text-2xl font-serif font-bold text-amber-100">
               {synastry.chartA.birthData.name} & {synastry.chartB.birthData.name}
             </h1>
-            <p className="text-xs text-slate-300 mt-1">
-              Afinidad Global: <strong className="text-amber-300 font-bold text-sm">{synastry.scores.overall}%</strong> • {synastry.crossAspects.length} aspectos interplanetarios
+            <p className="text-[11px] text-slate-300">
+              {synastry.chartA.birthData.name} ({synastry.chartA.birthData.cityName}, {synastry.chartA.birthData.day}/{synastry.chartA.birthData.month}/{synastry.chartA.birthData.year}) • {synastry.chartB.birthData.name} ({synastry.chartB.birthData.cityName}, {synastry.chartB.birthData.day}/{synastry.chartB.birthData.month}/{synastry.chartB.birthData.year})
             </p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 rounded-xl border border-amber-500/30 mt-1">
+              <span className="text-xs font-serif text-amber-300 font-bold">
+                Afinidad Global: {synastry.scores.overall}%
+              </span>
+              <span className="text-slate-500">·</span>
+              <span className="text-[10px] text-slate-300">
+                {synastry.crossAspects.length} aspectos cruzados
+              </span>
+              <span className="text-slate-500">·</span>
+              <span className="text-[10px] text-amber-400 font-serif">
+                Arcano: {synastry.relationalArcanum.name}
+              </span>
+            </div>
           </div>
 
-          {/* Rueda Bi-Wheel en SVG */}
-          <div className="py-2 flex justify-center">
+          {/* Rueda Bi-Wheel en SVG (Escalada para caber perfecta en Portada) */}
+          <div className="py-2 flex justify-center items-center">
             <SynastryWheel synastry={synastry} />
           </div>
 
           {/* 4 Dimensiones en Portada */}
-          <div className="grid grid-cols-4 gap-3 pt-4 border-t border-amber-500/20 text-center">
-            <div className="p-2.5 bg-black/40 rounded-xl border border-rose-500/20">
-              <span className="text-[10px] text-rose-300 block font-serif">Pasión</span>
-              <span className="text-lg font-bold text-rose-400 font-mono">{synastry.scores.chemistry}%</span>
+          <div className="grid grid-cols-4 gap-2.5 pt-3 border-t border-amber-500/20 text-center">
+            <div className="p-2 bg-black/40 rounded-xl border border-rose-500/20">
+              <span className="text-[9px] text-rose-300 block font-serif">Pasión</span>
+              <span className="text-base font-bold text-rose-400 font-mono">{synastry.scores.chemistry}%</span>
             </div>
-            <div className="p-2.5 bg-black/40 rounded-xl border border-sky-500/20">
-              <span className="text-[10px] text-sky-300 block font-serif">Diálogo</span>
-              <span className="text-lg font-bold text-sky-400 font-mono">{synastry.scores.communication}%</span>
+            <div className="p-2 bg-black/40 rounded-xl border border-sky-500/20">
+              <span className="text-[9px] text-sky-300 block font-serif">Diálogo</span>
+              <span className="text-base font-bold text-sky-400 font-mono">{synastry.scores.communication}%</span>
             </div>
-            <div className="p-2.5 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[10px] text-amber-300 block font-serif">Estabilidad</span>
-              <span className="text-lg font-bold text-amber-400 font-mono">{synastry.scores.stability}%</span>
+            <div className="p-2 bg-black/40 rounded-xl border border-amber-500/20">
+              <span className="text-[9px] text-amber-300 block font-serif">Estabilidad</span>
+              <span className="text-base font-bold text-amber-400 font-mono">{synastry.scores.stability}%</span>
             </div>
-            <div className="p-2.5 bg-black/40 rounded-xl border border-purple-500/20">
-              <span className="text-[10px] text-purple-300 block font-serif">Lazo Álmico</span>
-              <span className="text-lg font-bold text-purple-400 font-mono">{synastry.scores.soulConnection}%</span>
+            <div className="p-2 bg-black/40 rounded-xl border border-purple-500/20">
+              <span className="text-[9px] text-purple-300 block font-serif">Lazo Álmico</span>
+              <span className="text-base font-bold text-purple-400 font-mono">{synastry.scores.soulConnection}%</span>
             </div>
+          </div>
+
+          {/* Pie de Portada */}
+          <div className="text-center pt-2 border-t border-amber-500/10 text-[9px] text-slate-400 font-serif">
+            ARCANO · Dossier Astrológico Relacional · www.arcanosolutions.com
           </div>
         </div>
 
-        {/* PÁGINA 2: INFORME DE COMPATIBILIDAD (SALTO DE PÁGINA) */}
+        {/* PÁGINA 2: INFORME DE COMPATIBILIDAD ALQUÍMICA (SALTO DE PÁGINA) */}
         <div className="print-page-break space-y-6 pt-4">
           <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C]">
             <SynastryReportView synastry={synastry} />

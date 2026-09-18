@@ -88,7 +88,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
 
   return (
     <div
-      className="fixed bottom-6 left-6 z-40 flex items-center gap-3"
+      className="fixed bottom-6 left-6 z-40 flex items-center gap-3 print:hidden no-print"
       aria-label="Control de audio ambiental"
     >
       {/* Botón de control ceremonial */}

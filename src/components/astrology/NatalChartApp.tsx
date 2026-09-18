@@ -253,56 +253,62 @@ export default function NatalChartApp() {
       {/* =========================================================================
           SECCIÓN EXCLUSIVA DE IMPRESIÓN Y EXPORTACIÓN A PDF (DOSSIER EDITORIAL)
           ========================================================================= */}
-      <div className="hidden print:block space-y-8">
-        {/* PÁGINA 1: PORTADA Y RUEDA SAGRADA */}
-        <div className="border border-amber-500/40 rounded-3xl p-8 bg-[#0B0F1C] text-center space-y-6 print-avoid-break">
-          <div>
-            <span className="text-amber-400 text-xs uppercase tracking-[0.3em] font-serif block mb-1">
+      <div className="hidden print:block print-dossier">
+        {/* PÁGINA 1: PORTADA EDITORIAL A4 EXACTA */}
+        <div className="print-cover-page border border-amber-500/40 rounded-3xl p-6 bg-[#0B0F1C] text-center">
+          {/* Membrete y Título */}
+          <div className="space-y-1">
+            <span className="text-amber-400 text-[10px] uppercase tracking-[0.35em] font-serif block">
               ✦ ARCANO · DOSSIER ASTROLÓGICO SAGRADO ✦
             </span>
-            <h1 className="text-3xl font-serif font-bold text-amber-100">
+            <h1 className="text-2xl font-serif font-bold text-amber-100">
               Carta Natal de {chart.birthData.name}
             </h1>
-            <p className="text-xs text-slate-300 mt-1">
+            <p className="text-[11px] text-slate-300">
               Nacimiento: {chart.birthData.day}/{chart.birthData.month}/{chart.birthData.year} a las{' '}
               {String(chart.birthData.hour).padStart(2, '0')}:{String(chart.birthData.minute).padStart(2, '0')} hs •{' '}
               {chart.birthData.cityName} (Lat: {chart.birthData.latitude}°, Lon: {chart.birthData.longitude}°) • Casas {chart.birthData.houseSystem}
             </p>
           </div>
 
-          {/* Rueda en SVG */}
-          <div className="py-2 flex justify-center">
+          {/* Rueda en SVG (Escalada para portada A4) */}
+          <div className="py-2 flex justify-center items-center">
             <NatalWheel chart={chart} />
           </div>
 
-          {/* Tríada de Portada */}
-          <div className="grid grid-cols-3 gap-4 pt-4 border-t border-amber-500/20 text-left">
-            <div className="p-3 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[10px] uppercase font-serif text-amber-400 font-bold block">☉ Sol Esencial</span>
-              <span className="font-serif font-bold text-sm text-amber-100">
+          {/* Tríada Fundamental en Portada */}
+          <div className="grid grid-cols-3 gap-3 pt-3 border-t border-amber-500/20 text-left">
+            <div className="p-2.5 bg-black/40 rounded-xl border border-amber-500/20">
+              <span className="text-[9px] uppercase font-serif text-amber-400 font-bold block">☉ Sol Esencial</span>
+              <span className="font-serif font-bold text-xs text-amber-100 block truncate">
                 {chart.positions.find(p => p.body === 'Sol')?.sign} (Casa {chart.positions.find(p => p.body === 'Sol')?.house})
               </span>
             </div>
-            <div className="p-3 bg-black/40 rounded-xl border border-indigo-500/20">
-              <span className="text-[10px] uppercase font-serif text-indigo-300 font-bold block">☽ Luna Emocional</span>
-              <span className="font-serif font-bold text-sm text-indigo-100">
+            <div className="p-2.5 bg-black/40 rounded-xl border border-indigo-500/20">
+              <span className="text-[9px] uppercase font-serif text-indigo-300 font-bold block">☽ Luna Emocional</span>
+              <span className="font-serif font-bold text-xs text-indigo-100 block truncate">
                 {chart.positions.find(p => p.body === 'Luna')?.sign} (Casa {chart.positions.find(p => p.body === 'Luna')?.house})
               </span>
             </div>
-            <div className="p-3 bg-black/40 rounded-xl border border-purple-500/20">
-              <span className="text-[10px] uppercase font-serif text-purple-300 font-bold block">✦ Ascendente</span>
-              <span className="font-serif font-bold text-sm text-purple-100">
+            <div className="p-2.5 bg-black/40 rounded-xl border border-purple-500/20">
+              <span className="text-[9px] uppercase font-serif text-purple-300 font-bold block">✦ Ascendente</span>
+              <span className="font-serif font-bold text-xs text-purple-100 block truncate">
                 {chart.angles.ascSign} ({chart.angles.ascDegreeInSign}° {chart.angles.ascMinuteInSign}&apos;)
               </span>
             </div>
           </div>
+
+          {/* Pie de Portada */}
+          <div className="text-center pt-2 border-t border-amber-500/10 text-[9px] text-slate-400 font-serif">
+            ARCANO · Dossier Astrológico Sagrado · www.arcanosolutions.com
+          </div>
         </div>
 
-        {/* PÁGINA 2: INFORME DEL SER Y EFEMÉRIDES (CON SALTO DE PÁGINA) */}
+        {/* PÁGINA 2: INFORME ARQUETÍPICO DEL SER Y EFEMÉRIDES (CON SALTO DE PÁGINA) */}
         <div className="print-page-break space-y-6 pt-4">
           <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C]">
             <span className="text-[10px] uppercase tracking-widest text-amber-400 font-serif font-semibold block mb-2">
-              ✦ Síntesis & Dimensiones del Alma
+              ✦ Síntesis Arquetípica & Dimensiones del Ser
             </span>
             <NatalReportView chart={chart} />
           </div>

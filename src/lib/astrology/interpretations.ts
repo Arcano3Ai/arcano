@@ -710,7 +710,196 @@ export const KARMIC_INTERPRETATIONS = {
   },
 };
 
-export function generateNatalReport(chart: NatalChartData): {
+export const JUPITER_INTERPRETATIONS: Record<ZodiacSignName, { title: string; blessings: string; expansionStyle: string }> = {
+  Aries: {
+    title: 'Júpiter en Aries: El Impulso Conquistador de la Gracia',
+    blessings: 'Tu mayor fortuna florece cuando tienes el valor de ser el primero, cuando inicias proyectos audaces y confías ciegamente en tu instinto.',
+    expansionStyle: 'Fuego pionero, optimismo combativo y fe inquebrantable en tu propia capacidad para derribar murallas.',
+  },
+  Tauro: {
+    title: 'Júpiter en Tauro: La Cornucopia de la Tierra',
+    blessings: 'La prosperidad te llega a través de la constancia paciente, la reverencia por la naturaleza y la creación de valor tangible y perdurable.',
+    expansionStyle: 'Enraizamiento sereno, atracción magnética de recursos y disfrute sagrado de los frutos de la materia.',
+  },
+  Géminis: {
+    title: 'Júpiter en Géminis: La Polinización de las Ideas',
+    blessings: 'Tu suerte se multiplica cuando te comunicas, conectas saberes dispares y mantienes viva la curiosidad insaciable del eterno aprendiz.',
+    expansionStyle: 'Intelecto voraz, elocuencia chispeante y versatilidad para tender puentes entre diferentes mundos.',
+  },
+  Cáncer: {
+    title: 'Júpiter en Cáncer: El Cáliz Sagrado de la Nutrición',
+    blessings: 'Exaltado en este signo: el universo te colma de bendiciones cuando proteges a los tuyos, creas un hogar cálido y confías en tu intuición materna.',
+    expansionStyle: 'Generosidad afectiva, sabiduría ancestral y una empatía que acoge y sana a quienes entran en tu santuario.',
+  },
+  Leo: {
+    title: 'Júpiter en Leo: El Resplandor Regio del Corazón',
+    blessings: 'La abundancia te sonríe cuando te atreves a ocupar el centro del escenario, irradias generosidad y compartes tus dones creativos sin timidez.',
+    expansionStyle: 'Magnanimidad, nobleza de espíritu y una fe radiante que inspira a todos a creer en su propia grandeza.',
+  },
+  Virgo: {
+    title: 'Júpiter en Virgo: El Alquimista de la Excelencia',
+    blessings: 'Tu expansión no proviene de grandilocuencias, sino de la devoción al detalle, la disciplina impecable y el servicio altruista bien estructurado.',
+    expansionStyle: 'Pragmatismo lúcido, maestría técnica y la capacidad de ordenar el caos en sistemas de sanación y eficiencia.',
+  },
+  Libra: {
+    title: 'Júpiter en Libra: La Gracia de la Armonía y la Justicia',
+    blessings: 'Tus mayores puertas se abren mediante las alianzas honestas, el cultivo de la belleza, la mediación pacífica y la cooperación recíproca.',
+    expansionStyle: 'Diplomacia elegante, sentido exquisito de la proporción y capacidad para encontrar acuerdos donde otros ven conflicto.',
+  },
+  Escorpio: {
+    title: 'Júpiter en Escorpio: La Riqueza de las Profundidades',
+    blessings: 'Tu fortuna se forja en la resiliencia absoluta, la transmutación de crisis en poder personal y la investigación de misterios ocultos.',
+    expansionStyle: 'Intuición penetrante, poder regenerador del ave fénix y maestría para gestionar recursos compartidos o invisibles.',
+  },
+  Sagitario: {
+    title: 'Júpiter en Sagitario: El Templo de la Sabiduría Cósmica',
+    blessings: 'Domicilio natural: posees un escudo de protección cósmica. La vida se expande con cada viaje, cada libro sagrado y cada salto de fe.',
+    expansionStyle: 'Visión profética, entusiasmo contagioso, sed de verdad filosófica y generosidad sin fronteras.',
+  },
+  Capricornio: {
+    title: 'Júpiter en Capricornio: El Arquitecto de Imperios Duraderos',
+    blessings: 'Tu prosperidad se edifica piedra a piedra con integridad, perseverancia y una estrategia de largo aliento que resiste cualquier temporal.',
+    expansionStyle: 'Madurez pragmática, respeto a las jerarquías virtuosas y capacidad de transformar ideales abstractos en legados tangibles.',
+  },
+  Acuario: {
+    title: 'Júpiter en Acuario: El Faro de la Hermandad Universal',
+    blessings: 'El destino te favorece cuando rompes dogmas caducos, luchas por ideales humanitarios e innovas con ideas adelantadas a tu época.',
+    expansionStyle: 'Pensamiento visionario, tolerancia fraternal, desapego iluminado y fe en el renacimiento de la comunidad humana.',
+  },
+  Piscis: {
+    title: 'Júpiter en Piscis: El Océano de Gracia Incondicional',
+    blessings: 'Regencia clásica: bendecido con un misticismo espontáneo, sincronicidades milagrosas y una compasión que no juzga ni condena.',
+    expansionStyle: 'Fe mística pura, inspiración artística trascendente y una conexión directa con los manantiales secretos del éter.',
+  },
+};
+
+export const SATURN_INTERPRETATIONS: Record<ZodiacSignName, { title: string; masteryLesson: string; responsibility: string }> = {
+  Aries: {
+    title: 'Saturno en Aries: La Forja del Guerrero Templado',
+    masteryLesson: 'Tu gran examen es dominar la impaciencia y la ira reactiva. Debes aprender a perseverar cuando el entusiasmo inicial se desvanece.',
+    responsibility: 'Construir una autoconfianza inquebrantable basada en la disciplina y no en arranques impulsivos.',
+  },
+  Tauro: {
+    title: 'Saturno en Tauro: El Guardián de la Auténtica Autosuficiencia',
+    masteryLesson: 'Trascender el temor a la escasez material. Comprender que tu valor no reside en acumular, sino en tu capacidad innata de crear sustancia.',
+    responsibility: 'Establecer cimientos financieros y éticos indestructibles mediante el trabajo metódico y el desapego virtuoso.',
+  },
+  Géminis: {
+    title: 'Saturno en Géminis: La Maestría del Lenguaje y el Pensamiento',
+    masteryLesson: 'Vencer la dispersión y la superficialidad intelectual. Tu mente está llamada a estructurar conocimientos complejos con rigor y método.',
+    responsibility: 'Hablar con la verdad impecable, asumir el peso de tus palabras y convertirte en una autoridad en tu campo intelectual.',
+  },
+  Cáncer: {
+    title: 'Saturno en Cáncer: La Maduración del Niño Herido',
+    masteryLesson: 'Aprender a contenerte a ti mismo sin depender del chantaje emocional ni encerrarte en un caparazón frío por temor al rechazo.',
+    responsibility: 'Convertirte en el padre/madre sabio de tu propia alma y edificar un hogar seguro donde reine la estabilidad afectiva.',
+  },
+  Leo: {
+    title: 'Saturno en Leo: La Corona de la Autenticidad Silenciosa',
+    masteryLesson: 'Liberarte de la necesidad neurótica de aplauso y validación externa. Tu luz debe brillar por generosidad, no por alimentar el ego.',
+    responsibility: 'Liderar con humildad, dignificar tu creatividad y sostener a los demás sin reclamar pedestales.',
+  },
+  Virgo: {
+    title: 'Saturno en Virgo: La Maestría del Orden y la Sanación',
+    masteryLesson: 'Desactivar el perfeccionismo obsesivo y la autocrítica demoledora. Aceptar la nobleza de lo imperfecto en el camino del aprendizaje.',
+    responsibility: 'Servir con excelencia técnica y devoción práctica, convirtiendo la salud y el orden en templos vivos.',
+  },
+  Libra: {
+    title: 'Saturno en Libra: El Juez de los Pactos Sagrados',
+    masteryLesson: 'Exaltado: aprender a establecer compromisos serios y equitativos, sin someterte por miedo a la soledad ni exigir perfección al otro.',
+    responsibility: 'Ser un pilar de justicia, respetar los contratos del alma y ejercer la diplomacia con límites inflexibles.',
+  },
+  Escorpio: {
+    title: 'Saturno en Escorpio: La Alquimia del Control y la Sombra',
+    masteryLesson: 'Aprender a soltar la desconfianza crónica y la necesidad de control absoluto. Abrirte a la vulnerabilidad que verdaderamente empodera.',
+    responsibility: 'Atravesar tus propias crisis psicológicas sin proyectar culpas y convertirte en guía de quienes cruzan el abismo.',
+  },
+  Sagitario: {
+    title: 'Saturno en Sagitario: La Consolidación de la Verdad Ética',
+    masteryLesson: 'Cuestionar dogmas ciegos y fundamentalismos. Tu misión es comprobar tus creencias en el laboratorio de la vida real.',
+    responsibility: 'Vivir en coherencia con tus ideales filosóficos y enseñar desde la experiencia comprobada y no desde la soberbia teórica.',
+  },
+  Capricornio: {
+    title: 'Saturno en Capricornio: El Anciano de los Días en la Cumbre',
+    masteryLesson: 'En su propio trono: la prueba es no volverte frío, autoritario o esclavo del estatus. Recordar el corazón detrás de las responsabilidades.',
+    responsibility: 'Edificar obras monumentales que trasciendan tu vida, asumiendo el liderazgo de tu comunidad con rectitud estoica.',
+  },
+  Acuario: {
+    title: 'Saturno en Acuario: El Arquitecto del Nuevo Paradigma',
+    masteryLesson: 'Domicilio tradicional: canalizar la rebeldía estéril en reformas sociales estructuradas. Construir libertad dentro de la ley.',
+    responsibility: 'Organizar grupos, sostener la fraternidad colectiva y diseñar infraestructuras para el progreso humanitario.',
+  },
+  Piscis: {
+    title: 'Saturno en Piscis: El Ancla Terrenal en el Océano del Infinito',
+    masteryLesson: 'Superar el escapismo, la autodestrucción o el papel de mártir. Aprender a poner límites energéticos sagrados a tu empatía.',
+    responsibility: 'Dar forma física y estructura material a visiones espirituales, compasión real y creaciones artísticas de trascendencia.',
+  },
+};
+
+export const MIDHEAVEN_INTERPRETATIONS: Record<ZodiacSignName, { title: string; vocationalCalling: string; legacy: string }> = {
+  Aries: {
+    title: 'Medio Cielo en Aries: El Líder Pionero y Emprendedor',
+    vocationalCalling: 'Naciste para abrir brecha, tomar riesgos que otros temen y dirigir proyectos autónomos con audacia inquebrantable.',
+    legacy: 'Ser recordado como alguien valiente que desafió el conformismo y conquistó cumbres inexploradas.',
+  },
+  Tauro: {
+    title: 'Medio Cielo en Tauro: El Creador de Obras Duraderas',
+    vocationalCalling: 'Tu camino profesional triunfa en la arquitectura, finanzas, arte, ecología y todo lo que genere belleza, valor tangible y estabilidad.',
+    legacy: 'Dejar un imperio de prosperidad sólida, obras de arte imperecederas y una reputación de confiabilidad absoluta.',
+  },
+  Géminis: {
+    title: 'Medio Cielo en Géminis: El Comunicador y Estratega de Redes',
+    vocationalCalling: 'Brillas en los medios, el periodismo, la docencia, la tecnología y el arte de articular información dispersa en síntesis brillantes.',
+    legacy: 'Haber sido un divulgador de luz, alguien que conectó mentes y despertó la curiosidad de su generación.',
+  },
+  Cáncer: {
+    title: 'Medio Cielo en Cáncer: El Protector y Sanador Colectivo',
+    vocationalCalling: 'Tu vocación florece en la psicología, la salud, la gastronomía, la gestión del bienestar comunitario y la educación humanista.',
+    legacy: 'Haber creado un refugio nutricio en el mundo y enseñado a liderar desde el corazón y la empatía sincera.',
+  },
+  Leo: {
+    title: 'Medio Cielo en Leo: La Estrella Visible y el Director Creativo',
+    vocationalCalling: 'Tu destino está bajo los reflectores: liderazgo carismático, artes escénicas, dirección ejecutiva y proyectos de autor.',
+    legacy: 'Inspirar a miles con tu autenticidad regia y demostrar que el coraje creativo puede transformar la realidad.',
+  },
+  Virgo: {
+    title: 'Medio Cielo en Virgo: El Maestro de la Precisión y el Servicio',
+    vocationalCalling: 'Triunfas como consultor estratégico, científico, médico, analista de sistemas y optimizador de procesos complejos.',
+    legacy: 'Haber elevado el estándar de calidad en tu campo y dejado herramientas prácticas que facilitan la vida de la sociedad.',
+  },
+  Libra: {
+    title: 'Medio Cielo en Libra: El Pacificador y Embajador de la Belleza',
+    vocationalCalling: 'Llamado a la diplomacia, las leyes, el diseño estético, las relaciones públicas y la armonización de conflictos humanos.',
+    legacy: 'Haber restaurado la justicia y el equilibrio donde reinaba el caos, vistiendo el mundo de gracia y concordia.',
+  },
+  Escorpio: {
+    title: 'Medio Cielo en Escorpio: El Cirujano de Crisis y Alquimista',
+    vocationalCalling: 'Tu vocación es penetrar lo oculto: psiquiatría, finanzas estratégicas, investigación forense, transformación institucional profunda.',
+    legacy: 'Ser el estratega inquebrantable que no temió al abismo y resucitó estructuras caídas con poder definitivo.',
+  },
+  Sagitario: {
+    title: 'Medio Cielo en Sagitario: El Filósofo y Guía Internacional',
+    vocationalCalling: 'Tu esfera pública es la docencia universitaria, el derecho internacional, las editoriales, el turismo cultural y la expansión de cosmovisiones.',
+    legacy: 'Haber ampliado los horizontes de tu época y sembrado fe y esperanza en la inteligencia colectiva.',
+  },
+  Capricornio: {
+    title: 'Medio Cielo en Capricornio: El Estadista y Pilar Institucional',
+    vocationalCalling: 'La cumbre del estatus profesional: alta dirección, gobernanza, construcción de empresas longevas y maestría ejecutiva.',
+    legacy: 'Haber alcanzado la cima por mérito propio con intachable reputación, dejando cimientos que perdurarán por generaciones.',
+  },
+  Acuario: {
+    title: 'Medio Cielo en Acuario: El Pionero del Futuro y Agente de Cambio',
+    vocationalCalling: 'Vocación en la tecnología de punta, el activismo social, la ciencia innovadora, la astrología y el diseño de modelos vanguardistas.',
+    legacy: 'Haber roto cadenas arcaicas y abierto las puertas a una sociedad más libre, despierta y fraterna.',
+  },
+  Piscis: {
+    title: 'Medio Cielo en Piscis: El Artista Místico y Sanador Universal',
+    vocationalCalling: 'Misión en las artes visuales o musicales, la espiritualidad, el cine, la asistencia a los vulnerables y la compasión global.',
+    legacy: 'Haber tocado las fibras más íntimas del alma colectiva y recordado a la humanidad la presencia de lo divino en la tierra.',
+  },
+};
+
+export interface NatalChartReport {
   bigThree: {
     sun: InterpretationBlock;
     moon: InterpretationBlock;
@@ -721,10 +910,32 @@ export function generateNatalReport(chart: NatalChartData): {
     venus: { title: string; loveLanguage: string; aestheticSense: string; house: number };
     mars: { title: string; drive: string; conflictResolution: string; house: number };
   };
+  socialMasters: {
+    jupiter: { title: string; blessings: string; expansionStyle: string; house: number; sign: ZodiacSignName };
+    saturn: { title: string; masteryLesson: string; responsibility: string; house: number; sign: ZodiacSignName };
+  };
+  transpersonal: {
+    uranus: { title: string; house: number; influence: string };
+    neptune: { title: string; house: number; influence: string };
+    pluto: { title: string; house: number; influence: string };
+  };
+  midheaven: {
+    sign: ZodiacSignName;
+    title: string;
+    vocationalCalling: string;
+    legacy: string;
+  };
   karmicAxes: {
     northNode: { title: string; mission: string; pastComfort: string; house: number };
     chiron: { title: string; wound: string; medicine: string; house: number };
     lilith: { title: string; wildPower: string; shadowToTransmute: string; house: number };
+  };
+  birthArcana: {
+    cardNumber: number;
+    name: string;
+    archetype: string;
+    mantra: string;
+    teaching: string;
   };
   elementOverview: string;
   modalityOverview: string;
@@ -735,7 +946,9 @@ export function generateNatalReport(chart: NatalChartData): {
     description: string;
     orb: number;
   }>;
-} {
+}
+
+export function generateNatalReport(chart: NatalChartData): NatalChartReport {
   const sunPos = chart.positions.find(p => p.body === 'Sol');
   const moonPos = chart.positions.find(p => p.body === 'Luna');
   const mercPos = chart.positions.find(p => p.body === 'Mercurio');
@@ -850,6 +1063,91 @@ export function generateNatalReport(chart: NatalChartData): {
 
   const destinySummary = `Con tu **Sol en ${sunSign}**, tu energía vital brilla a través de ${SIGN_ESSENCE[sunSign].archetype}. Tu **Luna en ${moonSign}** te pide nutrir tu mundo emocional con ${SIGN_ESSENCE[moonSign].mantra.toLowerCase()}, mientras que tu **Ascendente en ${ascSign}** es la brújula y la máscara sagrada con la que conquistas tu destino en este plano terrenal.`;
 
+  // Social Masters (Júpiter y Saturno)
+  const jupPos = chart.positions.find(p => p.body === 'Júpiter');
+  const satPos = chart.positions.find(p => p.body === 'Saturno');
+  const jupSign = jupPos ? jupPos.sign : 'Sagitario';
+  const satSign = satPos ? satPos.sign : 'Capricornio';
+
+  const socialMasters = {
+    jupiter: {
+      ...JUPITER_INTERPRETATIONS[jupSign],
+      house: jupPos ? jupPos.house : 9,
+      sign: jupSign,
+    },
+    saturn: {
+      ...SATURN_INTERPRETATIONS[satSign],
+      house: satPos ? satPos.house : 10,
+      sign: satSign,
+    },
+  };
+
+  // Transpersonales (Urano, Neptuno, Plutón)
+  const uraPos = chart.positions.find(p => p.body === 'Urano');
+  const nepPos = chart.positions.find(p => p.body === 'Neptuno');
+  const pluPos = chart.positions.find(p => p.body === 'Plutón');
+
+  const uraHouse = uraPos ? uraPos.house : 11;
+  const nepHouse = nepPos ? nepPos.house : 12;
+  const pluHouse = pluPos ? pluPos.house : 8;
+
+  const transpersonal = {
+    uranus: {
+      title: `Urano en Casa ${uraHouse}: El Rayo de la Libertad`,
+      house: uraHouse,
+      influence: `Tu chispa de rebeldía visionaria, genialidad repentina y ruptura de condicionamientos opera en el escenario de la Casa ${uraHouse}. Aquí rehúsas someterte a la tradición y despiertas nuevas formas de consciencia.`,
+    },
+    neptune: {
+      title: `Neptuno en Casa ${nepHouse}: El Misticismo Oceánico`,
+      house: nepHouse,
+      influence: `Tu portal de conexión mística, ensoñación poética e inspiración artística sagrada impregna la Casa ${nepHouse}. Aquí disuelves las fronteras del ego para fundirte con la belleza incondicional del cosmos.`,
+    },
+    pluto: {
+      title: `Plutón en Casa ${pluHouse}: La Muerte y Resurrección`,
+      house: pluHouse,
+      influence: `Tu punto de máxima metamorfosis psicológica, poder personal y transmutación de la sombra reside en la Casa ${pluHouse}. Lo que allí experimentes como crisis renacerá como oro alquímico indestructible.`,
+    },
+  };
+
+  // Medio Cielo (MC / Casa X)
+  const mcSign = chart.angles.mcSign || 'Capricornio';
+  const midheaven = {
+    sign: mcSign,
+    ...MIDHEAVEN_INTERPRETATIONS[mcSign],
+  };
+
+  // Arcano Mayor de Nacimiento (Numerología Sagrada)
+  const birthNum = (chart.birthData.day + chart.birthData.month + chart.birthData.year) % 22 || 22;
+  const BIRTH_ARCANA_TABLE: Record<number, { name: string; archetype: string; mantra: string; teaching: string }> = {
+    1: { name: 'El Mago', archetype: 'El Creador Consciente', mantra: 'Tengo todas las herramientas para manifestar mi realidad', teaching: 'Tu alma encarnó para canalizar el poder de la voluntad y transformar ideas invisibles en obras vivas.' },
+    2: { name: 'La Sacerdotisa', archetype: 'La Guardiana del Misterio', mantra: 'Escucho la voz silenciosa de mi intuición sagrada', teaching: 'Posees una clarividencia innata y un acceso directo a los registros del inconsciente profundo.' },
+    3: { name: 'La Emperatriz', archetype: 'La Matriz de la Abundancia', mantra: 'Merezco toda la belleza, fertilidad y gozo de la existencia', teaching: 'Has venido a celebrar los sentidos, crear belleza duradera y nutrir proyectos fértiles en el plano terrenal.' },
+    4: { name: 'El Emperador', archetype: 'El Arquitecto Soberano', mantra: 'Edifico con honor, orden y maestría sobre roca firme', teaching: 'Tu misión es gobernar tu propio reino con autoridad benevolente y proteger a tu comunidad.' },
+    5: { name: 'El Hierofante', archetype: 'El Iniciado de la Tradición Sagrada', mantra: 'Conecto el cielo y la tierra a través de valores eternos', teaching: 'Eres un puente entre las enseñanzas ancestrales y la consciencia moderna; tu don es la docencia del alma.' },
+    6: { name: 'Los Enamorados', archetype: 'El Discernimiento del Corazón', mantra: 'Elijo desde el amor soberano y la verdad de mi ser', teaching: 'Tu aprendizaje primordial es el arte de la elección consciente y la integración armónica de polaridades.' },
+    7: { name: 'El Carro', archetype: 'El Guerrero Triunfante', mantra: 'Tomo las riendas de mi destino con coraje y dirección clara', teaching: 'Capaz de armonizar fuerzas opuestas para cruzar cualquier territorio hostil y alcanzar la victoria espiritual.' },
+    8: { name: 'La Justicia', archetype: 'El Ojo de la Verdad Imparcial', mantra: 'Actúo en perfecta concordancia con la ley cósmica', teaching: 'Tu brújula moral es incorruptible; has venido a restaurar el equilibrio kármico y la transparencia.' },
+    9: { name: 'El Ermitaño', archetype: 'El Faro Solitario', mantra: 'Mi lámpara interior ilumina cada paso en la niebla', teaching: 'Maestro de la introspección sagrada: sabes que la verdadera sabiduría solo madura en el silencio fértil.' },
+    10: { name: 'La Rueda de la Fortuna', archetype: 'El Navegante del Tiempo Cósmico', mantra: 'Fluyo con los ciclos divinos sabiendo que el centro es inmutable', teaching: 'Entiendes las sincronicidades del destino y posees una capacidad camaleónica para renacer en cada giro vital.' },
+    11: { name: 'La Fuerza', archetype: 'La Alquimia del Coraje Gentil', mantra: 'Mi ternura e integridad dominan a la fiera más salvaje', teaching: 'Tu poder no radica en la violencia física, sino en la serenidad inquebrantable de un corazón templado.' },
+    12: { name: 'El Colgado', archetype: 'El Despertar de la Nueva Mirada', mantra: 'Suelto el control egocéntrico y me abro a la gracia divina', teaching: 'Tienes el don de percibir lo que otros ignoran al renunciar a la prisa mundana y mirar desde el desapego.' },
+    13: { name: 'La Muerte', archetype: 'El Fénix Inmortal', mantra: 'Abrazo cada final sagrado como la semilla de un nuevo amanecer', teaching: 'Iniciador de transformaciones radicales: no temes soltar lo caduco para renacer en tu versión más luminosa.' },
+    14: { name: 'La Templanza', archetype: 'El Alquimista del Elixir Dorado', mantra: 'Combino con paciencia sagrada los fluidos de mi alma', teaching: 'Canal de paz y moderación: eres el sanador que devuelve la armonía a los ambientes más convulsos.' },
+    15: { name: 'El Diablo', archetype: 'La Maestría sobre la Sombra y el Deseo', mantra: 'Ilumino mis apegos y los transmuto en pura soberanía', teaching: 'Tienes una fuerza vital colosal; cuando trasciendes la ilusión material, nada en este plano puede encadenarte.' },
+    16: { name: 'La Torre', archetype: 'El Rayo de la Liberación Espontánea', mantra: 'Las falsas murallas caen para que mi verdad brille desnuda', teaching: 'Rompedor de hipocresías e ilusiones: aceleras el despertar de consciencia destruyendo lo artificial.' },
+    17: { name: 'La Estrella', archetype: 'El Manantial de la Esperanza Cósmica', mantra: 'Derramo mi esencia pura en el mundo con fe transparente', teaching: 'Eres un faro de serenidad, optimismo sagrado y belleza; tu mera presencia recuerda a otros que no están solos.' },
+    18: { name: 'La Luna', archetype: 'El Explorador del Abismo Psíquico', mantra: 'Navego las aguas de la noche guiado por mi intuición inmortal', teaching: 'Contacto directo con el misterio, el arte hipnótico y la psicología de las profundidades.' },
+    19: { name: 'El Sol', archetype: 'La Plenitud Radiante del Ser', mantra: 'Irradio mi verdad con alegría, generosidad y calidez infinita', teaching: 'Has nacido para celebrar la existencia, inspirar a otros y derramar bendiciones y claridad meridiana.' },
+    20: { name: 'El Juicio', archetype: 'El Despertar de la Vocación Eterna', mantra: 'Respondo al llamado de mi alma y resucito a una vida superior', teaching: 'Un alma despierta que escucha el llamado cósmico para perdonar el pasado y ascender a un propósito noble.' },
+    21: { name: 'El Mundo', archetype: 'La Coronación del Viaje Sagrado', mantra: 'Soy uno con la danza cósmica y habito mi santuario completo', teaching: 'El arquetipo de la maestría integral: has venido a cerrar ciclos kármicos y danzar en la totalidad de la vida.' },
+    22: { name: 'El Loco', archetype: 'El Viajero del Infinito Cuántico', mantra: 'Me lanzo al misterio con el corazón libre y la confianza del niño cósmico', teaching: 'Espíritu libre sin ataduras dogmáticas; tu inocencia sabia es tu mayor escudo en el viaje de la vida.' },
+  };
+
+  const birthArcana = {
+    cardNumber: birthNum,
+    ...(BIRTH_ARCANA_TABLE[birthNum] || BIRTH_ARCANA_TABLE[1]),
+  };
+
   return {
     bigThree: {
       sun: sunInterpretation,
@@ -861,11 +1159,15 @@ export function generateNatalReport(chart: NatalChartData): {
       venus: venusInterp,
       mars: marsInterp,
     },
+    socialMasters,
+    transpersonal,
+    midheaven,
     karmicAxes: {
       northNode: northNodeInterp,
       chiron: chironInterp,
       lilith: lilithInterp,
     },
+    birthArcana,
     elementOverview,
     modalityOverview,
     destinySummary,

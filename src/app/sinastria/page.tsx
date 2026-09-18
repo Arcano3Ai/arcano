@@ -49,18 +49,20 @@ export default function SinastriaPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 print:p-0 print:m-0 print:max-w-none">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(synastrySchema) }}
       />
 
-      <SectionHeader
-        subtitle="Alquimia Relacional"
-        title="Sinastría y Compatibilidad de Almas"
-        description="Cuando dos universos se encuentran, sus estrellas trazan un diálogo único de atracción, complicidad y evolución compartida. Explora los aspectos cruzados de su vínculo cósmico."
-        symbol="⚭"
-      />
+      <div className="print:hidden">
+        <SectionHeader
+          subtitle="Alquimia Relacional"
+          title="Sinastría y Compatibilidad de Almas"
+          description="Cuando dos universos se encuentran, sus estrellas trazan un diálogo único de atracción, complicidad y evolución compartida. Explora los aspectos cruzados de su vínculo cósmico."
+          symbol="⚭"
+        />
+      </div>
 
       <SynastryApp />
     </div>
