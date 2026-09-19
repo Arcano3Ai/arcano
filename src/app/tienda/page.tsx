@@ -164,12 +164,22 @@ export default function ShopPage() {
                 alt={product.name}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
+                  !product.inStock ? "contrast-90 brightness-95" : ""
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-              {/* Badges superiores */}
-              <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+              {/* Letrero Rojo de VENDIDO */}
+              {!product.inStock && (
+                <div className="absolute top-3 right-3 z-20 px-3 py-1 rounded bg-red-600/95 border border-red-400/80 text-white text-[11px] sm:text-xs font-sans font-extrabold tracking-[0.2em] uppercase shadow-[0_0_20px_rgba(239,68,68,0.75)] flex items-center gap-1.5 backdrop-blur-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                  <span>VENDIDO</span>
+                </div>
+              )}
+
+              {/* Badges superiores izquierdos */}
+              <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start z-10">
                 {product.isDoublePerforation && (
                   <span className="px-2.5 py-0.5 rounded bg-gold/90 text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
                     ⚡ Doble Perforación
@@ -183,9 +193,13 @@ export default function ShopPage() {
               </div>
 
               {/* Quick View Hover Prompt */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <span className="px-4 py-1.5 rounded-full bg-obsidian/90 border border-gold/60 text-xs text-parchment font-sans tracking-wider backdrop-blur-md shadow-lg">
-                  Ver Detalles ✦
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                <span className={`px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg text-xs font-sans tracking-wider ${
+                  !product.inStock
+                    ? "bg-obsidian/95 border border-red-500/80 text-red-200 font-medium"
+                    : "bg-obsidian/90 border border-gold/60 text-parchment"
+                }`}>
+                  {!product.inStock ? "Pieza Vendida · Ver Ficha ✦" : "Ver Detalles ✦"}
                 </span>
               </div>
             </div>
@@ -215,9 +229,16 @@ export default function ShopPage() {
                     {product.shippingNote}
                   </span>
                 </div>
-                <span className="text-[10px] text-parchment-muted/60 font-sans">
-                  {product.isDoublePerforation ? "2 Orificios" : "Pieza Única"}
-                </span>
+                {!product.inStock ? (
+                  <span className="text-[10px] text-red-400 font-sans font-semibold uppercase tracking-wider flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    Consagrada
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-parchment-muted/60 font-sans">
+                    {product.isDoublePerforation ? "2 Orificios" : "Pieza Única"}
+                  </span>
+                )}
               </div>
 
               {/* Botones de Acción */}
@@ -228,15 +249,27 @@ export default function ShopPage() {
                 >
                   Uso Ritual
                 </button>
-                <a
-                  href={getWhatsAppUrl(getProductWhatsAppMessage(product))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 rounded text-[11px] uppercase tracking-wider font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.25)] flex items-center justify-center gap-1.5 text-center"
-                >
-                  <span>Pedir</span>
-                  <span>↗</span>
-                </a>
+                {!product.inStock ? (
+                  <a
+                    href={getWhatsAppUrl(`Hola ARCANO, vi que la pieza única "${product.name}" está VENDIDA. ¿Tienen alguna pieza similar disponible o en consagración?`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-3 rounded text-[10px] sm:text-[11px] uppercase tracking-wider font-sans font-medium text-parchment-muted bg-charcoal/80 hover:bg-charcoal hover:text-gold border border-gold/30 hover:border-gold/60 transition-all flex items-center justify-center gap-1 text-center"
+                  >
+                    <span>Similar</span>
+                    <span>↗</span>
+                  </a>
+                ) : (
+                  <a
+                    href={getWhatsAppUrl(getProductWhatsAppMessage(product))}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-3 rounded text-[11px] uppercase tracking-wider font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.25)] flex items-center justify-center gap-1.5 text-center"
+                  >
+                    <span>Pedir</span>
+                    <span>↗</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -287,6 +320,14 @@ export default function ShopPage() {
                 fill
                 className="object-cover"
               />
+              {/* Letrero Rojo de VENDIDO en Modal */}
+              {!activeProduct.inStock && (
+                <div className="absolute top-3 right-3 z-10 px-3.5 py-1 rounded bg-red-600/95 border border-red-400 text-[11px] uppercase tracking-widest text-white font-sans font-extrabold shadow-[0_0_20px_rgba(239,68,68,0.75)] flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                  <span>VENDIDO</span>
+                </div>
+              )}
+
               <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
                 {activeProduct.isDoublePerforation && (
                   <span className="px-3 py-1 rounded bg-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
@@ -300,6 +341,17 @@ export default function ShopPage() {
                 )}
               </div>
             </div>
+
+            {/* Aviso de Pieza Vendida en Modal */}
+            {!activeProduct.inStock && (
+              <div className="mb-5 p-3.5 rounded bg-red-950/40 border border-red-500/40 flex items-start gap-3 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
+                <span className="text-red-400 text-lg leading-none">⚡</span>
+                <div className="text-xs text-red-200 font-sans font-light leading-relaxed">
+                  <strong className="font-semibold text-white block mb-0.5">Pieza Única Vendida</strong>
+                  Esta piedra sagrada de río ya fue consagrada y entregada a su custodio. Si deseas encargar una pieza con un grabado, símbolo o perforación semejante, contáctanos directamente.
+                </div>
+              </div>
+            )}
 
             {/* Info */}
             <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans block mb-1">
@@ -317,6 +369,11 @@ export default function ShopPage() {
               <span className="text-xs text-parchment-muted font-sans uppercase tracking-wider">
                 {activeProduct.shippingNote}
               </span>
+              {!activeProduct.inStock && (
+                <span className="ml-auto text-xs text-red-400 font-sans font-bold uppercase tracking-wider">
+                  ● No Disponible
+                </span>
+              )}
             </div>
 
             {/* Descripción */}
@@ -360,15 +417,27 @@ export default function ShopPage() {
 
             {/* CTA WhatsApp */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <a
-                href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
-              >
-                <span>Solicitar esta Pieza por WhatsApp</span>
-                <span>↗</span>
-              </a>
+              {!activeProduct.inStock ? (
+                <a
+                  href={getWhatsAppUrl(`Hola ARCANO, me fascinó la pieza única "${activeProduct.name}" que está VENDIDA. ¿Podrían consagrar o preparar una similar para mí?`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
+                >
+                  <span>Encargar Pieza Similar por WhatsApp</span>
+                  <span>↗</span>
+                </a>
+              ) : (
+                <a
+                  href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
+                >
+                  <span>Solicitar esta Pieza por WhatsApp</span>
+                  <span>↗</span>
+                </a>
+              )}
               <button
                 onClick={() => setActiveProduct(null)}
                 className="py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans border border-gold/30 text-parchment-muted hover:text-parchment transition-colors"
