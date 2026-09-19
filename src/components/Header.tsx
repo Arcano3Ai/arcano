@@ -81,6 +81,15 @@ export const Header: React.FC = () => {
           {/* Botón Solecito / Luna para Modo Claro / Oscuro */}
           <ThemeToggle />
 
+          {/* Acceso a Aula Virtual */}
+          <Link
+            href="/academia/mi-panel"
+            className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] uppercase font-serif tracking-wider hover:bg-amber-500/20 hover:border-amber-400 transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)]"
+          >
+            <span>🗝️</span>
+            <span>Aula Virtual</span>
+          </Link>
+
           <Link
             href="/reservar"
             onClick={handleBookingClick}
@@ -147,6 +156,14 @@ export const Header: React.FC = () => {
               </span>
               <ThemeToggle />
             </div>
+
+            <Link
+              href="/academia/mi-panel"
+              className="w-full text-center py-3 text-xs font-serif uppercase tracking-[0.2em] text-amber-300 bg-amber-500/15 border border-amber-500/40 hover:bg-amber-500/25 transition-all duration-300 rounded-sm font-semibold flex items-center justify-center gap-2"
+            >
+              <span>🗝️</span>
+              <span>Mi Aula Virtual (Estudiantes)</span>
+            </Link>
 
             <Link
               href="/reservar"

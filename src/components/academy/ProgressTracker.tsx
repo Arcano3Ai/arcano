@@ -17,7 +17,9 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
   const [completedLevels, setCompletedLevels] = useState<{ [key: number]: boolean }>({
     1: true,
     2: true,
-    3: false,
+    3: true,
+    4: true,
+    5: false,
   });
 
   const toggleLevel = (level: number) => {
@@ -27,7 +29,13 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     }));
   };
 
-  const isUnlocked = completedLevels[1] && completedLevels[2] && completedLevels[3];
+  const isUnlocked =
+    completedLevels[1] &&
+    completedLevels[2] &&
+    completedLevels[3] &&
+    completedLevels[4] &&
+    completedLevels[5];
+
   const activeCatInfo = academyCategories.find((c) => c.id === currentCategory) || academyCategories[0];
 
   return (
@@ -35,7 +43,7 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
       {/* Luz ambiental sutil */}
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(198,160,82,0.15)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
+      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-deep/90 border border-gold/40 text-gold-light text-[11px] uppercase tracking-[0.2em] font-sans">
           <span>{activeCatInfo.glyph}</span>
           <span>SIMULADOR DE RUTA DE APRENDIZAJE: {activeCatInfo.title}</span>
@@ -49,7 +57,7 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
         </h3>
 
         <p className="text-sm sm:text-base text-parchment-dim font-sans font-light max-w-2xl mx-auto leading-relaxed">
-          &ldquo;Completa tus primeros 3 niveles para desbloquear tu beneficio.&rdquo;
+          &ldquo;Completa tus 5 niveles de formación para graduarte y desbloquear tu página web profesional gratis.&rdquo;
         </p>
 
         {/* Selector de Disciplina para el simulador */}
@@ -72,126 +80,146 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
           </div>
         )}
 
-        {/* Línea de Progreso Visual */}
-        <div className="pt-6 sm:pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 relative">
+        {/* Línea de Progreso Visual: 5 Niveles + Beneficio */}
+        <div className="pt-6 sm:pt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative">
           {/* Nivel 1 */}
           <div
             onClick={() => toggleLevel(1)}
-            className={`cursor-pointer rounded-xl p-5 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
+            className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
               completedLevels[1]
-                ? "bg-[#151128] border-gold/60 shadow-[0_0_20px_rgba(198,160,82,0.2)]"
+                ? "bg-[#151128] border-gold/60 shadow-[0_0_15px_rgba(198,160,82,0.2)]"
                 : "bg-obsidian-deep border-charcoal-border opacity-70"
             }`}
           >
-            <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans mb-2">
+            <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans mb-1">
               PASO 1
             </div>
-            <div className="w-12 h-12 rounded-full border border-gold/50 flex items-center justify-center font-serif text-lg my-2 bg-obsidian-deep">
-              {completedLevels[1] ? (
-                <span className="text-gold font-bold">✓</span>
-              ) : (
-                <span className="text-parchment-muted">1</span>
-              )}
+            <div className="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center font-serif text-base my-1.5 bg-obsidian-deep">
+              {completedLevels[1] ? <span className="text-gold font-bold">✓</span> : "1"}
             </div>
-            <div className="font-serif text-sm sm:text-base text-parchment font-medium mt-1">
-              NIVEL 1
-            </div>
-            <div className="text-[11px] text-parchment-muted mt-1 font-sans">
-              Fundamentos
-            </div>
-            <div className="mt-3 text-[10px] text-gold/80 uppercase tracking-widest font-sans font-semibold">
-              {completedLevels[1] ? "COMPLETADO ✓" : "PENDIENTE"}
+            <div className="font-serif text-xs sm:text-sm text-parchment font-medium">NIVEL 1</div>
+            <div className="text-[10px] text-parchment-muted font-sans">Iniciación</div>
+            <div className="mt-2 text-[9px] text-gold/80 uppercase tracking-widest font-sans font-semibold">
+              {completedLevels[1] ? "LISTO ✓" : "PENDIENTE"}
             </div>
           </div>
 
           {/* Nivel 2 */}
           <div
             onClick={() => toggleLevel(2)}
-            className={`cursor-pointer rounded-xl p-5 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
+            className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
               completedLevels[2]
-                ? "bg-[#151128] border-gold/60 shadow-[0_0_20px_rgba(198,160,82,0.2)]"
+                ? "bg-[#151128] border-gold/60 shadow-[0_0_15px_rgba(198,160,82,0.2)]"
                 : "bg-obsidian-deep border-charcoal-border opacity-70"
             }`}
           >
-            <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans mb-2">
+            <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans mb-1">
               PASO 2
             </div>
-            <div className="w-12 h-12 rounded-full border border-gold/50 flex items-center justify-center font-serif text-lg my-2 bg-obsidian-deep">
-              {completedLevels[2] ? (
-                <span className="text-gold font-bold">✓</span>
-              ) : (
-                <span className="text-parchment-muted">2</span>
-              )}
+            <div className="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center font-serif text-base my-1.5 bg-obsidian-deep">
+              {completedLevels[2] ? <span className="text-gold font-bold">✓</span> : "2"}
             </div>
-            <div className="font-serif text-sm sm:text-base text-parchment font-medium mt-1">
-              NIVEL 2
-            </div>
-            <div className="text-[11px] text-parchment-muted mt-1 font-sans">
-              Profundización
-            </div>
-            <div className="mt-3 text-[10px] text-gold/80 uppercase tracking-widest font-sans font-semibold">
-              {completedLevels[2] ? "COMPLETADO ✓" : "PENDIENTE"}
+            <div className="font-serif text-xs sm:text-sm text-parchment font-medium">NIVEL 2</div>
+            <div className="text-[10px] text-parchment-muted font-sans">Estructura</div>
+            <div className="mt-2 text-[9px] text-gold/80 uppercase tracking-widest font-sans font-semibold">
+              {completedLevels[2] ? "LISTO ✓" : "PENDIENTE"}
             </div>
           </div>
 
           {/* Nivel 3 */}
           <div
             onClick={() => toggleLevel(3)}
-            className={`cursor-pointer rounded-xl p-5 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
+            className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
               completedLevels[3]
-                ? "bg-[#1d163a] border-gold shadow-[0_0_25px_rgba(198,160,82,0.35)] scale-[1.02]"
-                : "bg-[#151128] border-gold/40 hover:border-gold"
+                ? "bg-[#151128] border-gold/60 shadow-[0_0_15px_rgba(198,160,82,0.2)]"
+                : "bg-obsidian-deep border-charcoal-border opacity-70"
             }`}
           >
-            <div className="text-[10px] uppercase tracking-widest text-gold font-sans mb-2 font-bold">
+            <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans mb-1">
+              PASO 3
+            </div>
+            <div className="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center font-serif text-base my-1.5 bg-obsidian-deep">
+              {completedLevels[3] ? <span className="text-gold font-bold">✓</span> : "3"}
+            </div>
+            <div className="font-serif text-xs sm:text-sm text-parchment font-medium">NIVEL 3</div>
+            <div className="text-[10px] text-parchment-muted font-sans">Interpretación</div>
+            <div className="mt-2 text-[9px] text-gold/80 uppercase tracking-widest font-sans font-semibold">
+              {completedLevels[3] ? "LISTO ✓" : "PENDIENTE"}
+            </div>
+          </div>
+
+          {/* Nivel 4 */}
+          <div
+            onClick={() => toggleLevel(4)}
+            className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
+              completedLevels[4]
+                ? "bg-[#151128] border-gold/60 shadow-[0_0_15px_rgba(198,160,82,0.2)]"
+                : "bg-obsidian-deep border-charcoal-border opacity-70"
+            }`}
+          >
+            <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans mb-1">
+              PASO 4
+            </div>
+            <div className="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center font-serif text-base my-1.5 bg-obsidian-deep">
+              {completedLevels[4] ? <span className="text-gold font-bold">✓</span> : "4"}
+            </div>
+            <div className="font-serif text-xs sm:text-sm text-parchment font-medium">NIVEL 4</div>
+            <div className="text-[10px] text-parchment-muted font-sans">Avanzado</div>
+            <div className="mt-2 text-[9px] text-gold/80 uppercase tracking-widest font-sans font-semibold">
+              {completedLevels[4] ? "LISTO ✓" : "PENDIENTE"}
+            </div>
+          </div>
+
+          {/* Nivel 5: Llave Maestra */}
+          <div
+            onClick={() => toggleLevel(5)}
+            className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col items-center justify-between text-center relative ${
+              completedLevels[5]
+                ? "bg-[#1d163a] border-gold shadow-[0_0_20px_rgba(198,160,82,0.4)] scale-[1.03]"
+                : "bg-[#151128] border-gold/50 hover:border-gold"
+            }`}
+          >
+            <div className="text-[10px] uppercase tracking-widest text-gold font-sans mb-1 font-bold">
               ★ LLAVE MAESTRA
             </div>
-            <div className="w-12 h-12 rounded-full border-2 border-gold flex items-center justify-center font-serif text-lg my-2 bg-obsidian-deep shadow-[0_0_15px_rgba(198,160,82,0.4)]">
-              {completedLevels[3] ? (
+            <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center font-serif text-base my-1.5 bg-obsidian-deep shadow-[0_0_12px_rgba(198,160,82,0.4)]">
+              {completedLevels[5] ? (
                 <span className="text-gold-light font-bold">✓</span>
               ) : (
                 <span className="text-gold">🔓</span>
               )}
             </div>
-            <div className="font-serif text-sm sm:text-base text-gold-light font-medium mt-1">
-              NIVEL 3
-            </div>
-            <div className="text-[11px] text-parchment-muted mt-1 font-sans">
-              Interpretación
-            </div>
-            <div className="mt-3 text-[10px] text-gold uppercase tracking-widest font-sans font-bold">
-              {completedLevels[3] ? "DESBLOQUEADO 🔓" : "CLIC PARA ACTIVAR"}
+            <div className="font-serif text-xs sm:text-sm text-gold-light font-medium">NIVEL 5</div>
+            <div className="text-[10px] text-parchment-muted font-sans">Maestría</div>
+            <div className="mt-2 text-[9px] text-gold uppercase tracking-widest font-sans font-bold">
+              {completedLevels[5] ? "DESBLOQUEADO 🔓" : "ACTIVAR"}
             </div>
           </div>
 
-          {/* Premio: Web Gratis */}
+          {/* Premio: Web Profesional */}
           <div
-            className={`rounded-xl p-5 border transition-all duration-500 flex flex-col items-center justify-between text-center relative ${
+            className={`rounded-xl p-4 border transition-all duration-500 flex flex-col items-center justify-between text-center relative ${
               isUnlocked
-                ? "bg-gradient-to-b from-[#2a1e4a] to-[#160f29] border-gold shadow-[0_0_40px_rgba(198,160,82,0.6)] scale-[1.03]"
+                ? "bg-gradient-to-b from-[#2a1e4a] to-[#160f29] border-gold shadow-[0_0_30px_rgba(198,160,82,0.6)] scale-[1.04]"
                 : "bg-obsidian-deep/60 border-dashed border-charcoal-border opacity-70"
             }`}
           >
-            <div className="text-[10px] uppercase tracking-widest text-gold font-sans mb-2 font-bold">
-              BENEFICIO EXCLUSIVO
+            <div className="text-[10px] uppercase tracking-widest text-gold font-sans mb-1 font-bold">
+              PREMIO
             </div>
-            <div className="w-12 h-12 rounded-full border border-gold/60 flex items-center justify-center text-xl my-2 bg-obsidian-deep">
+            <div className="w-10 h-10 rounded-full border border-gold/60 flex items-center justify-center text-lg my-1.5 bg-obsidian-deep">
               🎁
             </div>
-            <div className="font-serif text-sm sm:text-base text-parchment font-medium mt-1">
-              WEB PROFESIONAL
-            </div>
-            <div className="text-[11px] text-gold-light mt-1 font-sans">
-              GRATIS + Dominio 1 año
-            </div>
-            <div className="mt-3">
+            <div className="font-serif text-xs sm:text-sm text-parchment font-medium">WEB PRO</div>
+            <div className="text-[10px] text-gold-light font-sans">+ Dominio 1 año</div>
+            <div className="mt-2">
               {isUnlocked ? (
-                <span className="px-2 py-0.5 rounded-full bg-gold text-obsidian text-[10px] uppercase font-bold tracking-wider animate-pulse">
+                <span className="px-2 py-0.5 rounded-full bg-gold text-obsidian text-[9px] uppercase font-bold tracking-wider animate-pulse">
                   ¡DESBLOQUEADA!
                 </span>
               ) : (
-                <span className="text-[10px] text-parchment-muted uppercase tracking-wider font-sans">
-                  Completa Nivel 3
+                <span className="text-[9px] text-parchment-muted uppercase tracking-wider font-sans">
+                  Completa Nivel 5
                 </span>
               )}
             </div>
@@ -201,7 +229,7 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = ({
         {/* Feedback interactivo del estado */}
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <p className="text-xs text-parchment-muted font-sans italic">
-            * Haz clic en cualquier nivel del simulador para activar o desactivar el progreso de demostración.
+            * Haz clic en los niveles del simulador para probar el desbloqueo al completar el Nivel 5.
           </p>
           <button
             onClick={onClaimWebClick}

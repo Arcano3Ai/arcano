@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   academyCategories,
   academyCourses,
@@ -18,11 +19,13 @@ import { CourseModal } from "./CourseModal";
 import { ProgressTracker } from "./ProgressTracker";
 import { brandConfig } from "@/config/brandConfig";
 import { getAssetPath, handleImageError } from "@/lib/utils";
+import { useStudent } from "@/lib/academy/studentContext";
 
 export const AcademySection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<AcademyCategoryId | "todos">("todos");
   const [selectedCourse, setSelectedCourse] = useState<AcademyCourse | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const { student } = useStudent();
 
   // Filtrado de cursos
   const filteredCourses =
@@ -40,7 +43,7 @@ export const AcademySection: React.FC = () => {
 
   const handleClaimWebPromotion = () => {
     const text = encodeURIComponent(
-      `Hola, El Señor de los Arcanos / ARCANO. Deseo información sobre la promoción de la Academia Esotérica: *Completa los primeros 3 niveles y recibe tu página web personalizada GRATIS con dominio*. ¿Cómo inicio mi formación?`
+      `Hola, El Señor de los Arcanos / ARCANO. Deseo información sobre la promoción de la Academia Esotérica: *Completa los 5 niveles y recibe tu página web personalizada GRATIS con dominio*. ¿Cómo inicio mi formación?`
     );
     window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${text}`, "_blank");
   };
@@ -85,23 +88,24 @@ export const AcademySection: React.FC = () => {
                 <span className="text-gold">✦</span> Inversión por curso: <strong className="text-gold-light ml-1 font-semibold">$799 MXN</strong>
               </span>
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#100e18] border border-charcoal-border shadow-inner">
-                <span className="text-gold">🔓</span> Niveles 1 a 3: <strong className="text-gold-light ml-1 font-semibold">Web Gratis con Dominio</strong>
+                <span className="text-gold">🔓</span> Al completar Nivel 5: <strong className="text-gold-light ml-1 font-semibold">Web Gratis con Dominio</strong>
               </span>
             </div>
 
             {/* Botones de Acción */}
             <div className="pt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Link
+                href={student ? "/academia/mi-panel" : "/academia/login"}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-sm bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 text-black text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:shadow-[0_0_35px_rgba(212,175,55,0.6)] transition-all duration-300 hover:scale-[1.03] text-center flex items-center justify-center gap-2"
+              >
+                <span>🗝️</span>
+                <span>{student ? "MI AULA VIRTUAL (PANEL)" : "INGRESAR AL AULA VIRTUAL"}</span>
+              </Link>
               <a
                 href="#cursos-academia"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-sm bg-gradient-to-r from-gold/90 via-gold-light to-gold/90 text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-semibold hover:shadow-[0_0_25px_rgba(198,160,82,0.5)] transition-all duration-300 hover:scale-[1.02] text-center"
-              >
-                EXPLORAR CURSOS
-              </a>
-              <a
-                href="#elige-tu-camino"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-sm border border-gold/40 text-gold-light hover:text-parchment hover:border-gold text-xs uppercase tracking-[0.2em] font-sans font-medium transition-all duration-300 hover:bg-gold/10 text-center"
               >
-                VER RUTAS DE APRENDIZAJE
+                EXPLORAR CURSOS
               </a>
             </div>
           </div>
@@ -337,7 +341,7 @@ export const AcademySection: React.FC = () => {
               </h2>
 
               <p className="font-serif text-lg sm:text-xl text-gold-light italic">
-                &ldquo;Completa los primeros 3 niveles y recibe una página web personalizada GRATIS.&rdquo;
+                &ldquo;Completa los 5 niveles y recibe una página web personalizada GRATIS.&rdquo;
               </p>
 
               <p className="text-sm sm:text-base text-parchment-dim font-sans font-light leading-relaxed">

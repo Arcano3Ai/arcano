@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Academia Esotérica | Cursos de Tarot, Astrología, Numerología y Reiki | ARCANO",
   description:
-    "Academia Esotérica ARCANO: Cursos de Tarot, Astrología, Numerología, Reiki y Energía. Formación paso a paso por $799 MXN por nivel. Completa los primeros 3 niveles y recibe una página web personalizada GRATIS con dominio incluido.",
+    "Academia Esotérica ARCANO: Cursos de Tarot, Astrología, Numerología, Reiki y Energía. Formación paso a paso por $799 MXN por nivel. Completa los 5 niveles de tu formación y recibe una página web personalizada GRATIS con dominio incluido.",
   keywords: [
     "Academia esotérica",
     "Academia de Tarot",

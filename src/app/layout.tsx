@@ -13,6 +13,7 @@ import { ArcanaAiBot } from "@/components/ArcanaAiBot";
 import { PwaRegister } from "@/components/PwaRegister";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { StudentProvider } from "@/lib/academy/studentContext";
 
 export const viewport: Viewport = {
   themeColor: "#07060b",
@@ -152,24 +153,26 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-obsidian text-parchment flex flex-col relative antialiased selection:bg-gold/30 selection:text-parchment transition-colors duration-500">
         <ThemeProvider>
-          {/* Atmósfera mística fija */}
-          <MysticalBackground />
-          <StarField />
-          <CustomCursor />
+          <StudentProvider>
+            {/* Atmósfera mística fija */}
+            <MysticalBackground />
+            <StarField />
+            <CustomCursor />
 
-          {/* Cabecera persistente */}
-          <Header />
+            {/* Cabecera persistente */}
+            <Header />
 
-          {/* Contenido principal */}
-          <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
+            {/* Contenido principal */}
+            <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
 
-          {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
-          <Footer />
-          <AtmosphereAudioPlayer />
-          <ArcanaAiBot />
-          <WhatsAppButton />
-          <PwaRegister />
-          <CookieConsentBanner />
+            {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
+            <Footer />
+            <AtmosphereAudioPlayer />
+            <ArcanaAiBot />
+            <WhatsAppButton />
+            <PwaRegister />
+            <CookieConsentBanner />
+          </StudentProvider>
         </ThemeProvider>
       </body>
     </html>
