@@ -69,7 +69,9 @@ function RegisterFormContent() {
     // Si eligió WhatsApp, abrimos la conversación con los datos
     if (paymentOption === 'whatsapp') {
       const msg = encodeURIComponent(
-        `Hola, El Señor de los Arcanos / ARCANO. Me he registrado en la Academia Esotérica con el correo *${email}* para el curso: *${selectedCourse?.category} — ${selectedCourse?.title}* ($799 MXN). Solicito los datos de depósito para activar mi constelación.`
+        selectedCourse?.priceMxn === 0
+          ? `Hola, El Señor de los Arcanos / ARCANO. Me he registrado en el Aula Virtual con el correo *${email}* para comenzar el Nivel 1 GRATIS por promoción: *${selectedCourse?.category} — ${selectedCourse?.title}*.`
+          : `Hola, El Señor de los Arcanos / ARCANO. Me he registrado en la Academia Esotérica con el correo *${email}* para el curso: *${selectedCourse?.category} — ${selectedCourse?.title}* ($799 MXN). Solicito los datos de depósito para activar mi constelación.`
       );
       window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${msg}`, '_blank');
     }
@@ -117,15 +119,24 @@ function RegisterFormContent() {
           >
             {LMS_COURSES.map((course) => (
               <option key={course.id} value={course.id} className="bg-obsidian-deep text-parchment">
-                {course.category} — {course.title} ($799 MXN)
+                {course.category} — {course.title} {course.priceMxn === 0 ? '✦ ¡100% GRATIS (PROMOCIÓN)!' : `($${course.priceMxn} MXN)`}
               </option>
             ))}
           </select>
-          <div className="mt-1 flex items-center justify-between text-[11px] text-parchment-muted px-1">
-            <span>Inversión universal: <strong className="text-gold">$799 MXN</strong></span>
-            {selectedCourse?.slug.includes('05') && (
+          <div className="mt-1.5 flex items-center justify-between text-[11px] text-parchment-muted px-1">
+            <span>
+              Inversión:{" "}
+              {selectedCourse?.priceMxn === 0 ? (
+                <strong className="text-emerald-400 font-bold">¡100% GRATIS (PROMOCIÓN)!</strong>
+              ) : (
+                <strong className="text-gold">$799 MXN</strong>
+              )}
+            </span>
+            {selectedCourse?.priceMxn === 0 ? (
+              <span className="text-emerald-400 font-semibold">🎁 Promoción Iniciática</span>
+            ) : selectedCourse?.slug.includes('05') ? (
               <span className="text-gold font-semibold">★ Desbloquea Web Gratis</span>
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -179,68 +190,88 @@ function RegisterFormContent() {
           <label className="block text-xs font-serif text-parchment-dim mb-2 uppercase tracking-wider">
             Forma de Activación
           </label>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <button
-              type="button"
-              onClick={() => setPaymentOption('spei')}
-              className={`p-3 rounded-xl border text-left transition-all ${
-                paymentOption === 'spei'
-                  ? 'bg-gold/20 border-gold text-gold-light'
-                  : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
-              }`}
-            >
-              <div className="font-semibold">🏦 SPEI / OXXO</div>
-              <div className="text-[10px] text-parchment-dim">Transferencia directa</div>
-            </button>
+          {selectedCourse?.priceMxn === 0 ? (
+            <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/50 text-emerald-200">
+              <div className="flex items-center gap-2 font-serif font-semibold text-sm text-emerald-300">
+                <span>🎁</span>
+                <span>ACTIVACIÓN INMEDIATA GRATUITA ($0 MXN)</span>
+              </div>
+              <p className="text-xs text-emerald-300/80 mt-1.5 leading-relaxed">
+                Este curso forma parte de la promoción de iniciación de ARCANO. No se requiere ningún método de pago ni tarjeta bancaria. Al hacer clic abajo, tu aula virtual se desbloquea al instante.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <button
+                type="button"
+                onClick={() => setPaymentOption('spei')}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  paymentOption === 'spei'
+                    ? 'bg-gold/20 border-gold text-gold-light'
+                    : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
+                }`}
+              >
+                <div className="font-semibold">🏦 SPEI / OXXO</div>
+                <div className="text-[10px] text-parchment-dim">Transferencia directa</div>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setPaymentOption('mercadopago')}
-              className={`p-3 rounded-xl border text-left transition-all ${
-                paymentOption === 'mercadopago'
-                  ? 'bg-gold/20 border-gold text-gold-light'
-                  : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
-              }`}
-            >
-              <div className="font-semibold">💳 Mercado Pago</div>
-              <div className="text-[10px] text-parchment-dim">Tarjetas y saldo</div>
-            </button>
+              <button
+                type="button"
+                onClick={() => setPaymentOption('mercadopago')}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  paymentOption === 'mercadopago'
+                    ? 'bg-gold/20 border-gold text-gold-light'
+                    : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
+                }`}
+              >
+                <div className="font-semibold">💳 Mercado Pago</div>
+                <div className="text-[10px] text-parchment-dim">Tarjetas y saldo</div>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setPaymentOption('whatsapp')}
-              className={`p-3 rounded-xl border text-left transition-all ${
-                paymentOption === 'whatsapp'
-                  ? 'bg-gold/20 border-gold text-gold-light'
-                  : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
-              }`}
-            >
-              <div className="font-semibold">🟢 WhatsApp Tutor</div>
-              <div className="text-[10px] text-parchment-dim">Atención humana</div>
-            </button>
+              <button
+                type="button"
+                onClick={() => setPaymentOption('whatsapp')}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  paymentOption === 'whatsapp'
+                    ? 'bg-gold/20 border-gold text-gold-light'
+                    : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
+                }`}
+              >
+                <div className="font-semibold">🟢 WhatsApp Tutor</div>
+                <div className="text-[10px] text-parchment-dim">Atención humana</div>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setPaymentOption('demo')}
-              className={`p-3 rounded-xl border text-left transition-all ${
-                paymentOption === 'demo'
-                  ? 'bg-gold/20 border-gold text-gold-light'
-                  : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
-              }`}
-            >
-              <div className="font-semibold">⚡ Pase de Cortesía</div>
-              <div className="text-[10px] text-parchment-dim">Entrada inmediata</div>
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={() => setPaymentOption('demo')}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  paymentOption === 'demo'
+                    ? 'bg-gold/20 border-gold text-gold-light'
+                    : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
+                }`}
+              >
+                <div className="font-semibold">⚡ Pase de Cortesía</div>
+                <div className="text-[10px] text-parchment-dim">Entrada inmediata</div>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Botón de Enviar */}
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full mt-4 py-3.5 rounded-2xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-serif font-bold text-xs uppercase tracking-widest shadow-[0_0_25px_rgba(198,160,82,0.4)] hover:brightness-110 active:scale-98 transition-all disabled:opacity-50"
+          className={`w-full mt-4 py-3.5 rounded-2xl font-serif font-bold text-xs uppercase tracking-widest active:scale-98 transition-all disabled:opacity-50 ${
+            selectedCourse?.priceMxn === 0
+              ? 'bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-400 text-obsidian shadow-[0_0_25px_rgba(16,185,129,0.4)] hover:brightness-110'
+              : 'bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_25px_rgba(198,160,82,0.4)] hover:brightness-110'
+          }`}
         >
-          {isLoading ? 'Consagrando Alumno en el Templo...' : 'Completar Inscripción e Ingresar'}
+          {isLoading
+            ? 'Consagrando Alumno en el Templo...'
+            : selectedCourse?.priceMxn === 0
+            ? 'Comenzar Nivel 1 Gratis e Ingresar →'
+            : 'Completar Inscripción e Ingresar'}
         </button>
       </form>
 

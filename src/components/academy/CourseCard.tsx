@@ -49,7 +49,11 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           </span>
 
           {/* Badge de Nivel o Promoción */}
-          {isWebUnlock ? (
+          {course.price === 0 ? (
+            <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 text-obsidian text-[10px] font-sans font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.5)] flex items-center gap-1">
+              <span>🎁</span> 100% GRATIS
+            </span>
+          ) : isWebUnlock ? (
             <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-gold/90 via-gold-light to-gold/90 text-obsidian text-[10px] font-sans font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(198,160,82,0.6)]">
               ★ DESBLOQUEA TU WEB
             </span>
@@ -110,22 +114,35 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         <div className="pt-4 border-t border-charcoal-border/60 flex items-center justify-between gap-3">
           <div>
             <div className="text-[10px] font-sans uppercase tracking-widest text-parchment-muted">
-              Inversión
+              {course.price === 0 ? "Promoción Especial" : "Inversión"}
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-gold-light font-medium tracking-wide">
-              {course.formattedPrice}
-            </div>
+            {course.price === 0 ? (
+              <div className="flex items-baseline gap-1.5">
+                <span className="line-through text-xs font-serif text-parchment-dim/60 font-light">
+                  $799
+                </span>
+                <span className="font-serif text-xl sm:text-2xl text-emerald-400 font-bold tracking-wide">
+                  GRATIS
+                </span>
+              </div>
+            ) : (
+              <div className="font-serif text-xl sm:text-2xl text-gold-light font-medium tracking-wide">
+                {course.formattedPrice}
+              </div>
+            )}
           </div>
 
           <button
             onClick={() => onSelectCourse(course)}
             className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded text-xs uppercase tracking-[0.15em] font-sans font-semibold transition-all duration-300 ${
-              isWebUnlock
+              course.price === 0
+                ? "bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-400 text-obsidian shadow-[0_0_15px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.55)] hover:scale-105"
+                : isWebUnlock
                 ? "bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_15px_rgba(198,160,82,0.4)] hover:shadow-[0_0_25px_rgba(198,160,82,0.6)] hover:scale-105"
                 : "bg-obsidian-deep border border-gold/40 text-gold-light hover:border-gold hover:text-parchment hover:bg-gold/10"
             }`}
           >
-            VER CURSO
+            {course.price === 0 ? "INICIAR GRATIS" : "VER CURSO"}
           </button>
         </div>
       </div>

@@ -113,18 +113,31 @@ export const CourseModal: React.FC<CourseModalProps> = ({
           <div className="p-4 rounded-xl bg-[#130f21] border border-gold/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans font-medium">
-                Inversión Única Universal
+                {course.price === 0 ? "🎁 Promoción Especial de Lanzamiento" : "Inversión por Nivel"}
               </div>
-              <div className="font-serif text-3xl text-gold-light font-medium tracking-wide">
-                {course.formattedPrice}
-              </div>
+              {course.price === 0 ? (
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="line-through text-sm sm:text-base font-serif text-parchment-dim/60 font-light">
+                    $799 MXN
+                  </span>
+                  <span className="font-serif text-2xl sm:text-3xl text-emerald-400 font-bold tracking-wide">
+                    100% GRATIS
+                  </span>
+                </div>
+              ) : (
+                <div className="font-serif text-3xl text-gold-light font-medium tracking-wide">
+                  {course.formattedPrice}
+                </div>
+              )}
             </div>
             <div className="text-left sm:text-right text-xs text-parchment-dim font-sans space-y-0.5">
               <div className="text-gold font-medium flex items-center gap-1.5 sm:justify-end">
                 <span>✦</span> Formación 100% Online & Asincrónica
               </div>
               <p className="text-parchment-muted text-[11px]">
-                Incluye manuales ceremoniales en PDF descargables y certificado al finalizar
+                {course.price === 0
+                  ? "Acceso completo a lecciones, manuales en PDF descargables y tutoría oficial sin costo."
+                  : "Incluye manuales ceremoniales en PDF descargables y certificado al finalizar"}
               </p>
             </div>
           </div>
@@ -283,8 +296,16 @@ export const CourseModal: React.FC<CourseModalProps> = ({
         {/* Barra Inferior Fija de Acciones (Checkout & WhatsApp) */}
         <div className="p-4 sm:p-6 bg-[#0a0713] border-t border-charcoal-border flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
           <div className="hidden sm:block">
-            <div className="text-[10px] uppercase tracking-widest text-parchment-muted">Inscripción Inmediata</div>
-            <div className="font-serif text-lg text-gold font-medium">{course.formattedPrice} • Acceso Total</div>
+            <div className="text-[10px] uppercase tracking-widest text-parchment-muted">
+              {course.price === 0 ? "Iniciación Sin Costo" : "Inscripción Inmediata"}
+            </div>
+            <div className="font-serif text-lg text-gold font-medium">
+              {course.price === 0 ? (
+                <span className="text-emerald-400 font-bold">100% GRATIS • Promoción Activa</span>
+              ) : (
+                `${course.formattedPrice} • Acceso Total`
+              )}
+            </div>
           </div>
 
           <div className="w-full sm:w-auto flex items-center justify-end gap-3">
@@ -297,9 +318,13 @@ export const CourseModal: React.FC<CourseModalProps> = ({
             <a
               href={`/academia/registro?curso=${course.id}`}
               onClick={onClose}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-center"
+              className={`w-full sm:w-auto px-8 py-3.5 rounded-xl text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-center ${
+                course.price === 0
+                  ? "bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-400 text-obsidian shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:shadow-[0_0_35px_rgba(16,185,129,0.7)] hover:scale-[1.02]"
+                  : "bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02]"
+              }`}
             >
-              <span>INSCRIBIRME AHORA</span>
+              <span>{course.price === 0 ? "INICIAR GRATIS AHORA" : "INSCRIBIRME AHORA"}</span>
               <span>→</span>
             </a>
           </div>

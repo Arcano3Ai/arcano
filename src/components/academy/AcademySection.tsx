@@ -84,8 +84,11 @@ export const AcademySection: React.FC = () => {
 
             {/* Badges de Garantía */}
             <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-sans text-parchment-dim">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 shadow-inner">
+                <span>🎁</span> <strong className="text-emerald-200 font-bold">Nivel 1 GRATIS por Promoción</strong>
+              </span>
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#100e18] border border-charcoal-border shadow-inner">
-                <span className="text-gold">✦</span> Inversión por curso: <strong className="text-gold-light ml-1 font-semibold">$799 MXN</strong>
+                <span className="text-gold">✦</span> Niveles 2 al 6: <strong className="text-gold-light ml-1 font-semibold">$799 MXN</strong>
               </span>
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#100e18] border border-charcoal-border shadow-inner">
                 <span className="text-gold">🔓</span> Al completar Nivel 5: <strong className="text-gold-light ml-1 font-semibold">Web Gratis con Dominio</strong>
@@ -236,7 +239,7 @@ export const AcademySection: React.FC = () => {
 
               <div className="pt-6 mt-4 border-t border-charcoal-border/60 flex items-center justify-between">
                 <span className="text-[11px] font-sans text-gold/80">
-                  {category.activeCount} Cursos a $799 MXN
+                  {category.activeCount} Niveles • <span className="text-emerald-400 font-semibold">Nivel 1 GRATIS</span>
                 </span>
                 <button
                   onClick={() => handleSelectDiscipline(category.id)}
@@ -260,7 +263,8 @@ export const AcademySection: React.FC = () => {
               CATÁLOGO DE CURSOS
             </h2>
             <p className="text-sm sm:text-base text-parchment-muted font-sans font-light">
-              Explora todos los niveles disponibles. Todos los cursos tienen un precio único de{" "}
+              Explora todos los niveles disponibles. El Nivel 1 es{" "}
+              <strong className="text-emerald-400 font-semibold">100% GRATIS por promoción</strong>, y los niveles del 2 al 6 tienen una inversión única de{" "}
               <strong className="text-gold-light font-semibold">$799 MXN</strong>.
             </p>
 

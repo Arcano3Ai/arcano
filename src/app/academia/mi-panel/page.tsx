@@ -247,7 +247,7 @@ export default function StudentDashboardPage() {
             Explora Otras Disciplinas de la Academia
           </h2>
           <p className="text-xs text-slate-400">
-            Inscríbete a nuevos niveles de Tarot, Astrología, Numerología y Reiki por solo $799 MXN por nivel.
+            Inscríbete a los niveles de Tarot, Astrología, Numerología y Reiki (¡Nivel 1 GRATIS por promoción de bienvenida! · Niveles 2 al 6: $799 MXN).
           </p>
         </div>
 
@@ -260,8 +260,12 @@ export default function StudentDashboardPage() {
                 className="bg-black/40 border border-amber-500/20 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-500/40 transition-all"
               >
                 <div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 block w-fit mb-2">
-                    {course.categoryName.toUpperCase()} · NIVEL {course.romanLevel}
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded border block w-fit mb-2 ${
+                    course.priceMxn === 0
+                      ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
+                      : 'bg-amber-500/10 text-amber-300 border-amber-500/20'
+                  }`}>
+                    {course.categoryName.toUpperCase()} · {course.priceMxn === 0 ? '🎁 NIVEL 1 GRATIS' : `NIVEL ${course.romanLevel}`}
                   </span>
                   <h4 className="font-serif font-bold text-sm text-slate-100 mb-1">
                     {course.title}
@@ -272,15 +276,19 @@ export default function StudentDashboardPage() {
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-sm font-mono font-bold text-amber-300">
-                    {course.formattedPrice}
+                  <span className={`text-sm font-mono font-bold ${course.priceMxn === 0 ? 'text-emerald-400' : 'text-amber-300'}`}>
+                    {course.priceMxn === 0 ? '🎁 GRATIS' : course.formattedPrice}
                   </span>
                   <button
                     type="button"
                     onClick={() => enrollInCourse(course.id)}
-                    className="px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-200 text-xs font-serif hover:bg-amber-500/30 transition-all"
+                    className={`px-3 py-1.5 rounded-xl border text-xs font-serif transition-all ${
+                      course.priceMxn === 0
+                        ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-200 hover:bg-emerald-500/30'
+                        : 'bg-amber-500/20 border-amber-500/30 text-amber-200 hover:bg-amber-500/30'
+                    }`}
                   >
-                    + Inscribirme
+                    {course.priceMxn === 0 ? '+ Iniciar Gratis' : '+ Inscribirme'}
                   </button>
                 </div>
               </div>

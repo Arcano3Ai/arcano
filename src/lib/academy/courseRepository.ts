@@ -101,6 +101,8 @@ export const LMS_COURSES: LMSCourse[] = academyCourses.map((c) => {
     subtitle: c.subtitle || `Formación Sagrada Nivel ${c.romanLevel}`,
     description: c.description,
     priceMxn: c.price,
+    originalPriceMxn: c.originalPrice || (c.price === 0 ? 799 : undefined),
+    isFreePromotion: c.price === 0,
     formattedPrice: c.formattedPrice,
     durationHours: c.duration,
     totalLessons,

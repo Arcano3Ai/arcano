@@ -46,6 +46,7 @@ export interface AcademyCourse {
   subtitle?: string;
   description: string;
   price: number;
+  originalPrice?: number;
   currency: string;
   formattedPrice: string;
   tag?: string;
@@ -228,11 +229,12 @@ export const academyCourses: AcademyCourse[] = [
     title: "Tarot desde Cero",
     description:
       "Conoce la estructura del Tarot, su origen hermético y aprende los fundamentos necesarios para comenzar a interpretar las cartas con absoluta seguridad.",
-    price: 799,
+    price: 0,
+    originalPrice: 799,
     currency: "MXN",
-    formattedPrice: "$799 MXN",
-    badge: "NIVEL 1",
-    tag: "IDEAL PARA PRINCIPIANTES",
+    formattedPrice: "GRATIS",
+    badge: "100% GRATIS (PROMOCIÓN)",
+    tag: "NIVEL 1 GRATUITO",
     countsForPromotion: true,
     duration: "A tu propio ritmo",
     lessonsCount: "7 Módulos",
@@ -423,11 +425,12 @@ export const academyCourses: AcademyCourse[] = [
     title: "Astrología desde Cero",
     description:
       "Conoce los fundamentos de la mecánica celeste, la rueda zodiacal y aprende los elementos esenciales para comenzar a descifrar una carta natal.",
-    price: 799,
+    price: 0,
+    originalPrice: 799,
     currency: "MXN",
-    formattedPrice: "$799 MXN",
-    badge: "NIVEL 1",
-    tag: "FUNDAMENTOS CELESTES",
+    formattedPrice: "GRATIS",
+    badge: "100% GRATIS (PROMOCIÓN)",
+    tag: "NIVEL 1 GRATUITO",
     countsForPromotion: true,
     duration: "A tu propio ritmo",
     lessonsCount: "8 Módulos",
@@ -589,11 +592,12 @@ export const academyCourses: AcademyCourse[] = [
     title: "Numerología desde Cero",
     description:
       "Descubre el poder de los números como códigos universales del cosmos y aprende a calcular e interpretar sus vibraciones esenciales del 1 al 9.",
-    price: 799,
+    price: 0,
+    originalPrice: 799,
     currency: "MXN",
-    formattedPrice: "$799 MXN",
-    badge: "NIVEL 1",
-    tag: "CÓDIGOS PITAGÓRICOS",
+    formattedPrice: "GRATIS",
+    badge: "100% GRATIS (PROMOCIÓN)",
+    tag: "NIVEL 1 GRATUITO",
     countsForPromotion: true,
     duration: "A tu propio ritmo",
     lessonsCount: "7 Módulos",
@@ -754,11 +758,12 @@ export const academyCourses: AcademyCourse[] = [
     title: "Despertar Energético y Chakras",
     description:
       "Iníciate en los principios de la anatomía sutil, los 7 centros energéticos principales, la autopurificación áurica y la meditación consciente.",
-    price: 799,
+    price: 0,
+    originalPrice: 799,
     currency: "MXN",
-    formattedPrice: "$799 MXN",
-    badge: "NIVEL 1",
-    tag: "BIENESTAR Y ARMONÍA",
+    formattedPrice: "GRATIS",
+    badge: "100% GRATIS (PROMOCIÓN)",
+    tag: "NIVEL 1 GRATUITO",
     countsForPromotion: true,
     duration: "A tu propio ritmo",
     lessonsCount: "7 Módulos",
@@ -999,7 +1004,7 @@ export const webPromotionBenefits: string[] = [
 export const academyFaqList: AcademyFaqItem[] = [
   {
     question: "¿CUÁNTO CUESTA CADA CURSO?",
-    answer: "Cada curso tiene un precio de $799 MXN.",
+    answer: "¡El Nivel 1 de cada disciplina es 100% GRATIS por promoción especial de bienvenida! A partir del Nivel 2 en adelante, cada curso tiene una inversión accesible de $799 MXN. Además, al completar los 5 niveles de tu formación recibes tu página web profesional personalizada con dominio propio incluido por 1 año.",
   },
   {
     question: "¿NECESITO EXPERIENCIA PREVIA?",

@@ -78,21 +78,21 @@ export const ArcanaAiBot: React.FC = () => {
     ) {
       if (q.includes("nivel 3") && (q.includes("web") || q.includes("gratis") || q.includes("promocion"))) {
         return {
-          response: `✦ Actualización de la Promoción Sagrada:\n\nLa bonificación de la «Página Web Personalizada GRATIS con Dominio Propio por 1 año» se desbloquea oficialmente al **completar el Nivel 5** de cualquiera de nuestras 4 disciplinas (Tarot, Astrología, Numerología o Reiki).\n\nEsto asegura que tengas toda la maestría técnica y práctica para lanzar tu proyecto con solvencia total. Cada nivel tiene un costo accesible de $799 MXN.`,
-          quickReplies: ["¿Cómo obtengo la web gratis?", "Explorar Cursos ($799 MXN)", "Ingresar al Aula Virtual"],
+          response: `✦ Actualización de la Promoción Sagrada:\n\n• ¡El **Nivel 1 es 100% GRATIS por promoción de bienvenida** en cualquiera de nuestras rutas!\n• La bonificación de la «Página Web Personalizada GRATIS con Dominio Propio por 1 año» se desbloquea oficialmente al **completar el Nivel 5** de cualquiera de nuestras 4 disciplinas (Tarot, Astrología, Numerología o Reiki).\n\nEsto asegura que tengas toda la maestría técnica y práctica para lanzar tu proyecto con solvencia total. Los niveles del 2 al 6 tienen una inversión accesible de solo $799 MXN por nivel.`,
+          quickReplies: ["Iniciar Nivel 1 Gratis", "¿Cómo obtengo la web gratis?", "Ingresar al Aula Virtual"],
         };
       }
 
-      if (q.includes("web") || q.includes("gratis") || q.includes("promocion") || q.includes("promoción") || q.includes("nivel 5")) {
+      if (q.includes("web") || q.includes("gratis") || q.includes("promocion") || q.includes("promoción") || q.includes("nivel 5") || q.includes("primer nivel") || q.includes("nivel 1")) {
         return {
-          response: `✦ Promoción Cumbre de la Academia Esotérica:\n\n«Completa los 5 niveles de formación y recibe una página web personalizada GRATIS con dominio incluido durante 1 año.»\n\n• Aplica completando los Niveles 1 al 5 de tu disciplina elegida (Tarot, Astrología, Numerología o Reiki).\n• Inversión: $799 MXN por curso (precio universal para todos los niveles).\n• Incluye: diseño profesional, botones a WhatsApp, catálogo/servicios y dominio por 1 año.\n• Nota: Después del primer año, la renovación del dominio es independiente.\n\nPuedes explorar los detalles en la sección «Academia» de nuestra web o registrarte en el Aula Virtual.`,
-          quickReplies: ["Ver Cursos de Tarot ($799 MXN)", "Ver Astrología y Carta Natal", "Ver Numerología", "¿Cómo obtengo la web gratis?"],
+          response: `✦ Promociones Activas de la Academia Esotérica ARCANO:\n\n1. 🎁 **¡Primer Nivel 100% GRATIS!**\nPuedes comenzar hoy mismo el Nivel 1 de tu disciplina (ej. Tarot desde Cero) sin costo ni tarjeta bancaria para que pruebes el aula virtual y las lecciones.\n\n2. 🌐 **Página Web Profesional GRATIS al completar el Nivel 5**:\n«Completa los 5 niveles de formación y recibe una página web personalizada GRATIS con dominio propio (.com) incluido durante 1 año.»\n\n• Inversión: Nivel 1 GRATIS • Niveles 2 al 5/6: $799 MXN por curso.\n• Incluye: manuales PDF ceremoniales, videos sagrados y tutoría oficial en consultas@arcanosolutions.com.`,
+          quickReplies: ["Iniciar Nivel 1 Gratis", "Ver Cursos de Tarot", "¿Cómo obtengo la web gratis?", "Aula Virtual"],
         };
       }
 
       return {
-        response: `✦ Academia Esotérica — ARCANO:\n\nPlataforma educativa con 4 rutas de formación sagrada:\n\n1. 🎴 Tarot (6 Niveles iniciáticos a profesionales)\n2. 🪐 Astrología (5 Niveles: Desde Cero hasta Carta Natal y Kármica)\n3. 🔢 Numerología (5 Niveles: Códigos, Número de Vida y Profesional)\n4. ✨ Reiki y Energía (5 Niveles: Bienestar, Chakras y Conexión Interior)\n\n• Inversión: Todos los cursos a $799 MXN.\n• ¡Completa los 5 niveles de cualquier disciplina y recibe tu página web personalizada GRATIS con dominio por 1 año!`,
-        quickReplies: ["¿Cómo obtengo la web gratis?", "Explorar Cursos ($799 MXN)", "Ingresar al Aula Virtual"],
+        response: `✦ Academia Esotérica — ARCANO:\n\nPlataforma educativa con 4 rutas de formación sagrada:\n\n1. 🎴 Tarot (6 Niveles iniciáticos a profesionales)\n2. 🪐 Astrología (5 Niveles: Desde Cero hasta Carta Natal y Kármica)\n3. 🔢 Numerología (5 Niveles: Códigos, Número de Vida y Profesional)\n4. ✨ Reiki y Energía (5 Niveles: Bienestar, Chakras y Conexión Interior)\n\n• 🎁 **Promoción Especial**: ¡El Nivel 1 es 100% GRATIS!\n• Niveles avanzados (2 al 6): $799 MXN.\n• ¡Completa los 5 niveles de cualquier disciplina y recibe tu página web personalizada GRATIS con dominio por 1 año!`,
+        quickReplies: ["Iniciar Nivel 1 Gratis", "¿Cómo obtengo la web gratis?", "Ingresar al Aula Virtual"],
       };
     }
 

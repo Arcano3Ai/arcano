@@ -49,6 +49,8 @@ export interface LMSCourse {
   subtitle: string;
   description: string;
   priceMxn: number;
+  originalPriceMxn?: number;
+  isFreePromotion?: boolean;
   formattedPrice: string;
   durationHours: string;
   totalLessons: number;
