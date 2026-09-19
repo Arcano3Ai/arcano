@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { SynastryReport, SynastryAspect } from '@/lib/astrology/types';
-import { ASPECT_DEFINITIONS } from '@/lib/astrology/constants';
+import { SynastryReport } from '@/lib/astrology/types';
+import { ASPECT_DEFINITIONS, BODY_SYMBOLS, ZODIAC_SIGNS } from '@/lib/astrology/constants';
 
 interface SynastryReportViewProps {
   synastry: SynastryReport;
@@ -16,15 +16,16 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
     overview,
     strengths,
     challenges,
-    arcanumCounsel,
     sunDynamic,
     moonDynamic,
     eroticChemistry,
     karmicDestiny,
     categorizedAspects,
     relationalArcanum,
+    crossAspects,
   } = synastry;
 
+  const [viewMode, setViewMode] = useState<'user' | 'astrologer'>('user');
   const [aspectFilter, setAspectFilter] = useState<'all' | 'harmonic' | 'tense' | 'conjunction'>('all');
 
   const displayedAspects =
@@ -34,10 +35,54 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
       ? categorizedAspects.tensions
       : aspectFilter === 'conjunction'
       ? categorizedAspects.conjunctions
-      : synastry.crossAspects.slice(0, 15);
+      : crossAspects;
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
+      {/* SELECTOR DE ENFOQUE: USUARIO / PAREJA vs ASTRÓLOGO */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-3xl bg-[#090D18]/90 border border-amber-500/30 backdrop-blur-md">
+        <div className="flex items-center gap-3">
+          <span className="text-xl">✨</span>
+          <div>
+            <span className="text-[10px] uppercase font-serif tracking-widest text-amber-400 font-semibold block">
+              Perspectiva de Análisis
+            </span>
+            <span className="text-xs text-slate-300">
+              {viewMode === 'user'
+                ? 'Modo Pareja: Lectura clara, práctica y enfocada en la vida cotidiana.'
+                : 'Modo Astrólogo: Desglose técnico con balance elemental, coordenadas y matriz completa.'}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1.5 p-1 bg-black/60 rounded-2xl border border-amber-500/20 shrink-0">
+          <button
+            type="button"
+            onClick={() => setViewMode('user')}
+            className={`px-4 py-2 rounded-xl text-xs font-serif transition-all flex items-center gap-1.5 ${
+              viewMode === 'user'
+                ? 'bg-rose-500/25 border border-rose-400 text-rose-100 font-bold shadow-[0_0_12px_rgba(244,63,94,0.3)]'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <span>❤️</span>
+            <span>Modo Pareja</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewMode('astrologer')}
+            className={`px-4 py-2 rounded-xl text-xs font-serif transition-all flex items-center gap-1.5 ${
+              viewMode === 'astrologer'
+                ? 'bg-sky-500/25 border border-sky-400 text-sky-100 font-bold shadow-[0_0_12px_rgba(14,165,233,0.3)]'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <span>🪐</span>
+            <span>Modo Astrólogo</span>
+          </button>
+        </div>
+      </div>
+
       {/* 1. RESUMEN GLOBAL Y SCORES */}
       <div className="bg-[#090D18]/90 border border-amber-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-2xl">
         <div className="text-center mb-6">
@@ -81,6 +126,66 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
           </div>
         </div>
       </div>
+
+      {/* SECCIÓN ESPECÍFICA MODO ASTRÓLOGO: BALANCE ELEMENTAL Y MODALIDAD */}
+      {viewMode === 'astrologer' && (
+        <div className="bg-[#090D18]/90 border border-sky-500/30 rounded-3xl p-6 sm:p-8 space-y-6">
+          <div className="flex items-center justify-between border-b border-sky-500/20 pb-4">
+            <div>
+              <span className="text-[10px] uppercase font-mono tracking-widest text-sky-400 block">
+                ANÁLISIS ESTRUCTURAL COMPARADO
+              </span>
+              <h3 className="text-lg font-serif font-bold text-sky-100">
+                Balance de Elementos y Modalidades
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-400">
+              Ponderación Astrológica
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+            {/* Elementos */}
+            <div className="space-y-3 bg-black/40 p-4 rounded-2xl border border-sky-500/20">
+              <h4 className="font-serif font-bold text-amber-200 text-sm">Elementos (Temperamento)</h4>
+              {[
+                { label: 'Fuego (Impulso / Vitalidad)', valA: chartA.elementBalance.fuego, valB: chartB.elementBalance.fuego, color: 'text-amber-400' },
+                { label: 'Tierra (Estructura / Realismo)', valA: chartA.elementBalance.tierra, valB: chartB.elementBalance.tierra, color: 'text-emerald-400' },
+                { label: 'Aire (Mente / Comunicación)', valA: chartA.elementBalance.aire, valB: chartB.elementBalance.aire, color: 'text-sky-400' },
+                { label: 'Agua (Emoción / Empatía)', valA: chartA.elementBalance.agua, valB: chartB.elementBalance.agua, color: 'text-indigo-400' },
+              ].map(el => (
+                <div key={el.label} className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                  <span className={`${el.color} font-medium`}>{el.label}</span>
+                  <div className="font-mono flex items-center gap-3">
+                    <span className="text-amber-300 font-bold">{chartA.birthData.name}: {el.valA}</span>
+                    <span className="text-slate-500">|</span>
+                    <span className="text-sky-300 font-bold">{chartB.birthData.name}: {el.valB}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Modalidades */}
+            <div className="space-y-3 bg-black/40 p-4 rounded-2xl border border-sky-500/20">
+              <h4 className="font-serif font-bold text-sky-200 text-sm">Modalidades (Dinámica de Acción)</h4>
+              {[
+                { label: 'Cardinal (Iniciativa / Liderazgo)', valA: chartA.modalityBalance.cardinal, valB: chartB.modalityBalance.cardinal },
+                { label: 'Fijo (Perseverancia / Apego)', valA: chartA.modalityBalance.fijo, valB: chartB.modalityBalance.fijo },
+                { label: 'Mutable (Adaptación / Flexibilidad)', valA: chartA.modalityBalance.mutable, valB: chartB.modalityBalance.mutable },
+              ].map(mod => (
+                <div key={mod.label} className="flex items-center justify-between border-b border-white/5 pb-1.5">
+                  <span className="text-slate-300 font-medium">{mod.label}</span>
+                  <div className="font-mono flex items-center gap-3">
+                    <span className="text-amber-300 font-bold">{chartA.birthData.name}: {mod.valA}</span>
+                    <span className="text-slate-500">|</span>
+                    <span className="text-sky-300 font-bold">{chartB.birthData.name}: {mod.valB}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 2. ARCANO MAYOR REGENTE DEL VÍNCULO */}
       <div className="bg-gradient-to-r from-amber-500/15 via-[#0B0E1B] to-purple-900/20 border border-amber-500/40 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-2xl relative overflow-hidden">
@@ -214,7 +319,44 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
         </div>
       </div>
 
-      {/* 5. TABLA DE ASPECTOS CRUZADOS CATEGORIZADOS */}
+      {/* 5. SECCIÓN DE REGLAS DE ORO PARA LA PAREJA (Modo Pareja) */}
+      {viewMode === 'user' && (
+        <div className="bg-gradient-to-r from-amber-500/10 via-[#0A0D1A] to-rose-500/10 border border-amber-500/30 rounded-3xl p-6 sm:p-8 space-y-4">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🗝️</span>
+            <div>
+              <h4 className="font-serif font-bold text-amber-100 text-base">
+                Tres Reglas de Oro para la Armonía de Esta Pareja
+              </h4>
+              <p className="text-xs text-slate-300 font-light">
+                Consejos prácticos para transformar las diferencias cósmicas en acuerdos amorosos:
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div className="p-4 rounded-2xl bg-black/40 border border-amber-500/20 space-y-2">
+              <span className="text-amber-400 font-serif font-bold text-xs block">1. En el Desacuerdo</span>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Escucha activa sin juzgar las reacciones emocionales del otro; permitan pausas de silencio antes de responder.
+              </p>
+            </div>
+            <div className="p-4 rounded-2xl bg-black/40 border border-rose-500/20 space-y-2">
+              <span className="text-rose-400 font-serif font-bold text-xs block">2. En la Intimidad</span>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Nutran la complicidad lúdica y verbal fuera del dormitorio para encender el magnetismo magnético mutuo.
+              </p>
+            </div>
+            <div className="p-4 rounded-2xl bg-black/40 border border-sky-500/20 space-y-2">
+              <span className="text-sky-400 font-serif font-bold text-xs block">3. En el Proyecto de Vida</span>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Mantengan sueños individuales claros mientras construyen el hogar y las finanzas compartidas.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 6. TABLA DE ASPECTOS CRUZADOS CATEGORIZADOS */}
       <div className="bg-[#090D18]/90 border border-amber-500/30 rounded-3xl p-6 sm:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
@@ -237,7 +379,7 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Todos ({synastry.crossAspects.length})
+              Todos ({crossAspects.length})
             </button>
             <button
               type="button"
@@ -259,14 +401,14 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Retos ({categorizedAspects.tensions.length})
+              Tensiones ({categorizedAspects.tensions.length})
             </button>
             <button
               type="button"
               onClick={() => setAspectFilter('conjunction')}
               className={`px-3 py-1 rounded-lg transition-all ${
                 aspectFilter === 'conjunction'
-                  ? 'bg-amber-500/25 text-amber-200 font-semibold'
+                  ? 'bg-purple-500/25 text-purple-200 font-semibold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -283,16 +425,16 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
                 <th className="py-2.5 px-3">Geometría</th>
                 <th className="py-2.5 px-3">{chartB.birthData.name}</th>
                 <th className="py-2.5 px-3">Orbe</th>
-                <th className="py-2.5 px-3">Significado Alquímico</th>
+                <th className="py-2.5 px-3">Significado {viewMode === 'astrologer' ? 'Técnico' : 'Alquímico'}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-amber-500/10">
-              {displayedAspects.map((asp, idx) => {
+              {displayedAspects.slice(0, viewMode === 'user' ? 12 : undefined).map((asp, idx) => {
                 const def = ASPECT_DEFINITIONS[asp.aspectType];
                 return (
                   <tr key={`cross-row-${idx}`} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3 px-3 font-serif font-medium text-amber-200 whitespace-nowrap">
-                      {asp.bodyA}
+                      {BODY_SYMBOLS[asp.bodyA] || ''} {asp.bodyA}
                     </td>
                     <td className="py-3 px-3 whitespace-nowrap">
                       <span
@@ -308,7 +450,7 @@ export default function SynastryReportView({ synastry }: SynastryReportViewProps
                       </span>
                     </td>
                     <td className="py-3 px-3 font-serif font-medium text-sky-200 whitespace-nowrap">
-                      {asp.bodyB}
+                      {BODY_SYMBOLS[asp.bodyB] || ''} {asp.bodyB}
                     </td>
                     <td className="py-3 px-3 font-mono text-slate-400 whitespace-nowrap">
                       {asp.orb.toFixed(2)}°

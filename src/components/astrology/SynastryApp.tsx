@@ -7,11 +7,15 @@ import { calculateSynastry } from '@/lib/astrology/synastry';
 import SynastryForm from './SynastryForm';
 import SynastryWheel from './SynastryWheel';
 import SynastryReportView from './SynastryReportView';
+import SynastryDossierUser from './SynastryDossierUser';
+import SynastryDossierAstrologer from './SynastryDossierAstrologer';
 
 export default function SynastryApp() {
   const [synastry, setSynastry] = useState<SynastryReport | null>(null);
   const [activeTab, setActiveTab] = useState<'wheel' | 'report' | 'new'>('wheel');
   const [isLoading, setIsLoading] = useState(false);
+  const [dossierType, setDossierType] = useState<'user' | 'astrologer'>('user');
+  const [isDossierModalOpen, setIsDossierModalOpen] = useState(false);
 
   const handleSubmit = (dataA: BirthDataInput, dataB: BirthDataInput) => {
     setIsLoading(true);
@@ -24,8 +28,12 @@ export default function SynastryApp() {
     }, 300);
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handleDownloadDossier = (type: 'user' | 'astrologer') => {
+    setDossierType(type);
+    setIsDossierModalOpen(false);
+    setTimeout(() => {
+      window.print();
+    }, 150);
   };
 
   if (!synastry) {
@@ -99,14 +107,117 @@ export default function SynastryApp() {
 
             <button
               type="button"
-              onClick={handlePrint}
-              className="px-5 py-2.5 rounded-2xl border border-amber-500/50 bg-amber-500/10 text-amber-200 text-xs font-serif font-semibold hover:bg-amber-500/20 shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all flex items-center gap-2"
-              title="Descargar o imprimir reporte de compatibilidad en PDF"
+              onClick={() => setIsDossierModalOpen(true)}
+              className="px-5 py-2.5 rounded-2xl border border-amber-500/50 bg-amber-500/10 text-amber-200 text-xs font-serif font-semibold hover:bg-amber-500/20 shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all flex items-center gap-2 cursor-pointer"
+              title="Descargar dossier de compatibilidad en PDF (Versión Pareja o Versión Astrólogo)"
             >
               <span>📥</span> Descargar Dossier PDF
             </button>
           </div>
         </div>
+
+        {/* Modal Selector de Versión de Dossier */}
+        {isDossierModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+            <div className="relative w-full max-w-2xl bg-[#090D18] border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+              {/* Botón Cerrar */}
+              <button
+                type="button"
+                onClick={() => setIsDossierModalOpen(false)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+                title="Cerrar modal"
+              >
+                ✕
+              </button>
+
+              <div className="text-center mb-6">
+                <span className="text-[11px] font-serif uppercase tracking-[0.25em] text-amber-400 font-semibold block">
+                  ✦ Dossier Oficial de Sinastría ✦
+                </span>
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100 mt-1">
+                  Elige la Versión del Reporte
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 font-light">
+                  Selecciona el formato que mejor se adapte a tus necesidades de lectura o consulta.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* OPCIÓN 1: VERSIÓN PAREJA / USUARIO */}
+                <div
+                  onClick={() => handleDownloadDossier('user')}
+                  className="p-5 rounded-2xl border border-rose-500/30 bg-gradient-to-b from-rose-500/10 to-transparent hover:border-rose-400 hover:bg-rose-500/15 cursor-pointer transition-all flex flex-col justify-between group text-left"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-2xl">❤️</span>
+                      <span className="text-[10px] uppercase font-serif px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-semibold">
+                        Recomendado para parejas
+                      </span>
+                    </div>
+                    <h4 className="font-serif font-bold text-base text-rose-100 group-hover:text-rose-300 transition-colors">
+                      Versión para la Pareja
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                      Lectura clara, fluida y práctica. Analiza la química emocional, comunicación, acuerdos cotidianos y el consejo del Arcano sin tablas técnicas complejas.
+                    </p>
+                    <ul className="text-[11px] text-slate-400 space-y-1 mt-3">
+                      <li>✓ Rueda Bi-Wheel sagrada</li>
+                      <li>✓ 4 Pilares relacionales (%)</li>
+                      <li>✓ Dinámica Sol, Luna y Venus/Marte</li>
+                      <li>✓ 3 Reglas de oro para la armonía</li>
+                    </ul>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="mt-5 w-full py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 text-white font-serif font-bold text-xs uppercase tracking-wider group-hover:brightness-110 shadow-[0_0_15px_rgba(244,63,94,0.3)] transition-all"
+                  >
+                    Descargar Versión Pareja
+                  </button>
+                </div>
+
+                {/* OPCIÓN 2: VERSIÓN ASTRÓLOGO / PROFESIONAL */}
+                <div
+                  onClick={() => handleDownloadDossier('astrologer')}
+                  className="p-5 rounded-2xl border border-sky-500/30 bg-gradient-to-b from-sky-500/10 to-transparent hover:border-sky-400 hover:bg-sky-500/15 cursor-pointer transition-all flex flex-col justify-between group text-left"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-2xl">🪐</span>
+                      <span className="text-[10px] uppercase font-serif px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-semibold">
+                        Técnico & Exhaustivo
+                      </span>
+                    </div>
+                    <h4 className="font-serif font-bold text-base text-sky-100 group-hover:text-sky-300 transition-colors">
+                      Versión para el Astrólogo
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                      Diseñado para astrólogos y consultas profesionales. Coordenadas natales exactas, efemérides completas grado/minuto, orbes matemáticos y matriz de aspectos.
+                    </p>
+                    <ul className="text-[11px] text-slate-400 space-y-1 mt-3">
+                      <li>✓ Coordenadas geográficas y UTC</li>
+                      <li>✓ Efemérides de los 13 cuerpos celestes</li>
+                      <li>✓ Cúspides comparadas de las 12 casas</li>
+                      <li>✓ Matriz integral con orbes y geometría</li>
+                    </ul>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="mt-5 w-full py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 text-white font-serif font-bold text-xs uppercase tracking-wider group-hover:brightness-110 shadow-[0_0_15px_rgba(14,165,233,0.3)] transition-all"
+                  >
+                    Descargar Versión Astrólogo
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-center text-[11px] text-slate-400 mt-5 font-light">
+                Ambas versiones se optimizan en formato A4 listo para imprimir o guardar como archivo PDF.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-3 border-b border-amber-500/20 pb-4">
@@ -163,80 +274,14 @@ export default function SynastryApp() {
 
       {/* =========================================================================
           SECCIÓN EXCLUSIVA DE IMPRESIÓN Y EXPORTACIÓN A PDF (DOSSIER SINASTRÍA)
-          ========================================================================= */}
-      {/* =========================================================================
-          SECCIÓN EXCLUSIVA DE IMPRESIÓN Y EXPORTACIÓN A PDF (DOSSIER SINASTRÍA)
+          Renderiza de forma precisa la versión seleccionada por el usuario
           ========================================================================= */}
       <div className="hidden print:block print-dossier">
-        {/* PÁGINA 1: PORTADA EDITORIAL A4 EXACTA */}
-        <div className="print-cover-page border border-amber-500/40 rounded-3xl p-6 bg-[#0B0F1C] text-center">
-          {/* Membrete y Título */}
-          <div className="space-y-1">
-            <span className="text-amber-400 text-[10px] uppercase tracking-[0.35em] font-serif block">
-              ✦ ARCANO · DOSSIER DE SINASTRÍA SAGRADA ✦
-            </span>
-            <h1 className="text-2xl font-serif font-bold text-amber-100">
-              {synastry.chartA.birthData.name} & {synastry.chartB.birthData.name}
-            </h1>
-            <p className="text-[11px] text-slate-300">
-              {synastry.chartA.birthData.name} ({synastry.chartA.birthData.cityName}, {synastry.chartA.birthData.day}/{synastry.chartA.birthData.month}/{synastry.chartA.birthData.year}) • {synastry.chartB.birthData.name} ({synastry.chartB.birthData.cityName}, {synastry.chartB.birthData.day}/{synastry.chartB.birthData.month}/{synastry.chartB.birthData.year})
-            </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 rounded-xl border border-amber-500/30 mt-1">
-              <span className="text-xs font-serif text-amber-300 font-bold">
-                Afinidad Global: {synastry.scores.overall}%
-              </span>
-              <span className="text-slate-500">·</span>
-              <span className="text-[10px] text-slate-300">
-                {synastry.crossAspects.length} aspectos cruzados
-              </span>
-              <span className="text-slate-500">·</span>
-              <span className="text-[10px] text-amber-400 font-serif">
-                Arcano: {synastry.relationalArcanum.name}
-              </span>
-            </div>
-          </div>
-
-          {/* Rueda Bi-Wheel en SVG (Escalada para caber perfecta en Portada) */}
-          <div className="py-2 flex justify-center items-center">
-            <SynastryWheel synastry={synastry} />
-          </div>
-
-          {/* 4 Dimensiones en Portada */}
-          <div className="grid grid-cols-4 gap-2.5 pt-3 border-t border-amber-500/20 text-center">
-            <div className="p-2 bg-black/40 rounded-xl border border-rose-500/20">
-              <span className="text-[9px] text-rose-300 block font-serif">Pasión</span>
-              <span className="text-base font-bold text-rose-400 font-mono">{synastry.scores.chemistry}%</span>
-            </div>
-            <div className="p-2 bg-black/40 rounded-xl border border-sky-500/20">
-              <span className="text-[9px] text-sky-300 block font-serif">Diálogo</span>
-              <span className="text-base font-bold text-sky-400 font-mono">{synastry.scores.communication}%</span>
-            </div>
-            <div className="p-2 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[9px] text-amber-300 block font-serif">Estabilidad</span>
-              <span className="text-base font-bold text-amber-400 font-mono">{synastry.scores.stability}%</span>
-            </div>
-            <div className="p-2 bg-black/40 rounded-xl border border-purple-500/20">
-              <span className="text-[9px] text-purple-300 block font-serif">Lazo Álmico</span>
-              <span className="text-base font-bold text-purple-400 font-mono">{synastry.scores.soulConnection}%</span>
-            </div>
-          </div>
-
-          {/* Pie de Portada */}
-          <div className="text-center pt-2 border-t border-amber-500/10 text-[9px] text-slate-400 font-serif">
-            ARCANO · Dossier Astrológico Relacional · www.arcanosolutions.com
-          </div>
-        </div>
-
-        {/* PÁGINA 2: INFORME DE COMPATIBILIDAD ALQUÍMICA (SALTO DE PÁGINA) */}
-        <div className="print-page-break space-y-6 pt-4">
-          <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C]">
-            <SynastryReportView synastry={synastry} />
-          </div>
-
-          <div className="text-center pt-4 border-t border-amber-500/20 text-[10px] text-slate-400 font-serif">
-            ARCANO · Santuario de Sabiduría y Simbolismo Arquetípico · www.arcanosolutions.com
-          </div>
-        </div>
+        {dossierType === 'user' ? (
+          <SynastryDossierUser synastry={synastry} />
+        ) : (
+          <SynastryDossierAstrologer synastry={synastry} />
+        )}
       </div>
     </div>
   );
