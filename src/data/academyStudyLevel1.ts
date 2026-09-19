@@ -11,6 +11,12 @@ export interface LessonStudyGuide {
   subtitle: string;
   readingTimeMinutes: number;
   officialTutorEmail: string;
+  recommendedArcanaAudio?: {
+    slug: string;
+    title: string;
+    audioUrl: string;
+    taskDescription: string;
+  };
   modules: {
     sectionTitle: string;
     paragraphs: string[];
@@ -40,6 +46,12 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     subtitle: 'El despertar del ojo simbólico: De juego cortesano a espejo del alma humana',
     readingTimeMinutes: 18,
     officialTutorEmail: 'consultas@arcanosolutions.com',
+    recommendedArcanaAudio: {
+      slug: 'el-loco',
+      title: 'Himno Sagrado de El Loco — El Salto al Vacío',
+      audioUrl: '/audio/arcanos/el-loco.mp3',
+      taskDescription: 'Escucha este himno con audífonos antes de iniciar tu práctica para conectar con la energía primordial del salto de fe y la inocencia iniciática.',
+    },
     modules: [
       {
         sectionTitle: '1. Qué es el Tarot: Espejo, no Sentencia',
@@ -90,8 +102,9 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
       },
     ],
     practicalExercise: {
-      title: 'Ejercicio Sagrado: Diálogo con tu Mazo',
+      title: 'Ejercicio Sagrado: Diálogo con tu Mazo & Sintonización Acústica',
       instructions: [
+        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha con auriculares la canción sagrada de «El Loco: El Salto al Vacío» (reproductor integrado abajo) con los ojos cerrados para disolver el ruido mental antes de tocar tus naipes.',
         'Toma tu mazo de cartas con ambas manos. Cierra los ojos y realiza tres respiraciones profundas inhalando por la nariz y exhalando lentamente.',
         'Baraja sin prisa sintiendo la textura de los bordes. Haz una única pregunta en voz alta o mentalmente: «¿Cuál es la energía o arquetipo que me acompaña a iniciar este estudio en ARCANO?»',
         'Extrae una carta al azar, colócala boca arriba y contémplala durante 3 minutos en silencio antes de buscar su significado en libros.',
@@ -150,8 +163,9 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
       },
     ],
     practicalExercise: {
-      title: 'Práctica de Clasificación y Conteo',
+      title: 'Auditoría Física y Mapeo de la Catedral',
       instructions: [
+        '🎵 TAREA ACÚSTICA: Reproduce la Invocación de «El Mago» mientras separas y ordenas tus 78 cartas.',
         'Separa tu mazo completo en 5 grupos sobre una mesa limpia: Grupo 1 (22 Mayores), Grupo 2 (Bastos), Grupo 3 (Copas), Grupo 4 (Espadas) y Grupo 5 (Oros).',
         'Verifica que tengas 14 cartas en cada palo menor (del As al Diez más Sota, Caballero, Reina y Rey).',
         'Contempla la diferencia de vibración entre un Arcano Mayor y una carta numérica menor.',
@@ -170,6 +184,12 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     subtitle: 'Jerarquía sagrada: Cuándo el destino manda y cuándo la decisión es tuya',
     readingTimeMinutes: 22,
     officialTutorEmail: 'consultas@arcanosolutions.com',
+    recommendedArcanaAudio: {
+      slug: 'la-sacerdotisa',
+      title: 'Cántico de La Sacerdotisa — El Silencio del Templo',
+      audioUrl: '/audio/arcanos/la-sacerdotisa.mp3',
+      taskDescription: 'Escucha el cántico de La Sacerdotisa para acceder al templo del silencio interior y percibir la jerarquía sagrada del Macrocosmos.',
+    },
     modules: [
       {
         sectionTitle: '1. Distinción de Peso Energético en la Mesa',
@@ -207,6 +227,7 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     practicalExercise: {
       title: 'Tirada Comparativa: Lo Esencial vs. Lo Cotidiano',
       instructions: [
+        '🎵 TAREA ACÚSTICA: Escucha el Cántico de «La Sacerdotisa» en total penumbra o con una vela antes de extraer las cartas para afinar tu visión psíquica.',
         'Separa los 22 Arcanos Mayores a tu izquierda y los 56 Menores a tu derecha.',
         'Baraja los Mayores y extrae 1 carta: «¿Cuál es mi lección de vida central en este mes?»',
         'Baraja los Menores y extrae 1 carta: «¿Qué acción concreta me ayudará a transitarla hoy?»',
@@ -225,6 +246,12 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     subtitle: 'El vocabulario iniciático: Luz y sombra de los primeros 11 Arcanos Mayores',
     readingTimeMinutes: 25,
     officialTutorEmail: 'consultas@arcanosolutions.com',
+    recommendedArcanaAudio: {
+      slug: 'la-emperatriz',
+      title: 'Sinfonía de La Emperatriz — El Florecer Eterno',
+      audioUrl: '/audio/arcanos/la-emperatriz.mp3',
+      taskDescription: 'Sintoniza la sinfonía de La Emperatriz para sentir la vibración de la creatividad, el gozo y la fertilidad sensorial del mazo.',
+    },
     modules: [
       {
         sectionTitle: '1. Cómo Memorizar Cartas sin Convertirte en un Robot',
@@ -266,8 +293,9 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
       },
     ],
     practicalExercise: {
-      title: 'Identificación de Luz y Sombra',
+      title: 'Identificación de Luz y Sombra con Sintonización Sonora',
       instructions: [
+        '🎵 TAREA ACÚSTICA: Reproduce la Sinfonía de «La Emperatriz» y contempla cómo la belleza estética despierta la intuición en tus sentidos.',
         'Escoge un Arcano Mayor entre el 0 y el X con el que sientas afinidad o resistencia.',
         'Escribe en tu cuaderno: «¿En qué momentos de mi vida he vivido la luz de este arcano? ¿Y en qué momentos he caído en su sombra?»',
       ],
@@ -285,6 +313,12 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     subtitle: 'Fuego, Agua, Aire y Tierra: La brújula material de los 56 Arcanos Menores',
     readingTimeMinutes: 24,
     officialTutorEmail: 'consultas@arcanosolutions.com',
+    recommendedArcanaAudio: {
+      slug: 'los-enamorados',
+      title: 'Melodía de Los Enamorados — La Sagrada Elección',
+      audioUrl: '/audio/arcanos/los-enamorados.mp3',
+      taskDescription: 'Conecta con la melodía de Los Enamorados para sintonizar el balance entre Fuego, Agua, Aire y Tierra en tus decisiones.',
+    },
     modules: [
       {
         sectionTitle: '1. La Alquimia Elemental en el Tarot',
@@ -328,8 +362,9 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
       },
     ],
     practicalExercise: {
-      title: 'Mapeo Elemental Personal',
+      title: 'Mapeo Elemental Personal y Armonización Sonora',
       instructions: [
+        '🎵 TAREA ACÚSTICA: Escucha la Melodía de «Los Enamorados» mientras contemplas la integración de los 4 elementos en tu vida afectiva y proyectos.',
         'Toma las 4 cartas de los Ases (As de Bastos, As de Copas, As de Espadas y As de Oros).',
         'Colócalos en cruz sobre tu mesa (Fuego al Sur, Agua al Oeste, Aire al Este y Tierra al Norte).',
         'Pregúntate con honestidad: «¿Cuál de estos 4 elementos está más desnutrido en mi vida en este instante? ¿Cuál está en exceso?»',
@@ -387,6 +422,7 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     practicalExercise: {
       title: 'Consagración Solemne de tu Primer Mazo',
       instructions: [
+        '🎵 TAREA ACÚSTICA: Reproduce la Consagración de «La Fuerza: La Caricia y el León» como banda sonora ritual mientras realizas la limpieza de tu mazo.',
         'Realiza la limpieza con humo o con un cuarzo de tu baraja.',
         'Coloca las 78 cartas en orden (desde El Loco hasta El Mundo, seguidos de Bastos, Copas, Espadas y Oros).',
         'Respira hondo y consagra tu mazo dedicándolo a tu aprendizaje en ARCANO.',
@@ -405,6 +441,12 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
     subtitle: 'De la teoría a la mesa: Técnicas de lectura dinámica, conexión de cartas y casos reales',
     readingTimeMinutes: 26,
     officialTutorEmail: 'consultas@arcanosolutions.com',
+    recommendedArcanaAudio: {
+      slug: 'el-carro',
+      title: 'Tono Victorioso de El Carro — La Conquista del Alma',
+      audioUrl: '/audio/arcanos/el-carro.mp3',
+      taskDescription: 'Sintoniza el Tono Victorioso de El Carro para infundirte de determinación, dirección y enfoque ético en tus primeras tiradas reales.',
+    },
     modules: [
       {
         sectionTitle: '1. La Tirada de 1 Carta: El Oráculo del Día',
@@ -451,8 +493,9 @@ export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
       },
     ],
     practicalExercise: {
-      title: 'Tirada de 3 Cartas para un Asunto Personal',
+      title: 'Tirada de 3 Cartas & Sintonización con El Carro',
       instructions: [
+        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha el Tono Victorioso de «El Carro: La Conquista del Alma» antes de extraer tus naipes para enfocar tu voluntad y dirección.',
         'Formule una pregunta clara a tu mazo sobre un tema de tu vida actual.',
         'Extrae 3 cartas alineadas de izquierda a derecha (Pasado / Presente / Futuro Potencial).',
         'Escribe un informe de 1 a 2 párrafos unificando el mensaje en una síntesis con sentido.',

@@ -7,6 +7,22 @@ import { useStudent } from '@/lib/academy/studentContext';
 import { getLMSCourseBySlug, getLMSLesson } from '@/lib/academy/courseRepository';
 import { getLessonStudyGuide } from '@/data/academyStudyGuides';
 import { brandConfig } from '@/config/brandConfig';
+import { ArcanaAudioPlayer } from '@/components/ArcanaAudioPlayer';
+
+const ARCANA_SONGS = [
+  { slug: 'el-loco', name: '0. El Loco', title: 'Himno Sagrado de El Loco — El Salto al Vacío', url: '/audio/arcanos/el-loco.mp3' },
+  { slug: 'el-mago', name: 'I. El Mago', title: 'Invocación de El Mago — Como es Arriba, es Abajo', url: '/audio/arcanos/el-mago.mp3' },
+  { slug: 'la-sacerdotisa', name: 'II. La Sacerdotisa', title: 'Cántico de La Sacerdotisa — El Silencio del Templo', url: '/audio/arcanos/la-sacerdotisa.mp3' },
+  { slug: 'la-emperatriz', name: 'III. La Emperatriz', title: 'Sinfonía de La Emperatriz — El Florecer Eterno', url: '/audio/arcanos/la-emperatriz.mp3' },
+  { slug: 'el-emperador', name: 'IV. El Emperador', title: 'Marcha Soberana de El Emperador — El Orden de la Piedra', url: '/audio/arcanos/el-emperador.mp3' },
+  { slug: 'el-hierofante', name: 'V. El Hierofante', title: 'Rito de El Hierofante — La Llave de los Misterios', url: '/audio/arcanos/el-hierofante.mp3' },
+  { slug: 'los-enamorados', name: 'VI. Los Enamorados', title: 'Melodía de Los Enamorados — La Sagrada Elección', url: '/audio/arcanos/los-enamorados.mp3' },
+  { slug: 'el-carro', name: 'VII. El Carro', title: 'Tono Victorioso de El Carro — La Conquista del Alma', url: '/audio/arcanos/el-carro.mp3' },
+  { slug: 'la-fuerza', name: 'VIII. La Fuerza', title: 'Consagración de La Fuerza — La Caricia y el León', url: '/audio/arcanos/la-fuerza.mp3' },
+  { slug: 'el-ermitano', name: 'IX. El Ermitaño', title: 'Vigilia de El Ermitaño — La Lámpara en la Cumbre', url: '/audio/arcanos/el-ermitano.mp3' },
+  { slug: 'la-justicia', name: 'X. La Justicia', title: 'Decreto de La Justicia — La Balanza Inflexible', url: '/audio/arcanos/la-justicia.mp3' },
+  { slug: 'el-colgado', name: 'XI. El Colgado', title: 'Éxtasis de El Colgado — La Visión Invertida', url: '/audio/arcanos/el-colgado.mp3' },
+];
 
 interface CourseClassroomViewProps {
   slug: string;
@@ -35,6 +51,16 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
     }
   }, [course, enrollInCourse]);
 
+  const studyGuide = lessonData ? getLessonStudyGuide(lessonData.lesson.id) : undefined;
+  const initialSongSlug = studyGuide?.recommendedArcanaAudio?.slug || 'el-loco';
+  const [selectedSongSlug, setSelectedSongSlug] = useState<string>(initialSongSlug);
+
+  useEffect(() => {
+    if (studyGuide?.recommendedArcanaAudio?.slug) {
+      setSelectedSongSlug(studyGuide.recommendedArcanaAudio.slug);
+    }
+  }, [studyGuide?.recommendedArcanaAudio?.slug]);
+
   if (!course || !lessonData) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center space-y-4">
@@ -53,7 +79,17 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
   const { lesson, nextLesson } = lessonData;
   const completed = isLessonCompleted(lesson.id);
   const courseProgress = getCourseProgress(course.id);
-  const studyGuide = getLessonStudyGuide(lesson.id);
+
+  const activeSong =
+    ARCANA_SONGS.find((s) => s.slug === selectedSongSlug) ||
+    (studyGuide?.recommendedArcanaAudio
+      ? {
+          slug: studyGuide.recommendedArcanaAudio.slug,
+          name: studyGuide.recommendedArcanaAudio.title,
+          title: studyGuide.recommendedArcanaAudio.title,
+          url: studyGuide.recommendedArcanaAudio.audioUrl,
+        }
+      : ARCANA_SONGS[0]);
 
   const handleCompleteAndNext = () => {
     markLessonComplete(course.id, lesson.id);
@@ -117,26 +153,15 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
       {/* 2. Cuerpo Principal del Aula Virtual */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
         {/* Zona de Reproducción de Video y Contenido de Estudio */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
-          {/* Contenedor de Video 16:9 con Estética Dark Luxury */}
-          <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black border-2 border-gold/30 shadow-[0_0_50px_rgba(0,0,0,0.85)]">
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${lesson.videoId}?modestbranding=1&rel=0&iv_load_policy=3`}
-              title={lesson.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full border-0"
-            />
-          </div>
-
-          {/* Barra de Acciones de Lección */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-[#0c0917]/90 border border-gold/25">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-8">
+          {/* 1. Barra Superior de Acciones de Lección */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-[#0c0917]/90 border border-gold/25 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-serif font-bold text-parchment">
+              <span className="text-sm sm:text-base font-serif font-bold text-parchment">
                 {lesson.title}
               </span>
               <span className="text-[11px] font-mono text-parchment-muted">
-                ({lesson.durationMinutes} min)
+                (~{lesson.durationMinutes} min)
               </span>
             </div>
 
@@ -165,9 +190,9 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
             </div>
           </div>
 
-          {/* Pestañas de Estudio Debajo del Video */}
-          <div className="space-y-4 pt-2">
-            <div className="flex items-center gap-2 border-b border-charcoal-border pb-2">
+          {/* 2. PRIORIDAD MÁXIMA: Pestañas de Estudio & Tratados Textuales */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 border-b border-charcoal-border pb-2 overflow-x-auto no-scrollbar">
               {[
                 { id: 'summary', label: '📖 Guía de Estudio & Texto Completo', icon: '📜' },
                 { id: 'resources', label: 'Manuales & PDFs', icon: '📥' },
@@ -177,7 +202,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`px-4 py-2 rounded-xl text-xs font-serif transition-all flex items-center gap-1.5 ${
+                  className={`px-4 py-2 rounded-xl text-xs font-serif whitespace-nowrap transition-all flex items-center gap-1.5 ${
                     activeTab === tab.id
                       ? 'bg-gold/20 border border-gold text-gold-light font-bold shadow-[0_0_15px_rgba(198,160,82,0.2)]'
                       : 'text-parchment-muted hover:text-parchment'
@@ -189,43 +214,46 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
               ))}
             </div>
 
-            {/* Contenido de la pestaña */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0b0816]/95 border border-gold/25 min-h-[220px]">
+            {/* Contenedor del Contenido de Estudio */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#0b0816]/95 border border-gold/25 min-h-[260px] shadow-[0_0_40px_rgba(0,0,0,0.6)]">
               {/* PESTAÑA 1: GUÍA DE ESTUDIO Y TEXTO COMPLETO */}
               {activeTab === 'summary' && (
                 <div className="space-y-6 text-xs sm:text-sm text-parchment-dim leading-relaxed font-light">
                   {studyGuide ? (
                     <div className="space-y-8 animate-fadeIn">
                       {/* Cabecera de la Guía */}
-                      <div className="border-b border-charcoal-border/70 pb-4 space-y-1">
-                        <div className="flex items-center justify-between text-[11px] font-mono text-gold/80">
-                          <span>GUÍA DE ESTUDIO OFICIAL ARCANO</span>
-                          <span>Tiempo estimado: {studyGuide.readingTimeMinutes} min de lectura</span>
+                      <div className="border-b border-charcoal-border/70 pb-4 space-y-1.5">
+                        <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-gold/80 gap-2">
+                          <span className="px-2.5 py-0.5 rounded-full bg-gold/10 border border-gold/30">
+                            TRATADO OFICIAL ARCANO · NIVEL 1
+                          </span>
+                          <span>Tiempo de estudio: ~{studyGuide.readingTimeMinutes} min de lectura</span>
                         </div>
-                        <h3 className="font-serif text-xl sm:text-2xl text-parchment font-medium">
+                        <h3 className="font-serif text-2xl sm:text-3xl text-parchment font-medium pt-1">
                           {studyGuide.title}
                         </h3>
-                        <p className="text-xs text-parchment-muted italic">
+                        <p className="text-xs sm:text-sm text-parchment-muted italic font-serif">
                           {studyGuide.subtitle}
                         </p>
                       </div>
 
                       {/* Secciones de Estudio */}
                       {studyGuide.modules.map((mod, idx) => (
-                        <div key={idx} className="space-y-3">
-                          <h4 className="font-serif text-base text-gold-light font-semibold">
-                            {mod.sectionTitle}
+                        <div key={idx} className="space-y-3 pt-2">
+                          <h4 className="font-serif text-base sm:text-lg text-gold-light font-semibold flex items-center gap-2">
+                            <span>✦</span>
+                            <span>{mod.sectionTitle}</span>
                           </h4>
                           {mod.paragraphs.map((p, pIdx) => (
-                            <p key={pIdx} className="leading-relaxed">
+                            <p key={pIdx} className="leading-relaxed text-parchment-dim text-xs sm:text-sm">
                               {p}
                             </p>
                           ))}
 
                           {mod.bulletPoints && (
-                            <ul className="space-y-1.5 pl-4 border-l border-gold/30 my-3">
+                            <ul className="space-y-1.5 pl-4 border-l-2 border-gold/40 my-3 bg-black/30 p-3 rounded-r-xl">
                               {mod.bulletPoints.map((bp, bpIdx) => (
-                                <li key={bpIdx} className="text-xs text-parchment font-sans">
+                                <li key={bpIdx} className="text-xs text-parchment font-sans leading-relaxed">
                                   • {bp}
                                 </li>
                               ))}
@@ -233,11 +261,11 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                           )}
 
                           {mod.calloutBox && (
-                            <div className="p-4 rounded-2xl bg-gold/10 border border-gold/40 space-y-1 my-4">
+                            <div className="p-4 sm:p-5 rounded-2xl bg-gold/10 border border-gold/40 space-y-1.5 my-4">
                               <div className="text-xs font-serif font-bold text-gold-light uppercase tracking-wider flex items-center gap-1.5">
-                                <span>✦</span> {mod.calloutBox.title}
+                                <span>⚜</span> {mod.calloutBox.title}
                               </div>
-                              <p className="text-xs text-parchment-dim italic font-serif">
+                              <p className="text-xs sm:text-sm text-parchment-dim italic font-serif leading-relaxed">
                                 {mod.calloutBox.text}
                               </p>
                             </div>
@@ -247,111 +275,122 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
 
                       {/* Glosario de Términos Clave */}
                       {studyGuide.keyTerms.length > 0 && (
-                        <div className="pt-4 border-t border-charcoal-border/70 space-y-3">
-                          <h4 className="font-serif text-sm uppercase tracking-widest text-gold-light font-semibold">
-                            Glosario de Términos Clave
+                        <div className="pt-6 border-t border-charcoal-border/70 space-y-3">
+                          <h4 className="font-serif text-sm uppercase tracking-widest text-gold-light font-semibold flex items-center gap-2">
+                            <span>📖</span> Glosario de Términos Clave
                           </h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {studyGuide.keyTerms.map((term, tIdx) => (
                               <div
                                 key={tIdx}
-                                className="p-3 rounded-xl bg-black/50 border border-charcoal-border space-y-1"
+                                className="p-3.5 rounded-xl bg-black/50 border border-charcoal-border space-y-1"
                               >
                                 <span className="font-serif text-xs font-bold text-gold block">
                                   {term.term}
                                 </span>
-                                <span className="text-[11px] text-parchment-dim block leading-snug">
+                                <p className="text-[11px] text-parchment-muted font-sans leading-snug">
                                   {term.definition}
-                                </span>
+                                </p>
                               </div>
                             ))}
                           </div>
                         </div>
                       )}
 
-                      {/* Ejercicio Práctico y Entrega al Correo Oficial */}
-                      {studyGuide.practicalExercise && (
-                        <div className="p-5 rounded-2xl bg-gradient-to-r from-gold/15 via-gold/5 to-transparent border border-gold/50 space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className="font-serif text-sm font-bold text-gold-light uppercase tracking-wider flex items-center gap-1.5">
-                              <span>✍️</span> {studyGuide.practicalExercise.title}
-                            </span>
-                            <span className="text-[10px] px-2 py-0.5 rounded bg-black/60 text-gold-light font-mono">
-                              Práctica Obligatoria
-                            </span>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            {studyGuide.practicalExercise.instructions.map((ins, iIdx) => (
-                              <div key={iIdx} className="flex items-start gap-2 text-xs">
-                                <span className="text-gold font-serif">{iIdx + 1}.</span>
-                                <span>{ins}</span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <div className="pt-2 border-t border-gold/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                            <p className="text-[11px] text-parchment-muted">
-                              {studyGuide.practicalExercise.deliverablePrompt}
-                            </p>
-                            <a
-                              href={`mailto:consultas@arcanosolutions.com?subject=Práctica de Tarot Nivel 1 — Lección: ${encodeURIComponent(
-                                lesson.title
-                              )}&body=Hola Maestro de ARCANO, adjunto mi reflexión y práctica para la lección "${encodeURIComponent(
-                                lesson.title
-                              )}" de Tarot desde Cero.`}
-                              className="px-4 py-2 rounded-xl bg-gold/20 border border-gold/50 text-gold-light text-xs font-serif font-bold hover:bg-gold/30 transition-all shrink-0"
-                            >
-                              ✉️ Enviar a consultas@arcanosolutions.com
-                            </a>
-                          </div>
+                      {/* Ejercicio Práctico Evaluativo */}
+                      <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-gold/15 via-[#130f25] to-black border border-gold/40 space-y-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xl">✍️</span>
+                          <h4 className="font-serif text-sm uppercase tracking-widest text-gold-light font-bold">
+                            {studyGuide.practicalExercise.title}
+                          </h4>
                         </div>
-                      )}
+
+                        <div className="space-y-2 text-xs text-parchment">
+                          {studyGuide.practicalExercise.instructions.map((inst, iIdx) => (
+                            <div key={iIdx} className="flex items-start gap-2">
+                              <span className="text-gold font-bold font-mono text-[11px] mt-0.5">
+                                {iIdx + 1}.
+                              </span>
+                              <span className="leading-relaxed">{inst}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="pt-2 border-t border-gold/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                          <p className="text-[11px] text-parchment-muted italic">
+                            {studyGuide.practicalExercise.deliverablePrompt}
+                          </p>
+                          <a
+                            href={`mailto:${studyGuide.officialTutorEmail || 'consultas@arcanosolutions.com'}?subject=Entrega Práctica: ${encodeURIComponent(
+                              studyGuide.title
+                            )}&body=Estimado Tutor de ARCANO (consultas@arcanosolutions.com):%0D%0A%0D%0ASoy el estudiante ${
+                              student?.fullName || '[Tu Nombre]'
+                            } y adjunto el desarrollo de mi práctica correspondiente a la lección "${encodeURIComponent(
+                              studyGuide.title
+                            )}":%0D%0A%0D%0A[Escribe aquí tu desarrollo o describe las cartas extraídas]:`}
+                            className="px-4 py-2 rounded-xl bg-gold/20 border border-gold text-gold-light hover:bg-gold/30 text-xs font-serif font-semibold whitespace-nowrap transition-all text-center"
+                          >
+                            Enviar Práctica al Tutor Oficial →
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   ) : (
-                    /* Fallback para cursos que usan summaryMarkdown */
                     <div className="space-y-4">
-                      <h4 className="font-serif font-bold text-gold-light text-base">
-                        Objetivos y Notas de la Lección
-                      </h4>
-                      <div className="whitespace-pre-line leading-relaxed font-sans text-xs sm:text-sm">
-                        {lesson.summaryMarkdown || lesson.description}
-                      </div>
+                      <h3 className="font-serif text-lg text-gold-light">
+                        {lesson.title}
+                      </h3>
+                      <p className="text-parchment-dim leading-relaxed">
+                        {lesson.description ||
+                          'En esta lección profundizamos en las leyes sagradas y correspondencias arquetípicas del sendero esotérico.'}
+                      </p>
+                      {lesson.summaryMarkdown && (
+                        <div className="p-4 rounded-2xl bg-black/40 border border-charcoal-border whitespace-pre-line text-xs font-sans text-parchment-muted leading-relaxed">
+                          {lesson.summaryMarkdown}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
               )}
 
-              {/* PESTAÑA 2: RECURSOS DESCARGABLES */}
+              {/* PESTAÑA 2: MANUALES Y RECURSOS PDF */}
               {activeTab === 'resources' && (
                 <div className="space-y-4">
-                  <h4 className="font-serif font-bold text-gold-light text-sm">
-                    Recursos y Manuales de Esta Lección
-                  </h4>
-                  <div className="space-y-2">
-                    {lesson.resources?.map((res, i) => (
+                  <div className="border-b border-charcoal-border/70 pb-3">
+                    <h4 className="font-serif font-bold text-gold-light text-base">
+                      Materiales Ceremoniales Descargables
+                    </h4>
+                    <p className="text-xs text-parchment-dim mt-1">
+                      Fichas de estudio imprimibles, tablas de correspondencias y manuales en PDF para tu altar de lectura.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {lesson.resources?.map((res, idx) => (
                       <div
-                        key={i}
-                        className="p-3.5 rounded-xl bg-black/50 border border-charcoal-border hover:border-gold/40 flex items-center justify-between text-xs transition-colors"
+                        key={idx}
+                        className="p-4 rounded-2xl bg-black/50 border border-charcoal-border hover:border-gold/40 transition-all flex items-center justify-between gap-3"
                       >
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-gold text-lg">📄</span>
-                          <div>
-                            <span className="text-parchment font-medium block">{res.name}</span>
-                            <span className="text-[10px] text-parchment-muted">
-                              Formato PDF • Listo para imprimir o leer en tablet
-                            </span>
+                        <div className="space-y-0.5 truncate">
+                          <div className="font-serif text-xs font-bold text-parchment truncate">
+                            {res.name}
+                          </div>
+                          <div className="text-[10px] font-mono text-gold/70 uppercase tracking-wider">
+                            Formato: {res.type}
                           </div>
                         </div>
+
                         <a
-                          href="#descargar"
+                          href={res.url}
                           onClick={(e) => {
                             e.preventDefault();
                             alert(
                               `Iniciando descarga de «${res.name}». En breve estará en tu carpeta de descargas.`
                             );
                           }}
-                          className="px-3 py-1.5 rounded-lg bg-gold/15 border border-gold/30 text-gold-light text-[11px] font-serif hover:bg-gold/25 transition-all"
+                          className="px-3.5 py-1.5 rounded-xl bg-gold/15 border border-gold/30 text-gold-light text-xs font-serif hover:bg-gold/25 transition-all shrink-0"
                         >
                           Descargar PDF ↓
                         </a>
@@ -428,6 +467,111 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* 3. TAREA SAGRADA: SINTONIZACIÓN ACÚSTICA CON LAS CANCIONES DE LOS ARCANOS (EN EL CURSO DE TAROT) */}
+          {(course.category === 'tarot' || studyGuide?.recommendedArcanaAudio) && (
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#130d26] to-[#0a0715] border-2 border-gold/40 shadow-[0_0_50px_rgba(198,160,82,0.15)] space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gold/20 pb-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/30 text-gold-light text-[10px] font-mono uppercase tracking-widest">
+                    <span>🎵</span>
+                    <span>TAREA DE SINTONIZACIÓN ACÚSTICA OBLIGATORIA</span>
+                  </div>
+                  <h3 className="font-serif text-xl sm:text-2xl text-parchment font-semibold">
+                    Canciones Sagradas de los Arcanos
+                  </h3>
+                  <p className="text-xs text-parchment-dim leading-relaxed max-w-2xl">
+                    Para integrar verdaderamente el Tarot, la mente no basta: la frecuencia sonora despierta la memoria celular y asienta el arquetipo en tu inconsciente. Escucha con auriculares la canción sagrada asignada a esta lección antes de barajar tus naipes.
+                  </p>
+                </div>
+
+                {studyGuide?.recommendedArcanaAudio && (
+                  <div className="px-3 py-1.5 rounded-xl bg-gold/10 border border-gold/30 text-[11px] font-mono text-gold-light shrink-0">
+                    Asignada: {studyGuide.recommendedArcanaAudio.title.split('—')[0]}
+                  </div>
+                )}
+              </div>
+
+              {/* Reproductor de Audio Activo */}
+              <div className="p-4 rounded-2xl bg-black/60 border border-gold/30">
+                <div className="mb-3 flex items-center justify-between text-xs text-gold-light font-serif">
+                  <span className="font-bold flex items-center gap-1.5">
+                    <span>▶</span> {activeSong.title}
+                  </span>
+                  <span className="text-[10px] font-mono text-parchment-muted">
+                    Audio Ceremonial ARCANO
+                  </span>
+                </div>
+                <ArcanaAudioPlayer
+                  audioUrl={activeSong.url}
+                  audioTitle={activeSong.title}
+                  arcanaName={activeSong.name}
+                  slug={activeSong.slug}
+                  variant="detailed"
+                />
+                {studyGuide?.recommendedArcanaAudio && (
+                  <p className="mt-3 text-xs text-parchment-dim italic border-t border-charcoal-border/60 pt-2">
+                    ✦ <strong>Instrucción del Maestro:</strong> {studyGuide.recommendedArcanaAudio.taskDescription}
+                  </p>
+                )}
+              </div>
+
+              {/* Selector Rápido de Otros Himnos Sagrados */}
+              <div className="space-y-2 pt-2">
+                <div className="text-[11px] uppercase tracking-widest font-serif text-gold/80 font-medium">
+                  Explorar Canciones de los demás Arcanos Mayores:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {ARCANA_SONGS.map((song) => {
+                    const isSelected = song.slug === selectedSongSlug;
+                    return (
+                      <button
+                        key={song.slug}
+                        type="button"
+                        onClick={() => setSelectedSongSlug(song.slug)}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-serif transition-all flex items-center gap-1.5 ${
+                          isSelected
+                            ? 'bg-gold text-obsidian font-bold shadow-[0_0_15px_rgba(198,160,82,0.4)]'
+                            : 'bg-black/50 border border-charcoal-border text-parchment-dim hover:text-parchment hover:border-gold/30'
+                        }`}
+                      >
+                        <span>🎶</span>
+                        <span>{song.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 4. AL FINAL: ZONA AUDIOVISUAL (EN PRODUCCIÓN CEREMONIAL) */}
+          <div className="space-y-4 pt-6 border-t border-charcoal-border/80">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#0f0b18] border border-gold/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">📹</span>
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-gold-light">
+                    Aula Audiovisual (En Producción en el Templo)
+                  </h4>
+                </div>
+                <p className="text-xs text-parchment-dim leading-relaxed">
+                  <strong>Aviso al Alumno:</strong> La prioridad formativa de este nivel descansa en los <strong>tratados escritos</strong> y en la <strong>sintonización sonora</strong> desarrollados arriba. Las grabaciones audiovisuales en alta definición se encuentran en producción ceremonial y estarán disponibles como complemento visual. Puedes consultar el video de referencia a continuación:
+                </p>
+              </div>
+            </div>
+
+            {/* Contenedor de Video 16:9 con Estética Dark Luxury al Final */}
+            <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black border-2 border-charcoal-border hover:border-gold/40 transition-colors shadow-[0_0_40px_rgba(0,0,0,0.85)]">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${lesson.videoId}?modestbranding=1&rel=0&iv_load_policy=3`}
+                title={lesson.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full border-0"
+              />
             </div>
           </div>
         </main>
