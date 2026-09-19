@@ -562,39 +562,39 @@ const htmlContent = `<!DOCTYPE html>
       </thead>
       <tbody>
         <tr>
-          <td><strong>1. El Mandala Celeste</strong></td>
-          <td>Introducción a la bóveda celeste. Principio hermético *"Como es arriba, es abajo"*.</td>
-          <td>Rueda zodiacal de 360° en lámina impresa.</td>
+          <td><strong>1. Qué es la Astrología</strong></td>
+          <td>Introducción a la cosmovisión celeste y el principio hermético de correspondencia *"Como es arriba, es abajo"*.</td>
+          <td>Tabla esmeralda y gráfico de correspondencias cósmicas.</td>
         </tr>
         <tr>
-          <td><strong>2. Las 2 Luminarias</strong></td>
-          <td>El Sol (conciencia, identidad, voluntad) y la Luna (matriz emocional y memoria infantil).</td>
+          <td><strong>2. El Mandala Zodiacal</strong></td>
+          <td>La rueda de 360°, los 12 signos arquetípicos y los 4 puntos cardinales (horizonte y meridiano).</td>
+          <td>Rueda zodiacal de 360° en lámina de alta definición.</td>
+        </tr>
+        <tr>
+          <td><strong>3. Las 2 Luminarias</strong></td>
+          <td>El Sol (conciencia, identidad, voluntad) y la Luna (matriz emocional y memoria subconsciente).</td>
           <td>Símbolos astronómicos ☉ y ☽ en primer plano.</td>
         </tr>
         <tr>
-          <td><strong>3. Planetas Personales</strong></td>
-          <td>Mercurio (intelecto), Venus (vínculo y valor) y Marte (deseo y acción).</td>
-          <td>Tabla de glifos y arquetipos mitológicos.</td>
+          <td><strong>4. Planetas Personales</strong></td>
+          <td>Mercurio (intelecto y comunicación), Venus (vínculos y valor) y Marte (deseo, impulso y acción).</td>
+          <td>Tabla de glifos ☿, ♀, ♂ y arquetipos mitológicos.</td>
         </tr>
         <tr>
-          <td><strong>4. Elementos y Modalidades</strong></td>
-          <td>Fuego, Tierra, Aire y Agua; signos Cardinales, Fijos y Mutables.</td>
-          <td>Matriz comparativa de 12 signos.</td>
+          <td><strong>5. Elementos y Modalidades</strong></td>
+          <td>Los 4 Elementos (Fuego, Tierra, Aire, Agua) y las 3 Modalidades (Cardinal, Fijo, Mutable).</td>
+          <td>Matriz comparativa de clasificación de los 12 signos.</td>
         </tr>
         <tr>
-          <td><strong>5. Las 12 Casas</strong></td>
-          <td>Las 12 áreas concretas de vida humana (del Ascendente al Medio Cielo).</td>
-          <td>Gráfico de carta natal dividida en 12 gajos.</td>
+          <td><strong>6. Las 12 Casas Astrológicas</strong></td>
+          <td>Los 12 escenarios concretos de la vida humana y manifestación terrenal (de la Casa 1 a la Casa 12).</td>
+          <td>Gráfico de carta natal dividida en 12 sectores.</td>
         </tr>
         <tr>
-          <td><strong>6. Aspectos Mayores</strong></td>
-          <td>Geometría sagrada celeste: Conjunción, Oposición, Trígono, Cuadratura y Sextil.</td>
-          <td>Trazado de líneas de colores sobre una rueda.</td>
-        </tr>
-        <tr>
-          <td><strong>7. Tríada Fundamental</strong></td>
-          <td>Cómo sintetizar el Sol, la Luna y el Ascendente en una lectura de carta natal.</td>
-          <td>Carta natal real comentada paso a paso.</td>
+          <td><strong>7. La Tríada Fundamental</strong></td>
+          <td>Síntesis de Sol, Luna y Ascendente: el núcleo primario de la personalidad y el destino evolutivo.</td>
+          <td>Carta natal real demostrada e interpretada paso a paso.</td>
         </tr>
       </tbody>
     </table>

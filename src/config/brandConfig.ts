@@ -81,9 +81,9 @@ export const brandConfig: BrandConfig = {
     calcomUrl: "https://cal.com/arcanotarot/sesion",
   },
   legal: {
-    companyLegalName: "[Razón Social / Titular - ARCANO]",
-    taxId: "[RFC / Identificación Fiscal]",
-    address: "[Ciudad de México / Modalidad Online Global]",
+    companyLegalName: "ARCANO Solutions — Sabiduría de los Arcanos",
+    taxId: "Registro Fiscal: ARCANO Digital Services",
+    address: "Monterrey, N.L. / Ciudad de México · Cobertura Internacional Online",
     lastUpdated: "Septiembre 2026",
   },
 };
