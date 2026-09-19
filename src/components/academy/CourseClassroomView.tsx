@@ -76,9 +76,53 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
     );
   }
 
-  const { lesson, nextLesson } = lessonData;
+  const { lesson, nextLesson, prevLesson } = lessonData;
   const completed = isLessonCompleted(lesson.id);
   const courseProgress = getCourseProgress(course.id);
+
+  // Lecciones del curso actual para navegación y consulta de completadas
+  const allCourseLessons: { id: string; title: string; durationMinutes: number }[] = [];
+  course.modules.forEach((m) =>
+    m.lessons.forEach((l) =>
+      allCourseLessons.push({ id: l.id, title: l.title, durationMinutes: l.durationMinutes })
+    )
+  );
+  const completedLessonsInCourse = allCourseLessons.filter((l) => isLessonCompleted(l.id));
+
+  // Filtro del temario lateral: 'all' o 'completed'
+  const [sidebarFilter, setSidebarFilter] = useState<'all' | 'completed'>('all');
+
+  // Control de canciones sagradas escuchadas y entendidas (todas obligatorias)
+  const [understoodSongs, setUnderstoodSongs] = useState<string[]>([]);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('arcano_understood_songs');
+      if (saved) {
+        setUnderstoodSongs(JSON.parse(saved));
+      }
+    } catch {
+      // Ignorar error de lectura local
+    }
+  }, []);
+
+  const toggleSongUnderstood = (songSlug: string) => {
+    const updated = understoodSongs.includes(songSlug)
+      ? understoodSongs.filter((s) => s !== songSlug)
+      : [...understoodSongs, songSlug];
+    setUnderstoodSongs(updated);
+    try {
+      localStorage.setItem('arcano_understood_songs', JSON.stringify(updated));
+    } catch {
+      // Ignorar error de escritura local
+    }
+  };
+
+  const handleGoToPrev = () => {
+    if (prevLesson) {
+      router.push(`/academia/cursos/${slug}/aprender?lesson=${prevLesson.id}`);
+    }
+  };
 
   const activeSong =
     ARCANA_SONGS.find((s) => s.slug === selectedSongSlug) ||
@@ -165,30 +209,72 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
               </span>
             </div>
 
-            <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="flex items-center gap-2.5 w-full sm:w-auto flex-wrap">
+              {/* Botón Regresar a Lección Anterior */}
+              {prevLesson && (
+                <button
+                  type="button"
+                  onClick={handleGoToPrev}
+                  className="flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl border border-charcoal-border bg-obsidian-deep text-parchment-muted hover:text-gold hover:border-gold/40 text-xs font-serif transition-all flex items-center justify-center gap-1.5"
+                  title={`Regresar a: ${prevLesson.title}`}
+                >
+                  <span>←</span>
+                  <span className="hidden sm:inline">Lección Anterior</span>
+                  <span className="sm:hidden">Anterior</span>
+                </button>
+              )}
+
+              {/* Botón Marcar Completada / Ver Estado */}
               <button
                 type="button"
                 onClick={() => markLessonComplete(course.id, lesson.id)}
                 className={`flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-serif transition-all flex items-center justify-center gap-1.5 ${
                   completed
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold'
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]'
                     : 'border border-gold/30 bg-gold/10 text-gold-light hover:bg-gold/20'
                 }`}
               >
                 <span>{completed ? '✓ Lección Completada' : 'Marcar como Completada'}</span>
               </button>
 
+              {/* Botón Siguiente Lección */}
               {nextLesson && (
                 <button
                   type="button"
                   onClick={handleCompleteAndNext}
                   className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-obsidian font-serif font-bold text-xs uppercase tracking-wider hover:brightness-110 shadow-[0_0_20px_rgba(198,160,82,0.4)] transition-all flex items-center justify-center gap-1.5"
                 >
-                  <span>Siguiente Lección →</span>
+                  <span className="hidden sm:inline">Siguiente Lección →</span>
+                  <span className="sm:hidden">Siguiente →</span>
                 </button>
               )}
             </div>
           </div>
+
+          {/* Banner de Consulta y Regreso a Lecciones Completadas */}
+          {completedLessonsInCourse.length > 0 && (
+            <div className="px-4 py-3 rounded-2xl bg-[#091515] border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
+              <div className="flex items-center gap-2.5 text-emerald-200">
+                <span className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xs font-bold text-emerald-300 shrink-0">
+                  ✓
+                </span>
+                <span>
+                  Has completado <strong>{completedLessonsInCourse.length} de {allCourseLessons.length} lecciones</strong>. Puedes regresar a repasar cualquiera de ellas cuando lo desees.
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSidebarOpen(true);
+                  setSidebarFilter('completed');
+                }}
+                className="self-end sm:self-auto px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-[11px] font-serif transition-colors flex items-center gap-1 shrink-0"
+              >
+                <span>📜</span>
+                <span>Ver lecciones completadas para regresar →</span>
+              </button>
+            </div>
+          )}
 
           {/* 2. PRIORIDAD MÁXIMA: Pestañas de Estudio & Tratados Textuales */}
           <div className="space-y-4">
@@ -471,16 +557,35 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
           </div>
 
           {/* 3. TAREA SAGRADA: SINTONIZACIÓN ACÚSTICA CON LAS CANCIONES DE LOS ARCANOS (EN EL CURSO DE TAROT) */}
+          {/* 3. TAREA SAGRADA: SINTONIZACIÓN ACÚSTICA CON LAS CANCIONES DE LOS ARCANOS (EN EL CURSO DE TAROT) */}
           {(course.category === 'tarot' || studyGuide?.recommendedArcanaAudio) && (
-            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#130d26] to-[#0a0715] border-2 border-gold/40 shadow-[0_0_50px_rgba(198,160,82,0.15)] space-y-5">
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#130d26] to-[#0a0715] border-2 border-amber-500/40 shadow-[0_0_50px_rgba(198,160,82,0.15)] space-y-5">
+              {/* Aviso Litúrgico Obligatorio */}
+              <div className="p-4 rounded-2xl bg-amber-500/15 border-2 border-amber-500/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-red-600/30 border border-red-500/60 text-red-300 text-[10px] font-mono font-bold tracking-wider uppercase">
+                      ✦ REQUISITO OBLIGATORIO
+                    </span>
+                    <span className="text-xs sm:text-sm font-serif font-bold text-amber-200">
+                      Todas las canciones de los Arcanos son obligatorias
+                    </span>
+                  </div>
+                  <p className="text-xs text-parchment leading-relaxed">
+                    En la Academia ARCANO, <strong>todas las canciones sagradas son obligatorias</strong>. Se recomienda escucharlas con reverencia y total introspección para <strong>entender su significado, lírica y frecuencia vibratoria</strong> antes de dar por asimilada la lección.
+                  </p>
+                </div>
+                <div className="text-right shrink-0">
+                  <span className="text-[11px] font-mono px-3 py-1.5 rounded-xl bg-black/60 border border-amber-500/30 text-amber-300 block">
+                    Comprendidas: <strong>{understoodSongs.length} de {ARCANA_SONGS.length}</strong>
+                  </span>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gold/20 pb-4">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/30 text-gold-light text-[10px] font-mono uppercase tracking-widest">
-                    <span>🎵</span>
-                    <span>TAREA DE SINTONIZACIÓN ACÚSTICA OBLIGATORIA</span>
-                  </div>
                   <h3 className="font-serif text-xl sm:text-2xl text-parchment font-semibold">
-                    Canciones Sagradas de los Arcanos
+                    Canción Sagrada de esta Lección
                   </h3>
                   <p className="text-xs text-parchment-dim leading-relaxed max-w-2xl">
                     Para integrar verdaderamente el Tarot, la mente no basta: la frecuencia sonora despierta la memoria celular y asienta el arquetipo en tu inconsciente. Escucha con auriculares la canción sagrada asignada a esta lección antes de barajar tus naipes.
@@ -511,21 +616,40 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                   slug={activeSong.slug}
                   variant="detailed"
                 />
-                {studyGuide?.recommendedArcanaAudio && (
-                  <p className="mt-3 text-xs text-parchment-dim italic border-t border-charcoal-border/60 pt-2">
-                    ✦ <strong>Instrucción del Maestro:</strong> {studyGuide.recommendedArcanaAudio.taskDescription}
+
+                {/* Botón interactivo para marcar la canción como entendida */}
+                <div className="mt-4 pt-3 border-t border-charcoal-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <p className="text-xs text-parchment-dim italic">
+                    {studyGuide?.recommendedArcanaAudio ? (
+                      <>✦ <strong>Instrucción del Maestro:</strong> {studyGuide.recommendedArcanaAudio.taskDescription}</>
+                    ) : (
+                      <>✦ <strong>Instrucción:</strong> Medita en el mensaje de este arcano y escribe tus revelaciones en tu bitácora.</>
+                    )}
                   </p>
-                )}
+                  <button
+                    type="button"
+                    onClick={() => toggleSongUnderstood(activeSong.slug)}
+                    className={`px-4 py-2 rounded-xl text-xs font-serif transition-all flex items-center justify-center gap-1.5 shrink-0 ${
+                      understoodSongs.includes(activeSong.slug)
+                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]'
+                        : 'bg-gold/15 border border-gold/30 text-gold-light hover:bg-gold/25'
+                    }`}
+                  >
+                    <span>{understoodSongs.includes(activeSong.slug) ? '✓ Himno Escuchado y Entendido' : '🎧 Marcar Himno como Escuchado y Entendido'}</span>
+                  </button>
+                </div>
               </div>
 
               {/* Selector Rápido de Otros Himnos Sagrados */}
               <div className="space-y-2 pt-2">
-                <div className="text-[11px] uppercase tracking-widest font-serif text-gold/80 font-medium">
-                  Explorar Canciones de los demás Arcanos Mayores:
+                <div className="flex items-center justify-between text-[11px] uppercase tracking-widest font-serif text-gold/80 font-medium">
+                  <span>Explorar y Entender las 12 Canciones Sagradas:</span>
+                  <span className="text-slate-400 lowercase text-[10px] font-mono">(todas obligatorias)</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {ARCANA_SONGS.map((song) => {
                     const isSelected = song.slug === selectedSongSlug;
+                    const isUnderstood = understoodSongs.includes(song.slug);
                     return (
                       <button
                         key={song.slug}
@@ -534,10 +658,12 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                         className={`px-3 py-1.5 rounded-xl text-xs font-serif transition-all flex items-center gap-1.5 ${
                           isSelected
                             ? 'bg-gold text-obsidian font-bold shadow-[0_0_15px_rgba(198,160,82,0.4)]'
+                            : isUnderstood
+                            ? 'bg-emerald-950/40 border border-emerald-500/40 text-emerald-200 hover:border-emerald-400'
                             : 'bg-black/50 border border-charcoal-border text-parchment-dim hover:text-parchment hover:border-gold/30'
                         }`}
                       >
-                        <span>🎶</span>
+                        <span>{isUnderstood ? '✓' : '🎶'}</span>
                         <span>{song.name}</span>
                       </button>
                     );
@@ -588,41 +714,108 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
               </span>
             </div>
 
+            {/* Pestañas de Filtro: Todas las Lecciones vs Lecciones Completadas */}
+            <div className="p-2 border-b border-charcoal-border/60 bg-black/40 flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => setSidebarFilter('all')}
+                className={`flex-1 py-1.5 rounded-lg text-[11px] font-serif transition-all ${
+                  sidebarFilter === 'all'
+                    ? 'bg-gold/20 text-gold-light border border-gold/40 font-bold'
+                    : 'text-parchment-muted hover:text-parchment'
+                }`}
+              >
+                Todas ({allCourseLessons.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setSidebarFilter('completed')}
+                className={`flex-1 py-1.5 rounded-lg text-[11px] font-serif transition-all ${
+                  sidebarFilter === 'completed'
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold'
+                    : 'text-parchment-muted hover:text-parchment'
+                }`}
+              >
+                ✓ Completadas ({completedLessonsInCourse.length})
+              </button>
+            </div>
+
             <div className="p-3 space-y-4">
-              {course.modules.map((mod) => (
-                <div key={mod.id} className="space-y-1">
-                  <div className="px-2 py-1 text-[11px] font-serif font-semibold text-gold-light uppercase tracking-wider">
-                    {mod.title}
+              {sidebarFilter === 'completed' ? (
+                /* Vista de Sólo Lecciones Completadas para Regresar Fácilmente */
+                <div className="space-y-2">
+                  <div className="px-2 py-1 text-[11px] font-serif font-semibold text-emerald-300 uppercase tracking-wider flex items-center justify-between">
+                    <span>Lecciones Completadas</span>
+                    <span className="font-mono text-[10px] text-emerald-400">Haz clic para regresar</span>
                   </div>
-                  <div className="space-y-1">
-                    {mod.lessons.map((les) => {
+                  {completedLessonsInCourse.length === 0 ? (
+                    <div className="p-4 rounded-xl bg-black/30 border border-charcoal-border text-center text-xs text-parchment-muted">
+                      Aún no has marcado ninguna lección como completada. Al terminarlas, aparecerán aquí para que puedas regresar a repasarlas en cualquier momento.
+                    </div>
+                  ) : (
+                    completedLessonsInCourse.map((les) => {
                       const isCurrent = les.id === lesson.id;
-                      const isDone = isLessonCompleted(les.id);
                       return (
                         <Link
                           key={les.id}
                           href={`/academia/cursos/${slug}/aprender?lesson=${les.id}`}
-                          className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between gap-2 block ${
+                          className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between gap-2 block border ${
                             isCurrent
-                              ? 'bg-gold/20 border border-gold text-gold-light font-bold shadow-[0_0_15px_rgba(198,160,82,0.25)]'
-                              : 'hover:bg-charcoal/40 text-parchment-muted hover:text-parchment'
+                              ? 'bg-gold/20 border-gold text-gold-light font-bold shadow-[0_0_15px_rgba(198,160,82,0.25)]'
+                              : 'bg-[#0b1512] border-emerald-500/30 text-emerald-200 hover:border-emerald-400'
                           }`}
                         >
                           <div className="flex items-center gap-2 truncate">
-                            <span className={isDone ? 'text-emerald-400' : 'text-charcoal-border'}>
-                              {isDone ? '✓' : '○'}
-                            </span>
+                            <span className="text-emerald-400 font-bold">✓</span>
                             <span className="truncate">{les.title}</span>
                           </div>
-                          <span className="text-[10px] font-mono text-parchment-dim shrink-0">
-                            {les.durationMinutes}m
+                          <span className="text-[10px] font-serif text-gold-light shrink-0">
+                            Regresar →
                           </span>
                         </Link>
                       );
-                    })}
-                  </div>
+                    })
+                  )}
                 </div>
-              ))}
+              ) : (
+                /* Vista General por Módulos */
+                course.modules.map((mod) => (
+                  <div key={mod.id} className="space-y-1">
+                    <div className="px-2 py-1 text-[11px] font-serif font-semibold text-gold-light uppercase tracking-wider">
+                      {mod.title}
+                    </div>
+                    <div className="space-y-1">
+                      {mod.lessons.map((les) => {
+                        const isCurrent = les.id === lesson.id;
+                        const isDone = isLessonCompleted(les.id);
+                        return (
+                          <Link
+                            key={les.id}
+                            href={`/academia/cursos/${slug}/aprender?lesson=${les.id}`}
+                            className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between gap-2 block ${
+                              isCurrent
+                                ? 'bg-gold/20 border border-gold text-gold-light font-bold shadow-[0_0_15px_rgba(198,160,82,0.25)]'
+                                : isDone
+                                ? 'bg-emerald-950/20 border border-emerald-500/20 text-emerald-200 hover:border-emerald-500/40'
+                                : 'hover:bg-charcoal/40 text-parchment-muted hover:text-parchment'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2 truncate">
+                              <span className={isDone ? 'text-emerald-400 font-bold' : 'text-charcoal-border'}>
+                                {isDone ? '✓' : '○'}
+                              </span>
+                              <span className="truncate">{les.title}</span>
+                            </div>
+                            <span className="text-[10px] font-mono text-parchment-dim shrink-0">
+                              {isDone ? 'Repasar' : `${les.durationMinutes}m`}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </aside>
         )}

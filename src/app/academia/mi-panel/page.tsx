@@ -240,6 +240,82 @@ export default function StudentDashboardPage() {
         )}
       </div>
 
+      {/* 3. Tus Lecciones Completadas: Ver Avance y Regresar a Repasar */}
+      {(() => {
+        const completedLessonDetails = completedLessons
+          .map((lessonId) => {
+            for (const course of LMS_COURSES) {
+              for (const mod of course.modules) {
+                const found = mod.lessons.find((l) => l.id === lessonId);
+                if (found) {
+                  return {
+                    lesson: found,
+                    moduleTitle: mod.title,
+                    courseTitle: course.title,
+                    courseSlug: course.slug,
+                    romanLevel: course.romanLevel,
+                  };
+                }
+              }
+            }
+            return null;
+          })
+          .filter(Boolean);
+
+        if (completedLessonDetails.length === 0) return null;
+
+        return (
+          <div className="space-y-4 pt-6 border-t border-amber-500/20">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-amber-100 flex items-center gap-2">
+                  <span>📜</span> Tus Lecciones Completadas ({completedLessonDetails.length})
+                </h2>
+                <p className="text-xs text-slate-400">
+                  Tu bitácora viva de sabiduría. Haz clic en cualquiera de ellas para <strong>regresar y repasar</strong> sus textos y meditaciones acústicas cuantas veces desees.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {completedLessonDetails.map((item, idx) => {
+                if (!item) return null;
+                return (
+                  <div
+                    key={`${item.lesson.id}-${idx}`}
+                    className="p-4 rounded-2xl bg-[#091515]/90 border border-emerald-500/30 hover:border-emerald-400 transition-all flex flex-col justify-between gap-3 shadow-md"
+                  >
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          {item.courseTitle} • {item.romanLevel}
+                        </span>
+                        <span className="text-[11px] font-mono text-emerald-400 font-bold">
+                          ✓ Completada
+                        </span>
+                      </div>
+                      <h4 className="font-serif text-sm font-bold text-parchment line-clamp-1">
+                        {item.lesson.title}
+                      </h4>
+                      <p className="text-[11px] text-slate-400 line-clamp-1">
+                        {item.moduleTitle}
+                      </p>
+                    </div>
+
+                    <Link
+                      href={`/academia/cursos/${item.courseSlug}/aprender?lesson=${item.lesson.id}`}
+                      className="w-full py-2 px-3 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-200 hover:bg-emerald-500/25 text-xs font-serif transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <span>← Regresar a Repasar</span>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
       {/* 4. Cursos Disponibles para Inscripción Inmediata */}
       <div className="space-y-4 pt-6 border-t border-amber-500/20">
         <div>
