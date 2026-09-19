@@ -75,8 +75,8 @@ function RegisterFormContent() {
     }
 
     setIsLoading(false);
-    // Redirigir al aula virtual del curso seleccionado
-    router.push(`/academia/cursos/${selectedCourseId}/aprender`);
+    // Redirigir directamente a la sección de avance (panel del estudiante)
+    router.push('/academia/mi-panel?bienvenido=1');
   };
 
   return (

@@ -55,16 +55,29 @@ export default function StudentDashboardPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+      {/* 0. Banner de Iniciación y Avance para Alumnos */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-gold/20 via-gold/10 to-transparent border border-gold/40 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">✨</span>
+          <div className="text-xs sm:text-sm">
+            <span className="text-gold-light font-semibold font-serif">¡Iniciación Activa en ARCANO!</span>{' '}
+            <span className="text-parchment-dim">
+              Tu cuenta está consagrada. Puedes consultar tus lecciones, registrar tu avance y desbloquear tu <strong>página web con dominio propio</strong> al completar el Nivel 5.
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* 1. Header Banner del Alumno */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#090D18] via-[#0D1322] to-[#090D18] border border-amber-500/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0c0916] via-[#120e20] to-[#0c0916] border border-gold/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-1 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-serif uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold-light text-xs font-serif uppercase tracking-widest">
             <span>✦</span> Alumno Consagrado de los Arcanos
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100">
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-parchment">
             Bienvenido, {student?.fullName || 'Iniciado'}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 font-light">
+          <p className="text-xs sm:text-sm text-parchment-dim font-light">
             Tu santuario de estudio místico. Continúa donde lo dejaste y avanza hacia tu maestría.
           </p>
         </div>
@@ -72,7 +85,7 @@ export default function StudentDashboardPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/academia"
-            className="px-4 py-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-200 text-xs font-serif hover:bg-amber-500/20 transition-all"
+            className="px-4 py-2.5 rounded-xl border border-gold/30 bg-gold/10 text-gold-light text-xs font-serif hover:bg-gold/20 transition-all"
           >
             Ver Catálogo General
           </Link>
