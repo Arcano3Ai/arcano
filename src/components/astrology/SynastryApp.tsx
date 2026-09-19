@@ -156,16 +156,16 @@ export default function SynastryApp() {
                       </span>
                     </div>
                     <h4 className="font-serif font-bold text-base text-rose-100 group-hover:text-rose-300 transition-colors">
-                      Versión para la Pareja
+                      Versión para la Pareja (Letra Grande & Fácil de Leer)
                     </h4>
                     <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                      Lectura clara, fluida y práctica. Analiza la química emocional, comunicación, acuerdos cotidianos y el consejo del Arcano sin tablas técnicas complejas.
+                      Diseñada con <strong>tipografía grande y lenguaje sencillo</strong> para que cualquier persona la comprenda sin tecnicismos. Explica cómo fluye su amor, el apoyo emocional mutuo y claves prácticas para convivir en armonía.
                     </p>
                     <ul className="text-[11px] text-slate-400 space-y-1 mt-3">
-                      <li>✓ Rueda Bi-Wheel sagrada</li>
-                      <li>✓ 4 Pilares relacionales (%)</li>
-                      <li>✓ Dinámica Sol, Luna y Venus/Marte</li>
-                      <li>✓ 3 Reglas de oro para la armonía</li>
+                      <li>✓ Letras grandes, claras y descansadas para la vista</li>
+                      <li>✓ Explicación sencilla de emociones, carácter y química</li>
+                      <li>✓ Rueda sagrada y porcentajes de afinidad</li>
+                      <li>✓ 3 Reglas de oro para la felicidad en pareja</li>
                     </ul>
                   </div>
 
@@ -173,7 +173,7 @@ export default function SynastryApp() {
                     type="button"
                     className="mt-5 w-full py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 text-white font-serif font-bold text-xs uppercase tracking-wider group-hover:brightness-110 shadow-[0_0_15px_rgba(244,63,94,0.3)] transition-all"
                   >
-                    Descargar Versión Pareja
+                    Descargar Versión Pareja (Letra Grande)
                   </button>
                 </div>
 

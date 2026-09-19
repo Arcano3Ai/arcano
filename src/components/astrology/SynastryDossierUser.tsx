@@ -26,27 +26,29 @@ export default function SynastryDossierUser({ synastry }: SynastryDossierUserPro
   return (
     <div className="space-y-6 text-slate-100 font-sans">
       {/* =========================================================================
-          PÁGINA 1: PORTADA EDITORIAL Y RUEDA SAGRADA DE LA PAREJA
+          PÁGINA 1: PORTADA CEREMONIAL, RUEDA SAGRADA Y PILARES DEL AMOR
+          (Tipografía grande, limpia, espaciosa y sin saturación)
           ========================================================================= */}
-      <div className="print-cover-page border border-amber-500/40 rounded-3xl p-6 bg-[#0B0F1C] text-center">
-        {/* Encabezado */}
-        <div className="space-y-1">
-          <span className="text-amber-400 text-[10px] uppercase tracking-[0.35em] font-serif block">
-            ✦ ARCANO · DOSSIER DE COMPATIBILIDAD & SINASTRÍA DE PAREJA ✦
+      <div className="print-cover-page border-2 border-amber-500/40 rounded-3xl p-8 bg-[#0B0F1C] text-center flex flex-col justify-between">
+        {/* Cabecera Principal */}
+        <div className="space-y-2 pt-2">
+          <span className="text-amber-400 text-xs uppercase tracking-[0.35em] font-serif font-bold block">
+            ✦ ARCANO · DOSSIER DE COMPATIBILIDAD DE PAREJA ✦
           </span>
-          <h1 className="text-2xl font-serif font-bold text-amber-100">
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-amber-100 tracking-wide">
             {chartA.birthData.name} & {chartB.birthData.name}
           </h1>
-          <p className="text-[11px] text-slate-300">
-            {chartA.birthData.name} ({chartA.birthData.cityName}, {chartA.birthData.day}/{chartA.birthData.month}/{chartA.birthData.year}) • {chartB.birthData.name} ({chartB.birthData.cityName}, {chartB.birthData.day}/{chartB.birthData.month}/{chartB.birthData.year})
+          <p className="text-sm text-slate-300 font-light">
+            Lectura esencial del vínculo sagrado calculada a partir de sus cartas natales
           </p>
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 rounded-xl border border-amber-500/30 mt-1">
-            <span className="text-xs font-serif text-amber-300 font-bold">
-              Afinidad Cósmica: {scores.overall}%
+
+          {/* Gran Distintivo de Afinidad Cósmica */}
+          <div className="inline-flex items-center gap-4 px-6 py-2 bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-amber-500/20 rounded-2xl border border-amber-500/40 mt-2 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+            <span className="text-base font-serif text-slate-200">
+              Afinidad Cósmica Global:
             </span>
-            <span className="text-slate-500">·</span>
-            <span className="text-[10px] text-amber-400 font-serif">
-              Arcano Regente: {relationalArcanum.name} ({relationalArcanum.cardNumber})
+            <span className="text-2xl font-serif font-bold text-amber-300 font-mono">
+              {scores.overall}%
             </span>
           </div>
         </div>
@@ -56,185 +58,293 @@ export default function SynastryDossierUser({ synastry }: SynastryDossierUserPro
           <SynastryWheel synastry={synastry} />
         </div>
 
-        {/* 4 Dimensiones Emocionales */}
-        <div className="grid grid-cols-4 gap-2.5 pt-3 border-t border-amber-500/20 text-center">
-          <div className="p-2 bg-black/40 rounded-xl border border-rose-500/20">
-            <span className="text-[9px] text-rose-300 block font-serif">Pasión & Química</span>
-            <span className="text-base font-bold text-rose-400 font-mono">{scores.chemistry}%</span>
+        {/* Los 4 Pilares Fundamentales de la Relación (Letra Grande y Clara) */}
+        <div className="grid grid-cols-4 gap-3 pt-4 border-t border-amber-500/30 text-center">
+          <div className="p-3 bg-black/50 rounded-2xl border border-rose-500/30">
+            <span className="text-xs text-rose-300 block font-serif font-bold uppercase tracking-wider mb-1">
+              Pasión & Deseo
+            </span>
+            <span className="text-2xl font-bold text-rose-400 font-mono">{scores.chemistry}%</span>
+            <span className="text-[11px] text-slate-300 block mt-1">Atracción física</span>
           </div>
-          <div className="p-2 bg-black/40 rounded-xl border border-sky-500/20">
-            <span className="text-[9px] text-sky-300 block font-serif">Diálogo & Mente</span>
-            <span className="text-base font-bold text-sky-400 font-mono">{scores.communication}%</span>
+          <div className="p-3 bg-black/50 rounded-2xl border border-sky-500/30">
+            <span className="text-xs text-sky-300 block font-serif font-bold uppercase tracking-wider mb-1">
+              Diálogo & Mente
+            </span>
+            <span className="text-2xl font-bold text-sky-400 font-mono">{scores.communication}%</span>
+            <span className="text-[11px] text-slate-300 block mt-1">Complicidad verbal</span>
           </div>
-          <div className="p-2 bg-black/40 rounded-xl border border-amber-500/20">
-            <span className="text-[9px] text-amber-300 block font-serif">Estabilidad</span>
-            <span className="text-base font-bold text-amber-400 font-mono">{scores.stability}%</span>
+          <div className="p-3 bg-black/50 rounded-2xl border border-amber-500/30">
+            <span className="text-xs text-amber-300 block font-serif font-bold uppercase tracking-wider mb-1">
+              Estabilidad
+            </span>
+            <span className="text-2xl font-bold text-amber-400 font-mono">{scores.stability}%</span>
+            <span className="text-[11px] text-slate-300 block mt-1">Hogar y futuro</span>
           </div>
-          <div className="p-2 bg-black/40 rounded-xl border border-purple-500/20">
-            <span className="text-[9px] text-purple-300 block font-serif">Lazo Álmico</span>
-            <span className="text-base font-bold text-purple-400 font-mono">{scores.soulConnection}%</span>
+          <div className="p-3 bg-black/50 rounded-2xl border border-purple-500/30">
+            <span className="text-xs text-purple-300 block font-serif font-bold uppercase tracking-wider mb-1">
+              Lazo de Almas
+            </span>
+            <span className="text-2xl font-bold text-purple-400 font-mono">{scores.soulConnection}%</span>
+            <span className="text-[11px] text-slate-300 block mt-1">Destino compartido</span>
           </div>
         </div>
 
-        {/* Síntesis del Arcano */}
-        <div className="mt-3 p-3 bg-amber-500/10 rounded-2xl border border-amber-500/30 text-left flex items-center gap-4">
-          <div className="w-12 h-14 rounded-xl border border-amber-400/50 bg-black/50 flex flex-col items-center justify-center text-center shrink-0">
-            <span className="text-sm font-serif font-bold text-amber-300">{relationalArcanum.cardNumber}</span>
-            <span className="text-[8px] uppercase tracking-tighter text-slate-300 font-serif line-clamp-1">{relationalArcanum.name}</span>
+        {/* Arcano Mayor Protector del Vínculo */}
+        <div className="p-4 bg-gradient-to-r from-amber-500/15 via-[#090D18] to-amber-500/15 rounded-2xl border border-amber-500/40 text-left flex items-center gap-5">
+          <div className="w-16 h-20 rounded-xl border-2 border-amber-400/60 bg-black/70 flex flex-col items-center justify-center text-center shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+            <span className="text-xs font-mono text-amber-400 font-bold">ARCANO</span>
+            <span className="text-xl font-serif font-bold text-amber-200">{relationalArcanum.cardNumber}</span>
+            <span className="text-[9px] uppercase tracking-tighter text-slate-200 font-serif line-clamp-1 px-1">{relationalArcanum.name}</span>
           </div>
-          <div>
-            <span className="text-[9px] uppercase tracking-widest text-amber-400 font-serif font-semibold block">
-              ✦ Clave Sagrada para su Relación
-            </span>
-            <p className="text-[10.5px] text-amber-100 font-serif italic leading-snug">
+          <div className="flex-1 space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-serif font-bold">
+                ✦ Arcano Regente: {relationalArcanum.name} ({relationalArcanum.archetype})
+              </span>
+            </div>
+            <p className="text-sm text-amber-100 font-serif italic leading-relaxed">
               &quot;{relationalArcanum.counsel}&quot;
             </p>
           </div>
         </div>
 
         {/* Pie de Portada */}
-        <div className="text-center pt-2 border-t border-amber-500/10 text-[9px] text-slate-400 font-serif">
-          ARCANO · Guía Astrológica de Pareja · www.arcanosolutions.com
+        <div className="text-center pt-2 border-t border-amber-500/20 text-xs text-slate-400 font-serif">
+          ARCANO · Dossier de Compatibilidad y Sabiduría Relacional · www.arcanosolutions.com
         </div>
       </div>
 
       {/* =========================================================================
-          PÁGINA 2: GUÍA DE ARMONÍA, DINÁMICAS Y CONVIVENCIA CONSCIENTE
+          PÁGINA 2: LAS 4 GRANDES DINÁMICAS DE LA VIDA EN PAREJA
+          (Letras grandes, explicaciones humanas, comprensibles sin tecnicismos)
           ========================================================================= */}
-      <div className="print-page-break space-y-5 pt-4">
+      <div className="print-page-break space-y-6 pt-6">
         {/* Cabecera Página 2 */}
-        <div className="border border-amber-500/30 rounded-2xl p-4 bg-[#0B0F1C] flex items-center justify-between">
+        <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <span className="text-[9px] uppercase tracking-[0.3em] text-amber-400 font-serif block">
-              ✦ MANUAL DE ARMONÍA VINCULAR ✦
+            <span className="text-xs uppercase tracking-[0.3em] text-amber-400 font-serif font-bold block mb-1">
+              ✦ GUÍA CLARA DE CONVIVENCIA ✦
             </span>
-            <h3 className="text-base font-serif font-bold text-amber-100">
-              Cómo Fluye su Energía: Dinámicas Cotidianas de Pareja
-            </h3>
+            <h2 className="text-2xl font-serif font-bold text-amber-100">
+              Cómo Funciona su Amor en el Día a Día
+            </h2>
+            <p className="text-xs text-slate-300 mt-1">
+              Explicación sencilla de cómo se acoplan sus caracteres, emociones, deseos y proyectos
+            </p>
           </div>
-          <span className="text-xs text-amber-300 font-mono font-bold bg-amber-500/15 px-2.5 py-1 rounded-lg border border-amber-500/30">
+          <div className="px-4 py-2 bg-amber-500/15 border border-amber-500/30 rounded-2xl font-serif font-bold text-amber-200 text-sm whitespace-nowrap">
             {chartA.birthData.name} & {chartB.birthData.name}
-          </span>
+          </div>
         </div>
 
-        {/* Resumen Global para Humanos */}
-        <div className="p-4 rounded-2xl bg-[#090D18]/90 border border-amber-500/20 text-xs text-slate-200 leading-relaxed font-light">
-          <p className="italic text-center max-w-2xl mx-auto text-amber-200/90">
-            &quot;{overview}&quot;
+        {/* Resumen General en Letra Amplia */}
+        <div className="p-5 rounded-3xl bg-[#090D18]/95 border border-amber-500/25">
+          <span className="text-xs uppercase font-serif tracking-wider text-amber-400 font-bold block mb-2">
+            ✦ Resumen de su Conexión:
+          </span>
+          <p className="text-sm text-slate-200 leading-relaxed font-light">
+            {overview}
           </p>
         </div>
 
-        {/* Las 4 Dinámicas Explicadas con Claridad */}
-        <div className="grid grid-cols-2 gap-3.5">
-          {/* Soles */}
-          <div className="p-3.5 rounded-2xl bg-[#090D18]/90 border border-amber-500/20">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-sm font-serif font-bold text-amber-300">☉ Personalidades & Egos</span>
-              <span className="text-[9px] uppercase font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+        {/* Las 4 Dinámicas en Tarjetas Grandes y Espaciosas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Dinámica 1: Personalidad */}
+          <div className="p-5 rounded-3xl bg-[#090D18]/90 border border-amber-500/30 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">☀️</span>
+                <span className="text-base font-serif font-bold text-amber-300">
+                  Personalidad & Metas
+                </span>
+              </div>
+              <span className="text-xs font-serif font-semibold text-amber-300 bg-amber-500/15 px-3 py-1 rounded-full border border-amber-500/30">
                 {sunDynamic.verdict}
               </span>
             </div>
-            <h5 className="text-[11px] font-serif font-semibold text-amber-100 mb-1">{sunDynamic.title}</h5>
-            <p className="text-[10px] text-slate-300 leading-relaxed font-light">{sunDynamic.description}</p>
+            <h4 className="text-sm font-serif font-bold text-amber-100">
+              {sunDynamic.title}
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+              {sunDynamic.description}
+            </p>
           </div>
 
-          {/* Lunas */}
-          <div className="p-3.5 rounded-2xl bg-[#090D18]/90 border border-indigo-500/20">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-sm font-serif font-bold text-indigo-300">☽ Emociones & Cuidado</span>
-              <span className="text-[9px] uppercase font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+          {/* Dinámica 2: Emociones y Hogar */}
+          <div className="p-5 rounded-3xl bg-[#090D18]/90 border border-indigo-500/30 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🌙</span>
+                <span className="text-base font-serif font-bold text-indigo-300">
+                  Emociones & Cuidado Mutuo
+                </span>
+              </div>
+              <span className="text-xs font-serif font-semibold text-indigo-300 bg-indigo-500/15 px-3 py-1 rounded-full border border-indigo-500/30">
                 {moonDynamic.verdict}
               </span>
             </div>
-            <h5 className="text-[11px] font-serif font-semibold text-indigo-100 mb-1">{moonDynamic.title}</h5>
-            <p className="text-[10px] text-slate-300 leading-relaxed font-light">{moonDynamic.description}</p>
+            <h4 className="text-sm font-serif font-bold text-indigo-100">
+              {moonDynamic.title}
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+              {moonDynamic.description}
+            </p>
           </div>
 
-          {/* Venus & Marte */}
-          <div className="p-3.5 rounded-2xl bg-[#090D18]/90 border border-rose-500/20">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-sm font-serif font-bold text-rose-300">♀ ♂ Química & Magnetismo</span>
-              <span className="text-[9px] uppercase font-mono px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/20">
+          {/* Dinámica 3: Química y Romance */}
+          <div className="p-5 rounded-3xl bg-[#090D18]/90 border border-rose-500/30 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">💖</span>
+                <span className="text-base font-serif font-bold text-rose-300">
+                  Atracción, Química & Romance
+                </span>
+              </div>
+              <span className="text-xs font-serif font-semibold text-rose-300 bg-rose-500/15 px-3 py-1 rounded-full border border-rose-500/30">
                 {eroticChemistry.verdict}
               </span>
             </div>
-            <h5 className="text-[11px] font-serif font-semibold text-rose-100 mb-1">{eroticChemistry.title}</h5>
-            <p className="text-[10px] text-slate-300 leading-relaxed font-light">{eroticChemistry.description}</p>
+            <h4 className="text-sm font-serif font-bold text-rose-100">
+              {eroticChemistry.title}
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+              {eroticChemistry.description}
+            </p>
           </div>
 
-          {/* Saturno & Nodos */}
-          <div className="p-3.5 rounded-2xl bg-[#090D18]/90 border border-purple-500/20">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-sm font-serif font-bold text-purple-300">♄ ☊ Propósito & Karma</span>
-              <span className="text-[9px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
+          {/* Dinámica 4: Madurez y Destino */}
+          <div className="p-5 rounded-3xl bg-[#090D18]/90 border border-purple-500/30 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🧭</span>
+                <span className="text-base font-serif font-bold text-purple-300">
+                  Crecimiento & Proyecto de Vida
+                </span>
+              </div>
+              <span className="text-xs font-serif font-semibold text-purple-300 bg-purple-500/15 px-3 py-1 rounded-full border border-purple-500/30">
                 {karmicDestiny.verdict}
               </span>
             </div>
-            <h5 className="text-[11px] font-serif font-semibold text-purple-100 mb-1">{karmicDestiny.title}</h5>
-            <p className="text-[10px] text-slate-300 leading-relaxed font-light">{karmicDestiny.description}</p>
+            <h4 className="text-sm font-serif font-bold text-purple-100">
+              {karmicDestiny.title}
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+              {karmicDestiny.description}
+            </p>
           </div>
         </div>
 
-        {/* Dones y Retos */}
-        <div className="grid grid-cols-2 gap-3.5">
-          <div className="p-3.5 rounded-2xl bg-[#090D18]/90 border border-emerald-500/20">
-            <h4 className="font-serif font-bold text-emerald-300 text-xs mb-2 flex items-center gap-1.5">
-              <span>✨</span> Lo que Fluye Naturalmente en su Unión
-            </h4>
-            <ul className="space-y-1.5 text-[10px] text-slate-300">
-              {strengths.slice(0, 3).map((s, i) => (
-                <li key={i} className="flex items-start gap-1.5">
-                  <span className="text-emerald-400">✦</span>
-                  <span className="leading-snug">{s}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="p-3.5 rounded-2xl bg-[#090D18]/90 border border-rose-500/20">
-            <h4 className="font-serif font-bold text-rose-300 text-xs mb-2 flex items-center gap-1.5">
-              <span>⚡</span> Puntos a Cuidar & Oportunidades de Maduración
-            </h4>
-            <ul className="space-y-1.5 text-[10px] text-slate-300">
-              {challenges.slice(0, 3).map((c, i) => (
-                <li key={i} className="flex items-start gap-1.5">
-                  <span className="text-rose-400">✦</span>
-                  <span className="leading-snug">{c}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Pie Página 2 */}
+        <div className="text-center pt-3 border-t border-amber-500/20 text-xs text-slate-400 font-serif">
+          Página 2 · Dinámicas Cotidianas · ARCANO
         </div>
+      </div>
 
-        {/* 3 Consejos de Oro para la Convivencia */}
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/15 via-[#0B0F1C] to-amber-500/15 border border-amber-500/30">
-          <span className="text-[9px] uppercase tracking-[0.25em] text-amber-400 font-serif font-bold block mb-2 text-center">
-            ✦ 3 PILARES PARA CUIDAR SU FUEGO SAGRADO ✦
+      {/* =========================================================================
+          PÁGINA 3: DONES, RETOS COTIDIANOS Y LAS 3 REGLAS DE ORO
+          (Letras grandes, muy fácil de asimilar y aplicar)
+          ========================================================================= */}
+      <div className="print-page-break space-y-6 pt-6">
+        {/* Cabecera Página 3 */}
+        <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C] text-center">
+          <span className="text-xs uppercase tracking-[0.3em] text-amber-400 font-serif font-bold block mb-1">
+            ✦ CLAVES PARA CUIDAR SU RELACIÓN ✦
           </span>
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="p-2 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[10px] font-serif font-semibold text-amber-200 block mb-0.5">1. Respetar Tiempos</span>
-              <p className="text-[9px] text-slate-300 leading-tight font-light">
-                Cada uno procesa sus emociones a ritmos distintos; dar espacio nutre la cercanía.
+          <h2 className="text-2xl font-serif font-bold text-amber-100">
+            Dones Compartidos & Consejos Prácticos de Convivencia
+          </h2>
+          <p className="text-xs text-slate-300 mt-1 max-w-xl mx-auto">
+            Herramientas sencillas para aprovechar lo que fluye naturalmente y transformar las fricciones en unión.
+          </p>
+        </div>
+
+        {/* Dones y Retos en 2 Grandes Columnas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Lo que fluye */}
+          <div className="p-6 rounded-3xl bg-[#090D18]/95 border-2 border-emerald-500/30 space-y-4">
+            <h3 className="font-serif font-bold text-emerald-300 text-lg flex items-center gap-2 border-b border-emerald-500/20 pb-2">
+              <span className="text-xl">✨</span> Lo Más Fuerte y Bonito de su Unión
+            </h3>
+            <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
+              {strengths.map((str, idx) => (
+                <li key={`str-user-${idx}`} className="flex items-start gap-3">
+                  <span className="text-emerald-400 text-base font-bold shrink-0">✔</span>
+                  <span className="leading-relaxed">{str}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Oportunidades de Crecimiento */}
+          <div className="p-6 rounded-3xl bg-[#090D18]/95 border-2 border-rose-500/30 space-y-4">
+            <h3 className="font-serif font-bold text-rose-300 text-lg flex items-center gap-2 border-b border-rose-500/20 pb-2">
+              <span className="text-xl">⚡</span> Qué Cuidar para Evitar Malentendidos
+            </h3>
+            <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
+              {challenges.map((cha, idx) => (
+                <li key={`cha-user-${idx}`} className="flex items-start gap-3">
+                  <span className="text-rose-400 text-base font-bold shrink-0">✦</span>
+                  <span className="leading-relaxed">{cha}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Las 3 Reglas de Oro en Cajas Grandes y Destacadas */}
+        <div className="p-6 rounded-3xl bg-gradient-to-b from-amber-500/15 via-[#090D18] to-amber-500/15 border-2 border-amber-500/40 space-y-5">
+          <div className="text-center">
+            <span className="text-xs uppercase tracking-[0.25em] text-amber-400 font-serif font-bold block mb-1">
+              ✦ SABIDURÍA PRÁCTICA PARA LA PAREJA ✦
+            </span>
+            <h3 className="text-xl font-serif font-bold text-amber-100">
+              Tres Reglas de Oro para un Amor Pleno y Duradero
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-4 bg-black/60 rounded-2xl border border-amber-500/30 space-y-2">
+              <div className="flex items-center gap-2 text-amber-300 font-serif font-bold text-sm">
+                <span>1.</span>
+                <span>Cuando no estén de acuerdo</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed font-light">
+                Recuerden que ningún desacuerdo vale más que su vínculo. Permítanse respirar y escuchar sin interrumpir antes de buscar soluciones juntos.
               </p>
             </div>
-            <div className="p-2 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[10px] font-serif font-semibold text-amber-200 block mb-0.5">2. Hablar sin Culpa</span>
-              <p className="text-[9px] text-slate-300 leading-tight font-light">
-                Expresar necesidades desde el corazón y el sentimiento, nunca desde el reclamo.
+
+            <div className="p-4 bg-black/60 rounded-2xl border border-rose-500/30 space-y-2">
+              <div className="flex items-center gap-2 text-rose-300 font-serif font-bold text-sm">
+                <span>2.</span>
+                <span>Alimentar la chispa diaria</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed font-light">
+                La intimidad se nutre en las pequeñas cosas: un mensaje cariñoso inesperado, una mirada cómplice y agradecer los detalles diarios del otro.
               </p>
             </div>
-            <div className="p-2 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[10px] font-serif font-semibold text-amber-200 block mb-0.5">3. Honrar la Libertad</span>
-              <p className="text-[9px] text-slate-300 leading-tight font-light">
-                Amar la individualidad del otro es el mayor amuleto para que el amor perdure.
+
+            <div className="p-4 bg-black/60 rounded-2xl border border-sky-500/30 space-y-2">
+              <div className="flex items-center gap-2 text-sky-300 font-serif font-bold text-sm">
+                <span>3.</span>
+                <span>Cuidar la propia individualidad</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed font-light">
+                Para que dos personas se amen con plenitud, cada una debe tener tiempo para sus propias pasiones, amigos y momentos de silencio interior.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Footer Página 2 */}
-        <div className="text-center pt-3 border-t border-amber-500/20 text-[9px] text-slate-400 font-serif">
+        {/* Mensaje de Cierre y Bendición */}
+        <div className="text-center p-4 bg-black/40 rounded-2xl border border-amber-500/20">
+          <p className="text-xs sm:text-sm text-amber-200/90 font-serif italic">
+            &quot;El cielo propone las energías, pero son ustedes dos quienes escriben cada día el destino de su amor con empatía, paciencia y ternura.&quot;
+          </p>
+        </div>
+
+        {/* Footer Final */}
+        <div className="text-center pt-3 border-t border-amber-500/20 text-xs text-slate-400 font-serif">
           ARCANO · Santuario de Sabiduría y Simbolismo Arquetípico · www.arcanosolutions.com
         </div>
       </div>
