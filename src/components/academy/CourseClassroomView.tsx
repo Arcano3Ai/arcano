@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useStudent } from '@/lib/academy/studentContext';
 import { getLMSCourseBySlug, getLMSLesson } from '@/lib/academy/courseRepository';
-import { TAROT_LEVEL_1_STUDY_GUIDES } from '@/data/academyStudyLevel1';
+import { getLessonStudyGuide } from '@/data/academyStudyGuides';
 import { brandConfig } from '@/config/brandConfig';
 
 interface CourseClassroomViewProps {
@@ -53,7 +53,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
   const { lesson, nextLesson } = lessonData;
   const completed = isLessonCompleted(lesson.id);
   const courseProgress = getCourseProgress(course.id);
-  const studyGuide = TAROT_LEVEL_1_STUDY_GUIDES[lesson.id];
+  const studyGuide = getLessonStudyGuide(lesson.id);
 
   const handleCompleteAndNext = () => {
     markLessonComplete(course.id, lesson.id);
