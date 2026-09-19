@@ -70,7 +70,7 @@ export interface LMSEnrollment {
   userId: string;
   courseId: string;
   course: LMSCourse;
-  status: 'active' | 'completed' | 'expired';
+  status: 'active' | 'completed' | 'expired' | 'pending';
   enrolledAt: string;
   completedAt?: string;
   progressPercentage: number;

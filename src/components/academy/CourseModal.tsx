@@ -145,10 +145,10 @@ export const CourseModal: React.FC<CourseModalProps> = ({
           {isWebUnlock && (
             <div className="p-4 rounded-lg bg-gradient-to-r from-gold/15 via-gold/5 to-transparent border border-gold/40 text-xs text-parchment-dim space-y-1">
               <div className="text-gold font-serif font-medium flex items-center gap-1.5">
-                <span>🎁</span> ¡NIVEL CLAVE DE LA PROMOCIÓN!
+                <span>🎁</span> ¡NIVEL CUMBRE DE LA PROMOCIÓN!
               </div>
               <p className="text-parchment-muted">
-                Al completar este nivel (junto a los Niveles 1 y 2), obtendrás tu <strong>página web personalizada GRATIS</strong> con dominio incluido por 1 año.
+                Al completar este nivel (culminando los 5 niveles de tu formación), obtendrás tu <strong>página web personalizada GRATIS</strong> con dominio incluido por 1 año.
               </p>
             </div>
           )}
@@ -161,11 +161,18 @@ export const CourseModal: React.FC<CourseModalProps> = ({
             >
               CERRAR
             </button>
+            <a
+              href={`/academia/registro?curso=${course.id}`}
+              onClick={onClose}
+              className="w-full sm:w-auto px-6 py-3 rounded border border-gold/50 bg-gold/10 hover:bg-gold/20 text-gold-light text-xs uppercase tracking-wider font-sans font-semibold transition-all flex items-center justify-center gap-1.5 text-center"
+            >
+              <span>REGISTRARSE EN LÍNEA</span>
+            </a>
             <button
               onClick={handleEnrollClick}
               className="w-full sm:w-auto px-8 py-3 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_20px_rgba(198,160,82,0.4)] hover:shadow-[0_0_30px_rgba(198,160,82,0.6)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
             >
-              <span>INSCRIBIRME AHORA</span>
+              <span>INSCRIBIRME POR WHATSAPP</span>
               <span>→</span>
             </button>
           </div>

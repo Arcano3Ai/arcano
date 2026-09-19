@@ -25,6 +25,7 @@ export const footerNavLinks = {
     { label: "Lecturas de Tarot", href: "/lecturas" },
     { label: "Los 22 Arcanos", href: "/arcanos" },
     { label: "Academia Esotérica", href: "/#academia" },
+    { label: "Aula Virtual (Alumnos)", href: "/academia/mi-panel" },
     { label: "Tarot del Amor", href: "/tarot-del-amor" },
     { label: "Tarot Profesional", href: "/tarot-profesional" },
     { label: "Carta del Día", href: "/carta-del-dia" },
