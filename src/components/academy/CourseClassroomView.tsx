@@ -672,34 +672,6 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
               </div>
             </div>
           )}
-
-          {/* 4. AL FINAL: ZONA AUDIOVISUAL (EN PRODUCCIÓN CEREMONIAL) */}
-          <div className="space-y-4 pt-6 border-t border-charcoal-border/80">
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#0f0b18] border border-gold/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">📹</span>
-                  <h4 className="font-serif text-sm sm:text-base font-bold text-gold-light">
-                    Aula Audiovisual (En Producción en el Templo)
-                  </h4>
-                </div>
-                <p className="text-xs text-parchment-dim leading-relaxed">
-                  <strong>Aviso al Alumno:</strong> La prioridad formativa de este nivel descansa en los <strong>tratados escritos</strong> y en la <strong>sintonización sonora</strong> desarrollados arriba. Las grabaciones audiovisuales en alta definición se encuentran en producción ceremonial y estarán disponibles como complemento visual. Puedes consultar el video de referencia a continuación:
-                </p>
-              </div>
-            </div>
-
-            {/* Contenedor de Video 16:9 con Estética Dark Luxury al Final */}
-            <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black border-2 border-charcoal-border hover:border-gold/40 transition-colors shadow-[0_0_40px_rgba(0,0,0,0.85)]">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${lesson.videoId}?modestbranding=1&rel=0&iv_load_policy=3`}
-                title={lesson.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full border-0"
-              />
-            </div>
-          </div>
         </main>
 
         {/* 3. Panel Lateral con Temario de Clases (Drawer) */}
