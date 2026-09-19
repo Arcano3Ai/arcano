@@ -15,6 +15,7 @@ export default function StudentDashboardPage() {
     isLoading,
     logout,
     enrollInCourse,
+    isCourseUnlocked,
     getCourseProgress,
   } = useStudent();
 
@@ -186,17 +187,29 @@ export default function StudentDashboardPage() {
             {enrollments.map((enr) => {
               const progress = getCourseProgress(enr.courseId);
               const firstLessonId = enr.course.modules[0]?.lessons[0]?.id || '1';
+              const unlocked = isCourseUnlocked(enr.courseId);
+              const isPaidCourse = enr.course.priceMxn > 0 || enr.course.level > 1;
 
               return (
                 <div
                   key={enr.id}
-                  className="bg-[#090D18]/90 border border-amber-500/30 rounded-3xl p-6 backdrop-blur-md flex flex-col justify-between hover:border-amber-400 transition-all group"
+                  className={`border rounded-3xl p-6 backdrop-blur-md flex flex-col justify-between transition-all group ${
+                    unlocked
+                      ? 'bg-[#090D18]/90 border-amber-500/30 hover:border-amber-400'
+                      : 'bg-[#12091c]/90 border-amber-500/50 shadow-[0_0_20px_rgba(212,175,55,0.1)]'
+                  }`}
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
-                        Nivel {enr.course.romanLevel}
-                      </span>
+                      {unlocked ? (
+                        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                          Nivel {enr.course.romanLevel}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-serif font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1">
+                          <span>🔒</span> PAGO PENDIENTE DE VALIDACIÓN
+                        </span>
+                      )}
                       <span className="text-xs font-serif text-slate-400">
                         {enr.course.durationHours}
                       </span>
@@ -209,29 +222,51 @@ export default function StudentDashboardPage() {
                       {enr.course.description}
                     </p>
 
-                    {/* Barra de progreso */}
-                    <div className="space-y-1.5 pt-2">
-                      <div className="flex justify-between text-xs font-mono">
-                        <span className="text-slate-400">Progreso del curso:</span>
-                        <span className="text-amber-400 font-bold">{progress}%</span>
+                    {/* Barra de progreso o aviso de pago */}
+                    {unlocked ? (
+                      <div className="space-y-1.5 pt-2">
+                        <div className="flex justify-between text-xs font-mono">
+                          <span className="text-slate-400">Progreso del curso:</span>
+                          <span className="text-amber-400 font-bold">{progress}%</span>
+                        </div>
+                        <div className="w-full bg-black/60 rounded-full h-2 border border-amber-500/20 overflow-hidden">
+                          <div
+                            className="bg-gradient-to-r from-amber-500 to-amber-400 h-full rounded-full transition-all duration-300"
+                            style={{ width: `${progress}%` }}
+                          />
+                        </div>
                       </div>
-                      <div className="w-full bg-black/60 rounded-full h-2 border border-amber-500/20 overflow-hidden">
-                        <div
-                          className="bg-gradient-to-r from-amber-500 to-amber-400 h-full rounded-full transition-all duration-300"
-                          style={{ width: `${progress}%` }}
-                        />
+                    ) : (
+                      <div className="pt-2 p-3 rounded-xl bg-black/50 border border-amber-500/25 space-y-1">
+                        <div className="text-[11px] font-serif text-amber-300 font-bold flex items-center justify-between">
+                          <span>Inversión requerida:</span>
+                          <span>$799 MXN</span>
+                        </div>
+                        <p className="text-[10px] text-slate-300 leading-snug">
+                          Se requiere registrar y validar tu comprobante de pago para desbloquear el acceso a las clases en video y manuales.
+                        </p>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <div className="pt-6">
-                    <Link
-                      href={`/academia/cursos/${enr.course.slug}/aprender?lesson=${firstLessonId}`}
-                      className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-serif font-bold text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.25)] hover:brightness-110 flex items-center justify-center gap-2 transition-all"
-                    >
-                      <span>▶</span>
-                      <span>{progress > 0 ? 'Continuar Lección' : 'Comenzar Curso'}</span>
-                    </Link>
+                    {unlocked ? (
+                      <Link
+                        href={`/academia/cursos/${enr.course.slug}/aprender?lesson=${firstLessonId}`}
+                        className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-serif font-bold text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.25)] hover:brightness-110 flex items-center justify-center gap-2 transition-all"
+                      >
+                        <span>▶</span>
+                        <span>{progress > 0 ? 'Continuar Lección' : 'Comenzar Curso'}</span>
+                      </Link>
+                    ) : (
+                      <Link
+                        href={`/academia/cursos/${enr.course.slug}/aprender`}
+                        className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500/30 via-amber-500/20 to-amber-600/30 border border-amber-500/50 text-amber-200 font-serif font-bold text-xs uppercase tracking-wider hover:bg-amber-500/40 flex items-center justify-center gap-2 transition-all"
+                      >
+                        <span>🔒</span>
+                        <span>Verificar Pago / Activar Aula</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
               );

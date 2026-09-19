@@ -1,6 +1,7 @@
 // ==============================================================================
 // ARCANO ACADEMIA ESOTÉRICA — GUÍAS DE ESTUDIO OFICIALES: TAROT NIVEL 1
-// LOS PRIMEROS 12 ARCANOS MAYORES (DEL LOCO AL COLGADO) CON CANCIONES OBLIGATORIAS
+// CURSO: TAROT DESDE CERO — FUNDAMENTOS E INICIACIÓN (tarot-01)
+// 7 LECCIONES MAESTRAS CON REQUISITO DE ESCUCHA DE LAS 12 CANCIONES SAGRADAS
 // Correo Oficial de Tutorías y Consultas: consultas@arcanosolutions.com
 // ==============================================================================
 
@@ -39,555 +40,418 @@ export interface LessonStudyGuide {
 
 export const TAROT_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
   // ----------------------------------------------------------------------------
-  // LECCIÓN 1: ARCANO 0 — EL LOCO
+  // LECCIÓN 1: INTRODUCCIÓN AL TAROT Y SU ORIGEN HISTÓRICO-HERMÉTICO
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-1': {
     lessonId: 'tarot-01-lesson-1',
     courseId: 'tarot-01',
-    title: 'Arcano 0: El Loco — El Salto al Vacío y la Inocencia Sagrada',
-    subtitle: 'El viajero sin ataduras: El cero primordial antes de todo comienzo manifiesto',
-    readingTimeMinutes: 20,
+    title: 'Introducción al Tarot y su Origen Histórico-Hermético',
+    subtitle: 'Del libro mudo de Thot y las cortes renacentistas al espejo sagrado de la psique humana',
+    readingTimeMinutes: 22,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'el-loco',
       title: 'Himno Sagrado de El Loco — El Salto al Vacío',
       audioUrl: '/audio/arcanos/el-loco.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Himno Sagrado de El Loco con audífonos. Medita en su lírica y siente la frecuencia de liberarte del control racional antes de iniciar tu estudio.',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Himno Sagrado de El Loco con audífonos. Medita en su lírica y siente la frecuencia de liberarte del control racional antes de abrir el estudio del Tarot.',
     },
     modules: [
       {
-        sectionTitle: '1. Naturaleza Arquetípica de El Loco',
+        sectionTitle: '1. El Misterio de los Orígenes: Mito y Realidad Histórica',
         paragraphs: [
-          'El Loco lleva el número Cero (0). En las matemáticas sagradas, el cero no simboliza la nada estéril, sino el vacío fértil: el huevo cósmico que contiene todas las potencialidades aún no manifestadas.',
-          'Representa el alma humana antes de encarnar, el espíritu libre que camina al borde del abismo con una flor blanca en la mano, ajeno a los juicios del mundo y confiado en la providencia invisible.',
+          'El Tarot es una de las catedrales simbólicas más asombrosas de Occidente. Durante siglos, ocultistas como Antoine Court de Gébelin y Éliphas Lévi sostuvieron que el Tarot era el legendario «Libro de Thot», el remanente sobreviviente de las bibliotecas sagradas de Alejandría y el antiguo Egipto, codificado en forma de cartas de juego para burlar la censura y la destrucción temporal.',
+          'La investigación histórica moderna documenta la aparición física de los primeros mazos en el norte de Italia (Milán, Ferrara y Bolonia) durante el siglo XV, conocidos como «Trionfi» o naipes de los Visconti-Sforza. No obstante, más allá de su uso cortesano, el Tarot recogió la vasta corriente del hermetismo alejandrino, el neoplatonismo renacentista, la alquimia medieval y la Cábala hebrea.',
+        ],
+        bulletPoints: [
+          'Etimología sagrada: Derivaciones tradicionales como «Rota» (rueda en latín), «Tora» (ley sagrada) y «Tar-Rog» (camino real en mística egipcia).',
+          'El Tarot como criptograma: Un lenguaje jeroglífico donde los secretos del alma se transmiten a través de imágenes arquetípicas y colores vivos.',
+          'Superación de la adivinación vulgar: En la Academia ARCANO concebimos el Tarot no como una bola de cristal para adivinar un destino fatalista, sino como un espejo sagrado para proyectar el inconsciente y despertar el libre albedrío.',
+        ],
+      },
+      {
+        sectionTitle: '2. Filosofía Hermética: Como es Arriba, es Abajo',
+        paragraphs: [
+          'El fundamento operativo del Tarot descansa en la segunda ley de la Tabla de Esmeralda atribuida a Hermes Trismegisto: «Lo que está abajo es semejante a lo que está arriba, y lo que está arriba es semejante a lo que está abajo, para obrar los prodigios de una sola cosa».',
+          'Cuando barajamos las cartas, no opera el azar caótico; opera la sincronicidad (término acuñado por Carl Gustav Jung). La carta que emerge sobre la mesa es una respuesta isomórfica al estado psíquico y espiritual del consultante en ese instante cósmico.',
         ],
         calloutBox: {
           type: 'hermetic',
-          title: 'Principio de Causa y Efecto',
-          text: '«Toda causa tiene su efecto; todo efecto tiene su causa». El Loco no es irresponsabilidad ciega: es la decisión consciente de no vivir atado a los condicionamientos del pasado para inaugurar una nueva cadena causal.',
+          title: 'Axioma de la Academia ARCANO',
+          text: 'Las cartas del Tarot no crean tu destino; revelan las corrientes energéticas invisibles que ya están moldeando tu presente. El buen tarotista es un cartógrafo del alma, no un juez ni un adivino determinista.',
         },
-      },
-      {
-        sectionTitle: '2. Simbología Esotérica Fundamental',
-        paragraphs: [
-          '• El hatillo al hombro: Contiene las memorias de vidas pasadas que aún no ha desempaquetado.',
-          '• El perro blanco: Representa el instinto animal domesticado, advirtiendo del peligro físico pero acompañando el viaje.',
-          '• El precipicio y los picos nevados: Las alturas de la conciencia espiritual y el riesgo iniciático necesario para evolucionar.',
-          '• El sol amarillo brillante: La gracia divina que bendice la inocencia del viajero.',
-        ],
-      },
-      {
-        sectionTitle: '3. Expresión en Luz y en Sombra',
-        paragraphs: [
-          '• EN LUZ: Audacia, fe incondicional, frescura mental, libertad interior, inicio genuino sin prejuicios.',
-          '• EN SOMBRA: Negligencia, inmadurez, evasión de responsabilidades, saltar al abismo sin propósito.',
-        ],
       },
     ],
     keyTerms: [
-      { term: 'El Cero Sagrado', definition: 'El estado de potencial puro donde coexisten todas las posibilidades futuras.' },
-      { term: 'Salto de Fe', definition: 'Confianza primordial en el universo que disuelve el miedo paralizante del ego.' },
+      { term: 'Arcano', definition: 'Del latín «arcanum» (secreto o misterio celosamente guardado en un cofre). Llave iniciática para comprender una verdad espiritual.' },
+      { term: 'Sincronicidad', definition: 'Coincidencia significativa en el tiempo de dos o más sucesos sin relación causal directa, conectada por un significado psíquico profundo.' },
+      { term: 'Trionfi', definition: 'Nombre original en el Renacimiento italiano de los triunfos que más tarde constituirían los 22 Arcanos Mayores.' },
     ],
     practicalExercise: {
-      title: 'Sintonización Acústica y Meditación con El Loco',
+      title: 'Audición Sagrada y Bitácora de Iniciación',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha con auriculares el «Himno Sagrado de El Loco — El Salto al Vacío». Cierra los ojos y presta atención a cada compás y palabra de la lírica.',
-        'Coloca la carta de El Loco sobre tu paño ceremonial.',
-        'Pregúntate: «¿En qué área de mi vida necesito dar un salto de fe y liberarme del miedo al qué dirán?»',
-        'Redacta tu reflexión en tu bitácora de tarotista y envíala a consultas@arcanosolutions.com.',
+        '🎵 TAREA OBLIGATORIA: En el reproductor de canciones sagradas, reproduce con audífonos «0. El Loco» y «I. El Mago». Anota en tu cuaderno qué sensaciones corporales y emociones evocan en ti.',
+        'Toma una libreta nueva consagrada exclusivamente como tu «Diario del Tarotista».',
+        'Escribe un manifiesto de intención de media cuartilla respondiendo: «¿Por qué elijo aprender el lenguaje sagrado de los Arcanos y cuál es mi compromiso ético con este estudio?»',
       ],
-      deliverablePrompt: 'Envía tu bitácora a consultas@arcanosolutions.com con el asunto «Bitácora Arcano 0 — [Tu Nombre]».',
+      deliverablePrompt: 'Envía tu manifiesto escrito al correo oficial consultas@arcanosolutions.com con el asunto: "Tarot Nivel 1 - Lección 1: Manifiesto de Iniciación - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 2: ARCANO I — EL MAGO
+  // LECCIÓN 2: ESTRUCTURA DE LA BARAJA: LOS 78 NAIPES SAGRADOS
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-2': {
     lessonId: 'tarot-01-lesson-2',
     courseId: 'tarot-01',
-    title: 'Arcano I: El Mago — Como es Arriba, es Abajo y el Poder Creador',
-    subtitle: 'El canal activo de manifestación: La voluntad humana alineada con la ley divina',
-    readingTimeMinutes: 22,
+    title: 'Estructura de la Baraja: Los 78 Naipes Sagrados',
+    subtitle: 'La anatomía completa del mazo: Macrocosmos, microcosmos y la corte arquetípica',
+    readingTimeMinutes: 20,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'el-mago',
       title: 'Invocación de El Mago — Como es Arriba, es Abajo',
       audioUrl: '/audio/arcanos/el-mago.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha atentamente la Invocación de El Mago. Comprende cómo la respiración y la vibración del mantra alinean tus 4 cuerpos (físico, emocional, mental y espiritual).',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Invocación de El Mago. Medita en los 4 elementos sobre su mesa (copa, espada, oro y basto) que conectan con la estructura total de los 78 naipes.',
     },
     modules: [
       {
-        sectionTitle: '1. El Canal Sagrado de Manifestación',
+        sectionTitle: '1. Los 78 Naipes: Un Sistema Completo y Autosuficiente',
         paragraphs: [
-          'El Mago alza su mano derecha con una varita apuntando al cielo, mientras su mano izquierda señala la tierra. Esta postura es la encarnación viva del axioma hermético: «Como es arriba, es abajo; como es abajo, es arriba».',
-          'El Mago no crea de la nada: canaliza la energía divina del cosmos y la transmuta en el plano terrenal utilizando los 4 elementos.',
+          'Una baraja tradicional de Tarot se compone estrictamente de 78 cartas o láminas sagradas. No sobra ninguna ni falta ninguna. Esta estructura matemática y geométrica refleja la totalidad de la experiencia humana y cósmica.',
+          'La baraja se articula en dos grandes cámaras iniciáticas:',
+          '• Los 22 Arcanos Mayores: Los principios arquetípicos universales, las leyes cósmicas inmutables y el gran viaje iniciático del alma.',
+          '• Los 56 Arcanos Menores: La manifestación terrenal cotidiana de esos arquetipos en la vida práctica, divididos a su vez en 40 cartas numerales (del As al 10 en cuatro palos) y 16 cartas de la corte o figuras reales.',
+        ],
+      },
+      {
+        sectionTitle: '2. Comparativa de Tradiciones: Marsella vs. Rider-Waite-Smith',
+        paragraphs: [
+          'En el estudio del Tarot existen dos escuelas visuales primordiales:',
+          '1. Escuela de Marsella: Proveniente de la Francia de los siglos XVII y XVIII. Destaca por sus Arcanos Mayores de marcado estilo medieval y renacentista, mientras que sus Arcanos Menores presentan únicamente patrones geométricos de los palos (sin escenas ilustradas con personajes).',
+          '2. Escuela Rider-Waite-Smith (1909): Creada por Arthur Edward Waite e ilustrada por Pamela Colman Smith bajo la égida de la Orden Hermética del Golden Dawn. Es la más didáctica y universal del mundo moderno porque los 56 Arcanos Menores están completamente ilustrados con escenas humanas y alegorías vivas.',
         ],
         calloutBox: {
-          type: 'hermetic',
-          title: 'Principio de Polaridad y Ritmo',
-          text: 'El Mago domina el flujo: sabe cuándo recibir (receptividad) y cuándo emitir (voluntad activa) sin forzar las leyes universales.',
+          type: 'tip',
+          title: 'Recomendación Pedagógica de la Academia ARCANO',
+          text: 'Para este Nivel 1 recomendamos utilizar una baraja basada en Rider-Waite-Smith tradicional o Marsella restaurado. En ambos casos, las correspondencias simbólicas fundamentales son perfectamente aplicables.',
         },
-      },
-      {
-        sectionTitle: '2. Los 4 Instrumentos sobre la Mesa',
-        paragraphs: [
-          'Sobre su mesa se encuentran las 4 herramientas sagradas que originan los 4 palos del Tarot:',
-          '• La Vara (Bastos / Fuego): La fuerza de la voluntad, la visión y la pasión creadora.',
-          '• La Copa (Copas / Agua): La intuición, los sentimientos puros y el amor universal.',
-          '• La Espada (Espadas / Aire): El intelecto agudo, el discernimiento y la palabra veraz.',
-          '• El Pentáculo (Oros / Tierra): La materia, el cuerpo físico y los recursos tangibles.',
-        ],
-      },
-      {
-        sectionTitle: '3. Luz y Sombra',
-        paragraphs: [
-          '• EN LUZ: Capacidad de manifestación, concentración impecable, elocuencia, dominio de habilidades prácticas.',
-          '• EN SOMBRA: Manipulación, charlatanería, arrogancia intelectual, usar el conocimiento para engañar.',
-        ],
       },
     ],
     keyTerms: [
-      { term: 'Axioma de Hermes', definition: 'La correspondencia sagrada entre el macrocosmos (universo) y el microcosmos (hombre).' },
-      { term: 'Lemniscata', definition: 'El símbolo del infinito sobre su cabeza: acceso a la fuente inagotable de sabiduría.' },
+      { term: '78 Naipes', definition: 'La suma perfecta de 22 Arcanos Mayores + 56 Arcanos Menores (40 numerales + 16 cortesanos).' },
+      { term: 'Golden Dawn', definition: 'Hermandad esotérica británica de finales del siglo XIX que unificó el Tarot con la Astrología, la Cábala y la Alta Magia ceremonial.' },
+      { term: 'Lámina', definition: 'Término esotérico tradicional para designar cada naipe del Tarot, aludiendo a los grabados alquímicos antiguos.' },
     ],
     practicalExercise: {
-      title: 'Práctica de Alineación Elemental con El Mago',
+      title: 'Inventario y Reconocimiento de tu Baraja',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha la «Invocación de El Mago: Como es Arriba, es Abajo» con respiración consciente.',
-        'Observa tus 4 herramientas cotidianas: tu cuerpo (Oros), tus emociones (Copas), tus ideas (Espadas) y tu pasión (Bastos).',
-        'Escribe qué proyecto concreto estás listo para manifestar en este momento.',
-        'Envía tu informe a consultas@arcanosolutions.com.',
+        '🎵 TAREA OBLIGATORIA: Escucha con auriculares la canción «II. La Sacerdotisa — El Silencio del Templo».',
+        'Desempaqueta tu baraja física y separa físicamente los 22 Arcanos Mayores de los 56 Arcanos Menores.',
+        'Cuenta meticulosamente cada grupo para verificar que tu mazo esté completo (78 cartas).',
+        'Toma una carta al azar de cada grupo, obsérvalas durante 3 minutos en silencio y anota las diferencias visuales entre ambas.',
       ],
-      deliverablePrompt: 'Envía tu ejercicio a consultas@arcanosolutions.com.',
+      deliverablePrompt: 'Envía un breve reporte con las fotos de tu baraja separada a consultas@arcanosolutions.com con el asunto: "Tarot Nivel 1 - Lección 2: Inventario de Baraja - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 3: ARCANO II — LA SACERDOTISA
+  // LECCIÓN 3: DIFERENCIAS ESENCIALES: ARCANOS MAYORES VS. MENORES
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-3': {
     lessonId: 'tarot-01-lesson-3',
     courseId: 'tarot-01',
-    title: 'Arcano II: La Sacerdotisa — El Silencio del Templo y la Memoria Oculta',
-    subtitle: 'La guardiana del umbral: La sabiduría receptiva, el inconsciente y los registros sagrados',
-    readingTimeMinutes: 20,
+    title: 'Diferencias Esenciales: Arcanos Mayores vs. Menores',
+    subtitle: 'El Macrocosmos trascendente frente al Microcosmos cotidiano en una lectura',
+    readingTimeMinutes: 21,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'la-sacerdotisa',
       title: 'Cántico de La Sacerdotisa — El Silencio del Templo',
       audioUrl: '/audio/arcanos/la-sacerdotisa.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Cántico de La Sacerdotisa en soledad y silencio absoluto. Permite que la melodía aquiete tus pensamientos para abrir tu tercer ojo.',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Cántico de La Sacerdotisa. Reconoce el velo del templo que separa lo oculto (Arcanos Mayores) de lo manifestado (Arcanos Menores).',
     },
     modules: [
       {
-        sectionTitle: '1. El Templo Interior y el Silencio Sagrado',
+        sectionTitle: '1. Arcanos Mayores: El Peso del Destino y las Lecciones del Alma',
         paragraphs: [
-          'La Sacerdotisa está sentada entre dos columnas: Boaz (la negra, severidad y sombra) y Jachin (la blanca, misericordia y luz). Ella no toma partido: se sienta en el centro exacto, custodiando el velo de granadas.',
-          'Representa la mente intuitiva profunda, la memoria akáshica y el conocimiento que no se grita ni se exhibe, sino que se revela a quien sabe callar y escuchar.',
+          'Cuando en una tirada aparece un Arcano Mayor, la situación consultada no es meramente circunstancial ni pasajera. Indica un hito kármico, un aprendizaje evolutivo ineludible o un cambio de rumbo existencial ordenado por el alma superior.',
+          'Los 22 Arcanos Mayores representan las grandes fuerzas que escapan al control inmediato del ego. Te dicen el POR QUÉ profundo y el propósito espiritual de lo que estás atravesando.',
+        ],
+        bulletPoints: [
+          'Fuerzas trascendentes: El nacimiento (La Emperatriz), la ley divina (La Justicia), la crisis purificadora (La Torre), el renacimiento (El Juicio).',
+          'Arquetipos junguianos universales: El Sabio (Ermitaño), la Sombra (El Diablo), el Alma Guía (La Estrella).',
+          'Efecto duradero: Sus consecuencias suelen extenderse a lo largo de meses o años en la vida del consultante.',
         ],
       },
       {
-        sectionTitle: '2. Simbolismo del Velo y la Luna',
+        sectionTitle: '2. Arcanos Menores: El Escenario Terrenal y la Respuesta Humana',
         paragraphs: [
-          '• El velo de granadas y palmeras: Unión de lo femenino fértil con lo masculino ascendente.',
-          '• La luna creciente a sus pies: Dominio del mundo emocional y de las mareas inconscientes.',
-          '• El pergamino de la TORA: La ley divina enrollada, revelada únicamente a los ojos preparados.',
+          'Los 56 Arcanos Menores representan el cómo, el cuándo y con quién. Son la vida cotidiana: una discusión laboral, un cobro de dinero, una decepción amorosa o una llamada telefónica importante.',
+          'Mientras que los Mayores marcan el clima general, los Menores indican los detalles precisos y las elecciones que el libre albedrío del consultante puede tomar en el corto plazo (días o semanas).',
         ],
+        calloutBox: {
+          type: 'practice',
+          title: 'Regla de Oro en la Consulta Profesional',
+          text: 'Una tirada dominada por Arcanos Mayores (ej. 3 de 3 cartas) anuncia que el consultante está viviendo un vórtice de destino donde debe fluir y aprender. Una tirada con mayoría de Arcanos Menores indica que tiene absoluto control operativo para solucionar el problema con acciones prácticas inmediatas.',
+        },
       },
     ],
     keyTerms: [
-      { term: 'Columnas Boaz y Jachin', definition: 'Los dos pilares del Templo de Salomón que representan la dualidad cósmica.' },
-      { term: 'Intuición Pura', definition: 'Percepción directa de la verdad sin necesidad de intermediación del razonamiento discursivo.' },
+      { term: 'Macrocosmos', definition: 'El orden cósmico superior y los principios arquetípicos universales representados por los Arcanos Mayores.' },
+      { term: 'Microcosmos', definition: 'El ser humano individual y sus vivencias cotidianas concretas reflejadas en los Arcanos Menores.' },
+      { term: 'Hito Kármico', definition: 'Suceso o prueba espiritual ineludible pactada por el alma para su crecimiento en la encarnación.' },
     ],
     practicalExercise: {
-      title: 'Silencio Iniciático y Conexión con La Sacerdotisa',
+      title: 'Contraste Visual y Energético de Naipes',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha el «Cántico de La Sacerdotisa: El Silencio del Templo» en penumbra.',
-        'Permanece 5 minutos en completo silencio sin revisar teléfono ni hablar.',
-        'Anota el primer sueño o corazonada clara que surja en tu bitácora.',
-        'Remite tu experiencia a consultas@arcanosolutions.com.',
+        '🎵 TAREA OBLIGATORIA: Escucha con auriculares «III. La Emperatriz — El Florecer Eterno» y «IV. El Emperador — El Orden de la Piedra».',
+        'Coloca frente a ti la carta de El Emperador (Arcano Mayor IV) al lado del 4 de Bastos (Arcano Menor).',
+        'Contempla ambas durante 5 minutos y describe por escrito cómo cambia la vibración: ¿Cuál evoca autoridad universal inmutable y cuál evoca una celebración humana concreta?',
       ],
-      deliverablePrompt: 'Envía tu bitácora a consultas@arcanosolutions.com.',
+      deliverablePrompt: 'Envía tu comparación de naipes a consultas@arcanosolutions.com con el asunto: "Tarot Nivel 1 - Lección 3: Mayores vs Menores - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 4: ARCANO III — LA EMPERATRIZ
+  // LECCIÓN 4: PALABRAS CLAVE, ARQUETIPOS Y GLOSARIO INICIÁTICO
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-4': {
     lessonId: 'tarot-01-lesson-4',
     courseId: 'tarot-01',
-    title: 'Arcano III: La Emperatriz — El Florecer Eterno y la Abundancia Creadora',
-    subtitle: 'La Gran Madre Naturaleza: Belleza sensorial, gozo de vivir y gestación fecunda',
-    readingTimeMinutes: 20,
+    title: 'Palabras Clave, Arquetipos y Glosario Iniciático',
+    subtitle: 'El vocabulario sagrado del lector: Cómo nombrar con precisión la verdad de las cartas',
+    readingTimeMinutes: 24,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'la-emperatriz',
       title: 'Sinfonía de La Emperatriz — El Florecer Eterno',
       audioUrl: '/audio/arcanos/la-emperatriz.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Sinfonía de La Emperatriz. Sintoniza con la frecuencia del agradecimiento por la abundancia y la belleza estética de la creación.',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Sinfonía de La Emperatriz. Presta atención a las palabras de fertilidad, creación y belleza en la letra como ejemplo vivo de vocabulario arquetípico.',
     },
     modules: [
       {
-        sectionTitle: '1. La Arquetípica Madre y Creadora',
+        sectionTitle: '1. El Poder de la Palabra en el Tarot Terapéutico',
         paragraphs: [
-          'Si la Sacerdotisa es el misterio oculto en la sombra, la Emperatriz es la vida que florece a la luz del sol. Es la regente de la naturaleza viva, los sentidos despiertos, el arte, el amor y la nutrición.',
-          'Enseña que la verdadera espiritualidad no rechaza la materia ni el placer estético, sino que reconoce la divinidad en cada hoja, en cada caricia y en cada fruto cosechado.',
+          'Un terapeuta o lector de Tarot profesional se distingue por la precisión y nobleza de su lenguaje. Decirle a un consultante «te va a ir mal» es una negligencia destructiva. Decirle «el naipe señala un momento de repliegue necesario para revisar tus bases» ilumina su conciencia.',
+          'Cada arcano posee un abanico de palabras clave en polaridad de Luz (su máxima expresión armónica) y Sombra (su exceso, defecto o distorsión).',
+        ],
+        bulletPoints: [
+          'Arcano 0 (El Loco): Luz = Inocencia, libertad, nuevo inicio, fe pura. Sombra = Caos, imprudencia, huida inmadura.',
+          'Arcano I (El Mago): Luz = Voluntad creadora, recursos disponibles, elocuencia. Sombra = Manipulación, dispersión, engaño.',
+          'Arcano II (La Sacerdotisa): Luz = Intuición, misterio fértil, sabiduría silenciosa. Sombra = Secretismo gélido, represión emocional.',
+          'Arcano III (La Emperatriz): Luz = Fertilidad, abundancia creativa, placer sensorial. Sombra = Vanidad, asfixia afectiva, derroche.',
         ],
       },
       {
-        sectionTitle: '2. Claves Visuales y de Polaridad',
+        sectionTitle: '2. El Viaje del Loco como Arquetipo de la Conciencia',
         paragraphs: [
-          '• Las doce estrellas de su corona: Regencia sobre los 12 signos del zodiaco y los 12 meses del año.',
-          '• El campo de trigo dorado: Maduración, fertilidad y recompensa tras el período de siembra.',
-          '• El escudo de Venus con forma de corazón: El amor incondicional como fuerza generadora universal.',
+          'Carl Gustav Jung demostró que los 22 Arcanos Mayores configuran el proceso de Individuación: el sendero mediante el cual una persona integra su sombra, reconcilia su ánima o ánimus y alcanza la totalidad de su Ser.',
+          'El Loco parte inocente y desnudo; atraviesa los maestros del mundo exterior (Mago a Carro), se sumerge en la introspección profunda (Fuerza a Templanza), desciende al inframundo de sus deseos inconscientes (Diablo a Luna) y finalmente renace en la iluminación plena (Sol, Juicio y Mundo).',
         ],
+        calloutBox: {
+          type: 'hermetic',
+          title: 'Glosario Hermético Esencial',
+          text: '• Sombra: Los aspectos no reconocidos ni aceptados de la psique que se proyectan en los demás.\n• Arquetipo: Matriz o molde primordial heredado en el inconsciente colectivo de toda la humanidad.\n• Individuación: El proceso de despertar y autorrealización integral del alma.',
+        },
       },
     ],
     keyTerms: [
-      { term: 'Fecundidad Sagrada', definition: 'Poder de materializar ideas abstractas en creaciones vivas y prósperas.' },
-      { term: 'Veneración de Venus', definition: 'Apertura al disfrute de los sentidos con gratitud y elevación estética.' },
+      { term: 'Proceso de Individuación', definition: 'Término de la psicología profunda de Jung que describe la integración del ego con el Yo Superior a lo largo de la vida.' },
+      { term: 'Polaridad Luz-Sombra', definition: 'La manifestación armónica constructiva frente a la manifestación bloqueada o exagerada de una misma energía arquetípica.' },
+      { term: 'Inconsciente Colectivo', definition: 'Estrato psíquico universal compartido por todos los seres humanos donde habitan los mitos y los arquetipos sagrados.' },
     ],
     practicalExercise: {
-      title: 'Meditación Sensorial y Escucha Fértil',
+      title: 'Creación de tu Diccionario Arquetípico',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha la «Sinfonía de La Emperatriz — El Florecer Eterno» con los ojos cerrados.',
-        'Haz una lista de 5 dones o bendiciones materiales que tengas hoy en tu vida.',
-        'Dedica un acto de cuidado a una planta, animal o persona querida.',
-        'Envía tu reporte a consultas@arcanosolutions.com.',
+        '🎵 TAREA OBLIGATORIA: Escucha con auriculares «V. El Hierofante — Rito de El Hierofante» y «VI. Los Enamorados — La Sagrada Elección».',
+        'Elige 3 cartas de los Arcanos Mayores que más te llamen la atención.',
+        'Redacta para cada una: 3 palabras clave en luz, 3 palabras clave en sombra y una frase iniciática sintética que resuma su enseñanza.',
       ],
-      deliverablePrompt: 'Envía tu reporte a consultas@arcanosolutions.com.',
+      deliverablePrompt: 'Envía tu diccionario arquetípico a consultas@arcanosolutions.com con el asunto: "Tarot Nivel 1 - Lección 4: Glosario Arquetípico - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 5: ARCANO IV — EL EMPERADOR
+  // LECCIÓN 5: LOS 4 PALOS Y LOS 4 ELEMENTOS PRIMORDIALES
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-5': {
     lessonId: 'tarot-01-lesson-5',
     courseId: 'tarot-01',
-    title: 'Arcano IV: El Emperador — El Orden de la Piedra y la Estructura Terrenal',
-    subtitle: 'El Padre soberano: Ley, estabilidad, protección y arquitectura del mundo manifiesto',
+    title: 'Los 4 Palos y los 4 Elementos Primordiales',
+    subtitle: 'Fuego, Agua, Aire y Tierra: La alquimia elemental que gobierna los 56 Arcanos Menores',
     readingTimeMinutes: 22,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'el-emperador',
       title: 'Marcha Soberana de El Emperador — El Orden de la Piedra',
       audioUrl: '/audio/arcanos/el-emperador.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Marcha Soberana de El Emperador para sintonizar con la firmeza, la disciplina inquebrantable y el orden interior.',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Marcha Soberana de El Emperador. Siente la fuerza del elemento Tierra y Fuego que sostienen el trono de la materia construida.',
     },
     modules: [
       {
-        sectionTitle: '1. El Trono de Piedra y la Firmeza Creadora',
+        sectionTitle: '1. Correspondencia Alquímica de los 4 Palos',
         paragraphs: [
-          'El Emperador es la contraparte masculina de la Emperatriz. Mientras ella provee la vida fecunda, él construye los cimientos, las murallas protectoras y las leyes que permiten a esa vida prosperar en paz.',
-          'Sentado en su trono cúbico de piedra labrada, decorado con cabezas de carnero (Aries), encarna la autoridad moral, la justicia terrenal y el dominio del caos mediante la estructura.',
+          'La manifestación cósmica se rige por el cuaternario primordial. Los 4 palos del Tarot son los recipientes donde se desenvuelven las cuatro funciones psíquicas básicas del ser humano:',
+          '• BASTOS (Fuego) — La Intuición y la Voluntad: Rige la pasión, la energía vital, el coraje, la creatividad artística, la ambición, la chispa sexual y el liderazgo. En desequilibrio: ira, burnout, impaciencia y agresividad.',
+          '• COPAS (Agua) — El Sentimiento y el Amor: Rige las relaciones afectivas, las emociones íntimas, la empatía, los sueños, el arte sensible y la receptividad mística. En desequilibrio: apego, drama desbordado, melancolía y victimismo.',
+          '• ESPADAS (Aire) — El Pensamiento y la Lógica: Rige el intelecto, la mente analítica, la verdad cruda, la comunicación, los dilemas morales y los conflictos éticos. En desequilibrio: ansiedad, sobrepensamiento, frialdad cruel y miedo mental.',
+          '• OROS o PENTÁCULOS (Tierra) — La Sensación y la Materia: Rige el cuerpo físico, la salud biológica, las finanzas, el trabajo práctico, los bienes raíces y el mundo tangible. En desequilibrio: avaricia, miedo a la escasez, terquedad y estancamiento.',
         ],
+      },
+      {
+        sectionTitle: '2. Dinámica de Elementos en una Lectura Real',
+        paragraphs: [
+          'Al extender las cartas de una tirada, el primer golpe de vista del lector experto no lee palabras individuales: examina el equilibrio elemental global.',
+          'Si una lectura sobre una relación de pareja contiene 4 Espadas y ninguna Copa, el vínculo está atrapado en la frialdad del análisis mental y la discusión, careciendo del agua nutricia del afecto y el perdón.',
+        ],
+        calloutBox: {
+          type: 'astrological',
+          title: 'Correspondencias Astrológicas de los Palos',
+          text: '• Bastos (Fuego) -> Aries, Leo, Sagitario\n• Copas (Agua) -> Cáncer, Escorpio, Piscis\n• Espadas (Aire) -> Géminis, Libra, Acuario\n• Oros (Tierra) -> Tauro, Virgo, Capricornio',
+        },
       },
     ],
     keyTerms: [
-      { term: 'Trono Cúbico', definition: 'El cubo como símbolo de la materia dominada y la estabilidad indestructible.' },
-      { term: 'Soberanía Personal', definition: 'Capacidad de gobernar los propios impulsos y ser el amo de tu propio destino.' },
+      { term: 'Cuaternario Sagrado', definition: 'Los 4 pilares elementales de la creación manifestada (Fuego, Agua, Aire y Tierra) reflejados en el Tetragrámaton.' },
+      { term: 'Pentáculos / Oros', definition: 'Símbolo sagrado de la materia consagrada por el espíritu humano, grabado habitualmente con la estrella de 5 puntas.' },
+      { term: 'Preponderancia Elemental', definition: 'La dominancia evidente de un palo sobre los demás en una tirada, marcando el tema raíz del consultante.' },
     ],
     practicalExercise: {
-      title: 'Ordenando el Templo Personal con El Emperador',
+      title: 'Auditoría y Mapeo Elemental con tus Cartas',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha la «Marcha Soberana de El Emperador» manteniendo la espalda erguida.',
-        'Identifica un área caótica de tu vida (finanzas, horarios, compromisos) y establece 3 reglas firmes para ordenarla.',
-        'Envía tu plan de acción a consultas@arcanosolutions.com.',
+        '🎵 TAREA OBLIGATORIA: Escucha con auriculares «VII. El Carro — La Conquista del Alma» y «VIII. La Fuerza — La Caricia y el León».',
+        'Toma los 4 Ases de tu baraja (As de Bastos, As de Copas, As de Espadas y As de Oros) y colócalos en cruz sobre tu mesa.',
+        'Medita 2 minutos ante cada uno y redacta cuál de los 4 elementos sientes más despierto en tu momento actual y cuál sientes más debilitado.',
       ],
-      deliverablePrompt: 'Envía tu ejercicio a consultas@arcanosolutions.com.',
+      deliverablePrompt: 'Envía tu análisis de los 4 palos a consultas@arcanosolutions.com con el asunto: "Tarot Nivel 1 - Lección 5: Los 4 Palos - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 6: ARCANO V — EL HIEROFANTE
+  // LECCIÓN 6: PREPARACIÓN DEL ESPACIO SAGRADO, CONSAGRACIÓN Y BARAJADO
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-6': {
     lessonId: 'tarot-01-lesson-6',
     courseId: 'tarot-01',
-    title: 'Arcano V: El Hierofante — El Rito Sagrado y el Puente hacia lo Divino',
-    subtitle: 'El Sumo Sacerdote: La transmisión oral del linaje, las llaves de los misterios y la ética',
-    readingTimeMinutes: 20,
+    title: 'Preparación del Espacio Sagrado, Consagración y Barajado',
+    subtitle: 'El rito de apertura: Cómo purificar el altar, neutralizar energías densas y conectar con la intuición',
+    readingTimeMinutes: 23,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'el-hierofante',
       title: 'Rito de El Hierofante — La Llave de los Misterios',
       audioUrl: '/audio/arcanos/el-hierofante.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Rito de El Hierofante. Reflexiona sobre la responsabilidad sagrada de estudiar el Tarot bajo un código ético inquebrantable.',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Rito de El Hierofante. Conéctate con la solemnidad del templo interior antes de consagrar tu baraja de lectura.',
     },
     modules: [
       {
-        sectionTitle: '1. El Pontífice: El Hacedor de Puentes',
+        sectionTitle: '1. El Espacio Ceremonial de Lectura',
         paragraphs: [
-          'La palabra «Pontífice» proviene del latín pontifex: constructor de puentes. El Hierofante tiende el puente entre la conciencia humana terrenal y las dimensiones sagradas de la divinidad.',
-          'Representa las escuelas de misterios, los maestros, la tradición esotérica verificada y la ética que protege al estudiante de caer en la soberbia o el engaño.',
+          'El Tarot no debe leerse en mesas desordenadas, sobre camas revueltas ni en ambientes con ruido discordante. Una lectura es un acto sagrado de psicomagia y conexión con el plano invisible; por ello requiere un contenedor energético seguro.',
+          'Elementos esenciales para armar tu espacio de lectura:',
+          '• Un paño o tapete de lectura: Preferentemente de seda, terciopelo o algodón natural en colores oscuros (morado, azul noche, negro o burdeos). Este paño aísla las cartas de la superficie profana.',
+          '• Vela blanca o de cera de abejas: Representa la luz del discernimiento divino y quema residuos etéricos densos.',
+          '• Sahumerio o incienso sagrado: Copal, mirra, sándalo o ruda para purificar el aire.',
+          '• Cristal de cuarzo transparente o turmalina negra: Para canalizar claridad y neutralizar cargas de consultantes.',
         ],
+      },
+      {
+        sectionTitle: '2. Protocolo de Consagración de la Baraja',
+        paragraphs: [
+          'Cuando un mazo sale de fábrica, contiene la impregnación industrial y las manipulaciones de muchas manos. Es necesario «bautizarlo» o consagrarlo para que responda a tu frecuencia psíquica personal:',
+          '1. Purificación con humo: Pasa cada tercio del mazo a través del humo del incienso bendiciendo las láminas.',
+          '2. Sal marina y luna: Coloca el mazo envuelto en seda sobre un lecho de sal o déjalo expuesto a la luz de la Luna Llena o Creciente.',
+          '3. Impregnación magnética: Duerme con el mazo debajo de tu almohada durante tres noches consecutivas barajándolo suavemente cada mañana sin emitir juicios.',
+        ],
+        calloutBox: {
+          type: 'practice',
+          title: 'Técnica de Barajado Consciente',
+          text: 'Nunca barajes con ansiedad mecánica. Respira por la nariz, pide mentalmente guía a tus protectores espirituales y formula la pregunta en tu mente mientras sientes el roce de los bordes de las cartas entre tus dedos.',
+        },
       },
     ],
     keyTerms: [
-      { term: 'Llaves Cruzadas', definition: 'Las llaves de oro y plata que abren los misterios solares (conscientes) y lunares (ocultos).' },
-      { term: 'Linaje Sagrado', definition: 'Cadena ininterrumpida de conocimiento hermético transmitida de maestro a discípulo.' },
+      { term: 'Consagración', definition: 'El acto ritual mediante el cual un objeto profano (los naipes impresos) se dedica formalmente a un propósito espiritual sagrado.' },
+      { term: 'Paño Ceremonial', definition: 'Manto textil que delimita el templo físico de la tirada, protegiendo las cartas de la suciedad y de energías discordantes.' },
+      { term: 'Corte de Mazo', definition: 'La partición en dos o tres montones de la baraja con la mano izquierda (mano del corazón y de la intuición) antes de extender la tirada.' },
     ],
     practicalExercise: {
-      title: 'Compromiso Ético y Sintonización con El Hierofante',
+      title: 'Ceremonia de Consagración de tu Baraja',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha el «Rito de El Hierofante: La Llave de los Misterios».',
-        'Redacta tu compromiso ético como estudiante de ARCANO: jamás utilizar el Tarot para manipular o asustar.',
-        'Envía tu juramento ético a consultas@arcanosolutions.com.',
+        '🎵 TAREA OBLIGATORIA: Escucha con auriculares «IX. El Ermitaño — La Lámpara en la Cumbre» y «X. La Justicia — La Balanza Inflexible».',
+        'Monta tu mesa de trabajo con paño, vela e incienso siguiendo las instrucciones de la lección.',
+        'Realiza la consagración de tu baraja siguiendo los 3 pasos rituales.',
+        'Toma una fotografía de tu altar consagrado y redacta tu experiencia de apertura.',
       ],
-      deliverablePrompt: 'Envía tu compromiso ético a consultas@arcanosolutions.com.',
+      deliverablePrompt: 'Envía la foto de tu altar consagrado y tu reporte a consultas@arcanosolutions.com con el asunto: "Tarot Nivel 1 - Lección 6: Consagración de Baraja - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 7: ARCANO VI — LOS ENAMORADOS
+  // LECCIÓN 7: PRIMERAS TIRADAS GUIADAS: LECTURAS DE 1 Y 3 CARTAS
   // ----------------------------------------------------------------------------
   'tarot-01-lesson-7': {
     lessonId: 'tarot-01-lesson-7',
     courseId: 'tarot-01',
-    title: 'Arcano VI: Los Enamorados — La Sagrada Elección y la Alianza del Corazón',
-    subtitle: 'El dilema del alma: La unión alquímica de opuestos y la elección desde la verdad interior',
-    readingTimeMinutes: 22,
+    title: 'Primeras Tiradas Guiadas: Lecturas de 1 y 3 Cartas',
+    subtitle: 'El arte de la pregunta honesta: Lectura del Consejo Diario y la Tirada Temporal de 3 Cartas',
+    readingTimeMinutes: 26,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     recommendedArcanaAudio: {
       slug: 'los-enamorados',
       title: 'Melodía de Los Enamorados — La Sagrada Elección',
       audioUrl: '/audio/arcanos/los-enamorados.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Melodía de Los Enamorados. Medita sobre la alineación entre lo que deseas, lo que piensas y lo que eliges cada día.',
+      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Melodía de Los Enamorados y Éxtasis de El Colgado. Comprende la sagrada responsabilidad de orientar una elección humana a través de la lectura.',
     },
     modules: [
       {
-        sectionTitle: '1. Mucho Más que Amor Romántico: La Gran Encrucijada',
+        sectionTitle: '1. Cómo Formular Preguntas Sagradas',
         paragraphs: [
-          'Los Enamorados no habla únicamente del romance entre dos personas: es la representación visual de la Sagrada Elección en la encrucijada de la vida.',
-          'Bajo las alas del arcángel Rafael, el hombre (la mente consciente) mira a la mujer (la mente subconsciente/emocional), y ella mira hacia el cielo (la superconciencia espiritual). Es el circuito perfecto de la sabiduría.',
-        ],
-      },
-    ],
-    keyTerms: [
-      { term: 'Boda Alquímica', definition: 'La unificación armoniosa de la energía masculina y femenina en el interior de un mismo ser.' },
-      { term: 'Libre Albedrío', definition: 'El poder supremo concedido al ser humano para elegir su camino evolutivo.' },
-    ],
-    practicalExercise: {
-      title: 'Examen de Decisiones con Los Enamorados',
-      instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha la «Melodía de Los Enamorados — La Sagrada Elección».',
-        'Analiza una decisión importante pendiente en tu vida. ¿La estás tomando desde el miedo o desde el amor?',
-        'Envía tu resolución a consultas@arcanosolutions.com.',
-      ],
-      deliverablePrompt: 'Envía tu ejercicio a consultas@arcanosolutions.com.',
-    },
-  },
-
-  // ----------------------------------------------------------------------------
-  // LECCIÓN 8: ARCANO VII — EL CARRO
-  // ----------------------------------------------------------------------------
-  'tarot-01-lesson-8': {
-    lessonId: 'tarot-01-lesson-8',
-    courseId: 'tarot-01',
-    title: 'Arcano VII: El Carro — La Victoria del Alma y la Dirección Consciente',
-    subtitle: 'El guerrero victorioso: Maestría sobre las fuerzas opuestas y avance implacable',
-    readingTimeMinutes: 22,
-    officialTutorEmail: 'consultas@arcanosolutions.com',
-    recommendedArcanaAudio: {
-      slug: 'el-carro',
-      title: 'Tono Victorioso de El Carro — La Conquista del Alma',
-      audioUrl: '/audio/arcanos/el-carro.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Tono Victorioso de El Carro. Siente cómo la voluntad domina las dudas y te proyecta hacia tu meta sin titubeos.',
-    },
-    modules: [
-      {
-        sectionTitle: '1. El Conductor sin Riendas',
-        paragraphs: [
-          'El guerrero del Carro no sujeta las esfinges con cuerdas de cuero ni riendas físicas: las gobierna con el poder de su mente y de su voluntad concentrada.',
-          'Las dos esfinges (una blanca y una negra) tiran hacia lados opuestos. El triunfo consiste en mantener el carro avanzando en línea recta sin permitir que ninguna polaridad desvíe tu curso.',
-        ],
-      },
-    ],
-    keyTerms: [
-      { term: 'Esfinges Opuestas', definition: 'Las fuerzas de la luz y de la sombra que el espíritu debe gobernar para no ser despedazado.' },
-      { term: 'Armadura Sagrada', definition: 'Protección psíquica del iniciado que avanza con un propósito moral intachable.' },
-    ],
-    practicalExercise: {
-      title: 'Dirección Inquebrantable con El Carro',
-      instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha el «Tono Victorioso de El Carro — La Conquista del Alma».',
-        'Define tu meta principal para los próximos 3 meses y los dos obstáculos (esfinges) que debes dominar.',
-        'Envía tu mapa de avance a consultas@arcanosolutions.com.',
-      ],
-      deliverablePrompt: 'Envía tu mapa a consultas@arcanosolutions.com.',
-    },
-  },
-
-  // ----------------------------------------------------------------------------
-  // LECCIÓN 9: ARCANO VIII — LA FUERZA
-  // ----------------------------------------------------------------------------
-  'tarot-01-lesson-9': {
-    lessonId: 'tarot-01-lesson-9',
-    courseId: 'tarot-01',
-    title: 'Arcano VIII: La Fuerza — La Caricia y el León: Dominio mediante el Amor',
-    subtitle: 'La fuerza del espíritu: La ternura y la compasión domesticando al instinto animal',
-    readingTimeMinutes: 20,
-    officialTutorEmail: 'consultas@arcanosolutions.com',
-    recommendedArcanaAudio: {
-      slug: 'la-fuerza',
-      title: 'Consagración de La Fuerza — La Caricia y el León',
-      audioUrl: '/audio/arcanos/la-fuerza.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Consagración de La Fuerza. Siente cómo la suavidad, la respiración profunda y el amor disuelven la ira y la frustración interna.',
-    },
-    modules: [
-      {
-        sectionTitle: '1. La Fuerza no es Violencia: Es Mansedumbre Soberana',
-        paragraphs: [
-          'La mujer no empuña una espada ni encadena al león feroz: le acaricia suavemente la mandíbula con una corona de flores y paciencia infinita.',
-          'Enseña que reprimir o golpear nuestras pasiones e instintos salvajes solo los vuelve más destructivos. La maestría reside en amarlos, comprenderlos y canalizarlos con ternura espiritual.',
-        ],
-      },
-    ],
-    keyTerms: [
-      { term: 'El León Interior', definition: 'La naturaleza instintiva, las pasiones viscerales, el ego y el fuego primordial.' },
-      { term: 'Mansedumbre Espiritual', definition: 'El poder supremo de permanecer en paz y amor frente a la agresividad externa o interna.' },
-    ],
-    practicalExercise: {
-      title: 'Domesticando al León Interior con La Fuerza',
-      instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha la «Consagración de La Fuerza — La Caricia y el León».',
-        'Identifica un impulso de enojo o impaciencia recurrente y escribe cómo puedes abordarlo con caricia y calma.',
-        'Envía tu reflexión a consultas@arcanosolutions.com.',
-      ],
-      deliverablePrompt: 'Envía tu reflexión a consultas@arcanosolutions.com.',
-    },
-  },
-
-  // ----------------------------------------------------------------------------
-  // LECCIÓN 10: ARCANO IX — EL ERMITAÑO
-  // ----------------------------------------------------------------------------
-  'tarot-01-lesson-10': {
-    lessonId: 'tarot-01-lesson-10',
-    courseId: 'tarot-01',
-    title: 'Arcano IX: El Ermitaño — La Lámpara en la Cumbre y la Búsqueda Interior',
-    subtitle: 'El sabio solitario: La lámpara de Hermes iluminando el sendero en la oscuridad',
-    readingTimeMinutes: 22,
-    officialTutorEmail: 'consultas@arcanosolutions.com',
-    recommendedArcanaAudio: {
-      slug: 'el-ermitano',
-      title: 'Vigilia de El Ermitaño — La Lámpara en la Cumbre',
-      audioUrl: '/audio/arcanos/el-ermitano.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha la Vigilia de El Ermitaño en soledad nocturna. Abraza la quietud y permite que tu propia luz interior ilumine tus dudas.',
-    },
-    modules: [
-      {
-        sectionTitle: '1. La Soledad Fértil y la Linterna de Hermes',
-        paragraphs: [
-          'El Ermitaño ha escalado la montaña sagrada. No busca el aplauso de las multitudes ni los títulos del mundo exterior.',
-          'Sostiene en lo alto su farol hexagonal, dentro del cual brilla una estrella de seis puntas (el Sello de Salomón): la luz de la verdad que solo alumbra un paso a la vez, el suficiente para no tropezar.',
-        ],
-      },
-    ],
-    keyTerms: [
-      { term: 'Báculo de Tres Nudos', definition: 'El soporte de la sabiduría apoyado en los tres mundos: físico, psíquico y espiritual.' },
-      { term: 'Estrella en el Farol', definition: 'La chispa divina de la conciencia que nunca se apaga en medio de la noche oscura del alma.' },
-    ],
-    practicalExercise: {
-      title: 'Vigilia Silenciosa con El Ermitaño',
-      instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha la «Vigilia de El Ermitaño — La Lámpara en la Cumbre» con las luces apagadas.',
-        'Apaga todos los dispositivos y permanece 10 minutos contigo mismo.',
-        'Anota la verdad íntima que tu mente solía acallar con el ruido diario.',
-        'Envía tu reflexión a consultas@arcanosolutions.com.',
-      ],
-      deliverablePrompt: 'Envía tu ejercicio a consultas@arcanosolutions.com.',
-    },
-  },
-
-  // ----------------------------------------------------------------------------
-  // LECCIÓN 11: ARCANO X — LA JUSTICIA
-  // ----------------------------------------------------------------------------
-  'tarot-01-lesson-11': {
-    lessonId: 'tarot-01-lesson-11',
-    courseId: 'tarot-01',
-    title: 'Arcano X: La Justicia — La Balanza Inflexible y la Ley Causa y Efecto',
-    subtitle: 'El juicio imparcial: La espada de la verdad y el equilibrio cósmico de cada acto',
-    readingTimeMinutes: 22,
-    officialTutorEmail: 'consultas@arcanosolutions.com',
-    recommendedArcanaAudio: {
-      slug: 'la-justicia',
-      title: 'Decreto de La Justicia — La Balanza Inflexible',
-      audioUrl: '/audio/arcanos/la-justicia.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Decreto de La Justicia. Comprende la ley del karma y asume la responsabilidad total de tus pensamientos, palabras y acciones.',
-    },
-    modules: [
-      {
-        sectionTitle: '1. La Balanza del Alma y la Espada de Doble Filo',
-        paragraphs: [
-          'La Justicia se sienta erguida con la mirada fija hacia el frente. En su mano izquierda sostiene la balanza dorada (equilibrio impecable de motivos e intenciones) y en su mano derecha la espada erguida (el corte inexorable de las consecuencias).',
-          'Enseña que el cosmos no castiga ni premia: simplemente equilibra. Lo que siembras en el plano invisible de la mente cosecharás en el plano visible de la materia.',
-        ],
-      },
-    ],
-    keyTerms: [
-      { term: 'Espada de Doble Filo', definition: 'La verdad que corta tanto el engaño ajeno como el autoengaño propio.' },
-      { term: 'Ley del Karma', definition: 'El principio cósmico de restitución armónica y equilibrio de fuerzas.' },
-    ],
-    practicalExercise: {
-      title: 'Pesaje en la Balanza con La Justicia',
-      instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha el «Decreto de La Justicia — La Balanza Inflexible».',
-        'Examina una situación en la que culpaste a otros y asume tu 50% de responsabilidad.',
-        'Escribe qué acción reparadora puedes tomar para restablecer el balance kármico.',
-        'Envía tu análisis a consultas@arcanosolutions.com.',
-      ],
-      deliverablePrompt: 'Envía tu análisis a consultas@arcanosolutions.com.',
-    },
-  },
-
-  // ----------------------------------------------------------------------------
-  // LECCIÓN 12: ARCANO XI — EL COLGADO
-  // ----------------------------------------------------------------------------
-  'tarot-01-lesson-12': {
-    lessonId: 'tarot-01-lesson-12',
-    courseId: 'tarot-01',
-    title: 'Arcano XI: El Colgado — La Visión Invertida y la Rendición Iluminada',
-    subtitle: 'La pausa fecunda: Mirar el mundo al revés para liberarse de las cadenas del ego',
-    readingTimeMinutes: 24,
-    officialTutorEmail: 'consultas@arcanosolutions.com',
-    recommendedArcanaAudio: {
-      slug: 'el-colgado',
-      title: 'Éxtasis de El Colgado — La Visión Invertida',
-      audioUrl: '/audio/arcanos/el-colgado.mp3',
-      taskDescription: 'REQUISITO OBLIGATORIO: Escucha el Éxtasis de El Colgado. Comprende el misterio de la entrega voluntaria: cuando el ego deja de luchar, el alma despierta iluminada.',
-    },
-    modules: [
-      {
-        sectionTitle: '1. El Sacrificio Sagrado y el Halo de Oro',
-        paragraphs: [
-          'El Colgado está suspendido de un pie en un madero vivo con brotes verdes. Su rostro no expresa dolor ni angustia: está en calma absoluta, con un halo dorado de iluminación brillando en torno a su cabeza.',
-          'Es el arquetipo de la rendición consciente. Cuando todas las estrategias del ego fracasan, quedarse quieto y mirar la situación desde una perspectiva totalmente invertida revela la salida que la mente apresurada no podía ver.',
+          'El 80% del éxito de una tirada radica en la calidad de la pregunta. Preguntas como «¿Me va a engañar mi esposo?» o «¿Me ganaré la lotería mañana?» nacen del miedo y de la pasividad infantil.',
+          'Las preguntas de la Escuela ARCANO son evolutivas y empoderadoras:',
+          '• En lugar de «¿Volverá mi ex?», pregunta: «¿Cuál es la raíz kármica de este distanciamiento y qué debo aprender yo de este vínculo?»',
+          '• En lugar de «¿Voy a tener dinero?», pregunta: «¿Qué bloqueo interior me impide manifestar prosperidad económica y qué acción concreta debo ejecutar?»',
         ],
       },
       {
-        sectionTitle: '2. Culminación del Nivel 1 y los 12 Arcanos',
+        sectionTitle: '2. Tirada 1: La Carta Única (Oráculo Diario)',
         paragraphs: [
-          'Con El Colgado completas los primeros 12 Arcanos Mayores de tu iniciación (del 0 al XI).',
-          'Has recorrido el salto audaz de El Loco, la manifestación de El Mago, el templo de La Sacerdotisa, la fertilidad de La Emperatriz, el orden de El Emperador, el rito de El Hierofante, la elección de Los Enamorados, el avance de El Carro, la ternura de La Fuerza, la lámpara de El Ermitaño, la balanza de La Justicia y la iluminación invertida de El Colgado.',
+          'Es la práctica diaria obligatoria de todo estudiante iniciático. Cada mañana al levantarte:',
+          '1. Barajas con calma y preguntas: «¿Cuál es la energía arquetípica que me acompañará hoy y qué lección exige mi alma?»',
+          '2. Extraes un solo naipe. Lo colocas en tu altar y observas sus detalles visuales durante el día.',
+          '3. Por la noche, contrastas lo vivido con el simbolismo de la carta.',
         ],
+      },
+      {
+        sectionTitle: '3. Tirada 2: La Tríada Sagrada (Pasado — Presente — Futuro Potencial)',
+        paragraphs: [
+          'La lectura de 3 cartas es la arquitectura madre de todo el Tarot. Se disponen tres cartas alineadas de izquierda a derecha:',
+          '• Carta 1 (Izquierda): La Raíz / Pasado reciente que generó la circunstancia.',
+          '• Carta 2 (Centro): El Presente / El estado actual de la energía y el desafío central.',
+          '• Carta 3 (Derecha): El Futuro Potencial / El desenlace más probable si el consultante continúa en la misma dirección de pensamiento y acción.',
+        ],
+        calloutBox: {
+          type: 'warning',
+          title: 'El Futuro Potencial no es Destino Fijo',
+          text: 'Si la Carta 3 muestra una energía discordante (ej. La Torre o el 5 de Oros), no es una profecía inmutable; es una advertencia amorosa del universo diciendo: «Si cambias tu conducta y pensamientos hoy, modificarás ese futuro».',
+        },
       },
     ],
     keyTerms: [
-      { term: 'Visión Invertida', definition: 'Cambio radical de paradigma donde lo que parecía pérdida se revela como la mayor ganancia espiritual.' },
-      { term: 'Pausa Fecunda', definition: 'La detención activa del movimiento exterior para gestar una transformación interna profunda.' },
+      { term: 'Pregunta Evolutiva', definition: 'Interrogante planteada con madurez que busca comprender y transformar la realidad en lugar de buscar certezas pasivas.' },
+      { term: 'Tríada Sagrada', definition: 'Método fundamental de tres cartas que conecta el origen (pasado), la vivencia presente y el vector de manifestación futuro.' },
+      { term: 'Futuro Probable', definition: 'El desenlace temporal con mayor densidad cuántica en el momento de la consulta, siempre sujeto al libre albedrío.' },
     ],
     practicalExercise: {
-      title: 'Tirada de Graduación del Nivel 1 (Los 12 Arcanos)',
+      title: 'Práctica Final de Graduación: Tu Primera Tirada de 3 Cartas',
       instructions: [
-        '🎵 TAREA ACÚSTICA OBLIGATORIA: Escucha el «Éxtasis de El Colgado — La Visión Invertida».',
-        'Separa los primeros 12 Arcanos Mayores de tu mazo (del 0 al XI).',
-        'Barájalos con reverencia y extrae 3 cartas para responder: «¿Cuál ha sido la mayor transformación de mi conciencia en este primer nivel?»',
-        'Redacta tu ensayo final y envíalo con tus fotografías a consultas@arcanosolutions.com para recibir tu retroalimentación oficial de graduación del Nivel 1.',
+        '🎵 TAREA OBLIGATORIA FINAL: Asegúrate de haber escuchado las 12 canciones sagradas de los Arcanos Mayores en el aula y de marcarlas como comprendidas en tu panel.',
+        'Abre tu espacio sagrado con vela y paño de lectura.',
+        'Realiza una tirada real de 3 cartas sobre un tema personal honesto (Pasado, Presente, Futuro Potencial).',
+        'Fotografía las tres cartas sobre tu tapete.',
+        'Redacta un informe de graduación de Nivel 1 de 2 a 3 páginas analizando: el tema consultado, la interpretación detallada carta por carta, cómo dialogan entre sí y el consejo final que te brinda el Tarot.',
       ],
-      deliverablePrompt: 'Envía tu trabajo de graduación a consultas@arcanosolutions.com con el asunto «Graduación Tarot Nivel 1 — [Tu Nombre]».',
+      deliverablePrompt: 'Envía tu informe final de graduación de 3 cartas con su fotografía adjunta a consultas@arcanosolutions.com con el asunto: "Graduación Tarot Nivel 1 - Informe de 3 Cartas - [Tu Nombre Completo]".',
     },
   },
 };

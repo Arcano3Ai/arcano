@@ -2,6 +2,7 @@
 // ARCANO ACADEMIA ESOTÉRICA — MATERIAL DE ESTUDIO OFICIAL: NIVEL 1
 // Ruta: ASTROLOGÍA (La Mecánica Celeste y la Rueda Zodiacal)
 // Curso: Astrología desde Cero (astrologia-01)
+// 7 LECCIONES MAESTRAS CANÓNICAS
 // Correo Oficial de Tutorías y Prácticas: consultas@arcanosolutions.com
 // ==============================================================================
 
@@ -9,21 +10,21 @@ import { LessonStudyGuide } from './academyStudyLevel1';
 
 export const ASTROLOGY_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = {
   // ----------------------------------------------------------------------------
-  // LECCIÓN 1: HISTORIA Y FILOSOFÍA DE LA ASTROLOGÍA TRADICIONAL Y MODERNA
+  // LECCIÓN 1: QUÉ ES LA ASTROLOGÍA: “COMO ES ARRIBA, ES ABAJO”
   // ----------------------------------------------------------------------------
   'astrologia-01-lesson-1': {
     lessonId: 'astrologia-01-lesson-1',
     courseId: 'astrologia-01',
-    title: 'Historia y Filosofía de la Astrología Tradicional y Moderna',
-    subtitle: 'El principio hermético de correspondencia: Como es arriba, es abajo',
-    readingTimeMinutes: 18,
+    title: 'Qué es la Astrología: “Como es arriba, es abajo”',
+    subtitle: 'El principio hermético de correspondencia y el cosmos como organismo vivo interconectado',
+    readingTimeMinutes: 20,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     modules: [
       {
         sectionTitle: '1. El Nacimiento de la Astrología en la Mesopotamia Sagrada',
         paragraphs: [
-          'La astrología nació en el momento en que el ser humano elevó la mirada a la bóveda celeste y comprendió que el orden estelar no era ajeno al devenir terrestre. En las llanuras de Caldea y Babilonia (siglos XIX a VI a.C.), los sacerdotes astrónomos registraron minuciosamente los eclipses, las fases lunares y el movimiento errante de los cinco planetas visibles a simple vista: Mercurio, Venus, Marte, Júpiter y Saturno.',
-          'Para el pensamiento mesopotámico, el cielo era una gran pizarra donde los dioses grababan presagios colectivos. La astrología primitiva no era individual ni natal; era judicial y oracular, consagrada a predecir la prosperidad del reino, las crecidas de los ríos Tigris y Éufrates, y el destino de los reyes.',
+          'La astrología nació en el instante en que el ser humano elevó la mirada a la bóveda celeste y comprendió que el orden estelar no era ajeno al devenir terrestre. En las llanuras de Babilonia y Caldea (siglos XIX a VI a.C.), los sacerdotes astrónomos registraron minuciosamente los eclipses y el movimiento de los planetas visibles.',
+          'Para el pensamiento mesopotámico, el cielo era una gran pizarra donde los dioses grababan presagios colectivos. La astrología primitiva no era individual ni determinista; era oracular y sagrada, consagrada a comprender los grandes ciclos cósmicos y la relación entre macrocosmos y microcosmos.',
         ],
         bulletPoints: [
           'Tablillas de Enuma Anu Enlil: Primer compendio de más de 7,000 presagios astrológicos babilónicos.',
@@ -32,398 +33,343 @@ export const ASTROLOGY_LEVEL_1_STUDY_GUIDES: Record<string, LessonStudyGuide> = 
         ],
       },
       {
-        sectionTitle: '2. La Síntesis Helenística y el Nacimiento de la Carta Natal',
+        sectionTitle: '2. El Axioma Hermético de Hermes Trismegisto',
         paragraphs: [
-          'Con la conquista de Alejandro Magno y el florecimiento de Alejandría en Egipto, la tradición babilónica se fusionó con la filosofía pitagórica, la geometría platónica y la física aristotélica. Aquí nació la astrología horoscópica o natal: la determinación del horoskopos (el signo y grado ascendente en el horizonte oriental al momento del nacimiento individual).',
-          'En el siglo II d.C., Claudio Ptolomeo compuso el Tetrabiblos, la obra maestra que codificó la doctrina de los 12 signos tropicales, las 12 casas celestes, los aspectos geométricos mayores y las dignidades planetarias, sentando las bases que rigieron Europa y el mundo islámico durante más de mil quinientos años.',
+          'En el siglo II d.C., en Alejandría, la tradición babilónica se fusionó con la filosofía pitagórica y el hermetismo egipcio. El fundamento de la astrología se sintetiza en la Tabla de Esmeralda: «Quod est inferius est sicut quod est superius...» (Lo que está abajo es semejante a lo que está arriba, para obrar los milagros de una sola cosa).',
+          'La astrología no postula que los planetas emitan rayos magnéticos que obliguen a actuar de una forma; postula la ley de la sincronicidad (Jung): el universo es un holograma armónico donde los movimientos celestes reflejan las corrientes internas de la psique.',
         ],
         calloutBox: {
           type: 'hermetic',
-          title: 'Axioma Hermético de Hermes Trismegisto (Tabla de Esmeralda)',
-          text: '«Quod est inferius est sicut quod est superius, et quod est superius est sicut quod est inferius, ad perpetranda miracula rei unius» (Lo que está abajo es semejante a lo que está arriba, y lo que está arriba es semejante a lo que está abajo, para obrar los milagros de una sola cosa). La astrología no postula que los astros emitan un rayo magnético determinista sobre tu voluntad, sino que reflejan el estado del Todo en sincronicidad armónica.',
+          title: 'Axioma de la Academia ARCANO',
+          text: '«Astra inclinant, sed non obligant» (Los astros inclinan, pero no obligan). La carta natal es un mapa de potencialidades y tendencias arquetípicas; tu libre albedrío y tu nivel de consciencia determinan si vibrarás en la luz o en la sombra de tu configuración celeste.',
         },
-      },
-      {
-        sectionTitle: '3. El Tránsito a la Astrología Psicológica y Humanista',
-        paragraphs: [
-          'Durante el Renacimiento, astrónomos y sabios como Johannes Kepler y Tycho Brahe continuaron ejerciendo la astrología con rigor matemático. No obstante, con la llegada del mecanicismo cartesiano, la disciplina fue relegada de las academias formales.',
-          'En el siglo XX, el médico psiquiatra suizo Carl Gustav Jung rescató la astrología como el sistema arquetípico más completo jamás diseñado por la psique humana. La astrología contemporánea concibe la carta natal no como una condena del destino, sino como un mapa del tesoro psíquico, una semilla de potencialidades donde los planetas son funciones psicológicas internas en proceso de integración.',
-        ],
       },
     ],
     keyTerms: [
-      {
-        term: 'Zodíaco Tropical',
-        definition: 'Sistema astrológico occidental basado en las estaciones y el punto vernal (0° de Aries), en contraposición al zodíaco sideral que mide las constelaciones astronómicas visibles.',
-      },
-      {
-        term: 'Sincronicidad',
-        definition: 'Concepto junguiano de coincidencia temporal no causal entre un estado anímico interno y un evento cósmico externo con sentido significativo.',
-      },
-      {
-        term: 'Carta Natal (Radix)',
-        definition: 'Fotografía instantánea y matemática del firmamento visto desde la latitud, longitud, fecha y hora exacta del nacimiento de un individuo.',
-      },
+      { term: 'Correspondencia Hermética', definition: 'Principio universal que establece la interconexión cualitativa entre el macrocosmos (cielo) y el microcosmos (hombre).' },
+      { term: 'Sincronicidad', definition: 'Principio de conexiones acausales acuñado por C.G. Jung: eventos simultáneos vinculados por un significado común.' },
+      { term: 'Zodíaco Tropical', definition: 'Sistema astrológico occidental medido a partir del Punto Vernal (0° Aries, equinoccio de primavera) y las estaciones terrestres.' },
     ],
     practicalExercise: {
       title: 'Práctica de Iniciación: Tu Conexión con los Ciclos Cósmicos',
       instructions: [
-        'Investiga con exactitud tu hora de nacimiento en tu acta oficial o partida de bautismo.',
-        'Redacta un texto reflexivo de 1 a 2 páginas respondiendo: ¿Concibes el universo como un mecanismo ciego y azaroso o como un organismo vivo interconectado?',
-        'Identifica un momento en tu vida en el que hayas experimentado una sincronicidad indudable entre un proceso emocional y un evento externo.',
+        'Investiga con exactitud tu hora de nacimiento en tu acta oficial o partida de nacimiento.',
+        'Redacta un texto reflexivo de 1 a 2 páginas respondiendo: ¿Concibes el universo como un mecanismo ciego o como un organismo vivo interconectado?',
+        'Identifica un momento de tu biografía donde hayas experimentado una sincronicidad indudable entre un proceso interior y un evento externo.',
       ],
-      deliverablePrompt: 'Envía tu reflexión en documento PDF o texto al correo oficial consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 1: Historia y Sincronicidad - [Tu Nombre Completo]".',
+      deliverablePrompt: 'Envía tu reflexión a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 1: Como es Arriba, es Abajo - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 2: LA RUEDA ZODIACAL: DIVISIÓN EN 360 GRADOS Y LOS 12 SIGNOS
+  // LECCIÓN 2: EL MANDALA ZODIACAL: LA RUEDA DE 360°, LOS 12 SIGNOS Y EL HORIZONTE
   // ----------------------------------------------------------------------------
   'astrologia-01-lesson-2': {
     lessonId: 'astrologia-01-lesson-2',
     courseId: 'astrologia-01',
-    title: 'La Rueda Zodiacal: División en 360 Grados y los 12 Signos Sagrados',
-    subtitle: 'La eclíptica solar, los 4 portales cardinales y el viaje del héroe de Aries a Piscis',
+    title: 'El Mandala Zodiacal: La rueda de 360°, los 12 signos y el horizonte',
+    subtitle: 'La geometría sagrada de la eclíptica: división en doce sectores de 30° y el viaje del héroe de Aries a Piscis',
     readingTimeMinutes: 22,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     modules: [
       {
         sectionTitle: '1. Geometría Sagrada de la Eclíptica',
         paragraphs: [
-          'La rueda zodiacal es el cinturón imaginario de la esfera celeste a través del cual transita el Sol, la Luna y los planetas a lo largo de un año terrestre visto desde una perspectiva geocéntrica. Este círculo sagrado de 360 grados se divide matemáticamente en 12 arcos idénticos de 30 grados cada uno.',
-          'Cada sector de 30 grados constituye un signo zodiacal. El punto de origen es el Equinoccio de Primavera en el hemisferio norte (el Punto Vernal o Punto Aries, 0° ♈). En este instante cósmico, el día y la noche tienen exactamente la misma duración y la fuerza vital del fuego primordial despierta de su letargo invernal.',
+          'La rueda zodiacal es el cinturón celeste por donde transita aparentemente el Sol a lo largo de un año terrestre (la eclíptica). Este círculo perfecto de 360 grados se divide con precisión matemática en 12 arcos de 30 grados cada uno.',
+          'El punto de origen es el Equinoccio de Primavera (0° de Aries), instante en que el día y la noche se igualan en duración y la vida despierta con vigor renovado.',
         ],
         bulletPoints: [
-          'Equinoccio de Primavera (0° Aries): Nacimiento del ciclo vital, la chispa de fuego.',
-          'Solsticio de Verano (0° Cáncer): La plenitud del agua emocional y la luz máxima.',
-          'Equinoccio de Otoño (0° Libra): El balance del aire relacional y la contemplación del otro.',
-          'Solsticio de Invierno (0° Capricornio): La solidez de la tierra, la maduración y la noche más profunda.',
+          'Equinoccio de Primavera (0° Aries): La chispa primordial de fuego, el nacimiento.',
+          'Solsticio de Verano (0° Cáncer): La matriz del agua nutricia, la luz cenital.',
+          'Equinoccio de Otoño (0° Libra): El balance del aire relacional, el encuentro con el otro.',
+          'Solsticio de Invierno (0° Capricornio): La solidez de la tierra, la noche más larga y la maduración.',
         ],
       },
       {
-        sectionTitle: '2. El Sendero Evolutivo de los 12 Arquetipos Zodiacales',
+        sectionTitle: '2. Los 12 Arquetipos de la Conciencia Humana',
         paragraphs: [
-          'Los 12 signos no son etiquetas superficiales, sino una espiral evolutiva de la conciencia humana:',
-          '1. Aries (♈): El impulso original, el grito vital, la individualidad naciente.\n2. Tauro (♉): La fijación de la materia, los 5 sentidos, la nutrición y el valor.\n3. Géminis (♊): La curiosidad, el lenguaje, la dualidad y la conexión mental.\n4. Cáncer (♋): El útero primordial, el hogar, la memoria ancestral y la ternura.\n5. Leo (♌): El brillo solar, la creatividad individual, el juego y la autoafirmación.\n6. Virgo (♍): El discernimiento, la purificación, la artesanía y el servicio útil.',
-          '7. Libra (♎): El encuentro con el prójimo, la armonía, la estética y la justicia.\n8. Escorpio (♏): La metamorfosis, la sombra, la sexualidad y la regeneración profunda.\n9. Sagitario (♐): La búsqueda de sentido, la filosofía, la fe y la expansión de horizontes.\n10. Capricornio (♑): La estructura, la ley del tiempo (Saturno), la maestría y la cosecha.\n11. Acuario (♒): La fraternidad universal, la innovación vanguardista y la libertad de mente.\n12. Piscis (♓): La disolución de las fronteras, la compasión mística y el retorno al océano primordial.',
+          'Los 12 signos no son estereotipos psicológicos fijos, sino doce estaciones evolutivas del alma:',
+          '1. Aries (♈): El impulso, el grito vital, la individualidad naciente («Yo Soy»).\n2. Tauro (♉): La consolidación material, los 5 sentidos, la nutrición («Yo Tengo»).\n3. Géminis (♊): La curiosidad, el lenguaje, la dualidad y los vínculos («Yo Pienso»).\n4. Cáncer (♋): El hogar, las emociones profundas, el linaje ancestral («Yo Siento»).\n5. Leo (♌): El brillo solar, la creatividad, la autoexpresión digna («Yo Creo»).\n6. Virgo (♍): El discernimiento, la purificación, la artesanía y el servicio («Yo Analizo»).\n7. Libra (♎): El encuentro con el otro, la estética, la armonía («Yo Equilibro»).\n8. Escorpio (♏): La metamorfosis, la sombra, la transmutación («Yo Transformo»).\n9. Sagitario (♐): La búsqueda de sentido, la filosofía, la fe («Yo Veo»).\n10. Capricornio (♑): La estructura, la ley del tiempo, la maestría («Yo Construyo»).\n11. Acuario (♒): La fraternidad universal, la innovación vanguardista («Yo Sé»).\n12. Piscis (♓): La compasión mística, el retorno al océano primordial («Yo Me Fundo»).',
         ],
-        calloutBox: {
-          type: 'hermetic',
-          title: 'El Ciclo Completo del Espíritu',
-          text: 'En Aries el alma dice «YO SOY»; en Tauro «YO TENGO»; en Géminis «YO PIENSO»; en Cáncer «YO SIENTO»; en Leo «YO CREO»; en Virgo «YO ANALIZO»; en Libra «YO EQUILIBRO»; en Escorpio «YO DESEO / TRANSFORMO»; en Sagitario «YO VEO»; en Capricornio «YO CONSTRUYO»; en Acuario «YO SÉ»; y en Piscis «YO ME FUNDO CON EL TODO».',
-        },
       },
     ],
     keyTerms: [
-      {
-        term: 'Eclíptica',
-        definition: 'Trayectoria aparente del Sol alrededor de la Tierra a lo largo del año solar.',
-      },
-      {
-        term: 'Signo Tropical',
-        definition: 'Cada uno de los 12 segmentos de 30° medidos a partir del equinoccio vernal.',
-      },
-      {
-        term: 'Cúspide de Signo',
-        definition: 'La frontera exacta (grado 0°00\'00") donde concluye un signo e inicia el siguiente.',
-      },
+      { term: 'Eclíptica', definition: 'Trayectoria aparente del Sol alrededor de la Tierra durante el ciclo anual de traslación.' },
+      { term: 'Punto Vernal (Punto Aries)', definition: 'La intersección del ecuador celeste con la eclíptica al comienzo de la primavera septentrional.' },
+      { term: 'Cúspide', definition: 'Límite exacto en grados, minutos y segundos donde concluye un signo o casa e inicia el siguiente.' },
     ],
     practicalExercise: {
-      title: 'Mapeo de los 12 Arquetipos en tu Entorno',
+      title: 'Mapeo del Mandala Zodiacal Personal',
       instructions: [
-        'Dibuja a mano en una lámina o cuaderno un círculo perfecto y divídelo en 12 sectores iguales de 30° anotando los glifos de los 12 signos.',
-        'Elige a 4 personas cercanas de signos solares distintos y describe cómo manifiestan las virtudes y los excesos de su signo zodiacal.',
-        'Identifica en qué signos reconoces mayor afinidad natural y en cuáles experimentas mayor dificultad o fricción.',
+        'Dibuja a mano en una hoja un círculo dividido en 12 sectores iguales de 30° con los 12 glifos sagrados.',
+        'Elige a tres personas cercanas y describe cómo manifiestan las virtudes y sombras de su signo solar.',
+        'Identifica con cuáles signos experimentas afinidad inmediata y con cuáles sientes mayor desafío de comprensión.',
       ],
-      deliverablePrompt: 'Envía tu lámina dibujada y tu análisis descriptivo a consultas@arcanosolutions.com para revisión del tutor oficial con el asunto: "Astrología Nivel 1 - Lección 2: Rueda Zodiacal - [Tu Nombre]".',
+      deliverablePrompt: 'Envía tu lámina dibujada y tus reflexiones a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 2: Mandala Zodiacal - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 3: LOS 4 ELEMENTOS CELESTES: FUEGO, TIERRA, AIRE Y AGUA
+  // LECCIÓN 3: LAS 2 LUMINARIAS: EL SOL Y LA LUNA
   // ----------------------------------------------------------------------------
   'astrologia-01-lesson-3': {
     lessonId: 'astrologia-01-lesson-3',
     courseId: 'astrologia-01',
-    title: 'Los 4 Elementos Celestes: Fuego, Tierra, Aire y Agua',
-    subtitle: 'Dinámica de la materia, temperamentos alquímicos y el balance elemental del ser',
-    readingTimeMinutes: 20,
+    title: 'Las 2 Luminarias: El Sol y la Luna',
+    subtitle: 'El Padre Cósmico y la Madre Celeste: El núcleo de la conciencia despierta y el refugio emocional del alma',
+    readingTimeMinutes: 24,
     officialTutorEmail: 'consultas@arcanosolutions.com',
+    recommendedArcanaAudio: {
+      slug: 'el-loco',
+      title: 'Himno Sagrado de El Loco',
+      audioUrl: '/audio/arcanos/el-loco.mp3',
+      taskDescription: 'Medita en el Sol brillante que ilumina el precipicio de El Loco, símbolo de la luz divina de la conciencia.',
+    },
     modules: [
       {
-        sectionTitle: '1. La Doctrina Alquímica de los Elementos en el Cielo',
+        sectionTitle: '1. El Sol: El Héroe Solar y el Núcleo de la Identidad',
         paragraphs: [
-          'La naturaleza manifestada se compone de cuatro sustancias primarias, cada una fruto de la combinación de dos cualidades primarias: Caliente, Frío, Seco y Húmedo.',
-          'Cada signo zodiacal pertenece de forma inmutable a una de estas cuatro familias elementales (triplicidades). El elemento de un signo define su temperamento básico, su motor motivacional y el prisma a través del cual procesa la realidad.',
+          'En astrología tradicional y psicológica, el Sol no es considerado un simple planeta: es la Gran Luminaria Mayor, el dador de vida física, el corazón del sistema circulatorio cósmico y el centro organizador de la psique.',
+          'El Sol representa el "Yo Consciente", la chispa divina encarnada, la voluntad creadora, la vitalidad biológica y aquello hacia lo que venimos a convertirnos con madurez y autoafirmación.',
         ],
         bulletPoints: [
-          'FUEGO (Caliente + Seco) — Aries, Leo, Sagitario: Impulso vital, entusiasmo, coraje, intuición activa, fe, liderazgo. En sombra: ira, egocentrismo, impaciencia destructiva.',
-          'TIERRA (Fría + Seca) — Tauro, Virgo, Capricornio: Concreción tangible, paciencia, realismo, disciplina, contacto sensorial. En sombra: terquedad, materialismo ciego, rigidez mental.',
-          'AIRE (Caliente + Húmedo) — Géminis, Libra, Acuario: Pensamiento abstracto, comunicación, perspectiva social, discernimiento ético. En sombra: desconexión emocional, dispersión, intelectualismo frío.',
-          'AGUA (Fría + Húmeda) — Cáncer, Escorpio, Piscis: Emotividad, intuición receptiva, empatía profunda, memoria psíquica, devoción. En sombra: apego patológico, drama, hipersensibilidad victimaria.',
+          'Principio masculino primordial (Yang / Animus): La fuerza que irradia luz propia y toma decisiones éticas.',
+          'Regencia astrológica: Rige exclusivamente el signo de Leo y la Casa 5.',
+          'El Sol en sombra: Egolatría, soberbia, necesidad patológica de aplauso o, en el polo opuesto, timidez y apagamiento vital.',
         ],
       },
       {
-        sectionTitle: '2. El Cálculo del Balance Elemental en una Carta Natal',
+        sectionTitle: '2. La Luna: El Océano Inconsciente y el Apego Afectivo',
         paragraphs: [
-          'Ningún ser humano está compuesto de un solo elemento. Una carta natal contiene 10 planetas y puntos sensibles distribuidos a lo largo del mandala. Un individuo con Sol en Cáncer (Agua) puede tener Luna en Aries (Fuego), Mercurio en Géminis (Aire) y Ascendente en Tauro (Tierra).',
-          'Aprender a tabular cuántos planetas se encuentran en cada elemento revela la homeostasis del consultante: qué elemento es dominante (el don innato) y qué elemento es deficiente (la lección kármica que debe cultivarse conscientemente en esta vida).',
+          'La Luna es la Luminaria Menor, la Reina de la Noche. No posee luz propia; refleja con dulzura la luz solar, cambiando de fase cada 28 días al igual que las mareas terrestres y los ciclos biológicos femeninos.',
+          'Representa el cuerpo emocional, los recuerdos de la primera infancia, la relación con la madre, el mecanismo de defensa automático cuando sentimos miedo y lo que necesitamos para sentirnos nutridos y a salvo.',
         ],
         calloutBox: {
           type: 'hermetic',
-          title: 'Compensación de Elementos Faltantes',
-          text: 'Cuando una persona carece casi por completo del elemento Agua, puede sobreintelectualizar los sentimientos o rodearse inconscientemente de parejas con fuerte impronta de Agua para que carguen su mundo afectivo. La astrología sagrada busca la transmutación del plomo en oro: la autointegración de los cuatro elementos.',
+          title: 'El Matrimonio Sagrado (Hieros Gamos)',
+          text: 'Una persona madura ha reconciliado su Sol (lo que quiere construir hacia el futuro) con su Luna (lo que necesita para sanar las heridas del pasado). Quien ignora su Luna actúa con frialdad neurótica; quien queda atrapado en su Luna nunca sale de la nostalgia infantil.',
         },
       },
     ],
     keyTerms: [
-      {
-        term: 'Triplicidad',
-        definition: 'Grupo de 3 signos zodiacales que comparten el mismo elemento sagrado, separados por 120 grados (aspecto de trígono armónico).',
-      },
-      {
-        term: 'Homeostasis Elemental',
-        definition: 'Equilibrio psíquico y biológico resultante de la ponderación de planetas en Fuego, Tierra, Aire y Agua.',
-      },
-      {
-        term: 'Carencia Elemental',
-        definition: 'Ausencia o escasez de cuerpos celestes en determinado elemento, lo cual genera un anhelo inconsciente o una necesidad de desarrollo consciente.',
-      },
+      { term: 'Luminarias', definition: 'Los dos cuerpos más brillantes del firmamento: el Sol (fuente activa de luz) y la Luna (espejo receptor).' },
+      { term: 'Mecanismo Lunar de Defensa', definition: 'Patrón reactivo inconsciente aprendido en la infancia para solicitar afecto y protegerse del rechazo.' },
+      { term: 'Fases Lunares', definition: 'Las 4 estaciones del ciclo sinódico (Luna Nueva, Cuarto Creciente, Luna Llena y Cuarto Menguante).' },
     ],
     practicalExercise: {
-      title: 'Auditoría Elemental Personal',
+      title: 'Auditoría de tu Eje Sol-Luna',
       instructions: [
-        'Escribe en una tabla cuántos planetas de tu carta natal están en Fuego, Tierra, Aire y Agua (puedes usar tu Sol, Luna, Mercurio, Venus y Marte).',
-        'Analiza: ¿Cuál es tu elemento predominante y cómo se manifiesta en tu vocación y estilo de vida?',
-        'Si tienes deficiencia de algún elemento, diseña una práctica cotidiana para nutrirlo (ejemplo: si te falta Tierra, caminar descalzo en la hierba, llevar contabilidad ordenada y cocinar con presencia).',
+        'Busca en tu carta natal el signo de tu Sol y el signo de tu Luna.',
+        'Redacta cómo conviven en ti: ¿Tu Sol quiere brillar mientras tu Luna prefiere esconderse? ¿O ambos cooperan en armonía?',
+        'Describe qué actividad cotidiana alimenta la vitalidad de tu Sol y qué comida o espacio hogareño reconforta tu Luna.',
       ],
-      deliverablePrompt: 'Envía tu análisis de balance elemental al tutor oficial en consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 3: Balance Elemental - [Tu Nombre]".',
+      deliverablePrompt: 'Envía tu análisis del eje Sol-Luna a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 3: Sol y Luna - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 4: LAS 3 MODALIDADES ENERGÉTICAS: CARDINAL, FIJA Y MUTABLE
+  // LECCIÓN 4: LOS PLANETAS PERSONALES: MERCURIO, VENUS Y MARTE
   // ----------------------------------------------------------------------------
   'astrologia-01-lesson-4': {
     lessonId: 'astrologia-01-lesson-4',
     courseId: 'astrologia-01',
-    title: 'Las 3 Modalidades Energéticas: Cardinal, Fija y Mutable',
-    subtitle: 'La dinámica del movimiento cósmico: La chispa, el ancla y el viento de cambio',
-    readingTimeMinutes: 19,
+    title: 'Los Planetas Personales: Mercurio, Venus y Marte',
+    subtitle: 'Las tres herramientas operativas del ego: el pensamiento articulado, el afecto vincular y la acción guerrera',
+    readingTimeMinutes: 23,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     modules: [
       {
-        sectionTitle: '1. El Ritmo Triádico de la Naturaleza',
+        sectionTitle: '1. Mercurio: El Mensajero de los Dioses y la Mente Operativa',
         paragraphs: [
-          'Si los elementos representan la sustancia de la que estamos hechos (el QUÉ), las modalidades energéticas o cuadruplicidades representan el ritmo dinámico con el que esa sustancia se manifiesta en el tiempo (el CÓMO).',
-          'En el cosmos nada permanece estático. Todo fenómeno nace (Cardinal), se consolida en su forma (Fijo), y finalmente se disuelve para dar paso a lo nuevo (Mutable). Este ciclo coincide con las estaciones climáticas.',
-        ],
-        bulletPoints: [
-          'SIGNOS CARDINALES (Aries, Cáncer, Libra, Capricornio): Coinciden con los solsticios y equinoccios. Son la energía iniciadora, la ambición pionera, el liderazgo y el arranque de nuevos proyectos. En sombra: incapacidad de concluir lo comenzado.',
-          'SIGNOS FIJOS (Tauro, Leo, Escorpio, Acuario): Ocupan la mitad de cada estación. Son la perseverancia inquebrantable, la solidez, la profundidad y el sostenimiento en el tiempo. En sombra: rigidez dogmática, apego obstinado y resistencia patológica al cambio.',
-          'SIGNOS MUTABLES (Géminis, Virgo, Sagitario, Piscis): Marcan la transición de una estación hacia la siguiente. Son la flexibilidad mental, la adaptabilidad, la capacidad de mediación y la integración de perspectivas múltiples. En sombra: dispersión, evasión del compromiso e inestabilidad.',
+          'Mercurio (Hermes) es el planeta más cercano al Sol. Es el puente entre el mundo celestial y el terrenal. En la carta natal rige la función del intelecto, el habla, la escritura, la velocidad de procesamiento neurológico y el comercio.',
+          'Rige los signos de Géminis (el aire de la curiosidad y la palabra) y Virgo (la tierra del análisis metódico y la clasificación). En sombra: verborrea estéril, mentira, sarcasmo hiriente y sobrepensamiento ansioso.',
         ],
       },
       {
-        sectionTitle: '2. Cruces Cósmicas y Conflictos Arquetípicos',
+        sectionTitle: '2. Venus: El Principio de Atracción, Valor y Deseo',
         paragraphs: [
-          'Los signos que comparten una misma modalidad forman aspectos de cuadratura (90°) y oposición (180°) entre sí, conformando las tres grandes Cruces Cósmicas:',
-          '1. La Cruz Cardinal: Crisis de acción y dirección (¿A dónde voy y quién dirige?).\n2. La Cruz Fija: Crisis de valor, deseo y solidez (¿A qué me aferro y qué debo soltar?).\n3. La Cruz Mutable: Crisis de sentido, aprendizaje y entrega (¿Cómo integro lo contradictorio?).',
+          'Venus (Afrodita) es el lucero del alba y del atardecer. Gobierna la capacidad de conectar con el placer, la belleza estética, el arte y los valores personales (tanto morales como financieros).',
+          'Rige a Tauro (el disfrute corporal de los sentidos y la seguridad material) y a Libra (la armonía vincular, la diplomacia y el amor de pareja). En sombra: vanidad frívola, dependencia afectiva complaciente y miedo al conflicto.',
         ],
+      },
+      {
+        sectionTitle: '3. Marte: La Espada de la Voluntad y la Fuerza de Afirmación',
+        paragraphs: [
+          'Marte (Ares) es el planeta rojo del fuego y el hierro. Representa el guerrero interior, la asertividad, el deseo sexual activo, el coraje para emprender y la capacidad de poner límites firmes.',
+          'Rige tradicionalmente a Aries y a Escorpio. En sombra: violencia ciega, crueldad, impaciencia y sabotaje destructivo.',
+        ],
+        calloutBox: {
+          type: 'astrological',
+          title: 'La Tríada Operativa en una Decisión',
+          text: 'Mercurio analiza las opciones con lógica; Venus decide qué opción ama y valora más; Marte desenfunda la espada y ejecuta la acción en el mundo material.',
+        },
       },
     ],
     keyTerms: [
-      {
-        term: 'Cuadruplicidad',
-        definition: 'Grupo de 4 signos zodiacales que comparten la misma modalidad vibratoria, separados entre sí por ángulos de 90° y 180°.',
-      },
-      {
-        term: 'Aspecto Dinámico (Cuadratura)',
-        definition: 'Tensión geométrica de 90 grados entre dos planetas o signos que exige esfuerzo, acción y resolución de contradicciones.',
-      },
+      { term: 'Planetas Personales', definition: 'Cuerpos celestes rápidos (Mercurio, Venus y Marte) que configuran las herramientas cotidianas de la personalidad consciente.' },
+      { term: 'Dignidad Planetaria', definition: 'La afinidad o fricción de un planeta al transitar por un signo específico (domicilio, exaltación, caída o exilio).' },
+      { term: 'Retrogradación', definition: 'Efecto óptico de aparente retroceso de un planeta visto desde la Tierra, señalando periodos de revisión interior.' },
     ],
     practicalExercise: {
-      title: 'Diagnóstico de tu Estilo de Gestión y Acción',
+      title: 'Mapeo de tu Tríada Operativa',
       instructions: [
-        'Evalúa en tus proyectos personales: ¿Eres de los que arrancan con fuego e ímpetu pero les cuesta terminar (Cardinal)? ¿Eres de los que se quedan años perfeccionando lo mismo sin permitir cambios (Fijo)? ¿O cambias de rumbo con fluidez pero corres riesgo de dispersión (Mutable)?',
-        'Elige un proyecto pendiente y define un plan de 3 pasos para compensar tu modalidad menos desarrollada.',
+        'Ubica los signos de tu Mercurio, Venus y Marte natales.',
+        'Analiza cómo te comunicas (Mercurio), cómo seduces y valoras (Venus) y cómo defiendes tu postura en un conflicto (Marte).',
+        'Identifica si existe contradicción entre tu Venus y tu Marte (ejemplo: desear armonía y paz, pero reaccionar con ira súbita).',
       ],
-      deliverablePrompt: 'Envía tu reflexión a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 4: Modalidades - [Tu Nombre]".',
+      deliverablePrompt: 'Envía tu análisis a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 4: Planetas Personales - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 5: POLARIDADES YIN Y YANG EN LA CARTA DEL CIELO
+  // LECCIÓN 5: LOS 4 ELEMENTOS Y LAS 3 MODALIDADES
   // ----------------------------------------------------------------------------
   'astrologia-01-lesson-5': {
     lessonId: 'astrologia-01-lesson-5',
     courseId: 'astrologia-01',
-    title: 'Polaridades Yin y Yang en la Carta del Cielo',
-    subtitle: 'Fuerzas activas diurnas vs. fuerzas receptivas nocturnas en el mandala astrológico',
-    readingTimeMinutes: 17,
+    title: 'Los 4 Elementos y las 3 Modalidades',
+    subtitle: 'La matriz viva del zodiaco: Fuego, Tierra, Aire y Agua combinados en ritmo Cardinal, Fijo y Mutable',
+    readingTimeMinutes: 22,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     modules: [
       {
-        sectionTitle: '1. La Primera Bipartición Cósmica: Día y Noche',
+        sectionTitle: '1. Los 4 Elementos Alquímicos',
         paragraphs: [
-          'Antes de dividirse en 4 elementos o 12 signos, el mandala astrológico se divide en dos grandes polaridades universales que la tradición oriental denomina Yin y Yang, y la tradición hermética llama Fuerzas Masculinas / Diurnas y Fuerzas Femeninas / Nocturnas.',
-          'Esta polaridad no se refiere al género biológico ni a la orientación sexual, sino a modos primordiales de relación entre la conciencia y el mundo exterior.',
-        ],
-        bulletPoints: [
-          'POLARIDAD YANG / ACTIVA / MASCULINA: Corresponde a los signos de Fuego (Aries, Leo, Sagitario) y Aire (Géminis, Libra, Acuario). Su vector se proyecta hacia afuera, hacia la conquista del mundo exterior, la expresión de ideas y la autoafirmación visible.',
-          'POLARIDAD YIN / RECEPTIVA / FEMENINA: Corresponde a los signos de Tierra (Tauro, Virgo, Capricornio) y Agua (Cáncer, Escorpio, Piscis). Su vector se repliega hacia adentro, hacia la contención, la nutrición, la asimilación profunda y la escucha sensible.',
+          'Toda manifestación material y psíquica está constituida por 4 elementos primordiales:',
+          '• FUEGO (Aries, Leo, Sagitario): Impulso, entusiasmo, pasión, fe y liderazgo. En sombra: ira y egocentrismo.',
+          '• TIERRA (Tauro, Virgo, Capricornio): Concreción, paciencia, realismo y estabilidad. En sombra: materialismo y terquedad.',
+          '• AIRE (Géminis, Libra, Acuario): Pensamiento, perspectiva social y comunicación. En sombra: frialdad y dispersión.',
+          '• AGUA (Cáncer, Escorpio, Piscis): Emoción, intuición, empatía y sensibilidad. En sombra: drama y apego.',
         ],
       },
       {
-        sectionTitle: '2. La Carta Diurna y la Carta Nocturna (Secta Planetaria)',
+        sectionTitle: '2. Las 3 Modalidades Dinámicas (Cuadruplicidades)',
         paragraphs: [
-          'En la astrología clásica tradicional, el concepto de Secta (Hairesis) es capital: si el Sol se encontraba sobre el horizonte (Casas 7 a 12) al nacer, la carta es Diurna; si el Sol estaba debajo del horizonte (Casas 1 a 6), la carta es Nocturna.',
-          'En una carta diurna, el Sol, Júpiter y Saturno operan con mayor dignidad y confort térmico. En una carta nocturna, la Luna, Venus y Marte encuentran su territorio de mayor agudeza intuitiva.',
+          'Si los elementos son la sustancia (QUÉ), las modalidades son el ritmo dinámico con que se expresan en el tiempo (CÓMO):',
+          '• CARDINALES (Aries, Cáncer, Libra, Capricornio): Inician las 4 estaciones. Energía pionera, ambición y arranque.',
+          '• FIJOS (Tauro, Leo, Escorpio, Acuario): Ocupan el centro de cada estación. Perseverancia, solidez y resistencia al cambio.',
+          '• MUTABLES (Géminis, Virgo, Sagitario, Piscis): Transición entre estaciones. Adaptabilidad, flexibilidad y mediación.',
         ],
+        calloutBox: {
+          type: 'hermetic',
+          title: 'Matriz de 12 Combinaciones Únicas',
+          text: '4 elementos x 3 modalidades = 12 signos únicos. No existe en el zodiaco ningún otro signo que sea Fuego Fijo además de Leo, ni Tierra Mutable además de Virgo. Cada signo es una fórmula alquímica irrepetible.',
+        },
       },
     ],
     keyTerms: [
-      {
-        term: 'Secta Astrológica',
-        definition: 'Condición diurna o nocturna de una carta natal determinada por la posición del Sol en relación con el horizonte oriental-occidental (eje Ascendente-Descendente).',
-      },
-      {
-        term: 'Vector Centrífugo (Yang)',
-        definition: 'Energía que parte del centro del individuo hacia el entorno visible.',
-      },
-      {
-        term: 'Vector Centrípeto (Yin)',
-        definition: 'Energía que atrae las experiencias del entorno hacia la matriz interna de procesamiento emocional y corporal.',
-      },
+      { term: 'Triplicidad', definition: 'Los 3 signos que pertenecen a un mismo elemento, separados entre sí por 120° (trígono armónico).' },
+      { term: 'Cuadruplicidad', definition: 'Los 4 signos que comparten la misma modalidad dinámica, en tensión de cuadratura (90°) y oposición (180°).' },
+      { term: 'Balance Elemental', definition: 'El conteo ponderado de cuerpos celestes en cada elemento para diagnosticar excesos o carencias psíquicas.' },
     ],
     practicalExercise: {
-      title: 'Mapeo de tu Polaridad Primaria',
+      title: 'Auditoría de Balance Elemental y Modal',
       instructions: [
-        'Revisa si naciste de día (con sol visible) o de noche (después del atardecer).',
-        'Contabiliza tus signos planetarios en Yang (Fuego + Aire) vs. Yin (Tierra + Agua).',
-        'Redacta un texto de 1 cuartilla analizando cómo incide esta polaridad en tus momentos de estrés: ¿tiendes a actuar y verbalizar hacia afuera (Yang) o a recluirte y digerir en silencio (Yin)?',
+        'Cuenta cuántos de tus planetas personales están en Fuego, Tierra, Aire y Agua.',
+        'Cuenta cuántos están en signos Cardinales, Fijos y Mutables.',
+        'Redacta un texto de 1 cuartilla explicando cuál es tu temperamento dominante y cuál es el elemento que necesitas nutrir conscientemente.',
       ],
-      deliverablePrompt: 'Envía tu ejercicio a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 5: Polaridades - [Tu Nombre]".',
+      deliverablePrompt: 'Envía tu auditoría a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 5: Elementos y Modalidades - [Tu Nombre]".',
     },
   },
 
   // ----------------------------------------------------------------------------
-  // LECCIÓN 6: DIFERENCIA ENTRE SIGNO SOLAR, SIGNO LUNAR Y ASCENDENTE
+  // LECCIÓN 6: LAS 12 CASAS ASTROLÓGICAS
   // ----------------------------------------------------------------------------
   'astrologia-01-lesson-6': {
     lessonId: 'astrologia-01-lesson-6',
     courseId: 'astrologia-01',
-    title: 'Diferencia entre Signo Solar, Signo Lunar y Punto Ascendente',
-    subtitle: 'La Santísima Trinidad de la personalidad: El Héroe, el Alma y el Vehículo',
-    readingTimeMinutes: 24,
-    officialTutorEmail: 'consultas@arcanosolutions.com',
-    modules: [
-      {
-        sectionTitle: '1. La Trinidad de la Conciencia en la Astrología Humanista',
-        paragraphs: [
-          'El mayor error de la astrología comercial de horóscopos periodísticos consiste en reducir la inmensidad del ser humano a su Signo Solar. Dos personas con el Sol en Tauro pueden ser diametralmente distintas si una tiene Luna en Aries con Ascendente en Escorpio, y la otra tiene Luna en Piscis con Ascendente en Virgo.',
-          'La base insustituible de la lectura natal descansa en el trípode fundacional: Sol, Luna y Ascendente.',
-        ],
-        bulletPoints: [
-          'EL SIGNO SOLAR (La Mente Consciente / El Núcleo de Vida): Representa el Héroe Solar, el propósito consciente, la voluntad de ser, la vitalidad biológica y aquello hacia lo cual evolucionamos con madurez. Es el "Yo Soy".',
-          'EL SIGNO LUNAR (El Inconsciente / El Cuerpo Emocional): Representa el refugio de la infancia, los patrones reactivos de seguridad afectiva, la relación con la figura materna y lo que necesitamos para sentirnos nutridos en la intimidad. Es el "Yo Siento y Me Protejo".',
-          'EL ASCENDENTE (La Máscara Sagrada / El Vehículo de Encarnación): Es el signo que emergía por el horizonte este al momento de tu primera respiración. No es solo la apariencia física o cómo te ven los demás; es el lente a través del cual contemplas la vida y el escenario de experiencias que el destino te presentará para que despiertes tu Sol.',
-        ],
-      },
-      {
-        sectionTitle: '2. Dinámica de Integración de la Gran Trinidad',
-        paragraphs: [
-          'Imagina un carruaje ceremonial: el Sol es el noble pasajero que sabe a dónde quiere llegar; la Luna son los caballos que suministran la fuerza emocional e instintiva (que deben ser amados y tranquilizados sin ser castigados); y el Ascendente es el propio carruaje y el cochero visible ante la sociedad.',
-          'Cuando el Sol, la Luna y el Ascendente entran en conflicto (por ejemplo, Sol en Leo que quiere brillar, pero Luna en Cáncer que teme ser expuesta y Ascendente en Capricornio que se muestra frío), el consultante experimenta angustia interna hasta que comprende que cada uno tiene una función sagrada irreemplazable.',
-        ],
-      },
-    ],
-    keyTerms: [
-      {
-        term: 'Ascendente (AC)',
-        definition: 'Grado del zodíaco que corta la cúspide de la Casa 1 en el horizonte oriental al momento de nacer.',
-      },
-      {
-        term: 'Luminarias',
-        definition: 'Denominación tradicional para el Sol y la Luna, los dos centros principales de luz en el cielo.',
-      },
-      {
-        term: 'Regente del Ascendente',
-        definition: 'El planeta que gobierna el signo del Ascendente; es considerado el "Capitán del Barco" o planeta timonel de toda la carta natal.',
-      },
-    ],
-    practicalExercise: {
-      title: 'Constelación de tu Trinidad Personal',
-      instructions: [
-        'Identifica tu Signo Solar, tu Signo Lunar y tu Signo Ascendente.',
-        'Redacta un diálogo imaginario entre tus tres partes: ¿Qué le pide tu Luna a tu Sol? ¿Qué le exige tu Ascendente a tu Luna?',
-        'Describe una situación reciente donde hayas reaccionado desde tu Luna instintiva y cómo pudiste haber respondido desde la madurez de tu Sol.',
-      ],
-      deliverablePrompt: 'Envía tu diálogo y análisis de la Gran Trinidad a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 6: Trinidad Personal - [Tu Nombre]".',
-    },
-  },
-
-  // ----------------------------------------------------------------------------
-  // LECCIÓN 7: INTRODUCCIÓN AL CÁLCULO DE LA CARTA NATAL CON EFEMÉRIDES
-  // ----------------------------------------------------------------------------
-  'astrologia-01-lesson-7': {
-    lessonId: 'astrologia-01-lesson-7',
-    courseId: 'astrologia-01',
-    title: 'Introducción al Cálculo de la Carta Natal con Efemérides Astronómicas',
-    subtitle: 'La anatomía del gráfico natal, los 4 ángulos cardinales y la ética de la consulta',
+    title: 'Las 12 Casas Astrológicas',
+    subtitle: 'Los doce escenarios terrenales de la experiencia humana: Del Yo individual a la trascendencia espiritual',
     readingTimeMinutes: 25,
     officialTutorEmail: 'consultas@arcanosolutions.com',
     modules: [
       {
-        sectionTitle: '1. Anatomía Visual de un Mandala Astrológico',
+        sectionTitle: '1. El Escenario Local: Signos vs. Casas',
         paragraphs: [
-          'La carta natal es un mapa circular bi-dimensional del cielo tridimensional. En el centro está la Tierra (el sujeto); alrededor se encuentran los doce signos del zodíaco (el escenario cósmico), las doce casas astrológicas (las áreas de experiencia práctica) y los glifos de los diez planetas y nodos lunares.',
-          'Los cuatro ángulos fundamentales estructuran la rueda:',
-          '• Ascendente (AC): Cúspide de Casa 1 — El Yo, la máscara, el nacimiento.\n• Descendente (DC): Cúspide de Casa 7 — El Otro, la pareja, las alianzas, el espejo.\n• Medio Cielo (MC): Cúspide de Casa 10 — La vocación pública, el cenit, la reputación y el destino profesional.\n• Fondo del Cielo (IC): Cúspide de Casa 4 — El nadir, la raíz familiar, el hogar íntimo y el linaje de los ancestros.',
+          'Existe una distinción fundamental que todo estudiante debe grabar en su mente:',
+          '• Los PLANETAS son los actores (QUÉ función psicológica actúa: Sol = voluntad, Marte = acción).',
+          '• Los SIGNOS son el traje y temperamento del actor (CÓMO actúa: Marte en Cáncer actúa con cautela emocional; Marte en Aries actúa con audacia frontal).',
+          '• Las CASAS son el escenario concreto de la vida cotidiana (DÓNDE se manifiesta esa energía: en la economía, en el matrimonio, en el trabajo o en el hogar).',
         ],
       },
       {
-        sectionTitle: '2. Las Efemérides y el Tiempo Universal (GMT/UTC)',
+        sectionTitle: '2. El Recorrido por los 12 Escenarios Sagrados',
         paragraphs: [
-          'Para levantar una carta natal con precisión matemática, se requiere convertir la hora civil local a Tiempo Universal Coordinado (UTC), corrigiendo husos horarios y horarios de verano. Con la latitud y longitud geográfica del lugar de nacimiento, se consulta la tabla de efemérides planetarias para calcular el Tiempo Sidéreo Local (LST) y determinar con exactitud las cúspides.',
-          'Hoy en día contamos con potentes softwares astronómicos, pero el astrólogo profesional debe comprender la mecánica celeste que opera detrás de cada cálculo computarizado.',
+          '• Casa 1 (Ascendente): La identidad, el cuerpo físico, la primera impresión y el nacimiento.\n• Casa 2: Recursos propios, dinero ganado, talentos innatos y autoestima.\n• Casa 3: Entorno cercano, hermanos, estudios básicos y comunicación cotidiana.\n• Casa 4 (Fondo del Cielo): El hogar íntimo, las raíces familiares y los ancestros.\n• Casa 5: Creatividad, romances, hijos, juegos y autoexpresión gozosa.\n• Casa 6: Rutina laboral cotidiana, salud biológica y vocación de servicio.\n• Casa 7 (Descendente): El matrimonio, socios formales, contratos y el espejo del Otro.\n• Casa 8: Bienes compartidos, crisis transformadoras, sexualidad sagrada y herencias.\n• Casa 9: Viajes lejanos, filosofía superior, universidad y búsqueda espiritual.\n• Casa 10 (Medio Cielo): Vocación pública, reputación social, éxito profesional y destino.\n• Casa 11: Amigos afines, comunidades, proyectos colectivos e ideales humanitarios.\n• Casa 12: El inconsciente colectivo, el retiro meditativo, vidas pasadas y disolución del ego.',
         ],
         calloutBox: {
-          type: 'warning',
-          title: 'Código Deontológico y Ética de la Lectura Astrológica',
-          text: 'Nunca utilices la carta natal para emitir diagnósticos médicos definitivos, vaticinar fechas fatales o infundir terror psicológico. La astrología es un instrumento sagrado de empoderamiento, consciencia y autoconocimiento, jamás de condena.',
+          type: 'practice',
+          title: 'Las 4 Casas Angulares (Los Pilares de la Vida)',
+          text: 'Las Casas 1, 4, 7 y 10 forman la cruz cardinal del cielo local. Los planetas situados en estas casas tienen un impacto visible, determinante y directo sobre el rumbo del destino.',
         },
-      },
-      {
-        sectionTitle: '3. Caso Práctico Resuelto: Lectura Integral Básica',
-        paragraphs: [
-          'Analicemos un caso de estudio pedagógico:',
-          '• Nativo con Sol en Tauro (Casa 10), Luna en Escorpio (Casa 4) y Ascendente en Leo (Casa 1).\n• Diagnóstico inicial: El Ascendente en Leo le otorga una presencia luminosa, digna y cálida; no obstante, su Luna en Escorpio en el fondo íntimo del hogar guarda heridas infantiles profundas y un intenso miedo a la traición. Su propósito vital (Sol en Tauro en el cenit del Medio Cielo) consiste en construir una obra profesional tangible, serena, próspera y estable que le demuestre a su alma que el mundo es seguro y fértil.',
-        ],
       },
     ],
     keyTerms: [
-      {
-        term: 'Medio Cielo (MC)',
-        definition: 'Punto de culminación superior del Sol en el meridiano al mediodía; rige la vocación y el estatus social.',
-      },
-      {
-        term: 'Casas Astrológicas',
-        definition: 'Doce sectores del espacio local que representan los diferentes escenarios prácticos de la vida humana (economía, hermanos, hogar, hijos, salud, pareja, etc.).',
-      },
-      {
-        term: 'Tiempo Sidéreo',
-        definition: 'Escala de tiempo basada en la rotación de la Tierra en relación con las estrellas lejanas, en lugar del Sol.',
-      },
+      { term: 'Casa Astrológica', definition: 'División del espacio local en doce sectores que representan las diversas áreas de actividad de la vida terrenal.' },
+      { term: 'Casas Angulares', definition: 'Casas 1, 4, 7 y 10; señalan los cuatro puntos cardinales del gráfico natal (AC, IC, DC, MC).' },
+      { term: 'Cúspide de Casa', definition: 'El grado exacto del zodíaco donde inicia una casa astrológica determinada.' },
     ],
     practicalExercise: {
-      title: 'Práctica Final Evaluativa de Nivel 1: Tu Mandala Natal',
+      title: 'Exploración de tus Casas Angulares',
       instructions: [
-        'Genera tu carta natal completa ingresando tus datos exactos de nacimiento (fecha, hora y ciudad).',
-        'Identifica en el gráfico tus 4 ángulos cardinales: Signo y grado exacto del Ascendente, Descendente, Medio Cielo y Fondo del Cielo.',
-        'Redacta un ensayo de graduación de Nivel 1 de 2 a 3 páginas explicando cómo interactúa tu Signo Solar con tu Ascendente y tu Signo Lunar, basándote en los conceptos de elementos y modalidades aprendidos.',
+        'Observa tu carta natal y anota qué signo corta la cúspide de tu Casa 1 (Ascendente), Casa 4 (Fondo del Cielo), Casa 7 (Descendente) y Casa 10 (Medio Cielo).',
+        'Describe cómo se refleja el signo de tu Casa 10 en tu vocación profesional soñada o ejercida.',
+        'Describe cómo se refleja el signo de tu Casa 4 en el ambiente de tu hogar de crianza.',
       ],
-      deliverablePrompt: 'Envía tu ensayo final de graduación con la imagen de tu carta natal adjunta al correo oficial consultas@arcanosolutions.com con el asunto: "Graduación Astrología Nivel 1 - [Tu Nombre Completo]".',
+      deliverablePrompt: 'Envía tu reporte a consultas@arcanosolutions.com con el asunto: "Astrología Nivel 1 - Lección 6: Doce Casas - [Tu Nombre]".',
+    },
+  },
+
+  // ----------------------------------------------------------------------------
+  // LECCIÓN 7: LA TRÍADA FUNDAMENTAL: SOL, LUNA Y ASCENDENTE
+  // ----------------------------------------------------------------------------
+  'astrologia-01-lesson-7': {
+    lessonId: 'astrologia-01-lesson-7',
+    courseId: 'astrologia-01',
+    title: 'La Tríada Fundamental: Sol, Luna y Ascendente',
+    subtitle: 'La Santísima Trinidad de la personalidad: El Héroe, el Alma y el Vehículo de encarnación',
+    readingTimeMinutes: 26,
+    officialTutorEmail: 'consultas@arcanosolutions.com',
+    modules: [
+      {
+        sectionTitle: '1. El Trípode Insustituible de la Lectura Natal',
+        paragraphs: [
+          'El mayor error de los horóscopos superficiales consiste en reducir al ser humano únicamente a su signo solar. Dos personas con el Sol en Tauro tendrán vidas y psiques diametralmente distintas si una tiene Luna en Aries con Ascendente en Escorpio, y la otra tiene Luna en Piscis con Ascendente en Virgo.',
+          'La base innegociable de toda lectura rigurosa reposa en la articulación de la Tríada Fundamental:',
+          '• EL SOL (El Héroe Solar / La Voluntad Consciente): El rumbo hacia el cual caminas cuando maduras. Es el "Yo Soy".',
+          '• LA LUNA (El Refugio Inconsciente / El Cuerpo Afectivo): Las necesidades de nutrición y memoria infantil. Es el "Yo Siento".',
+          '• EL ASCENDENTE (El Vehículo / El Lente de Percepción): El signo que ascendía por el horizonte este en tu primer respiro. Es la máscara sagrada con la que interactúas con el mundo y el escenario que te presenta la vida para que despiertes tu Sol. Es el "Yo Manifiesto".',
+        ],
+      },
+      {
+        sectionTitle: '2. La Metáfora del Carruaje Sagrado',
+        paragraphs: [
+          'Imagina un carruaje ceremonial:',
+          '• El Sol es el noble pasajero interior: sabe a qué palacio se dirige y cuál es la misión encomendada.',
+          '• La Luna son los caballos briosos: aportan la fuerza instintiva y emocional; deben ser cuidados y alimentados con ternura sin maltratarlos.',
+          '• El Ascendente es el propio carruaje y el cochero visible: el diseño exterior del vehículo ante la sociedad y la pericia con que sortea los baches del camino.',
+        ],
+        calloutBox: {
+          type: 'hermetic',
+          title: 'Código Deontológico de la Academia ARCANO',
+          text: 'Una carta natal es una obra maestra de geometría sagrada, nunca un pretexto para justificar conductas dañinas diciendo «es que soy Escorpio y por eso me vengo». El verdadero astrólogo utiliza el conocimiento cósmico para elevar la vibración del consultante hacia el amor y la libertad.',
+        },
+      },
+    ],
+    keyTerms: [
+      { term: 'Tríada Fundamental', definition: 'La articulación sagrada de Sol, Luna y Ascendente que conforma el 70% de la dinámica de la personalidad.' },
+      { term: 'Regente del Ascendente', definition: 'El planeta que gobierna el signo del Ascendente; considerado el capitán del barco de toda la encarnación.' },
+      { term: 'Carta Diurna / Nocturna', definition: 'La condición de nacimiento con el Sol sobre o bajo el horizonte, que altera la jerarquía luminosa.' },
+    ],
+    practicalExercise: {
+      title: 'Práctica Final Evaluativa de Nivel 1: Síntesis de tu Tríada Personal',
+      instructions: [
+        'Genera tu carta natal completa con tus coordenadas exactas (fecha, hora y ciudad).',
+        'Identifica tu Signo Solar, tu Signo Lunar y tu Signo Ascendente con sus grados exactos.',
+        'Redacta un informe final de graduación de Nivel 1 de 2 a 3 páginas explicando cómo dialogan estos tres pilares en tu biografía: tus mayores dones, tus contradicciones internas y cómo estás aprendiendo a armonizarlos.',
+      ],
+      deliverablePrompt: 'Envía tu informe final de graduación con la imagen de tu gráfico natal a consultas@arcanosolutions.com con el asunto: "Graduación Astrología Nivel 1 - [Tu Nombre Completo]".',
     },
   },
 };

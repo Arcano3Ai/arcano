@@ -31,10 +31,23 @@ interface CourseClassroomViewProps {
 export default function CourseClassroomView({ slug }: CourseClassroomViewProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { student, markLessonComplete, isLessonCompleted, getCourseProgress, enrollInCourse } = useStudent();
+  const {
+    student,
+    markLessonComplete,
+    isLessonCompleted,
+    getCourseProgress,
+    enrollInCourse,
+    isCourseUnlocked,
+    submitPaymentProof,
+  } = useStudent();
 
   const lessonIdFromUrl = searchParams.get('lesson');
   const course = getLMSCourseBySlug(slug);
+
+  // Estados para verificación y registro de comprobante de pago
+  const [paymentFolio, setPaymentFolio] = useState('');
+  const [paymentSubmitted, setPaymentSubmitted] = useState(false);
+  const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
 
   // Determinar lección activa
   const firstLessonId = course?.modules[0]?.lessons[0]?.id || '';
@@ -44,12 +57,14 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
   const [activeTab, setActiveTab] = useState<'summary' | 'resources' | 'notes'>('summary');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Si el estudiante no está matriculado, matricularlo automáticamente para la sesión
+  // Solo matricular automáticamente si el curso es 100% GRATUITO (Nivel 1)
   useEffect(() => {
-    if (course) {
+    if (course && (course.priceMxn === 0 || course.level === 1)) {
       enrollInCourse(course.id);
     }
   }, [course, enrollInCourse]);
+
+  const isUnlocked = course ? isCourseUnlocked(course.id) : false;
 
   const studyGuide = lessonData ? getLessonStudyGuide(lessonData.lesson.id) : undefined;
   const initialSongSlug = studyGuide?.recommendedArcanaAudio?.slug || 'el-loco';
@@ -72,6 +87,160 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
         >
           ← Volver a Mi Panel de Avance
         </Link>
+      </div>
+    );
+  }
+
+  // Si el curso es de pago (Nivel 2 o superior) y el alumno no tiene pago verificado: BLOQUEAR ACCESO
+  if (!isUnlocked) {
+    const handleRegisterProof = async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!paymentFolio.trim()) return;
+      setIsSubmittingPayment(true);
+      await submitPaymentProof(course.id, paymentFolio.trim());
+      setIsSubmittingPayment(false);
+      setPaymentSubmitted(true);
+    };
+
+    const whatsappMessage = encodeURIComponent(
+      `Hola, El Señor de los Arcanos / ARCANO. Deseo activar mi acceso al curso ${course.romanLevel}: ${course.title} ($799 MXN). Adjunto comprobante de pago para mi cuenta registrada con el correo: ${student?.email || 'mi correo'}.`
+    );
+
+    return (
+      <div className="min-h-screen bg-[#07050d] text-parchment py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto space-y-8">
+          {/* Tarjeta Principal de Paywall */}
+          <div className="bg-[#0e091b]/95 border-2 border-gold/40 rounded-3xl p-6 sm:p-10 shadow-[0_0_60px_rgba(198,160,82,0.2)] relative overflow-hidden backdrop-blur-xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 blur-3xl pointer-events-none" />
+
+            {/* Cabecera de Alerta */}
+            <div className="text-center space-y-3 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-serif uppercase tracking-widest">
+                <span>🔒</span> ACCESO RESTRINGIDO • NIVEL SUPERIOR
+              </div>
+              <h1 className="text-2xl sm:text-4xl font-serif font-bold text-parchment leading-tight">
+                {course.title}
+              </h1>
+              <p className="text-xs sm:text-sm text-parchment-dim font-light max-w-xl mx-auto">
+                Este curso pertenece a la formación avanzada de la Academia ARCANO ({course.romanLevel}). Para ingresar al aula virtual, lecciones y materiales, se requiere confirmación de pago oficial.
+              </p>
+            </div>
+
+            {/* Inversión */}
+            <div className="mb-8 p-5 rounded-2xl bg-black/60 border border-gold/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <span className="text-[10px] uppercase tracking-widest text-parchment-muted block">
+                  Inversión Oficial por Nivel
+                </span>
+                <span className="text-3xl font-serif font-bold text-gold-light">
+                  $799 MXN
+                </span>
+                <span className="text-xs text-parchment-dim block mt-0.5">
+                  Acceso completo de por vida • Sin cargos recurrentes
+                </span>
+              </div>
+              <div className="text-xs text-emerald-400 font-serif flex items-center gap-1.5">
+                <span>✦</span> Incluye manuales PDF y tutoría oficial
+              </div>
+            </div>
+
+            {/* Métodos de Pago y Verificación */}
+            <div className="space-y-6">
+              <h3 className="text-xs font-serif uppercase tracking-widest text-gold-light flex items-center gap-2">
+                <span>✦</span> Métodos Oficiales para Activar tu Acceso
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Opción 1: SPEI / Transferencia Bancaria */}
+                <div className="p-4 rounded-2xl bg-black/40 border border-charcoal-border hover:border-gold/40 transition-colors space-y-2 text-xs">
+                  <div className="flex items-center gap-2 font-serif text-gold font-bold">
+                    <span>🏦</span> Transferencia Interbancaria (SPEI)
+                  </div>
+                  <div className="space-y-1 text-parchment-dim font-mono text-[11px]">
+                    <div><span className="text-parchment-muted font-sans">Banco:</span> BBVA México</div>
+                    <div><span className="text-parchment-muted font-sans">CLABE:</span> 012180015487293841</div>
+                    <div><span className="text-parchment-muted font-sans">Beneficiario:</span> ARCANO Solutions</div>
+                    <div><span className="text-parchment-muted font-sans">Monto:</span> $799.00 MXN</div>
+                    <div><span className="text-parchment-muted font-sans">Concepto:</span> {student?.email ? student.email.split('@')[0] : 'Tu Correo'} - {course.id}</div>
+                  </div>
+                </div>
+
+                {/* Opción 2: Atención Rápida por WhatsApp */}
+                <div className="p-4 rounded-2xl bg-emerald-950/25 border border-emerald-500/40 space-y-3 text-xs flex flex-col justify-between">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2 font-serif text-emerald-300 font-bold">
+                      <span>💬</span> Envío de Comprobante por WhatsApp
+                    </div>
+                    <p className="text-emerald-200/80 text-[11px] leading-relaxed">
+                      Si ya realizaste tu transferencia o pago en OXXO, envía tu captura de pantalla a nuestro WhatsApp para activación prioritaria en menos de 15 minutos.
+                    </p>
+                  </div>
+                  <a
+                    href={`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                  >
+                    <span>Enviar Comprobante a WhatsApp</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Formulario de Registro de Folio / Autorización */}
+              <div className="pt-4 border-t border-charcoal-border/70 space-y-3">
+                <h4 className="text-xs font-serif uppercase tracking-wider text-parchment-dim">
+                  ¿Ya realizaste tu pago? Ingresa tu Folio o Número de Rastreo
+                </h4>
+
+                {paymentSubmitted ? (
+                  <div className="p-4 rounded-2xl bg-emerald-950/50 border border-emerald-500/50 text-emerald-200 text-xs text-center space-y-1">
+                    <div className="font-bold font-serif text-emerald-300">
+                      ✓ Comprobante Registrado en el Sistema
+                    </div>
+                    <p className="text-emerald-300/80">
+                      Folio: <strong>{paymentFolio}</strong>. Nuestro equipo de tesorería está verificando los fondos y activará tu aula a la brevedad. Recibirás confirmación por correo a {student?.email}.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleRegisterProof} className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="text"
+                      value={paymentFolio}
+                      onChange={(e) => setPaymentFolio(e.target.value)}
+                      placeholder="Ej. Folio BBVA, Mercado Pago o Número de Operación"
+                      required
+                      className="flex-1 px-4 py-2.5 rounded-xl bg-black/60 border border-gold/30 text-parchment text-xs placeholder-parchment-muted focus:outline-none focus:border-gold"
+                    />
+                    <button
+                      type="submit"
+                      disabled={isSubmittingPayment}
+                      className="px-6 py-2.5 rounded-xl bg-gold/20 hover:bg-gold/30 border border-gold/50 text-gold-light font-serif text-xs uppercase tracking-wider transition-all disabled:opacity-50"
+                    >
+                      {isSubmittingPayment ? 'Registrando...' : 'Registrar para Validación'}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+
+            {/* Enlaces de Retorno */}
+            <div className="mt-8 pt-6 border-t border-charcoal-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+              <Link
+                href="/academia/mi-panel"
+                className="text-parchment-muted hover:text-gold transition-colors flex items-center gap-1.5 font-serif"
+              >
+                <span>←</span> Volver a Mi Panel de Alumno
+              </Link>
+              <Link
+                href="/academia"
+                className="px-4 py-2 rounded-xl bg-black/50 border border-charcoal-border hover:border-gold/40 text-gold-light transition-all font-serif"
+              >
+                Ver Cursos Gratuitos de Nivel 1 ✦
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
