@@ -1017,7 +1017,7 @@ const htmlContent = `<!DOCTYPE html>
 `;
 
 async function main() {
-  const outputDir = path.join(__dirname, '..', 'public', 'manuales');
+  const outputDir = path.join(__dirname, '..', 'docs', 'produccion');
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
