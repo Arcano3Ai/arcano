@@ -1,68 +1,88 @@
 import { LMSCourse, LMSModule, LMSLesson } from './types';
 import { academyCourses } from '@/data/academy';
 
-// Generador de módulos y lecciones a partir del temario existente en academyCourses
+// Generador de módulos y lecciones a partir del temario enriquecido en academyCourses
 function buildModulesForCourse(courseId: string, contentList: string[]): LMSModule[] {
-  // Dividimos el temario en 2 o 3 módulos temáticos
-  const half = Math.ceil(contentList.length / 2);
-  const part1 = contentList.slice(0, half);
-  const part2 = contentList.slice(half);
-
   const sampleVideos = [
-    'dQw4w9WgXcQ', // ID de muestra
+    'dQw4w9WgXcQ', // IDs de demostración configurables
     'L_LUpnjgPso',
     '3JZ_D3ELwOQ',
     '2Vv-BfVoq4g',
+    '7wtfhZwyrcc',
   ];
+
+  // Distribuir en 3 módulos equilibrados
+  const total = contentList.length;
+  const chunk1 = Math.ceil(total / 3);
+  const chunk2 = Math.ceil((total - chunk1) / 2);
+
+  const part1 = contentList.slice(0, chunk1);
+  const part2 = contentList.slice(chunk1, chunk1 + chunk2);
+  const part3 = contentList.slice(chunk1 + chunk2);
 
   const createLessons = (titles: string[], modulePrefix: string, startIdx: number): LMSLesson[] => {
     return titles.map((title, i) => {
       const idx = startIdx + i;
+      const cleanTitle = title.replace(/^[✦•\-]\s*/, '').trim();
+
       return {
         id: `${courseId}-lesson-${idx + 1}`,
         moduleId: `${courseId}-${modulePrefix}`,
-        title: title.replace(/^[✦•\-]\s*/, '').trim(),
-        description: `Lección fundamental para comprender y dominar ${title.toLowerCase()}.`,
-        durationMinutes: 15 + ((idx * 7) % 25),
+        title: cleanTitle,
+        description: `Lección ${idx + 1}: Análisis pedagógico y profundización en ${cleanTitle.toLowerCase()}.`,
+        durationMinutes: 20 + ((idx * 6) % 25),
         videoProvider: 'youtube',
         videoId: sampleVideos[idx % sampleVideos.length],
-        summaryMarkdown: `### Objetivos de la Lección\n\nEn esta clase profundizamos en **${title}**, analizando sus arquetipos, aplicación práctica y la resonancia con tu propia energía.\n\n- Fundamentos y simbolismo sagrado.\n- Práctica guiada paso a paso.\n- Errores comunes y cómo evitarlos en tus lecturas y sesiones.`,
+        summaryMarkdown: `### ✦ Propósito y Claves Sagradas\n\nEn esta lección profundizamos en **${cleanTitle}**, examinando su estructura arquetípica, sus correspondencias simbólicas y su aplicación en la práctica real.\n\n#### 📜 Puntos Clave de la Clase:\n- Fundamentos teóricos, origen histórico y vibración elemental.\n- Reconocimiento de patrones en luz y en sombra.\n- Señales de alerta y errores comunes a evitar en la consulta.\n\n#### 🧘 Ejercicio de Integración Personal:\nToma tu libreta o diario de estudiante y anota las 3 revelaciones principales de esta clase. Realiza la práctica sugerida en el video antes de marcar la lección como completada.`,
         resources: [
           {
-            name: `Guía de Estudio en PDF — ${title.slice(0, 30)}`,
+            name: `Manual Ceremonial en PDF — ${cleanTitle.slice(0, 32)}`,
             url: '#',
             type: 'pdf',
           },
           {
-            name: 'Plantilla de Práctica Imprimible',
+            name: 'Guía de Práctica & Ficha Imprimible',
             url: '#',
             type: 'pdf',
           },
         ],
         order: idx + 1,
-        isFreePreview: idx === 0, // La primera lección es vista previa gratuita
+        isFreePreview: idx === 0, // La primera lección siempre es vista previa gratuita
       };
     });
   };
 
-  return [
+  const modules: LMSModule[] = [
     {
       id: `${courseId}-mod-1`,
       courseId,
-      title: 'Módulo 1: Fundamentos, Arquetipos y Filosofía Sagrada',
-      description: 'Bases esenciales, historia y apertura energética de la disciplina.',
+      title: 'Módulo 1: Fundamentos Teóricos y Arquetipos Sagrados',
+      description: 'Apertura iniciática, conceptos esenciales y bases filosóficas.',
       order: 1,
       lessons: createLessons(part1, 'mod-1', 0),
     },
     {
       id: `${courseId}-mod-2`,
       courseId,
-      title: 'Módulo 2: Interpretación, Aplicación Práctica y Casos Reales',
-      description: 'Lecturas, consultas, integración de símbolos y dominio del método.',
+      title: 'Módulo 2: Simbología Aplicada y Dinámica Práctica',
+      description: 'Estructuras, combinaciones, correspondencias y métodos de interpretación.',
       order: 2,
       lessons: createLessons(part2, 'mod-2', part1.length),
     },
   ];
+
+  if (part3.length > 0) {
+    modules.push({
+      id: `${courseId}-mod-3`,
+      courseId,
+      title: 'Módulo 3: Práctica Avanzada, Casos Reales e Integración Ética',
+      description: 'Tiradas complejas, consulta con clientes y consolidación del conocimiento.',
+      order: 3,
+      lessons: createLessons(part3, 'mod-3', part1.length + part2.length),
+    });
+  }
+
+  return modules;
 }
 
 // Catálogo completo de cursos LMS

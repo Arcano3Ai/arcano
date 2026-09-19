@@ -161,20 +161,20 @@ export const CourseModal: React.FC<CourseModalProps> = ({
             >
               CERRAR
             </button>
+            <button
+              onClick={handleEnrollClick}
+              className="w-full sm:w-auto px-4 py-3 rounded border border-charcoal-border text-parchment-muted hover:text-parchment text-xs font-sans transition-colors flex items-center justify-center gap-1.5"
+            >
+              <span>💬 Consultar por WhatsApp</span>
+            </button>
             <a
               href={`/academia/registro?curso=${course.id}`}
               onClick={onClose}
-              className="w-full sm:w-auto px-6 py-3 rounded border border-gold/50 bg-gold/10 hover:bg-gold/20 text-gold-light text-xs uppercase tracking-wider font-sans font-semibold transition-all flex items-center justify-center gap-1.5 text-center"
+              className="w-full sm:w-auto px-8 py-3.5 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-center"
             >
-              <span>REGISTRARSE EN LÍNEA</span>
-            </a>
-            <button
-              onClick={handleEnrollClick}
-              className="w-full sm:w-auto px-8 py-3 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_20px_rgba(198,160,82,0.4)] hover:shadow-[0_0_30px_rgba(198,160,82,0.6)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
-            >
-              <span>INSCRIBIRME POR WHATSAPP</span>
+              <span>INSCRIBIRME AHORA</span>
               <span>→</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

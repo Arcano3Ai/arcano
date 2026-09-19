@@ -365,13 +365,13 @@ export const AcademySection: React.FC = () => {
 
               {/* Botón Promoción */}
               <div className="pt-2">
-                <button
-                  onClick={handleClaimWebPromotion}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                <Link
+                  href="/academia/registro?promo=web-gratis-nivel-5"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-center"
                 >
-                  <span>QUIERO DESBLOQUEAR MI WEB</span>
+                  <span>INICIAR MI RUTA HACIA EL NIVEL 5</span>
                   <span>→</span>
-                </button>
+                </Link>
               </div>
             </div>
 
