@@ -54,7 +54,7 @@ export const brandConfig: BrandConfig = {
   closingQuote:
     "Quizá la pregunta no sea qué va a suceder. Quizá sea qué estás preparado para ver.",
   contact: {
-    email: "contacto@arcanosolutions.com",
+    email: "consultas@arcanosolutions.com",
     phone: "+52 (81) 2191-2778",
     whatsappNumber: "5218121912778",
     whatsappDefaultMessage:
