@@ -27,6 +27,82 @@ export interface ShopProduct {
   featured?: boolean;
 }
 
+export interface CreativeProcessImage {
+  id: string;
+  src: string;
+  title: string;
+  caption: string;
+}
+
+export const creativeProcessGallery: CreativeProcessImage[] = [
+  {
+    id: "proceso-1",
+    src: "/images/shop/proceso/proceso-creativo-1.jpeg",
+    title: "Creación en Plena Naturaleza",
+    caption: "Trazado a mano y pinceladas áureas sobre piedras de río recolectadas en cauce natural.",
+  },
+  {
+    id: "proceso-2",
+    src: "/images/shop/proceso/proceso-creativo-2.jpeg",
+    title: "Detalle de Símbolos Sagrados",
+    caption: "Pintado minucioso de runas, geometrías y sellos de luz bajo la luz del sol.",
+  },
+  {
+    id: "proceso-3",
+    src: "/images/shop/proceso/proceso-creativo-3.jpeg",
+    title: "Encuentro Creativo en Comunidad",
+    caption: "Compartiendo la devoción del arte manual y la intención ceremonial en grupo.",
+  },
+  {
+    id: "proceso-4",
+    src: "/images/shop/proceso/proceso-creativo-4.jpeg",
+    title: "Concentración y Precisión",
+    caption: "Cada curva y pigmento se asienta sobre la morfología mineral única de cada piedra.",
+  },
+  {
+    id: "proceso-5",
+    src: "/images/shop/proceso/proceso-creativo-5.jpeg",
+    title: "Taller al Aire Libre",
+    caption: "Inspiración directa conectando con los elementos: tierra, agua y aire libre.",
+  },
+  {
+    id: "proceso-6",
+    src: "/images/shop/proceso/proceso-creativo-6.jpeg",
+    title: "Selección y Pigmentos Dorados",
+    caption: "Aplicación de tonos oro y sellado protector para preservar la obra en el altar.",
+  },
+  {
+    id: "proceso-7",
+    src: "/images/shop/proceso/proceso-creativo-7.jpeg",
+    title: "Compañerismo & Propósito",
+    caption: "El trabajo artesanal como vía de meditación activa y presencia plena.",
+  },
+  {
+    id: "proceso-8",
+    src: "/images/shop/proceso/proceso-creativo-8.jpeg",
+    title: "Texturas y Formas Fluviales",
+    caption: "Respetando los cantos rodados originales pulidos durante décadas por la corriente.",
+  },
+  {
+    id: "proceso-9",
+    src: "/images/shop/proceso/proceso-creativo-9.jpeg",
+    title: "El Alma de Cada Pieza",
+    caption: "Manos artesanas que transmiten calidez y reverencia en cada trazo ceremonial.",
+  },
+  {
+    id: "proceso-10",
+    src: "/images/shop/proceso/proceso-creativo-10.jpeg",
+    title: "Consagración al Fuego",
+    caption: "Sesión nocturna de pintura y activación junto a las brasas de la fogata sagrada.",
+  },
+  {
+    id: "proceso-11",
+    src: "/images/shop/proceso/proceso-creativo-11.jpeg",
+    title: "Alquimia Ceremonial",
+    caption: "El fuego como cuarto elemento que sella la energía viva de cada piedra de río.",
+  },
+];
+
 export const artisanManifesto = {
   eyebrow: "Colección Viva de Piezas Únicas de Río",
   title: "Cada proceso es diferente, cada colección es diferente, cada piedra es única",

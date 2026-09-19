@@ -10,6 +10,7 @@ import {
   ShopProduct,
 } from "@/data/shop";
 import { getWhatsAppUrl } from "@/config/brandConfig";
+import { CreativeProcessGallery } from "@/components/shop/CreativeProcessGallery";
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
@@ -110,6 +111,9 @@ export default function ShopPage() {
           </div>
         </div>
       </div>
+
+      {/* 2.1 Miniaturas y Visor del Proceso Creativo */}
+      <CreativeProcessGallery />
 
       {/* 3. Filtros de Colección y Tema */}
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
