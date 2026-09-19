@@ -33,7 +33,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Backups
+# Backups & Masters (Local only)
 public/images/cards_backup/
 public/images/minor_cards_backup/
 public/audio_wav_masters/
+masters_audio/
+audio_wav_masters/
