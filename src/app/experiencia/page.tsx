@@ -24,6 +24,7 @@ export default function ExperienciaPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
+        as="h1"
         subtitle="Rito de Paso"
         title="Tu Experiencia en el Santuario"
         description="Cada encuentro está concebido como una pausa sagrada en el ajetreo del mundo moderno. No hay prisas ni juicios: solo espacio para la verdad de tus preguntas."

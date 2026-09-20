@@ -36,6 +36,7 @@ export default function ContactoPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
+        as="h1"
         subtitle="Correspondencia Directa"
         title="Contacto con el Santuario"
         description="Si tienes inquietudes sobre alguna lectura, eventos privados o colaboraciones, comunícate a través de nuestro formulario o por canales directos."

@@ -6,6 +6,7 @@ interface SectionHeaderProps {
   description?: string;
   alignment?: "center" | "left";
   symbol?: string;
+  as?: "h1" | "h2";
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
@@ -14,6 +15,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   description,
   alignment = "center",
   symbol = "✦",
+  as: Component = "h2",
 }) => {
   const isCenter = alignment === "center";
 
@@ -32,9 +34,9 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         </span>
       )}
 
-      <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl tracking-[0.12em] text-parchment font-light leading-tight">
+      <Component className="font-serif text-2xl sm:text-4xl md:text-5xl tracking-[0.12em] text-parchment font-light leading-tight">
         {title}
-      </h2>
+      </Component>
 
       {description && (
         <p className="mt-4 text-sm sm:text-base text-parchment-muted font-sans font-light leading-relaxed max-w-2xl mx-auto">

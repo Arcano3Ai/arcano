@@ -25,6 +25,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Aula Virtual: ${course.title} (Nivel ${course.romanLevel}) | Academia ARCANO`,
     description: `Aprende ${course.title} en el aula virtual de ARCANO. Lecciones en video, guías PDF y acompañamiento ceremonial.`,
+    robots: {
+      index: false,
+      follow: false,
+    },
   };
 }
 
@@ -35,8 +39,10 @@ export default function CourseLearningPage({ params }: Props) {
   }
 
   return (
-    <Suspense
-      fallback={
+    <>
+      <h1 className="sr-only">Aula Virtual: {course.title}</h1>
+      <Suspense
+        fallback={
         <div className="min-h-screen bg-[#05070E] flex items-center justify-center text-amber-200 font-serif">
           <div className="flex items-center gap-3">
             <span className="animate-spin text-2xl">✦</span>
@@ -47,5 +53,6 @@ export default function CourseLearningPage({ params }: Props) {
     >
       <CourseClassroomView slug={params.slug} />
     </Suspense>
+    </>
   );
 }

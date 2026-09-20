@@ -91,9 +91,9 @@ function RegisterFormContent() {
         <span className="text-[11px] font-serif uppercase tracking-[0.3em] text-gold font-semibold block">
           ✦ INICIACIÓN EN ARCANO ✦
         </span>
-        <h1 className="text-2xl sm:text-3xl font-serif font-bold text-parchment">
+        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-parchment">
           Inscripción a la Academia
-        </h1>
+        </h2>
         <p className="text-xs text-parchment-dim font-light max-w-sm mx-auto">
           Crea tu cuenta de estudiante y accede al aula virtual con lecciones en video y manuales sagrados.
         </p>
@@ -301,7 +301,8 @@ function RegisterFormContent() {
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-[85vh] flex items-center justify-center px-4 py-12">
+    <div className="min-h-[85vh] flex flex-col items-center justify-center px-4 py-12">
+      <h1 className="sr-only">Inscripción a la Academia Esotérica — ARCANO</h1>
       <Suspense
         fallback={
           <div className="w-full max-w-md p-10 text-center text-gold font-serif">

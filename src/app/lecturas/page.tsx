@@ -57,6 +57,7 @@ export default function LecturasPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
       />
       <SectionHeader
+        as="h1"
         subtitle="Catálogo Ceremonial"
         title="Nuestras Lecturas de Tarot"
         description="Cada sesión es un espacio de quietud donde los símbolos de los arcanos se despliegan para iluminar tus encrucijadas presentes con respeto y confidencialidad."

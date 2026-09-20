@@ -47,6 +47,7 @@ export default function ArcanosIndexPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
+        as="h1"
         subtitle="Las 78 Puertas del Tarot"
         title="La Baraja Sagrada Completa"
         description="Explora las setenta y ocho cartas tradicionales ilustradas originalmente por Pamela Colman Smith bajo la guía de Arthur Edward Waite (1909). Desde los misterios cósmicos de los Arcanos Mayores hasta las encrucijadas cotidianas de los Arcanos Menores."

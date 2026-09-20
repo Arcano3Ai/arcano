@@ -35,6 +35,7 @@ export default function BlogIndexPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
+        as="h1"
         subtitle="Publicaciones y Ensayos"
         title="Crónicas de los Símbolos"
         description="Textos meditativos para profundizar en la historia, la filosofía hermética y las lecciones psicológicas que custodian los 22 símbolos mayores."

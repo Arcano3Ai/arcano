@@ -58,6 +58,7 @@ export default function CartaAstralPage() {
 
       <div className="print:hidden">
         <SectionHeader
+          as="h1"
           subtitle="Cosmología Sagrada"
           title="Carta Natal y Rueda Astral"
           description="El cielo cósmico al instante de tu primer aliento es un mapa vivo de potencialidades. Explora tus posiciones planetarias, la geometría sagrada de tus aspectos y la tríada fundamental de tu alma."

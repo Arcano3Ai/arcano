@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Los 22 Arcanos Mayores y Menores · Compendio y Simbolismo del Tarot | ARCANO",
   description:
-    "Explora la enciclopedia completa del tarot en ARCANO: los 22 Arcanos Mayores y los 56 Arcanos Menores. Simbolismo arquetípico, elementos, manifestaciones de luz y sombra.",
+    "Enciclopedia del tarot en ARCANO: los 22 Arcanos Mayores y 56 Menores. Simbolismo arquetípico, elementos sagrados y manifestaciones de luz y sombra.",
   keywords: [
     "arcanos mayores",
     "arcanos menores",

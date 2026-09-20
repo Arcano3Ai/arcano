@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${arcana.name} (${arcana.number}) — Significado, Simbolismo y Guía en el Tarot | ARCANO`,
-    description: `${arcana.name} en el Tarot: "${arcana.quote}" Descubre su significado completo, luz, sombra, amor, trabajo, crecimiento personal y simbolismo arquetípico.`,
+    description: `Significado de ${arcana.name} (${arcana.number}) en el Tarot: arquetipo, simbolismo sagrado, luz, sombra y guía en el amor y trabajo con ARCANO.`,
     keywords: [
       arcana.name,
       `significado de ${arcana.name.toLowerCase()}`,

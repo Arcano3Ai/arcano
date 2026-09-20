@@ -19,6 +19,7 @@ export default function ReservarPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
+        as="h1"
         subtitle="Encuentro Personal"
         title="Reservar tu Lectura"
         description="Elige la lectura que mejor se adapte a tu necesidad actual y selecciona tu fecha preferida. Toda sesión se realiza en un entorno de quietud y estricta confidencialidad."

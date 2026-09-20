@@ -57,6 +57,7 @@ export default function SinastriaPage() {
 
       <div className="print:hidden">
         <SectionHeader
+          as="h1"
           subtitle="Alquimia Relacional"
           title="Sinastría y Compatibilidad de Almas"
           description="Cuando dos universos se encuentran, sus estrellas trazan un diálogo único de atracción, complicidad y evolución compartida. Explora los aspectos cruzados de su vínculo cósmico."

@@ -21,7 +21,11 @@ import { brandConfig } from "@/config/brandConfig";
 import { getAssetPath, handleImageError } from "@/lib/utils";
 import { useStudent } from "@/lib/academy/studentContext";
 
-export const AcademySection: React.FC = () => {
+interface AcademySectionProps {
+  asHeading?: "h1" | "h2";
+}
+
+export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: HeadingTag = "h2" }) => {
   const [activeCategory, setActiveCategory] = useState<AcademyCategoryId | "todos">("todos");
   const [selectedCourse, setSelectedCourse] = useState<AcademyCourse | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -67,12 +71,12 @@ export const AcademySection: React.FC = () => {
               <span>PLATAFORMA EDUCATIVA ESOTÉRICA PREMIUM</span>
             </div>
 
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-parchment tracking-[0.05em] font-light leading-[1.15]">
+            <HeadingTag className="font-serif text-4xl sm:text-5xl lg:text-6xl text-parchment tracking-[0.05em] font-light leading-[1.15]">
               ACADEMIA <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold drop-shadow-[0_0_25px_rgba(198,160,82,0.3)]">
                 ESOTÉRICA
               </span>
-            </h2>
+            </HeadingTag>
 
             <p className="font-serif text-lg sm:text-xl text-parchment-dim italic max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               &ldquo;Explora el conocimiento ancestral, desarrolla tu intuición y transforma tu pasión espiritual en una nueva forma de crecimiento.&rdquo;

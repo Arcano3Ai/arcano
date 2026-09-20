@@ -52,6 +52,7 @@ export default function CartaDelDiaPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(oracleSchema) }}
       />
       <SectionHeader
+        as="h1"
         subtitle="Oráculo Cotidiano"
         title="Tu Carta para el Día de Hoy"
         description="El tarot diario no busca predecir eventos con rigidez; actúa como una brújula reflexiva para recordarte en qué actitud sabia puedes habitar los retos y oportunidades de hoy."
