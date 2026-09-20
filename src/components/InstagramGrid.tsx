@@ -34,6 +34,7 @@ export const InstagramGrid: React.FC = () => {
             href={item.permalink}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Ver publicación ceremonial en Instagram: ${item.caption}`}
             className="group relative aspect-[4/5] rounded-md overflow-hidden border border-charcoal-border hover:border-gold/50 transition-all duration-500 shadow-[0_8px_25px_rgba(0,0,0,0.7)]"
           >
             {/* Imagen con fallback estilizado */}

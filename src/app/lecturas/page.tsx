@@ -10,7 +10,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Lecturas de Tarot Online y Presencial · Consultas Personalizadas",
   description:
-    "Catálogo ceremonial de lecturas de tarot profesionales en ARCANO. Sesión general evolutiva, tarot del amor y vínculos, propósito vocacional y lectura profunda de 90 minutos.",
+    "Lecturas de tarot profesionales en ARCANO. Sesión general evolutiva, tarot del amor, propósito vocacional y lectura profunda con El Señor de los Arcanos.",
   alternates: {
     canonical: `${siteConfig.url}/lecturas/`,
   },

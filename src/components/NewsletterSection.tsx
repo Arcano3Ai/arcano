@@ -52,9 +52,14 @@ export const NewsletterSection: React.FC = () => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Correo electrónico para suscribirse al Círculo de la Luna
+            </label>
             <input
+              id="newsletter-email"
               type="email"
               required
+              aria-label="Correo electrónico para suscribirse al Círculo de la Luna"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="tu.correo@ejemplo.com"

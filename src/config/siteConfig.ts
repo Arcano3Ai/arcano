@@ -4,7 +4,7 @@ export const siteConfig = {
   title: `${brandConfig.name} — Sabiduría de los Arcanos | Tarot, Astrología & Academia en Monterrey y México`,
   titleTemplate: `%s | ARCANO — Tarot y Astrología Monterrey & México`,
   description:
-    "Santuario místico de Tarot Profesional, Carta Astral y Astrología en Monterrey, San Pedro Garza García y todo México. Academia certificada con 21 cursos, oráculo de la Carta del Día, sinastría de parejas y lecturas privadas online.",
+    "Tarot profesional, Carta Astral y Astrología en Monterrey y México. Academia mística, oráculo diario y lecturas privadas con El Señor de los Arcanos.",
   url: "https://arcanosolutions.com",
   ogImage: "https://arcanosolutions.com/og-arcano.jpg",
   author: "ARCANO Solutions",

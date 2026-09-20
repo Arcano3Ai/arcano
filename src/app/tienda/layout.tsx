@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Boutique Ceremonial · Quemadores de Incienso & Piedras de Río | ARCANO",
   description:
-    "Colección exclusiva de soportes de incienso y piedras sagradas de río taladradas y grabadas a mano. Doble perforación, símbolos Reiki, runas y frecuencias de altar.",
+    "Colección exclusiva de soportes de incienso y piedras de río grabadas a mano. Doble perforación, símbolos Reiki, runas y piezas sagradas para tu altar.",
   alternates: {
     canonical: `${siteConfig.url}/tienda/`,
   },

@@ -8,7 +8,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Carta del Día · Tarot Diario y Oráculo de Hoy Gratis | ARCANO",
   description:
-    "Descubre tu carta del día de tarot. Una tirada interactiva diaria de introspección para revelar la energía arquetípica de tu jornada con la sabiduría de los arcanos.",
+    "Descubre tu carta del día de tarot. Una tirada interactiva diaria para revelar la energía arquetípica de tu jornada con la sabiduría de los arcanos.",
   keywords: [
     "carta del dia",
     "carta del tarot de hoy",

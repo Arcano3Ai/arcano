@@ -469,8 +469,13 @@ export const ArcanaAiBot: React.FC = () => {
 
           {/* Formulario de Entrada */}
           <div className="p-3 border-t border-charcoal-border bg-[#0b0a10] flex items-center gap-2">
+            <label htmlFor="arcana_ai_input" className="sr-only">
+              Pregunta o consulta sobre el tarot para el custodio
+            </label>
             <input
+              id="arcana_ai_input"
               type="text"
+              aria-label="Pregunta o consulta sobre el tarot para el custodio"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={handleKeyDown}

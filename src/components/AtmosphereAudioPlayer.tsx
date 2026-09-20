@@ -9,30 +9,20 @@ export const AtmosphereAudioPlayer: React.FC = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const getOrCreateAudio = () => {
+    if (!audioRef.current && typeof window !== "undefined") {
+      const primaryUrl = getAudioPath("/audio/el-viaje-entre-los-arcanos.mp3");
+      const audio = new Audio(primaryUrl);
+      audio.preload = "none";
+      audio.loop = true;
+      audio.volume = 0.28; // Volumen sutil ceremonial
+      audioRef.current = audio;
+    }
+    return audioRef.current;
+  };
+
   useEffect(() => {
-    const primaryUrl = getAudioPath("/audio/el-viaje-entre-los-arcanos.mp3");
-    const audio = new Audio(primaryUrl);
-    audio.preload = "metadata";
-    audio.loop = true;
-    audio.volume = 0.28; // Volumen sutil ceremonial
-    audioRef.current = audio;
-
     let wasPlayingBeforeArcano = false;
-
-    // Escuchar el evento de inicio desde la pantalla de bienvenida
-    const handleAmbientStart = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-            setHasInteracted(true);
-          })
-          .catch(() => {
-            // Autoplay prevenido por el navegador
-          });
-      }
-    };
 
     const handleArcanoPauseAmbient = () => {
       if (audioRef.current && !audioRef.current.paused) {
@@ -54,12 +44,10 @@ export const AtmosphereAudioPlayer: React.FC = () => {
       }
     };
 
-    window.addEventListener("arcano_start_ambient", handleAmbientStart);
     window.addEventListener("arcano_pause_ambient", handleArcanoPauseAmbient);
     window.addEventListener("arcano_resume_ambient", handleArcanoResumeAmbient);
 
     return () => {
-      window.removeEventListener("arcano_start_ambient", handleAmbientStart);
       window.removeEventListener("arcano_pause_ambient", handleArcanoPauseAmbient);
       window.removeEventListener("arcano_resume_ambient", handleArcanoResumeAmbient);
       if (audioRef.current) {
@@ -70,13 +58,14 @@ export const AtmosphereAudioPlayer: React.FC = () => {
   }, []);
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
+    const audio = getOrCreateAudio();
+    if (!audio) return;
 
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current
+      audio
         .play()
         .then(() => {
           setIsPlaying(true);

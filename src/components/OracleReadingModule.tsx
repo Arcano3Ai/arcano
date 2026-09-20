@@ -161,10 +161,11 @@ export const OracleReadingModule: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
             <div>
-              <label className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1">
+              <label htmlFor="oracle_consultant_name" className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1">
                 Tu Nombre o Apelativo
               </label>
               <input
+                id="oracle_consultant_name"
                 type="text"
                 value={consultantName}
                 onChange={(e) => setConsultantName(e.target.value)}
@@ -174,100 +175,113 @@ export const OracleReadingModule: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1 flex items-center justify-between">
+              <span className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1 flex items-center justify-between">
                 <span>Fecha de Nacimiento</span>
                 {birthDate && (
                   <span className="text-[9px] text-gold font-sans capitalize">
                     ✦ {birthDate}
                   </span>
                 )}
-              </label>
+              </span>
 
               {/* Selector ceremonial de Día, Mes y Año: infalible en móviles */}
               <div className="grid grid-cols-3 gap-1.5">
                 {/* Día */}
-                <select
-                  aria-label="Día de nacimiento"
-                  name="birth_day"
-                  value={birthDate ? parseInt(birthDate.split("-")[2] || "0", 10) : ""}
-                  onChange={(e) => {
-                    const dayVal = e.target.value ? e.target.value.padStart(2, "0") : "";
-                    const parts = (birthDate || "--").split("-");
-                    const y = parts[0] || "1995";
-                    const m = parts[1] || "01";
-                    if (dayVal) {
-                      setBirthDate(`${y}-${m}-${dayVal}`);
-                    }
-                  }}
-                  className="bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
-                >
-                  <option value="" disabled>Día</option>
-                  {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
-                    <option key={d} value={d} className="bg-[#161424] text-parchment">
-                      {d}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <label htmlFor="oracle_birth_day" className="sr-only">Día de nacimiento</label>
+                  <select
+                    id="oracle_birth_day"
+                    aria-label="Día de nacimiento"
+                    name="birth_day"
+                    value={birthDate ? parseInt(birthDate.split("-")[2] || "0", 10) : ""}
+                    onChange={(e) => {
+                      const dayVal = e.target.value ? e.target.value.padStart(2, "0") : "";
+                      const parts = (birthDate || "--").split("-");
+                      const y = parts[0] || "1995";
+                      const m = parts[1] || "01";
+                      if (dayVal) {
+                        setBirthDate(`${y}-${m}-${dayVal}`);
+                      }
+                    }}
+                    className="w-full bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
+                  >
+                    <option value="" disabled>Día</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                      <option key={d} value={d} className="bg-[#161424] text-parchment">
+                        {d}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 {/* Mes */}
-                <select
-                  aria-label="Mes de nacimiento"
-                  name="birth_month"
-                  value={birthDate ? parseInt(birthDate.split("-")[1] || "0", 10) : ""}
-                  onChange={(e) => {
-                    const monthVal = e.target.value ? e.target.value.padStart(2, "0") : "";
-                    const parts = (birthDate || "--").split("-");
-                    const y = parts[0] || "1995";
-                    const d = parts[2] || "15";
-                    if (monthVal) {
-                      setBirthDate(`${y}-${monthVal}-${d}`);
-                    }
-                  }}
-                  className="bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
-                >
-                  <option value="" disabled>Mes</option>
-                  {[
-                    "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-                    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-                  ].map((mName, i) => (
-                    <option key={i + 1} value={i + 1} className="bg-[#161424] text-parchment">
-                      {mName}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <label htmlFor="oracle_birth_month" className="sr-only">Mes de nacimiento</label>
+                  <select
+                    id="oracle_birth_month"
+                    aria-label="Mes de nacimiento"
+                    name="birth_month"
+                    value={birthDate ? parseInt(birthDate.split("-")[1] || "0", 10) : ""}
+                    onChange={(e) => {
+                      const monthVal = e.target.value ? e.target.value.padStart(2, "0") : "";
+                      const parts = (birthDate || "--").split("-");
+                      const y = parts[0] || "1995";
+                      const d = parts[2] || "15";
+                      if (monthVal) {
+                        setBirthDate(`${y}-${monthVal}-${d}`);
+                      }
+                    }}
+                    className="w-full bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
+                  >
+                    <option value="" disabled>Mes</option>
+                    {[
+                      "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                      "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+                    ].map((mName, i) => (
+                      <option key={i + 1} value={i + 1} className="bg-[#161424] text-parchment">
+                        {mName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 {/* Año */}
-                <select
-                  aria-label="Año de nacimiento"
-                  name="birth_year"
-                  value={birthDate ? parseInt(birthDate.split("-")[0] || "0", 10) : ""}
-                  onChange={(e) => {
-                    const yearVal = e.target.value;
-                    const parts = (birthDate || "--").split("-");
-                    const m = parts[1] || "01";
-                    const d = parts[2] || "15";
-                    if (yearVal) {
-                      setBirthDate(`${yearVal}-${m}-${d}`);
-                    }
-                  }}
-                  className="bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
-                >
-                  <option value="" disabled>Año</option>
-                  {Array.from({ length: 85 }, (_, i) => 2014 - i).map((y) => (
-                    <option key={y} value={y} className="bg-[#161424] text-parchment">
-                      {y}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <label htmlFor="oracle_birth_year" className="sr-only">Año de nacimiento</label>
+                  <select
+                    id="oracle_birth_year"
+                    aria-label="Año de nacimiento"
+                    name="birth_year"
+                    value={birthDate ? parseInt(birthDate.split("-")[0] || "0", 10) : ""}
+                    onChange={(e) => {
+                      const yearVal = e.target.value;
+                      const parts = (birthDate || "--").split("-");
+                      const m = parts[1] || "01";
+                      const d = parts[2] || "15";
+                      if (yearVal) {
+                        setBirthDate(`${yearVal}-${m}-${d}`);
+                      }
+                    }}
+                    className="w-full bg-[#161424] border border-charcoal-border rounded px-2 py-2 text-xs text-parchment focus:outline-none focus:border-gold transition-colors font-sans"
+                  >
+                    <option value="" disabled>Año</option>
+                    {Array.from({ length: 85 }, (_, i) => 2014 - i).map((y) => (
+                      <option key={y} value={y} className="bg-[#161424] text-parchment">
+                        {y}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="mb-3">
-            <label className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1">
+            <label htmlFor="oracle_question" className="block text-[10px] uppercase tracking-wider text-parchment-dim font-sans mb-1">
               Tu Pregunta, Inquietud o Dilema Interior
             </label>
             <textarea
+              id="oracle_question"
               rows={2}
               value={question}
               onChange={(e) => setQuestion(e.target.value)}

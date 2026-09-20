@@ -7,7 +7,7 @@ import SynastryApp from '@/components/astrology/SynastryApp';
 export const metadata: Metadata = {
   title: 'Calculadora de Sinastría y Compatibilidad de Pareja Gratis · Bi-Wheel | ARCANO',
   description:
-    'Calcula la sinastría y compatibilidad de pareja gratis con precisión astronómica. Rueda doble (Bi-Wheel), aspectos cruzados, química, comunicación, retos kármicos y la sabiduría de los arcanos.',
+    'Calcula la sinastría y compatibilidad de pareja gratis. Rueda doble Bi-Wheel, aspectos cruzados, química, retos kármicos y la sabiduría de los arcanos.',
   keywords: [
     'sinastria de pareja',
     'calculadora de sinastria',

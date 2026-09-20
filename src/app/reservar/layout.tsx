@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Reservar Lectura de Tarot Online · Sesión Privada y Confidencial | ARCANO",
   description:
-    "Agenda tu sesión personalizada de lectura de tarot en ARCANO. Orientación evolutiva y simbólica por videoconferencia o audio ceremonial con confirmación inmediata.",
+    "Agenda tu sesión de lectura de tarot en ARCANO. Orientación evolutiva y simbólica por videoconferencia o audio ceremonial con confirmación inmediata.",
   keywords: [
     "reservar lectura de tarot",
     "agendar cita tarot online",

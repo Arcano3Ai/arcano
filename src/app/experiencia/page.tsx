@@ -9,7 +9,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "El Método de Tarot Simbólico · Cómo Funciona Tu Sesión | ARCANO",
   description:
-    "Descubre el método ceremonial y terapéutico de lectura de tarot en ARCANO: un proceso en 5 pasos desde la formulación de la pregunta hasta la integración consciente.",
+    "Conoce el método ceremonial de tarot en ARCANO: un proceso en 5 pasos desde la formulación de tu pregunta hasta la integración consciente de los símbolos.",
   alternates: {
     canonical: `${siteConfig.url}/experiencia/`,
   },

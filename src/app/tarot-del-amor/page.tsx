@@ -8,7 +8,7 @@ import { siteConfig } from "@/config/siteConfig";
 export const metadata: Metadata = {
   title: "Tarot del Amor y Pareja · Lectura Simbólica de Vínculos y Relaciones",
   description:
-    "Explora los arquetipos detrás de tus vínculos afectivos con el Tarot del Amor. Comprensión profunda de relaciones, comunicación, cierres de ciclo y nuevos encuentros conscientes.",
+    "Explora los arquetipos de tus vínculos con el Tarot del Amor. Comprensión profunda de relaciones, comunicación, cierres y nuevos encuentros conscientes.",
   keywords: [
     "tarot del amor",
     "lectura tarot del amor",

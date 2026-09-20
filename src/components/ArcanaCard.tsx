@@ -119,6 +119,7 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, pri
 
         <Link
           href={`/arcanos/${arcana.slug}`}
+          aria-label={`Explorar arcano ${arcana.name} (${arcana.number})`}
           className="text-[10px] uppercase tracking-[0.18em] text-gold hover:text-gold-light transition-colors font-sans ml-auto py-1"
         >
           Explorar arcano →

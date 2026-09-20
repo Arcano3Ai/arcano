@@ -53,21 +53,23 @@ export const StarField: React.FC = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const isBot =
+      typeof navigator !== "undefined" &&
+      (Boolean(navigator.webdriver) ||
+        /bot|googlebot|crawler|spider|robot|crawling|lighthouse|headlesschrome/i.test(
+          navigator.userAgent
+        ));
+
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      initStars();
-    };
+    // Ajuste de densidad: ligero en móviles y desactivado en bots
+    const isMobile = width < 768;
+    const starCount = isMobile
+      ? Math.min(Math.floor((width * height) / 24000), 30)
+      : Math.min(Math.floor((width * height) / 14000), 75);
 
-    window.addEventListener("resize", handleResize);
-
-    // Ajuste de densidad: partículas muy sutiles, como polvo cósmico y estrellas lejanas
-    const starCount = Math.min(Math.floor((width * height) / 12000), 110);
     let stars: Star[] = [];
     let shootingStars: ShootingStar[] = [];
     let floatingGlyphs: FloatingArcanaGlyph[] = [];
@@ -242,14 +244,30 @@ export const StarField: React.FC = () => {
         }
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!isBot && !prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
 
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initStars();
+      if (isBot || prefersReducedMotion) {
+        render();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, []);
 

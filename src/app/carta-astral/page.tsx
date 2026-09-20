@@ -7,7 +7,7 @@ import NatalChartApp from '@/components/astrology/NatalChartApp';
 export const metadata: Metadata = {
   title: 'Calculadora de Carta Natal y Rueda Astral Gratis · Precisión Efemérides | ARCANO',
   description:
-    'Calcula tu carta astral y natal gratis con precisión astronómica de efemérides. Rueda interactiva en SVG, análisis de signos, casas, aspectos planetarios y la sabiduría arquetípica de los arcanos.',
+    'Calcula tu carta astral y natal gratis con precisión de efemérides. Rueda zodiacal interactiva, signos, casas, aspectos y sabiduría de los arcanos.',
   keywords: [
     'carta natal gratis',
     'carta astral',

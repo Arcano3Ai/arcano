@@ -67,12 +67,12 @@ export const AcademySection: React.FC = () => {
               <span>PLATAFORMA EDUCATIVA ESOTÉRICA PREMIUM</span>
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-parchment tracking-[0.05em] font-light leading-[1.15]">
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-parchment tracking-[0.05em] font-light leading-[1.15]">
               ACADEMIA <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold drop-shadow-[0_0_25px_rgba(198,160,82,0.3)]">
                 ESOTÉRICA
               </span>
-            </h1>
+            </h2>
 
             <p className="font-serif text-lg sm:text-xl text-parchment-dim italic max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               &ldquo;Explora el conocimiento ancestral, desarrolla tu intuición y transforma tu pasión espiritual en una nueva forma de crecimiento.&rdquo;

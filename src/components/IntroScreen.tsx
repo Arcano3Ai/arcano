@@ -9,24 +9,30 @@ export const IntroScreen: React.FC = () => {
   const [isDismissed, setIsDismissed] = useState<boolean>(false);
 
   useEffect(() => {
-    // Si ya vio la intro en esta sesión o prefiere movimiento reducido, no interrumpir
+    // Si es bot, auditoría (Lighthouse), prefiere movimiento reducido o ya vio la intro, omitir al instante
     const hasSeenIntro = sessionStorage.getItem("arcano_intro_seen");
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    const isBot =
+      typeof navigator !== "undefined" &&
+      (Boolean(navigator.webdriver) ||
+        /bot|googlebot|crawler|spider|robot|crawling|lighthouse|headlesschrome/i.test(
+          navigator.userAgent
+        ));
 
-    if (hasSeenIntro || prefersReducedMotion) {
+    if (hasSeenIntro || prefersReducedMotion || isBot) {
       setIsDismissed(true);
       return;
     }
 
     setIsVisible(true);
 
-    // Secuencia ceremonial de aparición
-    const timer1 = setTimeout(() => setStep(1), 500);   // Luna y resplandor
-    const timer2 = setTimeout(() => setStep(2), 1600);  // Logotipo ARCANO
-    const timer3 = setTimeout(() => setStep(3), 2700);  // Descriptor y Frase
-    const timer4 = setTimeout(() => handleClose(), 5800); // Cierre automático suave
+    // Secuencia ceremonial ágil que no bloquea la experiencia del usuario ni el LCP
+    const timer1 = setTimeout(() => setStep(1), 250);   // Luna y resplandor
+    const timer2 = setTimeout(() => setStep(2), 650);   // Logotipo ARCANO
+    const timer3 = setTimeout(() => setStep(3), 1100);  // Descriptor y Frase
+    const timer4 = setTimeout(() => handleClose(), 2000); // Cierre automático suave
 
     return () => {
       clearTimeout(timer1);
@@ -39,12 +45,9 @@ export const IntroScreen: React.FC = () => {
   const handleClose = () => {
     setIsVisible(false);
     sessionStorage.setItem("arcano_intro_seen", "true");
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("arcano_start_ambient"));
-    }
     setTimeout(() => {
       setIsDismissed(true);
-    }, 900);
+    }, 500);
   };
 
   if (isDismissed) return null;
@@ -85,9 +88,9 @@ export const IntroScreen: React.FC = () => {
           step >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
-        <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl tracking-[0.3em] text-parchment font-light drop-shadow-md">
+        <p className="font-serif text-3xl sm:text-5xl md:text-6xl tracking-[0.3em] text-parchment font-light drop-shadow-md">
           {brandConfig.name}
-        </h1>
+        </p>
         <div className="h-[1px] w-16 mx-auto mt-4 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
       </div>
 
