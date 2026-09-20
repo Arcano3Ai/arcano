@@ -47,9 +47,7 @@ export const Footer: React.FC = () => {
 
           {/* Columna Explorar */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4">
-              Explorar
-            </h4>
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">Explorar</p>
             <ul className="space-y-2.5">
               {footerNavLinks.explorar.map((link) => (
                 <li key={link.href}>
@@ -66,9 +64,7 @@ export const Footer: React.FC = () => {
 
           {/* Columna Santuario */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4">
-              Santuario
-            </h4>
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">Santuario</p>
             <ul className="space-y-2.5">
               {footerNavLinks.santuario.map((link) => (
                 <li key={link.href}>
@@ -85,9 +81,7 @@ export const Footer: React.FC = () => {
 
           {/* Columna Legal y Ética */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4">
-              Legal & Ética
-            </h4>
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">Legal & Ética</p>
             <ul className="space-y-2.5">
               {footerNavLinks.legal.map((link) => (
                 <li key={link.href}>

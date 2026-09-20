@@ -336,9 +336,9 @@ export default function HomePage() {
                   <span>Paso {step.stepNumber}</span>
                   <span className="text-sm font-serif">{step.glyph}</span>
                 </div>
-                <h4 className="font-serif text-base text-parchment font-medium tracking-wide">
+                <h3 className="font-serif text-base text-parchment font-medium tracking-wide">
                   {step.title}
-                </h4>
+                </h3>
                 <p className="text-[11px] text-gold/75 font-sans mt-0.5">
                   {step.subtitle}
                 </p>
@@ -382,7 +382,7 @@ export default function HomePage() {
             <ArcanaCard
               key={arcana.slug}
               arcana={arcana}
-              priority={idx < 6}
+              priority={false}
               onQuickView={(a) => setSelectedArcanaForModal(a)}
             />
           ))}
@@ -481,9 +481,9 @@ export default function HomePage() {
                     {test.initials}
                   </div>
                   <div>
-                    <h5 className="font-serif text-sm text-parchment font-medium">
+                    <p className="font-serif text-sm text-parchment font-medium">
                       {test.clientName}
-                    </h5>
+                    </p>
                     <span className="text-[10px] text-parchment-dim font-sans block">
                       {test.location}
                     </span>
@@ -538,9 +538,9 @@ export default function HomePage() {
                   <span className="text-[10px] uppercase tracking-wider text-parchment-dim font-sans block mb-2">
                     {post.publishedAt} · {post.readTime}
                   </span>
-                  <h4 className="font-serif text-lg text-parchment group-hover:text-gold transition-colors font-medium leading-snug">
+                  <h3 className="font-serif text-lg text-parchment group-hover:text-gold transition-colors font-medium leading-snug">
                     {post.title}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-parchment-muted font-sans font-light mt-2 line-clamp-2 leading-relaxed">
                     {post.excerpt}
                   </p>

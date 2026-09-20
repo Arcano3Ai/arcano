@@ -49,6 +49,6 @@ export const tarotistProfile: TarotistProfile = {
     alt: "El Señor de los Arcanos, lector y custodio de los símbolos en el santuario de ARCANO",
     caption: "El Señor de los Arcanos · Presencia ceremonial, ojos del oráculo y sabiduría arcana",
     aspectRatio: "1/1",
-    imageUrl: "/images/malachai-perfil.gif",
+    imageUrl: "/images/malachai-perfil.webp",
   },
 };

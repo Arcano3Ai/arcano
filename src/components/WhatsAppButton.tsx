@@ -39,6 +39,7 @@ export const WhatsAppButton: React.FC = () => {
       {/* Botón flotante ceremonial */}
       <a
         href={whatsappUrl}
+        aria-label="Contactar a ARCANO por WhatsApp"
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
@@ -46,7 +47,9 @@ export const WhatsAppButton: React.FC = () => {
         onMouseLeave={() => setIsHovered(false)}
         className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-gold/60 hover:border-gold bg-gradient-to-br from-[#1c1810] via-[#121118] to-[#08080a] text-gold hover:text-gold-light flex items-center justify-center shadow-[0_0_20px_rgba(198,160,82,0.3)] hover:shadow-[0_0_35px_rgba(198,160,82,0.6)] transition-all duration-500 hover:scale-105"
       >
+        <span className="sr-only">Contactar a ARCANO por WhatsApp</span>
         <svg
+          aria-hidden="true"
           className="w-6 h-6 fill-current"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

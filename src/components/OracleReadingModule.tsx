@@ -187,6 +187,8 @@ export const OracleReadingModule: React.FC = () => {
               <div className="grid grid-cols-3 gap-1.5">
                 {/* Día */}
                 <select
+                  aria-label="Día de nacimiento"
+                  name="birth_day"
                   value={birthDate ? parseInt(birthDate.split("-")[2] || "0", 10) : ""}
                   onChange={(e) => {
                     const dayVal = e.target.value ? e.target.value.padStart(2, "0") : "";
@@ -209,6 +211,8 @@ export const OracleReadingModule: React.FC = () => {
 
                 {/* Mes */}
                 <select
+                  aria-label="Mes de nacimiento"
+                  name="birth_month"
                   value={birthDate ? parseInt(birthDate.split("-")[1] || "0", 10) : ""}
                   onChange={(e) => {
                     const monthVal = e.target.value ? e.target.value.padStart(2, "0") : "";
@@ -234,6 +238,8 @@ export const OracleReadingModule: React.FC = () => {
 
                 {/* Año */}
                 <select
+                  aria-label="Año de nacimiento"
+                  name="birth_year"
                   value={birthDate ? parseInt(birthDate.split("-")[0] || "0", 10) : ""}
                   onChange={(e) => {
                     const yearVal = e.target.value;

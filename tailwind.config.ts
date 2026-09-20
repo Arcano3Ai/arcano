@@ -30,7 +30,7 @@ const config: Config = {
         parchment: {
           DEFAULT: "#f4efe6",
           muted: "#c8c0b2",
-          dim: "#8f877a",
+          dim: "#9e9689",
         },
         gold: {
           DEFAULT: "#c6a052",
