@@ -12,17 +12,10 @@ export const AtmosphereAudioPlayer: React.FC = () => {
   useEffect(() => {
     const primaryUrl = getAudioPath("/audio/el-viaje-entre-los-arcanos.mp3");
     const audio = new Audio(primaryUrl);
+    audio.preload = "metadata";
     audio.loop = true;
     audio.volume = 0.28; // Volumen sutil ceremonial
     audioRef.current = audio;
-
-    audio.onerror = () => {
-      const fallbackUrl = getAssetPath("/audio/el-viaje-entre-los-arcanos.mp3");
-      if (audio.src !== fallbackUrl) {
-        audio.src = fallbackUrl;
-        audio.load();
-      }
-    };
 
     let wasPlayingBeforeArcano = false;
 
