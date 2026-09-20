@@ -213,7 +213,8 @@ export const CreativeProcessGallery: React.FC = () => {
               </p>
 
               {/* Tira inferior de miniaturas para navegar rápido */}
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 overflow-x-auto py-1 scrollbar-none">
+              <div className="w-full overflow-x-auto py-1.5 px-2 scrollbar-none">
+                <div className="flex items-center min-w-max mx-auto gap-1.5 sm:gap-2">
                 {creativeProcessGallery.map((thumb, idx) => (
                   <button
                     key={thumb.id}
@@ -233,6 +234,7 @@ export const CreativeProcessGallery: React.FC = () => {
                     />
                   </button>
                 ))}
+                </div>
               </div>
             </div>
           </div>

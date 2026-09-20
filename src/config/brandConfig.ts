@@ -59,7 +59,7 @@ export const brandConfig: BrandConfig = {
     whatsappNumber: "5218121912778",
     whatsappDefaultMessage:
       "Hola ARCANO, deseo consultar sobre una lectura privada.",
-    location: "Santuario Digital & Sesiones Privadas",
+    location: "Monterrey & San Pedro Garza García, N.L. · Cobertura en todo México",
     hours: "Lunes a Sábado · Con cita previa",
   },
   social: {
@@ -83,7 +83,7 @@ export const brandConfig: BrandConfig = {
   legal: {
     companyLegalName: "ARCANO Solutions — Sabiduría de los Arcanos",
     taxId: "Registro Fiscal: ARCANO Digital Services",
-    address: "Monterrey, N.L. / Ciudad de México · Cobertura Internacional Online",
+    address: "Monterrey, N.L. / San Pedro Garza García · Cobertura Presencial & Online en todo México",
     lastUpdated: "Septiembre 2026",
   },
 };

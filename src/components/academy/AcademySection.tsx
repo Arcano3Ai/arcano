@@ -258,7 +258,8 @@ export const AcademySection: React.FC = () => {
       {/* ============================================================ */}
       <div id="cursos-academia" className="relative py-20 bg-[#090712] border-t border-charcoal-border/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+          {/* Header de la sección de cursos */}
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
             <h2 className="font-serif text-3xl sm:text-4xl text-parchment font-light">
               CATÁLOGO DE CURSOS
             </h2>
@@ -267,33 +268,37 @@ export const AcademySection: React.FC = () => {
               <strong className="text-emerald-400 font-semibold">100% GRATIS por promoción</strong>, y los niveles del 2 al 6 tienen una inversión única de{" "}
               <strong className="text-gold-light font-semibold">$799 MXN</strong>.
             </p>
+          </div>
 
-            {/* Barra de Filtros / Navegación por Disciplina */}
-            <div className="pt-4 flex items-center justify-start sm:justify-center overflow-x-auto pb-2 gap-2 sm:gap-3 no-scrollbar">
-              <button
-                onClick={() => setActiveCategory("todos")}
-                className={`px-4 py-2 rounded-full text-xs font-sans uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 ${
-                  activeCategory === "todos"
-                    ? "bg-gradient-to-r from-gold/90 via-gold-light to-gold/90 text-obsidian font-bold shadow-[0_0_15px_rgba(198,160,82,0.4)] scale-105"
-                    : "bg-obsidian-deep border border-charcoal-border text-parchment-dim hover:text-parchment hover:border-gold/40"
-                }`}
-              >
-                ✦ TODOS ({academyCourses.length})
-              </button>
-
-              {academyCategories.map((cat) => (
+          {/* Barra de Filtros / Navegación por Disciplina */}
+          <div className="w-full max-w-5xl mx-auto mb-12">
+            <div className="w-full overflow-x-auto py-3 px-4 sm:px-6 no-scrollbar">
+              <div className="flex items-center min-w-max mx-auto justify-center gap-2 sm:gap-3">
                 <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-sans uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 ${
-                    activeCategory === cat.id
+                  onClick={() => setActiveCategory("todos")}
+                  className={`px-4 py-2 rounded-full text-xs font-sans uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
+                    activeCategory === "todos"
                       ? "bg-gradient-to-r from-gold/90 via-gold-light to-gold/90 text-obsidian font-bold shadow-[0_0_15px_rgba(198,160,82,0.4)] scale-105"
                       : "bg-obsidian-deep border border-charcoal-border text-parchment-dim hover:text-parchment hover:border-gold/40"
+                  }`}
+                >
+                  ✦ TODOS ({academyCourses.length})
+                </button>
+
+                {academyCategories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`px-4 py-2 rounded-full text-xs font-sans uppercase tracking-[0.15em] whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
+                      activeCategory === cat.id
+                        ? "bg-gradient-to-r from-gold/90 via-gold-light to-gold/90 text-obsidian font-bold shadow-[0_0_15px_rgba(198,160,82,0.4)] scale-105"
+                        : "bg-obsidian-deep border border-charcoal-border text-parchment-dim hover:text-parchment hover:border-gold/40"
                   }`}
                 >
                   {cat.icon} {cat.title} ({cat.activeCount})
                 </button>
               ))}
+              </div>
             </div>
           </div>
 
