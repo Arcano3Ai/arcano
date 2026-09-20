@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -9,12 +9,16 @@ import NatalWheel from './NatalWheel';
 import PlanetTable from './PlanetTable';
 import AspectGrid from './AspectGrid';
 import NatalReportView from './NatalReportView';
+import NatalDossierUser from './NatalDossierUser';
+import NatalDossierAstrologer from './NatalDossierAstrologer';
 
 export default function NatalChartApp() {
   const [chart, setChart] = useState<NatalChartData | null>(null);
   const [activeTab, setActiveTab] = useState<'wheel' | 'report' | 'tables' | 'new'>('wheel');
   const [selectedPlanet, setSelectedPlanet] = useState<PlanetaryPosition | null>(null);
   const [isRecalculating, setIsRecalculating] = useState(false);
+  const [dossierType, setDossierType] = useState<'user' | 'astrologer'>('user');
+  const [isDossierModalOpen, setIsDossierModalOpen] = useState(false);
 
   const handleFormSubmit = (data: BirthDataInput) => {
     setIsRecalculating(true);
@@ -29,8 +33,27 @@ export default function NatalChartApp() {
     }, 250);
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handleDownloadDossier = (type: 'user' | 'astrologer') => {
+    setDossierType(type);
+    setIsDossierModalOpen(false);
+
+    // Garantizar aislamiento total de modo claro: el PDF siempre es fondo cósmico oscuro de lujo
+    const html = document.documentElement;
+    const body = document.body;
+    const wasLight = html.classList.contains('light') || body.classList.contains('light');
+    if (wasLight) {
+      html.classList.remove('light');
+      body.classList.remove('light');
+    }
+
+    setTimeout(() => {
+      window.print();
+      // Restaurar modo claro después de imprimir si estaba activo
+      if (wasLight) {
+        html.classList.add('light');
+        body.classList.add('light');
+      }
+    }, 200);
   };
 
   // 1. ESTADO INICIAL: CREAR LA PRIMERA CARTA
@@ -89,10 +112,10 @@ export default function NatalChartApp() {
             </p>
           </div>
           <div className="p-4 rounded-2xl bg-[#090D18]/50 border border-amber-500/10">
-            <span className="text-2xl text-amber-400 block mb-2">☌</span>
-            <h4 className="font-serif font-bold text-sm text-amber-100 mb-1">Matriz de Aspectos</h4>
+            <span className="text-2xl text-amber-400 block mb-2">📥</span>
+            <h4 className="font-serif font-bold text-sm text-amber-100 mb-1">Dossier Editorial PDF</h4>
             <p className="text-xs text-slate-400">
-              Grilla triangular idéntica al estándar profesional de Astro-Seek con orbes en tiempo real.
+              Exportación imprimible en formato A4 con diseño de libro ceremonial en alta resolución.
             </p>
           </div>
         </div>
@@ -100,29 +123,24 @@ export default function NatalChartApp() {
     );
   }
 
-  // 2. ESTADO POST-CÁLCULO: PANTALLA WEB INTERACTIVA
+  // 2. ESTADO PRINCIPAL: CARTA CALCULADA Y VISTA INTERACTIVA
   return (
-    <div className="w-full space-y-8 animate-in fade-in duration-300">
+    <div className="w-full space-y-8">
       {/* SECCIÓN VISIBLE EN PANTALLA (NO-PRINT) */}
       <div className="print:hidden space-y-8">
-        {/* Header Info Banner */}
-        <div className="bg-[#090D18]/90 border border-amber-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Cabecera de la Carta Activa */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-[#080C16] border border-amber-500/20 backdrop-blur-xl shadow-2xl">
           <div>
-            <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-amber-400 font-semibold mb-1">
-              <span>✦ Carta Natal Calculada</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-slate-400 font-mono">
-                {chart.birthData.day}/{chart.birthData.month}/{chart.birthData.year}{' '}
-                {String(chart.birthData.hour).padStart(2, '0')}:{String(chart.birthData.minute).padStart(2, '0')}
-              </span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[10px] font-serif uppercase tracking-widest mb-1.5">
+              <span>✦</span> Carta Natal Activa
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-amber-100">
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-amber-100">
               {chart.birthData.name}
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Lugar: <strong className="text-amber-300 font-normal">{chart.birthData.cityName}</strong> • Casas:{' '}
-              <span className="capitalize">{chart.birthData.houseSystem}</span> •{' '}
-              {chart.aspects.length} aspectos celestes activos
+            </h2>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Nacimiento: {chart.birthData.day}/{chart.birthData.month}/{chart.birthData.year} a las{' '}
+              {String(chart.birthData.hour).padStart(2, '0')}:{String(chart.birthData.minute).padStart(2, '0')} hs •{' '}
+              {chart.birthData.cityName}
             </p>
           </div>
 
@@ -138,14 +156,103 @@ export default function NatalChartApp() {
 
             <button
               type="button"
-              onClick={handlePrint}
+              onClick={() => setIsDossierModalOpen(true)}
               className="px-5 py-2.5 rounded-2xl border border-amber-500/50 bg-amber-500/10 text-amber-200 text-xs font-serif font-semibold hover:bg-amber-500/20 shadow-[0_0_15px_rgba(212,175,55,0.2)] transition-all flex items-center gap-2"
-              title="Descargar o imprimir reporte editorial en PDF"
+              title="Descargar dossier en PDF (Versión Fácil o Versión Astrólogo)"
             >
               <span>📥</span> Descargar Dossier PDF
             </button>
           </div>
         </div>
+
+        {/* Modal de Selección de Formato Dossier PDF */}
+        {isDossierModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+            <div className="relative w-full max-w-2xl bg-[#090D18] border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+              {/* Botón Cerrar */}
+              <button
+                type="button"
+                onClick={() => setIsDossierModalOpen(false)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+                title="Cerrar modal"
+              >
+                ✕
+              </button>
+
+              <div className="text-center mb-6">
+                <span className="text-[11px] font-serif uppercase tracking-[0.25em] text-amber-400 font-semibold block">
+                  ✦ Dossier Oficial de Carta Astral ✦
+                </span>
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100 mt-1">
+                  Elige la Versión del Reporte
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 font-light">
+                  Selecciona el formato de exportación PDF que mejor se adapte a tu lectura o archivo profesional.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* OPCIÓN 1: VERSIÓN FÁCIL / CONSULTANTE */}
+                <div
+                  onClick={() => handleDownloadDossier('user')}
+                  className="p-5 rounded-2xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-transparent hover:border-amber-400 hover:bg-amber-500/15 cursor-pointer transition-all flex flex-col justify-between group text-left"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-2xl">🌟</span>
+                      <span className="text-[10px] uppercase font-serif px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold">
+                        Para el Consultante
+                      </span>
+                    </div>
+                    <h4 className="font-serif font-bold text-base text-amber-100 group-hover:text-amber-200">
+                      Versión Fácil (Para Ti)
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                      Interpretación clara en letra grande: Tríada de Identidad (Sol, Luna, Ascendente), Arcano de Nacimiento, tus 4 Dones Cósmicos y Misión de Vida sin tecnicismos complejos.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="mt-4 w-full py-2 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-serif font-semibold group-hover:bg-amber-500 group-hover:text-black transition-colors"
+                  >
+                    Descargar Versión Fácil →
+                  </button>
+                </div>
+
+                {/* OPCIÓN 2: VERSIÓN ASTRÓLOGO */}
+                <div
+                  onClick={() => handleDownloadDossier('astrologer')}
+                  className="p-5 rounded-2xl border border-purple-500/30 bg-gradient-to-b from-purple-500/10 to-transparent hover:border-purple-400 hover:bg-purple-500/15 cursor-pointer transition-all flex flex-col justify-between group text-left"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-2xl">📜</span>
+                      <span className="text-[10px] uppercase font-serif px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold">
+                        Nivel Profesional
+                      </span>
+                    </div>
+                    <h4 className="font-serif font-bold text-base text-purple-100 group-hover:text-purple-200">
+                      Versión Astrólogo (Técnica)
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                      Efemérides matemáticas de los 14 cuerpos al segundo de arco, tabla de las 12 casas (Placidus), matriz de aspectos con orbes exactos y balance ponderado.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="mt-4 w-full py-2 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-200 text-xs font-serif font-semibold group-hover:bg-purple-500 group-hover:text-black transition-colors"
+                  >
+                    Descargar Versión Técnica →
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-6 text-center text-[11px] text-slate-400 border-t border-white/10 pt-4 font-serif">
+                Ambas versiones se optimizan en fondo cósmico oscuro `#0B0F1C` de lujo para guardar o imprimir en PDF formato A4 sin orillas blancas.
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Tríada Rápida en Banner */}
         <div className="grid grid-cols-3 gap-3 max-w-xl mx-auto">
@@ -254,77 +361,11 @@ export default function NatalChartApp() {
           SECCIÓN EXCLUSIVA DE IMPRESIÓN Y EXPORTACIÓN A PDF (DOSSIER EDITORIAL)
           ========================================================================= */}
       <div className="hidden print:block print-dossier">
-        {/* PÁGINA 1: PORTADA EDITORIAL A4 EXACTA */}
-        <div className="print-cover-page border border-amber-500/40 rounded-3xl p-6 bg-[#0B0F1C] text-center">
-          {/* Membrete y Título */}
-          <div className="space-y-1">
-            <span className="text-amber-400 text-[10px] uppercase tracking-[0.35em] font-serif block">
-              ✦ ARCANO · DOSSIER ASTROLÓGICO SAGRADO ✦
-            </span>
-            <h1 className="text-2xl font-serif font-bold text-amber-100">
-              Carta Natal de {chart.birthData.name}
-            </h1>
-            <p className="text-[11px] text-slate-300">
-              Nacimiento: {chart.birthData.day}/{chart.birthData.month}/{chart.birthData.year} a las{' '}
-              {String(chart.birthData.hour).padStart(2, '0')}:{String(chart.birthData.minute).padStart(2, '0')} hs •{' '}
-              {chart.birthData.cityName} (Lat: {chart.birthData.latitude}°, Lon: {chart.birthData.longitude}°) • Casas {chart.birthData.houseSystem}
-            </p>
-          </div>
-
-          {/* Rueda en SVG (Escalada para portada A4) */}
-          <div className="py-2 flex justify-center items-center">
-            <NatalWheel chart={chart} />
-          </div>
-
-          {/* Tríada Fundamental en Portada */}
-          <div className="grid grid-cols-3 gap-3 pt-3 border-t border-amber-500/20 text-left">
-            <div className="p-2.5 bg-black/40 rounded-xl border border-amber-500/20">
-              <span className="text-[9px] uppercase font-serif text-amber-400 font-bold block">☉ Sol Esencial</span>
-              <span className="font-serif font-bold text-xs text-amber-100 block truncate">
-                {chart.positions.find(p => p.body === 'Sol')?.sign} (Casa {chart.positions.find(p => p.body === 'Sol')?.house})
-              </span>
-            </div>
-            <div className="p-2.5 bg-black/40 rounded-xl border border-indigo-500/20">
-              <span className="text-[9px] uppercase font-serif text-indigo-300 font-bold block">☽ Luna Emocional</span>
-              <span className="font-serif font-bold text-xs text-indigo-100 block truncate">
-                {chart.positions.find(p => p.body === 'Luna')?.sign} (Casa {chart.positions.find(p => p.body === 'Luna')?.house})
-              </span>
-            </div>
-            <div className="p-2.5 bg-black/40 rounded-xl border border-purple-500/20">
-              <span className="text-[9px] uppercase font-serif text-purple-300 font-bold block">✦ Ascendente</span>
-              <span className="font-serif font-bold text-xs text-purple-100 block truncate">
-                {chart.angles.ascSign} ({chart.angles.ascDegreeInSign}° {chart.angles.ascMinuteInSign}&apos;)
-              </span>
-            </div>
-          </div>
-
-          {/* Pie de Portada */}
-          <div className="text-center pt-2 border-t border-amber-500/10 text-[9px] text-slate-400 font-serif">
-            ARCANO · Dossier Astrológico Sagrado · www.arcanosolutions.com
-          </div>
-        </div>
-
-        {/* PÁGINA 2: INFORME ARQUETÍPICO DEL SER Y EFEMÉRIDES (CON SALTO DE PÁGINA) */}
-        <div className="print-page-break space-y-6 pt-4">
-          <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C]">
-            <span className="text-[10px] uppercase tracking-widest text-amber-400 font-serif font-semibold block mb-2">
-              ✦ Síntesis Arquetípica & Dimensiones del Ser
-            </span>
-            <NatalReportView chart={chart} />
-          </div>
-
-          <div className="border border-amber-500/30 rounded-3xl p-6 bg-[#0B0F1C] print-avoid-break">
-            <span className="text-[10px] uppercase tracking-widest text-amber-400 font-serif font-semibold block mb-2">
-              ✦ Efemérides Matemáticas & Cúspides
-            </span>
-            <PlanetTable positions={chart.positions} houses={chart.houses} />
-          </div>
-
-          {/* Pie Editorial */}
-          <div className="text-center pt-4 border-t border-amber-500/20 text-[10px] text-slate-400 font-serif">
-            ARCANO · Santuario de Sabiduría y Simbolismo Arquetípico · www.arcanosolutions.com
-          </div>
-        </div>
+        {dossierType === 'user' ? (
+          <NatalDossierUser chart={chart} />
+        ) : (
+          <NatalDossierAstrologer chart={chart} />
+        )}
       </div>
     </div>
   );

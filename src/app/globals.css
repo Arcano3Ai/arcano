@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -282,7 +282,7 @@ html.light Image {
    ========================================================================== */
 @media print {
   @page {
-    margin: 6mm 8mm;
+    margin: 0 !important;
     size: A4 portrait;
   }
 
@@ -311,19 +311,80 @@ html.light Image {
 
   /* Resetear espaciados de layout web que interfieren con la página 1 */
   main {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    padding: 0 !important;
     margin: 0 !important;
     min-height: 0 !important;
   }
 
   /* Fondo oscuro cósmico con contraste preservado para PDF editorial */
-  html, body {
+  html,
+  html.light,
+  body,
+  html.light body,
+  main,
+  html.light main {
     background-color: #060911 !important;
     color: #f4efe6 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     font-size: 9.5pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* AISLAMIENTO TOTAL: Anular cualquier clase o filtro de Modo Claro en la impresión */
+  html.light .print-dossier,
+  html.light .print-dossier * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-image: none !important;
+  }
+
+  /* Asegurar que las tarjetas y contenedores mantengan su fondo oscuro ceremonial */
+  .print-dossier,
+  html.light .print-dossier,
+  .print-cover-page,
+  html.light .print-cover-page,
+  .print-dossier [class*="bg-[#"],
+  html.light .print-dossier [class*="bg-[#"],
+  .print-dossier [class*="bg-black"],
+  html.light .print-dossier [class*="bg-black"],
+  .print-dossier article,
+  html.light .print-dossier article {
+    background-color: #0b0f1c !important;
+    color: #f4efe6 !important;
+    border-color: rgba(212, 175, 55, 0.35) !important;
+    box-shadow: none !important;
+  }
+
+  /* Textos de alto contraste dorado y pergamino en impresión */
+  .print-dossier .text-parchment,
+  html.light .print-dossier .text-parchment,
+  .print-dossier .text-white,
+  html.light .print-dossier .text-white,
+  .print-dossier [class*="text-amber-100"],
+  html.light .print-dossier [class*="text-amber-100"],
+  .print-dossier [class*="text-amber-200"],
+  html.light .print-dossier [class*="text-amber-200"],
+  .print-dossier [class*="text-slate-100"],
+  html.light .print-dossier [class*="text-slate-100"],
+  .print-dossier [class*="text-slate-200"],
+  html.light .print-dossier [class*="text-slate-200"] {
+    color: #f4efe6 !important;
+  }
+
+  .print-dossier [class*="text-amber-300"],
+  html.light .print-dossier [class*="text-amber-300"],
+  .print-dossier [class*="text-amber-400"],
+  html.light .print-dossier [class*="text-amber-400"] {
+    color: #d4af37 !important;
+  }
+
+  .print-dossier [class*="text-slate-300"],
+  html.light .print-dossier [class*="text-slate-300"],
+  .print-dossier [class*="text-slate-400"],
+  html.light .print-dossier [class*="text-slate-400"] {
+    color: #94a3b8 !important;
   }
 
   .print-avoid-break {
@@ -336,8 +397,9 @@ html.light Image {
     break-before: page !important;
   }
 
-  /* Portada exacta A4 sin saltos ni desbordes involuntarios */
+  /* Portada exacta A4 sin saltos ni orillas blancas */
   .print-cover-page {
+    min-height: 275mm !important;
     height: 275mm !important;
     max-height: 275mm !important;
     display: flex !important;
@@ -346,6 +408,17 @@ html.light Image {
     box-sizing: border-box !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
+    margin: 8mm !important;
+  }
+
+  .print-dossier-inner {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-page-break {
+    padding: 8mm !important;
+    box-sizing: border-box !important;
   }
 
   /* Centrado y escala controlada de ruedas SVG en impresión */
@@ -356,5 +429,3 @@ html.light Image {
     margin: 0 auto !important;
   }
 }
-
-
