@@ -55,6 +55,30 @@ export function getAssetPath(path: string): string {
 }
 
 /**
+ * Base de CDN de GitHub Releases para audios sagrados en máxima calidad (320kbps).
+ * Libera 100% el ancho de banda y almacenamiento de Vercel.
+ */
+export const GITHUB_AUDIO_CDN_BASE = "https://github.com/Arcano3Ai/arcano/releases/download/v1.0.0-audio-assets";
+
+/**
+ * Retorna la URL de un audio sagrado.
+ * Prioriza la CDN global de GitHub Releases; si falla, recurre al asset local.
+ */
+export function getAudioPath(path: string): string {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  const fileName = path.split("/").pop();
+  if (fileName && (path.includes("/audio/") || path.endsWith(".mp3"))) {
+    return `${GITHUB_AUDIO_CDN_BASE}/${fileName}`;
+  }
+
+  return getAssetPath(path);
+}
+
+/**
  * Recuperador automático ante fallos de carga de imágenes (404 por desfase de basePath):
  * Si la imagen falló con /arcano/, reintenta inmediatamente en raíz /.
  * Si falló en raíz /, reintenta bajo /arcano/.

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { getAudioPath, getAssetPath } from "@/lib/utils";
 
 interface ArcanaAudioPlayerProps {
   audioUrl: string;
@@ -25,9 +26,19 @@ export const ArcanaAudioPlayer: React.FC<ArcanaAudioPlayerProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const audio = new Audio(audioUrl);
+    const primaryUrl = getAudioPath(audioUrl);
+    const audio = new Audio(primaryUrl);
     audio.volume = volume;
     audioRef.current = audio;
+
+    // Resiliencia: si la CDN de GitHub tuviera algún corte momentáneo, recurre al asset local
+    audio.onerror = () => {
+      const fallbackUrl = getAssetPath(audioUrl);
+      if (audio.src !== fallbackUrl) {
+        audio.src = fallbackUrl;
+        audio.load();
+      }
+    };
 
     const onLoadedMetadata = () => {
       if (audio.duration && !isNaN(audio.duration)) {

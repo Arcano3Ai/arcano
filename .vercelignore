@@ -15,5 +15,8 @@ public/images/cards_backup/
 public/images/minor_cards_backup/
 public/audio_wav_masters/
 
+# Audios alojados en GitHub Releases CDN (Ahorro de 206MB por despliegue en Vercel)
+public/audio/
+
 # Logs y archivos temporales
 *.log
