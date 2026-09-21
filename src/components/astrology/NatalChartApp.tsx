@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -88,7 +88,7 @@ export default function NatalChartApp() {
             </p>
           </div>
           <Link
-            href="/sinastria"
+            href="/sinastria/"
             className="px-5 py-2.5 rounded-xl border border-amber-400 text-amber-200 text-xs font-serif hover:bg-amber-400/10 transition-colors whitespace-nowrap"
           >
             Ir a Sinastría →

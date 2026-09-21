@@ -324,7 +324,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
             />
             <label htmlFor="terms" className="text-[11px] text-parchment-muted font-sans leading-relaxed">
               Acepto los{" "}
-              <a href="/terminos" className="text-gold underline" target="_blank">
+              <a href="/terminos/" className="text-gold underline" target="_blank">
                 términos del servicio
               </a>{" "}
               y reconozco que las lecturas son un ejercicio simbólico de introspección personal y no sustituyen asesoría médica, legal ni financiera.

@@ -148,7 +148,7 @@ export default function ArcanaDetailPage({ params }: Props) {
       />
       {/* Navegación de migas de pan */}
       <nav className="text-xs uppercase tracking-[0.2em] text-parchment-dim font-sans mb-8 flex items-center gap-2">
-        <Link href="/arcanos" className="hover:text-gold transition-colors">
+        <Link href="/arcanos/" className="hover:text-gold transition-colors">
           Los 22 Arcanos
         </Link>
         <span>/</span>
@@ -308,19 +308,19 @@ export default function ArcanaDetailPage({ params }: Props) {
       {/* Navegación entre Arcanos */}
       <footer className="pt-10 border-t border-charcoal-border flex items-center justify-between text-xs uppercase tracking-[0.2em] text-parchment-dim font-sans">
         <Link
-          href={`/arcanos/${prevArcana.slug}`}
+          href={`/arcanos/${prevArcana.slug}/`}
           className="hover:text-gold transition-colors flex items-center gap-1"
         >
           <span>← {prevArcana.name}</span>
         </Link>
         <Link
-          href="/arcanos"
+          href="/arcanos/"
           className="hover:text-parchment text-[10px] hidden sm:inline"
         >
           Compendio
         </Link>
         <Link
-          href={`/arcanos/${nextArcana.slug}`}
+          href={`/arcanos/${nextArcana.slug}/`}
           className="hover:text-gold transition-colors flex items-center gap-1"
         >
           <span>{nextArcana.name} →</span>

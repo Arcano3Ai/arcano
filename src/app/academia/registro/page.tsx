@@ -288,7 +288,7 @@ function RegisterFormContent() {
         <p className="text-xs text-parchment-muted">
           ¿Ya eres estudiante de ARCANO?{' '}
           <Link
-            href="/academia/login"
+            href="/academia/login/"
             className="text-gold hover:text-gold-light font-serif font-semibold underline underline-offset-4 ml-1"
           >
             Iniciar Sesión →

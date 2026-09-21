@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
 
           {/* Acceso a Aula Virtual */}
           <Link
-            href="/academia/mi-panel"
+            href="/academia/mi-panel/"
             className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] uppercase font-serif tracking-wider hover:bg-amber-500/20 hover:border-amber-400 transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)]"
           >
             <span>🗝️</span>
@@ -91,7 +91,7 @@ export const Header: React.FC = () => {
           </Link>
 
           <Link
-            href="/reservar"
+            href="/reservar/"
             onClick={handleBookingClick}
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2 text-xs font-sans uppercase tracking-[0.2em] text-parchment bg-charcoal hover:bg-gold/10 border border-gold/40 hover:border-gold transition-all duration-500 rounded-sm shadow-[0_0_15px_rgba(198,160,82,0.12)] hover:shadow-[0_0_20px_rgba(198,160,82,0.3)] hover:text-gold"
           >
@@ -158,7 +158,7 @@ export const Header: React.FC = () => {
             </div>
 
             <Link
-              href="/academia/mi-panel"
+              href="/academia/mi-panel/"
               className="w-full text-center py-3 text-xs font-serif uppercase tracking-[0.2em] text-amber-300 bg-amber-500/15 border border-amber-500/40 hover:bg-amber-500/25 transition-all duration-300 rounded-sm font-semibold flex items-center justify-center gap-2"
             >
               <span>🗝️</span>
@@ -166,7 +166,7 @@ export const Header: React.FC = () => {
             </Link>
 
             <Link
-              href="/reservar"
+              href="/reservar/"
               onClick={handleBookingClick}
               className="w-full text-center py-3.5 text-xs font-sans uppercase tracking-[0.2em] text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.4)]"
             >

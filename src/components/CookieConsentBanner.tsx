@@ -50,7 +50,7 @@ export const CookieConsentBanner: React.FC = () => {
 
       <div className="flex flex-wrap items-center justify-between gap-2.5 pt-1 border-t border-charcoal-border">
         <Link
-          href="/privacidad"
+          href="/privacidad/"
           className="text-[11px] text-parchment-dim hover:text-gold underline underline-offset-4 font-sans transition-colors"
         >
           Leer política

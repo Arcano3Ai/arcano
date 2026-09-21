@@ -101,7 +101,7 @@ export default function HomePage() {
           {/* CTAs */}
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <Link
-              href="/reservar"
+              href="/reservar/"
               onClick={() => handleBookingCta("hero_primary")}
               className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_25px_rgba(198,160,82,0.45)] hover:scale-105"
             >
@@ -109,7 +109,7 @@ export default function HomePage() {
             </Link>
 
             <Link
-              href="/arcanos"
+              href="/arcanos/"
               className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-parchment hover:text-gold border border-gold/40 hover:border-gold transition-all duration-300 rounded-sm bg-charcoal/60 backdrop-blur shadow-md"
             >
               Explorar los Arcanos
@@ -298,7 +298,7 @@ export default function HomePage() {
 
         <div className="text-center mt-12">
           <Link
-            href="/lecturas"
+            href="/lecturas/"
             className="text-xs uppercase tracking-[0.25em] text-gold hover:text-gold-light border-b border-gold/40 hover:border-gold pb-1 font-sans transition-colors"
           >
             Ver detalles exhaustivos de todas las lecturas →
@@ -390,7 +390,7 @@ export default function HomePage() {
 
         <div className="text-center mt-12">
           <Link
-            href="/arcanos"
+            href="/arcanos/"
             className="px-8 py-3 text-xs uppercase tracking-[0.25em] font-sans text-parchment hover:text-gold border border-gold/40 hover:border-gold rounded-sm bg-charcoal/60 transition-all inline-block"
           >
             Explorar los 22 Arcanos Completos ✦
@@ -419,7 +419,7 @@ export default function HomePage() {
             </div>
             <div className="mt-8 pt-6 border-t border-charcoal-border/80">
               <Link
-                href="/tarot-del-amor"
+                href="/tarot-del-amor/"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light font-sans font-medium"
               >
                 <span>Conocer el enfoque del Tarot del Amor</span>
@@ -446,7 +446,7 @@ export default function HomePage() {
             </div>
             <div className="mt-8 pt-6 border-t border-charcoal-border/80">
               <Link
-                href="/tarot-profesional"
+                href="/tarot-profesional/"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light font-sans font-medium"
               >
                 <span>Explorar la consulta vocacional</span>
@@ -562,7 +562,7 @@ export default function HomePage() {
 
         <div className="text-center mt-10">
           <Link
-            href="/blog"
+            href="/blog/"
             className="text-xs uppercase tracking-[0.25em] text-parchment hover:text-gold border-b border-gold/40 pb-1 font-sans transition-colors"
           >
             Ver todos los artículos de la revista →
@@ -649,7 +649,7 @@ export default function HomePage() {
 
           <div className="pt-6">
             <Link
-              href="/reservar"
+              href="/reservar/"
               onClick={() => handleBookingCta("footer_final_cta")}
               className="inline-block px-10 py-4 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_30px_rgba(198,160,82,0.5)] hover:scale-105"
             >

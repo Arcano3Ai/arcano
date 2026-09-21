@@ -86,7 +86,7 @@ export default function TarotProfesionalPage() {
 
         <div className="pt-6">
           <Link
-            href="/reservar?servicio=trabajo-y-proposito"
+            href="/reservar/?servicio=trabajo-y-proposito"
             className="inline-block px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.35)]"
           >
             Reservar lectura profesional ✦
@@ -129,7 +129,7 @@ export default function TarotProfesionalPage() {
         </p>
         <div className="pt-4">
           <Link
-            href="/reservar?servicio=trabajo-y-proposito"
+            href="/reservar/?servicio=trabajo-y-proposito"
             className="text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light border-b border-gold/40 pb-0.5 font-sans"
           >
             Agendar sesión de enfoque profesional →

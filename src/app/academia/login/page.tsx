@@ -159,7 +159,7 @@ export default function LoginPage() {
           <p className="text-xs text-parchment-muted">
             ¿Aún no eres estudiante de ARCANO?{' '}
             <Link
-              href="/academia/registro"
+              href="/academia/registro/"
               className="text-gold hover:text-gold-light font-serif font-semibold underline underline-offset-4 ml-1"
             >
               Inscribirme a un Curso →

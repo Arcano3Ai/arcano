@@ -451,7 +451,7 @@ export const ArcanaAiBot: React.FC = () => {
 
           {/* Enlaces rápidos: Lecturas y WhatsApp */}
           <div className="px-4 py-2 bg-[#12101c] border-t border-charcoal-border/50 text-[10px] text-parchment-dim flex items-center justify-between font-sans">
-            <a href="/lecturas" className="text-parchment-muted hover:text-gold flex items-center gap-1">
+            <a href="/lecturas/" className="text-parchment-muted hover:text-gold flex items-center gap-1">
               <span>🔮</span>
               <span>Ver Lecturas de Tarot</span>
             </a>

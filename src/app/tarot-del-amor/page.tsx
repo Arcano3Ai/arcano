@@ -87,7 +87,7 @@ export default function TarotDelAmorPage() {
 
         <div className="pt-6">
           <Link
-            href="/reservar?servicio=amor-y-relaciones"
+            href="/reservar/?servicio=amor-y-relaciones"
             className="inline-block px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.35)]"
           >
             Reservar lectura de amor ✦
@@ -131,7 +131,7 @@ export default function TarotDelAmorPage() {
           </p>
         </div>
         <Link
-          href="/sinastria"
+          href="/sinastria/"
           className="px-5 py-2.5 rounded-xl bg-gold/15 border border-gold text-gold text-xs font-serif hover:bg-gold/25 transition-colors whitespace-nowrap"
         >
           Calcular Sinastría →
@@ -151,7 +151,7 @@ export default function TarotDelAmorPage() {
         </p>
         <div className="pt-4">
           <Link
-            href="/reservar?servicio=amor-y-relaciones"
+            href="/reservar/?servicio=amor-y-relaciones"
             className="text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light border-b border-gold/40 pb-0.5 font-sans"
           >
             Solicitar lectura especializada →

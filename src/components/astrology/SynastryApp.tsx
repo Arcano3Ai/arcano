@@ -67,7 +67,7 @@ export default function SynastryApp() {
             </p>
           </div>
           <Link
-            href="/carta-astral"
+            href="/carta-astral/"
             className="px-5 py-2.5 rounded-xl border border-sky-400 text-sky-200 text-xs font-serif hover:bg-sky-400/10 transition-colors whitespace-nowrap"
           >
             Ir a Carta Astral →

@@ -219,7 +219,7 @@ export const DailyCardModule: React.FC = () => {
                     ¿Deseas profundizar en esta energía?
                   </span>
                   <Link
-                    href="/reservar"
+                    href="/reservar/"
                     className="text-xs uppercase tracking-[0.18em] text-gold hover:text-gold-light border-b border-gold/40 hover:border-gold pb-0.5 transition-colors font-sans"
                   >
                     Quiero una lectura personal →

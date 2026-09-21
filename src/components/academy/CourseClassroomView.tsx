@@ -82,7 +82,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
         <span className="text-3xl">⚠️</span>
         <h2 className="text-xl font-serif text-gold-light">Curso o Lección no encontrada</h2>
         <Link
-          href="/academia/mi-panel"
+          href="/academia/mi-panel/"
           className="px-4 py-2 bg-gold/20 text-gold-light rounded-xl text-xs font-serif hover:bg-gold/30"
         >
           ← Volver a Mi Panel de Avance
@@ -227,13 +227,13 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
             {/* Enlaces de Retorno */}
             <div className="mt-8 pt-6 border-t border-charcoal-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
               <Link
-                href="/academia/mi-panel"
+                href="/academia/mi-panel/"
                 className="text-parchment-muted hover:text-gold transition-colors flex items-center gap-1.5 font-serif"
               >
                 <span>←</span> Volver a Mi Panel de Alumno
               </Link>
               <Link
-                href="/academia"
+                href="/academia/"
                 className="px-4 py-2 rounded-xl bg-black/50 border border-charcoal-border hover:border-gold/40 text-gold-light transition-all font-serif"
               >
                 Ver Cursos Gratuitos de Nivel 1 ✦
@@ -319,7 +319,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
       <header className="h-16 border-b border-charcoal-border bg-[#0a0714]/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between z-30 shrink-0">
         <div className="flex items-center gap-4">
           <Link
-            href="/academia/mi-panel"
+            href="/academia/mi-panel/"
             className="text-xs text-parchment-muted hover:text-gold flex items-center gap-1.5 transition-colors"
           >
             <span>←</span>

@@ -33,13 +33,13 @@ export default function StudentDashboardPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <Link
-              href="/academia/login"
+              href="/academia/login/"
               className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-serif font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all text-center"
             >
               Iniciar Sesión
             </Link>
             <Link
-              href="/academia/registro"
+              href="/academia/registro/"
               className="flex-1 py-3 rounded-xl border border-amber-500/40 text-amber-200 font-serif text-xs font-semibold hover:bg-amber-500/10 transition-all text-center"
             >
               Crear Cuenta
@@ -85,7 +85,7 @@ export default function StudentDashboardPage() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/academia"
+            href="/academia/"
             className="px-4 py-2.5 rounded-xl border border-gold/30 bg-gold/10 text-gold-light text-xs font-serif hover:bg-gold/20 transition-all"
           >
             Ver Catálogo General

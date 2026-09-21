@@ -66,7 +66,7 @@ export default function ExperienciaPage() {
         </p>
         <div className="pt-4">
           <Link
-            href="/reservar"
+            href="/reservar/"
             className="inline-block px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_25px_rgba(198,160,82,0.4)]"
           >
             Reservar mi momento ✦

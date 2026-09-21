@@ -132,7 +132,7 @@ export default function BlogPostDetailPage({ params }: Props) {
       />
       {/* Navegación breadcrumb */}
       <nav className="text-xs uppercase tracking-[0.2em] text-parchment-dim font-sans mb-8 flex items-center gap-2">
-        <Link href="/blog" className="hover:text-gold transition-colors">
+        <Link href="/blog/" className="hover:text-gold transition-colors">
           Revista
         </Link>
         <span>/</span>
@@ -218,7 +218,7 @@ export default function BlogPostDetailPage({ params }: Props) {
         </p>
         <div className="pt-2">
           <Link
-            href="/reservar"
+            href="/reservar/"
             className="inline-block px-8 py-3 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.3)]"
           >
             Reservar lectura ✦
