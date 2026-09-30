@@ -38,16 +38,11 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
     getCourseProgress,
     enrollInCourse,
     isCourseUnlocked,
-    submitPaymentProof,
   } = useStudent();
 
   const lessonIdFromUrl = searchParams.get('lesson');
   const course = getLMSCourseBySlug(slug);
 
-  // Estados para verificación y registro de comprobante de pago
-  const [paymentFolio, setPaymentFolio] = useState('');
-  const [paymentSubmitted, setPaymentSubmitted] = useState(false);
-  const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
 
   // Determinar lección activa
   const firstLessonId = course?.modules[0]?.lessons[0]?.id || '';
@@ -93,17 +88,8 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
 
   // Si el curso no tiene pago verificado: BLOQUEAR ACCESO AL AULA
   if (!isUnlocked) {
-    const handleRegisterProof = async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!paymentFolio.trim()) return;
-      setIsSubmittingPayment(true);
-      await submitPaymentProof(course.id, paymentFolio.trim());
-      setIsSubmittingPayment(false);
-      setPaymentSubmitted(true);
-    };
-
     const whatsappMessage = encodeURIComponent(
-      `Hola, El Señor de los Arcanos / ARCANO. Deseo activar mi acceso al curso ${course.romanLevel}: ${course.title} ($799 MXN). Adjunto comprobante de pago para mi cuenta registrada con el correo: ${student?.email || 'mi correo'}.`
+      `Hola, El Señor de los Arcanos / ARCANO. Deseo activar mi acceso al curso ${course.romanLevel}: ${course.title} (${brandConfig.payments.formattedPrice}). Adjunto comprobante de pago para mi cuenta registrada con el correo: ${student?.email || 'mi correo'}.`
     );
 
     return (
@@ -205,42 +191,6 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                   <span>Enviar Comprobante a WhatsApp</span>
                   <span>→</span>
                 </a>
-              </div>
-
-              {/* Formulario de Registro de Folio / Autorización */}
-              <div className="pt-4 border-t border-charcoal-border/70 space-y-3">
-                <h4 className="text-xs font-serif uppercase tracking-wider text-parchment-dim">
-                  ¿Ya realizaste tu pago? Ingresa tu Folio o Número de Rastreo
-                </h4>
-
-                {paymentSubmitted ? (
-                  <div className="p-4 rounded-2xl bg-emerald-950/50 border border-emerald-500/50 text-emerald-200 text-xs text-center space-y-1">
-                    <div className="font-bold font-serif text-emerald-300">
-                      ✓ Comprobante Registrado en el Sistema
-                    </div>
-                    <p className="text-emerald-300/80">
-                      Folio: <strong>{paymentFolio}</strong>. Nuestro equipo de tesorería está verificando los fondos para el curso <strong>{course.title}</strong> y activará tu aula a la brevedad. Recibirás confirmación por correo a {student?.email}.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleRegisterProof} className="flex flex-col sm:flex-row gap-2">
-                    <input
-                      type="text"
-                      value={paymentFolio}
-                      onChange={(e) => setPaymentFolio(e.target.value)}
-                      placeholder="Ej. Folio Spin OXXO, Mercado Pago o Número de Operación"
-                      required
-                      className="flex-1 px-4 py-2.5 rounded-xl bg-black/60 border border-gold/30 text-parchment text-xs placeholder-parchment-muted focus:outline-none focus:border-gold"
-                    />
-                    <button
-                      type="submit"
-                      disabled={isSubmittingPayment}
-                      className="px-6 py-2.5 rounded-xl bg-gold/20 hover:bg-gold/30 border border-gold/50 text-gold-light font-serif text-xs uppercase tracking-wider transition-all disabled:opacity-50"
-                    >
-                      {isSubmittingPayment ? 'Registrando...' : 'Registrar para Validación'}
-                    </button>
-                  </form>
-                )}
               </div>
             </div>
 
