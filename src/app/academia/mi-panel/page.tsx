@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useStudent } from '@/lib/academy/studentContext';
 import { LMS_COURSES } from '@/lib/academy/courseRepository';
+import { brandConfig } from '@/config/brandConfig';
 
 export default function StudentDashboardPage() {
   const router = useRouter();
@@ -240,7 +241,7 @@ export default function StudentDashboardPage() {
                       <div className="pt-2 p-3 rounded-xl bg-black/50 border border-amber-500/25 space-y-1">
                         <div className="text-[11px] font-serif text-amber-300 font-bold flex items-center justify-between">
                           <span>Inversión requerida:</span>
-                          <span>$799 MXN</span>
+                          <span>{brandConfig.payments.formattedPrice}</span>
                         </div>
                         <p className="text-[10px] text-slate-300 leading-snug">
                           Se requiere registrar y validar tu comprobante de pago para desbloquear el acceso a las clases en video y manuales.
@@ -358,7 +359,7 @@ export default function StudentDashboardPage() {
             Explora Otras Disciplinas de la Academia
           </h2>
           <p className="text-xs text-slate-400">
-            Inscríbete a los niveles de Tarot, Astrología, Numerología y Reiki ($799 MXN por curso).
+            Inscríbete a los niveles de Tarot, Astrología, Numerología y Reiki ({brandConfig.payments.formattedPrice} por curso).
           </p>
         </div>
 

@@ -227,12 +227,12 @@ function RegisterFormContent() {
             {paymentOption === 'spei' && (
               <>
                 <div className="font-serif font-bold text-gold-light flex items-center gap-1.5">
-                  <span>🏪</span> Spin by OXXO (Depósito en Caja OXXO o Transferencia)
+                  <span>🏪</span> Spin by OXXO ({brandConfig.payments.spinOxxo.modalidad})
                 </div>
                 <div className="text-parchment-dim text-[11px] font-mono space-y-1 pt-1">
-                  <div><span className="text-parchment-muted font-sans">Número de Cuenta / Tarjeta:</span> <strong className="text-gold select-all font-bold">728969000127902158</strong></div>
-                  <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">Sergio Adrián Pérez Villarreal</strong></div>
-                  <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">$799.00 MXN</strong></div>
+                  <div><span className="text-parchment-muted font-sans">Número de Cuenta / Tarjeta:</span> <strong className="text-gold select-all font-bold">{brandConfig.payments.spinOxxo.cuenta}</strong></div>
+                  <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">{brandConfig.payments.titular}</strong></div>
+                  <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">{brandConfig.payments.formattedPrice}</strong></div>
                   <div><span className="text-parchment-muted font-sans">Concepto del pago:</span> <strong className="text-gold-light font-sans">{selectedCourse?.title}</strong></div>
                 </div>
               </>
@@ -241,13 +241,13 @@ function RegisterFormContent() {
             {paymentOption === 'mercadopago' && (
               <>
                 <div className="font-serif font-bold text-gold-light flex items-center gap-1.5">
-                  <span>💳</span> Mercado Pago W (Transferencia SPEI)
+                  <span>💳</span> {brandConfig.payments.mercadoPago.banco} (Transferencia SPEI)
                 </div>
                 <div className="text-parchment-dim text-[11px] font-mono space-y-1 pt-1">
-                  <div><span className="text-parchment-muted font-sans">Banco Destinatario:</span> Mercado Pago W</div>
-                  <div><span className="text-parchment-muted font-sans">CLABE Interbancaria:</span> <strong className="text-gold select-all font-bold">722969017074087021</strong></div>
-                  <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">Sergio Adrián Pérez Villarreal</strong></div>
-                  <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">$799.00 MXN</strong></div>
+                  <div><span className="text-parchment-muted font-sans">Banco Destinatario:</span> {brandConfig.payments.mercadoPago.banco}</div>
+                  <div><span className="text-parchment-muted font-sans">CLABE Interbancaria:</span> <strong className="text-gold select-all font-bold">{brandConfig.payments.mercadoPago.clabe}</strong></div>
+                  <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">{brandConfig.payments.titular}</strong></div>
+                  <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">{brandConfig.payments.formattedPrice}</strong></div>
                   <div><span className="text-parchment-muted font-sans">Concepto del pago:</span> <strong className="text-gold-light font-sans">{selectedCourse?.title}</strong></div>
                 </div>
               </>
@@ -259,7 +259,7 @@ function RegisterFormContent() {
                   <span>🟢</span> Registro y Validación por WhatsApp
                 </div>
                 <p className="text-[11px] text-emerald-200/80 leading-relaxed pt-1">
-                  Al completar tu registro se abrirá un chat directo con Sergio Adrián Pérez Villarreal solicitando la activación del curso <strong>{selectedCourse?.title}</strong> ($799 MXN).
+                  Al completar tu registro se abrirá un chat directo con {brandConfig.payments.titular} solicitando la activación del curso <strong>{selectedCourse?.title}</strong> ({brandConfig.payments.formattedPrice}).
                 </p>
               </>
             )}

@@ -154,16 +154,16 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                 {/* Opción 1: Mercado Pago */}
                 <div className="p-4 rounded-2xl bg-black/40 border border-charcoal-border hover:border-gold/40 transition-colors space-y-2 text-xs">
                   <div className="flex items-center gap-2 font-serif text-gold font-bold">
-                    <span>💳</span> Mercado Pago (SPEI / Transferencia)
+                    <span>💳</span> {brandConfig.payments.mercadoPago.banco} (SPEI / Transferencia)
                   </div>
                   <div className="space-y-1.5 text-parchment-dim font-mono text-[11px]">
-                    <div><span className="text-parchment-muted font-sans">Banco Destinatario:</span> Mercado Pago W</div>
+                    <div><span className="text-parchment-muted font-sans">Banco Destinatario:</span> {brandConfig.payments.mercadoPago.banco}</div>
                     <div className="bg-black/60 p-2 rounded-xl border border-charcoal-border">
                       <span className="text-parchment-muted font-sans block text-[10px]">CLABE Interbancaria:</span>
-                      <strong className="text-gold-light text-xs font-mono select-all tracking-wider block">722969017074087021</strong>
+                      <strong className="text-gold-light text-xs font-mono select-all tracking-wider block">{brandConfig.payments.mercadoPago.clabe}</strong>
                     </div>
-                    <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">Sergio Adrián Pérez Villarreal</strong></div>
-                    <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">$799.00 MXN</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">{brandConfig.payments.titular}</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">{brandConfig.payments.formattedPrice}</strong></div>
                     <div><span className="text-parchment-muted font-sans">Concepto del pago:</span> <strong className="text-gold-light font-sans">{course.title}</strong></div>
                   </div>
                 </div>
@@ -174,13 +174,13 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                     <span>🏪</span> Spin by OXXO (Depósito en Tienda / SPEI)
                   </div>
                   <div className="space-y-1.5 text-parchment-dim font-mono text-[11px]">
-                    <div><span className="text-parchment-muted font-sans">Modalidad:</span> En cualquier caja OXXO o Transferencia</div>
+                    <div><span className="text-parchment-muted font-sans">Modalidad:</span> {brandConfig.payments.spinOxxo.modalidad}</div>
                     <div className="bg-black/60 p-2 rounded-xl border border-charcoal-border">
                       <span className="text-parchment-muted font-sans block text-[10px]">Número de Cuenta / Tarjeta Spin:</span>
-                      <strong className="text-gold-light text-xs font-mono select-all tracking-wider block">728969000127902158</strong>
+                      <strong className="text-gold-light text-xs font-mono select-all tracking-wider block">{brandConfig.payments.spinOxxo.cuenta}</strong>
                     </div>
-                    <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">Sergio Adrián Pérez Villarreal</strong></div>
-                    <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">$799.00 MXN</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">{brandConfig.payments.titular}</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">{brandConfig.payments.formattedPrice}</strong></div>
                     <div><span className="text-parchment-muted font-sans">Concepto del pago:</span> <strong className="text-gold-light font-sans">{course.title}</strong></div>
                   </div>
                 </div>

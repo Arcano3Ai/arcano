@@ -32,6 +32,19 @@ export interface BrandConfig {
     currencySymbol: string;
     locale: string;
   };
+  payments: {
+    titular: string;
+    coursePriceMxn: number;
+    formattedPrice: string;
+    mercadoPago: {
+      banco: string;
+      clabe: string;
+    };
+    spinOxxo: {
+      modalidad: string;
+      cuenta: string;
+    };
+  };
   booking: {
     provider: "native" | "calendly" | "calcom";
     calendlyUrl?: string;
@@ -44,6 +57,20 @@ export interface BrandConfig {
     lastUpdated: string;
   };
 }
+
+export const OFFICIAL_PAYMENT_ACCOUNTS = Object.freeze({
+  titular: "Sergio Adrián Pérez Villarreal",
+  coursePriceMxn: 799,
+  formattedPrice: "$799.00 MXN",
+  mercadoPago: {
+    banco: "Mercado Pago W",
+    clabe: "722969017074087021",
+  },
+  spinOxxo: {
+    modalidad: "En cualquier caja OXXO o Transferencia SPEI",
+    cuenta: "728969000127902158",
+  },
+} as const);
 
 export const brandConfig: BrandConfig = {
   name: "ARCANO",
@@ -75,6 +102,7 @@ export const brandConfig: BrandConfig = {
     currencySymbol: "$",
     locale: "es-MX",
   },
+  payments: OFFICIAL_PAYMENT_ACCOUNTS,
   booking: {
     provider: "native",
     calendlyUrl: "https://calendly.com/arcanotarot/sesion",
