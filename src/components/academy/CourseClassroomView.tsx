@@ -57,12 +57,12 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
   const [activeTab, setActiveTab] = useState<'summary' | 'resources' | 'notes'>('summary');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Solo matricular automáticamente si el curso es 100% GRATUITO (Nivel 1)
+  // Inscripción pendiente si el usuario aún no está matriculado
   useEffect(() => {
-    if (course && (course.priceMxn === 0 || course.level === 1)) {
-      enrollInCourse(course.id);
+    if (course && !student) {
+      // Si no hay estudiante, se gestionará en el paywall
     }
-  }, [course, enrollInCourse]);
+  }, [course, student]);
 
   const isUnlocked = course ? isCourseUnlocked(course.id) : false;
 
@@ -91,7 +91,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
     );
   }
 
-  // Si el curso es de pago (Nivel 2 o superior) y el alumno no tiene pago verificado: BLOQUEAR ACCESO
+  // Si el curso no tiene pago verificado: BLOQUEAR ACCESO AL AULA
   if (!isUnlocked) {
     const handleRegisterProof = async (e: React.FormEvent) => {
       e.preventDefault();
@@ -116,13 +116,13 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
             {/* Cabecera de Alerta */}
             <div className="text-center space-y-3 mb-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-serif uppercase tracking-widest">
-                <span>🔒</span> ACCESO RESTRINGIDO • NIVEL SUPERIOR
+                <span>🔒</span> ACCESO RESTRINGIDO • REQUIERE PAGO DE MATRÍCULA
               </div>
               <h1 className="text-2xl sm:text-4xl font-serif font-bold text-parchment leading-tight">
                 {course.title}
               </h1>
               <p className="text-xs sm:text-sm text-parchment-dim font-light max-w-xl mx-auto">
-                Este curso pertenece a la formación avanzada de la Academia ARCANO ({course.romanLevel}). Para ingresar al aula virtual, lecciones y materiales, se requiere confirmación de pago oficial.
+                Este curso pertenece a la formación de la Academia ARCANO ({course.romanLevel}). Para ingresar al aula virtual, lecciones en video y manuales ceremoniales, se requiere confirmación de pago oficial.
               </p>
             </div>
 

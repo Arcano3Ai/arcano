@@ -86,7 +86,7 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
           });
           setEnrollments(hydrated);
         } else if (savedStudent) {
-          // Inscripción inicial de bienvenida al Tarot Nivel 1
+          // Inscripción inicial pendiente de pago para el curso base
           const tarotCourse = LMS_COURSES[0];
           if (tarotCourse) {
             const initialEnrollment: LMSEnrollment = {
@@ -94,7 +94,7 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
               userId: JSON.parse(savedStudent).id,
               courseId: tarotCourse.id,
               course: tarotCourse,
-              status: 'active',
+              status: 'pending',
               enrolledAt: new Date().toISOString(),
               progressPercentage: 0,
               completedLessonIds: [],
@@ -138,28 +138,13 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
       setStudent(newStudent);
       localStorage.setItem(LOCAL_STORAGE_STUDENT_KEY, JSON.stringify(newStudent));
 
-      // Asignar el curso inicial elegido o el curso base
+      // Asignar el curso inicial elegido con estado pendiente de pago
       const targetCourseId = initialCourseId || LMS_COURSES[0]?.id;
       const targetCourse = LMS_COURSES.find((c) => c.id === targetCourseId);
 
       if (targetCourse) {
-        const isFree = targetCourse.priceMxn === 0 || targetCourse.level === 1;
-        const initialEnrollments: LMSEnrollment[] = [];
-
-        if (isFree) {
-          initialEnrollments.push({
-            id: `enr-${Date.now()}`,
-            userId: newStudent.id,
-            courseId: targetCourse.id,
-            course: targetCourse,
-            status: 'active',
-            enrolledAt: new Date().toISOString(),
-            progressPercentage: 0,
-            completedLessonIds: [],
-          });
-        } else {
-          // El curso es de pago (Nivel 2 o superior): Se registra como pendiente de pago
-          initialEnrollments.push({
+        const initialEnrollments: LMSEnrollment[] = [
+          {
             id: `enr-${Date.now()}`,
             userId: newStudent.id,
             courseId: targetCourse.id,
@@ -168,27 +153,8 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
             enrolledAt: new Date().toISOString(),
             progressPercentage: 0,
             completedLessonIds: [],
-          });
-
-          // Se le otorga acceso activo inmediato al Nivel 1 gratuito de su categoría para comenzar a estudiar
-          const freeLevel1 =
-            LMS_COURSES.find(
-              (c) => c.category === targetCourse.category && (c.priceMxn === 0 || c.level === 1)
-            ) || LMS_COURSES[0];
-
-          if (freeLevel1 && freeLevel1.id !== targetCourse.id) {
-            initialEnrollments.push({
-              id: `enr-free-${Date.now()}`,
-              userId: newStudent.id,
-              courseId: freeLevel1.id,
-              course: freeLevel1,
-              status: 'active',
-              enrolledAt: new Date().toISOString(),
-              progressPercentage: 0,
-              completedLessonIds: [],
-            });
-          }
-        }
+          },
+        ];
 
         setEnrollments(initialEnrollments);
         localStorage.setItem(LOCAL_STORAGE_ENROLLMENTS_KEY, JSON.stringify(initialEnrollments));
@@ -254,7 +220,7 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
           userId: newStudent.id,
           courseId: defaultCourse.id,
           course: defaultCourse,
-          status: 'active',
+          status: 'pending',
           enrolledAt: new Date().toISOString(),
           progressPercentage: 0,
           completedLessonIds: [],
@@ -307,19 +273,13 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
 
   /**
    * Determina si un curso está desbloqueado para acceder a sus lecciones.
-   * Cursos de Nivel 1 (gratis) están siempre desbloqueados.
-   * Cursos de Nivel 2 o superior requieren una matrícula con status 'active'.
+   * Requiere una matrícula con status 'active' (pago verificado y confirmado).
    */
   const isCourseUnlocked = (courseId: string): boolean => {
     const course = LMS_COURSES.find((c) => c.id === courseId);
     if (!course) return false;
 
-    // Nivel 1 gratuito siempre accesible
-    if (course.priceMxn === 0 || course.level === 1) {
-      return true;
-    }
-
-    // Nivel 2 o superior requiere confirmación explícita de pago activo
+    // Requiere confirmación explícita de pago activo
     const enr = enrollments.find((e) => e.courseId === courseId);
     return Boolean(enr && enr.status === 'active');
   };
@@ -332,8 +292,7 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
     const course = LMS_COURSES.find((c) => c.id === courseId);
     if (!course) return false;
 
-    const isFree = course.priceMxn === 0 || course.level === 1;
-    const targetStatus: 'active' | 'pending' = isFree ? 'active' : 'pending';
+    const targetStatus: 'active' | 'pending' = 'pending';
 
     const existingEnrollment = enrollments.find((e) => e.courseId === courseId);
     if (existingEnrollment) {
