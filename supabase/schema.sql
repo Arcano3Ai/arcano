@@ -35,10 +35,14 @@ CREATE POLICY "Inserción automática o de servicio"
   ON public.profiles FOR INSERT 
   WITH CHECK (auth.uid() = id);
 
--- 3. TRIGGER: CREAR PERFIL AUTOMÁTICO AL REGISTRARSE EN AUTH.USERS
+-- 3. TRIGGER: CREAR PERFIL E INSCRIPCIÓN AUTOMÁTICA AL REGISTRARSE EN AUTH.USERS
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
+DECLARE
+  v_initial_course TEXT;
+  v_payment_method TEXT;
 BEGIN
+  -- 1. Crear Perfil en public.profiles
   INSERT INTO public.profiles (id, email, full_name, role)
   VALUES (
     new.id,
@@ -47,6 +51,22 @@ BEGIN
     'student'
   )
   ON CONFLICT (id) DO NOTHING;
+
+  -- 2. Crear Inscripción en public.enrollments de forma atómica y garantizada
+  v_initial_course := COALESCE(new.raw_user_meta_data->>'initial_course_id', 'tarot-01');
+  v_payment_method := COALESCE(new.raw_user_meta_data->>'payment_method', 'online_registration');
+
+  INSERT INTO public.enrollments (user_id, course_slug, status, payment_method, progress_percentage, completed_lessons)
+  VALUES (
+    new.id,
+    v_initial_course,
+    'pending',
+    v_payment_method,
+    0,
+    '{}'
+  )
+  ON CONFLICT (user_id, course_slug) DO NOTHING;
+
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -74,13 +94,23 @@ CREATE TABLE IF NOT EXISTS public.enrollments (
 -- Habilitar RLS en enrollments
 ALTER TABLE public.enrollments ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Los alumnos ven sus propias inscripciones" ON public.enrollments;
+DROP POLICY IF EXISTS "Los alumnos pueden crear/actualizar sus inscripciones" ON public.enrollments;
+DROP POLICY IF EXISTS "Permitir insercion inicial de inscripciones" ON public.enrollments;
+DROP POLICY IF EXISTS "Permitir actualizacion de inscripciones" ON public.enrollments;
+
 CREATE POLICY "Los alumnos ven sus propias inscripciones" 
   ON public.enrollments FOR SELECT 
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Los alumnos pueden crear/actualizar sus inscripciones" 
-  ON public.enrollments FOR ALL 
-  USING (auth.uid() = user_id);
+CREATE POLICY "Permitir insercion de inscripciones" 
+  ON public.enrollments FOR INSERT 
+  WITH CHECK (auth.uid() = user_id OR auth.uid() IS NULL);
+
+CREATE POLICY "Permitir actualizacion de inscripciones" 
+  ON public.enrollments FOR UPDATE 
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
 
 -- 5. TABLA: LESSON_PROGRESS (Progreso granular de cada lección y video)
 CREATE TABLE IF NOT EXISTS public.lesson_progress (

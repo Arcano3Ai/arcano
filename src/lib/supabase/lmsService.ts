@@ -44,6 +44,7 @@ export async function registerStudent(
   }
 
   try {
+    const courseIdToEnroll = initialCourseId || 'tarot-01';
     const supabase = createClient();
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -51,6 +52,8 @@ export async function registerStudent(
       options: {
         data: {
           full_name: fullName,
+          initial_course_id: courseIdToEnroll,
+          payment_method: 'online_registration',
         },
       },
     });
