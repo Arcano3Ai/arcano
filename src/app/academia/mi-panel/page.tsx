@@ -253,7 +253,7 @@ export default function StudentDashboardPage() {
                   <div className="pt-6">
                     {unlocked ? (
                       <Link
-                        href={`/academia/cursos/${enr.course.slug}/aprender?lesson=${firstLessonId}`}
+                        href={`/academia/cursos/${enr.course.slug}/aprender/?lesson=${firstLessonId}`}
                         className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-black font-serif font-bold text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.25)] hover:brightness-110 flex items-center justify-center gap-2 transition-all"
                       >
                         <span>▶</span>
@@ -261,7 +261,7 @@ export default function StudentDashboardPage() {
                       </Link>
                     ) : (
                       <Link
-                        href={`/academia/cursos/${enr.course.slug}/aprender`}
+                        href={`/academia/cursos/${enr.course.slug}/aprender/`}
                         className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500/30 via-amber-500/20 to-amber-600/30 border border-amber-500/50 text-amber-200 font-serif font-bold text-xs uppercase tracking-wider hover:bg-amber-500/40 flex items-center justify-center gap-2 transition-all"
                       >
                         <span>🔒</span>
@@ -339,7 +339,7 @@ export default function StudentDashboardPage() {
                     </div>
 
                     <Link
-                      href={`/academia/cursos/${item.courseSlug}/aprender?lesson=${item.lesson.id}`}
+                      href={`/academia/cursos/${item.courseSlug}/aprender/?lesson=${item.lesson.id}`}
                       className="w-full py-2 px-3 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-200 hover:bg-emerald-500/25 text-xs font-serif transition-colors flex items-center justify-center gap-1.5"
                     >
                       <span>← Regresar a Repasar</span>

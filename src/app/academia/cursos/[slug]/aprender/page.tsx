@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LMS_COURSES, getLMSCourseBySlug } from '@/lib/academy/courseRepository';
 import CourseClassroomView from '@/components/academy/CourseClassroomView';
+import { ClassroomErrorBoundary } from '@/components/academy/ClassroomErrorBoundary';
 
 interface Props {
   params: {
@@ -51,7 +52,9 @@ export default function CourseLearningPage({ params }: Props) {
         </div>
       }
     >
-      <CourseClassroomView slug={params.slug} />
+      <ClassroomErrorBoundary slug={params.slug}>
+        <CourseClassroomView slug={params.slug} />
+      </ClassroomErrorBoundary>
     </Suspense>
     </>
   );

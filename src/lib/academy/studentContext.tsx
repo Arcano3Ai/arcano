@@ -279,9 +279,9 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
     const course = LMS_COURSES.find((c) => c.id === courseId);
     if (!course) return false;
 
-    // Requiere confirmación explícita de pago activo
+    // Requiere confirmación explícita de pago activo o curso completado
     const enr = enrollments.find((e) => e.courseId === courseId);
-    return Boolean(enr && enr.status === 'active');
+    return Boolean(enr && (enr.status === 'active' || enr.status === 'completed'));
   };
 
   const enrollInCourse = async (
@@ -320,7 +320,9 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
 
     const updated = [...enrollments, newEnrollment];
     setEnrollments(updated);
-    localStorage.setItem(LOCAL_STORAGE_ENROLLMENTS_KEY, JSON.stringify(updated));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_ENROLLMENTS_KEY, JSON.stringify(updated));
+    } catch {}
     return true;
   };
 
@@ -356,7 +358,9 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
     }
 
     setEnrollments(updated);
-    localStorage.setItem(LOCAL_STORAGE_ENROLLMENTS_KEY, JSON.stringify(updated));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_ENROLLMENTS_KEY, JSON.stringify(updated));
+    } catch {}
 
     if (student && isSupabaseConfigured()) {
       await enrollStudentInCourse(student.id, courseId, 'pending', 'manual_proof', reference);
@@ -366,39 +370,55 @@ export function StudentProvider({ children }: { children: React.ReactNode }) {
   };
 
   const markLessonComplete = async (courseId: string, lessonId: string) => {
-    if (!completedLessons.includes(lessonId)) {
-      const updatedLessons = [...completedLessons, lessonId];
-      setCompletedLessons(updatedLessons);
-      localStorage.setItem(LOCAL_STORAGE_PROGRESS_KEY, JSON.stringify(updatedLessons));
+    try {
+      const currentCompletedList = Array.isArray(completedLessons) ? completedLessons : [];
+      if (!currentCompletedList.includes(lessonId)) {
+        const updatedLessons = [...currentCompletedList, lessonId];
+        setCompletedLessons(updatedLessons);
+        try {
+          localStorage.setItem(LOCAL_STORAGE_PROGRESS_KEY, JSON.stringify(updatedLessons));
+        } catch {}
 
-      // Persistir en Supabase
-      if (student && isSupabaseConfigured()) {
-        await persistLessonProgress(student.id, courseId, lessonId, true);
+        // Persistir en Supabase
+        if (student && isSupabaseConfigured()) {
+          try {
+            await persistLessonProgress(student.id, courseId, lessonId, true);
+          } catch {}
+        }
+
+        // Actualizar enrollment local de forma 100% segura
+        const course = LMS_COURSES.find((c) => c.id === courseId);
+        if (course) {
+          const allCourseLessons: string[] = [];
+          course.modules.forEach((m) => m.lessons.forEach((l) => allCourseLessons.push(l.id)));
+          const completedCount = allCourseLessons.filter((id) => updatedLessons.includes(id)).length;
+          const percent = Math.round((completedCount / (allCourseLessons.length || 1)) * 100);
+
+          setEnrollments((prev) => {
+            const list = Array.isArray(prev) ? prev : [];
+            const nextList = list.map((enr) => {
+              if (enr.courseId === courseId) {
+                const currentArr = Array.isArray(enr.completedLessonIds) ? enr.completedLessonIds : [];
+                const nextArr = currentArr.includes(lessonId) ? currentArr : [...currentArr, lessonId];
+                return {
+                  ...enr,
+                  progressPercentage: percent,
+                  completedLessonIds: nextArr,
+                  completedAt: percent === 100 ? new Date().toISOString() : enr.completedAt,
+                  status: (percent === 100 ? 'completed' : (enr.status || 'active')) as any,
+                };
+              }
+              return enr;
+            });
+            try {
+              localStorage.setItem(LOCAL_STORAGE_ENROLLMENTS_KEY, JSON.stringify(nextList));
+            } catch {}
+            return nextList;
+          });
+        }
       }
-
-      // Actualizar enrollment local
-      const course = LMS_COURSES.find((c) => c.id === courseId);
-      if (course) {
-        const allCourseLessons: string[] = [];
-        course.modules.forEach((m) => m.lessons.forEach((l) => allCourseLessons.push(l.id)));
-        const completedCount = allCourseLessons.filter((id) => updatedLessons.includes(id)).length;
-        const percent = Math.round((completedCount / (allCourseLessons.length || 1)) * 100);
-
-        setEnrollments((prev) =>
-          prev.map((enr) => {
-            if (enr.courseId === courseId) {
-              return {
-                ...enr,
-                progressPercentage: percent,
-                completedLessonIds: [...enr.completedLessonIds, lessonId],
-                completedAt: percent === 100 ? new Date().toISOString() : undefined,
-                status: percent === 100 ? 'completed' : 'active',
-              };
-            }
-            return enr;
-          })
-        );
-      }
+    } catch (err) {
+      console.error('Error al marcar lección como completada:', err);
     }
   };
 

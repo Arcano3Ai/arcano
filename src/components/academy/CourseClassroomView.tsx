@@ -259,7 +259,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
 
   const handleGoToPrev = () => {
     if (prevLesson) {
-      router.push(`/academia/cursos/${slug}/aprender?lesson=${prevLesson.id}`);
+      router.push(`/academia/cursos/${slug}/aprender/?lesson=${prevLesson.id}`);
     }
   };
 
@@ -275,11 +275,16 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
       : ARCANA_SONGS[0]);
 
   const handleCompleteAndNext = () => {
-    markLessonComplete(course.id, lesson.id);
+    try {
+      markLessonComplete(course.id, lesson.id);
+    } catch (e) {
+      console.error('Error al marcar lección:', e);
+    }
+
     if (nextLesson) {
-      router.push(`/academia/cursos/${slug}/aprender?lesson=${nextLesson.id}`);
+      router.push(`/academia/cursos/${slug}/aprender/?lesson=${nextLesson.id}`);
     } else {
-      router.push('/academia/mi-panel');
+      router.push('/academia/mi-panel/');
     }
   };
 
@@ -869,7 +874,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                       return (
                         <Link
                           key={les.id}
-                          href={`/academia/cursos/${slug}/aprender?lesson=${les.id}`}
+                          href={`/academia/cursos/${slug}/aprender/?lesson=${les.id}`}
                           className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between gap-2 block border ${
                             isCurrent
                               ? 'bg-gold/20 border-gold text-gold-light font-bold shadow-[0_0_15px_rgba(198,160,82,0.25)]'
@@ -902,7 +907,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                         return (
                           <Link
                             key={les.id}
-                            href={`/academia/cursos/${slug}/aprender?lesson=${les.id}`}
+                            href={`/academia/cursos/${slug}/aprender/?lesson=${les.id}`}
                             className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between gap-2 block ${
                               isCurrent
                                 ? 'bg-gold/20 border border-gold text-gold-light font-bold shadow-[0_0_15px_rgba(198,160,82,0.25)]'
