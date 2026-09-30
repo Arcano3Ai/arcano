@@ -154,13 +154,17 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                 {/* Opción 1: Mercado Pago */}
                 <div className="p-4 rounded-2xl bg-black/40 border border-charcoal-border hover:border-gold/40 transition-colors space-y-2 text-xs">
                   <div className="flex items-center gap-2 font-serif text-gold font-bold">
-                    <span>💳</span> Mercado Pago (SPEI / Tarjeta)
+                    <span>💳</span> Mercado Pago (SPEI / Transferencia)
                   </div>
-                  <div className="space-y-1 text-parchment-dim font-mono text-[11px]">
-                    <div><span className="text-parchment-muted font-sans">Método:</span> Transferencia SPEI / Saldo Mercado Pago</div>
-                    <div><span className="text-parchment-muted font-sans">Beneficiario:</span> ARCANO Solutions</div>
-                    <div><span className="text-parchment-muted font-sans">Monto:</span> $799.00 MXN</div>
-                    <div><span className="text-parchment-muted font-sans">Concepto:</span> {student?.email ? student.email.split('@')[0] : 'Tu Correo'} - {course.id}</div>
+                  <div className="space-y-1.5 text-parchment-dim font-mono text-[11px]">
+                    <div><span className="text-parchment-muted font-sans">Banco Destinatario:</span> Mercado Pago W</div>
+                    <div className="bg-black/60 p-2 rounded-xl border border-charcoal-border">
+                      <span className="text-parchment-muted font-sans block text-[10px]">CLABE Interbancaria:</span>
+                      <strong className="text-gold-light text-xs font-mono select-all tracking-wider block">722969017074087021</strong>
+                    </div>
+                    <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">Sergio Adrián Pérez Villarreal</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">$799.00 MXN</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Concepto del pago:</span> <strong className="text-gold-light font-sans">{course.title}</strong></div>
                   </div>
                 </div>
 
@@ -169,11 +173,15 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                   <div className="flex items-center gap-2 font-serif text-gold font-bold">
                     <span>🏪</span> Spin by OXXO (Depósito en Tienda / SPEI)
                   </div>
-                  <div className="space-y-1 text-parchment-dim font-mono text-[11px]">
-                    <div><span className="text-parchment-muted font-sans">Método:</span> Depósito en cualquier tienda OXXO o Transferencia</div>
-                    <div><span className="text-parchment-muted font-sans">Beneficiario:</span> ARCANO / Spin by OXXO</div>
-                    <div><span className="text-parchment-muted font-sans">Monto:</span> $799.00 MXN</div>
-                    <div><span className="text-parchment-muted font-sans">Concepto:</span> {student?.email ? student.email.split('@')[0] : 'Tu Correo'} - {course.id}</div>
+                  <div className="space-y-1.5 text-parchment-dim font-mono text-[11px]">
+                    <div><span className="text-parchment-muted font-sans">Modalidad:</span> En cualquier caja OXXO o Transferencia</div>
+                    <div className="bg-black/60 p-2 rounded-xl border border-charcoal-border">
+                      <span className="text-parchment-muted font-sans block text-[10px]">Número de Cuenta / Tarjeta Spin:</span>
+                      <strong className="text-gold-light text-xs font-mono select-all tracking-wider block">728969000127902158</strong>
+                    </div>
+                    <div><span className="text-parchment-muted font-sans">Titular / Beneficiario:</span> <strong className="text-parchment font-sans">Sergio Adrián Pérez Villarreal</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Monto exacto:</span> <strong className="text-emerald-400 font-sans">$799.00 MXN</strong></div>
+                    <div><span className="text-parchment-muted font-sans">Concepto del pago:</span> <strong className="text-gold-light font-sans">{course.title}</strong></div>
                   </div>
                 </div>
               </div>
@@ -185,7 +193,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                     <span>💬</span> Envío de Comprobante por WhatsApp
                   </div>
                   <p className="text-emerald-200/80 text-[11px] leading-relaxed">
-                    Si ya realizaste tu transferencia por Mercado Pago o depósito en OXXO (Spin), envía tu comprobante por WhatsApp para activación prioritaria de tu aula.
+                    Si ya realizaste tu transferencia por Mercado Pago o tu depósito en OXXO (Spin), envía tu comprobante por WhatsApp indicando el curso <strong>{course.title}</strong> para activación prioritaria en tu aula.
                   </p>
                 </div>
                 <a
@@ -211,7 +219,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                       ✓ Comprobante Registrado en el Sistema
                     </div>
                     <p className="text-emerald-300/80">
-                      Folio: <strong>{paymentFolio}</strong>. Nuestro equipo de tesorería está verificando los fondos y activará tu aula a la brevedad. Recibirás confirmación por correo a {student?.email}.
+                      Folio: <strong>{paymentFolio}</strong>. Nuestro equipo de tesorería está verificando los fondos para el curso <strong>{course.title}</strong> y activará tu aula a la brevedad. Recibirás confirmación por correo a {student?.email}.
                     </p>
                   </div>
                 ) : (
@@ -220,7 +228,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                       type="text"
                       value={paymentFolio}
                       onChange={(e) => setPaymentFolio(e.target.value)}
-                      placeholder="Ej. Folio BBVA, Mercado Pago o Número de Operación"
+                      placeholder="Ej. Folio Spin OXXO, Mercado Pago o Número de Operación"
                       required
                       className="flex-1 px-4 py-2.5 rounded-xl bg-black/60 border border-gold/30 text-parchment text-xs placeholder-parchment-muted focus:outline-none focus:border-gold"
                     />
@@ -248,7 +256,7 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
                 href="/academia/"
                 className="px-4 py-2 rounded-xl bg-black/50 border border-charcoal-border hover:border-gold/40 text-gold-light transition-all font-serif"
               >
-                Ver Cursos Gratuitos de Nivel 1 ✦
+                Explorar Catálogo de la Academia ✦
               </Link>
             </div>
           </div>
