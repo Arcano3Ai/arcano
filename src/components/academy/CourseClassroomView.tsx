@@ -151,40 +151,52 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Opción 1: SPEI / Transferencia Bancaria */}
+                {/* Opción 1: Mercado Pago */}
                 <div className="p-4 rounded-2xl bg-black/40 border border-charcoal-border hover:border-gold/40 transition-colors space-y-2 text-xs">
                   <div className="flex items-center gap-2 font-serif text-gold font-bold">
-                    <span>🏦</span> Transferencia Interbancaria (SPEI)
+                    <span>💳</span> Mercado Pago (SPEI / Tarjeta)
                   </div>
                   <div className="space-y-1 text-parchment-dim font-mono text-[11px]">
-                    <div><span className="text-parchment-muted font-sans">Banco:</span> BBVA México</div>
-                    <div><span className="text-parchment-muted font-sans">CLABE:</span> 012180015487293841</div>
+                    <div><span className="text-parchment-muted font-sans">Método:</span> Transferencia SPEI / Saldo Mercado Pago</div>
                     <div><span className="text-parchment-muted font-sans">Beneficiario:</span> ARCANO Solutions</div>
                     <div><span className="text-parchment-muted font-sans">Monto:</span> $799.00 MXN</div>
                     <div><span className="text-parchment-muted font-sans">Concepto:</span> {student?.email ? student.email.split('@')[0] : 'Tu Correo'} - {course.id}</div>
                   </div>
                 </div>
 
-                {/* Opción 2: Atención Rápida por WhatsApp */}
-                <div className="p-4 rounded-2xl bg-emerald-950/25 border border-emerald-500/40 space-y-3 text-xs flex flex-col justify-between">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2 font-serif text-emerald-300 font-bold">
-                      <span>💬</span> Envío de Comprobante por WhatsApp
-                    </div>
-                    <p className="text-emerald-200/80 text-[11px] leading-relaxed">
-                      Si ya realizaste tu transferencia o pago en OXXO, envía tu captura de pantalla a nuestro WhatsApp para activación prioritaria en menos de 15 minutos.
-                    </p>
+                {/* Opción 2: Spin by OXXO */}
+                <div className="p-4 rounded-2xl bg-black/40 border border-charcoal-border hover:border-gold/40 transition-colors space-y-2 text-xs">
+                  <div className="flex items-center gap-2 font-serif text-gold font-bold">
+                    <span>🏪</span> Spin by OXXO (Depósito en Tienda / SPEI)
                   </div>
-                  <a
-                    href={`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                  >
-                    <span>Enviar Comprobante a WhatsApp</span>
-                    <span>→</span>
-                  </a>
+                  <div className="space-y-1 text-parchment-dim font-mono text-[11px]">
+                    <div><span className="text-parchment-muted font-sans">Método:</span> Depósito en cualquier tienda OXXO o Transferencia</div>
+                    <div><span className="text-parchment-muted font-sans">Beneficiario:</span> ARCANO / Spin by OXXO</div>
+                    <div><span className="text-parchment-muted font-sans">Monto:</span> $799.00 MXN</div>
+                    <div><span className="text-parchment-muted font-sans">Concepto:</span> {student?.email ? student.email.split('@')[0] : 'Tu Correo'} - {course.id}</div>
+                  </div>
                 </div>
+              </div>
+
+              {/* Opción 3: Atención Rápida y Validación por WhatsApp */}
+              <div className="p-4 rounded-2xl bg-emerald-950/25 border border-emerald-500/40 space-y-3 text-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 font-serif text-emerald-300 font-bold">
+                    <span>💬</span> Envío de Comprobante por WhatsApp
+                  </div>
+                  <p className="text-emerald-200/80 text-[11px] leading-relaxed">
+                    Si ya realizaste tu transferencia por Mercado Pago o depósito en OXXO (Spin), envía tu comprobante por WhatsApp para activación prioritaria de tu aula.
+                  </p>
+                </div>
+                <a
+                  href={`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto shrink-0 py-2.5 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                >
+                  <span>Enviar Comprobante a WhatsApp</span>
+                  <span>→</span>
+                </a>
               </div>
 
               {/* Formulario de Registro de Folio / Autorización */}
