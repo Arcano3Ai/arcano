@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,6 +16,22 @@ export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
   const [activeProduct, setActiveProduct] = useState<ShopProduct | null>(null);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveProduct(null);
+      }
+    };
+    if (activeProduct) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [activeProduct]);
+
   const filteredProducts = shopProducts.filter((product) => {
     if (selectedCategory === "todos") return true;
     if (selectedCategory === "doble-perforacion") {
@@ -28,7 +44,10 @@ export default function ShopPage() {
   });
 
   const getProductWhatsAppMessage = (product: ShopProduct) => {
-    return `Hola ARCANO, me interesa adquirir la pieza única "${product.name}" (${product.formattedPrice} ${product.shippingNote}). ¿Sigue disponible para envío?`;
+    if (product.categoryId === "duos") {
+      return `Hola ARCANO, deseo encargar el set ceremonial "${product.name}" (${product.formattedPrice} ${product.shippingNote}). ¿Sigue disponible para envío?`;
+    }
+    return `Hola ARCANO, deseo encargar la pieza "${product.name}" (${product.formattedPrice} ${product.shippingNote}). ¿Sigue disponible para envío?`;
   };
 
   return (
@@ -44,7 +63,7 @@ export default function ShopPage() {
           Quemadores de Incienso & Piedras Sagradas de Río
         </h1>
         <p className="text-parchment-muted text-sm sm:text-base font-sans font-light leading-relaxed mb-8">
-          Piezas únicas recolectadas en cauces fluviales, taladradas y grabadas a mano con runas, símbolos Reiki y geometrías sagradas para consagrar tu altar y elevar tus rituales.
+          Piezas únicas recolectadas en cauces fluviales, perforadas y pintadas a mano, consagradas con el fuego sagrado y la luna llena, con runas, símbolos Reiki y geometrías sagradas para tu altar.
         </p>
 
         {/* Banner Visual Ceremonial */}
@@ -116,33 +135,36 @@ export default function ShopPage() {
       <CreativeProcessGallery />
 
       {/* 3. Filtros de Colección y Tema */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
-        {shopCategories.map((cat) => {
-          const isActive = selectedCategory === cat.id;
-          const count = shopProducts.filter((p) => {
-            if (cat.id === "todos") return true;
-            if (cat.id === "doble-perforacion") return p.isDoublePerforation === true || p.categoryId === "doble-perforacion";
-            return p.categoryId === cat.id || p.theme === cat.id;
-          }).length;
+      <div className="w-full overflow-x-auto pb-4 pt-1 mb-10 scrollbar-none touch-pan-x">
+        <div className="flex items-center gap-2 sm:gap-3 whitespace-nowrap min-w-max px-2 sm:justify-center sm:flex-wrap">
+          {shopCategories.map((cat) => {
+            const isActive = selectedCategory === cat.id;
+            const count = shopProducts.filter((p) => {
+              if (cat.id === "todos") return true;
+              if (cat.id === "doble-perforacion") return p.isDoublePerforation === true || p.categoryId === "doble-perforacion";
+              return p.categoryId === cat.id || p.theme === cat.id;
+            }).length;
 
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-xs font-sans tracking-wider transition-all duration-300 flex items-center gap-2 ${
-                isActive
-                  ? "bg-gold text-obsidian font-medium shadow-[0_0_15px_rgba(198,160,82,0.35)] border border-gold"
-                  : "bg-charcoal/50 text-parchment-muted border border-gold/20 hover:border-gold/50 hover:text-parchment"
-              }`}
-            >
-              <span>{cat.symbol}</span>
-              <span>{cat.name}</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-obsidian/30 text-obsidian font-bold" : "bg-gold/10 text-gold"}`}>
-                {count}
-              </span>
-            </button>
-          );
-        })}
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                data-category={cat.id}
+                className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-sans tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                  isActive
+                    ? "bg-gold text-obsidian font-medium shadow-[0_0_15px_rgba(198,160,82,0.35)] border border-gold"
+                    : "bg-charcoal/50 text-parchment-muted border border-gold/20 hover:border-gold/50 hover:text-parchment"
+                }`}
+              >
+                <span>{cat.symbol}</span>
+                <span>{cat.name}</span>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-obsidian/30 text-obsidian font-bold" : "bg-gold/10 text-gold"}`}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Conteo de piezas y nota de envío */}
@@ -156,6 +178,7 @@ export default function ShopPage() {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
+            data-category={product.categoryId}
             className="group relative flex flex-col rounded-md border border-gold/20 bg-charcoal/40 hover:border-gold/50 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(198,160,82,0.15)] overflow-hidden"
           >
             {/* Contenedor de Imagen */}
@@ -300,154 +323,253 @@ export default function ShopPage() {
         </a>
       </div>
 
-      {/* 6. Modal de Detalle de Producto */}
+      {/* 6. Modal de Detalle de Producto (Diseño Apaisado de 2 Columnas · Ergonómico y Proporcionado) */}
       {activeProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-obsidian/85 backdrop-blur-md">
+        <div
+          className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-6 md:p-8 pt-20 sm:pt-20 md:pt-24 pb-8 bg-obsidian/90 backdrop-blur-md overflow-y-auto"
+          onClick={() => setActiveProduct(null)}
+        >
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg border border-gold/40 bg-charcoal p-6 sm:p-8 shadow-[0_0_50px_rgba(198,160,82,0.25)]"
+            className="relative w-full max-w-6xl max-h-[82vh] md:max-h-[80vh] overflow-y-auto rounded-2xl border border-gold/50 bg-charcoal p-5 sm:p-7 md:p-8 shadow-[0_15px_60px_rgba(0,0,0,0.9),0_0_50px_rgba(198,160,82,0.25)] my-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Botón Cerrar */}
+            {/* Botón Cerrar (X Amplia, Destacada y Ergonómica) */}
             <button
               onClick={() => setActiveProduct(null)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-parchment-muted hover:text-gold hover:border-gold transition-colors text-lg"
-              aria-label="Cerrar modal"
+              className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-obsidian/95 border-2 border-gold/70 flex items-center justify-center text-gold hover:bg-gold hover:text-obsidian hover:scale-110 shadow-[0_4px_25px_rgba(0,0,0,0.85)] transition-all text-xl font-bold cursor-pointer group"
+              aria-label="Cerrar ventana"
+              title="Cerrar ficha (Esc)"
             >
-              ✕
+              <span className="leading-none select-none group-hover:rotate-90 transition-transform duration-200">✕</span>
             </button>
 
-            {/* Imagen Grande */}
-            <div className="relative aspect-[4/3] w-full rounded overflow-hidden bg-black/50 mb-6 border border-gold/20">
-              <Image
-                src={activeProduct.imageUrl}
-                alt={activeProduct.name}
-                fill
-                className="object-cover"
-              />
-              {/* Letrero Rojo de VENDIDO en Modal */}
-              {!activeProduct.inStock && (
-                <div className="absolute top-3 right-3 z-10 px-3.5 py-1 rounded bg-red-600/95 border border-red-400 text-[11px] uppercase tracking-widest text-white font-sans font-extrabold shadow-[0_0_20px_rgba(239,68,68,0.75)] flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                  <span>VENDIDO</span>
+            {/* Layout en 2 Columnas para Pantallas Medianas y Grandes */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start">
+              
+              {/* Columna Izquierda: Imagen y Ficha de Consagración (5 de 12 columnas) */}
+              <div className="md:col-span-5 flex flex-col gap-4">
+                {/* Imagen Grande */}
+                <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden bg-black/60 border border-gold/30 shadow-md">
+                  <Image
+                    src={activeProduct.imageUrl}
+                    alt={activeProduct.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 450px"
+                  />
+                  {/* Letrero Rojo de VENDIDO en Modal */}
+                  {!activeProduct.inStock && (
+                    <div className="absolute top-3 right-3 z-10 px-3 py-1 rounded bg-red-600/95 border border-red-400 text-[11px] uppercase tracking-widest text-white font-sans font-extrabold shadow-[0_0_20px_rgba(239,68,68,0.75)] flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                      <span>VENDIDO</span>
+                    </div>
+                  )}
+
+                  <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+                    {activeProduct.isDoublePerforation && (
+                      <span className="px-3 py-1 rounded bg-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
+                        ⚡ Doble Perforación
+                      </span>
+                    )}
+                    {activeProduct.badge && (
+                      <span className="px-3 py-1 rounded bg-obsidian/90 border border-gold/50 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
+                        {activeProduct.badge}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              )}
 
-              <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
-                {activeProduct.isDoublePerforation && (
-                  <span className="px-3 py-1 rounded bg-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
-                    ⚡ Doble Perforación
-                  </span>
-                )}
-                {activeProduct.badge && (
-                  <span className="px-3 py-1 rounded bg-obsidian/90 border border-gold/50 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
-                    {activeProduct.badge}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Aviso de Pieza Vendida en Modal */}
-            {!activeProduct.inStock && (
-              <div className="mb-5 p-3.5 rounded bg-red-950/40 border border-red-500/40 flex items-start gap-3 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
-                <span className="text-red-400 text-lg leading-none">⚡</span>
-                <div className="text-xs text-red-200 font-sans font-light leading-relaxed">
-                  <strong className="font-semibold text-white block mb-0.5">Pieza Única Vendida</strong>
-                  Esta piedra sagrada de río ya fue consagrada y entregada a su custodio. Si deseas encargar una pieza con un grabado, símbolo o perforación semejante, contáctanos directamente.
+                {/* Ficha Ritual de Elaboración Artesanal Homologada */}
+                <div className="p-4 rounded-lg bg-obsidian/70 border border-gold/20 text-xs text-parchment-muted font-sans font-light leading-relaxed">
+                  <div className="flex items-center gap-2 mb-1.5 text-gold font-serif">
+                    <span>✦</span>
+                    <span className="text-xs uppercase tracking-widest font-sans font-semibold text-gold">
+                      {activeProduct.categoryId === "talismanes" ? "Consagración de la Pulsera" : activeProduct.categoryId === "duos" ? "Elaboración del Kit Ceremonial" : "Origen Mineral Fluvial"}
+                    </span>
+                  </div>
+                  <p>
+                    {activeProduct.categoryId === "talismanes"
+                      ? "Montada a mano con minerales seleccionados y cordón de alta resistencia. Purificada con humo de resinas sagradas antes de su entrega para preservar la vibración limpia de cada gema."
+                      : activeProduct.categoryId === "duos"
+                      ? "Cada canto rodado fue recolectado en cauces naturales de río, perforado y pintado a mano, y consagrado junto al fuego sagrado bajo la luna llena. El kit incluye Palo Santo sustentable e incienso de alta pureza."
+                      : "Pieza única de río recolectada a mano, perforada artesanalmente y consagrada ritualmente junto al fuego sagrado y la luna llena. Cada veta y textura es irrepetible."}
+                  </p>
                 </div>
               </div>
-            )}
 
-            {/* Info */}
-            <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans block mb-1">
-              {activeProduct.categoryName}
-            </span>
-            <h2 className="font-serif text-2xl text-parchment font-light mb-3">
-              {activeProduct.name}
-            </h2>
+              {/* Columna Derecha: Título, Precios, Opciones y Ritual (7 de 12 columnas) */}
+              <div className="md:col-span-7 flex flex-col">
+                {/* Aviso de Pieza Vendida en Modal */}
+                {!activeProduct.inStock && (
+                  <div className="mb-4 p-3.5 rounded bg-red-950/40 border border-red-500/40 flex items-start gap-3 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
+                    <span className="text-red-400 text-lg leading-none">⚡</span>
+                    <div className="text-xs text-red-200 font-sans font-light leading-relaxed">
+                      <strong className="font-semibold text-white block mb-0.5">Pieza Única Vendida</strong>
+                      Esta piedra sagrada de río ya fue consagrada y entregada a su custodio. Si deseas encargar una pieza con un grabado o símbolo semejante, contáctanos directamente.
+                    </div>
+                  </div>
+                )}
 
-            {/* Precio */}
-            <div className="flex items-baseline gap-2 mb-6 pb-4 border-b border-gold/15">
-              <span className="font-serif text-2xl text-gold font-medium">
-                {activeProduct.formattedPrice}
-              </span>
-              <span className="text-xs text-parchment-muted font-sans uppercase tracking-wider">
-                {activeProduct.shippingNote}
-              </span>
-              {!activeProduct.inStock && (
-                <span className="ml-auto text-xs text-red-400 font-sans font-bold uppercase tracking-wider">
-                  ● No Disponible
+                {/* Encabezado */}
+                <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans block mb-1">
+                  {activeProduct.categoryName}
                 </span>
-              )}
-            </div>
+                <h2 className="font-serif text-2xl sm:text-3xl text-parchment font-light mb-2 pr-14 sm:pr-16">
+                  {activeProduct.name}
+                </h2>
 
-            {/* Descripción */}
-            <div className="mb-6">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-medium mb-2">
-                Descripción de la Pieza
-              </h4>
-              <p className="text-xs sm:text-sm text-parchment font-sans font-light leading-relaxed">
-                {activeProduct.description}
-              </p>
-            </div>
+                {/* Precio Principal */}
+                <div className="flex items-baseline gap-2 mb-4 pb-3 border-b border-gold/15">
+                  <span className="font-serif text-2xl sm:text-3xl text-gold font-medium">
+                    {activeProduct.formattedPrice}
+                  </span>
+                  <span className="text-xs text-parchment-muted font-sans uppercase tracking-wider">
+                    {activeProduct.shippingNote}
+                  </span>
+                  {!activeProduct.inStock && (
+                    <span className="ml-auto text-xs text-red-400 font-sans font-bold uppercase tracking-wider">
+                      ● No Disponible
+                    </span>
+                  )}
+                </div>
 
-            {/* Uso Ritual */}
-            <div className="mb-6 p-4 rounded bg-obsidian/60 border border-gold/15">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-medium mb-1.5 flex items-center gap-1.5">
-                <span>✦</span>
-                <span>Uso Ritual & Meditación</span>
-              </h4>
-              <p className="text-xs text-parchment-muted font-sans font-light leading-relaxed">
-                {activeProduct.ritualUse}
-              </p>
-            </div>
+                {/* Selector Ritual de Opciones (Solo Pulsera vs Dúo Alquímico) */}
+                {activeProduct.categoryId === "talismanes" && (
+                  <div className="mb-5 p-4 rounded-lg bg-gradient-to-br from-obsidian via-charcoal/90 to-obsidian border border-gold/40 shadow-[0_0_20px_rgba(198,160,82,0.15)]">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-gold text-sm">✨</span>
+                      <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-semibold">
+                        ¿Deseas Solo la Pulsera o el Dúo Alquímico de Altar?
+                      </h4>
+                    </div>
+                    <p className="text-xs text-parchment-muted font-sans font-light leading-relaxed mb-3">
+                      Por la noche, reposa tu pulsera en su Canto Rodado Fluvial Sahumador consagrado al fuego y la luna mientras el Palo Santo y el incienso limpian y reactivan el mineral.
+                    </p>
 
-            {/* Detalles Artesanales */}
-            <div className="mb-8">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-medium mb-2">
-                Características & Cuidados
-              </h4>
-              <ul className="space-y-1.5">
-                {activeProduct.details.map((detail, i) => (
-                  <li
-                    key={i}
-                    className="text-xs text-parchment-muted font-sans font-light flex items-start gap-2"
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <a
+                        href={getWhatsAppUrl(`Hola ARCANO, deseo encargar SOLO LA PULSERA "${activeProduct.name}" (${activeProduct.formattedPrice} + Envío).`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-2.5 px-3 rounded text-center text-[11px] font-sans border border-gold/40 text-parchment hover:border-gold hover:text-gold transition-colors flex flex-col justify-center"
+                      >
+                        <span className="font-semibold">Solo la Pulsera</span>
+                        <span className="text-gold/90 text-xs">{activeProduct.formattedPrice} + Envío</span>
+                      </a>
+
+                      <a
+                        href={getWhatsAppUrl(`Hola ARCANO, deseo encargar el KIT COMPLETO DÚO ALQUÍMICO para "${activeProduct.name}" con Canto Rodado Sahumador consagrado al fuego sagrado y la luna, Palo Santo e Incienso (MXN $${activeProduct.duoPairPrice || 1480} con Envío Express Gratis).`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-2.5 px-3 rounded text-center text-[11px] font-sans bg-gold text-obsidian font-semibold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.3)] flex flex-col justify-center"
+                      >
+                        <span>✦ Kit Dúo Alquímico de Altar</span>
+                        <span className="text-[10px] uppercase font-bold tracking-wider">MXN ${activeProduct.duoPairPrice || 1480} · Envío Gratis</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {activeProduct.categoryId === "duos" && (
+                  <div className="mb-5 p-4 rounded-lg bg-gradient-to-br from-obsidian via-charcoal/90 to-obsidian border border-gold/40 shadow-[0_0_20px_rgba(198,160,82,0.15)]">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-gold text-sm">✦</span>
+                      <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-semibold">
+                        Consagración del Altar Fluvial & Purificación Ritual
+                      </h4>
+                    </div>
+                    <blockquote className="text-xs italic text-parchment/90 font-serif border-l-2 border-gold/50 pl-3 my-2 leading-relaxed">
+                      «Esta pieza no fue moldeada en serie. Nació en las aguas vivas de un cauce fluvial, fue perforada a mano y consagrada junto al fuego sagrado bajo la Luna Llena. Cada noche, regresa tu talismán a su Altar Fluvial para que el mineral descanse, se purifique con el humo sagrado y despierte renovado junto contigo al amanecer.»
+                    </blockquote>
+                    <div className="flex flex-col sm:flex-row items-center justify-between pt-2.5 border-t border-gold/15 gap-2 text-[11px] font-sans">
+                      <span className="text-parchment-muted">
+                        ¿Prefieres adquirir únicamente el talismán de muñeca?
+                      </span>
+                      {activeProduct.braceletPairId && (
+                        <button
+                          onClick={() => {
+                            const bracelet = shopProducts.find(p => p.id === activeProduct.braceletPairId);
+                            if (bracelet) setActiveProduct(bracelet);
+                          }}
+                          className="text-gold hover:underline font-medium"
+                        >
+                          Ver solo la pulsera individual ↗
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Descripción */}
+                <div className="mb-4">
+                  <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-medium mb-1.5">
+                    Descripción de la Pieza
+                  </h4>
+                  <p className="text-xs sm:text-sm text-parchment font-sans font-light leading-relaxed">
+                    {activeProduct.description}
+                  </p>
+                </div>
+
+                {/* Uso Ritual */}
+                <div className="mb-4 p-3.5 rounded bg-obsidian/60 border border-gold/15">
+                  <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-medium mb-1 flex items-center gap-1.5">
+                    <span>✦</span>
+                    <span>Uso Ritual & Meditación</span>
+                  </h4>
+                  <p className="text-xs text-parchment-muted font-sans font-light leading-relaxed">
+                    {activeProduct.ritualUse}
+                  </p>
+                </div>
+
+                {/* Detalles Artesanales */}
+                <div className="mb-6">
+                  <h4 className="text-xs uppercase tracking-[0.2em] text-gold font-sans font-medium mb-1.5">
+                    Características & Cuidados
+                  </h4>
+                  <ul className="space-y-1">
+                    {activeProduct.details.map((detail, i) => (
+                      <li
+                        key={i}
+                        className="text-xs text-parchment-muted font-sans font-light flex items-start gap-2"
+                      >
+                        <span className="text-gold text-[10px] mt-0.5">•</span>
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Botones de Acción */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-gold/15">
+                  {!activeProduct.inStock ? (
+                    <a
+                      href={getWhatsAppUrl(`Hola ARCANO, me fascinó la pieza única "${activeProduct.name}" que está VENDIDA. ¿Podrían consagrar o preparar una similar para mí?`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
+                    >
+                      <span>Encargar Pieza Similar por WhatsApp</span>
+                      <span>↗</span>
+                    </a>
+                  ) : (
+                    <a
+                      href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
+                    >
+                      <span>{activeProduct.categoryId === "duos" ? "Pedir Dúo Alquímico por WhatsApp" : activeProduct.categoryId === "talismanes" ? "Pedir Talismán por WhatsApp" : "Solicitar esta Piedra por WhatsApp"}</span>
+                      <span>↗</span>
+                    </a>
+                  )}
+                  <button
+                    onClick={() => setActiveProduct(null)}
+                    className="py-3 px-5 rounded text-xs uppercase tracking-[0.2em] font-sans border border-gold/30 text-parchment-muted hover:text-parchment hover:border-gold transition-colors"
                   >
-                    <span className="text-gold text-[10px] mt-0.5">•</span>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* CTA WhatsApp */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              {!activeProduct.inStock ? (
-                <a
-                  href={getWhatsAppUrl(`Hola ARCANO, me fascinó la pieza única "${activeProduct.name}" que está VENDIDA. ¿Podrían consagrar o preparar una similar para mí?`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
-                >
-                  <span>Encargar Pieza Similar por WhatsApp</span>
-                  <span>↗</span>
-                </a>
-              ) : (
-                <a
-                  href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
-                >
-                  <span>Solicitar esta Pieza por WhatsApp</span>
-                  <span>↗</span>
-                </a>
-              )}
-              <button
-                onClick={() => setActiveProduct(null)}
-                className="py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans border border-gold/30 text-parchment-muted hover:text-parchment transition-colors"
-              >
-                Volver al Catálogo
-              </button>
+                    Cerrar Ficha
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
