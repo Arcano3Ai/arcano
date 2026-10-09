@@ -11,10 +11,12 @@ import {
 } from "@/data/shop";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { CreativeProcessGallery } from "@/components/shop/CreativeProcessGallery";
+import { useCart } from "@/context/CartContext";
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
   const [activeProduct, setActiveProduct] = useState<ShopProduct | null>(null);
+  const { addItem, openCart, totalCount, subtotal } = useCart();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -37,6 +39,9 @@ export default function ShopPage() {
     if (selectedCategory === "doble-perforacion") {
       return product.isDoublePerforation === true || product.categoryId === "doble-perforacion";
     }
+    if (selectedCategory === "alta-joyeria-oro") {
+      return product.categoryId === "alta-joyeria-oro" || product.goldSpecifications !== undefined || product.theme === "alta-joyeria-oro";
+    }
     return (
       product.categoryId === selectedCategory ||
       product.theme === selectedCategory
@@ -44,6 +49,9 @@ export default function ShopPage() {
   });
 
   const getProductWhatsAppMessage = (product: ShopProduct) => {
+    if (product.categoryId === "alta-joyeria-oro" || product.goldSpecifications) {
+      return `Hola ARCANO, deseo encargar la joya ceremonial "${product.name}" (${product.formattedPrice} ${product.shippingNote}). ¿Sigue disponible para envío?`;
+    }
     if (product.categoryId === "duos") {
       return `Hola ARCANO, deseo encargar el set ceremonial "${product.name}" (${product.formattedPrice} ${product.shippingNote}). ¿Sigue disponible para envío?`;
     }
@@ -56,18 +64,18 @@ export default function ShopPage() {
       <div className="text-center max-w-3xl mx-auto mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/40 bg-charcoal/60 text-gold text-xs uppercase tracking-[0.25em] mb-4">
           <span>✦</span>
-          <span>Boutique Ceremonial · Piedras de Río</span>
+          <span>Boutique Ceremonial & Alta Joyería</span>
           <span>✦</span>
         </div>
         <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light tracking-wide mb-4">
-          Quemadores de Incienso & Piedras Sagradas de Río
+          Quemadores de Río & Alta Joyería Sagrada
         </h1>
         <p className="text-parchment-muted text-sm sm:text-base font-sans font-light leading-relaxed mb-8">
-          Piezas únicas recolectadas en cauces fluviales, perforadas y pintadas a mano, consagradas con el fuego sagrado y la luna llena, con runas, símbolos Reiki y geometrías sagradas para tu altar.
+          Quemadores de piedra de río recolectados en cauces naturales para tu altar, y piezas de alta joyería ceremonial con herrajes bañados en Oro 18K y gemas minerales de Grado AAA.
         </p>
 
         {/* Banner Visual Ceremonial */}
-        <div className="relative aspect-[16/9] w-full max-w-4xl mx-auto rounded-xl overflow-hidden border border-gold/40 shadow-[0_0_40px_rgba(198,160,82,0.2)] mb-12 group">
+        <div className="relative aspect-[16/9] w-full max-w-4xl mx-auto rounded-xl overflow-hidden border border-gold/40 shadow-[0_0_40px_rgba(198,160,82,0.2)] mb-8 group">
           <Image
             src="/images/shop/banner-tienda-arcanos.jpg"
             alt="Boutique Ceremonial ARCANO · Piedras de Río, Quemadores e Inciensos"
@@ -84,17 +92,41 @@ export default function ShopPage() {
                 Altar Místico · Colección Viva
               </span>
               <h3 className="font-serif text-base sm:text-xl text-parchment font-light">
-                Piedras de Río con Doble Perforación & Símbolos Áureos
+                Piedras de Río & Alta Joyería en Oro 18K
               </h3>
             </div>
             <div className="hidden sm:flex items-center gap-2">
               <span className="px-3 py-1 rounded-full bg-obsidian/85 border border-gold/40 text-[11px] font-sans text-parchment-muted backdrop-blur-md">
-                ⚡ Doble Sahumerio
+                ⚜️ Herrajes Oro 18K
               </span>
               <span className="px-3 py-1 rounded-full bg-obsidian/85 border border-gold/40 text-[11px] font-sans text-parchment-muted backdrop-blur-md">
-                🌀 Reiki & Runas
+                💎 Gemas Grado AAA
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Barra de Garantía de Alta Joyería y Metales Nobles */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="p-3 rounded-lg border border-gold/30 bg-charcoal/70 backdrop-blur-sm text-center flex flex-col items-center justify-center gap-1 shadow-sm">
+            <span className="text-gold text-lg">⚜️</span>
+            <span className="text-xs font-serif text-parchment tracking-wide">Herrajes en Oro 18K</span>
+            <span className="text-[10px] text-parchment-muted/80 font-sans">Acabado áureo de alta micra</span>
+          </div>
+          <div className="p-3 rounded-lg border border-gold/30 bg-charcoal/70 backdrop-blur-sm text-center flex flex-col items-center justify-center gap-1 shadow-sm">
+            <span className="text-gold text-lg">💎</span>
+            <span className="text-xs font-serif text-parchment tracking-wide">Gemas Grado AAA</span>
+            <span className="text-[10px] text-parchment-muted/80 font-sans">Minerales puros sin tintes</span>
+          </div>
+          <div className="p-3 rounded-lg border border-gold/30 bg-charcoal/70 backdrop-blur-sm text-center flex flex-col items-center justify-center gap-1 shadow-sm">
+            <span className="text-gold text-lg">📜</span>
+            <span className="text-xs font-serif text-parchment tracking-wide">Certificado de Pureza</span>
+            <span className="text-[10px] text-parchment-muted/80 font-sans">Autenticidad mineralógica</span>
+          </div>
+          <div className="p-3 rounded-lg border border-gold/30 bg-charcoal/70 backdrop-blur-sm text-center flex flex-col items-center justify-center gap-1 shadow-sm">
+            <span className="text-gold text-lg">🎁</span>
+            <span className="text-xs font-serif text-parchment tracking-wide">Estuche de Colección</span>
+            <span className="text-[10px] text-parchment-muted/80 font-sans">Caja rígida con terciopelo y lacre</span>
           </div>
         </div>
       </div>
@@ -142,6 +174,7 @@ export default function ShopPage() {
             const count = shopProducts.filter((p) => {
               if (cat.id === "todos") return true;
               if (cat.id === "doble-perforacion") return p.isDoublePerforation === true || p.categoryId === "doble-perforacion";
+              if (cat.id === "alta-joyeria-oro") return p.categoryId === "alta-joyeria-oro" || p.goldSpecifications !== undefined || p.theme === "alta-joyeria-oro";
               return p.categoryId === cat.id || p.theme === cat.id;
             }).length;
 
@@ -167,9 +200,39 @@ export default function ShopPage() {
         </div>
       </div>
 
-      {/* Conteo de piezas y nota de envío */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gold/15 pb-3 mb-8 text-xs font-sans text-parchment-muted gap-2">
-        <span>Mostrando {filteredProducts.length} piezas artesanales de río</span>
+      {/* Banner Exclusivo: Alta Joyería & Oro 18K */}
+      {selectedCategory === "alta-joyeria-oro" && (
+        <div className="mb-10 rounded-xl border border-gold/50 bg-gradient-to-r from-obsidian via-charcoal/90 to-obsidian p-6 sm:p-8 text-center shadow-[0_0_40px_rgba(198,160,82,0.2)] relative overflow-hidden">
+          <div className="absolute -top-12 -right-12 w-44 h-44 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-gold/40 bg-gold/10 text-gold text-[10px] uppercase tracking-[0.25em] mb-3">
+            <span>⚜️</span>
+            <span>Edición Magna · Oro 18K & Gemas Grado AAA</span>
+            <span>⚜️</span>
+          </div>
+          <h2 className="font-serif text-2xl sm:text-3xl text-parchment font-light mb-3">
+            Alta Joyería Sagrada & Talismanes de Poder
+          </h2>
+          <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light max-w-3xl mx-auto leading-relaxed">
+            Piezas consagradas donde la fuerza milenaria de los minerales auténticos se funde con herrajes, broches y cuentas facetadas en baño de Oro 18K antialérgico de alta durabilidad. Cada joya se entrega en estuche rígido negro obsidiana con bolsa de terciopelo y Certificado de Pureza Mineralógica.
+          </p>
+        </div>
+      )}
+
+      {/* Conteo de piezas, Carrito Ceremonial y nota de envío */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gold/15 pb-3 mb-8 text-xs font-sans text-parchment-muted gap-3">
+        <div className="flex items-center gap-3">
+          <span>Mostrando {filteredProducts.length} piezas exclusivas</span>
+          {totalCount > 0 && (
+            <button
+              onClick={openCart}
+              className="px-3 py-1 rounded-full bg-gold/15 border border-gold/40 text-gold text-xs font-sans font-medium hover:bg-gold hover:text-obsidian transition-all flex items-center gap-1.5 cursor-pointer shadow-sm group"
+            >
+              <span className="group-hover:scale-110 transition-transform">🛒</span>
+              <span>Carrito ({totalCount})</span>
+              <span className="text-[11px] opacity-80">· ${subtotal.toLocaleString("es-MX")}</span>
+            </button>
+          )}
+        </div>
         <span className="text-gold/90 font-medium">Envíos a todo México · Empaque Ceremonial Seguro · Piezas Únicas</span>
       </div>
 
@@ -207,12 +270,18 @@ export default function ShopPage() {
 
               {/* Badges superiores izquierdos */}
               <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start z-10">
+                {product.goldSpecifications && (
+                  <span className="px-2.5 py-0.5 rounded bg-gradient-to-r from-gold/95 via-gold-light to-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md flex items-center gap-1">
+                    <span>⚜️</span>
+                    <span>Oro 18K & Gemas AAA</span>
+                  </span>
+                )}
                 {product.isDoublePerforation && (
                   <span className="px-2.5 py-0.5 rounded bg-gold/90 text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
                     ⚡ Doble Perforación
                   </span>
                 )}
-                {product.badge && (
+                {product.badge && !product.goldSpecifications && (
                   <span className="px-2.5 py-0.5 rounded bg-obsidian/85 backdrop-blur-sm border border-gold/40 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
                     {product.badge}
                   </span>
@@ -272,9 +341,9 @@ export default function ShopPage() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setActiveProduct(product)}
-                  className="w-full py-2.5 px-3 rounded text-[11px] uppercase tracking-wider font-sans border border-gold/30 hover:border-gold text-parchment hover:text-gold transition-colors bg-charcoal/60"
+                  className="w-full py-2.5 px-3 rounded text-[11px] uppercase tracking-wider font-sans border border-gold/30 hover:border-gold text-parchment hover:text-gold transition-colors bg-charcoal/60 cursor-pointer"
                 >
-                  Uso Ritual
+                  Detalles
                 </button>
                 {!product.inStock ? (
                   <a
@@ -287,15 +356,14 @@ export default function ShopPage() {
                     <span>↗</span>
                   </a>
                 ) : (
-                  <a
-                    href={getWhatsAppUrl(getProductWhatsAppMessage(product))}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-3 rounded text-[11px] uppercase tracking-wider font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.25)] flex items-center justify-center gap-1.5 text-center"
+                  <button
+                    onClick={() => addItem(product)}
+                    className="w-full py-2.5 px-3 rounded text-[11px] uppercase tracking-wider font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.25)] flex items-center justify-center gap-1.5 text-center cursor-pointer group"
+                    title="Agregar al carrito ceremonial"
                   >
-                    <span>Pedir</span>
-                    <span>↗</span>
-                  </a>
+                    <span>+ Carrito</span>
+                    <span className="group-hover:scale-110 transition-transform">🛒</span>
+                  </button>
                 )}
               </div>
             </div>
@@ -366,12 +434,18 @@ export default function ShopPage() {
                   )}
 
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+                    {activeProduct.goldSpecifications && (
+                      <span className="px-3 py-1 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md flex items-center gap-1">
+                        <span>⚜️</span>
+                        <span>Oro 18K & Gemas AAA</span>
+                      </span>
+                    )}
                     {activeProduct.isDoublePerforation && (
                       <span className="px-3 py-1 rounded bg-gold text-obsidian text-[10px] uppercase tracking-wider font-sans font-bold shadow-md">
                         ⚡ Doble Perforación
                       </span>
                     )}
-                    {activeProduct.badge && (
+                    {activeProduct.badge && !activeProduct.goldSpecifications && (
                       <span className="px-3 py-1 rounded bg-obsidian/90 border border-gold/50 text-[10px] uppercase tracking-widest text-gold font-sans font-medium">
                         {activeProduct.badge}
                       </span>
@@ -384,11 +458,13 @@ export default function ShopPage() {
                   <div className="flex items-center gap-2 mb-1.5 text-gold font-serif">
                     <span>✦</span>
                     <span className="text-xs uppercase tracking-widest font-sans font-semibold text-gold">
-                      {activeProduct.categoryId === "talismanes" ? "Consagración de la Pulsera" : activeProduct.categoryId === "duos" ? "Elaboración del Kit Ceremonial" : "Origen Mineral Fluvial"}
+                      {activeProduct.goldSpecifications ? "Alta Joyería & Metales Nobles" : activeProduct.categoryId === "talismanes" ? "Consagración de la Pulsera" : activeProduct.categoryId === "duos" ? "Elaboración del Kit Ceremonial" : "Origen Mineral Fluvial"}
                     </span>
                   </div>
                   <p>
-                    {activeProduct.categoryId === "talismanes"
+                    {activeProduct.goldSpecifications
+                      ? "Diseño consagrado con herrajes bañados en Oro 18K antialérgico y gemas naturales Grado AAA seleccionadas por su pureza geológica. Resguardado en estuche de alta gama con certificado de autenticidad."
+                      : activeProduct.categoryId === "talismanes"
                       ? "Montada a mano con minerales seleccionados y cordón de alta resistencia. Purificada con humo de resinas sagradas antes de su entrega para preservar la vibración limpia de cada gema."
                       : activeProduct.categoryId === "duos"
                       ? "Cada canto rodado fue recolectado en cauces naturales de río, perforado y pintado a mano, y consagrado junto al fuego sagrado bajo la luna llena. El kit incluye Palo Santo sustentable e incienso de alta pureza."
@@ -433,6 +509,46 @@ export default function ShopPage() {
                   )}
                 </div>
 
+                {/* Especificaciones de Oro 18K & Gemas Grado AAA */}
+                {activeProduct.goldSpecifications && (
+                  <div className="mb-5 p-4 rounded-xl bg-gradient-to-br from-obsidian via-charcoal to-obsidian border border-gold/45 shadow-[0_0_25px_rgba(198,160,82,0.18)]">
+                    <div className="flex items-center gap-2 mb-3 text-gold">
+                      <span className="text-base">⚜️</span>
+                      <h4 className="text-xs uppercase tracking-[0.2em] font-sans font-bold">
+                        Especificaciones de Alta Joyería & Metales Nobles
+                      </h4>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-sans">
+                      <div className="flex flex-col gap-0.5 p-2 rounded bg-black/40 border border-gold/15">
+                        <span className="text-[10px] uppercase text-gold font-medium tracking-wider">Metal & Herrajes</span>
+                        <span className="text-parchment font-light leading-snug">{activeProduct.goldSpecifications.metal}</span>
+                      </div>
+                      <div className="flex flex-col gap-0.5 p-2 rounded bg-black/40 border border-gold/15">
+                        <span className="text-[10px] uppercase text-gold font-medium tracking-wider">Calidad Gemológica</span>
+                        <span className="text-parchment font-light leading-snug">{activeProduct.goldSpecifications.gemstones}</span>
+                      </div>
+                      {activeProduct.goldSpecifications.clasp && (
+                        <div className="flex flex-col gap-0.5 p-2 rounded bg-black/40 border border-gold/15">
+                          <span className="text-[10px] uppercase text-gold font-medium tracking-wider">Montaje & Estructura</span>
+                          <span className="text-parchment font-light leading-snug">{activeProduct.goldSpecifications.clasp}</span>
+                        </div>
+                      )}
+                      {activeProduct.goldSpecifications.packaging && (
+                        <div className="flex flex-col gap-0.5 p-2 rounded bg-black/40 border border-gold/15">
+                          <span className="text-[10px] uppercase text-gold font-medium tracking-wider">Presentación de Lujo</span>
+                          <span className="text-parchment font-light leading-snug">{activeProduct.goldSpecifications.packaging}</span>
+                        </div>
+                      )}
+                    </div>
+                    {activeProduct.goldSpecifications.certificate && (
+                      <div className="mt-3 pt-2.5 border-t border-gold/20 flex items-center gap-2 text-[11px] text-gold/90 font-sans">
+                        <span>📜</span>
+                        <span className="font-light">{activeProduct.goldSpecifications.certificate}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Selector Ritual de Opciones (Solo Pulsera vs Dúo Alquímico) */}
                 {activeProduct.categoryId === "talismanes" && (
                   <div className="mb-5 p-4 rounded-lg bg-gradient-to-br from-obsidian via-charcoal/90 to-obsidian border border-gold/40 shadow-[0_0_20px_rgba(198,160,82,0.15)]">
@@ -447,25 +563,52 @@ export default function ShopPage() {
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <a
-                        href={getWhatsAppUrl(`Hola ARCANO, deseo encargar SOLO LA PULSERA "${activeProduct.name}" (${activeProduct.formattedPrice} + Envío).`)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="py-2.5 px-3 rounded text-center text-[11px] font-sans border border-gold/40 text-parchment hover:border-gold hover:text-gold transition-colors flex flex-col justify-center"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          addItem(activeProduct, {
+                            optionKey: "pulsera",
+                            optionLabel: "Solo Pulsera",
+                            price: activeProduct.price,
+                          });
+                        }}
+                        className="py-2.5 px-3 rounded text-center text-[11px] font-sans border border-gold/40 text-parchment hover:border-gold hover:text-gold transition-colors flex flex-col justify-center cursor-pointer group"
                       >
-                        <span className="font-semibold">Solo la Pulsera</span>
+                        <span className="font-semibold group-hover:text-gold flex items-center justify-center gap-1">
+                          <span>+ Carrito: Solo Pulsera</span>
+                          <span>🛒</span>
+                        </span>
                         <span className="text-gold/90 text-xs">{activeProduct.formattedPrice} + Envío</span>
-                      </a>
+                      </button>
 
-                      <a
-                        href={getWhatsAppUrl(`Hola ARCANO, deseo encargar el KIT COMPLETO DÚO ALQUÍMICO para "${activeProduct.name}" con Canto Rodado Sahumador consagrado al fuego sagrado y la luna, Palo Santo e Incienso (MXN $${activeProduct.duoPairPrice || 1480} con Envío Express Gratis).`)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="py-2.5 px-3 rounded text-center text-[11px] font-sans bg-gold text-obsidian font-semibold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.3)] flex flex-col justify-center"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const duoPair = shopProducts.find((p) => p.id === activeProduct.duoPairId);
+                          if (duoPair) {
+                            addItem(duoPair, {
+                              optionKey: "duo-kit",
+                              optionLabel: "Kit Dúo Alquímico de Altar",
+                              price: duoPair.price,
+                            });
+                          } else {
+                            addItem(activeProduct, {
+                              optionKey: "duo-kit",
+                              optionLabel: "Kit Dúo Alquímico de Altar",
+                              price: activeProduct.duoPairPrice || 1480,
+                            });
+                          }
+                        }}
+                        className="py-2.5 px-3 rounded text-center text-[11px] font-sans bg-gold text-obsidian font-semibold hover:bg-gold-light transition-all shadow-[0_0_12px_rgba(198,160,82,0.3)] flex flex-col justify-center cursor-pointer"
                       >
-                        <span>✦ Kit Dúo Alquímico de Altar</span>
-                        <span className="text-[10px] uppercase font-bold tracking-wider">MXN ${activeProduct.duoPairPrice || 1480} · Envío Gratis</span>
-                      </a>
+                        <span className="flex items-center justify-center gap-1">
+                          <span>✦ Kit Dúo Alquímico de Altar</span>
+                          <span>🛒</span>
+                        </span>
+                        <span className="text-[10px] uppercase font-bold tracking-wider">
+                          MXN ${activeProduct.duoPairPrice || 1480} · Envío Gratis
+                        </span>
+                      </button>
                     </div>
                   </div>
                 )}
@@ -552,19 +695,33 @@ export default function ShopPage() {
                       <span>↗</span>
                     </a>
                   ) : (
-                    <a
-                      href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.3)] flex items-center justify-center gap-2 text-center"
-                    >
-                      <span>{activeProduct.categoryId === "duos" ? "Pedir Dúo Alquímico por WhatsApp" : activeProduct.categoryId === "talismanes" ? "Pedir Talismán por WhatsApp" : "Solicitar esta Piedra por WhatsApp"}</span>
-                      <span>↗</span>
-                    </a>
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          addItem(activeProduct);
+                          setActiveProduct(null);
+                        }}
+                        className="flex-1 py-3 px-6 rounded text-xs uppercase tracking-[0.2em] font-sans font-semibold text-obsidian bg-gold hover:bg-gold-light transition-all shadow-[0_0_20px_rgba(198,160,82,0.35)] flex items-center justify-center gap-2 text-center cursor-pointer"
+                      >
+                        <span>+ Agregar al Carrito Ceremonial</span>
+                        <span>🛒</span>
+                      </button>
+                      <a
+                        href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-3 px-4 rounded text-xs uppercase tracking-[0.15em] font-sans border border-gold/40 text-parchment hover:border-gold hover:text-gold transition-colors flex items-center justify-center gap-1.5 text-center"
+                        title="Pedir únicamente esta pieza de forma individual"
+                      >
+                        <span>Pedir Directo</span>
+                        <span>↗</span>
+                      </a>
+                    </>
                   )}
                   <button
                     onClick={() => setActiveProduct(null)}
-                    className="py-3 px-5 rounded text-xs uppercase tracking-[0.2em] font-sans border border-gold/30 text-parchment-muted hover:text-parchment hover:border-gold transition-colors"
+                    className="py-3 px-5 rounded text-xs uppercase tracking-[0.2em] font-sans border border-gold/30 text-parchment-muted hover:text-parchment hover:border-gold transition-colors cursor-pointer"
                   >
                     Cerrar Ficha
                   </button>

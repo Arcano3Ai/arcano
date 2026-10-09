@@ -3,6 +3,7 @@ const content = fs.readFileSync('src/data/shop.ts', 'utf8');
 
 const cats = [
   'todos',
+  'alta-joyeria-oro',
   'doble-perforacion',
   'reiki-sanacion',
   'portainciensos-y-runas',

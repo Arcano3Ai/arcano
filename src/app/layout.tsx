@@ -38,6 +38,8 @@ import { PwaRegister } from "@/components/PwaRegister";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { StudentProvider } from "@/lib/academy/studentContext";
+import { CartProvider } from "@/context/CartContext";
+import { CeremonialCartDrawer, FloatingCartButton } from "@/components/shop/CeremonialCartDrawer";
 
 export const viewport: Viewport = {
   themeColor: "#07060b",
@@ -310,24 +312,30 @@ export default function RootLayout({
       <body className="min-h-screen bg-obsidian text-parchment flex flex-col relative antialiased selection:bg-gold/30 selection:text-parchment transition-colors duration-500">
         <ThemeProvider>
           <StudentProvider>
-            {/* Atmósfera mística fija */}
-            <MysticalBackground />
-            <StarField />
-            <CustomCursor />
+            <CartProvider>
+              {/* Atmósfera mística fija */}
+              <MysticalBackground />
+              <StarField />
+              <CustomCursor />
 
-            {/* Cabecera persistente */}
-            <Header />
+              {/* Cabecera persistente */}
+              <Header />
 
-            {/* Contenido principal */}
-            <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
+              {/* Contenido principal */}
+              <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
 
-            {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
-            <Footer />
-            <AtmosphereAudioPlayer />
-            <ArcanaAiBot />
-            <WhatsAppButton />
-            <PwaRegister />
-            <CookieConsentBanner />
+              {/* Drawer y botón flotante del Carrito Ceremonial */}
+              <CeremonialCartDrawer />
+              <FloatingCartButton />
+
+              {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
+              <Footer />
+              <AtmosphereAudioPlayer />
+              <ArcanaAiBot />
+              <WhatsAppButton />
+              <PwaRegister />
+              <CookieConsentBanner />
+            </CartProvider>
           </StudentProvider>
         </ThemeProvider>
       </body>

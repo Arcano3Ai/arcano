@@ -6,13 +6,21 @@ export interface ShopCategory {
   symbol: string;
 }
 
+export interface GoldSpecification {
+  metal: string;
+  gemstones: string;
+  clasp?: string;
+  packaging?: string;
+  certificate?: string;
+}
+
 export interface ShopProduct {
   id: string;
   slug: string;
   name: string;
   categoryId: string;
   categoryName: string;
-  theme?: "doble-perforacion" | "reiki" | "runas" | "geometria" | "angelical" | "altar" | "talismanes" | "duos";
+  theme?: "doble-perforacion" | "reiki" | "runas" | "geometria" | "angelical" | "altar" | "talismanes" | "duos" | "alta-joyeria-oro";
   isDoublePerforation?: boolean;
   price: number;
   formattedPrice: string;
@@ -29,6 +37,7 @@ export interface ShopProduct {
   duoPairName?: string;
   duoPairPrice?: number;
   braceletPairId?: string;
+  goldSpecifications?: GoldSpecification;
 }
 
 export interface CreativeProcessImage {
@@ -135,6 +144,13 @@ export const shopCategories: ShopCategory[] = [
     name: "Toda la Colección",
     description: "Todas las piezas de piedra de río, quemadores y sahumerios ceremoniales.",
     symbol: "✦",
+  },
+  {
+    id: "alta-joyeria-oro",
+    slug: "alta-joyeria-oro",
+    name: "Alta Joyería & Oro 18K",
+    description: "Talismanes ceremoniales y gargantillas consagradas con herrajes bañados en oro 18K y gemas naturales de Grado AAA.",
+    symbol: "⚜️",
   },
   {
     id: "doble-perforacion",
@@ -1721,5 +1737,351 @@ export const shopProducts: ShopProduct[] = [
     imageUrl: "/images/shop/duos/duo-luz-lunar-cuarzo-marfil-luna.jpg",
     featured: true,
     braceletPairId: "pulsera-luz-lunar-cuarzo-marfil",
+  },
+
+  // ==========================================
+  // 9. COLECCIÓN ALTA JOYERÍA & ORO 18K (PIEZAS DE ALTA CONSAGRACIÓN)
+  // ==========================================
+  {
+    id: "joya-01-ojo-de-tigre-corazon-oro",
+    slug: "joya-01-ojo-de-tigre-corazon-oro",
+    name: "Talismán Sagrado del Corazón: Ojo de Tigre & Herrajes de Oro",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1180,
+    formattedPrice: "MXN $1,180",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Ojo de Tigre dorado grado gema y hematita con medallón central de corazón y herrajes facetados en Oro 18K.",
+    description:
+      "Pieza de alta protección y soberanía emocional. Cuentas esféricas de Ojo de Tigre dorado Grado AAA alternadas con hematita pulida al espejo y esferas facetadas con baño de Oro 18K. Coronado por un medallón artesanal con corazón áureo central que irradia valentía y amor propio inquebrantable.",
+    ritualUse:
+      "Portar en la muñeca dominante para anclar autoconfianza, presencia y protección ante ambientes demandantes. Purificar sobre un canto rodado fluvial.",
+    details: [
+      "Herrajes y cuentas facetadas con Baño de Oro 18K antialérgico",
+      "Ojo de Tigre dorado Grado AAA y cuentas de Hematita pulida",
+      "Medallón artesanal con corazón central en relieve",
+      "Alma elástica reforzada de grado joyería de alta durabilidad",
+      "Estuche rígido de lujo negro obsidiana con estampado en oro",
+      "Incluye Certificado de Autenticidad Mineralógica y Consagración",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_01.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Herrajes y cuentas facetadas en Baño de Oro 18K antialérgico",
+      gemstones: "Ojo de Tigre dorado Grado AAA y Hematita de alta densidad",
+      clasp: "Montaje elástico reforzado de grado joyería de triple hebra",
+      packaging: "Estuche rígido negro obsidiana con estampado áureo y bolsa de terciopelo",
+      certificate: "Certificado de pureza mineralógica y consagración ritual incluido",
+    },
+  },
+  {
+    id: "joya-02-choker-amatista-geoda-oro",
+    slug: "joya-02-choker-amatista-geoda-oro",
+    name: "Gargantilla Ceremonial: Amatista Profunda & Druza en Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1680,
+    formattedPrice: "MXN $1,680",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Gargantilla sutil de amatistas púrpuras Grado AAA y cuarzo nieve con separadores cúbicos de Oro 18K y dije de druza natural.",
+    description:
+      "Una joya de alta vibración oracular para el chakra garganta y corona. Compuesta por micro-esferas de amatista violeta translúcida seleccionada grano a grano, esferas de cuarzo nieve puro y cuentas espaciadoras cúbicas bañadas en Oro 18K. El punto focal es un colgante en forma de gota de druza mineral en bruto con filo dorado electroplateado.",
+    ritualUse:
+      "Ideal para momentos de canalización intuitiva, oratoria sagrada y meditación profunda. Resuena con la serenidad y la transmutación mental.",
+    details: [
+      "Separadores cúbicos y engarce del colgante en Baño de Oro 18K",
+      "Amatistas naturales de Uruguay Grado AAA y Cuarzo Nieve",
+      "Dije central de druza natural con borde áureo sellado",
+      "Broche y cadena de extensión ajustables",
+      "Estuche rígido de lujo y bolsa de terciopelo para su resguardo",
+      "Certificado oficial de autenticidad mineral",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Herrajes, separadores cúbicos y borde de druza en Baño de Oro 18K",
+      gemstones: "Amatista natural de Uruguay Grado AAA, Cuarzo Nieve y Druza en bruto",
+      clasp: "Broche de joyería con cadena de alargue regulable",
+      packaging: "Estuche rígido de alta gama con interior aterciopelado",
+      certificate: "Certificado de pureza mineralógica y consagración ritual",
+    },
+  },
+  {
+    id: "joya-03-collar-amatista-turmalina-oro",
+    slug: "joya-03-collar-amatista-turmalina-oro",
+    name: "Collar de Alta Consagración: Amatista & Punta de Cristal en Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1880,
+    formattedPrice: "MXN $1,880",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Esferas de amatista profunda con cadena de eslabones de lujo y dije corazón bañado en Oro 18K con cristal facetado.",
+    description:
+      "La pieza de mayor rango ceremonial de la colección. Enhebrada con esferas de amatista pura de 8mm de color morado regio, rematada por una cadena de eslabones pulidos y un dije áureo con detalle de corazón que engarza una auténtica punta facetada de cuarzo rosa/turmalina rosada de brillo vítreo.",
+    ritualUse:
+      "Canalización de amor universal, sanación de heridas emocionales ancestrales y elevación de la frecuencia áurica.",
+    details: [
+      "Cadena de eslabones, terminales y dije corazón en Baño de Oro 18K",
+      "Esferas seleccionadas de Amatista imperial Grado AAA",
+      "Colgante central de punta de cristal translúcido facetado",
+      "Longitud tipo gargantilla elegante regulable",
+      "Empaque ceremonial de alta joyería con lacre y paño de limpieza",
+      "Certificado individual de consagración",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_03.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Cadena de eslabones, broche y corazón en Baño de Oro 18K",
+      gemstones: "Amatista imperial Grado AAA y punta de cristal rosa auténtico",
+      clasp: "Cierre de mosquetón de precisión con cadena de ajuste",
+      packaging: "Estuche rígido de colección con paño de microfibra de joyería",
+      certificate: "Certificado oficial de autenticidad mineralógica",
+    },
+  },
+  {
+    id: "joya-04-pulsera-cornalina-dalmata-tigre",
+    slug: "joya-04-pulsera-cornalina-dalmata-tigre",
+    name: "Talismán Ígneo: Rondelles de Cornalina, Jaspe Dálmata & Ojo de Tigre en Oro",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1080,
+    formattedPrice: "MXN $1,080",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Rondelles de cornalina roja translúcida Grado AAA con jaspe dálmata natural y esferas de ojo de tigre.",
+    description:
+      "Fuego terrenal y creatividad indómita. Una sinergia entre las ruedas facetadas de cornalina carmesí de Madagascar, el jaspe dálmata moteado y las esferas luminosas de ojo de tigre dorado con destello felino, ensambladas con precisión milimétrica.",
+    ritualUse:
+      "Despertar del plexo solar y el segundo chakra; ideal para nuevos emprendimientos, vigor físico y motivación renovada.",
+    details: [
+      "Rondelles pulidos de Cornalina de Madagascar Grado AAA",
+      "Esferas de Jaspe Dálmata natural y Ojo de Tigre dorado grado gema",
+      "Acentos y separadores áureos inalterables",
+      "Montaje elástico de alta tenacidad de grado joyería",
+      "Estuche rígido negro con bolsa de terciopelo",
+      "Certificado de autenticidad mineral",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_04.jpeg",
+    goldSpecifications: {
+      metal: "Acentos y separadores con recubrimiento áureo de alta durabilidad",
+      gemstones: "Cornalina de Madagascar Grado AAA, Jaspe Dálmata y Ojo de Tigre",
+      clasp: "Alma elástica de triple núcleo de grado joyería",
+      packaging: "Estuche rígido de lujo y bolsa de terciopelo protectora",
+      certificate: "Certificado de autenticidad mineral",
+    },
+  },
+  {
+    id: "joya-05-pulsera-malaquita-unakita-oro",
+    slug: "joya-05-pulsera-malaquita-unakita-oro",
+    name: "Talismán del Corazón Botánico: Malaquita Pura & Cuentas de Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1280,
+    formattedPrice: "MXN $1,280",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Malaquita verde pura con vetas naturales concéntricas, unakita y cuentas espaciadoras facetadas en Oro 18K.",
+    description:
+      "Poderosa aliada de transformación y protección cardíaca. Esferas de malaquita verde bosque de origen congolés con sus distintivos anillos botánicos, complementadas con pepitas de unakita verde-rosácea y esferas facetadas con baño de Oro 18K que atrapan la luz.",
+    ritualUse:
+      "Escudo áurico contra proyecciones externas y medicina de sanación emocional profunda.",
+    details: [
+      "Separadores facetados con Baño de Oro 18K",
+      "Malaquita auténtica Grado AAA con vetas concéntricas naturales",
+      "Unakita natural y cuarzo de alta calidad",
+      "Elástico de alta resistencia antidesgaste",
+      "Estuche ceremonial rígido con grabado en pan de oro",
+      "Certificado de pureza mineral",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_05.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Cuentas espaciadoras facetadas con Baño de Oro 18K",
+      gemstones: "Malaquita pura Grado AAA y Unakita natural",
+      clasp: "Montaje elástico reforzado de grado joyería",
+      packaging: "Estuche rígido negro obsidiana con bolsa de terciopelo",
+      certificate: "Certificado oficial de autenticidad mineralógica",
+    },
+  },
+  {
+    id: "joya-06-pulsera-fuego-jaspe-cuarzo-oro",
+    slug: "joya-06-pulsera-fuego-jaspe-cuarzo-oro",
+    name: "Talismán Telúrico Raíz: Jaspe Rojo Imperial & Cuarzo en Bruto con Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1280,
+    formattedPrice: "MXN $1,280",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Astillas pulidas de jaspe rojo imperial, cuarzo cristalino central en bruto y esferas de Oro 18K.",
+    description:
+      "La cumbre de la fuerza mineral viva. Astillas pulidas de jaspe rojo imperial seleccionadas por su densidad y color terracota intenso, custodiando una gema central de cuarzo cristalino en bruto con sus estrías geológicas intactas y cuentas esféricas en baño de Oro 18K.",
+    ritualUse:
+      "Enraizamiento telúrico, protección física y anclaje de propósitos materiales en el plano terrenal.",
+    details: [
+      "Cuentas esféricas de separación en Baño de Oro 18K",
+      "Jaspe Rojo Imperial Grado AAA y Cuarzo Cristalino en bruto",
+      "Esferas de Ojo de Tigre dorado en los flancos",
+      "Estructura elástica resistente de alta calidad",
+      "Packaging rígido ceremonial con certificado de autenticidad",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_06.jpeg",
+    goldSpecifications: {
+      metal: "Esferas separadoras en Baño de Oro 18K antialérgico",
+      gemstones: "Jaspe Rojo Imperial Grado AAA, Cuarzo Cristalino en bruto y Ojo de Tigre",
+      clasp: "Montaje elástico de grado joyería",
+      packaging: "Estuche rígido de lujo y bolsa protectora de terciopelo",
+      certificate: "Certificado de pureza mineralógica y consagración",
+    },
+  },
+  {
+    id: "joya-07-pulsera-sodalita-bloques-oro",
+    slug: "joya-07-pulsera-sodalita-bloques-oro",
+    name: "Brazalete Oracular: Bloques de Sodalita Azul Real & Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1380,
+    formattedPrice: "MXN $1,380",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Bloques geométricos macizos de sodalita azul noche con vetas de calcita y separadores facetados en Oro 18K.",
+    description:
+      "Elegancia geométrica y serenidad mental. Bloques pulidos en corte cojín rectangular de sodalita azul noche de grado gema, mostrando la belleza de sus vetas de calcita blanca natural, intercalados con cuentas facetadas en baño de Oro 18K.",
+    ritualUse:
+      "Claridad para la lectura de cartas de tarot, silenciar el diálogo interno y activar el chakra del tercer ojo.",
+    details: [
+      "Separadores facetados en Baño de Oro 18K",
+      "Bloques macizos de Sodalita Azul Real Grado AAA",
+      "Calcita blanca natural auténtica en cada veta",
+      "Banda elástica reforzada de triple núcleo",
+      "Estuche rígido negro con estampa áurea y certificado",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_07.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Separadores facetados con Baño de Oro 18K",
+      gemstones: "Sodalita Azul Real Grado AAA y Calcita blanca natural",
+      clasp: "Alma elástica reforzada de triple hebra",
+      packaging: "Estuche rígido de alta gama con bolsa de terciopelo",
+      certificate: "Certificado oficial de autenticidad mineral",
+    },
+  },
+  {
+    id: "joya-08-pulsera-cuarzo-nieve-pez-oro",
+    slug: "joya-08-pulsera-cuarzo-nieve-pez-oro",
+    name: "Talismán de la Abundancia Serena: Cuarzo Nieve & Pez Sagrado en Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1280,
+    formattedPrice: "MXN $1,280",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Esferas pulidas de cuarzo nieve marfil Grado AAA con dije de pez esculpido y cuentas cúbicas en Oro 18K.",
+    description:
+      "Símbolo ancestral de fertilidad, calma y abundancia que fluye sin esfuerzo. Esferas de cuarzo nieve de tacto lechoso y suave luminiscencia, armonizadas con un dije tridimensional de pez sagrado y cuentas espaciadoras cúbicas bañadas en Oro 18K.",
+    ritualUse:
+      "Conexión con el elemento agua, fluidez en épocas de estancamiento y paz para el descanso nocturno.",
+    details: [
+      "Dije de pez esculpido y cuentas cúbicas en Baño de Oro 18K",
+      "Esferas pulidas de Cuarzo Nieve Marfil Grado AAA",
+      "Acabado satinado de brillo suave y tacto sedoso",
+      "Montaje elástico de alta tenacidad",
+      "Estuche rígido de lujo y bolsa de terciopelo protectora",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_08.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Dije de Pez Ichthys y cuentas cúbicas en Baño de Oro 18K",
+      gemstones: "Cuarzo Nieve Marfil Grado AAA seleccionado",
+      clasp: "Alma elástica de grado joyería",
+      packaging: "Estuche rígido negro obsidiana con bolsa de terciopelo",
+      certificate: "Certificado oficial de pureza y consagración ritual",
+    },
+  },
+  {
+    id: "joya-09-pulsera-cornalina-citrino-solar",
+    slug: "joya-09-pulsera-cornalina-citrino-solar",
+    name: "Talismán Solar Radiante: Cornalina de Madagascar & Citrino Ámbar con Oro",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1080,
+    formattedPrice: "MXN $1,080",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Rondelles de cornalina carmesí y esferas de citrino solar brillante Grado AAA con sutiles detalles dorados.",
+    description:
+      "La energía dorada del Astro Rey materializada en mineral. Combina las notas cálidas de la cornalina translúcida con la luminosidad del citrino/calcita solar ámbar, infundiendo vigor, vitalidad y carisma en quien la porta.",
+    ritualUse:
+      "Recarga energética matutina, activación de la creatividad y éxito en entrevistas o presentaciones.",
+    details: [
+      "Rondelles pulidos de Cornalina roja Grado AAA",
+      "Esferas translúcidas de Citrino / Calcita Solar",
+      "Acentos dorados resistentes al uso diario",
+      "Alma elástica de alta tenacidad",
+      "Packaging rígido ceremonial con lacre áureo",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_09.jpeg",
+    goldSpecifications: {
+      metal: "Acentos dorados inalterables de alta pureza",
+      gemstones: "Cornalina de Madagascar Grado AAA y Citrino Solar translúcido",
+      clasp: "Montaje elástico reforzado de grado joyería",
+      packaging: "Estuche rígido de lujo y bolsa de terciopelo",
+      certificate: "Certificado de autenticidad mineralógica",
+    },
+  },
+  {
+    id: "joya-10-pulsera-amazonita-cuarzo-oro",
+    slug: "joya-10-pulsera-amazonita-cuarzo-oro",
+    name: "Talismán de Aguas Vivas: Pepitas de Amazonita & Cuarzo Cristalino en Oro 18K",
+    categoryId: "alta-joyeria-oro",
+    categoryName: "Alta Joyería & Oro 18K",
+    theme: "alta-joyeria-oro",
+    price: 1280,
+    formattedPrice: "MXN $1,280",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Pepitas pulidas de amazonita verde azulada con esferas de cuarzo puro y separadores facetados en Oro 18K.",
+    description:
+      "La frescura de los manantiales de montaña. Pepitas orgánicas de amazonita verde esmeralda y turquesa con sus matices geológicos naturales, alternadas con cuarzo cristalino transparente y cuentas espaciadoras facetadas en baño de Oro 18K.",
+    ritualUse:
+      "Paz mental, disipar la ansiedad y facilitar la expresión auténtica desde el corazón.",
+    details: [
+      "Separadores facetados en Baño de Oro 18K",
+      "Pepitas pulidas de Amazonita natural Grado AAA",
+      "Esferas translúcidas de Cuarzo Cristalino",
+      "Montaje elástico reforzado de alta tenacidad",
+      "Estuche rígido ceremonial con certificado de autenticidad",
+    ],
+    inStock: true,
+    badge: "⚜️ Oro 18K & Gemas AAA",
+    imageUrl: "/images/shop/pulseras_arcanos/pulsera_10.jpeg",
+    featured: true,
+    goldSpecifications: {
+      metal: "Separadores facetados con Baño de Oro 18K antialérgico",
+      gemstones: "Amazonita verde azulada Grado AAA y Cuarzo Cristalino puro",
+      clasp: "Montaje elástico de triple hebra de grado joyería",
+      packaging: "Estuche rígido negro obsidiana con bolsa de terciopelo",
+      certificate: "Certificado oficial de autenticidad mineral",
+    },
   },
 ];
