@@ -252,7 +252,7 @@ export default function ShopPage() {
          ───────────────────────────────────────────────────────────── */}
       <div className="bg-[#0D0D0D] text-neutral-300 py-2.5 px-4 text-center border-b border-neutral-900 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-light">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 sm:gap-6">
-          <span>ENVÍO EXPRESS GRATIS SOBRE $1,380 MXN</span>
+          <span>ENVÍO EXPRESS GRATIS SOBRE $1,480 MXN</span>
           <span className="opacity-30">·</span>
           <span>HECHO A MANO A LA MEDIDA DE TU MUÑECA</span>
           <span className="opacity-30 hidden sm:inline">·</span>

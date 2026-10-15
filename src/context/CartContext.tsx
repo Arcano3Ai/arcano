@@ -41,7 +41,7 @@ export interface CartContextType {
   getWhatsAppOrderUrl: () => string;
 }
 
-const FREE_SHIPPING_THRESHOLD = 1380; // MXN
+const FREE_SHIPPING_THRESHOLD = 1480; // MXN
 const CART_STORAGE_KEY = "arcano_ceremonial_cart_v1";
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
