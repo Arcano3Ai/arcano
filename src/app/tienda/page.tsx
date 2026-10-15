@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -20,26 +20,126 @@ function formatPrice(price: number): string {
   })} MXN`;
 }
 
-// Variedades de Gemas para "Shop by Stone" estilo Aurum Brothers
-const AURUM_STONES = [
-  { id: "todos", name: "Todas las Gemas", symbol: "✦" },
-  { id: "Ónix", name: "Ónix Negro", symbol: "🖤" },
-  { id: "Ojo de Tigre", name: "Ojo de Tigre & Halcón", symbol: "🐯" },
-  { id: "Lava", name: "Lava Volcánica", symbol: "🌋" },
-  { id: "Obsidiana", name: "Obsidiana Sagrada", symbol: "🌌" },
-  { id: "Lapislázuli", name: "Lapislázuli Real", symbol: "🔵" },
-  { id: "Malaquita", name: "Malaquita & Jade", symbol: "🌿" },
-  { id: "Hematita", name: "Hematita & Pirita", symbol: "🛡️" },
-  { id: "Turquesa", name: "Turquesa Africana", symbol: "🧿" },
-  { id: "Howlita", name: "Howlita Mármol", symbol: "⚪" },
-  { id: "Cuarzo", name: "Cuarzos & Rutilado", symbol: "💎" },
-  { id: "Labradorita", name: "Labradorita Espectral", symbol: "✨" },
-  { id: "Amatista", name: "Amatista Púrpura", symbol: "💜" },
-  { id: "Jaspe", name: "Jaspe & Dálmata", symbol: "🔴" },
-  { id: "Sodalita", name: "Sodalita Azul", symbol: "🔷" },
-  { id: "Citrino", name: "Citrino Solar", symbol: "☀️" },
-  { id: "Turmalina", name: "Turmalina Negra", symbol: "⚡" },
-  { id: "Ámbar", name: "Ámbar de Chiapas", symbol: "🍯" },
+// Estructura de Espécimen en Bruto estilo Aurum Brothers ("SHOP BY STONE")
+interface RawStoneShowcase {
+  id: string; // Para filtro de productos
+  titleEn: string; // Título exacto en inglés (Sodalite, Tiger Eye, etc.)
+  nameEs: string; // Nombre en español
+  vibe: string; // Atributo metafísico/vibracional
+  image: string; // Fotografía en bruto con reflejo sobre negro
+  accentColor: string; // Tonalidad de acento sutil
+  itemCount: number; // Cantidad de piezas en la boutique
+}
+
+const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
+  {
+    id: "Sodalita",
+    titleEn: "Sodalite",
+    nameEs: "Sodalita Azul",
+    vibe: "Visión & Intuición",
+    image: "/images/shop/stones/sodalite_raw.webp",
+    accentColor: "#3B82F6",
+    itemCount: 5,
+  },
+  {
+    id: "Ojo de Tigre",
+    titleEn: "Tiger Eye",
+    nameEs: "Ojo de Tigre Imperial",
+    vibe: "Coraje & Confianza",
+    image: "/images/shop/stones/tiger_eye_raw.webp",
+    accentColor: "#D97706",
+    itemCount: 29,
+  },
+  {
+    id: "Cornalina",
+    titleEn: "Carnelian",
+    nameEs: "Cornalina Ámbar",
+    vibe: "Fuego Vital & Pasión",
+    image: "/images/shop/stones/carnelian_raw.webp",
+    accentColor: "#DC2626",
+    itemCount: 6,
+  },
+  {
+    id: "Turmalina",
+    titleEn: "Tourmaline",
+    nameEs: "Turmalina Negra",
+    vibe: "Escudo Áurico Puro",
+    image: "/images/shop/stones/tourmaline_raw.jpg",
+    accentColor: "#52525B",
+    itemCount: 6,
+  },
+  {
+    id: "Aguamarina",
+    titleEn: "Aquamarine",
+    nameEs: "Aguamarina Sagrada",
+    vibe: "Serenidad & Flujo",
+    image: "/images/shop/stones/aquamarine_raw.webp",
+    accentColor: "#06B6D4",
+    itemCount: 2,
+  },
+  {
+    id: "Amatista",
+    titleEn: "Amethyst",
+    nameEs: "Amatista Púrpura",
+    vibe: "Transmutación Espiritual",
+    image: "/images/shop/stones/amethyst_raw.webp",
+    accentColor: "#8B5CF6",
+    itemCount: 8,
+  },
+  {
+    id: "Lapislázuli",
+    titleEn: "Lapis Lazuli",
+    nameEs: "Lapislázuli Real",
+    vibe: "Soberanía & Sabiduría",
+    image: "/images/shop/stones/lapis_lazuli_raw.webp",
+    accentColor: "#1D4ED8",
+    itemCount: 6,
+  },
+  {
+    id: "Malaquita",
+    titleEn: "Malachite",
+    nameEs: "Malaquita & Jade",
+    vibe: "Sanación del Corazón",
+    image: "/images/shop/stones/malachite_raw.jpg",
+    accentColor: "#059669",
+    itemCount: 8,
+  },
+  {
+    id: "Obsidiana",
+    titleEn: "Obsidian",
+    nameEs: "Obsidiana Sagrada",
+    vibe: "Protección Telúrica",
+    image: "/images/shop/stones/obsidian_raw.jpg",
+    accentColor: "#EAB308",
+    itemCount: 12,
+  },
+  {
+    id: "Labradorita",
+    titleEn: "Labradorite",
+    nameEs: "Labradorita Espectral",
+    vibe: "Magia & Alquimia",
+    image: "/images/shop/stones/labradorite_raw.jpg",
+    accentColor: "#0284C7",
+    itemCount: 3,
+  },
+  {
+    id: "Ámbar",
+    titleEn: "Chiapas Amber",
+    nameEs: "Ámbar de Simojovel",
+    vibe: "Luz Solar Fósil",
+    image: "/images/shop/stones/amber_raw.jpg",
+    accentColor: "#F59E0B",
+    itemCount: 31,
+  },
+  {
+    id: "Ónix",
+    titleEn: "Black Onyx",
+    nameEs: "Ónix Negro & Lava",
+    vibe: "Fuerza & Enraizamiento",
+    image: "/images/shop/stones/onyx_raw.jpg",
+    accentColor: "#71717A",
+    itemCount: 13,
+  },
 ];
 
 // Colecciones visuales ("LATEST COLLECTIONS" estilo Aurum Brothers)
@@ -109,6 +209,16 @@ export default function ShopPage() {
   const [modalTab, setModalTab] = useState<"detalles" | "mineral" | "ritual">("detalles");
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
 
+  // Ref para scroll horizontal fluido de la estantería de minerales en bruto
+  const stonesScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollStones = (direction: "left" | "right") => {
+    if (stonesScrollRef.current) {
+      const scrollAmount = direction === "left" ? -360 : 360;
+      stonesScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   const { addItem, openCart, totalCount } = useCart();
 
   // Control de scroll y tecla Escape para el modal
@@ -160,11 +270,83 @@ export default function ShopPage() {
         const prodDesc = product.description.toLowerCase();
         const prodStone = (product.stoneType || "").toLowerCase();
         const prodTag = product.tagline.toLowerCase();
-        matchesStone =
-          prodStone.includes(queryStone) ||
-          prodName.includes(queryStone) ||
-          prodDesc.includes(queryStone) ||
-          prodTag.includes(queryStone);
+
+        if (queryStone.includes("ónix") || queryStone.includes("onix")) {
+          matchesStone =
+            prodStone.includes("ónix") ||
+            prodStone.includes("onix") ||
+            prodStone.includes("lava") ||
+            prodName.includes("ónix") ||
+            prodName.includes("onix") ||
+            prodName.includes("lava");
+        } else if (queryStone.includes("tigre")) {
+          matchesStone =
+            prodStone.includes("tigre") ||
+            prodStone.includes("halcón") ||
+            prodName.includes("tigre") ||
+            prodName.includes("halcón") ||
+            prodTag.includes("tigre");
+        } else if (queryStone.includes("ámbar") || queryStone.includes("ambar")) {
+          matchesStone =
+            product.categoryId === "ambar-chiapas" ||
+            prodStone.includes("ámbar") ||
+            prodStone.includes("ambar") ||
+            prodName.includes("ámbar") ||
+            prodName.includes("ambar") ||
+            prodDesc.includes("ámbar") ||
+            prodDesc.includes("ambar");
+        } else if (queryStone.includes("lapis")) {
+          matchesStone =
+            prodStone.includes("lapis") ||
+            prodName.includes("lapis") ||
+            prodDesc.includes("lapis");
+        } else if (queryStone.includes("obsidiana")) {
+          matchesStone =
+            prodStone.includes("obsidiana") ||
+            prodName.includes("obsidiana") ||
+            prodDesc.includes("obsidiana");
+        } else if (queryStone.includes("malaquita")) {
+          matchesStone =
+            prodStone.includes("malaquita") ||
+            prodName.includes("malaquita") ||
+            prodDesc.includes("malaquita");
+        } else if (queryStone.includes("labradorita")) {
+          matchesStone =
+            prodStone.includes("labradorita") ||
+            prodName.includes("labradorita") ||
+            prodDesc.includes("labradorita");
+        } else if (queryStone.includes("amatista")) {
+          matchesStone =
+            prodStone.includes("amatista") ||
+            prodName.includes("amatista") ||
+            prodDesc.includes("amatista");
+        } else if (queryStone.includes("turmalina")) {
+          matchesStone =
+            prodStone.includes("turmalina") ||
+            prodName.includes("turmalina") ||
+            prodDesc.includes("turmalina");
+        } else if (queryStone.includes("cornalina")) {
+          matchesStone =
+            prodStone.includes("cornalina") ||
+            prodName.includes("cornalina") ||
+            prodDesc.includes("cornalina");
+        } else if (queryStone.includes("aguamarina")) {
+          matchesStone =
+            prodStone.includes("aguamarina") ||
+            prodName.includes("aguamarina") ||
+            prodDesc.includes("aguamarina");
+        } else if (queryStone.includes("sodalita")) {
+          matchesStone =
+            prodStone.includes("sodalita") ||
+            prodName.includes("sodalita") ||
+            prodDesc.includes("sodalita");
+        } else {
+          matchesStone =
+            prodStone.includes(queryStone) ||
+            prodName.includes(queryStone) ||
+            prodDesc.includes(queryStone) ||
+            prodTag.includes(queryStone);
+        }
       }
 
       // 3. Filtro de búsqueda rápida
@@ -496,7 +678,145 @@ export default function ShopPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          5. SECCIÓN PRINCIPAL: "TOP PRODUCTS" (ESTILO FLOATING CARDS)
+          5. SECCIÓN DEDICADA "SHOP BY STONE" (SHOWCASE MINERAL EN BRUTO)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="relative w-full py-16 sm:py-24 bg-gradient-to-b from-[#030303] via-[#080808] to-black border-t border-b border-neutral-900/90 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Header Editorial Estilo Aurum Brothers */}
+          <div className="text-center mb-10 sm:mb-14">
+            <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.3em] uppercase text-[#C5A059] block mb-2 font-medium">
+              MATRIZ GEOLÓGICA & ALQUIMIA NATURAL
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-light tracking-[0.28em] text-white uppercase mb-3">
+              SHOP BY STONE
+            </h2>
+            <p className="text-xs sm:text-sm text-neutral-400 font-light max-w-xl mx-auto tracking-wide leading-relaxed">
+              Descubre cada talismán a través de su gema en bruto original. Selecciona un mineral para filtrar instantáneamente la colección.
+            </p>
+
+            {/* Selector Activo / Botón de Reset */}
+            {selectedStone !== "todos" && (
+              <div className="mt-5 inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-[#C5A059]/40 backdrop-blur-md animate-fadeIn">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse" />
+                <span className="text-xs text-neutral-300 font-light tracking-wider">
+                  Gema Activa: <strong className="text-[#C5A059] font-medium uppercase">{selectedStone}</strong>
+                </span>
+                <button
+                  onClick={() => {
+                    setSelectedStone("todos");
+                    setSelectedCategory("todos");
+                  }}
+                  className="ml-2 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  ✕ Ver Todas
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Carrusel / Estantería de Minerales con Reflejo Especular */}
+          <div className="relative group/shelf">
+            
+            {/* Flecha Izquierda */}
+            <button
+              onClick={() => scrollStones("left")}
+              className="absolute -left-2 sm:left-0 top-[38%] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/80 hover:bg-[#C5A059] border border-neutral-800 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
+              aria-label="Desplazar minerales a la izquierda"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Estantería Horizontal */}
+            <div
+              ref={stonesScrollRef}
+              className="flex items-end justify-start gap-4 sm:gap-7 overflow-x-auto pb-6 pt-2 px-2 scroll-smooth scrollbar-none"
+            >
+              {AURUM_STONES_SHOWCASE.map((stone) => {
+                const isSelected = selectedStone === stone.id;
+                return (
+                  <button
+                    key={stone.id}
+                    onClick={() => {
+                      const next = isSelected ? "todos" : stone.id;
+                      setSelectedStone(next);
+                      setSelectedCategory("todos");
+                      document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className={`group relative flex-shrink-0 flex flex-col items-center text-center cursor-pointer transition-all duration-300 w-28 sm:w-36 md:w-40 p-2 rounded-lg ${
+                      isSelected
+                        ? "bg-gradient-to-b from-[#C5A059]/10 to-transparent border border-[#C5A059]/40 scale-105"
+                        : "hover:bg-white/[0.02] border border-transparent hover:border-neutral-800/80"
+                    }`}
+                  >
+                    {/* Resplandor radial dorado bajo el espécimen activo */}
+                    {isSelected && (
+                      <div className="absolute top-8 inset-x-4 h-24 bg-[radial-gradient(ellipse_at_center,_rgba(197,160,89,0.22)_0%,_transparent_70%)] pointer-events-none -z-10" />
+                    )}
+
+                    {/* Espécimen en Bruto con Reflejo Negro */}
+                    <div className="relative aspect-square w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mb-3 transition-transform duration-500 group-hover:scale-105">
+                      <Image
+                        src={stone.image}
+                        alt={stone.titleEn}
+                        fill
+                        sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 144px"
+                        className={`object-contain transition-all duration-300 filter ${
+                          isSelected
+                            ? "drop-shadow-[0_0_18px_rgba(197,160,89,0.35)] brightness-110"
+                            : "opacity-90 group-hover:opacity-100 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.12)]"
+                        }`}
+                      />
+                    </div>
+
+                    {/* Nombre en Inglés estilo Aurum Brothers */}
+                    <span className={`text-xs sm:text-sm font-light tracking-[0.18em] uppercase transition-colors block mb-0.5 ${
+                      isSelected ? "text-[#C5A059] font-medium" : "text-neutral-200 group-hover:text-white"
+                    }`}>
+                      {stone.titleEn}
+                    </span>
+
+                    {/* Atributo Metafísico & Nombre en Español */}
+                    <span className="text-[9px] sm:text-[10px] text-neutral-400 font-light tracking-wider line-clamp-1">
+                      {stone.vibe}
+                    </span>
+
+                    {/* Contador de piezas en catálogo */}
+                    <span className="mt-1.5 text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-black/60 border border-neutral-800 text-neutral-400 group-hover:text-neutral-300 tracking-widest font-sans">
+                      {stone.itemCount} modelos
+                    </span>
+
+                    {/* Línea dorada indicadora */}
+                    <div className="mt-2.5 h-0.5 w-full flex items-center justify-center">
+                      {isSelected ? (
+                        <span className="w-8 h-0.5 bg-[#C5A059] rounded-full shadow-[0_0_8px_#C5A059]" />
+                      ) : (
+                        <span className="w-1.5 h-0.5 bg-transparent group-hover:bg-neutral-700 transition-colors" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Flecha Derecha */}
+            <button
+              onClick={() => scrollStones("right")}
+              className="absolute -right-2 sm:right-0 top-[38%] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/80 hover:bg-[#C5A059] border border-neutral-800 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
+              aria-label="Desplazar minerales a la derecha"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          6. SECCIÓN PRINCIPAL: "TOP PRODUCTS" (ESTILO FLOATING CARDS)
          ───────────────────────────────────────────────────────────── */}
       <section id="catalogo-top" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         
@@ -505,28 +825,29 @@ export default function ShopPage() {
           TOP PRODUCTS
         </h2>
 
-        {/* Barra de Filtros Minimalista por Mineral ("Shop by Stone") */}
-        <div className="w-full overflow-x-auto pb-4 mb-8 scrollbar-none">
-          <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 whitespace-nowrap min-w-max">
-            {AURUM_STONES.map((stone) => {
-              const isActive = selectedStone === stone.id;
-              return (
-                <button
-                  key={stone.id}
-                  onClick={() => setSelectedStone(stone.id)}
-                  className={`px-4 py-2 text-xs font-sans tracking-[0.18em] uppercase transition-all duration-200 cursor-pointer rounded-full ${
-                    isActive
-                      ? "bg-white text-black font-semibold shadow-md"
-                      : "bg-[#111111] text-neutral-400 hover:text-white hover:bg-[#1a1a1a]"
-                  }`}
-                >
-                  <span className="mr-1.5 opacity-70">{stone.symbol}</span>
-                  <span>{stone.name}</span>
-                </button>
-              );
-            })}
+        {/* Barra de Estado si hay un mineral seleccionado */}
+        {selectedStone !== "todos" && (
+          <div className="mb-8 p-4 bg-[#0D0D0D] border border-neutral-800 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-3 animate-fadeIn">
+            <div className="flex items-center gap-3 text-center sm:text-left">
+              <span className="text-[#C5A059] text-base">✦</span>
+              <div>
+                <span className="text-[10px] font-sans tracking-[0.25em] uppercase text-neutral-400 block font-medium">
+                  FILTRANDO POR GEMA:
+                </span>
+                <span className="text-sm font-normal text-white tracking-wide">
+                  {selectedStone} · <span className="text-neutral-400 font-light">{filteredProducts.length} {filteredProducts.length === 1 ? "pieza disponible" : "piezas disponibles"}</span>
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => setSelectedStone("todos")}
+              className="px-3.5 py-1.5 text-[10px] font-sans tracking-widest uppercase text-neutral-300 hover:text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 rounded-sm transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Mostrar Todas las Gemas</span>
+              <span className="text-xs">✕</span>
+            </button>
           </div>
-        </div>
+        )}
 
         {/* Filtro secundario: Categorías & Barra de búsqueda */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-4 border-b border-neutral-900 text-xs">
