@@ -20,36 +20,42 @@ function formatPrice(price: number): string {
   })} MXN`;
 }
 
-// 12 Variedades de Gemas para "Shop by Stone" estilo Aurum Brothers
+// Variedades de Gemas para "Shop by Stone" estilo Aurum Brothers
 const AURUM_STONES = [
   { id: "todos", name: "Todas las Gemas", symbol: "✦" },
-  { id: "Ámbar", name: "Ámbar de Chiapas", symbol: "🍯" },
-  { id: "Obsidiana", name: "Obsidiana Dorada", symbol: "🌌" },
-  { id: "Labradorita", name: "Labradorita", symbol: "✨" },
-  { id: "Ojo de Tigre", name: "Ojo de Tigre", symbol: "🐯" },
-  { id: "Lapislázuli", name: "Lapislázuli", symbol: "🔵" },
-  { id: "Citrino", name: "Citrino Solar", symbol: "☀️" },
-  { id: "Hematita", name: "Hematita & Pirita", symbol: "🛡️" },
+  { id: "Ónix", name: "Ónix Negro", symbol: "🖤" },
+  { id: "Ojo de Tigre", name: "Ojo de Tigre & Halcón", symbol: "🐯" },
+  { id: "Lava", name: "Lava Volcánica", symbol: "🌋" },
+  { id: "Obsidiana", name: "Obsidiana Sagrada", symbol: "🌌" },
+  { id: "Lapislázuli", name: "Lapislázuli Real", symbol: "🔵" },
   { id: "Malaquita", name: "Malaquita & Jade", symbol: "🌿" },
-  { id: "Amatista", name: "Amatista Sagrada", symbol: "💜" },
-  { id: "Howlita", name: "Howlita & Cuarzo", symbol: "⚪" },
-  { id: "Jaspe", name: "Jaspe Imperial", symbol: "🔴" },
+  { id: "Hematita", name: "Hematita & Pirita", symbol: "🛡️" },
+  { id: "Turquesa", name: "Turquesa Africana", symbol: "🧿" },
+  { id: "Howlita", name: "Howlita Mármol", symbol: "⚪" },
+  { id: "Cuarzo", name: "Cuarzos & Rutilado", symbol: "💎" },
+  { id: "Labradorita", name: "Labradorita Espectral", symbol: "✨" },
+  { id: "Amatista", name: "Amatista Púrpura", symbol: "💜" },
+  { id: "Jaspe", name: "Jaspe & Dálmata", symbol: "🔴" },
+  { id: "Sodalita", name: "Sodalita Azul", symbol: "🔷" },
+  { id: "Citrino", name: "Citrino Solar", symbol: "☀️" },
+  { id: "Turmalina", name: "Turmalina Negra", symbol: "⚡" },
+  { id: "Ámbar", name: "Ámbar de Chiapas", symbol: "🍯" },
 ];
 
 // Colecciones visuales ("LATEST COLLECTIONS" estilo Aurum Brothers)
 const FEATURED_COLLECTIONS = [
   {
-    id: "ambar-chiapas",
-    name: "Ámbar de Chiapas",
-    image: "/images/shop/pulseras/pulsera-ambar-chiapas-caricias-maternales.jpg",
-    stoneFilter: "Ámbar",
-    catFilter: "ambar-chiapas",
+    id: "onix-lava",
+    name: "Ónix & Lava Volcánica",
+    image: "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
+    stoneFilter: "Ónix",
+    catFilter: "todos",
   },
   {
-    id: "obsidiana-dorada",
-    name: "Obsidiana & Lava",
-    image: "/images/shop/pulseras_arcanos/pulsera_01.jpeg",
-    stoneFilter: "Obsidiana",
+    id: "ojo-de-tigre",
+    name: "Ojo de Tigre & Halcón",
+    image: "https://cdn.shopify.com/s/files/1/0238/9055/9056/files/Frontal.webp?v=1785859032",
+    stoneFilter: "Ojo de Tigre",
     catFilter: "todos",
   },
   {
@@ -60,25 +66,32 @@ const FEATURED_COLLECTIONS = [
     catFilter: "alta-joyeria-oro",
   },
   {
-    id: "ojo-de-tigre",
-    name: "Ojo de Tigre & Halcón",
-    image: "/images/shop/pulseras/pulsera-ojo-tigre-verde-perlas-ambar.jpg",
-    stoneFilter: "Ojo de Tigre",
+    id: "lapislazuli",
+    name: "Lapislázuli & Pirita",
+    image: "https://cdn.shopify.com/s/files/1/0238/9055/9056/products/1_12a5c814-00a7-4a8d-a161-cc2a501aa183.jpg?v=1666408731",
+    stoneFilter: "Lapislázuli",
     catFilter: "todos",
   },
   {
-    id: "labradorita",
-    name: "Labradorita Espectral",
-    image: "/images/shop/pulseras_arcanos/pulsera_05.jpeg",
-    stoneFilter: "Labradorita",
+    id: "obsidiana-dorada",
+    name: "Obsidiana Sagrada",
+    image: "https://cdn.shopify.com/s/files/1/0238/9055/9056/products/1_f976038e-7630-4de2-ad58-46c927e8d3cd.jpg?v=1666415821",
+    stoneFilter: "Obsidiana",
     catFilter: "todos",
   },
   {
     id: "duos-stacks",
-    name: "Dúos & Stacks",
-    image: "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
+    name: "Dúos & Trilogías",
+    image: "/images/shop/pulseras_arcanos/pulsera_01.jpeg",
     stoneFilter: "todos",
     catFilter: "duos",
+  },
+  {
+    id: "ambar-chiapas",
+    name: "Ámbar de Chiapas",
+    image: "/images/shop/pulseras/pulsera-ambar-chiapas-caricias-maternales.jpg",
+    stoneFilter: "Ámbar",
+    catFilter: "ambar-chiapas",
   },
 ];
 
@@ -172,21 +185,26 @@ export default function ShopPage() {
         a.categoryId === "ambar-chiapas" ||
         a.categoryId === "alta-joyeria-oro" ||
         a.categoryId === "duos" ||
-        a.id.startsWith("aurum-");
+        a.id.startsWith("aurum-") ||
+        a.id.startsWith("arcano-");
       const isBraceletB =
         b.categoryId === "talismanes" ||
         b.categoryId === "ambar-chiapas" ||
         b.categoryId === "alta-joyeria-oro" ||
         b.categoryId === "duos" ||
-        b.id.startsWith("aurum-");
+        b.id.startsWith("aurum-") ||
+        b.id.startsWith("arcano-");
 
       if (isBraceletA && !isBraceletB) return -1;
       if (!isBraceletA && isBraceletB) return 1;
 
-      // Si ambos son brazaletes, priorizar los destacados
+      // Si ambos son brazaletes, priorizar los destacados y las piezas insignia
       if (isBraceletA && isBraceletB) {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
+        // Priorizar las nuevas piezas de piedras comunes al inicio de los destacados
+        if (a.id.startsWith("arcano-") && !b.id.startsWith("arcano-")) return -1;
+        if (!a.id.startsWith("arcano-") && b.id.startsWith("arcano-")) return 1;
       }
       return 0;
     });
