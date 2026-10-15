@@ -23,7 +23,7 @@ export const WhatsAppButton: React.FC = () => {
         right: "max(1.25rem, calc(env(safe-area-inset-right, 0px) + 1.25rem))",
         top: "auto",
       }}
-      className="z-40 flex items-center gap-3 print:hidden no-print"
+      className="z-40 hidden md:flex items-center gap-3 print:hidden no-print"
     >
       {/* Tooltip místico expandible en hover */}
       <div

@@ -20,8 +20,10 @@ export const IntroScreen: React.FC = () => {
         /bot|googlebot|crawler|spider|robot|crawling|lighthouse|headlesschrome/i.test(
           navigator.userAgent
         ));
+    const isMobile =
+      typeof window !== "undefined" && window.innerWidth < 768;
 
-    if (hasSeenIntro || prefersReducedMotion || isBot) {
+    if (hasSeenIntro || prefersReducedMotion || isBot || isMobile) {
       setIsDismissed(true);
       return;
     }

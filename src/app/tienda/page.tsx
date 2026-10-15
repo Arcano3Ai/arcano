@@ -82,6 +82,9 @@ export default function ShopPage() {
   };
 
   const getProductWhatsAppMessage = (product: ShopProduct) => {
+    if (product.categoryId === "ambar-chiapas") {
+      return `Hola ARCANO Concierge, deseo encargar el talismán consagrado "${product.name}" (${formatPriceDatega(product.price)} ${product.shippingNote}). ¿Sigue disponible para envío?`;
+    }
     if (product.categoryId === "alta-joyeria-oro" || product.goldSpecifications) {
       return `Hola ARCANO Concierge, deseo encargar la joya ceremonial "${product.name}" (${formatPriceDatega(product.price)} ${product.shippingNote}). ¿Sigue disponible para envío prioritario?`;
     }
@@ -134,6 +137,14 @@ export default function ShopPage() {
               }`}
             >
               Oro 18K & Gemas
+            </button>
+            <button
+              onClick={() => { setSelectedCategory("ambar-chiapas"); setSearchQuery(""); }}
+              className={`hover:text-[#121212] transition-colors pb-1 border-b-2 ${
+                selectedCategory === "ambar-chiapas" ? "border-[#121212] text-[#121212]" : "border-transparent"
+              }`}
+            >
+              Ámbar de Chiapas
             </button>
             <button
               onClick={() => { setSelectedCategory("piedras-rio"); setSearchQuery(""); }}
@@ -249,6 +260,15 @@ export default function ShopPage() {
             >
               PIEDRAS DE RÍO
             </button>
+            <button
+              onClick={() => {
+                setSelectedCategory("ambar-chiapas");
+                document.getElementById("catalogo-grid")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-7 py-3.5 bg-amber-50 border border-amber-600/40 text-[#8B6E32] text-xs font-sans tracking-[0.2em] uppercase font-medium hover:bg-amber-100 transition-colors shadow-sm cursor-pointer"
+            >
+              ÁMBAR DE CHIAPAS
+            </button>
             <a
               href={getWhatsAppUrl("Hola ARCANO Concierge, deseo consultar sobre una pieza personalizada de alta joyería o altar ceremonial.")}
               target="_blank"
@@ -257,6 +277,17 @@ export default function ShopPage() {
             >
               <span>💬 WHATSAPP CONCIERGE</span>
             </a>
+          </div>
+
+          {/* Enlace sutil para visitantes móviles que buscan lecturas u oráculo */}
+          <div className="mt-4 mb-2 text-center sm:hidden">
+            <Link
+              href="/?view=full"
+              className="inline-flex items-center gap-1.5 text-[10px] font-sans tracking-[0.2em] uppercase text-[#666666] hover:text-[#121212] transition-colors py-1 border-b border-[#D5CFBF]"
+            >
+              <span>✦ ¿Deseas consultar el Oráculo o Lecturas? Ver Santuario</span>
+              <span>→</span>
+            </Link>
           </div>
 
           {/* ─────────────────────────────────────────────────────────────

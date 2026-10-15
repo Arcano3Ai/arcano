@@ -40,6 +40,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { StudentProvider } from "@/lib/academy/studentContext";
 import { CartProvider } from "@/context/CartContext";
 import { CeremonialCartDrawer, FloatingCartButton } from "@/components/shop/CeremonialCartDrawer";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 
 export const viewport: Viewport = {
   themeColor: "#07060b",
@@ -322,11 +323,14 @@ export default function RootLayout({
               <Header />
 
               {/* Contenido principal */}
-              <main className="flex-1 relative z-10 pt-20 sm:pt-24">{children}</main>
+              <main className="flex-1 relative z-10 pt-20 sm:pt-24 pb-20 md:pb-0">{children}</main>
 
               {/* Drawer y botón flotante del Carrito Ceremonial */}
               <CeremonialCartDrawer />
               <FloatingCartButton />
+
+              {/* Barra de navegación inferior móvil estilo App */}
+              <MobileBottomNav />
 
               {/* Footer, audio ceremonial, asistente IA, botón WhatsApp flotante y PWA Register */}
               <Footer />

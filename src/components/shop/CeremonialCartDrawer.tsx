@@ -254,7 +254,7 @@ export function FloatingCartButton() {
     <button
       onClick={openCart}
       aria-label="Ver carrito ceremonial"
-      className="fixed bottom-24 right-5 sm:right-6 z-40 px-4 py-2.5 rounded-full bg-charcoal/95 border border-gold/70 text-parchment shadow-[0_0_25px_rgba(198,160,82,0.4)] backdrop-blur-md hover:scale-105 hover:border-gold transition-all flex items-center gap-2.5 cursor-pointer group"
+      className="fixed bottom-24 right-5 sm:right-6 z-40 px-4 py-2.5 rounded-full bg-charcoal/95 border border-gold/70 text-parchment shadow-[0_0_25px_rgba(198,160,82,0.4)] backdrop-blur-md hover:scale-105 hover:border-gold transition-all hidden md:flex items-center gap-2.5 cursor-pointer group"
     >
       <span className="text-lg group-hover:scale-110 transition-transform text-gold">🛒</span>
       <div className="flex flex-col text-left">

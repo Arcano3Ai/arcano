@@ -20,7 +20,7 @@ export interface ShopProduct {
   name: string;
   categoryId: string;
   categoryName: string;
-  theme?: "doble-perforacion" | "reiki" | "runas" | "geometria" | "angelical" | "altar" | "talismanes" | "duos" | "alta-joyeria-oro";
+  theme?: "doble-perforacion" | "reiki" | "runas" | "geometria" | "angelical" | "altar" | "talismanes" | "duos" | "alta-joyeria-oro" | "ambar-chiapas";
   isDoublePerforation?: boolean;
   price: number;
   formattedPrice: string;
@@ -151,6 +151,13 @@ export const shopCategories: ShopCategory[] = [
     name: "Alta Joyería & Oro 18K",
     description: "Talismanes ceremoniales y gargantillas consagradas con herrajes bañados en oro 18K y gemas naturales de Grado AAA.",
     symbol: "⚜️",
+  },
+  {
+    id: "ambar-chiapas",
+    slug: "ambar-chiapas",
+    name: "Ámbar de Chiapas & Minerales",
+    description: "Talismanes ceremoniales con auténtico ámbar fósil de Simojovel, plata fina Ley .925 y minerales sagrados.",
+    symbol: "✨",
   },
   {
     id: "doble-perforacion",
@@ -2083,5 +2090,220 @@ export const shopProducts: ShopProduct[] = [
       packaging: "Estuche rígido negro obsidiana con bolsa de terciopelo",
       certificate: "Certificado oficial de autenticidad mineral",
     },
+  },
+
+  // ==========================================
+  // 10. COLECCIÓN ÁMBAR DE CHIAPAS & MINERALES SAGRADOS
+  // ==========================================
+  {
+    id: "pulsera-ambar-trebol-cuadrifolio",
+    slug: "talisman-cuadrifolio-plata-925-ambar-chiapas",
+    name: "Talismán Cuadrifolio Solar: Trébol de Plata Ley .925 & Ámbar Puro de Chiapas",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 480,
+    formattedPrice: "MXN $480",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Símbolo ancestral de sincronicidad favorable. Plata legítima .925 y ámbar fósil chiapaneco de resplandor miel.",
+    description:
+      "Pieza consagrada que amalgama el arquetipo del cuadrifolio sagrado forjado en plata fina ley .925 con una perla de ámbar fósil de Simojovel, Chiapas. Cada hoja del trébol custodia una intención: fe viva, esperanza inquebrantable, amor sincero y sincronicidad áurea en tu camino.",
+    ritualUse:
+      "Portar en la muñeca izquierda (receptiva) durante acuerdos, firmas, inicios de ciclos y meditaciones de abundancia para anclar sincronicidades propicias.",
+    details: [
+      "Plata pura certificada Ley .925 grabada con sello de pureza",
+      "Gema central de Ámbar fósil de Chiapas (Simojovel) 100% natural",
+      "Cadena ajustable de 16 cm a 19 cm con broche de seguridad",
+      "Purificación ceremonial con resina de copal y mirra antes del despacho",
+      "Incluye estuche protector rígido ARCANO y certificado de autenticidad mineral",
+    ],
+    inStock: true,
+    badge: "Plata .925 & Ámbar Chiapas",
+    imageUrl: "/images/shop/pulseras/pulsera-ambar-trebol-plata.jpg",
+    featured: true,
+  },
+  {
+    id: "pulsera-ambar-infinito-sagrado",
+    slug: "brazalete-infinito-amor-plata-925-ambar-chiapas",
+    name: "Brazalete Infinito Sagrado: Ámbar Meloso de Chiapas & Plata Ley .925",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 520,
+    formattedPrice: "MXN $520",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Lazos de devoción eterna y resina solar fósil para sellar pactos del alma y lealtad áurea.",
+    description:
+      "Unión alquímica entre la nobleza de la plata fina ley .925 cincelada en lazo infinito y gemas orgánicas de ámbar miel chiapaneco. Cada esfera fosilizada de resina prehistórica emite una calidez sutil que armoniza el chakra del plexo solar y el centro cardíaco.",
+    ritualUse:
+      "Protección de relaciones álmicas, votos de pareja y disolución de celos o proyecciones discordantes.",
+    details: [
+      "Dije infinito forjado en Plata Ley .925 maciza",
+      "Esferas de Ámbar amarillo miel seleccionado de minas chiapanecas",
+      "Largo adaptable de 17 a 20 cm con eslabones de ajuste",
+      "Activado bajo vibración de cuencos tibetanos y salvia blanca",
+      "Estuche ceremonial ARCANO con guía de consagración personal",
+    ],
+    inStock: true,
+    badge: "Plata .925 & Ámbar Chiapas",
+    imageUrl: "/images/shop/pulseras/pulsera-ambar-plata-amor-por-siempre.jpg",
+  },
+  {
+    id: "pulsera-ambar-mano-fatima-hamsa",
+    slug: "hamsa-protectora-plata-925-ambar-fosil-chiapas",
+    name: "Hamsa Protectora de Plata .925 & Ámbar Fósil de Chiapas",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 520,
+    formattedPrice: "MXN $520",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "El escudo milenario de la Hamsa contra el mal de ojo, potenciado con el fuego solar del ámbar puro.",
+    description:
+      "Poderoso talismán de protección apotropaica. La Mano de Fátima forjada en plata de ley .925 resguarda en su centro una perla pulida de ámbar chiapaneco de alta pureza. Actúa como disipador de envidias, proyecciones astrales densas y fatiga psíquica en espacios cargados.",
+    ritualUse:
+      "Llevar como amuleto diario de escudo áurico o consagrarlo al sahumar con incienso de copal y mirra para sellar el campo energético.",
+    details: [
+      "Mano Hamsa calada a mano en Plata Ley .925",
+      "Gema de Ámbar auténtico de Chiapas engarzada al centro",
+      "Cadena de eslabones reforzados en plata fina antialérgica",
+      "Propiedades apotropaicas y de equilibrio bioenergético",
+      "Incluye bolsa ceremonial de terciopelo y certificado mineral",
+    ],
+    inStock: true,
+    badge: "Protección & Plata .925",
+    imageUrl: "/images/shop/pulseras/pulsera-ambar-mano-fatima-plata.jpg",
+    featured: true,
+  },
+  {
+    id: "pulsera-ojo-tigre-verde-ambar",
+    slug: "talisman-ojo-tigre-verde-trilogia-ambar-solar",
+    name: "Talismán Visión del Felino: Ojo de Tigre Esmeralda & Trilogía de Ámbar Solar",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 520,
+    formattedPrice: "MXN $520",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Reflejos de seda vegetal y resina fósil. Enfoque estratégico, valentía y transmutación de temores.",
+    description:
+      "Fusión magnética de cuentas esféricas de ojo de tigre verde bosque con su característico destello de chatoyancy sedoso, flanqueadas por una tríada de cuentas de ámbar natural de Chiapas. Estimula la visión clara para discernir oportunidades y tomar decisiones firmes sin titubear.",
+    ritualUse:
+      "Meditación de enraizamiento y lectura oracular para agudizar el instinto certero y la determinación.",
+    details: [
+      "Cuentas esféricas de Ojo de Tigre verde grado mineral AAA de 8 mm",
+      "Trilogía central de Ámbar amarillo dorado de Simojovel, Chiapas",
+      "Montaje elástico de silicona reforzada de triple filamento (18 cm)",
+      "Consagración previa con humo de palo santo y cuarzos ahumados",
+      "Estuche rígido negro con certificado de autenticidad mineral",
+    ],
+    inStock: true,
+    badge: "Ojo de Tigre & Ámbar",
+    imageUrl: "/images/shop/pulseras/pulsera-ojo-tigre-verde-perlas-ambar.jpg",
+  },
+  {
+    id: "pulsera-ambar-arbol-de-la-vida",
+    slug: "talisman-yggdrasil-arbol-vida-plata-925-ambar",
+    name: "Talismán Yggdrasil: Árbol de la Vida en Plata .925 con Cuentas de Ámbar",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 520,
+    formattedPrice: "MXN $520",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Raíces profundas en la Madre Tierra y ramas alzadas hacia la luz estelar. Conexión biófila ancestral.",
+    description:
+      "El arquetipo universal del Árbol Cósmico forjado en medallón de plata fina ley .925, acompañado de cuentas de ámbar chiapaneco seleccionadas por su transparencia y pureza. Representa la longevidad, la sabiduría ancestral del linaje y la continua renovación vital.",
+    ritualUse:
+      "Armonización del árbol genealógico, rituales de cumpleaños y conexión con guías espirituales.",
+    details: [
+      "Medallón Árbol de la Vida en Plata de Ley .925 pulida a espejo",
+      "Cuentas pulidas de Ámbar fósil de Chiapas de tonalidad miel",
+      "Ajuste cómodo con broche marinero de plata",
+      "Ritualizado en altar con incienso de copal y mirra",
+      "Presentado en caja de lujo ARCANO con tarjeta de intención",
+    ],
+    inStock: true,
+    badge: "Plata .925 & Ámbar Chiapas",
+    imageUrl: "/images/shop/pulseras/pulsera-ambar-plata-arbol-de-la-vida.jpg",
+  },
+  {
+    id: "pulsera-ambar-caricias-maternales",
+    slug: "amuleto-maternal-cuentas-ambar-puro-chiapas",
+    name: "Amuleto Maternal Dulce Guarda: Cuentas Redondas de Ámbar Chiapaneco Puro",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 650,
+    formattedPrice: "MXN $650",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Calidez terapéutica y sosiego natural. Cuentas suaves de ámbar fósil certificadas para serenidad y descanso.",
+    description:
+      "Pieza confeccionada con cuentas esféricas pulidas a mano de auténtico ámbar de Chiapas con nudo de seguridad individual entre cada cuenta y cierre hipoalergénico. Reconocido por la tradición por liberar trazas de ácido succínico con el calor de la piel, propiciando relajación y calma profunda.",
+    ritualUse:
+      "Envolver a niños, bebés o personas sensibles en un manto energético de dulzura, sosiego y descanso continuo.",
+    details: [
+      "Cuentas de Ámbar de Chiapas 100% puro pulidas sin químicos abrasivos",
+      "Anudado de seguridad artesanal grano por grano",
+      "Cierre de rosca suave hipoalergénico libre de metales pesados",
+      "Largo seguro de 14 a 15 cm apto para muñeca o tobillo",
+      "Certificado gemológico de autenticidad y origen Chiapas",
+    ],
+    inStock: true,
+    badge: "Ámbar Puro Certificado",
+    imageUrl: "/images/shop/pulseras/pulsera-ambar-chiapas-caricias-maternales.jpg",
+  },
+  {
+    id: "pulsera-howlita-blanca-perla-ambar",
+    slug: "brazalete-nieve-y-sol-howlita-blanca-ambar-chiapas",
+    name: "Brazalete Nieve & Sol: Howlita Blanca Glacial & Gema Central de Ámbar",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 480,
+    formattedPrice: "MXN $480",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Mármol interior de quietud zen coronado por la calidez lumínica de la resina solar de Chiapas.",
+    description:
+      "Contraste ceremonial sublime entre la serenidad blanca veteada de la howlita natural (gema del silencio interior y la templanza) y una cuenta esférica central de ámbar fósil chiapaneco que irradia fuego vital. Calma el flujo de pensamientos intrusivos y restaura el balance emocional.",
+    ritualUse:
+      "Uso diario para personas con alta sensibilidad emocional, meditación silenciosa y conciliación del sueño profundo.",
+    details: [
+      "Cuentas de Howlita blanca natural de 8 mm con vetas grises auténticas",
+      "Perla central de Ámbar chiapaneco de tono miel intenso",
+      "Banda elástica reforzada de triple núcleo elástico",
+      "Consagrada con agua de luna llena y humo de lavanda silvestre",
+      "Estuche rígido ARCANO con bolsa de terciopelo",
+    ],
+    inStock: true,
+    badge: "Howlita & Ámbar",
+    imageUrl: "/images/shop/pulseras/pulsera-howlita-blanca-perla-ambar.jpg",
+  },
+  {
+    id: "pulsera-ambar-chips-fluviales",
+    slug: "talisman-chips-organicos-ambar-chiapas-autentico",
+    name: "Talismán Fluvial Primitivo: Astillas Pulidas (Chips) de Ámbar Puro de Chiapas",
+    categoryId: "ambar-chiapas",
+    categoryName: "Ámbar de Chiapas & Minerales",
+    theme: "talismanes",
+    price: 580,
+    formattedPrice: "MXN $580",
+    shippingNote: "ENVÍO A TODO MÉXICO",
+    tagline: "Cientos de millones de años de luz solar atrapada en fragmentos orgánicos de alta vibración mineral.",
+    description:
+      "Confeccionada con lascas y trozos orgánicos pulidos al tambor de ámbar chiapaneco 100% genuino en gradaciones miel, coñac y amarillo dorado. Al preservar su forma geológica libre y asimétrica, cada fragmento mantiene intacta su vibración fósil y su calidez solar única.",
+    ritualUse:
+      "Revitalización del campo bioenergético, aumento de la vitalidad física, superación del cansancio crónico y estímulo de la creatividad.",
+    details: [
+      "Astillas seleccionadas de Ámbar fósil de Simojovel, Chiapas",
+      "Gama policromática natural: miel, limón y coñac profundo",
+      "Montaje elástico de alta resistencia adaptativo de 17 a 19 cm",
+      "Efecto electrostático natural al frotamiento (auténtico ámbar)",
+      "Certificado de origen y estuche ceremonial ARCANO",
+    ],
+    inStock: true,
+    badge: "Ámbar Chiapas 100%",
+    imageUrl: "/images/shop/pulseras/pulsera-ambar-chiapas-chips-fluviales.jpg",
+    featured: true,
   },
 ];

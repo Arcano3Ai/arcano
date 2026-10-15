@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { brandConfig } from "@/config/brandConfig";
@@ -26,8 +27,23 @@ import { trackEvent } from "@/lib/analytics";
 import { getAssetPath } from "@/lib/utils";
 
 export default function HomePage() {
+  const router = useRouter();
   const [selectedArcanaForModal, setSelectedArcanaForModal] =
     useState<Arcana | null>(null);
+
+  // Redirección directa en móvil hacia la tienda / boutique (estilo proyecto mágica)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768;
+      const searchParams = new URLSearchParams(window.location.search);
+      const isFullView =
+        searchParams.get("view") === "full" ||
+        searchParams.get("desktop") === "1";
+      if (isMobile && !isFullView) {
+        router.replace("/tienda/");
+      }
+    }
+  }, [router]);
 
   const handleBookingCta = (source: string) => {
     trackEvent({ name: "click_booking", params: { source } });
@@ -48,6 +64,22 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Script inmediato pre-render para evitar flash de contenido en móvil */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            try {
+              if (window.innerWidth < 768) {
+                var p = new URLSearchParams(window.location.search);
+                if (p.get('view') !== 'full' && p.get('desktop') !== '1') {
+                  window.location.replace('/tienda/');
+                }
+              }
+            } catch(e) {}
+          `,
+        }}
+      />
+
       {/* Schema.org FAQPage para Rich Snippets en Google */}
       <script
         type="application/ld+json"

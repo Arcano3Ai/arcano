@@ -7,11 +7,13 @@ import { brandConfig } from "@/config/brandConfig";
 import { headerNavLinks } from "@/config/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useCart } from "@/context/CartContext";
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { totalCount, openCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,6 +100,20 @@ export const Header: React.FC = () => {
             <span>Reservar lectura</span>
             <span className="text-gold text-xs">✦</span>
           </Link>
+
+          {/* Botón Carrito Rápido Móvil */}
+          <button
+            onClick={openCart}
+            aria-label={`Abrir carrito ceremonial (${totalCount} artículos)`}
+            className="lg:hidden p-2 text-parchment hover:text-gold transition-colors relative focus:outline-none focus:ring-1 focus:ring-gold/50 rounded"
+          >
+            <span className="text-base">🛍️</span>
+            {totalCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-500 to-gold text-obsidian text-[9px] font-bold font-sans w-4 h-4 rounded-full flex items-center justify-center shadow-[0_0_8px_rgba(212,175,55,0.8)]">
+                {totalCount}
+              </span>
+            )}
+          </button>
 
           {/* Botón Hamburger */}
           <button
