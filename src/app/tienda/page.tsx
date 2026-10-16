@@ -1493,11 +1493,11 @@ export default function ShopPage() {
                     </div>
                   </div>
 
-                  {/* Pestañas de Información (Detalles / Propiedades / Ritual) */}
-                  <div className="flex border-b border-neutral-800 mb-4 gap-6 text-xs font-sans uppercase tracking-wider">
+                  {/* Pestañas de Información (Detalles / Propiedades / Consagración) */}
+                  <div className="flex border-b border-neutral-800 mb-5 gap-6 text-xs sm:text-sm font-sans uppercase tracking-wider">
                     <button
                       onClick={() => setModalTab("detalles")}
-                      className={`pb-2 transition-colors cursor-pointer ${
+                      className={`pb-2.5 transition-colors cursor-pointer ${
                         modalTab === "detalles" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
                       }`}
                     >
@@ -1505,7 +1505,7 @@ export default function ShopPage() {
                     </button>
                     <button
                       onClick={() => setModalTab("mineral")}
-                      className={`pb-2 transition-colors cursor-pointer ${
+                      className={`pb-2.5 transition-colors cursor-pointer ${
                         modalTab === "mineral" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
                       }`}
                     >
@@ -1513,7 +1513,7 @@ export default function ShopPage() {
                     </button>
                     <button
                       onClick={() => setModalTab("ritual")}
-                      className={`pb-2 transition-colors cursor-pointer ${
+                      className={`pb-2.5 transition-colors cursor-pointer ${
                         modalTab === "ritual" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
                       }`}
                     >
@@ -1521,16 +1521,18 @@ export default function ShopPage() {
                     </button>
                   </div>
 
-                  {/* Contenido de Pestaña */}
-                  <div className="min-h-[100px] text-xs font-light text-neutral-300 leading-relaxed mb-6">
+                  {/* Contenido de Pestaña con Tipografía Grande y Clara (Mobile First) */}
+                  <div className="min-h-[110px] text-sm sm:text-base font-normal text-neutral-200 leading-relaxed mb-6">
                     {modalTab === "detalles" && (
-                      <div className="space-y-3">
-                        <p>{activeProduct.description}</p>
+                      <div className="space-y-3.5">
+                        <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
+                          {activeProduct.description}
+                        </p>
                         {activeProduct.details && activeProduct.details.length > 0 && (
-                          <ul className="space-y-1.5 pt-2 border-t border-neutral-900 text-[11px] text-neutral-400">
+                          <ul className="space-y-2 pt-3 border-t border-neutral-800 text-xs sm:text-sm text-neutral-300">
                             {activeProduct.details.map((d, i) => (
-                              <li key={i} className="flex items-start gap-2">
-                                <span className="text-[#C5A059] mt-0.5">✦</span>
+                              <li key={i} className="flex items-start gap-2.5">
+                                <span className="text-[#C5A059] mt-0.5 font-bold">✦</span>
                                 <span>{d}</span>
                               </li>
                             ))}
@@ -1539,22 +1541,28 @@ export default function ShopPage() {
                       </div>
                     )}
                     {modalTab === "mineral" && (
-                      <div className="space-y-2">
-                        <p className="text-white font-normal">
-                          Gema: {activeProduct.stoneType || "Mineral Natural Grado AAA"}
-                        </p>
-                        <p>{activeProduct.tagline}</p>
-                        <p className="text-[11px] text-[#C5A059]">
-                          ✦ Cada esfera presenta variaciones morfológicas naturales que certifican su autenticidad geológica.
+                      <div className="space-y-3 p-4 bg-[#0D0D0D] border border-neutral-800 rounded-sm">
+                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b border-neutral-800 pb-2.5">
+                          <span className="text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium">Gema Principal:</span>
+                          <span className="text-base sm:text-lg font-medium text-white tracking-wide">{activeProduct.stoneType || "Mineral Natural Grado AAA"}</span>
+                        </div>
+                        <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">{activeProduct.tagline}</p>
+                        <p className="text-xs sm:text-sm text-[#C5A059]/90 italic">
+                          ✦ Cada esfera es 100% auténtica y presenta vetas geológicas irrepetibles.
                         </p>
                       </div>
                     )}
                     {modalTab === "ritual" && (
-                      <div className="p-3 bg-[#111111] border border-neutral-800 rounded-sm">
-                        <span className="text-[#C5A059] font-medium block mb-1">
-                          ✦ Propósito Energético:
-                        </span>
-                        <p>{activeProduct.ritualUse || "Anclaje de intención y protección energética diaria."}</p>
+                      <div className="p-4 bg-gradient-to-br from-[#121212] via-[#0D0D0D] to-black border border-[#C5A059]/40 rounded-sm space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-base text-[#C5A059]">🔥</span>
+                          <span className="text-xs sm:text-sm font-sans uppercase tracking-[0.2em] text-[#C5A059] font-semibold">
+                            Rito de Fuego & Luna Llena:
+                          </span>
+                        </div>
+                        <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
+                          {activeProduct.ritualUse || "Consagrado bajo el influjo de la Luna Llena frente a una hoguera sagrada de fuego creador y destructor. Purificado con resinas vivas para anclar tu intención."}
+                        </p>
                       </div>
                     )}
                   </div>
