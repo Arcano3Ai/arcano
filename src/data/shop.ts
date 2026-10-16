@@ -20,7 +20,7 @@ export interface ShopProduct {
   name: string;
   categoryId: string;
   categoryName: string;
-  theme?: "doble-perforacion" | "reiki" | "runas" | "geometria" | "angelical" | "altar" | "talismanes" | "duos" | "alta-joyeria-oro" | "ambar-chiapas";
+  theme?: "doble-perforacion" | "reiki" | "runas" | "geometria" | "angelical" | "altar" | "talismanes" | "duos" | "alta-joyeria-oro" | "ambar-chiapas" | "coleccion-arcanos";
   isDoublePerforation?: boolean;
   price: number;
   formattedPrice: string;
@@ -42,6 +42,8 @@ export interface ShopProduct {
   duoPairPrice?: number;
   braceletPairId?: string;
   goldSpecifications?: GoldSpecification;
+  arcanoNumber?: string;
+  intentionWords?: string[];
 }
 
 export interface CreativeProcessImage {
@@ -150,6 +152,13 @@ export const shopCategories: ShopCategory[] = [
     symbol: "✦",
   },
   {
+    id: "coleccion-arcanos",
+    slug: "coleccion-arcanos",
+    name: "Colección Arcanos Mayores",
+    description: "Talismanes de muñeca consagrados a los 22 arquetipos del Tarot hermético y la alquimia interior.",
+    symbol: "♾️",
+  },
+  {
     id: "alta-joyeria-oro",
     slug: "alta-joyeria-oro",
     name: "Alta Joyería & Oro 18K",
@@ -222,6 +231,46 @@ export const shopCategories: ShopCategory[] = [
 ];
 
 export const shopProducts: ShopProduct[] = [
+  // ==========================================
+  // 0. COLECCIÓN ARCANOS MAYORES (PIEZA INSIGNIA DE APERTURA)
+  // ==========================================
+  {
+    id: "talisman-arcano-i-el-mago-onix-lapislazuli",
+    slug: "talisman-arcano-i-el-mago-onix-lapislazuli",
+    name: "Arcano I · El Mago (Ónix Mate & Lapislázuli)",
+    categoryId: "coleccion-arcanos",
+    categoryName: "Colección Arcanos Mayores",
+    theme: "coleccion-arcanos",
+    price: 1680,
+    formattedPrice: "MXN $1,680",
+    shippingNote: "ENVÍO EXPRESS GRATIS",
+    tagline: "Voluntad · Creatividad · Iniciativa. Talismán de manifestación con lemniscata sagrada en oro envejecido.",
+    description:
+      "Una pieza simbólica para recordar tu potencial creativo y tomar el camino con determinación. Consagrado al primer arquetipo del Tarot hermético —El Mago—, este talismán conjuga la firmeza enraizante del ónix negro mate de 8mm (anclaje, firmeza y dominio de la mente terrenal) con el azul cobalto estrellado del lapislázuli afgano Grado AAA con destellos naturales de pirita dorada (sabiduría, visión elevada y conexión con la chispa cósmica). En el epicentro, un cilindro alquímico en oro envejecido grabado en relieve con la Lemniscata (el símbolo del infinito de El Mago) sella el principio hermético: 'Como es arriba, es abajo; el poder de manifestar reside en tu voluntad'.",
+    ritualUse:
+      "Activación matutina de la voluntad creativa, toma de decisiones determinantes, inicio de proyectos trascendentes y anclaje del poder de manifestación personal.",
+    details: [
+      "Ónix negro mate natural 8mm seleccionado por grano homogéneo y tacto sedoso",
+      "Cuentas focales de Lapislázuli afgano Grado AAA con vetas naturales de pirita áurea",
+      "Cilindro alquímico central en aleación noble con pátina de oro envejecido y grabado de la Lemniscata (Infinito)",
+      "3 Palabras de Intención grabadas en el alma de la pieza: Voluntad · Creatividad · Iniciativa",
+      "Ensamblado a mano a la medida exacta con cordón elastómero alemán de ultra-alta resistencia y memoria elástica",
+      "Incluye estuche ceremonial rígido negro mate ARCANO, paño de microfibra y tarjeta arquetípica de Arcano I",
+    ],
+    inStock: true,
+    badge: "ARCANO I · APERTURA DE COLECCIÓN",
+    imageUrl: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
+    secondaryImageUrl: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
+    images: [
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
+    ],
+    stoneType: "Ónix Mate & Lapislázuli Real",
+    beadSize: "8mm",
+    featured: true,
+    arcanoNumber: "I",
+    intentionWords: ["Voluntad", "Creatividad", "Iniciativa"],
+  },
   // ==========================================
   // 1. COLECCIÓN DOBLE PERFORACIÓN (DUAL)
   // ==========================================

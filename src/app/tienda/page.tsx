@@ -145,6 +145,13 @@ const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
 // Colecciones visuales ("LATEST COLLECTIONS" estilo Aurum Brothers)
 const FEATURED_COLLECTIONS = [
   {
+    id: "coleccion-arcanos",
+    name: "Arcanos Mayores",
+    image: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
+    stoneFilter: "todos",
+    catFilter: "coleccion-arcanos",
+  },
+  {
     id: "onix-lava",
     name: "Ónix & Lava Volcánica",
     image: "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
@@ -168,23 +175,9 @@ const FEATURED_COLLECTIONS = [
   {
     id: "lapislazuli",
     name: "Lapislázuli & Pirita",
-    image: "https://cdn.shopify.com/s/files/1/0238/9055/9056/products/1_12a5c814-00a7-4a8d-a161-cc2a501aa183.jpg?v=1666408731",
+    image: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     stoneFilter: "Lapislázuli",
     catFilter: "todos",
-  },
-  {
-    id: "obsidiana-dorada",
-    name: "Obsidiana Sagrada",
-    image: "https://cdn.shopify.com/s/files/1/0238/9055/9056/products/1_f976038e-7630-4de2-ad58-46c927e8d3cd.jpg?v=1666415821",
-    stoneFilter: "Obsidiana",
-    catFilter: "todos",
-  },
-  {
-    id: "duos-stacks",
-    name: "Dúos & Trilogías",
-    image: "/images/shop/pulseras_arcanos/pulsera_01.jpeg",
-    stoneFilter: "todos",
-    catFilter: "duos",
   },
   {
     id: "ambar-chiapas",
@@ -364,26 +357,36 @@ export default function ShopPage() {
       // Priorizar brazaletes y talismanes minerales al frente estilo Aurum Brothers
       const isBraceletA =
         a.categoryId === "talismanes" ||
+        a.categoryId === "coleccion-arcanos" ||
         a.categoryId === "ambar-chiapas" ||
         a.categoryId === "alta-joyeria-oro" ||
         a.categoryId === "duos" ||
         a.id.startsWith("aurum-") ||
-        a.id.startsWith("arcano-");
+        a.id.startsWith("arcano-") ||
+        a.id.startsWith("talisman-arcano-");
       const isBraceletB =
         b.categoryId === "talismanes" ||
+        b.categoryId === "coleccion-arcanos" ||
         b.categoryId === "ambar-chiapas" ||
         b.categoryId === "alta-joyeria-oro" ||
         b.categoryId === "duos" ||
         b.id.startsWith("aurum-") ||
-        b.id.startsWith("arcano-");
+        b.id.startsWith("arcano-") ||
+        b.id.startsWith("talisman-arcano-");
 
       if (isBraceletA && !isBraceletB) return -1;
       if (!isBraceletA && isBraceletB) return 1;
 
       // Si ambos son brazaletes, priorizar los destacados y las piezas insignia
       if (isBraceletA && isBraceletB) {
+        // El Mago (Pieza Insignia de Apertura) va en la posición de honor absoluta #1
+        if (a.id === "talisman-arcano-i-el-mago-onix-lapislazuli") return -1;
+        if (b.id === "talisman-arcano-i-el-mago-onix-lapislazuli") return 1;
+
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
+        if (a.categoryId === "coleccion-arcanos" && b.categoryId !== "coleccion-arcanos") return -1;
+        if (a.categoryId !== "coleccion-arcanos" && b.categoryId === "coleccion-arcanos") return 1;
         // Priorizar las nuevas piezas de piedras comunes al inicio de los destacados
         if (a.id.startsWith("arcano-") && !b.id.startsWith("arcano-")) return -1;
         if (!a.id.startsWith("arcano-") && b.id.startsWith("arcano-")) return 1;
@@ -861,6 +864,17 @@ export default function ShopPage() {
               }`}
             >
               Todos ({shopProducts.length})
+            </button>
+            <button
+              onClick={() => { setSelectedCategory("coleccion-arcanos"); setSelectedStone("todos"); }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer flex items-center gap-1.5 ${
+                selectedCategory === "coleccion-arcanos"
+                  ? "text-[#C5A059] border-b border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              <span>Colección Arcanos</span>
+              <span className="text-[#C5A059] text-[10px]">♾️</span>
             </button>
             <button
               onClick={() => setSelectedCategory("ambar-chiapas")}
@@ -1407,10 +1421,29 @@ export default function ShopPage() {
                   </h2>
 
                   {/* Reseñas y Estrellas */}
-                  <div className="flex items-center gap-2 mb-4 text-[#C5A059] text-xs">
+                  <div className="flex items-center gap-2 mb-3 text-[#C5A059] text-xs">
                     <span>★★★★★</span>
                     <span className="text-neutral-400 text-[11px]">4.9 (48 reseñas verificadas)</span>
                   </div>
+
+                  {/* Palabras de Intención Arquetípica */}
+                  {activeProduct.intentionWords && activeProduct.intentionWords.length > 0 && (
+                    <div className="flex items-center gap-2 mb-4 flex-wrap">
+                      <span className="text-[10px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium">
+                        Intención:
+                      </span>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {activeProduct.intentionWords.map((word, idx) => (
+                          <span
+                            key={idx}
+                            className="text-[10px] uppercase tracking-wider px-2 py-0.5 bg-[#141414] border border-[#C5A059]/40 text-neutral-200 rounded-sm font-sans"
+                          >
+                            {word}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Precio */}
                   <div className="mb-6 pb-4 border-b border-neutral-800">
@@ -1491,7 +1524,19 @@ export default function ShopPage() {
                   {/* Contenido de Pestaña */}
                   <div className="min-h-[100px] text-xs font-light text-neutral-300 leading-relaxed mb-6">
                     {modalTab === "detalles" && (
-                      <p>{activeProduct.description}</p>
+                      <div className="space-y-3">
+                        <p>{activeProduct.description}</p>
+                        {activeProduct.details && activeProduct.details.length > 0 && (
+                          <ul className="space-y-1.5 pt-2 border-t border-neutral-900 text-[11px] text-neutral-400">
+                            {activeProduct.details.map((d, i) => (
+                              <li key={i} className="flex items-start gap-2">
+                                <span className="text-[#C5A059] mt-0.5">✦</span>
+                                <span>{d}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     )}
                     {modalTab === "mineral" && (
                       <div className="space-y-2">
