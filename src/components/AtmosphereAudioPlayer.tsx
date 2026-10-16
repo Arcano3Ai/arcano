@@ -11,7 +11,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
 
   const getOrCreateAudio = () => {
     if (!audioRef.current && typeof window !== "undefined") {
-      const primaryUrl = getAudioPath("/audio/el-viaje-entre-los-arcanos.mp3");
+      const primaryUrl = getAudioPath("/audio/druidic-dance.mp3");
       const audio = new Audio(primaryUrl);
       audio.preload = "none";
       audio.loop = true;
@@ -115,7 +115,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
         }`}
       >
         <div className="text-[11px] font-sans uppercase tracking-[0.2em] text-parchment bg-obsidian-deep/95 border border-gold/35 px-3 py-1.5 rounded shadow-lg backdrop-blur flex items-center gap-2">
-          <span>{isPlaying ? "Atmósfera Sonora: El Viaje entre los Arcanos" : "Activar sonido del santuario ✦"}</span>
+          <span>{isPlaying ? "Atmósfera Sonora: Druidic Dance" : "Activar sonido del santuario ✦"}</span>
         </div>
       </div>
     </div>
