@@ -34,13 +34,13 @@ interface RawStoneShowcase {
 
 const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
   {
-    id: "Sodalita",
-    titleEn: "Sodalite",
-    nameEs: "Sodalita Azul",
-    vibe: "Visión & Intuición",
-    image: "/images/shop/stones/sodalite_raw.jpg",
-    accentColor: "#3B82F6",
-    itemCount: 5,
+    id: "Lapislázuli",
+    titleEn: "Lapis Lazuli",
+    nameEs: "Lapislázuli Real",
+    vibe: "Soberanía & Sabiduría",
+    image: "/images/shop/stones/lapis_lazuli_raw.jpg",
+    accentColor: "#1D4ED8",
+    itemCount: 6,
   },
   {
     id: "Ojo de Tigre",
@@ -61,6 +61,15 @@ const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
     itemCount: 6,
   },
   {
+    id: "Amatista",
+    titleEn: "Amethyst",
+    nameEs: "Amatista Púrpura",
+    vibe: "Transmutación Espiritual",
+    image: "/images/shop/stones/amethyst_raw.jpg",
+    accentColor: "#8B5CF6",
+    itemCount: 8,
+  },
+  {
     id: "Turmalina",
     titleEn: "Tourmaline",
     nameEs: "Turmalina Negra",
@@ -79,22 +88,13 @@ const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
     itemCount: 2,
   },
   {
-    id: "Amatista",
-    titleEn: "Amethyst",
-    nameEs: "Amatista Púrpura",
-    vibe: "Transmutación Espiritual",
-    image: "/images/shop/stones/amethyst_raw.jpg",
-    accentColor: "#8B5CF6",
-    itemCount: 8,
-  },
-  {
-    id: "Lapislázuli",
-    titleEn: "Lapis Lazuli",
-    nameEs: "Lapislázuli Real",
-    vibe: "Soberanía & Sabiduría",
-    image: "/images/shop/stones/lapis_lazuli_raw.jpg",
-    accentColor: "#1D4ED8",
-    itemCount: 6,
+    id: "Sodalita",
+    titleEn: "Sodalite",
+    nameEs: "Sodalita Azul",
+    vibe: "Visión & Intuición",
+    image: "/images/shop/stones/sodalite_raw.jpg",
+    accentColor: "#3B82F6",
+    itemCount: 5,
   },
   {
     id: "Malaquita",
@@ -695,254 +695,6 @@ export default function ShopPage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          3.1. SANTUARIO DE LAS 4 RAMAS SAGRADAS · ARCANO ÉPICO
-               (TAROT, REIKI, NUMEROLOGÍA & ASTROLOGÍA)
-         ───────────────────────────────────────────────────────────── */}
-      <section className="relative w-full py-16 sm:py-24 bg-gradient-to-b from-black via-[#0B0B0B] to-[#040404] border-b border-neutral-900 overflow-hidden">
-        
-        {/* Resplandor radial de fondo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(197,160,89,0.12)_0%,_transparent_70%)] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          {/* Encabezado de la Obra Magna */}
-          <div className="text-center mb-10 sm:mb-14">
-            <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.3em] uppercase text-[#C5A059] block mb-2 font-medium">
-              {t("PILOTES HERMÉTICOS DEL TEMPLO", "HERMETIC PILLARS OF THE TEMPLE")}
-            </span>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.2em] text-white uppercase mb-3">
-              {t("LAS CUATRO RAMAS SAGRADAS", "THE FOUR SACRED DISCIPLINES")}
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-400 font-light max-w-2xl mx-auto tracking-wide leading-relaxed">
-              {t(
-                "En ARCANO cada joya y amuleto nace del entrelazamiento de las cuatro grandes ciencias del alma: el Tarot hermético, la canalización del Reiki, la vibración de la Numerología y la cartografía celeste de la Astrología.",
-                "At ARCANO, each jewel and talisman is born from the convergence of four sacred sciences: Hermetic Tarot, Reiki energy healing, sacred Numerology, and celestial Astrology."
-              )}
-            </p>
-          </div>
-
-          {/* Obra de Arte Épica Central con Marco Dorado */}
-          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] max-h-[520px] rounded-xl overflow-hidden border border-[#C5A059]/40 shadow-[0_10px_50px_rgba(0,0,0,0.8)] mb-10 group">
-            <Image
-              src="/images/shop/arcano_sacred_disciplines_epic.jpg"
-              alt="Tarot, Reiki, Numerología y Astrología - ARCANO"
-              fill
-              className="object-cover object-center filter brightness-[1.05] contrast-[1.05] group-hover:scale-[1.02] transition-transform duration-700"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-            />
-            {/* Viñeta sutil para enmarcar la luz dorada */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30 pointer-events-none" />
-
-            {/* Badges Flotantes sobre la Imagen Épica */}
-            <div className="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex flex-wrap items-center justify-between gap-3 text-white">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-ping" />
-                <span className="text-[10px] sm:text-xs font-sans tracking-[0.25em] uppercase text-[#F3EFE6] font-medium">
-                  {t("ALQUIMIA COSMICA EN ORO & MINERAL", "COSMIC ALCHEMY IN GOLD & MINERAL")}
-                </span>
-              </div>
-              <div className="hidden sm:flex items-center gap-3 text-xs tracking-wider text-[#C5A059]">
-                <span>🎴 Tarot</span>
-                <span>·</span>
-                <span>✨ Reiki</span>
-                <span>·</span>
-                <span>♾️ Numerología</span>
-                <span>·</span>
-                <span>🪐 Astrología</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Estantería de las 6 Ramas Sagradas estilo Galería de Joyería & Minerales */}
-          <div className="mt-8">
-            <div className="text-center mb-8">
-              <span className="text-[10px] font-sans tracking-[0.28em] uppercase text-[#C5A059] block mb-1 font-medium">
-                {t("ARTEFACTOS SAGRADOS DEL SANTUARIO", "SACRED ARTIFACTS OF THE SANCTUARY")}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-light tracking-[0.2em] text-white uppercase">
-                {t("EXPLORA POR DISCIPLINA", "EXPLORE BY DISCIPLINE")}
-              </h3>
-            </div>
-
-            {/* Grid / Shelf de 6 Disciplinas con Reflejo Especular Negro */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
-              
-              {/* 1. TAROT HERMÉTICO */}
-              <button
-                onClick={() => {
-                  setSelectedCategory("coleccion-arcanos");
-                  setSelectedStone("todos");
-                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-[#C5A059] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,160,89,0.25)]"
-              >
-                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/shop/disciplinas/tarot_specimen.jpg"
-                    alt="Tarot Hermético"
-                    fill
-                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                    sizes="(max-width: 640px) 96px, 128px"
-                  />
-                </div>
-                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-[#C5A059] transition-colors block mb-1">
-                  {t("Tarot Hermético", "Hermetic Tarot")}
-                </span>
-                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
-                  {t("Arquetipos & Destino", "Archetypes & Soul")}
-                </span>
-                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-[#C5A059]/40 text-[#C5A059] tracking-wider uppercase font-sans">
-                  {t("22 Arcanos", "22 Arcana")}
-                </span>
-              </button>
-
-              {/* 2. ASTROLOGÍA CÓSMICA */}
-              <Link
-                href="/carta-astral"
-                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-indigo-400 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]"
-              >
-                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/shop/disciplinas/astrology_specimen.jpg"
-                    alt="Astrología Cósmica"
-                    fill
-                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                    sizes="(max-width: 640px) 96px, 128px"
-                  />
-                </div>
-                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-indigo-400 transition-colors block mb-1">
-                  {t("Astrología", "Astrology")}
-                </span>
-                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
-                  {t("Carta Astral & Tránsitos", "Natal Chart & Stars")}
-                </span>
-                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-indigo-500/40 text-indigo-300 tracking-wider uppercase font-sans">
-                  {t("Calculadora", "Calculator")}
-                </span>
-              </Link>
-
-              {/* 3. REIKI & ENERGÍA VITAL */}
-              <button
-                onClick={() => {
-                  setSelectedCategory("reiki-sanacion");
-                  setSelectedStone("todos");
-                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-cyan-400 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(6,182,212,0.25)]"
-              >
-                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/shop/disciplinas/reiki_specimen.jpg"
-                    alt="Reiki & Sanación"
-                    fill
-                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                    sizes="(max-width: 640px) 96px, 128px"
-                  />
-                </div>
-                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-cyan-400 transition-colors block mb-1">
-                  {t("Reiki Sagrado", "Sacred Reiki")}
-                </span>
-                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
-                  {t("Cristales & Cho Ku Rei", "Crystals & Prana")}
-                </span>
-                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-cyan-500/40 text-cyan-300 tracking-wider uppercase font-sans">
-                  {t("Sanación", "Healing")}
-                </span>
-              </button>
-
-              {/* 4. NUMEROLOGÍA SAGRADA */}
-              <button
-                onClick={() => {
-                  setSelectedCategory("frecuencias-angelicales");
-                  setSelectedStone("todos");
-                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-amber-400 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(251,191,36,0.25)]"
-              >
-                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/shop/disciplinas/numerology_specimen.jpg"
-                    alt="Numerología Sagrada"
-                    fill
-                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                    sizes="(max-width: 640px) 96px, 128px"
-                  />
-                </div>
-                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-amber-400 transition-colors block mb-1">
-                  {t("Numerología", "Numerology")}
-                </span>
-                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
-                  {t("Frecuencias 11:11 & 777", "Angel Numbers & Codes")}
-                </span>
-                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-amber-500/40 text-amber-300 tracking-wider uppercase font-sans">
-                  {t("Sincronías", "Synchronicities")}
-                </span>
-              </button>
-
-              {/* 5. ALTAR & SAHUMERIOS (DOBLE PERFORACIÓN) */}
-              <button
-                onClick={() => {
-                  setSelectedCategory("doble-perforacion");
-                  setSelectedStone("todos");
-                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-[#C5A059] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,160,89,0.25)]"
-              >
-                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/shop/disciplinas/alchemy_specimen.jpg"
-                    alt="Altar Fluvial & Sahumerios"
-                    fill
-                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                    sizes="(max-width: 640px) 96px, 128px"
-                  />
-                </div>
-                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-[#C5A059] transition-colors block mb-1">
-                  {t("Altar & Alquimia", "Altar & Alchemy")}
-                </span>
-                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
-                  {t("Basalto de Río & Humo", "River Basalt & Smoke")}
-                </span>
-                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-neutral-700 text-neutral-300 tracking-wider uppercase font-sans">
-                  {t("Doble Orificio", "Dual Incense")}
-                </span>
-              </button>
-
-              {/* 6. TALISMANES DE MUÑECA */}
-              <button
-                onClick={() => {
-                  setSelectedCategory("talismanes");
-                  setSelectedStone("todos");
-                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-[#C5A059] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,160,89,0.25)]"
-              >
-                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/shop/disciplinas/talisman_specimen.jpg"
-                    alt="Talismanes de Muñeca"
-                    fill
-                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-                    sizes="(max-width: 640px) 96px, 128px"
-                  />
-                </div>
-                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-[#C5A059] transition-colors block mb-1">
-                  {t("Talismanes Puros", "Pure Talismans")}
-                </span>
-                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
-                  {t("Minerales 8mm Sin Metal", "Pure 8mm No Metal")}
-                </span>
-                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-[#C5A059]/40 text-[#C5A059] tracking-wider uppercase font-sans">
-                  {t("Alta Joyería", "Fine Jewelry")}
-                </span>
-              </button>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-  {/* ─────────────────────────────────────────────────────────────
           4. SECCIÓN "LATEST COLLECTIONS" (GALERÍA REDONDEADA AURUM)
          ───────────────────────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-b border-neutral-900">
@@ -982,71 +734,110 @@ export default function ShopPage() {
 
       {/* ─────────────────────────────────────────────────────────────
           5. SECCIÓN DEDICADA: VETA GEOLÓGICA & COMPRA POR MINERAL
-             (GRIETA DE ROCA CON MINERALES ALINEADOS)
+             (VETA DIAGONAL VISIBLE DE ARRIBA A ABAJO, IZQUIERDA A DERECHA)
          ───────────────────────────────────────────────────────────── */}
       <section
         id="seccion-veta-mineral"
-        className="relative w-full py-16 sm:py-28 bg-[#000000] border-t border-b border-neutral-900/90 overflow-hidden"
+        className="relative w-full py-20 sm:py-32 bg-[#000000] border-t border-b border-neutral-900/90 overflow-hidden"
       >
-        {/* Fondo de Grieta y Veta Mineral Geológica Auténtica */}
+        {/* Fondo de Grieta y Veta Mineral Geológica Auténtica en Diagonal Nítida */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <Image
-            src="/images/shop/mineral_vein_fissure.jpg"
-            alt="Veta Geológica y Grieta Mineral Natural"
+            src="/images/shop/diagonal_mineral_vein.jpg"
+            alt="Veta Mineral Geológica Diagonal Natural"
             fill
-            className="object-cover object-center opacity-55 mix-blend-screen filter contrast-125 brightness-110"
+            priority
+            className="object-cover object-center opacity-90 sm:opacity-95 filter contrast-125 brightness-110"
             sizes="100vw"
           />
-          {/* Degradado superior e inferior para fundir con el negro del sitio */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/35 to-black" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-transparent to-black/85" />
+          {/* Veladuras perimetrales sutiles para fundir perfectamente con el negro del sitio */}
+          <div className="absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-32 sm:h-44 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-black/80 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-black/80 to-transparent pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           {/* Header Editorial con Indicador de Veta Viva */}
-          <div className="text-center mb-10 sm:mb-14">
-            <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full bg-black/70 border border-[#C5A059]/40 backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse" />
+          <div className="text-center mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 mb-3 px-3.5 py-1.5 rounded-full bg-black/80 border border-[#C5A059]/60 backdrop-blur-md shadow-lg">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C5A059] animate-pulse" />
               <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.3em] uppercase text-[#C5A059] font-medium">
-                {t("VETA GEOLÓGICA & MATRIZ MINERAL", "GEOLOGICAL VEIN & MINERAL MATRIX")}
+                {t("VETA GEOLÓGICA DIAGONAL · MATRIZ MINERAL", "DIAGONAL GEOLOGICAL VEIN · MINERAL MATRIX")}
               </span>
             </div>
             
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.25em] text-white uppercase mb-3">
               {t("COMPRA POR MINERAL", "SHOP BY STONE")}
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-300 font-light max-w-2xl mx-auto tracking-wide leading-relaxed">
+            <p className="text-xs sm:text-sm text-neutral-200 font-light max-w-2xl mx-auto tracking-wide leading-relaxed drop-shadow-md">
               {t(
-                "Sigue la grieta de la tierra: cada gema en bruto emerge de su propia estratificación geológica. Toca un espécimen para filtrar instantáneamente los talismanes de esa frecuencia.",
-                "Follow the fracture of the earth: each raw gemstone emerges from its own geological strata. Tap a mineral to instantly filter the talismans of that frequency."
+                "Sigue la fractura diagonal de la tierra: de arriba a abajo y de izquierda a derecha, cada gema en bruto emerge de su propia estratificación geológica. Toca un espécimen para filtrar instantáneamente el catálogo.",
+                "Follow the earth's diagonal fissure: from top-left descending to bottom-right, each raw gemstone emerges from its geological stratum. Tap a mineral specimen to instantly filter the catalog."
               )}
             </p>
 
-            {/* Selector Activo / Botón de Reset */}
+            {/* Selector Activo / Botón de Reset y Salto al Catálogo */}
             {selectedStone !== "todos" && (
-              <div className="mt-5 inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-black/90 border border-[#C5A059] backdrop-blur-md animate-fadeIn shadow-[0_0_15px_rgba(197,160,89,0.3)]">
+              <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-3 px-5 py-2 rounded-full bg-black/90 border border-[#C5A059] backdrop-blur-md animate-fadeIn shadow-[0_0_20px_rgba(197,160,89,0.35)]">
                 <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-ping" />
                 <span className="text-xs text-neutral-200 font-light tracking-wider">
-                  {t("Mineral Activo:", "Active Stone:")} <strong className="text-[#C5A059] font-medium uppercase">{selectedStone}</strong>
+                  {t("Mineral Activo:", "Active Mineral:")}{" "}
+                  <strong className="text-[#C5A059] font-medium uppercase">{selectedStone}</strong> ·{" "}
+                  <span className="text-neutral-400">
+                    {filteredProducts.length} {filteredProducts.length === 1 ? t("pieza", "piece") : t("piezas", "pieces")}
+                  </span>
                 </span>
+                <button
+                  onClick={() => document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" })}
+                  className="px-2.5 py-0.5 rounded-full bg-[#C5A059]/20 hover:bg-[#C5A059]/30 border border-[#C5A059] text-[10px] text-[#C5A059] font-medium tracking-wider uppercase transition-colors cursor-pointer"
+                >
+                  {t("Ver Piezas ↓", "View Pieces ↓")}
+                </button>
                 <button
                   onClick={() => {
                     setSelectedStone("todos");
                     setSelectedCategory("todos");
                   }}
-                  className="ml-2 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                  className="ml-1 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 >
-                  ✕ {t("Ver Todas", "Show All")}
+                  ✕ {t("Mostrar Todo", "Show All")}
                 </button>
               </div>
             )}
           </div>
 
-          {/* Carrusel / Estantería de Minerales Montada Sobre la Veta */}
-          <div className="relative group/shelf">
+          {/* ─────────────────────────────────────────────────────────
+              DISPOSICIÓN DIAGONAL: 6 MINERALES A LO LARGO DE LA VETA
+              (INCLINADO DE ARRIBA A ABAJO, DE IZQUIERDA A DERECHA)
+             ───────────────────────────────────────────────────────── */}
+          <div className="relative group/shelf mb-12">
             
-            {/* Flecha Izquierda */}
+            {/* Trazo Diagonal Guía de la Falla Geológica (Desktop) */}
+            <div className="hidden lg:block absolute inset-0 pointer-events-none -z-10 overflow-hidden">
+              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 440" fill="none">
+                <path
+                  d="M 60 80 Q 300 150, 600 220 T 1140 360"
+                  stroke="url(#veinGlowGradient)"
+                  strokeWidth="2.5"
+                  strokeDasharray="6 8"
+                  className="opacity-75"
+                />
+                <defs>
+                  <linearGradient id="veinGlowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#1D4ED8" stopOpacity="0.85" />
+                    <stop offset="20%" stopColor="#D97706" stopOpacity="0.9" />
+                    <stop offset="40%" stopColor="#DC2626" stopOpacity="0.9" />
+                    <stop offset="60%" stopColor="#8B5CF6" stopOpacity="0.9" />
+                    <stop offset="80%" stopColor="#C5A059" stopOpacity="0.85" />
+                    <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.9" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            {/* Flecha Izquierda (Scroll táctil en pantallas medianas) */}
             <button
               onClick={() => scrollStones("left")}
               className="absolute -left-2 sm:left-0 top-[38%] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
@@ -1057,13 +848,24 @@ export default function ShopPage() {
               </svg>
             </button>
 
-            {/* Estantería Horizontal Alineada con la Falla Geológica */}
+            {/* Contenedor de Minerales: Descenso Diagonal Escalonado */}
             <div
               ref={stonesScrollRef}
-              className="flex items-end justify-start gap-4 sm:gap-7 overflow-x-auto pb-6 pt-2 px-2 scroll-smooth scrollbar-none"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 items-center pt-4 pb-8 px-2"
             >
-              {AURUM_STONES_SHOWCASE.map((stone) => {
+              {AURUM_STONES_SHOWCASE.slice(0, 6).map((stone, idx) => {
                 const isSelected = selectedStone === stone.id;
+                // Escalonamiento diagonal de arriba a abajo, de izquierda a derecha en Desktop
+                const diagonalOffsets = [
+                  "lg:-translate-y-12", // 1. Lapislázuli (Arriba Izquierda)
+                  "lg:-translate-y-6",  // 2. Ojo de Tigre
+                  "lg:translate-y-0",   // 3. Cornalina (Centro Fuego)
+                  "lg:translate-y-6",   // 4. Amatista
+                  "lg:translate-y-12",  // 5. Turmalina Negra
+                  "lg:translate-y-18",  // 6. Aguamarina (Abajo Derecha)
+                ];
+                const offsetClass = diagonalOffsets[idx] || "translate-y-0";
+
                 return (
                   <button
                     key={stone.id}
@@ -1073,36 +875,48 @@ export default function ShopPage() {
                       setSelectedCategory("todos");
                       document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className={`group relative flex-shrink-0 flex flex-col items-center text-center cursor-pointer transition-all duration-300 w-28 sm:w-36 md:w-40 p-2.5 rounded-xl ${
+                    className={`group relative flex flex-col items-center text-center cursor-pointer transition-all duration-500 p-3 sm:p-4 rounded-xl ${offsetClass} ${
                       isSelected
-                        ? "bg-black/80 border-2 border-[#C5A059] scale-105 shadow-[0_0_25px_rgba(197,160,89,0.35)] backdrop-blur-md"
-                        : "bg-black/40 hover:bg-black/70 border border-neutral-800/80 hover:border-[#C5A059]/60 backdrop-blur-sm"
+                        ? "bg-black/90 border-2 border-[#C5A059] scale-105 shadow-[0_0_30px_rgba(197,160,89,0.5)] backdrop-blur-md ring-2 ring-[#C5A059]/40"
+                        : "bg-black/60 hover:bg-black/85 border border-neutral-800/90 hover:border-[#C5A059]/80 backdrop-blur-sm hover:scale-105"
                     }`}
                   >
-                    {/* Resplandor radial dorado bajo el espécimen activo */}
-                    {isSelected && (
-                      <div className="absolute top-8 inset-x-4 h-24 bg-[radial-gradient(ellipse_at_center,_rgba(197,160,89,0.35)_0%,_transparent_70%)] pointer-events-none -z-10" />
-                    )}
+                    {/* Indicador de Estrato Geológico (#1 a #6 en la diagonal) */}
+                    <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-full bg-black/80 border border-neutral-700/80 text-[8px] font-sans font-mono text-neutral-400 group-hover:text-[#C5A059]">
+                      #{idx + 1}
+                    </div>
 
-                    {/* Espécimen en Bruto con Reflejo Negro */}
-                    <div className="relative aspect-square w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mb-3 transition-transform duration-500 group-hover:scale-105">
+                    {/* Resplandor radial de frecuencia mineral */}
+                    <div
+                      className={`absolute top-6 inset-x-3 h-28 pointer-events-none -z-10 rounded-full transition-opacity duration-300 ${
+                        isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-70"
+                      }`}
+                      style={{
+                        background: `radial-gradient(ellipse at center, ${stone.accentColor}44 0%, transparent 70%)`,
+                      }}
+                    />
+
+                    {/* Espécimen en Bruto con Reflejo Negro Aurum */}
+                    <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
                       <Image
                         src={stone.image}
                         alt={language === "es" ? stone.nameEs : stone.titleEn}
                         fill
-                        sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 144px"
+                        sizes="(max-width: 640px) 96px, 128px"
                         className={`object-contain transition-all duration-300 filter ${
                           isSelected
-                            ? "drop-shadow-[0_0_18px_rgba(197,160,89,0.45)] brightness-115"
-                            : "opacity-90 group-hover:opacity-100 group-hover:brightness-110 group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.18)]"
+                            ? "drop-shadow-[0_0_20px_rgba(197,160,89,0.55)] brightness-120"
+                            : "opacity-95 group-hover:opacity-100 group-hover:brightness-110 group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.25)]"
                         }`}
                       />
                     </div>
 
                     {/* Nombre del Mineral Bilingüe */}
-                    <span className={`text-xs sm:text-sm font-medium tracking-[0.18em] uppercase transition-colors block mb-0.5 ${
-                      isSelected ? "text-[#C5A059]" : "text-neutral-100 group-hover:text-white"
-                    }`}>
+                    <span
+                      className={`text-xs sm:text-sm font-medium tracking-[0.16em] uppercase transition-colors block mb-0.5 ${
+                        isSelected ? "text-[#C5A059]" : "text-white group-hover:text-[#C5A059]"
+                      }`}
+                    >
                       {language === "es" ? stone.nameEs : stone.titleEn}
                     </span>
 
@@ -1112,11 +926,17 @@ export default function ShopPage() {
                     </span>
 
                     {/* Contador de piezas en catálogo */}
-                    <span className="mt-2 text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-black/80 border border-neutral-700 text-neutral-300 group-hover:text-white tracking-widest font-sans">
-                      {stone.itemCount} {t("modelos", "pieces")}
+                    <span
+                      className={`mt-2 text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full font-sans tracking-widest transition-colors ${
+                        isSelected
+                          ? "bg-[#C5A059] text-black font-semibold"
+                          : "bg-black/80 border border-neutral-700 text-neutral-300 group-hover:text-white"
+                      }`}
+                    >
+                      {stone.itemCount} {t("piezas", "pieces")}
                     </span>
 
-                    {/* Línea dorada indicadora */}
+                    {/* Línea dorada indicadora de selección */}
                     <div className="mt-2.5 h-0.5 w-full flex items-center justify-center">
                       {isSelected ? (
                         <span className="w-8 h-0.5 bg-[#C5A059] rounded-full shadow-[0_0_8px_#C5A059]" />
@@ -1140,7 +960,374 @@ export default function ShopPage() {
               </svg>
             </button>
           </div>
+
+          {/* Barra Secundaria: Otros Minerales Sagrados del Santuario */}
+          <div className="pt-6 border-t border-neutral-800/80 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center">
+            <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.22em] uppercase text-neutral-400 mr-2">
+              {t("MÁS ESTRATOS MINERALES:", "MORE SACRED MINERALS:")}
+            </span>
+            {AURUM_STONES_SHOWCASE.slice(6).map((stone) => {
+              const isSelected = selectedStone === stone.id;
+              return (
+                <button
+                  key={stone.id}
+                  onClick={() => {
+                    const next = isSelected ? "todos" : stone.id;
+                    setSelectedStone(next);
+                    setSelectedCategory("todos");
+                    document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] font-sans tracking-wider uppercase transition-all cursor-pointer flex items-center gap-2 ${
+                    isSelected
+                      ? "bg-[#C5A059] text-black font-semibold shadow-[0_0_15px_rgba(197,160,89,0.4)]"
+                      : "bg-black/70 hover:bg-neutral-900 border border-neutral-800 hover:border-[#C5A059]/60 text-neutral-300 hover:text-white"
+                  }`}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full"
+                    style={{ backgroundColor: stone.accentColor }}
+                  />
+                  <span>{language === "es" ? stone.nameEs : stone.titleEn}</span>
+                  <span className="opacity-60 text-[9px]">({stone.itemCount})</span>
+                </button>
+              );
+            })}
+          </div>
+
         </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          5.1. CATÁLOGO PRINCIPAL & INTEGRACIÓN TOTAL DEL FILTRADO
+               (FLOATING CARDS ESTILO AURUM BROTHERS & ARCANO)
+         ───────────────────────────────────────────────────────────── */}
+      <div id="catalogo-top" className="scroll-mt-24" />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        
+        {/* Título Editorial del Catálogo */}
+        <div className="text-center mb-8">
+          <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.3em] uppercase text-[#C5A059] block mb-2 font-medium">
+            {t("ALTA JOYERÍA MINERAL & ORFEBRERÍA SAGRADA", "FINE MINERAL JEWELRY & SACRED CRAFT")}
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-light tracking-[0.22em] text-white uppercase mb-3">
+            {t("CATÁLOGO DE TALISMANES", "TALISMANS CATALOG")}
+          </h2>
+          <p className="text-xs sm:text-sm text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed">
+            {t(
+              "Piezas individuales y colecciones forjadas en minerales puros Grado AAA de 8mm. Consagradas en Luna Llena ante fuego ceremonial sagrado de 1.5 metros.",
+              "Individual pieces and sets crafted from 100% pure AAA Grade 8mm minerals. Consecrated under the Full Moon before a 1.5-meter sacred ceremonial fire."
+            )}
+          </p>
+        </div>
+
+        {/* Banner de Estado Activo si hay un Mineral Filtrado */}
+        {selectedStone !== "todos" && (
+          <div className="mb-8 p-4 sm:p-5 bg-gradient-to-r from-black via-[#111111] to-black border border-[#C5A059] rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn shadow-[0_0_30px_rgba(197,160,89,0.2)]">
+            <div className="flex items-center gap-3.5 text-center sm:text-left">
+              <span className="w-3 h-3 rounded-full bg-[#C5A059] animate-ping" />
+              <div>
+                <span className="text-[10px] font-sans tracking-[0.25em] uppercase text-[#C5A059] block font-medium">
+                  {t("FILTRANDO POR VETA MINERAL:", "FILTERING BY MINERAL VEIN:")}
+                </span>
+                <span className="text-base sm:text-lg font-light text-white tracking-wide">
+                  {selectedStone} ·{" "}
+                  <span className="text-neutral-300 text-xs sm:text-sm font-light">
+                    {filteredProducts.length}{" "}
+                    {filteredProducts.length === 1
+                      ? t("pieza consagrada encontrada", "consecrated piece found")
+                      : t("piezas consagradas encontradas", "consecrated pieces found")}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setSelectedStone("todos");
+                setSelectedCategory("todos");
+              }}
+              className="px-4 py-2 text-xs font-sans tracking-widest uppercase text-black font-semibold bg-[#C5A059] hover:bg-[#d8b368] rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-md"
+            >
+              <span>✕ {t("Mostrar Todo el Catálogo", "Show All Pieces")}</span>
+            </button>
+          </div>
+        )}
+
+        {/* Barra de Filtro de Categorías & Barra de Búsqueda */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 mb-10 pb-4 border-b border-neutral-900 text-xs">
+          <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto scrollbar-none py-1">
+            <button
+              onClick={() => {
+                setSelectedCategory("todos");
+                setSelectedStone("todos");
+              }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
+                selectedCategory === "todos" && selectedStone === "todos"
+                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {t("Todos", "All")} ({shopProducts.length})
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory("coleccion-arcanos");
+                setSelectedStone("todos");
+              }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer flex items-center gap-1.5 ${
+                selectedCategory === "coleccion-arcanos"
+                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              <span>{t("Colección Arcanos", "Arcana Collection")}</span>
+              <span className="text-[#C5A059] text-[10px]">♾️</span>
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory("ambar-chiapas");
+                setSelectedStone("Ámbar");
+              }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
+                selectedCategory === "ambar-chiapas"
+                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {t("Ámbar de Simojovel", "Chiapas Amber")}
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory("alta-joyeria-oro");
+                setSelectedStone("todos");
+              }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
+                selectedCategory === "alta-joyeria-oro"
+                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {t("Alta Joyería Oro 18K", "Fine 18K Gold")}
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory("talismanes");
+                setSelectedStone("todos");
+              }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
+                selectedCategory === "talismanes"
+                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {t("Brazaletes Minerales", "Mineral Talismans")}
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory("duos");
+                setSelectedStone("todos");
+              }}
+              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
+                selectedCategory === "duos"
+                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {t("Dúos & Stacks", "Duos & Stacks")}
+            </button>
+          </div>
+
+          {/* Campo de Búsqueda Rápida */}
+          <div className="relative w-full lg:w-64">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={t("Buscar gema, arcano, intención...", "Search stone, arcana, intention...")}
+              className="w-full bg-[#0D0D0D] border border-neutral-800 px-3.5 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A059] transition-colors rounded-full"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-2 text-neutral-500 hover:text-white text-xs cursor-pointer"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            GRID DE PRODUCTOS ESTILO AURUM BROTHERS (FLOATING CARDS)
+           ───────────────────────────────────────────────────────────── */}
+        {filteredProducts.length === 0 ? (
+          <div className="py-24 text-center bg-[#0A0A0A] border border-neutral-900 p-8 rounded-2xl">
+            <span className="text-3xl block mb-3 text-neutral-500">🔍</span>
+            <h3 className="text-lg text-white font-light mb-2">
+              {t("No encontramos piezas con ese criterio", "No pieces match your criteria")}
+            </h3>
+            <p className="text-xs text-neutral-400 mb-6 max-w-md mx-auto">
+              {t(
+                "Prueba seleccionando otro mineral en la veta geológica o restablece todos los filtros del catálogo.",
+                "Try picking another mineral on the geological vein or reset all filters."
+              )}
+            </p>
+            <button
+              onClick={() => {
+                setSelectedCategory("todos");
+                setSelectedStone("todos");
+                setSearchQuery("");
+              }}
+              className="px-6 py-2.5 bg-[#C5A059] text-black text-xs font-sans tracking-widest uppercase font-semibold hover:bg-[#d8b368] rounded-full transition-all cursor-pointer shadow-lg"
+            >
+              {t("Ver Todo el Catálogo", "Show All Pieces")}
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-7 gap-y-10 sm:gap-y-12">
+            {filteredProducts.map((product) => {
+              const isHovered = hoveredCardId === product.id;
+              const isAdded = addedProductId === product.id;
+              const isWishlisted = Boolean(wishlist[product.id]);
+              const hasSecondaryImg = Boolean(
+                product.secondaryImageUrl && product.secondaryImageUrl !== product.imageUrl
+              );
+
+              return (
+                <div
+                  key={product.id}
+                  onClick={() => setActiveProduct(product)}
+                  onMouseEnter={() => setHoveredCardId(product.id)}
+                  onMouseLeave={() => setHoveredCardId(null)}
+                  className="group flex flex-col cursor-pointer select-none text-left"
+                >
+                  {/* Contenedor de Imagen de Producto: Fondo Negro de Estudio, Borde Invisible */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#0A0A0A] rounded-xl border border-neutral-900 group-hover:border-neutral-800 transition-colors">
+                    
+                    {/* Imagen Primaria */}
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className={`object-cover transition-opacity duration-500 ${
+                        hasSecondaryImg && isHovered ? "opacity-0" : "opacity-100"
+                      } ${!product.inStock ? "grayscale-[40%] opacity-70" : ""}`}
+                    />
+
+                    {/* Imagen Secundaria (Efecto Hover de Muñeca / Lifestyle) */}
+                    {hasSecondaryImg && (
+                      <Image
+                        src={product.secondaryImageUrl!}
+                        alt={`${product.name} lifestyle`}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        className={`object-cover transition-opacity duration-500 absolute inset-0 ${
+                          isHovered ? "opacity-100" : "opacity-0"
+                        }`}
+                      />
+                    )}
+
+                    {/* Badges Estilo Aurum Brothers (Top-Left Outlined Pills) */}
+                    <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10 pointer-events-none">
+                      {product.goldSpecifications && (
+                        <span className="px-2 py-0.5 border border-[#C5A059] text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
+                          ORO 18K
+                        </span>
+                      )}
+                      {product.badge && !product.goldSpecifications && (
+                        <span className="px-2 py-0.5 border border-[#C5A059]/70 text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
+                          {product.badge.includes("8mm") ? "8MM AAA" : product.badge.toUpperCase()}
+                        </span>
+                      )}
+                      {product.featured && (
+                        <span className="px-2 py-0.5 border border-white/60 text-white text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
+                          LIMITED
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Bookmark / Wishlist Icon (Top-Right) */}
+                    <button
+                      onClick={(e) => toggleWishlist(product.id, e)}
+                      className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/60 hover:bg-black/90 flex items-center justify-center transition-colors text-white"
+                      aria-label="Guardar en favoritos"
+                    >
+                      <svg
+                        className={`w-3.5 h-3.5 ${isWishlisted ? "text-[#C5A059] fill-[#C5A059]" : "text-white"}`}
+                        fill={isWishlisted ? "currentColor" : "none"}
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                        />
+                      </svg>
+                    </button>
+
+                    {/* Botón "+" en esquina inferior derecha estilo Aurum Brothers */}
+                    {product.inStock && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToCart(product, undefined, undefined, true);
+                        }}
+                        className={`absolute bottom-2.5 right-2.5 z-10 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center font-sans font-bold text-sm transition-all duration-300 rounded-sm cursor-pointer shadow-lg ${
+                          isAdded
+                            ? "bg-[#27AE60] text-white scale-110"
+                            : "bg-[#C5A059] text-black hover:bg-[#d8b368] hover:scale-105"
+                        }`}
+                        title="Añadir a la bolsa"
+                      >
+                        {isAdded ? "✓" : "+"}
+                      </button>
+                    )}
+
+                    {/* Badge de Agotado si aplica */}
+                    {!product.inStock && (
+                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10 pointer-events-none">
+                        <span className="px-3 py-1 border border-neutral-500 text-neutral-300 text-[10px] uppercase tracking-[0.25em] font-sans font-medium bg-black/90">
+                          SOLD OUT
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Información Centrada de la Pieza (Estilo Aurum Brothers) */}
+                  <div className="pt-3 text-center flex flex-col items-center">
+                    
+                    {/* Intención Arquetípica si tiene */}
+                    {product.intentionWords && product.intentionWords.length > 0 && (
+                      <span className="text-[8px] sm:text-[9px] font-sans tracking-[0.2em] uppercase text-[#C5A059] mb-0.5 line-clamp-1">
+                        {product.intentionWords.join(" · ")}
+                      </span>
+                    )}
+
+                    {/* Título en tipografía sans-serif limpia */}
+                    <h3 className="text-xs sm:text-sm font-normal text-neutral-200 group-hover:text-[#C5A059] transition-colors line-clamp-1 mb-1">
+                      {product.name}
+                    </h3>
+
+                    {/* Precio Centrado */}
+                    <p className="text-xs sm:text-sm text-neutral-400 font-normal mb-1">
+                      {formatPrice(product.price)}
+                    </p>
+
+                    {/* Reseñas con estrellas doradas Aurum */}
+                    <div className="flex items-center justify-center gap-1 text-[11px] text-[#C5A059]">
+                      <span>★★★★★</span>
+                      <span className="text-neutral-500 text-[10px]">
+                        ({12 + (product.price % 37)})
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </section>
 
   {/* ─────────────────────────────────────────────────────────────
