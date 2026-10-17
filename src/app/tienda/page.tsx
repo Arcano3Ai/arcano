@@ -32,7 +32,8 @@ interface RawStoneShowcase {
   itemCount: number; // Cantidad de piezas en la boutique
 }
 
-const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
+// 1. Sendero Superior (Izquierda a Derecha) · Minerales Clásicos de Cabecera
+const STONES_UPPER_TRAIL: RawStoneShowcase[] = [
   {
     id: "Lapislázuli",
     titleEn: "Lapis Lazuli",
@@ -87,15 +88,68 @@ const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
     accentColor: "#06B6D4",
     itemCount: 2,
   },
+];
+
+// 2. Sendero Inferior tras el Rebote Geológico (Derecha a Izquierda) · Minerales Raros & Menos Comunes
+const STONES_LOWER_TRAIL: RawStoneShowcase[] = [
   {
-    id: "Sodalita",
-    titleEn: "Sodalite",
-    nameEs: "Sodalita Azul",
-    vibe: "Visión & Intuición",
-    image: "/images/shop/stones/sodalite_raw.jpg",
-    accentColor: "#3B82F6",
-    itemCount: 5,
+    id: "Piedra Luna",
+    titleEn: "Rainbow Moonstone",
+    nameEs: "Piedra Luna Arcoíris",
+    vibe: "Intuición & Misterio",
+    image: "/images/shop/stones/moonstone_raw.jpg",
+    accentColor: "#93C5FD",
+    itemCount: 2,
   },
+  {
+    id: "Turquesa",
+    titleEn: "Natural Turquoise",
+    nameEs: "Turquesa en Matriz",
+    vibe: "Salto de Fe & Protección",
+    image: "/images/shop/stones/turquoise_raw.jpg",
+    accentColor: "#06B6D4",
+    itemCount: 2,
+  },
+  {
+    id: "Pirita",
+    titleEn: "Golden Pyrite",
+    nameEs: "Pirita Cúbica Dorada",
+    vibe: "Magnetismo & Fuego Creador",
+    image: "/images/shop/stones/pyrite_raw.jpg",
+    accentColor: "#EAB308",
+    itemCount: 4,
+  },
+  {
+    id: "Rodocrosita",
+    titleEn: "Inca Rhodochrosite",
+    nameEs: "Rodocrosita Rosa Inca",
+    vibe: "Amor Consciente & Gracia",
+    image: "/images/shop/stones/rhodochrosite_raw.jpg",
+    accentColor: "#F43F5E",
+    itemCount: 2,
+  },
+  {
+    id: "Cuarzo Ahumado",
+    titleEn: "Smoky Quartz",
+    nameEs: "Cuarzo Ahumado",
+    vibe: "Luz Interior & Enraizamiento",
+    image: "/images/shop/stones/smoky_quartz_raw.jpg",
+    accentColor: "#78716C",
+    itemCount: 3,
+  },
+  {
+    id: "Citrino",
+    titleEn: "Golden Citrine",
+    nameEs: "Citrino Dorado Solar",
+    vibe: "Vitalidad & Éxito Tangible",
+    image: "/images/shop/stones/citrine_raw.jpg",
+    accentColor: "#F59E0B",
+    itemCount: 2,
+  },
+];
+
+// 3. Otros Minerales y Resinas Sagradas del Santuario
+const STONES_REMAINING: RawStoneShowcase[] = [
   {
     id: "Malaquita",
     titleEn: "Malachite",
@@ -141,6 +195,21 @@ const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
     accentColor: "#71717A",
     itemCount: 13,
   },
+  {
+    id: "Sodalita",
+    titleEn: "Sodalite",
+    nameEs: "Sodalita Azul",
+    vibe: "Visión & Intuición",
+    image: "/images/shop/stones/sodalite_raw.jpg",
+    accentColor: "#3B82F6",
+    itemCount: 5,
+  },
+];
+
+const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
+  ...STONES_UPPER_TRAIL,
+  ...STONES_LOWER_TRAIL,
+  ...STONES_REMAINING,
 ];
 
 // Colecciones visuales ("LATEST COLLECTIONS" estilo Aurum Brothers)
@@ -203,13 +272,21 @@ export default function ShopPage() {
   const [modalTab, setModalTab] = useState<"detalles" | "mineral" | "ritual">("detalles");
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
 
-  // Ref para scroll horizontal fluido de la estantería de minerales en bruto
-  const stonesScrollRef = useRef<HTMLDivElement>(null);
+  // Refs para scroll horizontal fluido de los senderos geológicos en móvil y tablet
+  const upperStonesScrollRef = useRef<HTMLDivElement>(null);
+  const lowerStonesScrollRef = useRef<HTMLDivElement>(null);
 
-  const scrollStones = (direction: "left" | "right") => {
-    if (stonesScrollRef.current) {
+  const scrollUpperStones = (direction: "left" | "right") => {
+    if (upperStonesScrollRef.current) {
       const scrollAmount = direction === "left" ? -360 : 360;
-      stonesScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      upperStonesScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  const scrollLowerStones = (direction: "left" | "right") => {
+    if (lowerStonesScrollRef.current) {
+      const scrollAmount = direction === "left" ? -360 : 360;
+      lowerStonesScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
@@ -335,6 +412,42 @@ export default function ShopPage() {
             prodStone.includes("sodalita") ||
             prodName.includes("sodalita") ||
             prodDesc.includes("sodalita");
+        } else if (queryStone.includes("luna")) {
+          matchesStone =
+            prodStone.includes("luna") ||
+            prodName.includes("luna") ||
+            prodDesc.includes("luna") ||
+            prodDesc.includes("moonstone");
+        } else if (queryStone.includes("turquesa")) {
+          matchesStone =
+            prodStone.includes("turquesa") ||
+            prodName.includes("turquesa") ||
+            prodDesc.includes("turquesa") ||
+            prodDesc.includes("turquoise");
+        } else if (queryStone.includes("pirita")) {
+          matchesStone =
+            prodStone.includes("pirita") ||
+            prodName.includes("pirita") ||
+            prodDesc.includes("pirita") ||
+            prodDesc.includes("pyrite");
+        } else if (queryStone.includes("rodocrosita")) {
+          matchesStone =
+            prodStone.includes("rodocrosita") ||
+            prodName.includes("rodocrosita") ||
+            prodDesc.includes("rodocrosita") ||
+            prodDesc.includes("rhodochrosite");
+        } else if (queryStone.includes("ahumado")) {
+          matchesStone =
+            prodStone.includes("ahumado") ||
+            prodName.includes("ahumado") ||
+            prodDesc.includes("ahumado") ||
+            prodDesc.includes("smoky");
+        } else if (queryStone.includes("citrino")) {
+          matchesStone =
+            prodStone.includes("citrino") ||
+            prodName.includes("citrino") ||
+            prodDesc.includes("citrino") ||
+            prodDesc.includes("citrine");
         } else {
           matchesStone =
             prodStone.includes(queryStone) ||
@@ -579,15 +692,19 @@ export default function ShopPage() {
           3. HERO PRINCIPAL: VETA GEOLÓGICA & COMPRA POR MINERAL
              (FONDO NÍTIDO, DESTELLOS CRISTALINOS & TIPOGRAFÍA DE LUJO)
          ───────────────────────────────────────────────────────────── */}
+      {/* ─────────────────────────────────────────────────────────────
+          3. HERO PRINCIPAL: VETA GEOLÓGICA EN ZIGZAG CON REBOTE
+             (FONDO NÍTIDO, DESTELLOS CRISTALINOS & MINERALES RAROS)
+         ───────────────────────────────────────────────────────────── */}
       <section
         id="hero-veta-mineral"
         className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#000000] border-b border-neutral-900/90 overflow-hidden flex flex-col justify-center"
       >
-        {/* Fondo de Grieta y Veta Mineral Geológica Auténtica en Diagonal Nítida */}
+        {/* Fondo de Grieta y Veta Mineral Geológica Auténtica en Zigzag con Rebote */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <Image
-            src="/images/shop/diagonal_mineral_vein.jpg"
-            alt="Veta Mineral Geológica Diagonal Natural - ARCANO"
+            src="/images/shop/zigzag_mineral_vein.jpg"
+            alt="Veta Mineral Geológica en Zigzag con Rebote - ARCANO"
             fill
             priority
             className="object-cover object-center opacity-95 filter contrast-125 brightness-110"
@@ -600,28 +717,31 @@ export default function ShopPage() {
           <div className="absolute inset-y-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-black/75 to-transparent pointer-events-none" />
         </div>
 
-        {/* Destellos y Parpadeo Sutil en las Partes Claras de los Cristales */}
+        {/* Destellos y Parpadeo Sutil a lo Largo del Recorrido en Zigzag */}
         <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
-          {/* Destello 1 (Zona Lapis / Cuarzo Superior) */}
-          <div className="absolute top-[20%] left-[16%] w-2 h-2 rounded-full bg-blue-100 shadow-[0_0_14px_#93C5FD] animate-ping opacity-60" style={{ animationDuration: '3.6s' }} />
-          <div className="absolute top-[24%] left-[22%] w-1.5 h-1.5 rounded-full bg-amber-100 shadow-[0_0_10px_#FDE68A] animate-pulse opacity-75" style={{ animationDuration: '2.5s' }} />
-          {/* Destello 2 (Zona Ojo de Tigre / Bronce Solar) */}
-          <div className="absolute top-[35%] left-[34%] w-2 h-2 rounded-full bg-amber-200 shadow-[0_0_15px_#F59E0B] animate-pulse opacity-70" style={{ animationDuration: '4s' }} />
-          <div className="absolute top-[40%] left-[42%] w-1 h-1 rounded-full bg-white shadow-[0_0_8px_#FFFFFF] animate-ping opacity-60" style={{ animationDuration: '3.1s' }} />
-          {/* Destello 3 (Zona Centro Cornalina / Fuego Ígneo) */}
-          <div className="absolute top-[50%] left-[51%] w-2.5 h-2.5 rounded-full bg-orange-100 shadow-[0_0_16px_#FB923C] animate-pulse opacity-80" style={{ animationDuration: '2.8s' }} />
-          {/* Destello 4 (Zona Amatista Púrpura) */}
-          <div className="absolute top-[60%] left-[65%] w-2 h-2 rounded-full bg-purple-200 shadow-[0_0_16px_#C084FC] animate-pulse opacity-75" style={{ animationDuration: '3.5s' }} />
-          <div className="absolute top-[56%] left-[71%] w-1 h-1 rounded-full bg-white shadow-[0_0_9px_#FFFFFF] animate-ping opacity-70" style={{ animationDuration: '4.5s' }} />
-          {/* Destello 5 (Zona Aguamarina / Cuarzo Inferior) */}
-          <div className="absolute top-[72%] left-[80%] w-2 h-2 rounded-full bg-cyan-100 shadow-[0_0_15px_#67E8F9] animate-pulse opacity-85" style={{ animationDuration: '3s' }} />
-          <div className="absolute top-[78%] left-[88%] w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_12px_#FFFFFF] animate-ping opacity-70" style={{ animationDuration: '2.7s' }} />
+          {/* Sendero Superior (Izquierda a Derecha) */}
+          <div className="absolute top-[14%] left-[12%] w-2 h-2 rounded-full bg-blue-100 shadow-[0_0_14px_#93C5FD] animate-ping opacity-60" style={{ animationDuration: '3.6s' }} />
+          <div className="absolute top-[18%] left-[26%] w-1.5 h-1.5 rounded-full bg-amber-100 shadow-[0_0_10px_#FDE68A] animate-pulse opacity-75" style={{ animationDuration: '2.5s' }} />
+          <div className="absolute top-[24%] left-[42%] w-2 h-2 rounded-full bg-orange-100 shadow-[0_0_15px_#FB923C] animate-pulse opacity-80" style={{ animationDuration: '3.8s' }} />
+          <div className="absolute top-[30%] left-[58%] w-1 h-1 rounded-full bg-white shadow-[0_0_8px_#FFFFFF] animate-ping opacity-60" style={{ animationDuration: '3.1s' }} />
+          <div className="absolute top-[36%] left-[74%] w-2 h-2 rounded-full bg-purple-200 shadow-[0_0_16px_#C084FC] animate-pulse opacity-75" style={{ animationDuration: '3.5s' }} />
+
+          {/* Vértice de Rebote (Extremo Derecho) */}
+          <div className="absolute top-[44%] left-[89%] w-2.5 h-2.5 rounded-full bg-amber-200 shadow-[0_0_18px_#F59E0B] animate-ping opacity-85" style={{ animationDuration: '2.9s' }} />
+          <div className="absolute top-[48%] left-[84%] w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_12px_#FFFFFF] animate-pulse opacity-80" style={{ animationDuration: '4.2s' }} />
+
+          {/* Sendero Inferior tras el Rebote (Derecha a Izquierda) */}
+          <div className="absolute top-[56%] left-[72%] w-2 h-2 rounded-full bg-blue-200 shadow-[0_0_16px_#93C5FD] animate-pulse opacity-80" style={{ animationDuration: '3.4s' }} />
+          <div className="absolute top-[63%] left-[56%] w-2 h-2 rounded-full bg-cyan-100 shadow-[0_0_15px_#67E8F9] animate-ping opacity-75" style={{ animationDuration: '3.9s' }} />
+          <div className="absolute top-[70%] left-[40%] w-1.5 h-1.5 rounded-full bg-yellow-100 shadow-[0_0_12px_#FDE047] animate-pulse opacity-85" style={{ animationDuration: '2.7s' }} />
+          <div className="absolute top-[77%] left-[24%] w-2 h-2 rounded-full bg-rose-200 shadow-[0_0_15px_#FB7185] animate-pulse opacity-75" style={{ animationDuration: '3.6s' }} />
+          <div className="absolute top-[84%] left-[10%] w-2 h-2 rounded-full bg-amber-200 shadow-[0_0_16px_#F59E0B] animate-ping opacity-80" style={{ animationDuration: '3.2s' }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           
           {/* Encabezado de Lujo con Tipografía Elegante de Marca */}
-          <div className="text-center mb-10 sm:mb-14">
+          <div className="text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 mb-3.5 px-4 py-1.5 rounded-full bg-black/85 border border-[#C5A059]/60 backdrop-blur-md shadow-xl">
               <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse" />
               <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.3em] uppercase text-[#C5A059] font-medium">
@@ -634,8 +754,8 @@ export default function ShopPage() {
             </h1>
             <p className="font-serif italic text-xs sm:text-sm text-neutral-200 max-w-2xl mx-auto tracking-wide leading-relaxed drop-shadow-md">
               {t(
-                "Sigue la fractura diagonal de la tierra. Toca un espécimen en bruto para filtrar instantáneamente el catálogo de talismanes consagrados.",
-                "Follow the earth's diagonal fissure. Tap a raw mineral specimen to instantly filter the consecrated talismans catalog."
+                "Sigue la fractura en zigzag de la tierra. Desciende por la veta primordial de izquierda a derecha, sigue el rebote geológico hacia los estratos raros y toca cualquier gema para filtrar el catálogo.",
+                "Follow the earth's zigzag fissure. Descend left-to-right along the primordial vein, follow the geological rebound to rare strata, and tap any stone to filter the catalog."
               )}
             </p>
 
@@ -670,23 +790,33 @@ export default function ShopPage() {
           </div>
 
           {/* ─────────────────────────────────────────────────────────
-              DISPOSICIÓN DIAGONAL: 6 MINERALES A LO LARGO DE LA VETA
-              (INCLINADO DE ARRIBA A ABAJO, DE IZQUIERDA A DERECHA)
+              1. SENDERO SUPERIOR (IZQUIERDA A DERECHA)
+              MINERALES FUNDACIONALES
              ───────────────────────────────────────────────────────── */}
-          <div className="relative group/shelf mb-10">
+          <div className="relative group/shelf mb-4">
             
-            {/* Trazo Diagonal Guía de la Falla Geológica (Desktop) */}
+            <div className="flex items-center justify-between mb-4 px-2">
+              <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.25em] uppercase text-[#C5A059] flex items-center gap-2">
+                <span>✦</span>
+                <span>{t("ESTRATO I · MINERALES FUNDACIONALES (DESCENSO A LA DERECHA)", "STRATUM I · FOUNDATIONAL MINERALS (LEFT TO RIGHT)")}</span>
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-neutral-500 uppercase">
+                #1 — #6
+              </span>
+            </div>
+
+            {/* Trazo Diagonal Guía de la Falla Superior (Desktop) */}
             <div className="hidden lg:block absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 440" fill="none">
+              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 320" fill="none">
                 <path
-                  d="M 60 80 Q 300 150, 600 220 T 1140 360"
-                  stroke="url(#veinGlowGradient)"
+                  d="M 60 50 Q 300 110, 600 170 T 1140 240"
+                  stroke="url(#upperGlowGradient)"
                   strokeWidth="2.5"
                   strokeDasharray="6 8"
                   className="opacity-75"
                 />
                 <defs>
-                  <linearGradient id="veinGlowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="upperGlowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#1D4ED8" stopOpacity="0.85" />
                     <stop offset="20%" stopColor="#D97706" stopOpacity="0.9" />
                     <stop offset="40%" stopColor="#DC2626" stopOpacity="0.9" />
@@ -698,32 +828,31 @@ export default function ShopPage() {
               </svg>
             </div>
 
-            {/* Flecha Izquierda (Scroll táctil en pantallas medianas) */}
+            {/* Flecha Izquierda (Scroll táctil) */}
             <button
-              onClick={() => scrollStones("left")}
-              className="absolute -left-2 sm:left-0 top-[38%] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
-              aria-label="Desplazar minerales a la izquierda"
+              onClick={() => scrollUpperStones("left")}
+              className="absolute -left-2 sm:left-0 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
+              aria-label="Desplazar minerales superiores a la izquierda"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
-            {/* Contenedor de Minerales: Descenso Diagonal Escalonado */}
+            {/* Grid Escalonado Superior */}
             <div
-              ref={stonesScrollRef}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 items-center pt-3 pb-8 px-2"
+              ref={upperStonesScrollRef}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 items-center pt-2 pb-6 px-1"
             >
-              {AURUM_STONES_SHOWCASE.slice(0, 6).map((stone, idx) => {
+              {STONES_UPPER_TRAIL.map((stone, idx) => {
                 const isSelected = selectedStone === stone.id;
-                // Escalonamiento diagonal de arriba a abajo, de izquierda a derecha en Desktop
                 const diagonalOffsets = [
-                  "lg:-translate-y-12", // 1. Lapislázuli (Arriba Izquierda)
-                  "lg:-translate-y-6",  // 2. Ojo de Tigre
-                  "lg:translate-y-0",   // 3. Cornalina (Centro Fuego)
-                  "lg:translate-y-6",   // 4. Amatista
-                  "lg:translate-y-12",  // 5. Turmalina Negra
-                  "lg:translate-y-18",  // 6. Aguamarina (Abajo Derecha)
+                  "lg:-translate-y-8", // 1. Lapislázuli
+                  "lg:-translate-y-4", // 2. Ojo de Tigre
+                  "lg:translate-y-0",  // 3. Cornalina
+                  "lg:translate-y-4",  // 4. Amatista
+                  "lg:translate-y-8",  // 5. Turmalina
+                  "lg:translate-y-12", // 6. Aguamarina
                 ];
                 const offsetClass = diagonalOffsets[idx] || "translate-y-0";
 
@@ -742,12 +871,10 @@ export default function ShopPage() {
                         : "bg-black/60 hover:bg-black/85 border border-neutral-800/90 hover:border-[#C5A059]/80 backdrop-blur-sm hover:scale-105"
                     }`}
                   >
-                    {/* Indicador de Estrato Geológico (#1 a #6 en la diagonal) */}
                     <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-full bg-black/80 border border-neutral-700/80 text-[8px] font-sans font-mono text-neutral-400 group-hover:text-[#C5A059]">
                       #{idx + 1}
                     </div>
 
-                    {/* Resplandor radial de frecuencia mineral */}
                     <div
                       className={`absolute top-6 inset-x-3 h-28 pointer-events-none -z-10 rounded-full transition-opacity duration-300 ${
                         isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-70"
@@ -757,13 +884,12 @@ export default function ShopPage() {
                       }}
                     />
 
-                    {/* Espécimen en Bruto con Reflejo Negro Aurum */}
-                    <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                    <div className="relative aspect-square w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-2 transition-transform duration-500 group-hover:scale-105">
                       <Image
                         src={stone.image}
                         alt={language === "es" ? stone.nameEs : stone.titleEn}
                         fill
-                        sizes="(max-width: 640px) 96px, 128px"
+                        sizes="(max-width: 640px) 80px, 112px"
                         className={`object-contain transition-all duration-300 filter ${
                           isSelected
                             ? "drop-shadow-[0_0_20px_rgba(197,160,89,0.55)] brightness-120"
@@ -772,7 +898,6 @@ export default function ShopPage() {
                       />
                     </div>
 
-                    {/* Nombre del Mineral Bilingüe en Tipografía Elegante */}
                     <span
                       className={`text-xs sm:text-sm font-serif font-medium tracking-[0.16em] uppercase transition-colors block mb-0.5 ${
                         isSelected ? "text-[#C5A059]" : "text-white group-hover:text-[#C5A059]"
@@ -781,12 +906,10 @@ export default function ShopPage() {
                       {language === "es" ? stone.nameEs : stone.titleEn}
                     </span>
 
-                    {/* Atributo Metafísico */}
                     <span className="text-[9px] sm:text-[10px] text-neutral-300 font-light tracking-wider line-clamp-1">
                       {stone.vibe}
                     </span>
 
-                    {/* Contador de piezas en catálogo */}
                     <span
                       className={`mt-2 text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full font-sans tracking-widest transition-colors ${
                         isSelected
@@ -797,8 +920,7 @@ export default function ShopPage() {
                       {stone.itemCount} {t("piezas", "pieces")}
                     </span>
 
-                    {/* Línea dorada indicadora de selección */}
-                    <div className="mt-2.5 h-0.5 w-full flex items-center justify-center">
+                    <div className="mt-2 h-0.5 w-full flex items-center justify-center">
                       {isSelected ? (
                         <span className="w-8 h-0.5 bg-[#C5A059] rounded-full shadow-[0_0_8px_#C5A059]" />
                       ) : (
@@ -812,22 +934,203 @@ export default function ShopPage() {
 
             {/* Flecha Derecha */}
             <button
-              onClick={() => scrollStones("right")}
-              className="absolute -right-2 sm:right-0 top-[38%] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
-              aria-label="Desplazar minerales a la derecha"
+              onClick={() => scrollUpperStones("right")}
+              className="absolute -right-2 sm:right-0 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
+              aria-label="Desplazar minerales superiores a la derecha"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
 
-          {/* Barra Secundaria: Otros Minerales Sagrados del Santuario */}
+          {/* ─────────────────────────────────────────────────────────
+              EL REBOTE GEOLÓGICO: VÉRTICE DE INFLEXIÓN
+              (LA FALLA GIRA HACIA LOS MINERALES MENOS COMUNES)
+             ───────────────────────────────────────────────────────── */}
+          <div className="relative my-6 sm:my-8 flex items-center justify-end pr-2 sm:pr-6">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black/90 border border-[#C5A059] shadow-[0_0_25px_rgba(197,160,89,0.4)] backdrop-blur-md">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C5A059] animate-ping" />
+              <div className="flex flex-col text-right">
+                <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.25em] uppercase text-[#C5A059] font-medium">
+                  {t("⚡ VÉRTICE & REBOTE GEOLÓGICO", "⚡ REBOUND VERTEX & GEOLOGICAL TURN")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] font-sans tracking-widest text-neutral-400 uppercase">
+                  {t("LA VETA VIRA HACIA ESTRATOS RAROS & EXÓTICOS ↓", "VEIN SWERVES DOWNWARD TO RARE SACRED MINERALS ↓")}
+                </span>
+              </div>
+              <div className="w-7 h-7 rounded-full bg-[#C5A059]/20 border border-[#C5A059] flex items-center justify-center text-[#C5A059]">
+                <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────
+              2. SENDERO INFERIOR (DERECHA A IZQUIERDA TRAS EL REBOTE)
+              MINERALES SAGRADOS NO TAN COMUNES (RAROS / EXÓTICOS)
+             ───────────────────────────────────────────────────────── */}
+          <div className="relative group/shelf mb-8">
+            
+            <div className="flex items-center justify-between mb-4 px-2">
+              <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.25em] uppercase text-[#C5A059] flex items-center gap-2">
+                <span>✦</span>
+                <span>{t("ESTRATO II · MINERALES SAGRADOS NO COMUNES (DESCENSO A LA IZQUIERDA)", "STRATUM II · UNCOMMON SACRED GEMS (RIGHT TO LEFT)")}</span>
+              </span>
+              <span className="text-[9px] font-mono tracking-widest text-neutral-500 uppercase">
+                #7 — #12
+              </span>
+            </div>
+
+            {/* Trazo Diagonal Guía de la Falla Inferior tras Rebote (Desktop) */}
+            <div className="hidden lg:block absolute inset-0 pointer-events-none -z-10 overflow-hidden">
+              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 320" fill="none">
+                <path
+                  d="M 1140 50 Q 900 110, 600 170 T 60 240"
+                  stroke="url(#lowerGlowGradient)"
+                  strokeWidth="2.5"
+                  strokeDasharray="6 8"
+                  className="opacity-75"
+                />
+                <defs>
+                  <linearGradient id="lowerGlowGradient" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.9" />
+                    <stop offset="20%" stopColor="#06B6D4" stopOpacity="0.9" />
+                    <stop offset="40%" stopColor="#EAB308" stopOpacity="0.9" />
+                    <stop offset="60%" stopColor="#F43F5E" stopOpacity="0.9" />
+                    <stop offset="80%" stopColor="#78716C" stopOpacity="0.85" />
+                    <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.9" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            {/* Flecha Izquierda (Scroll táctil) */}
+            <button
+              onClick={() => scrollLowerStones("left")}
+              className="absolute -left-2 sm:left-0 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
+              aria-label="Desplazar minerales inferiores a la izquierda"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Grid Escalonado Inferior (Sigue la veta descendente hacia la izquierda) */}
+            <div
+              ref={lowerStonesScrollRef}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 items-center pt-2 pb-6 px-1"
+            >
+              {STONES_LOWER_TRAIL.map((stone, idx) => {
+                const isSelected = selectedStone === stone.id;
+                // Escalonamiento diagonal en reversa de derecha a izquierda
+                const diagonalOffsets = [
+                  "lg:-translate-y-8", // 7. Piedra Luna
+                  "lg:-translate-y-4", // 8. Turquesa
+                  "lg:translate-y-0",  // 9. Pirita
+                  "lg:translate-y-4",  // 10. Rodocrosita
+                  "lg:translate-y-8",  // 11. Cuarzo Ahumado
+                  "lg:translate-y-12", // 12. Citrino
+                ];
+                const offsetClass = diagonalOffsets[idx] || "translate-y-0";
+
+                return (
+                  <button
+                    key={stone.id}
+                    onClick={() => {
+                      const next = isSelected ? "todos" : stone.id;
+                      setSelectedStone(next);
+                      setSelectedCategory("todos");
+                      document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className={`group relative flex flex-col items-center text-center cursor-pointer transition-all duration-500 p-3 sm:p-4 rounded-xl ${offsetClass} ${
+                      isSelected
+                        ? "bg-black/90 border-2 border-[#C5A059] scale-105 shadow-[0_0_30px_rgba(197,160,89,0.5)] backdrop-blur-md ring-2 ring-[#C5A059]/40"
+                        : "bg-black/60 hover:bg-black/85 border border-neutral-800/90 hover:border-[#C5A059]/80 backdrop-blur-sm hover:scale-105"
+                    }`}
+                  >
+                    <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-full bg-black/80 border border-neutral-700/80 text-[8px] font-sans font-mono text-neutral-400 group-hover:text-[#C5A059]">
+                      #{idx + 7}
+                    </div>
+
+                    <div
+                      className={`absolute top-6 inset-x-3 h-28 pointer-events-none -z-10 rounded-full transition-opacity duration-300 ${
+                        isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-70"
+                      }`}
+                      style={{
+                        background: `radial-gradient(ellipse at center, ${stone.accentColor}44 0%, transparent 70%)`,
+                      }}
+                    />
+
+                    <div className="relative aspect-square w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-2 transition-transform duration-500 group-hover:scale-105">
+                      <Image
+                        src={stone.image}
+                        alt={language === "es" ? stone.nameEs : stone.titleEn}
+                        fill
+                        sizes="(max-width: 640px) 80px, 112px"
+                        className={`object-contain transition-all duration-300 filter ${
+                          isSelected
+                            ? "drop-shadow-[0_0_20px_rgba(197,160,89,0.55)] brightness-120"
+                            : "opacity-95 group-hover:opacity-100 group-hover:brightness-110 group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.25)]"
+                        }`}
+                      />
+                    </div>
+
+                    <span
+                      className={`text-xs sm:text-sm font-serif font-medium tracking-[0.16em] uppercase transition-colors block mb-0.5 ${
+                        isSelected ? "text-[#C5A059]" : "text-white group-hover:text-[#C5A059]"
+                      }`}
+                    >
+                      {language === "es" ? stone.nameEs : stone.titleEn}
+                    </span>
+
+                    <span className="text-[9px] sm:text-[10px] text-neutral-300 font-light tracking-wider line-clamp-1">
+                      {stone.vibe}
+                    </span>
+
+                    <span
+                      className={`mt-2 text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full font-sans tracking-widest transition-colors ${
+                        isSelected
+                          ? "bg-[#C5A059] text-black font-semibold"
+                          : "bg-black/80 border border-neutral-700 text-neutral-300 group-hover:text-white"
+                      }`}
+                    >
+                      {stone.itemCount} {t("piezas", "pieces")}
+                    </span>
+
+                    <div className="mt-2 h-0.5 w-full flex items-center justify-center">
+                      {isSelected ? (
+                        <span className="w-8 h-0.5 bg-[#C5A059] rounded-full shadow-[0_0_8px_#C5A059]" />
+                      ) : (
+                        <span className="w-1.5 h-0.5 bg-transparent group-hover:bg-[#C5A059]/60 transition-colors" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Flecha Derecha */}
+            <button
+              onClick={() => scrollLowerStones("right")}
+              className="absolute -right-2 sm:right-0 top-[45%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/90 hover:bg-[#C5A059] border border-neutral-700 hover:border-[#C5A059] text-white hover:text-black flex items-center justify-center transition-all opacity-0 group-hover/shelf:opacity-100 backdrop-blur-md cursor-pointer shadow-2xl hidden md:flex"
+              aria-label="Desplazar minerales inferiores a la derecha"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────
+              3. BARRA DE MINERALES COMPLEMENTARIOS DEL SANTUARIO
+             ───────────────────────────────────────────────────────── */}
           <div className="pt-6 border-t border-neutral-800/80 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center">
             <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.22em] uppercase text-neutral-400 mr-2">
               {t("MÁS ESTRATOS MINERALES:", "MORE SACRED MINERALS:")}
             </span>
-            {AURUM_STONES_SHOWCASE.slice(6).map((stone) => {
+            {STONES_REMAINING.map((stone) => {
               const isSelected = selectedStone === stone.id;
               return (
                 <button
