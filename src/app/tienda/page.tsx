@@ -272,6 +272,21 @@ export default function ShopPage() {
   const [modalTab, setModalTab] = useState<"detalles" | "mineral" | "ritual">("detalles");
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
 
+  // Escuchar parámetro ?stone=... en la URL para auto-filtrar al venir desde el Menú de la Galería
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const stoneParam = params.get("stone");
+      if (stoneParam) {
+        setSelectedStone(stoneParam);
+        setSelectedCategory("todos");
+        setTimeout(() => {
+          document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+        }, 250);
+      }
+    }
+  }, []);
+
   // Refs para scroll horizontal fluido de los senderos geológicos en móvil y tablet
   const upperStonesScrollRef = useRef<HTMLDivElement>(null);
   const lowerStonesScrollRef = useRef<HTMLDivElement>(null);

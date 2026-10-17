@@ -23,6 +23,7 @@ import { ArcanaModal } from "@/components/ArcanaModal";
 import { NewsletterSection } from "@/components/NewsletterSection";
 import { InstagramGrid } from "@/components/InstagramGrid";
 import { AcademySection } from "@/components/academy/AcademySection";
+import { VolcanicVeinGalleryMenu } from "@/components/VolcanicVeinGalleryMenu";
 import { trackEvent } from "@/lib/analytics";
 import { getAssetPath } from "@/lib/utils";
 
@@ -140,23 +141,55 @@ export default function HomePage() {
               Reservar una lectura ✦
             </Link>
 
-            <Link
-              href="/arcanos/"
+            <a
+              href="#menu-galeria-mineral"
               className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-parchment hover:text-gold border border-gold/40 hover:border-gold transition-all duration-300 rounded-sm bg-charcoal/60 backdrop-blur shadow-md"
             >
-              Explorar los Arcanos
+              Menú de la Galería ✦
+            </a>
+
+            <Link
+              href="/arcanos/"
+              className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-parchment-muted hover:text-gold transition-all duration-300 rounded-sm text-center"
+            >
+              Los Arcanos
             </Link>
           </div>
 
           {/* Indicador de Desliza para entrar */}
           <div className="pt-12 sm:pt-16 animate-pulse-subtle">
             <span className="text-[10px] tracking-[0.3em] uppercase text-parchment-dim font-sans block mb-2">
-              Desliza para entrar
+              Desliza para explorar la galería
             </span>
             <span className="text-gold text-sm block">↓</span>
           </div>
         </div>
       </section>
+
+      {/* 2.5. MENÚ DE LA GALERÍA: GEMAS FORJADAS EN PROFUNDIDADES VOLCÁNICAS (VETA EN ZIGZAG DESKTOP) */}
+      <div id="menu-galeria-mineral" className="hidden md:block">
+        <VolcanicVeinGalleryMenu />
+      </div>
+
+      {/* BANNER COMPACTO PARA MÓVIL HACIA LA TIENDA */}
+      <div className="block md:hidden border-y border-neutral-900 bg-[#050505] py-8 px-4 text-center">
+        <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-black border border-gold/40 text-[10px] uppercase font-serif tracking-widest text-gold shadow-md">
+          <span>✦</span>
+          <span>Boutique de Talismanes Minerales</span>
+        </div>
+        <h3 className="font-serif text-lg tracking-[0.15em] uppercase text-white mb-2">
+          Gemas Forjadas en Volcanes
+        </h3>
+        <p className="text-xs text-neutral-400 max-w-sm mx-auto mb-4 font-sans leading-relaxed">
+          Descubre la colección de pulseras y talismanes 100% de mineral puro, consagrados bajo Luna Llena.
+        </p>
+        <Link
+          href="/tienda/"
+          className="inline-block px-6 py-2.5 rounded-full bg-gold hover:bg-gold-light text-black text-xs font-bold tracking-widest uppercase transition-all shadow-lg"
+        >
+          Entrar a la Boutique →
+        </Link>
+      </div>
 
       {/* 3. SECCIÓN INTRODUCCIÓN: EL TAROT COMO ESPEJO CON CÁLIZ DE HUMO */}
       <section className="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
