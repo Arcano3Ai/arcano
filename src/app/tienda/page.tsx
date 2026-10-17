@@ -576,213 +576,74 @@ export default function ShopPage() {
       </header>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. HERO ILUMINADO · LUZ SAGRADA & ALTA JOYERÍA MINERAL
-         ───────────────────────────────────────────────────────────── */}
-      <section className="relative w-full min-h-[600px] lg:h-[78vh] max-h-[820px] bg-[#0A0A0A] overflow-hidden flex items-center border-b border-neutral-900">
-        
-        {/* Imagen de fondo luminosa bañada en luz dorada natural */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/shop/luminous_boutique_hero.jpg"
-            alt="Luminous Sanctuary Fine Jewelry Boutique"
-            fill
-            priority
-            className="object-cover object-center filter brightness-[1.05] contrast-[1.02]"
-            sizes="100vw"
-          />
-          {/* Veladuras de luz dorada etérea para contraste y legibilidad impecable */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/35" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,175,55,0.25)_0%,_transparent_65%)] pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
-        </div>
-
-        {/* Contenido Editorial del Hero Lleno de Luz */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-14 sm:py-16">
-          <div className="max-w-2xl text-left">
-            
-            {/* Reviews y Calificación Estelar */}
-            <div className="inline-flex items-center gap-2 mb-4 px-3.5 py-1.5 rounded-full bg-black/60 border border-[#C5A059]/40 backdrop-blur-md shadow-lg">
-              <span className="text-[#C5A059] text-xs">★★★★★</span>
-              <span className="text-white text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase">
-                4.9/5.0 · 2,450 {t("RESEÑAS VERIFICADAS", "VERIFIED REVIEWS")}
-              </span>
-            </div>
-
-            {/* Título Principal Bilingüe Iluminado */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[1.08] mb-4">
-              {language === "es" ? (
-                <>
-                  Elementos en Bruto. <br />
-                  <span className="font-normal text-transparent bg-clip-text bg-gradient-to-r from-white via-[#F3EFE6] to-[#C5A059]">
-                    Diseño Sagrado.
-                  </span>
-                </>
-              ) : (
-                <>
-                  Raw Elements. <br />
-                  <span className="font-normal text-transparent bg-clip-text bg-gradient-to-r from-white via-[#F3EFE6] to-[#C5A059]">
-                    Refined Design.
-                  </span>
-                </>
-              )}
-            </h1>
-
-            {/* Subtítulo Bilingüe */}
-            <p className="text-xs sm:text-sm font-sans tracking-[0.28em] uppercase text-[#C5A059] font-medium mb-6 flex items-center gap-2">
-              <span className="w-6 h-[1px] bg-[#C5A059]" />
-              <span>
-                {t(
-                  "MINERALES 100% NATURALES & TALISMANES DE PODER",
-                  "100% NATURAL MINERALS & CONSECRATED TALISMANS"
-                )}
-              </span>
-            </p>
-
-            {/* 3 Checkmarks de Garantía Bilingües */}
-            <div className="space-y-3 mb-8 text-neutral-200 text-xs sm:text-sm font-light">
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full bg-[#C5A059]/20 border border-[#C5A059] flex items-center justify-center text-xs text-[#C5A059] font-bold">
-                  ✓
-                </span>
-                <span>
-                  {t(
-                    "Hecho a mano a la medida exacta de tu muñeca (100% minerales puros, sin metales)",
-                    "Handcrafted to your exact wrist circumference (100% pure minerals, zero metals)"
-                  )}
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full bg-[#C5A059]/20 border border-[#C5A059] flex items-center justify-center text-xs text-[#C5A059] font-bold">
-                  ✓
-                </span>
-                <span>
-                  {t(
-                    "Consagrado en Luna Llena frente a hoguera sagrada de fuego ceremonial (1.5 m)",
-                    "Consecrated under the Full Moon in front of a 1.5m sacred bonfire"
-                  )}
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full bg-[#C5A059]/20 border border-[#C5A059] flex items-center justify-center text-xs text-[#C5A059] font-bold">
-                  ✓
-                </span>
-                <span>
-                  {t(
-                    "22 Arcanos Mayores con 3 palabras de intención y mito iniciático de viaje del alma",
-                    "22 Major Arcana with 3 intention words and initiatory soul journey lore"
-                  )}
-                </span>
-              </div>
-            </div>
-
-            {/* Botones de Acción */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
-              <button
-                onClick={() => document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-8 py-4 bg-gradient-to-r from-[#C5A059] to-[#d8b368] text-black font-semibold text-xs tracking-[0.22em] uppercase hover:brightness-110 transition-all text-center cursor-pointer shadow-[0_4px_25px_rgba(197,160,89,0.35)] rounded-sm"
-              >
-                {t("Explorar 22 Arcanos", "Explore 22 Arcana")}
-              </button>
-              <button
-                onClick={() => document.getElementById("seccion-veta-mineral")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-8 py-4 bg-black/60 border border-[#C5A059]/50 text-white font-medium text-xs tracking-[0.22em] uppercase hover:bg-[#C5A059]/10 hover:border-[#C5A059] transition-all text-center backdrop-blur-md rounded-sm"
-              >
-                {t("Veta Geológica", "Geological Vein")}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────
-          4. SECCIÓN "LATEST COLLECTIONS" (GALERÍA REDONDEADA AURUM)
-         ───────────────────────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-b border-neutral-900">
-        <h2 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-white text-center mb-10 uppercase">
-          LATEST COLLECTIONS
-        </h2>
-
-        {/* Carousel / Grid de Colecciones */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-          {FEATURED_COLLECTIONS.map((col) => (
-            <div
-              key={col.id}
-              onClick={() => {
-                setSelectedCategory(col.catFilter);
-                setSelectedStone(col.stoneFilter);
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="group relative aspect-square bg-[#0D0D0D] rounded-xl overflow-hidden cursor-pointer border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 shadow-md"
-            >
-              <Image
-                src={col.image}
-                alt={col.name}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                className="object-cover filter brightness-[0.85] contrast-[1.1] transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 inset-x-0 p-2.5 text-center">
-                <span className="block text-[11px] font-sans font-medium text-white tracking-wider uppercase group-hover:text-[#C5A059] transition-colors">
-                  {col.name}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────
-          5. SECCIÓN DEDICADA: VETA GEOLÓGICA & COMPRA POR MINERAL
-             (VETA DIAGONAL VISIBLE DE ARRIBA A ABAJO, IZQUIERDA A DERECHA)
+          3. HERO PRINCIPAL: VETA GEOLÓGICA & COMPRA POR MINERAL
+             (FONDO NÍTIDO, DESTELLOS CRISTALINOS & TIPOGRAFÍA DE LUJO)
          ───────────────────────────────────────────────────────────── */}
       <section
-        id="seccion-veta-mineral"
-        className="relative w-full py-20 sm:py-32 bg-[#000000] border-t border-b border-neutral-900/90 overflow-hidden"
+        id="hero-veta-mineral"
+        className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#000000] border-b border-neutral-900/90 overflow-hidden flex flex-col justify-center"
       >
         {/* Fondo de Grieta y Veta Mineral Geológica Auténtica en Diagonal Nítida */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <Image
             src="/images/shop/diagonal_mineral_vein.jpg"
-            alt="Veta Mineral Geológica Diagonal Natural"
+            alt="Veta Mineral Geológica Diagonal Natural - ARCANO"
             fill
             priority
-            className="object-cover object-center opacity-90 sm:opacity-95 filter contrast-125 brightness-110"
+            className="object-cover object-center opacity-95 filter contrast-125 brightness-110"
             sizes="100vw"
           />
-          {/* Veladuras perimetrales sutiles para fundir perfectamente con el negro del sitio */}
-          <div className="absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-32 sm:h-44 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-black/80 to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-black/80 to-transparent pointer-events-none" />
+          {/* Veladuras perimetrales sutiles para fundir perfectamente con el marco del sitio */}
+          <div className="absolute inset-x-0 top-0 h-24 sm:h-32 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-12 sm:w-20 bg-gradient-to-r from-black/75 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-black/75 to-transparent pointer-events-none" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Destellos y Parpadeo Sutil en las Partes Claras de los Cristales */}
+        <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+          {/* Destello 1 (Zona Lapis / Cuarzo Superior) */}
+          <div className="absolute top-[20%] left-[16%] w-2 h-2 rounded-full bg-blue-100 shadow-[0_0_14px_#93C5FD] animate-ping opacity-60" style={{ animationDuration: '3.6s' }} />
+          <div className="absolute top-[24%] left-[22%] w-1.5 h-1.5 rounded-full bg-amber-100 shadow-[0_0_10px_#FDE68A] animate-pulse opacity-75" style={{ animationDuration: '2.5s' }} />
+          {/* Destello 2 (Zona Ojo de Tigre / Bronce Solar) */}
+          <div className="absolute top-[35%] left-[34%] w-2 h-2 rounded-full bg-amber-200 shadow-[0_0_15px_#F59E0B] animate-pulse opacity-70" style={{ animationDuration: '4s' }} />
+          <div className="absolute top-[40%] left-[42%] w-1 h-1 rounded-full bg-white shadow-[0_0_8px_#FFFFFF] animate-ping opacity-60" style={{ animationDuration: '3.1s' }} />
+          {/* Destello 3 (Zona Centro Cornalina / Fuego Ígneo) */}
+          <div className="absolute top-[50%] left-[51%] w-2.5 h-2.5 rounded-full bg-orange-100 shadow-[0_0_16px_#FB923C] animate-pulse opacity-80" style={{ animationDuration: '2.8s' }} />
+          {/* Destello 4 (Zona Amatista Púrpura) */}
+          <div className="absolute top-[60%] left-[65%] w-2 h-2 rounded-full bg-purple-200 shadow-[0_0_16px_#C084FC] animate-pulse opacity-75" style={{ animationDuration: '3.5s' }} />
+          <div className="absolute top-[56%] left-[71%] w-1 h-1 rounded-full bg-white shadow-[0_0_9px_#FFFFFF] animate-ping opacity-70" style={{ animationDuration: '4.5s' }} />
+          {/* Destello 5 (Zona Aguamarina / Cuarzo Inferior) */}
+          <div className="absolute top-[72%] left-[80%] w-2 h-2 rounded-full bg-cyan-100 shadow-[0_0_15px_#67E8F9] animate-pulse opacity-85" style={{ animationDuration: '3s' }} />
+          <div className="absolute top-[78%] left-[88%] w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_12px_#FFFFFF] animate-ping opacity-70" style={{ animationDuration: '2.7s' }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           
-          {/* Header Editorial con Indicador de Veta Viva */}
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 mb-3 px-3.5 py-1.5 rounded-full bg-black/80 border border-[#C5A059]/60 backdrop-blur-md shadow-lg">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#C5A059] animate-pulse" />
-              <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.3em] uppercase text-[#C5A059] font-medium">
-                {t("VETA GEOLÓGICA DIAGONAL · MATRIZ MINERAL", "DIAGONAL GEOLOGICAL VEIN · MINERAL MATRIX")}
+          {/* Encabezado de Lujo con Tipografía Elegante de Marca */}
+          <div className="text-center mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 mb-3.5 px-4 py-1.5 rounded-full bg-black/85 border border-[#C5A059]/60 backdrop-blur-md shadow-xl">
+              <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse" />
+              <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.3em] uppercase text-[#C5A059] font-medium">
+                {t("MATRIZ GEOLÓGICA & ALTA ORFEBRERÍA", "GEOLOGICAL MATRIX & SACRED FINE JEWELRY")}
               </span>
             </div>
             
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.25em] text-white uppercase mb-3">
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light tracking-[0.22em] text-white uppercase mb-3 drop-shadow-lg">
               {t("COMPRA POR MINERAL", "SHOP BY STONE")}
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-200 font-light max-w-2xl mx-auto tracking-wide leading-relaxed drop-shadow-md">
+            </h1>
+            <p className="font-serif italic text-xs sm:text-sm text-neutral-200 max-w-2xl mx-auto tracking-wide leading-relaxed drop-shadow-md">
               {t(
-                "Sigue la fractura diagonal de la tierra: de arriba a abajo y de izquierda a derecha, cada gema en bruto emerge de su propia estratificación geológica. Toca un espécimen para filtrar instantáneamente el catálogo.",
-                "Follow the earth's diagonal fissure: from top-left descending to bottom-right, each raw gemstone emerges from its geological stratum. Tap a mineral specimen to instantly filter the catalog."
+                "Sigue la fractura diagonal de la tierra. Toca un espécimen en bruto para filtrar instantáneamente el catálogo de talismanes consagrados.",
+                "Follow the earth's diagonal fissure. Tap a raw mineral specimen to instantly filter the consecrated talismans catalog."
               )}
             </p>
 
-            {/* Selector Activo / Botón de Reset y Salto al Catálogo */}
+            {/* Selector Activo / Botón de Salto al Catálogo */}
             {selectedStone !== "todos" && (
-              <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-3 px-5 py-2 rounded-full bg-black/90 border border-[#C5A059] backdrop-blur-md animate-fadeIn shadow-[0_0_20px_rgba(197,160,89,0.35)]">
+              <div className="mt-5 inline-flex flex-wrap items-center justify-center gap-3 px-5 py-2 rounded-full bg-black/90 border border-[#C5A059] backdrop-blur-md animate-fadeIn shadow-[0_0_20px_rgba(197,160,89,0.35)]">
                 <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-ping" />
-                <span className="text-xs text-neutral-200 font-light tracking-wider">
+                <span className="text-xs text-neutral-200 font-serif tracking-wider">
                   {t("Mineral Activo:", "Active Mineral:")}{" "}
                   <strong className="text-[#C5A059] font-medium uppercase">{selectedStone}</strong> ·{" "}
                   <span className="text-neutral-400">
@@ -791,16 +652,16 @@ export default function ShopPage() {
                 </span>
                 <button
                   onClick={() => document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" })}
-                  className="px-2.5 py-0.5 rounded-full bg-[#C5A059]/20 hover:bg-[#C5A059]/30 border border-[#C5A059] text-[10px] text-[#C5A059] font-medium tracking-wider uppercase transition-colors cursor-pointer"
+                  className="px-3 py-1 rounded-full bg-[#C5A059] hover:bg-[#d8b368] text-black text-[10px] font-sans font-bold tracking-wider uppercase transition-colors cursor-pointer shadow-md"
                 >
-                  {t("Ver Piezas ↓", "View Pieces ↓")}
+                  {t("Ver Catálogo Filtrado ↓", "View Filtered Pieces ↓")}
                 </button>
                 <button
                   onClick={() => {
                     setSelectedStone("todos");
                     setSelectedCategory("todos");
                   }}
-                  className="ml-1 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                  className="ml-1 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-white transition-colors cursor-pointer font-sans"
                 >
                   ✕ {t("Mostrar Todo", "Show All")}
                 </button>
@@ -812,7 +673,7 @@ export default function ShopPage() {
               DISPOSICIÓN DIAGONAL: 6 MINERALES A LO LARGO DE LA VETA
               (INCLINADO DE ARRIBA A ABAJO, DE IZQUIERDA A DERECHA)
              ───────────────────────────────────────────────────────── */}
-          <div className="relative group/shelf mb-12">
+          <div className="relative group/shelf mb-10">
             
             {/* Trazo Diagonal Guía de la Falla Geológica (Desktop) */}
             <div className="hidden lg:block absolute inset-0 pointer-events-none -z-10 overflow-hidden">
@@ -851,7 +712,7 @@ export default function ShopPage() {
             {/* Contenedor de Minerales: Descenso Diagonal Escalonado */}
             <div
               ref={stonesScrollRef}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 items-center pt-4 pb-8 px-2"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 items-center pt-3 pb-8 px-2"
             >
               {AURUM_STONES_SHOWCASE.slice(0, 6).map((stone, idx) => {
                 const isSelected = selectedStone === stone.id;
@@ -911,9 +772,9 @@ export default function ShopPage() {
                       />
                     </div>
 
-                    {/* Nombre del Mineral Bilingüe */}
+                    {/* Nombre del Mineral Bilingüe en Tipografía Elegante */}
                     <span
-                      className={`text-xs sm:text-sm font-medium tracking-[0.16em] uppercase transition-colors block mb-0.5 ${
+                      className={`text-xs sm:text-sm font-serif font-medium tracking-[0.16em] uppercase transition-colors block mb-0.5 ${
                         isSelected ? "text-[#C5A059]" : "text-white group-hover:text-[#C5A059]"
                       }`}
                     >
@@ -963,7 +824,7 @@ export default function ShopPage() {
 
           {/* Barra Secundaria: Otros Minerales Sagrados del Santuario */}
           <div className="pt-6 border-t border-neutral-800/80 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center">
-            <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.22em] uppercase text-neutral-400 mr-2">
+            <span className="text-[10px] sm:text-[11px] font-serif tracking-[0.22em] uppercase text-neutral-400 mr-2">
               {t("MÁS ESTRATOS MINERALES:", "MORE SACRED MINERALS:")}
             </span>
             {AURUM_STONES_SHOWCASE.slice(6).map((stone) => {
@@ -987,7 +848,7 @@ export default function ShopPage() {
                     className="w-1.5 h-1.5 rounded-full"
                     style={{ backgroundColor: stone.accentColor }}
                   />
-                  <span>{language === "es" ? stone.nameEs : stone.titleEn}</span>
+                  <span className="font-serif">{language === "es" ? stone.nameEs : stone.titleEn}</span>
                   <span className="opacity-60 text-[9px]">({stone.itemCount})</span>
                 </button>
               );
@@ -996,6 +857,64 @@ export default function ShopPage() {
 
         </div>
       </section>
+
+      {/* Barra de Confianza & Compromisos Sagrados en Tipografía Fina */}
+      <div className="bg-[#0A0A0A] border-b border-neutral-900 py-4 px-4">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-around gap-4 text-center text-xs text-neutral-300 font-serif">
+          <div className="flex items-center gap-2">
+            <span className="text-[#C5A059] text-xs">✦</span>
+            <span className="tracking-wider">{t("Minerales 100% Puros Sin Metales (8mm)", "100% Pure Minerals · Zero Metals (8mm)")}</span>
+          </div>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-[#C5A059] text-xs">✦</span>
+            <span className="tracking-wider">{t("Consagrado en Luna Llena & Hoguera Sagrada", "Consecrated under Full Moon & Sacred Fire")}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[#C5A059] text-xs">✦</span>
+            <span className="tracking-wider">{t("Hecho a Mano a la Medida Exacta de tu Muñeca", "Handcrafted to Your Exact Wrist Size")}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          4. SECCIÓN "LATEST COLLECTIONS" (GALERÍA REDONDEADA AURUM)
+         ───────────────────────────────────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-b border-neutral-900">
+        <h2 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-white text-center mb-10 uppercase">
+          LATEST COLLECTIONS
+        </h2>
+
+        {/* Carousel / Grid de Colecciones */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          {FEATURED_COLLECTIONS.map((col) => (
+            <div
+              key={col.id}
+              onClick={() => {
+                setSelectedCategory(col.catFilter);
+                setSelectedStone(col.stoneFilter);
+                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative aspect-square bg-[#0D0D0D] rounded-xl overflow-hidden cursor-pointer border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 shadow-md"
+            >
+              <Image
+                src={col.image}
+                alt={col.name}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                className="object-cover filter brightness-[0.85] contrast-[1.1] transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 inset-x-0 p-2.5 text-center">
+                <span className="block text-[11px] font-sans font-medium text-white tracking-wider uppercase group-hover:text-[#C5A059] transition-colors">
+                  {col.name}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
 
       {/* ─────────────────────────────────────────────────────────────
           5.1. CATÁLOGO PRINCIPAL & INTEGRACIÓN TOTAL DEL FILTRADO
