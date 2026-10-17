@@ -1501,7 +1501,7 @@ export default function ShopPage() {
                         modalTab === "detalles" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
                       }`}
                     >
-                      Detalles
+                      {activeProduct.arcanoStory ? "Historia" : "Detalles"}
                     </button>
                     <button
                       onClick={() => setModalTab("mineral")}
@@ -1509,7 +1509,7 @@ export default function ShopPage() {
                         modalTab === "mineral" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
                       }`}
                     >
-                      Propiedades
+                      {activeProduct.arcanoStory ? "Minerales" : "Propiedades"}
                     </button>
                     <button
                       onClick={() => setModalTab("ritual")}
@@ -1525,10 +1525,26 @@ export default function ShopPage() {
                   <div className="min-h-[110px] text-sm sm:text-base font-normal text-neutral-200 leading-relaxed mb-6">
                     {modalTab === "detalles" && (
                       <div className="space-y-3.5">
-                        <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
-                          {activeProduct.description}
-                        </p>
-                        {activeProduct.details && activeProduct.details.length > 0 && (
+                        {activeProduct.arcanoStory ? (
+                          <div className="space-y-3">
+                            <div className="p-3.5 bg-gradient-to-br from-[#141414] to-[#0A0A0A] border border-[#C5A059]/30 rounded-sm">
+                              <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
+                                Mito & Viaje del Alma:
+                              </span>
+                              <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed italic">
+                                "{activeProduct.arcanoStory}"
+                              </p>
+                            </div>
+                            <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
+                              {activeProduct.description}
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
+                            {activeProduct.description}
+                          </p>
+                        )}
+                        {activeProduct.details && activeProduct.details.length > 0 && !activeProduct.arcanoStory && (
                           <ul className="space-y-2 pt-3 border-t border-neutral-800 text-xs sm:text-sm text-neutral-300">
                             {activeProduct.details.map((d, i) => (
                               <li key={i} className="flex items-start gap-2.5">
@@ -1543,12 +1559,22 @@ export default function ShopPage() {
                     {modalTab === "mineral" && (
                       <div className="space-y-3 p-4 bg-[#0D0D0D] border border-neutral-800 rounded-sm">
                         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b border-neutral-800 pb-2.5">
-                          <span className="text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium">Gema Principal:</span>
+                          <span className="text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium">Gemas 100% Puras:</span>
                           <span className="text-base sm:text-lg font-medium text-white tracking-wide">{activeProduct.stoneType || "Mineral Natural Grado AAA"}</span>
                         </div>
                         <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">{activeProduct.tagline}</p>
-                        <p className="text-xs sm:text-sm text-[#C5A059]/90 italic">
-                          ✦ Cada esfera es 100% auténtica y presenta vetas geológicas irrepetibles.
+                        {activeProduct.details && activeProduct.details.length > 0 && (
+                          <ul className="space-y-2 pt-3 border-t border-neutral-800 text-xs sm:text-sm text-neutral-300">
+                            {activeProduct.details.map((d, i) => (
+                              <li key={i} className="flex items-start gap-2.5">
+                                <span className="text-[#C5A059] mt-0.5 font-bold">✦</span>
+                                <span>{d}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        <p className="text-xs sm:text-sm text-[#C5A059]/90 italic pt-1">
+                          ✦ Cada esfera es 100% mineral geológico auténtico, tallado a 8mm y sin añadidos metálicos.
                         </p>
                       </div>
                     )}
@@ -1561,7 +1587,7 @@ export default function ShopPage() {
                           </span>
                         </div>
                         <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
-                          {activeProduct.ritualUse || "Consagrado bajo el influjo de la Luna Llena frente a una hoguera sagrada de fuego creador y destructor. Purificado con resinas vivas para anclar tu intención."}
+                          {activeProduct.ritualUse || "Consagrado bajo el influjo de la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas para anclar tu intención."}
                         </p>
                       </div>
                     )}

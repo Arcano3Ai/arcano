@@ -1,3 +1,4 @@
+import { majorArcanaTalismans } from "./majorArcanaTalismans";
 export interface ShopCategory {
   id: string;
   slug: string;
@@ -44,6 +45,7 @@ export interface ShopProduct {
   goldSpecifications?: GoldSpecification;
   arcanoNumber?: string;
   intentionWords?: string[];
+  arcanoStory?: string;
 }
 
 export interface CreativeProcessImage {
@@ -232,42 +234,10 @@ export const shopCategories: ShopCategory[] = [
 
 export const shopProducts: ShopProduct[] = [
   // ==========================================
-  // 0. COLECCIÓN ARCANOS MAYORES (PIEZA INSIGNIA DE APERTURA)
+  // 0. COLECCIÓN ARCANOS MAYORES (22 TALISMANES ARQUETÍPICOS)
   // ==========================================
-  {
-    id: "talisman-arcano-i-el-mago-onix-lapislazuli",
-    slug: "talisman-arcano-i-el-mago-onix-lapislazuli",
-    name: "Arcano I · El Mago (Ónix Mate & Lapislázuli)",
-    categoryId: "coleccion-arcanos",
-    categoryName: "Colección Arcanos Mayores",
-    theme: "coleccion-arcanos",
-    price: 1680,
-    formattedPrice: "MXN $1,680",
-    shippingNote: "ENVÍO EXPRESS GRATIS",
-    tagline: "Voluntad · Creatividad · Iniciativa. Talismán de manifestación con ónix negro mate y lapislázuli real.",
-    description:
-      "Una pieza simbólica para recordar tu potencial creativo y tomar el camino con determinación. Fusión de ónix negro mate para el enraizamiento y lapislázuli con destellos dorados de pirita para despertar tu visión y poder creador.",
-    ritualUse:
-      "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas para anclar tu voluntad y determinación.",
-    details: [
-      "Ónix negro mate 8mm con cuentas focales de Lapislázuli Grado AAA y pirita natural",
-      "Diseño 100% mineral puro, sin metales, ensamblado a tu medida exacta",
-      "Consagrado en luna llena frente al fuego sagrado ceremonial",
-    ],
-    inStock: true,
-    badge: "ARCANO I · APERTURA DE COLECCIÓN",
-    imageUrl: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
-    secondaryImageUrl: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
-    images: [
-      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
-      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
-    ],
-    stoneType: "Ónix Mate & Lapislázuli Real",
-    beadSize: "8mm",
-    featured: true,
-    arcanoNumber: "I",
-    intentionWords: ["Voluntad", "Creatividad", "Iniciativa"],
-  },
+  ...majorArcanaTalismans,
+
   // ==========================================
   // 1. COLECCIÓN DOBLE PERFORACIÓN (DUAL)
   // ==========================================
