@@ -98,9 +98,20 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Barra de Copyright inferior */}
-        <div className="pt-8 border-t border-charcoal-border/40 text-center text-xs text-parchment-dim font-sans leading-relaxed">
+        <div className="pt-8 border-t border-charcoal-border/40 text-center text-xs text-parchment-dim font-sans leading-relaxed space-y-1.5">
           <p>
-            © 2026 Desarrollado por <span className="text-gold">ARCANO SOLUTIONS</span> • Todos los derechos reservados • El conocimiento está en los símbolos. El camino, en ti.
+            © {currentYear} ARCANO • Todos los derechos reservados • El conocimiento está en los símbolos. El camino, en ti.
+          </p>
+          <p className="text-[11px] text-parchment-dim/90">
+            Desarrollado por{" "}
+            <a
+              href="https://agenteweb.com.mx/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold hover:text-amber-300 underline underline-offset-4 font-medium transition-colors"
+            >
+              agenteweb.com.mx
+            </a>
           </p>
         </div>
       </div>

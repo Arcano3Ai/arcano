@@ -7,6 +7,7 @@ import { brandConfig } from "@/config/brandConfig";
 import { headerNavLinks } from "@/config/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
 
 export const Header: React.FC = () => {
@@ -81,6 +82,7 @@ export const Header: React.FC = () => {
         {/* CTA DE RESERVA, MODO CLARO/OSCURO Y HAMBURGUER MÓVIL */}
         <div className="flex items-center space-x-3 sm:space-x-4">
           {/* Botón Solecito / Luna para Modo Claro / Oscuro */}
+          <LanguageToggle />
           <ThemeToggle />
 
           {/* Acceso a Aula Virtual */}
@@ -151,8 +153,9 @@ export const Header: React.FC = () => {
           className="fixed inset-0 top-[60px] z-50 bg-obsidian-deep/98 backdrop-blur-2xl flex flex-col justify-between px-6 py-10 lg:hidden overflow-y-auto animate-fadeIn"
         >
           <div className="flex flex-col space-y-6 pt-4">
-            <div className="text-center text-xs tracking-[0.3em] uppercase text-gold/70 pb-4 border-b border-charcoal-border">
-              Navegación del Santuario
+            <div className="flex items-center justify-between text-xs tracking-[0.3em] uppercase text-gold/70 pb-4 border-b border-charcoal-border">
+              <span>Santuario ARCANO</span>
+              <LanguageToggle />
             </div>
             {headerNavLinks.map((link) => (
               <Link

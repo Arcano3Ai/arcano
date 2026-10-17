@@ -37,6 +37,7 @@ import { ArcanaAiBot } from "@/components/ArcanaAiBot";
 import { PwaRegister } from "@/components/PwaRegister";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { StudentProvider } from "@/lib/academy/studentContext";
 import { CartProvider } from "@/context/CartContext";
 import { CeremonialCartDrawer, FloatingCartButton } from "@/components/shop/CeremonialCartDrawer";
@@ -311,6 +312,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-obsidian text-parchment flex flex-col relative antialiased selection:bg-gold/30 selection:text-parchment transition-colors duration-500">
+        <LanguageProvider>
         <ThemeProvider>
           <StudentProvider>
             <CartProvider>
@@ -342,6 +344,7 @@ export default function RootLayout({
             </CartProvider>
           </StudentProvider>
         </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
