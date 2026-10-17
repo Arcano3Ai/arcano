@@ -753,105 +753,191 @@ export default function ShopPage() {
             </div>
           </div>
 
-          {/* 4 Tarjetas Interactivas de las Ramas */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            {/* 1. TAROT */}
-            <div
-              onClick={() => {
-                setSelectedCategory("coleccion-arcanos");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="p-5 rounded-lg bg-[#0E0E0E]/80 border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 cursor-pointer group hover:bg-[#121212]"
-            >
-              <div className="text-2xl mb-3 text-[#C5A059] group-hover:scale-110 transition-transform">🎴</div>
-              <h3 className="text-sm font-sans tracking-[0.2em] uppercase text-white font-semibold mb-1 group-hover:text-[#C5A059] transition-colors">
-                {t("Tarot Hermético", "Hermetic Tarot")}
-              </h3>
-              <p className="text-[11px] text-neutral-400 font-light leading-relaxed mb-3">
-                {t(
-                  "22 arquetipos iniciáticos plasmados en talismanes 100% minerales que despiertan el viaje evolutivo del alma.",
-                  "22 initiatory archetypes captured in 100% pure mineral talismans awakening the soul journey."
-                )}
-              </p>
-              <span className="text-[10px] uppercase tracking-widest text-[#C5A059] flex items-center gap-1">
-                <span>{t("Ver 22 Arcanos", "View 22 Arcana")}</span>
-                <span>→</span>
+          {/* Estantería de las 6 Ramas Sagradas estilo Galería de Joyería & Minerales */}
+          <div className="mt-8">
+            <div className="text-center mb-8">
+              <span className="text-[10px] font-sans tracking-[0.28em] uppercase text-[#C5A059] block mb-1 font-medium">
+                {t("ARTEFACTOS SAGRADOS DEL SANTUARIO", "SACRED ARTIFACTS OF THE SANCTUARY")}
               </span>
+              <h3 className="text-xl sm:text-2xl font-light tracking-[0.2em] text-white uppercase">
+                {t("EXPLORA POR DISCIPLINA", "EXPLORE BY DISCIPLINE")}
+              </h3>
             </div>
 
-            {/* 2. REIKI */}
-            <div
-              onClick={() => {
-                setSelectedCategory("reiki-sanacion");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="p-5 rounded-lg bg-[#0E0E0E]/80 border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 cursor-pointer group hover:bg-[#121212]"
-            >
-              <div className="text-2xl mb-3 text-cyan-400 group-hover:scale-110 transition-transform">✨</div>
-              <h3 className="text-sm font-sans tracking-[0.2em] uppercase text-white font-semibold mb-1 group-hover:text-cyan-400 transition-colors">
-                {t("Reiki & Energía Vital", "Reiki & Life Force")}
-              </h3>
-              <p className="text-[11px] text-neutral-400 font-light leading-relaxed mb-3">
-                {t(
-                  "Canalización pránica, símbolos sagrados Cho Ku Rei y armonización de los centros áuricos con cristales.",
-                  "Pranic energy channel, Cho Ku Rei sacred symbols, and auric chakra harmonization with crystals."
-                )}
-              </p>
-              <span className="text-[10px] uppercase tracking-widest text-cyan-400 flex items-center gap-1">
-                <span>{t("Colección Reiki", "Reiki Collection")}</span>
-                <span>→</span>
-              </span>
+            {/* Grid / Shelf de 6 Disciplinas con Reflejo Especular Negro */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
+              
+              {/* 1. TAROT HERMÉTICO */}
+              <button
+                onClick={() => {
+                  setSelectedCategory("coleccion-arcanos");
+                  setSelectedStone("todos");
+                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-[#C5A059] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,160,89,0.25)]"
+              >
+                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/images/shop/disciplinas/tarot_specimen.jpg"
+                    alt="Tarot Hermético"
+                    fill
+                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                    sizes="(max-width: 640px) 96px, 128px"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-[#C5A059] transition-colors block mb-1">
+                  {t("Tarot Hermético", "Hermetic Tarot")}
+                </span>
+                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
+                  {t("Arquetipos & Destino", "Archetypes & Soul")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-[#C5A059]/40 text-[#C5A059] tracking-wider uppercase font-sans">
+                  {t("22 Arcanos", "22 Arcana")}
+                </span>
+              </button>
+
+              {/* 2. ASTROLOGÍA CÓSMICA */}
+              <Link
+                href="/carta-astral"
+                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-indigo-400 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]"
+              >
+                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/images/shop/disciplinas/astrology_specimen.jpg"
+                    alt="Astrología Cósmica"
+                    fill
+                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                    sizes="(max-width: 640px) 96px, 128px"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-indigo-400 transition-colors block mb-1">
+                  {t("Astrología", "Astrology")}
+                </span>
+                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
+                  {t("Carta Astral & Tránsitos", "Natal Chart & Stars")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-indigo-500/40 text-indigo-300 tracking-wider uppercase font-sans">
+                  {t("Calculadora", "Calculator")}
+                </span>
+              </Link>
+
+              {/* 3. REIKI & ENERGÍA VITAL */}
+              <button
+                onClick={() => {
+                  setSelectedCategory("reiki-sanacion");
+                  setSelectedStone("todos");
+                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-cyan-400 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(6,182,212,0.25)]"
+              >
+                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/images/shop/disciplinas/reiki_specimen.jpg"
+                    alt="Reiki & Sanación"
+                    fill
+                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                    sizes="(max-width: 640px) 96px, 128px"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-cyan-400 transition-colors block mb-1">
+                  {t("Reiki Sagrado", "Sacred Reiki")}
+                </span>
+                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
+                  {t("Cristales & Cho Ku Rei", "Crystals & Prana")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-cyan-500/40 text-cyan-300 tracking-wider uppercase font-sans">
+                  {t("Sanación", "Healing")}
+                </span>
+              </button>
+
+              {/* 4. NUMEROLOGÍA SAGRADA */}
+              <button
+                onClick={() => {
+                  setSelectedCategory("frecuencias-angelicales");
+                  setSelectedStone("todos");
+                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-amber-400 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(251,191,36,0.25)]"
+              >
+                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/images/shop/disciplinas/numerology_specimen.jpg"
+                    alt="Numerología Sagrada"
+                    fill
+                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                    sizes="(max-width: 640px) 96px, 128px"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-amber-400 transition-colors block mb-1">
+                  {t("Numerología", "Numerology")}
+                </span>
+                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
+                  {t("Frecuencias 11:11 & 777", "Angel Numbers & Codes")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-amber-500/40 text-amber-300 tracking-wider uppercase font-sans">
+                  {t("Sincronías", "Synchronicities")}
+                </span>
+              </button>
+
+              {/* 5. ALTAR & SAHUMERIOS (DOBLE PERFORACIÓN) */}
+              <button
+                onClick={() => {
+                  setSelectedCategory("doble-perforacion");
+                  setSelectedStone("todos");
+                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-[#C5A059] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,160,89,0.25)]"
+              >
+                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/images/shop/disciplinas/alchemy_specimen.jpg"
+                    alt="Altar Fluvial & Sahumerios"
+                    fill
+                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                    sizes="(max-width: 640px) 96px, 128px"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-[#C5A059] transition-colors block mb-1">
+                  {t("Altar & Alquimia", "Altar & Alchemy")}
+                </span>
+                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
+                  {t("Basalto de Río & Humo", "River Basalt & Smoke")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-neutral-700 text-neutral-300 tracking-wider uppercase font-sans">
+                  {t("Doble Orificio", "Dual Incense")}
+                </span>
+              </button>
+
+              {/* 6. TALISMANES DE MUÑECA */}
+              <button
+                onClick={() => {
+                  setSelectedCategory("talismanes");
+                  setSelectedStone("todos");
+                  document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-black/80 hover:bg-[#111111] border border-neutral-800/80 hover:border-[#C5A059] transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(197,160,89,0.25)]"
+              >
+                <div className="relative aspect-square w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-2 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/images/shop/disciplinas/talisman_specimen.jpg"
+                    alt="Talismanes de Muñeca"
+                    fill
+                    className="object-contain filter brightness-105 group-hover:brightness-120 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+                    sizes="(max-width: 640px) 96px, 128px"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-white group-hover:text-[#C5A059] transition-colors block mb-1">
+                  {t("Talismanes Puros", "Pure Talismans")}
+                </span>
+                <span className="text-[10px] text-neutral-400 font-light tracking-wide line-clamp-1 mb-2">
+                  {t("Minerales 8mm Sin Metal", "Pure 8mm No Metal")}
+                </span>
+                <span className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full bg-[#181818] border border-[#C5A059]/40 text-[#C5A059] tracking-wider uppercase font-sans">
+                  {t("Alta Joyería", "Fine Jewelry")}
+                </span>
+              </button>
+
             </div>
-
-            {/* 3. NUMEROLOGÍA */}
-            <div
-              onClick={() => {
-                setSelectedCategory("frecuencias-angelicales");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="p-5 rounded-lg bg-[#0E0E0E]/80 border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 cursor-pointer group hover:bg-[#121212]"
-            >
-              <div className="text-2xl mb-3 text-amber-400 group-hover:scale-110 transition-transform">♾️</div>
-              <h3 className="text-sm font-sans tracking-[0.2em] uppercase text-white font-semibold mb-1 group-hover:text-amber-400 transition-colors">
-                {t("Numerología Sagrada", "Sacred Numerology")}
-              </h3>
-              <p className="text-[11px] text-neutral-400 font-light leading-relaxed mb-3">
-                {t(
-                  "Frecuencias angelicales (11:11, 777, 444) y geometría de Metatrón para sellar sincronicidades cósmicas.",
-                  "Angel numbers (11:11, 777, 444) and Metatron geometry anchoring cosmic synchronicities."
-                )}
-              </p>
-              <span className="text-[10px] uppercase tracking-widest text-amber-400 flex items-center gap-1">
-                <span>{t("Números Angelicales", "Angel Numbers")}</span>
-                <span>→</span>
-              </span>
-            </div>
-
-            {/* 4. ASTROLOGÍA */}
-            <Link
-              href="/carta-astral"
-              className="p-5 rounded-lg bg-[#0E0E0E]/80 border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 cursor-pointer group hover:bg-[#121212]"
-            >
-              <div className="text-2xl mb-3 text-indigo-400 group-hover:scale-110 transition-transform">🪐</div>
-              <h3 className="text-sm font-sans tracking-[0.2em] uppercase text-white font-semibold mb-1 group-hover:text-indigo-400 transition-colors">
-                {t("Astrología Cósmica", "Cosmic Astrology")}
-              </h3>
-              <p className="text-[11px] text-neutral-400 font-light leading-relaxed mb-3">
-                {t(
-                  "Cartografía natal interactiva, tránsitos planetarios y correspondencias astrales con gemas puras.",
-                  "Interactive natal astrology, planetary transits, and stellar gemstone correspondences."
-                )}
-              </p>
-              <span className="text-[10px] uppercase tracking-widest text-indigo-400 flex items-center gap-1">
-                <span>{t("Abrir Carta Natal", "Open Natal Chart")}</span>
-                <span>→</span>
-              </span>
-            </Link>
-
           </div>
         </div>
       </section>
