@@ -1,33 +1,16 @@
+"use client";
+
 import React, { Suspense } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { useSearchParams } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Consagración Confirmada | Pedido Recibido | ARCANO",
-  description: "Tu pedido ha sido recibido y ha entrado al Círculo de Consagración Ceremonial de ARCANO.",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
-
-interface SuccessProps {
-  searchParams: Promise<{
-    order_id?: string;
-    payment_id?: string;
-    collection_status?: string;
-    status?: string;
-    external_reference?: string;
-  }>;
-}
-
-async function SuccessContent({ searchParams }: SuccessProps) {
-  const resolvedParams = await searchParams;
+function SuccessContent() {
+  const searchParams = useSearchParams();
   const orderId =
-    resolvedParams.order_id ||
-    resolvedParams.external_reference ||
-    `ARC-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-  const paymentId = resolvedParams.payment_id;
+    searchParams.get("order_id") ||
+    searchParams.get("external_reference") ||
+    "ARC-CEREMONIAL";
+  const paymentId = searchParams.get("payment_id");
 
   const whatsappMessage = encodeURIComponent(
     `¡Hola ARCANO! He completado mi orden ceremonial *${orderId}*${
@@ -102,7 +85,7 @@ async function SuccessContent({ searchParams }: SuccessProps) {
             </div>
           </div>
 
-          {/* Garantía y Asistencia */}
+          {/* Asistencia Directa */}
           <div className="p-4 rounded-lg bg-gold/5 border border-gold/20 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-xs font-serif text-gold font-semibold">
@@ -144,7 +127,7 @@ async function SuccessContent({ searchParams }: SuccessProps) {
   );
 }
 
-export default function CheckoutSuccessPage({ searchParams }: SuccessProps) {
+export default function CheckoutSuccessPage() {
   return (
     <Suspense
       fallback={
@@ -153,7 +136,7 @@ export default function CheckoutSuccessPage({ searchParams }: SuccessProps) {
         </div>
       }
     >
-      <SuccessContent searchParams={searchParams} />
+      <SuccessContent />
     </Suspense>
   );
 }

@@ -82,67 +82,41 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
         },
       };
 
-      // 1. Caso Mercado Pago
-      if (selectedGateway === "mercadopago") {
-        const res = await fetch("/api/checkout/mercadopago", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Error al conectar con Mercado Pago");
-        
-        if (data.initPoint) {
-          window.location.href = data.initPoint;
-          return;
-        }
-      }
-
-      // 2. Caso Stripe (Google Pay / Apple Pay / Tarjetas)
-      if (selectedGateway === "stripe") {
-        const res = await fetch("/api/checkout/stripe", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Error al conectar con Stripe");
-
-        if (data.url) {
-          window.location.href = data.url;
-          return;
-        }
-      }
-
-      // 3. Caso PayPal
-      if (selectedGateway === "paypal") {
-        const res = await fetch("/api/checkout/paypal", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Error al conectar con PayPal");
-
-        if (data.url) {
-          window.location.href = data.url;
-          return;
-        }
-      }
-
-      // 4. Caso SPEI Directo (Cero Comisiones a cuenta oficial)
+      // 1. Caso SPEI Directo (Cero Comisiones a cuenta oficial de Sergio Adrián Pérez Villarreal)
       if (selectedGateway === "spei_direct") {
-        // Redirigir a página de instrucciones SPEI con los datos oficiales
         window.location.href = `/checkout/pending?gateway=spei_direct&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
         return;
       }
 
-      // 5. Caso WhatsApp Concierge
+      // 2. Caso WhatsApp Concierge
       if (selectedGateway === "whatsapp") {
         window.open(getWhatsAppOrderUrl(), "_blank");
         onClose();
         return;
       }
+
+      // 3. Caso Mercado Pago, Stripe o PayPal en arquitectura estática (GitHub Pages)
+      // Generar orden ceremonial y conectar con el Concierge Oficial para enlace seguro
+      const gatewayNames: Record<string, string> = {
+        mercadopago: "Mercado Pago (Tarjetas, OXXO, hasta 12 MSI)",
+        stripe: "Stripe (Apple Pay, Google Pay, Tarjetas Internacionales)",
+        paypal: "PayPal Express",
+      };
+
+      const selectedName = gatewayNames[selectedGateway] || "Pago Digital";
+      const customWhatsAppMessage = encodeURIComponent(
+        `¡Hola ARCANO! He generado mi orden ceremonial *${orderId}* por *${selectedName}*.\n\n` +
+        `📦 *Resumen de Orden:*\n` +
+        items.map(item => `• ${item.quantity}x ${item.name} (${item.optionLabel || "Edición Sagrada"}) - $${(item.price * item.quantity).toLocaleString("es-MX")} MXN`).join("\n") +
+        `\n\n💰 *Total a pagar:* $${finalTotal.toLocaleString("es-MX")} MXN\n` +
+        `📍 *Destino:* ${shippingForm.street} #${shippingForm.number}, Col. ${shippingForm.colonia}, ${shippingForm.city}, ${shippingForm.state} CP ${shippingForm.zipCode}\n` +
+        `👤 *Titular:* ${shippingForm.name} (${shippingForm.phone})\n\n` +
+        `¿Me podrían proporcionar el enlace de pago oficial para completar la consagración?`
+      );
+
+      window.open(`https://wa.me/528180923854?text=${customWhatsAppMessage}`, "_blank");
+      window.location.href = `/checkout/pending?gateway=${selectedGateway}&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
+      return;
     } catch (err: any) {
       console.error("Error al procesar pago:", err);
       setErrorMessage(err.message || "Ocurrió un error inesperado al iniciar el pago.");

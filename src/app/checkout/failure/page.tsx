@@ -1,27 +1,12 @@
+"use client";
+
 import React, { Suspense } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { useSearchParams } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Pago No Completado | Reintentar Checkout | ARCANO",
-  description: "Tu pago no pudo procesarse. Puedes intentar con otro método o solicitar asistencia personalizada.",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
-
-interface FailureProps {
-  searchParams: Promise<{
-    order_id?: string;
-    error?: string;
-    status?: string;
-  }>;
-}
-
-async function FailureContent({ searchParams }: FailureProps) {
-  const resolvedParams = await searchParams;
-  const orderId = resolvedParams.order_id || "ARC-SESION";
+function FailureContent() {
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get("order_id") || "ARC-SESION";
 
   const whatsappMessage = encodeURIComponent(
     `¡Hola ARCANO! Tuve un inconveniente al pagar mi orden ceremonial *${orderId}*. ¿Me podrían ayudar a completar mi compra por transferencia o enlace directo?`
@@ -108,7 +93,7 @@ async function FailureContent({ searchParams }: FailureProps) {
   );
 }
 
-export default function CheckoutFailurePage({ searchParams }: FailureProps) {
+export default function CheckoutFailurePage() {
   return (
     <Suspense
       fallback={
@@ -117,7 +102,7 @@ export default function CheckoutFailurePage({ searchParams }: FailureProps) {
         </div>
       }
     >
-      <FailureContent searchParams={searchParams} />
+      <FailureContent />
     </Suspense>
   );
 }

@@ -1,31 +1,16 @@
+"use client";
+
 import React, { Suspense } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { useSearchParams } from "next/navigation";
 import { paymentConfig } from "@/config/paymentConfig";
 
-export const metadata: Metadata = {
-  title: "Pago en Proceso | Ficha de Depósito | ARCANO",
-  description: "Tu orden ha sido registrada. Completa tu pago mediante SPEI o en efectivo OXXO para iniciar la consagración.",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
-
-interface PendingProps {
-  searchParams: Promise<{
-    order_id?: string;
-    payment_id?: string;
-    external_reference?: string;
-  }>;
-}
-
-async function PendingContent({ searchParams }: PendingProps) {
-  const resolvedParams = await searchParams;
+function PendingContent() {
+  const searchParams = useSearchParams();
   const orderId =
-    resolvedParams.order_id ||
-    resolvedParams.external_reference ||
-    `ARC-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+    searchParams.get("order_id") ||
+    searchParams.get("external_reference") ||
+    "ARC-CEREMONIAL";
 
   const whatsappMessage = encodeURIComponent(
     `¡Hola ARCANO! Adjunto el comprobante de pago para mi orden ceremonial *${orderId}*. Deseo que inicien la preparación.`
@@ -107,7 +92,7 @@ async function PendingContent({ searchParams }: PendingProps) {
               <span>¿Elegiste pagar en efectivo OXXO?</span>
             </p>
             <p className="text-parchment-muted text-[11px] leading-relaxed">
-              Descarga o presenta en caja de cualquier tienda OXXO el código de barras generado por Mercado Pago / Stripe. El pago se acredita automáticamente en minutos.
+              Descarga o presenta en caja de cualquier tienda OXXO el código de barras generado por Mercado Pago / Spin. El pago se acredita automáticamente en minutos.
             </p>
           </div>
 
@@ -147,7 +132,7 @@ async function PendingContent({ searchParams }: PendingProps) {
   );
 }
 
-export default function CheckoutPendingPage({ searchParams }: PendingProps) {
+export default function CheckoutPendingPage() {
   return (
     <Suspense
       fallback={
@@ -156,7 +141,7 @@ export default function CheckoutPendingPage({ searchParams }: PendingProps) {
         </div>
       }
     >
-      <PendingContent searchParams={searchParams} />
+      <PendingContent />
     </Suspense>
   );
 }
