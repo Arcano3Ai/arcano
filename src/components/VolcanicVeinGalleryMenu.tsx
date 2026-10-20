@@ -27,8 +27,12 @@ export interface GeologicalVeinNode {
   pointerDirection: "right" | "left"; // Hacia dónde apunta la línea guía
 }
 
-export const VOLCANIC_VEIN_NODES: GeologicalVeinNode[] = [
-  // ── TRAMO 1: SUPERIOR (IZQUIERDA A DERECHA) ──
+/**
+ * TRAMO I: FALLA SUPERIOR (SUPERFICIE A PROFUNDIDADES INTERMEDIAS)
+ * Imagen: /images/landing/volcanic_mine_vein_master.jpg
+ */
+export const VOLCANIC_VEIN_NODES_PART1: GeologicalVeinNode[] = [
+  // ── Tramo 1: Superior (Izquierda a Derecha) ──
   {
     id: "Lapislázuli",
     index: "#1",
@@ -149,7 +153,7 @@ export const VOLCANIC_VEIN_NODES: GeologicalVeinNode[] = [
     pointerDirection: "left",
   },
 
-  // ── TRAMO 2: PRIMER REBOTE (DERECHA A IZQUIERDA) ──
+  // ── Tramo 2: Primer Rebote (Derecha a Izquierda) ──
   {
     id: "Malaquita",
     index: "#8",
@@ -236,7 +240,7 @@ export const VOLCANIC_VEIN_NODES: GeologicalVeinNode[] = [
     pointerDirection: "right",
   },
 
-  // ── TRAMO 3: SEGUNDO REBOTE & PROFUNDIDADES (IZQUIERDA A DERECHA) ──
+  // ── Tramo 3: Segundo Rebote (Izquierda a Derecha) ──
   {
     id: "Amatista",
     index: "#13",
@@ -341,13 +345,275 @@ export const VOLCANIC_VEIN_NODES: GeologicalVeinNode[] = [
   },
 ];
 
+/**
+ * TRAMO II: PROFUNDIDADES DE LOS 22 ARCANOS (CONTINUACIÓN EXACTA)
+ * Imagen: /images/landing/volcanic_mine_vein_part2.jpg
+ */
+export const VOLCANIC_VEIN_NODES_PART2: GeologicalVeinNode[] = [
+  {
+    id: "Howlita",
+    index: "#19",
+    nameEs: "Howlita Blanca",
+    nameEn: "White Howlite",
+    vibeEs: "El Loco · Libertad y Comienzo",
+    vibeEn: "The Fool · New Beginnings",
+    itemCount: 8,
+    image: "/images/shop/stones/howlite_raw.jpg",
+    accentColor: "#F1F5F9",
+    tier: 1,
+    cardTop: "16%",
+    cardLeft: "4%",
+    pinTop: "18%",
+    pinLeft: "48%",
+    pointerDirection: "right",
+  },
+  {
+    id: "Ónix",
+    index: "#20",
+    nameEs: "Ónix Negro Azabache",
+    nameEn: "Black Onyx",
+    vibeEs: "El Mago · Voluntad y Foco",
+    vibeEn: "The Magician · Focused Will",
+    itemCount: 14,
+    image: "/images/shop/stones/onyx_raw.jpg",
+    accentColor: "#3F3F46",
+    tier: 1,
+    cardTop: "24%",
+    cardRight: "4%",
+    pinTop: "27%",
+    pinRight: "30%",
+    pointerDirection: "left",
+  },
+  {
+    id: "Jaspe",
+    index: "#21",
+    nameEs: "Jaspe Rojo Telúrico",
+    nameEn: "Red Jasper",
+    vibeEs: "El Emperador · Fuerza y Estructura",
+    vibeEn: "The Emperor · Earth Strength",
+    itemCount: 8,
+    image: "/images/shop/stones/red_jasper_raw.jpg",
+    accentColor: "#DC2626",
+    tier: 1,
+    cardTop: "33%",
+    cardRight: "4%",
+    pinTop: "36%",
+    pinRight: "15%",
+    pointerDirection: "left",
+  },
+  {
+    id: "Cuarzo Rosa",
+    index: "#22",
+    nameEs: "Cuarzo Rosa Sagrado",
+    nameEn: "Rose Quartz",
+    vibeEs: "La Emperatriz · Amor Incondicional",
+    vibeEn: "The Empress · Pure Love",
+    itemCount: 12,
+    image: "/images/shop/stones/rose_quartz_raw.jpg",
+    accentColor: "#F472B6",
+    tier: 2,
+    cardTop: "42%",
+    cardRight: "4%",
+    pinTop: "46%",
+    pinRight: "35%",
+    pointerDirection: "left",
+  },
+  {
+    id: "Aventurina",
+    index: "#23",
+    nameEs: "Aventurina Verde & Jade",
+    nameEn: "Green Aventurine & Jade",
+    vibeEs: "Abundancia Telúrica · Salud",
+    vibeEn: "Abundance & Vitality",
+    itemCount: 8,
+    image: "/images/shop/stones/malachite_raw.jpg",
+    accentColor: "#10B981",
+    tier: 2,
+    cardTop: "48%",
+    cardLeft: "4%",
+    pinTop: "52%",
+    pinLeft: "38%",
+    pointerDirection: "right",
+  },
+  {
+    id: "Sodalita",
+    index: "#24",
+    nameEs: "Sodalita Azul Real",
+    nameEn: "Royal Blue Sodalite",
+    vibeEs: "El Hierofante · Sabiduría y Guía",
+    vibeEn: "The Hierophant · Ancient Wisdom",
+    itemCount: 8,
+    image: "/images/shop/stones/sodalite_raw.jpg",
+    accentColor: "#2563EB",
+    tier: 2,
+    cardTop: "57%",
+    cardLeft: "4%",
+    pinTop: "60%",
+    pinLeft: "20%",
+    pointerDirection: "right",
+  },
+  {
+    id: "Piedra Luna",
+    index: "#25",
+    nameEs: "Piedra Luna & Opalina",
+    nameEn: "Moonstone & Opalite",
+    vibeEs: "La Sacerdotisa · Intuición Mística",
+    vibeEn: "High Priestess · Mystic Light",
+    itemCount: 8,
+    image: "/images/shop/stones/moonstone_raw.jpg",
+    accentColor: "#67E8F9",
+    tier: 3,
+    cardTop: "69%",
+    cardLeft: "4%",
+    pinTop: "73%",
+    pinLeft: "36%",
+    pointerDirection: "right",
+  },
+  {
+    id: "Hematita",
+    index: "#26",
+    nameEs: "Hematita Gris Metálica",
+    nameEn: "Metallic Hematite",
+    vibeEs: "Espejo Alquímico · Escudo",
+    vibeEn: "Alchemical Mirror · Shield",
+    itemCount: 6,
+    image: "/images/shop/stones/hematite_raw.jpg",
+    accentColor: "#94A3B8",
+    tier: 3,
+    cardTop: "76%",
+    cardRight: "4%",
+    pinTop: "80%",
+    pinRight: "35%",
+    pointerDirection: "left",
+  },
+  {
+    id: "Cuarzo",
+    index: "#27",
+    nameEs: "Geoda de Cuarzo Cristal",
+    nameEn: "Quartz Crystal Geode",
+    vibeEs: "Claridad Radiante · Luz Divina",
+    vibeEn: "Pure Clarity · Divine Light",
+    itemCount: 10,
+    image: "/images/shop/stones/quartz_crystal_raw.jpg",
+    accentColor: "#E2E8F0",
+    tier: 3,
+    cardTop: "86%",
+    cardRight: "4%",
+    pinTop: "89%",
+    pinRight: "18%",
+    pointerDirection: "left",
+  },
+  {
+    id: "Pirita",
+    index: "#28",
+    nameEs: "Cuarzo Rutilado & Pirita Oro",
+    nameEn: "Golden Rutilated Quartz",
+    vibeEs: "El Sol · Victoria Solar y Oro 18K",
+    vibeEn: "The Sun · Solar Triumph & 18K Gold",
+    itemCount: 6,
+    image: "/images/shop/stones/pyrite_raw.jpg",
+    accentColor: "#F59E0B",
+    tier: 3,
+    cardTop: "88%",
+    cardLeft: "8%",
+    pinTop: "91%",
+    pinLeft: "45%",
+    pointerDirection: "right",
+  },
+];
+
 export function VolcanicVeinGalleryMenu() {
   const { language, t } = useLanguage();
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
 
+  const renderNodes = (nodes: GeologicalVeinNode[]) => {
+    return nodes.map((node) => {
+      const isHovered = hoveredNodeId === `${node.id}-${node.index}`;
+
+      return (
+        <React.Fragment key={`${node.id}-${node.index}`}>
+          {/* 1. Pin / Destello sobre el cristal correspondiente */}
+          <div
+            className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"
+            style={{
+              top: node.pinTop,
+              left: node.pinLeft,
+              right: node.pinRight,
+            }}
+          >
+            <div
+              className={`rounded-full transition-all duration-300 ${
+                isHovered
+                  ? "w-4 h-4 shadow-[0_0_20px_#FFFFFF] scale-150 animate-ping"
+                  : "w-2.5 h-2.5 shadow-[0_0_12px_#FFFFFF] opacity-80 animate-pulse"
+              }`}
+              style={{ backgroundColor: node.accentColor }}
+            />
+            <div className="w-1.5 h-1.5 rounded-full bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          </div>
+
+          {/* 2. Tarjeta flotante interactiva estilo menú de galería */}
+          <Link
+            href={`/tienda?stone=${encodeURIComponent(node.id)}#catalogo-top`}
+            onMouseEnter={() => setHoveredNodeId(`${node.id}-${node.index}`)}
+            onMouseLeave={() => setHoveredNodeId(null)}
+            className={`absolute z-30 flex items-center gap-2.5 sm:gap-3 p-2 sm:p-2.5 rounded-xl border backdrop-blur-md transition-all duration-300 cursor-pointer group ${
+              isHovered
+                ? "bg-black/95 border-[#C5A059] scale-105 shadow-[0_0_25px_rgba(197,160,89,0.5)] ring-1 ring-[#C5A059]"
+                : "bg-black/80 hover:bg-black/90 border-neutral-800/90 hover:border-[#C5A059]/70 shadow-xl"
+            }`}
+            style={{
+              top: node.cardTop,
+              left: node.cardLeft,
+              right: node.cardRight,
+            }}
+          >
+            {/* Badge de número / ID */}
+            <span className="text-[9px] sm:text-[10px] font-mono text-neutral-400 group-hover:text-[#C5A059] font-bold">
+              {node.index}
+            </span>
+
+            {/* Miniatura del mineral en bruto */}
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden bg-black/60 border border-neutral-700/60 flex-shrink-0 group-hover:border-[#C5A059]/80 transition-colors">
+              <Image
+                src={node.image}
+                alt={language === "es" ? node.nameEs : node.nameEn}
+                fill
+                sizes="40px"
+                className="object-cover filter contrast-110 group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+
+            {/* Textos del nodo */}
+            <div className="flex flex-col text-left">
+              <div className="flex items-center gap-1.5">
+                <span className="font-serif text-[11px] sm:text-xs font-medium tracking-[0.12em] uppercase text-white group-hover:text-[#C5A059] transition-colors leading-tight">
+                  {language === "es" ? node.nameEs : node.nameEn}
+                </span>
+              </div>
+
+              <span className="text-[8px] sm:text-[9px] text-neutral-400 font-sans tracking-wide line-clamp-1 leading-tight mt-0.5">
+                {language === "es" ? node.vibeEs : node.vibeEn}
+              </span>
+
+              <span className="text-[7px] sm:text-[8px] font-mono text-[#C5A059]/90 tracking-widest uppercase mt-0.5">
+                {node.itemCount} {t("piezas · Entrar →", "pieces · Enter →")}
+              </span>
+            </div>
+
+            {/* Resplandor lateral indicativo */}
+            <div
+              className="w-1 h-6 rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
+              style={{ backgroundColor: node.accentColor }}
+            />
+          </Link>
+        </React.Fragment>
+      );
+    });
+  };
+
   return (
     <section className="relative w-full bg-[#050505] text-white overflow-hidden py-12 lg:py-20 select-none">
-      
       {/* ─────────────────────────────────────────────────────────────
           1. ENCABEZADO EDITORIAL DE ALTA JOYERÍA
          ───────────────────────────────────────────────────────────── */}
@@ -355,7 +621,7 @@ export function VolcanicVeinGalleryMenu() {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/85 border border-[#C5A059]/60 backdrop-blur-md shadow-2xl mb-4">
           <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse" />
           <span className="text-[10px] sm:text-xs font-serif tracking-[0.3em] uppercase text-[#C5A059] font-medium">
-            {t("MENÚ DE LA GALERÍA · TALISMANES DE MINERAL PURO", "GALLERY MENU · 100% PURE MINERAL TALISMANS")}
+            {t("MENÚ DE LA GALERÍA · 28 MINERALES PUROS", "GALLERY MENU · 28 PURE MINERALS")}
           </span>
         </div>
 
@@ -365,13 +631,13 @@ export function VolcanicVeinGalleryMenu() {
 
         <p className="font-serif italic text-xs sm:text-sm text-neutral-300 max-w-2xl mx-auto tracking-wide leading-relaxed drop-shadow-md">
           {t(
-            "Desciende por la fractura de la tierra en zigzag. Sigue el curso de la veta viva de lado a lado y toca cualquier espécimen para ingresar directamente a su colección en la galería.",
-            "Descend along the zigzagging fissure. Follow the living mineral vein from side to side and tap any specimen to enter its direct gallery collection."
+            "Desciende por la fractura monumental de la tierra en zigzag. Sigue el curso continuo de la veta viva de lado a lado y toca cualquier espécimen para ingresar directamente a su colección en la galería.",
+            "Descend along the monumental zigzagging earth fissure. Follow the continuous mineral vein from side to side and tap any specimen to enter its direct gallery collection."
           )}
         </p>
 
-        {/* Acciones directas */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-sans tracking-widest uppercase">
+        {/* Acciones directas y anclajes rápidos */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-sans tracking-widest uppercase">
           <Link
             href="/tienda/#catalogo-top"
             className="px-6 py-2.5 rounded-full bg-[#C5A059] hover:bg-[#d8b368] text-black font-semibold transition-all shadow-[0_0_20px_rgba(197,160,89,0.4)] hover:scale-105 cursor-pointer"
@@ -379,133 +645,43 @@ export function VolcanicVeinGalleryMenu() {
             {t("✦ Explorar Catálogo Completo", "✦ Browse Full Catalog")}
           </Link>
           <a
-            href="#recorrido-falla"
-            className="px-5 py-2.5 rounded-full bg-black/80 hover:bg-neutral-900 border border-neutral-700 hover:border-[#C5A059] text-neutral-300 hover:text-white transition-all backdrop-blur cursor-pointer"
+            href="#tramo-falla-1"
+            className="px-4 py-2 rounded-full bg-black/80 hover:bg-neutral-900 border border-neutral-700 hover:border-[#C5A059] text-neutral-300 hover:text-white transition-all backdrop-blur cursor-pointer text-[11px]"
           >
-            {t("Bajar por la Veta ↓", "Descend the Vein ↓")}
+            {t("Tramo I: Falla Superior ↓", "Part I: Upper Vein ↓")}
+          </a>
+          <a
+            href="#tramo-falla-2"
+            className="px-4 py-2 rounded-full bg-black/80 hover:bg-neutral-900 border border-[#C5A059]/60 hover:border-[#C5A059] text-[#C5A059] hover:text-white transition-all backdrop-blur cursor-pointer text-[11px] shadow-[0_0_15px_rgba(197,160,89,0.2)]"
+          >
+            {t("Tramo II: Núcleo de los Arcanos ⤓", "Part II: Arcana Core ⤓")}
           </a>
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. LIENZO GIGANTE DESKTOP: VETA CONTINUA EN ZIGZAG (9:16)
+          2. LIENZO MONUMENTAL EXTENDIDO: VETA CONTINUA EN DOS TRAMOS
          ───────────────────────────────────────────────────────────── */}
-      <div id="recorrido-falla" className="relative max-w-[1240px] mx-auto px-2 sm:px-4">
+      <div id="recorrido-falla" className="relative max-w-[1240px] mx-auto px-2 sm:px-4 space-y-4 sm:space-y-6">
         
-        {/* Contenedor con ratio vertical idéntico a la imagen maestra (9:16) */}
-        <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-neutral-800/80 shadow-[0_25px_80px_rgba(0,0,0,0.95)] bg-black">
-          
-          {/* Fondo fotográfico en alta resolución de la pared volcánica sin texto */}
+        {/* ── TRAMO I: FALLA SUPERIOR (NODOS #1 AL #18) ── */}
+        <div id="tramo-falla-1" className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-neutral-800/80 shadow-[0_25px_80px_rgba(0,0,0,0.95)] bg-black">
+          {/* Fondo fotográfico Parte 1 */}
           <Image
             src="/images/landing/volcanic_mine_vein_master.jpg"
-            alt="Pared Volcánica y Veta de Cristales en Zigzag - ARCANO"
+            alt="Pared Volcánica y Veta de Cristales en Zigzag - Tramo Superior - ARCANO"
             fill
             priority
             sizes="(max-width: 1240px) 100vw, 1240px"
             className="object-cover object-center filter brightness-105 contrast-115"
           />
 
-          {/* Viñeta perimetral de sombra para integrar los bordes con elegancia */}
+          {/* Viñetas perimetrales */}
           <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
           <div className="absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-black/80 to-transparent pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-black/80 to-transparent pointer-events-none" />
 
-          {/* ─────────────────────────────────────────────────────────
-              NODOS Y TARJETAS FLOTANTES SOBRE LA ROCA VOLCÁNICA
-             ───────────────────────────────────────────────────────── */}
-          {VOLCANIC_VEIN_NODES.map((node) => {
-            const isHovered = hoveredNodeId === node.id;
-
-            return (
-              <React.Fragment key={`${node.id}-${node.index}`}>
-                
-                {/* 1. Pin / Destello sobre el cristal correspondiente */}
-                <div
-                  className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"
-                  style={{
-                    top: node.pinTop,
-                    left: node.pinLeft,
-                    right: node.pinRight,
-                  }}
-                >
-                  <div
-                    className={`rounded-full transition-all duration-300 ${
-                      isHovered
-                        ? "w-4 h-4 shadow-[0_0_20px_#FFFFFF] scale-150 animate-ping"
-                        : "w-2.5 h-2.5 shadow-[0_0_12px_#FFFFFF] opacity-80 animate-pulse"
-                    }`}
-                    style={{ backgroundColor: node.accentColor }}
-                  />
-                  <div
-                    className="w-1.5 h-1.5 rounded-full bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                  />
-                </div>
-
-                {/* 2. Tarjeta flotante interactiva estilo menú de galería */}
-                <Link
-                  href={`/tienda?stone=${encodeURIComponent(node.id)}#catalogo-top`}
-                  onMouseEnter={() => setHoveredNodeId(node.id)}
-                  onMouseLeave={() => setHoveredNodeId(null)}
-                  className={`absolute z-30 flex items-center gap-2.5 sm:gap-3 p-2 sm:p-2.5 rounded-xl border backdrop-blur-md transition-all duration-300 cursor-pointer group ${
-                    isHovered
-                      ? "bg-black/95 border-[#C5A059] scale-105 shadow-[0_0_25px_rgba(197,160,89,0.5)] ring-1 ring-[#C5A059]"
-                      : "bg-black/80 hover:bg-black/90 border-neutral-800/90 hover:border-[#C5A059]/70 shadow-xl"
-                  }`}
-                  style={{
-                    top: node.cardTop,
-                    left: node.cardLeft,
-                    right: node.cardRight,
-                  }}
-                >
-                  {/* Badge de número / ID */}
-                  <span className="text-[9px] sm:text-[10px] font-mono text-neutral-400 group-hover:text-[#C5A059] font-bold">
-                    {node.index}
-                  </span>
-
-                  {/* Miniatura del mineral en bruto */}
-                  <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden bg-black/60 border border-neutral-700/60 flex-shrink-0 group-hover:border-[#C5A059]/80 transition-colors">
-                    <Image
-                      src={node.image}
-                      alt={language === "es" ? node.nameEs : node.nameEn}
-                      fill
-                      sizes="40px"
-                      className="object-cover filter contrast-110 group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-
-                  {/* Textos del nodo */}
-                  <div className="flex flex-col text-left">
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-serif text-[11px] sm:text-xs font-medium tracking-[0.12em] uppercase text-white group-hover:text-[#C5A059] transition-colors leading-tight">
-                        {language === "es" ? node.nameEs : node.nameEn}
-                      </span>
-                    </div>
-
-                    <span className="text-[8px] sm:text-[9px] text-neutral-400 font-sans tracking-wide line-clamp-1 leading-tight mt-0.5">
-                      {language === "es" ? node.vibeEs : node.vibeEn}
-                    </span>
-
-                    <span className="text-[7px] sm:text-[8px] font-mono text-[#C5A059]/90 tracking-widest uppercase mt-0.5">
-                      {node.itemCount} {t("piezas · Entrar →", "pieces · Enter →")}
-                    </span>
-                  </div>
-
-                  {/* Resplandor lateral indicativo */}
-                  <div
-                    className="w-1 h-6 rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
-                    style={{ backgroundColor: node.accentColor }}
-                  />
-                </Link>
-
-              </React.Fragment>
-            );
-          })}
-
-          {/* ─────────────────────────────────────────────────────────
-              INDICADORES DE REBOTE GEOLÓGICO SOBRE EL LIENZO
-             ───────────────────────────────────────────────────────── */}
-          
           {/* Vértice 1: Rebote Superior Derecho */}
           <div className="absolute top-[39.5%] right-[2%] z-20 pointer-events-none flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/90 border border-[#C5A059]/70 shadow-lg backdrop-blur">
             <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-ping" />
@@ -522,6 +698,45 @@ export function VolcanicVeinGalleryMenu() {
             </span>
           </div>
 
+          {/* Nodos interactivos Tramo I */}
+          {renderNodes(VOLCANIC_VEIN_NODES_PART1)}
+
+          {/* Indicador de continuidad al fondo del Tramo 1 */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/90 border border-[#C5A059]/80 shadow-[0_0_20px_rgba(197,160,89,0.3)] backdrop-blur">
+            <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-bounce" />
+            <span className="text-[8px] sm:text-[10px] font-serif tracking-[0.25em] uppercase text-[#C5A059] font-medium">
+              {t("✦ LA VETA CONTINÚA DESCENDIENDO AL NÚCLEO ARCANO ↓", "✦ VEIN CONTINUES DESCENDING TO ARCANA CORE ↓")}
+            </span>
+          </div>
+        </div>
+
+        {/* ── TRAMO II: PROFUNDIDADES DE LOS 22 ARCANOS (NODOS #19 AL #28) ── */}
+        <div id="tramo-falla-2" className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-neutral-800/80 shadow-[0_25px_80px_rgba(0,0,0,0.95)] bg-black">
+          {/* Fondo fotográfico Parte 2 (Continuación exacta) */}
+          <Image
+            src="/images/landing/volcanic_mine_vein_part2.jpg"
+            alt="Pared Volcánica y Veta de Cristales en Zigzag - Tramo II Profundidades Sagradas - ARCANO"
+            fill
+            sizes="(max-width: 1240px) 100vw, 1240px"
+            className="object-cover object-center filter brightness-105 contrast-115"
+          />
+
+          {/* Viñetas perimetrales */}
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-black/80 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-black/80 to-transparent pointer-events-none" />
+
+          {/* Badge de Tramo II */}
+          <div className="absolute top-4 left-4 z-20 pointer-events-none flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/90 border border-[#C5A059]/60 shadow-lg backdrop-blur">
+            <span className="text-[10px] text-[#C5A059]">⚜️</span>
+            <span className="text-[8px] sm:text-[9px] font-serif tracking-[0.2em] uppercase text-[#C5A059] font-medium">
+              {t("TRAMO II · MATRIZ SAGRADA DE LOS 22 ARCANOS", "PART II · SACRED 22 ARCANA MATRIX")}
+            </span>
+          </div>
+
+          {/* Nodos interactivos Tramo II */}
+          {renderNodes(VOLCANIC_VEIN_NODES_PART2)}
         </div>
 
       </div>
@@ -537,8 +752,8 @@ export function VolcanicVeinGalleryMenu() {
             </span>
             <p className="font-serif text-sm sm:text-base text-neutral-200">
               {t(
-                "Cada pieza se consagra en Luna Llena frente al fuego ceremonial y se confecciona a tu medida exacta.",
-                "Every talisman is consecrated under the Full Moon before sacred fire and custom made to your wrist size."
+                "28 minerales puros consagrados en Luna Llena frente al fuego ceremonial y calibrados milimétricamente a tu muñeca.",
+                "28 pure minerals consecrated under the Full Moon before sacred fire and custom calibrated to your wrist."
               )}
             </p>
           </div>

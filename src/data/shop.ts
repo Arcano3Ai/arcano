@@ -15,6 +15,14 @@ export interface GoldSpecification {
   certificate?: string;
 }
 
+export interface BeadMatrixSpecification {
+  archetype: string;
+  mainBody: string;      // 19 cuentas - 8 mm
+  lateralBeads: string;  // 2 cuentas - 8 mm
+  centerPiece: string;   // 1 cuenta - 10 mm
+  totalBeads: number;    // 22 cuentas
+}
+
 export interface ShopProduct {
   id: string;
   slug: string;
@@ -46,6 +54,7 @@ export interface ShopProduct {
   arcanoNumber?: string;
   intentionWords?: string[];
   arcanoStory?: string;
+  beadMatrix?: BeadMatrixSpecification;
 }
 
 export interface CreativeProcessImage {

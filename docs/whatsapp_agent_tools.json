@@ -1,0 +1,81 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "consultar_catalogo_arcanos",
+      "description": "Consulta el catálogo ceremonial y disponibilidad de inventario de ARCANO. Permite buscar por nombre, mineral o colección.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "busqueda": {
+            "type": "string",
+            "description": "Término de búsqueda o palabra clave (ej. 'el loco', 'amatista', 'oro', 'sahumerio', 'runas'). Opcional."
+          },
+          "coleccion": {
+            "type": "string",
+            "enum": [
+              "coleccion-arcanos",
+              "alta-joyeria-oro",
+              "ambar-chiapas",
+              "doble-perforacion",
+              "reiki-sanacion",
+              "portainciensos-y-runas",
+              "simbolos-y-geometria",
+              "frecuencias-angelicales",
+              "sahumerios-y-kits",
+              "talismanes",
+              "duos"
+            ],
+            "description": "Identificador de la colección ceremonial específica a filtrar. Opcional."
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "consultar_pieza_por_sku",
+      "description": "Obtiene la ficha ceremonial completa, precio en MXN, mineral y stock disponible en tiempo real de una pieza específica.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "description": "Código SKU de la pieza (ej. 'ARC-00', 'ORO-01', 'AMB-05', 'DBP-02')."
+          }
+        },
+        "required": ["sku"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "reservar_pieza_para_cliente",
+      "description": "Aparta temporalmente una pieza ceremonial para un consultante mientras coordina su pago vía SPEI o Mercado Pago.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string",
+            "description": "Código SKU de la pieza a apartar."
+          },
+          "cantidad": {
+            "type": "integer",
+            "description": "Número de unidades a apartar (por defecto 1)."
+          },
+          "telefono_cliente": {
+            "type": "string",
+            "description": "Número de WhatsApp del cliente para asociar la reserva."
+          },
+          "nombre_cliente": {
+            "type": "string",
+            "description": "Nombre del consultante o cliente."
+          }
+        },
+        "required": ["sku"]
+      }
+    }
+  }
+]

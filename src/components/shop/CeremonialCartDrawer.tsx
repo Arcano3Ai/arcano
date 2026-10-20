@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import { CeremonialCheckoutModal } from "./CeremonialCheckoutModal";
 
 export function CeremonialCartDrawer() {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const {
     items,
     isCartOpen,
@@ -214,15 +216,38 @@ export function CeremonialCartDrawer() {
               </div>
             </div>
 
-            {/* Botón de Enviar Pedido por WhatsApp */}
+            {/* Botón Principal: Checkout Multicanal Seguro */}
+            <button
+              onClick={() => setIsCheckoutOpen(true)}
+              className="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-gold via-amber-400 to-gold text-obsidian font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-[0_0_25px_rgba(198,160,82,0.4)] hover:shadow-[0_0_35px_rgba(198,160,82,0.6)] hover:scale-[1.01] flex items-center justify-center gap-2 text-center group cursor-pointer"
+            >
+              <span className="text-base group-hover:scale-110 transition-transform">🔒</span>
+              <span>Proceder al Pago Seguro</span>
+              <span>→</span>
+            </button>
+
+            {/* Micro-badges de Pasarelas Soportadas */}
+            <div className="flex items-center justify-center gap-2 text-[10px] text-parchment-muted/80 font-sans tracking-wider py-0.5">
+              <span>💳 Tarjetas</span>
+              <span>•</span>
+              <span>⚡ SPEI</span>
+              <span>•</span>
+              <span>🏪 OXXO</span>
+              <span>•</span>
+              <span>🅿️ PayPal</span>
+              <span>•</span>
+              <span>GPay</span>
+            </div>
+
+            {/* Botón Secundario de Asistencia WhatsApp */}
             <a
               href={getWhatsAppOrderUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)] flex items-center justify-center gap-2 text-center group cursor-pointer"
+              className="w-full py-2.5 px-4 rounded-lg border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/40 text-emerald-400 font-sans text-[11px] uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 text-center group cursor-pointer"
             >
-              <span className="text-base group-hover:scale-110 transition-transform">💬</span>
-              <span>Completar Pedido por WhatsApp</span>
+              <span className="text-sm group-hover:scale-110 transition-transform">💬</span>
+              <span>O pedir con un Asesor por WhatsApp</span>
               <span>↗</span>
             </a>
 
@@ -235,12 +260,18 @@ export function CeremonialCartDrawer() {
                 Vaciar carrito
               </button>
               <span className="flex items-center gap-1 text-[10px] text-gold/80">
-                🔒 Transferencia / SPEI / OXXO
+                🛡️ Transacciones Cifradas SSL 256-bit
               </span>
             </div>
           </div>
         )}
       </div>
+
+      {/* Modal Ceremonial de Checkout Multicanal */}
+      <CeremonialCheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+      />
     </div>
   );
 }
