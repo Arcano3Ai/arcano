@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { getAudioPath, getAssetPath } from "@/lib/utils";
+import { getAudioPath } from "@/lib/utils";
 
 export const AtmosphereAudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -13,7 +13,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
     if (!audioRef.current && typeof window !== "undefined") {
       const primaryUrl = getAudioPath("/audio/druidic-dance.mp3");
       const audio = new Audio(primaryUrl);
-      audio.preload = "none";
+      audio.preload = "auto";
       audio.loop = true;
       audio.volume = 0.28; // Volumen sutil ceremonial
       audioRef.current = audio;
@@ -22,6 +22,54 @@ export const AtmosphereAudioPlayer: React.FC = () => {
   };
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const isExplicitlyMuted = localStorage.getItem("arcano_ambient_muted") === "true";
+    const audio = getOrCreateAudio();
+
+    if (audio && !isExplicitlyMuted) {
+      // Intentar reproducción inmediata al entrar a la página
+      const playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            setHasInteracted(true);
+          })
+          .catch(() => {
+            // Si la política de autoplay del navegador restringe audio sin gesto previo,
+            // activar la música en el primer clic, toque o desplazamiento en cualquier parte de la pantalla.
+            const handleFirstGesture = () => {
+              if (audioRef.current && audioRef.current.paused && localStorage.getItem("arcano_ambient_muted") !== "true") {
+                audioRef.current
+                  .play()
+                  .then(() => {
+                    setIsPlaying(true);
+                    setHasInteracted(true);
+                  })
+                  .catch(() => {});
+              }
+              cleanupGestures();
+            };
+
+            const cleanupGestures = () => {
+              window.removeEventListener("click", handleFirstGesture);
+              window.removeEventListener("touchstart", handleFirstGesture);
+              window.removeEventListener("pointerdown", handleFirstGesture);
+              window.removeEventListener("scroll", handleFirstGesture);
+              window.removeEventListener("keydown", handleFirstGesture);
+            };
+
+            window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
+            window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
+            window.addEventListener("pointerdown", handleFirstGesture, { once: true, passive: true });
+            window.addEventListener("scroll", handleFirstGesture, { once: true, passive: true });
+            window.addEventListener("keydown", handleFirstGesture, { once: true, passive: true });
+          });
+      }
+    }
+
     let wasPlayingBeforeArcano = false;
 
     const handleArcanoPauseAmbient = () => {
@@ -64,12 +112,14 @@ export const AtmosphereAudioPlayer: React.FC = () => {
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
+      localStorage.setItem("arcano_ambient_muted", "true");
     } else {
       audio
         .play()
         .then(() => {
           setIsPlaying(true);
           setHasInteracted(true);
+          localStorage.removeItem("arcano_ambient_muted");
         })
         .catch((err) => {
           console.warn("Audio playback issue:", err);

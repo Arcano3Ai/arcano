@@ -447,6 +447,50 @@ export default function ShopPage() {
             prodName.includes("citrino") ||
             prodDesc.includes("citrino") ||
             prodDesc.includes("citrine");
+        } else if (queryStone.includes("fluorita")) {
+          matchesStone =
+            prodStone.includes("fluorita") ||
+            prodName.includes("fluorita") ||
+            prodDesc.includes("fluorita") ||
+            prodTag.includes("fluorita");
+        } else if (queryStone.includes("rutilado")) {
+          matchesStone =
+            prodStone.includes("rutilado") ||
+            prodName.includes("rutilado") ||
+            prodDesc.includes("rutilado") ||
+            prodStone.includes("pirita");
+        } else if (queryStone.includes("lava")) {
+          matchesStone =
+            prodStone.includes("lava") ||
+            prodStone.includes("volcánica") ||
+            prodStone.includes("volcanica") ||
+            prodName.includes("lava") ||
+            prodDesc.includes("lava");
+        } else if (queryStone.includes("amazonita")) {
+          matchesStone =
+            prodStone.includes("amazonita") ||
+            prodName.includes("amazonita") ||
+            prodDesc.includes("amazonita");
+        } else if (queryStone.includes("granate") || queryStone.includes("buey")) {
+          matchesStone =
+            prodStone.includes("granate") ||
+            prodStone.includes("buey") ||
+            prodName.includes("granate") ||
+            prodName.includes("buey") ||
+            prodDesc.includes("granate") ||
+            prodDesc.includes("buey");
+        } else if (queryStone.includes("selenita")) {
+          matchesStone =
+            prodStone.includes("selenita") ||
+            prodStone.includes("luna") ||
+            prodName.includes("selenita") ||
+            prodDesc.includes("selenita");
+        } else if (queryStone.includes("nefrita") || queryStone.includes("jade")) {
+          matchesStone =
+            prodStone.includes("jade") ||
+            prodStone.includes("nefrita") ||
+            prodName.includes("jade") ||
+            prodDesc.includes("jade");
         } else {
           matchesStone =
             prodStone.includes(queryStone) ||
