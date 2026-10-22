@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { paymentConfig } from "@/config/paymentConfig";
+import { brandConfig } from "@/config/brandConfig";
 
 interface CeremonialCheckoutModalProps {
   isOpen: boolean;
@@ -114,7 +115,7 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
         `¿Me podrían proporcionar el enlace de pago oficial para completar la consagración?`
       );
 
-      window.open(`https://wa.me/528180923854?text=${customWhatsAppMessage}`, "_blank");
+      window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${customWhatsAppMessage}`, "_blank");
       window.location.href = `/checkout/pending?gateway=${selectedGateway}&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
       return;
     } catch (err: any) {

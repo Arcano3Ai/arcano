@@ -3,6 +3,7 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { brandConfig } from "@/config/brandConfig";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -17,7 +18,7 @@ function SuccessContent() {
       paymentId ? ` (ID Pago: ${paymentId})` : ""
     }. Deseo confirmar los detalles de consagración y seguimiento de envío.`
   );
-  const whatsappUrl = `https://wa.me/528180923854?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`;
 
   return (
     <div className="min-h-screen bg-obsidian text-parchment pt-28 pb-20 px-4 sm:px-6 relative overflow-hidden">

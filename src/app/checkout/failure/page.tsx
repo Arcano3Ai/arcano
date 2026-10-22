@@ -3,6 +3,7 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { brandConfig } from "@/config/brandConfig";
 
 function FailureContent() {
   const searchParams = useSearchParams();
@@ -11,7 +12,7 @@ function FailureContent() {
   const whatsappMessage = encodeURIComponent(
     `¡Hola ARCANO! Tuve un inconveniente al pagar mi orden ceremonial *${orderId}*. ¿Me podrían ayudar a completar mi compra por transferencia o enlace directo?`
   );
-  const whatsappUrl = `https://wa.me/528180923854?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`;
 
   return (
     <div className="min-h-screen bg-obsidian text-parchment pt-28 pb-20 px-4 sm:px-6 relative overflow-hidden">

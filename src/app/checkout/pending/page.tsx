@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { paymentConfig } from "@/config/paymentConfig";
+import { brandConfig } from "@/config/brandConfig";
 
 function PendingContent() {
   const searchParams = useSearchParams();
@@ -15,7 +16,7 @@ function PendingContent() {
   const whatsappMessage = encodeURIComponent(
     `¡Hola ARCANO! Adjunto el comprobante de pago para mi orden ceremonial *${orderId}*. Deseo que inicien la preparación.`
   );
-  const whatsappUrl = `https://wa.me/528180923854?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`;
 
   return (
     <div className="min-h-screen bg-obsidian text-parchment pt-28 pb-20 px-4 sm:px-6 relative overflow-hidden">
