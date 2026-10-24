@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   shopCategories,
   shopProducts,
@@ -15,329 +16,189 @@ import {
   buildConciergeWhatsAppUrl,
   trackConciergeLead,
 } from "@/config/conciergeConfig";
-import { CreativeProcessGallery } from "@/components/shop/CreativeProcessGallery";
-import { useCart } from "@/context/CartContext";
 import { useLanguage, LanguageToggle } from "@/context/LanguageContext";
-import { EpicMineralVeinSelector } from "@/components/shop/EpicMineralVeinSelector";
 
-// Formateador estilo Aurum Brothers: $X,XXX.00 MXN
+// Formateador estilo Aurum Brothers: $X,XXX MXN
 function formatPrice(price: number): string {
   return `$${price.toLocaleString("es-MX", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   })} MXN`;
 }
 
-// Estructura de Espécimen en Bruto estilo Aurum Brothers ("SHOP BY STONE")
-interface RawStoneShowcase {
-  id: string; // Para filtro de productos
-  titleEn: string; // Título exacto en inglés (Sodalite, Tiger Eye, etc.)
-  nameEs: string; // Nombre en español
-  vibe: string; // Atributo metafísico/vibracional
-  image: string; // Fotografía en bruto con reflejo sobre negro
-  accentColor: string; // Tonalidad de acento sutil
-  itemCount: number; // Cantidad de piezas en la boutique
+// Bloques editoriales cinematográficos estilo Aurum Brothers ("IN FOCUS / [PRODUCT]")
+interface EditorialHighlight {
+  id: string;
+  arcanoSlug: string;
+  eyebrow: string;
+  headline: string;
+  subheadline: string;
+  ctaText: string;
+  image: string;
+  ratingText: string;
+  buyerName: string;
+  buyerLocation: string;
 }
 
-// 1. Sendero Superior (Izquierda a Derecha) · Minerales Clásicos de Cabecera
-const STONES_UPPER_TRAIL: RawStoneShowcase[] = [
+const EDITORIAL_HIGHLIGHTS: EditorialHighlight[] = [
   {
-    id: "Lapislázuli",
-    titleEn: "Lapis Lazuli",
-    nameEs: "Lapislázuli Real",
-    vibe: "Soberanía & Sabiduría",
-    image: "/images/shop/stones/lapis_lazuli_raw.jpg",
-    accentColor: "#1D4ED8",
-    itemCount: 6,
-  },
-  {
-    id: "Ojo de Tigre",
-    titleEn: "Tiger Eye",
-    nameEs: "Ojo de Tigre Imperial",
-    vibe: "Coraje & Confianza",
-    image: "/images/shop/stones/tiger_eye_raw.jpg",
-    accentColor: "#D97706",
-    itemCount: 29,
-  },
-  {
-    id: "Cornalina",
-    titleEn: "Carnelian",
-    nameEs: "Cornalina Ámbar",
-    vibe: "Fuego Vital & Pasión",
-    image: "/images/shop/stones/carnelian_raw.jpg",
-    accentColor: "#DC2626",
-    itemCount: 6,
-  },
-  {
-    id: "Amatista",
-    titleEn: "Amethyst",
-    nameEs: "Amatista Púrpura",
-    vibe: "Transmutación Espiritual",
-    image: "/images/shop/stones/amethyst_raw.jpg",
-    accentColor: "#8B5CF6",
-    itemCount: 8,
-  },
-  {
-    id: "Turmalina",
-    titleEn: "Tourmaline",
-    nameEs: "Turmalina Negra",
-    vibe: "Escudo Áurico Puro",
-    image: "/images/shop/stones/tourmaline_raw.jpg",
-    accentColor: "#52525B",
-    itemCount: 6,
-  },
-  {
-    id: "Aguamarina",
-    titleEn: "Aquamarine",
-    nameEs: "Aguamarina Sagrada",
-    vibe: "Serenidad & Flujo",
-    image: "/images/shop/stones/aquamarine_raw.jpg",
-    accentColor: "#06B6D4",
-    itemCount: 2,
-  },
-];
-
-// 2. Sendero Inferior tras el Rebote Geológico (Derecha a Izquierda) · Minerales Raros & Menos Comunes
-const STONES_LOWER_TRAIL: RawStoneShowcase[] = [
-  {
-    id: "Piedra Luna",
-    titleEn: "Rainbow Moonstone",
-    nameEs: "Piedra Luna Arcoíris",
-    vibe: "Intuición & Misterio",
-    image: "/images/shop/stones/moonstone_raw.jpg",
-    accentColor: "#93C5FD",
-    itemCount: 2,
-  },
-  {
-    id: "Turquesa",
-    titleEn: "Natural Turquoise",
-    nameEs: "Turquesa en Matriz",
-    vibe: "Salto de Fe & Protección",
-    image: "/images/shop/stones/turquoise_raw.jpg",
-    accentColor: "#06B6D4",
-    itemCount: 2,
-  },
-  {
-    id: "Pirita",
-    titleEn: "Golden Pyrite",
-    nameEs: "Pirita Cúbica Dorada",
-    vibe: "Magnetismo & Fuego Creador",
-    image: "/images/shop/stones/pyrite_raw.jpg",
-    accentColor: "#EAB308",
-    itemCount: 4,
-  },
-  {
-    id: "Rodocrosita",
-    titleEn: "Inca Rhodochrosite",
-    nameEs: "Rodocrosita Rosa Inca",
-    vibe: "Amor Consciente & Gracia",
-    image: "/images/shop/stones/rhodochrosite_raw.jpg",
-    accentColor: "#F43F5E",
-    itemCount: 2,
-  },
-  {
-    id: "Cuarzo Ahumado",
-    titleEn: "Smoky Quartz",
-    nameEs: "Cuarzo Ahumado",
-    vibe: "Luz Interior & Enraizamiento",
-    image: "/images/shop/stones/smoky_quartz_raw.jpg",
-    accentColor: "#78716C",
-    itemCount: 3,
-  },
-  {
-    id: "Citrino",
-    titleEn: "Golden Citrine",
-    nameEs: "Citrino Dorado Solar",
-    vibe: "Vitalidad & Éxito Tangible",
-    image: "/images/shop/stones/citrine_raw.jpg",
-    accentColor: "#F59E0B",
-    itemCount: 2,
-  },
-];
-
-// 3. Otros Minerales y Resinas Sagradas del Santuario
-const STONES_REMAINING: RawStoneShowcase[] = [
-  {
-    id: "Malaquita",
-    titleEn: "Malachite",
-    nameEs: "Malaquita & Jade",
-    vibe: "Sanación del Corazón",
-    image: "/images/shop/stones/malachite_raw.jpg",
-    accentColor: "#059669",
-    itemCount: 8,
-  },
-  {
-    id: "Obsidiana",
-    titleEn: "Obsidian",
-    nameEs: "Obsidiana Sagrada",
-    vibe: "Protección Telúrica",
-    image: "/images/shop/stones/obsidian_raw.jpg",
-    accentColor: "#EAB308",
-    itemCount: 12,
-  },
-  {
-    id: "Labradorita",
-    titleEn: "Labradorite",
-    nameEs: "Labradorita Espectral",
-    vibe: "Magia & Alquimia",
-    image: "/images/shop/stones/labradorite_raw.jpg",
-    accentColor: "#0284C7",
-    itemCount: 3,
-  },
-  {
-    id: "Ámbar",
-    titleEn: "Chiapas Amber",
-    nameEs: "Ámbar de Simojovel",
-    vibe: "Luz Solar Fósil",
-    image: "/images/shop/stones/amber_raw.jpg",
-    accentColor: "#F59E0B",
-    itemCount: 31,
-  },
-  {
-    id: "Ónix",
-    titleEn: "Black Onyx",
-    nameEs: "Ónix Negro & Lava",
-    vibe: "Fuerza & Enraizamiento",
-    image: "/images/shop/stones/onyx_raw.jpg",
-    accentColor: "#71717A",
-    itemCount: 13,
-  },
-  {
-    id: "Sodalita",
-    titleEn: "Sodalite",
-    nameEs: "Sodalita Azul",
-    vibe: "Visión & Intuición",
-    image: "/images/shop/stones/sodalite_raw.jpg",
-    accentColor: "#3B82F6",
-    itemCount: 5,
-  },
-];
-
-const AURUM_STONES_SHOWCASE: RawStoneShowcase[] = [
-  ...STONES_UPPER_TRAIL,
-  ...STONES_LOWER_TRAIL,
-  ...STONES_REMAINING,
-];
-
-// Colecciones visuales ("LATEST COLLECTIONS" estilo Aurum Brothers)
-const FEATURED_COLLECTIONS = [
-  {
-    id: "coleccion-arcanos",
-    name: "Arcanos Mayores",
-    image: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
-    stoneFilter: "todos",
-    catFilter: "coleccion-arcanos",
-  },
-  {
-    id: "onix-lava",
-    name: "Ónix & Lava Volcánica",
-    image: "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
-    stoneFilter: "Ónix",
-    catFilter: "todos",
-  },
-  {
-    id: "ojo-de-tigre",
-    name: "Ojo de Tigre & Halcón",
-    image: "https://cdn.shopify.com/s/files/1/0238/9055/9056/files/Frontal.webp?v=1785859032",
-    stoneFilter: "Ojo de Tigre",
-    catFilter: "todos",
-  },
-  {
-    id: "oro-18k",
-    name: "Oro 18K & Gemas",
-    image: "https://quetzam.mx/cdn/shop/products/1_9564c0c5-cb5f-46eb-bc8a-e48219bd084d.jpg?v=1772558204&width=800",
-    stoneFilter: "todos",
-    catFilter: "alta-joyeria-oro",
-  },
-  {
-    id: "lapislazuli",
-    name: "Lapislázuli & Pirita",
+    id: "editorial-mago",
+    arcanoSlug: "talisman-arcano-i-el-mago-onix-lapislazuli",
+    eyebrow: "IN FOCUS / ARCANO I · EL MAGO",
+    headline: "Rough by nature.",
+    subheadline: "Como es arriba, es abajo. Manifestación y dominio creador de los cuatro elementos en ónix brillante y lapislázuli real.",
+    ctaText: "Descubrir Arcano I",
     image: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
-    stoneFilter: "Lapislázuli",
-    catFilter: "todos",
+    ratingText: "Aún más impresionante en persona. El calibre uniforme de 8mm y el peso del ónix y lapislázuli se sienten excepcionales.",
+    buyerName: "Mauricio G.",
+    buyerLocation: "San Pedro Garza García · Comprador verificado",
   },
   {
-    id: "ambar-chiapas",
-    name: "Ámbar de Chiapas",
-    image: "/images/shop/pulseras/pulsera-ambar-chiapas-caricias-maternales.jpg",
-    stoneFilter: "Ámbar",
-    catFilter: "ambar-chiapas",
+    id: "editorial-emperatriz",
+    arcanoSlug: "talisman-arcano-iii-la-emperatriz-cuarzo-rosa-jade",
+    eyebrow: "IN FOCUS / ARCANO III · LA EMPERATRIZ",
+    headline: "Deep green. Quiet presence.",
+    subheadline: "Abundancia telúrica y gracia creadora forjada en jade nefrita verde profundo y cuarzo rosa natural.",
+    ctaText: "Descubrir Arcano III",
+    image: "/images/shop/pulseras/lifestyle_wrist_jade_emperatriz.jpg",
+    ratingText: "Exactamente como se muestra en las fotos. Una presencia serena y distinguida que atrae miradas de inmediato.",
+    buyerName: "David S.",
+    buyerLocation: "San Jerónimo, Monterrey · Comprador verificado",
+  },
+  {
+    id: "editorial-emperador",
+    arcanoSlug: "talisman-arcano-iv-el-emperador-ojo-tigre-hematita",
+    eyebrow: "IN FOCUS / ARCANO IV · EL EMPERADOR",
+    headline: "A softer light.",
+    subheadline: "Estructura, fuego y solidez inquebrantable. Ojo de tigre dorado imperial con cuentas de hematita gris metálica.",
+    ctaText: "Descubrir Arcano IV",
+    image: "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
+    ratingText: "Presencia imponente. Luce impecable tanto con saco y camisa como en atuendo relajado de fin de semana.",
+    buyerName: "Javier C.",
+    buyerLocation: "Cumbres, Monterrey · Comprador verificado",
+  },
+  {
+    id: "editorial-mundo",
+    arcanoSlug: "talisman-arcano-xxi-el-mundo-7-minerales",
+    eyebrow: "IN FOCUS / ARCANO XXI · EL MUNDO",
+    headline: "Infinite Cosmos.",
+    subheadline: "La Gran Obra Alquímica completada. La integración armónica de los siete rayos planetarios en un círculo perfecto.",
+    ctaText: "Descubrir Arcano XXI",
+    image: "/images/shop/aurum_hero_wrist.jpg",
+    ratingText: "Calidad de alta joyería que supera cualquier expectativa. La energía y pureza de las piedras minerales son insuperables.",
+    buyerName: "Alejandro P.",
+    buyerLocation: "Linda Vista, Monterrey · Comprador verificado",
   },
 ];
 
-export default function ShopPage() {
+// Helper para clasificar arcanos en los filtros minimalistas de categoría
+function getArcanoCategory(product: ShopProduct): string[] {
+  const name = (product.name + " " + product.description + " " + (product.stoneType || "")).toLowerCase();
+  const cats = ["todos"];
+
+  if (
+    name.includes("lapislázuli") ||
+    name.includes("sodalita") ||
+    name.includes("azul") ||
+    name.includes("turquesa")
+  ) {
+    cats.push("azules");
+  }
+
+  if (
+    name.includes("jade") ||
+    name.includes("aventurina") ||
+    name.includes("malaquita") ||
+    name.includes("verde")
+  ) {
+    cats.push("verdes");
+  }
+
+  if (
+    name.includes("tigre") ||
+    name.includes("citrino") ||
+    name.includes("cornalina") ||
+    name.includes("jaspe") ||
+    name.includes("sol")
+  ) {
+    cats.push("tierra");
+  }
+
+  if (
+    name.includes("ónix") ||
+    name.includes("onix") ||
+    name.includes("lava") ||
+    name.includes("hematita") ||
+    name.includes("ahumado") ||
+    name.includes("negro")
+  ) {
+    cats.push("oscuros");
+  }
+
+  if (
+    name.includes("howlita") ||
+    name.includes("luna") ||
+    name.includes("cuarzo") ||
+    name.includes("amatista") ||
+    name.includes("fluorita") ||
+    name.includes("blanco")
+  ) {
+    cats.push("claridad");
+  }
+
+  return cats;
+}
+
+function TiendaContent() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
-  const [selectedStone, setSelectedStone] = useState<string>("todos");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeProduct, setActiveProduct] = useState<ShopProduct | null>(null);
-  const [addedProductId, setAddedProductId] = useState<string | null>(null);
-  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
-  const [wishlist, setWishlist] = useState<Record<string, boolean>>({});
-
-  // Opciones de configuración de brazalete estilo Aurum Brothers
-  const [selectedWristSize, setSelectedWristSize] = useState<string>("M");
-  const [modalTab, setModalTab] = useState<"detalles" | "mineral" | "ritual">("detalles");
-  const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
   const [selectedDeliveryZone, setSelectedDeliveryZone] = useState<string>(CONCIERGE_DEFAULT_ZONE);
+  const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
+  const { language, t } = useLanguage();
+  const searchParams = useSearchParams();
 
-  // Escuchar parámetros ?item=... o ?product=... / ?id=... en la URL (crucial para Concierge VIP, Google Ads & Merchant Center)
+  // Escuchar parámetros ?item=... reactivamente con useSearchParams (para Concierge VIP & Ads Deep Linking)
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const stoneParam = params.get("stone");
-      if (stoneParam) {
-        setSelectedStone(stoneParam);
-        setSelectedCategory("todos");
-        setTimeout(() => {
-          document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-        }, 250);
-      }
-
-      const productParam = params.get("item") || params.get("product") || params.get("id");
-      if (productParam) {
-        const found = shopProducts.find(
-          (p) => p.slug === productParam || p.id === productParam
-        );
-        if (found) {
-          setActiveProduct(found);
-          setTimeout(() => {
-            document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-          }, 300);
-        }
+    const itemParam = searchParams?.get("item") || searchParams?.get("product") || searchParams?.get("id");
+    if (itemParam) {
+      const found = shopProducts.find(
+        (p) =>
+          p.slug === itemParam ||
+          p.id === itemParam ||
+          p.slug.includes(itemParam) ||
+          p.id.includes(itemParam)
+      );
+      if (found) {
+        setActiveProduct(found);
       }
     }
-  }, []);
+  }, [searchParams]);
 
-
-  const { addItem, openCart, totalCount } = useCart();
-  const { language, setLanguage, t } = useLanguage();
-
-  // Control de scroll, tecla Escape y sincronización de URL profunda (?item=slug) para el modal
+  // Manejo de tecla Escape, overflow de body y URL query param al abrir/cerrar modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setActiveProduct(null);
       }
     };
+
     if (activeProduct) {
       window.addEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "hidden";
-      setModalTab("detalles");
-      setSelectedWristSize("M");
       setActiveModalImage(activeProduct.imageUrl);
 
-      // Deep linking reactivo al abrir producto en el navegador
       if (typeof window !== "undefined") {
         const currentParams = new URLSearchParams(window.location.search);
         currentParams.set("item", activeProduct.slug);
         window.history.replaceState(null, "", `?${currentParams.toString()}`);
       }
     }
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
 
-      // Limpiar query params de producto al cerrar modal
       if (typeof window !== "undefined") {
         const currentParams = new URLSearchParams(window.location.search);
         if (currentParams.has("item") || currentParams.has("product") || currentParams.has("id")) {
@@ -351,1479 +212,596 @@ export default function ShopPage() {
     };
   }, [activeProduct]);
 
-  // Wishlist toggle
-  const toggleWishlist = (id: string, e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    setWishlist((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  // Filtrado reactivo de productos (Categoría + Piedra + Búsqueda)
+  // Filtrado de productos
   const filteredProducts = useMemo(() => {
     return shopProducts.filter((product) => {
-      // 1. Filtro de Categoría
-      const matchesCategory =
-        selectedCategory === "todos" ||
-        (selectedCategory === "doble-perforacion" &&
-          (product.isDoublePerforation === true || product.categoryId === "doble-perforacion")) ||
-        (selectedCategory === "alta-joyeria-oro" &&
-          (product.categoryId === "alta-joyeria-oro" ||
-            product.goldSpecifications !== undefined ||
-            product.theme === "alta-joyeria-oro")) ||
-        product.categoryId === selectedCategory ||
-        product.theme === selectedCategory;
-
-      // 2. Filtro de Piedra estilo Aurum Brothers
-      let matchesStone = true;
-      if (selectedStone !== "todos") {
-        const queryStone = selectedStone.toLowerCase();
-        const prodName = product.name.toLowerCase();
-        const prodDesc = product.description.toLowerCase();
-        const prodStone = (product.stoneType || "").toLowerCase();
-        const prodTag = product.tagline.toLowerCase();
-
-        if (queryStone.includes("ónix") || queryStone.includes("onix")) {
-          matchesStone =
-            prodStone.includes("ónix") ||
-            prodStone.includes("onix") ||
-            prodStone.includes("lava") ||
-            prodName.includes("ónix") ||
-            prodName.includes("onix") ||
-            prodName.includes("lava");
-        } else if (queryStone.includes("tigre")) {
-          matchesStone =
-            prodStone.includes("tigre") ||
-            prodStone.includes("halcón") ||
-            prodName.includes("tigre") ||
-            prodName.includes("halcón") ||
-            prodTag.includes("tigre");
-        } else if (queryStone.includes("ámbar") || queryStone.includes("ambar")) {
-          matchesStone =
-            product.categoryId === "ambar-chiapas" ||
-            prodStone.includes("ámbar") ||
-            prodStone.includes("ambar") ||
-            prodName.includes("ámbar") ||
-            prodName.includes("ambar") ||
-            prodDesc.includes("ámbar") ||
-            prodDesc.includes("ambar");
-        } else if (queryStone.includes("lapis")) {
-          matchesStone =
-            prodStone.includes("lapis") ||
-            prodName.includes("lapis") ||
-            prodDesc.includes("lapis");
-        } else if (queryStone.includes("obsidiana")) {
-          matchesStone =
-            prodStone.includes("obsidiana") ||
-            prodName.includes("obsidiana") ||
-            prodDesc.includes("obsidiana");
-        } else if (queryStone.includes("malaquita")) {
-          matchesStone =
-            prodStone.includes("malaquita") ||
-            prodName.includes("malaquita") ||
-            prodDesc.includes("malaquita");
-        } else if (queryStone.includes("labradorita")) {
-          matchesStone =
-            prodStone.includes("labradorita") ||
-            prodName.includes("labradorita") ||
-            prodDesc.includes("labradorita");
-        } else if (queryStone.includes("amatista")) {
-          matchesStone =
-            prodStone.includes("amatista") ||
-            prodName.includes("amatista") ||
-            prodDesc.includes("amatista");
-        } else if (queryStone.includes("turmalina")) {
-          matchesStone =
-            prodStone.includes("turmalina") ||
-            prodName.includes("turmalina") ||
-            prodDesc.includes("turmalina");
-        } else if (queryStone.includes("cornalina")) {
-          matchesStone =
-            prodStone.includes("cornalina") ||
-            prodName.includes("cornalina") ||
-            prodDesc.includes("cornalina");
-        } else if (queryStone.includes("aguamarina")) {
-          matchesStone =
-            prodStone.includes("aguamarina") ||
-            prodName.includes("aguamarina") ||
-            prodDesc.includes("aguamarina");
-        } else if (queryStone.includes("sodalita")) {
-          matchesStone =
-            prodStone.includes("sodalita") ||
-            prodName.includes("sodalita") ||
-            prodDesc.includes("sodalita");
-        } else if (queryStone.includes("luna")) {
-          matchesStone =
-            prodStone.includes("luna") ||
-            prodName.includes("luna") ||
-            prodDesc.includes("luna") ||
-            prodDesc.includes("moonstone");
-        } else if (queryStone.includes("turquesa")) {
-          matchesStone =
-            prodStone.includes("turquesa") ||
-            prodName.includes("turquesa") ||
-            prodDesc.includes("turquesa") ||
-            prodDesc.includes("turquoise");
-        } else if (queryStone.includes("pirita")) {
-          matchesStone =
-            prodStone.includes("pirita") ||
-            prodName.includes("pirita") ||
-            prodDesc.includes("pirita") ||
-            prodDesc.includes("pyrite");
-        } else if (queryStone.includes("rodocrosita")) {
-          matchesStone =
-            prodStone.includes("rodocrosita") ||
-            prodName.includes("rodocrosita") ||
-            prodDesc.includes("rodocrosita") ||
-            prodDesc.includes("rhodochrosite");
-        } else if (queryStone.includes("ahumado")) {
-          matchesStone =
-            prodStone.includes("ahumado") ||
-            prodName.includes("ahumado") ||
-            prodDesc.includes("ahumado") ||
-            prodDesc.includes("smoky");
-        } else if (queryStone.includes("citrino")) {
-          matchesStone =
-            prodStone.includes("citrino") ||
-            prodName.includes("citrino") ||
-            prodDesc.includes("citrino") ||
-            prodDesc.includes("citrine");
-        } else if (queryStone.includes("fluorita")) {
-          matchesStone =
-            prodStone.includes("fluorita") ||
-            prodName.includes("fluorita") ||
-            prodDesc.includes("fluorita") ||
-            prodTag.includes("fluorita");
-        } else if (queryStone.includes("rutilado")) {
-          matchesStone =
-            prodStone.includes("rutilado") ||
-            prodName.includes("rutilado") ||
-            prodDesc.includes("rutilado") ||
-            prodStone.includes("pirita");
-        } else if (queryStone.includes("lava")) {
-          matchesStone =
-            prodStone.includes("lava") ||
-            prodStone.includes("volcánica") ||
-            prodStone.includes("volcanica") ||
-            prodName.includes("lava") ||
-            prodDesc.includes("lava");
-        } else if (queryStone.includes("amazonita")) {
-          matchesStone =
-            prodStone.includes("amazonita") ||
-            prodName.includes("amazonita") ||
-            prodDesc.includes("amazonita");
-        } else if (queryStone.includes("granate") || queryStone.includes("buey")) {
-          matchesStone =
-            prodStone.includes("granate") ||
-            prodStone.includes("buey") ||
-            prodName.includes("granate") ||
-            prodName.includes("buey") ||
-            prodDesc.includes("granate") ||
-            prodDesc.includes("buey");
-        } else if (queryStone.includes("selenita")) {
-          matchesStone =
-            prodStone.includes("selenita") ||
-            prodStone.includes("luna") ||
-            prodName.includes("selenita") ||
-            prodDesc.includes("selenita");
-        } else if (queryStone.includes("nefrita") || queryStone.includes("jade")) {
-          matchesStone =
-            prodStone.includes("jade") ||
-            prodStone.includes("nefrita") ||
-            prodName.includes("jade") ||
-            prodDesc.includes("jade");
-        } else {
-          matchesStone =
-            prodStone.includes(queryStone) ||
-            prodName.includes(queryStone) ||
-            prodDesc.includes(queryStone) ||
-            prodTag.includes(queryStone);
+      // 1. Filtro por categoría mineral
+      if (selectedCategory !== "todos") {
+        const cats = getArcanoCategory(product);
+        if (!cats.includes(selectedCategory)) {
+          return false;
         }
       }
 
-      // 3. Filtro de búsqueda rápida
-      const query = searchQuery.trim().toLowerCase();
-      const matchesSearch =
-        !query ||
-        product.name.toLowerCase().includes(query) ||
-        product.categoryName.toLowerCase().includes(query) ||
-        product.tagline.toLowerCase().includes(query) ||
-        (product.stoneType && product.stoneType.toLowerCase().includes(query)) ||
-        product.description.toLowerCase().includes(query);
-
-      return matchesCategory && matchesStone && matchesSearch;
-    }).sort((a, b) => {
-      // Priorizar brazaletes y talismanes minerales al frente estilo Aurum Brothers
-      const isBraceletA =
-        a.categoryId === "talismanes" ||
-        a.categoryId === "coleccion-arcanos" ||
-        a.categoryId === "ambar-chiapas" ||
-        a.categoryId === "alta-joyeria-oro" ||
-        a.categoryId === "duos" ||
-        a.id.startsWith("aurum-") ||
-        a.id.startsWith("arcano-") ||
-        a.id.startsWith("talisman-arcano-");
-      const isBraceletB =
-        b.categoryId === "talismanes" ||
-        b.categoryId === "coleccion-arcanos" ||
-        b.categoryId === "ambar-chiapas" ||
-        b.categoryId === "alta-joyeria-oro" ||
-        b.categoryId === "duos" ||
-        b.id.startsWith("aurum-") ||
-        b.id.startsWith("arcano-") ||
-        b.id.startsWith("talisman-arcano-");
-
-      if (isBraceletA && !isBraceletB) return -1;
-      if (!isBraceletA && isBraceletB) return 1;
-
-      // Si ambos son brazaletes, priorizar los destacados y las piezas insignia
-      if (isBraceletA && isBraceletB) {
-        // El Mago (Pieza Insignia de Apertura) va en la posición de honor absoluta #1
-        if (a.id === "talisman-arcano-i-el-mago-onix-lapislazuli") return -1;
-        if (b.id === "talisman-arcano-i-el-mago-onix-lapislazuli") return 1;
-
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
-        if (a.categoryId === "coleccion-arcanos" && b.categoryId !== "coleccion-arcanos") return -1;
-        if (a.categoryId !== "coleccion-arcanos" && b.categoryId === "coleccion-arcanos") return 1;
-        // Priorizar las nuevas piezas de piedras comunes al inicio de los destacados
-        if (a.id.startsWith("arcano-") && !b.id.startsWith("arcano-")) return -1;
-        if (!a.id.startsWith("arcano-") && b.id.startsWith("arcano-")) return 1;
+      // 2. Filtro de búsqueda
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        const matchesName = product.name.toLowerCase().includes(q);
+        const matchesDesc = product.description.toLowerCase().includes(q);
+        const matchesStone = (product.stoneType || "").toLowerCase().includes(q);
+        const matchesArcano = (product.arcanoNumber || "").toLowerCase() === q;
+        if (!matchesName && !matchesDesc && !matchesStone && !matchesArcano) {
+          return false;
+        }
       }
-      return 0;
-    });
-  }, [selectedCategory, selectedStone, searchQuery]);
 
-  const handleAddToCart = (
-    product: ShopProduct,
-    e?: React.MouseEvent,
-    options?: { optionKey?: string; optionLabel?: string; price?: number },
-    autoOpen: boolean = false
-  ) => {
-    if (e) e.stopPropagation();
-    addItem(product, options);
-    setAddedProductId(product.id);
-    if (autoOpen) {
-      setTimeout(() => openCart(), 200);
+      return true;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Generador de URL de WhatsApp Concierge para el modal activo
+  const conciergeUrl = useMemo(() => {
+    if (!activeProduct) return "";
+    return buildConciergeWhatsAppUrl({
+      product: activeProduct,
+      selectedZone: selectedDeliveryZone,
+    });
+  }, [activeProduct, selectedDeliveryZone]);
+
+  const handleConciergeClick = () => {
+    if (activeProduct) {
+      trackConciergeLead({
+        product: activeProduct,
+        selectedZone: selectedDeliveryZone,
+      });
     }
-    setTimeout(() => setAddedProductId(null), 1800);
   };
 
-  const getProductWhatsAppMessage = (product: ShopProduct) => {
-    const sizeCm =
-      selectedWristSize === "S"
-        ? "16-17 cm"
-        : selectedWristSize === "M"
-        ? "18-19 cm"
-        : selectedWristSize === "L"
-        ? "20-21 cm"
-        : "22 cm";
-    const sizeNote = ` (Talla Muñeca: ${selectedWristSize} [${sizeCm}])`;
-    if (product.categoryId === "ambar-chiapas") {
-      return `Hola ARCANO Concierge, deseo ordenar el brazalete "${product.name}"${sizeNote} (${formatPrice(product.price)} ${product.shippingNote}). ¿Sigue disponible para despacho prioritario?`;
+  const handleOpenProductBySlug = (slug: string) => {
+    const found = shopProducts.find((p) => p.slug === slug || p.id === slug);
+    if (found) {
+      setActiveProduct(found);
     }
-    if (product.categoryId === "alta-joyeria-oro" || product.goldSpecifications) {
-      return `Hola ARCANO Concierge, deseo ordenar la joya de alta orfebrería "${product.name}"${sizeNote} (${formatPrice(product.price)} ${product.shippingNote}). ¿Tienen disponibilidad inmediata?`;
-    }
-    return `Hola ARCANO Concierge, deseo ordenar la pieza ritual "${product.name}"${sizeNote} (${formatPrice(product.price)} ${product.shippingNote}).`;
   };
 
   return (
-    <div className="bg-[#000000] text-[#FFFFFF] min-h-screen font-sans selection:bg-[#C5A059]/30 selection:text-[#F3EFE6] w-full max-w-full overflow-x-clip">
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-[#C5A059] selection:text-black pt-20 sm:pt-24">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP ANNOUNCEMENT BAR (ESTILO AURUM BROTHERS)
+          1. TOP BAR DISCRETO · CONCIERGE VIP MONTERREY
          ───────────────────────────────────────────────────────────── */}
-      <div className="bg-[#0D0D0D] text-neutral-300 py-2 px-4 border-b border-neutral-900 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-light">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-          <div className="hidden md:flex items-center gap-3 text-[#C5A059]">
-            <span className="text-xs">✦</span>
-            <span>{t("BOUTIQUE ESOTÉRICA DE ALTA JOYERÍA", "SACRED FINE JEWELRY BOUTIQUE")}</span>
-          </div>
-          <div className="flex-1 flex items-center justify-center gap-3 sm:gap-6 text-center text-neutral-200">
-            <span>{t("ENVÍO EXPRESS GRATIS SOBRE $1,480 MXN", "FREE EXPRESS SHIPPING OVER $1,480 MXN")}</span>
-            <span className="opacity-30">·</span>
-            <span>{t("MINERALES 100% PUROS SIN METALES", "100% PURE MINERALS · ZERO METALS")}</span>
-            <span className="opacity-30 hidden sm:inline">·</span>
-            <span className="hidden sm:inline">{t("CONSAGRACIÓN EN LUNA LLENA & FUEGO", "FULL MOON & SACRED FIRE CONSECRATED")}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <LanguageToggle size="sm" />
-          </div>
-        </div>
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          2. HEADER PRINCIPAL · NAVEGACIÓN LIMPIA Y ELEGANTE
-         ───────────────────────────────────────────────────────────── */}
-      <header className="border-b border-neutral-900 bg-black/95 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          
-          {/* Logo ARCANO estilo Aurum Brothers */}
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <span className="text-xl sm:text-2xl text-[#C5A059] group-hover:scale-105 transition-transform">
-                ✦
-              </span>
-              <div className="flex flex-col">
-                <span className="font-serif text-lg sm:text-2xl tracking-[0.3em] font-light text-white group-hover:text-[#C5A059] transition-colors uppercase">
-                  ARCANO
-                </span>
-                <span className="text-[8px] tracking-[0.35em] text-neutral-400 uppercase font-sans -mt-1 hidden sm:block">
-                  HANDMADE FINE JEWELRY
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Navegación Central (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-8 text-[11px] tracking-[0.2em] uppercase font-light text-neutral-300">
-            <button
-              onClick={() => {
-                setSelectedCategory("todos");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Novedades
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("talismanes");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Brazaletes
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("ambar-chiapas");
-                setSelectedStone("Ámbar");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Ámbar de Chiapas
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("alta-joyeria-oro");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Oro 18K
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("duos");
-                setSelectedStone("todos");
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Stacks & Dúos
-            </button>
-            <a
-              href="#the-art-of-stacking"
-              className="text-[#C5A059] hover:brightness-110 transition-colors"
-            >
-              Stacking Guide
-            </a>
-          </nav>
-
-          {/* Iconos de Acción Derecha */}
-          <div className="flex items-center gap-3 sm:gap-5">
-            {/* WhatsApp Concierge */}
-            <a
-              href={getWhatsAppUrl("Hola ARCANO Concierge, deseo asesoría personalizada para elegir un brazalete mineral.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-[#25D366] transition-colors py-1.5 px-3 border border-neutral-800 rounded-full"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-              <span>Concierge</span>
-            </a>
-
-            {/* Selector de Idioma */}
-            <div className="hidden sm:block">
-              <LanguageToggle size="sm" />
-            </div>
-
-            {/* Carrito / Bolsa Aurum */}
-            <button
-              onClick={openCart}
-              className="flex items-center gap-2.5 py-2 px-3.5 sm:px-4 bg-[#111111] hover:bg-[#1a1a1a] border border-neutral-800 rounded-full text-xs font-sans tracking-widest uppercase text-white transition-all cursor-pointer"
-              aria-label="Abrir Bolsa de Compra"
-            >
-              <svg className="w-4 h-4 text-[#C5A059]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              <span>Bolsa</span>
-              <span className="w-5 h-5 rounded-full bg-[#C5A059] text-black text-[10px] font-bold flex items-center justify-center">
-                {totalCount}
-              </span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* ─────────────────────────────────────────────────────────────
-          3. HERO PRINCIPAL: VETA GEOLÓGICA & COMPRA POR MINERAL
-             (FONDO NÍTIDO, DESTELLOS CRISTALINOS & TIPOGRAFÍA DE LUJO)
-         ───────────────────────────────────────────────────────────── */}
-      {/* ─────────────────────────────────────────────────────────────
-          3. HERO PRINCIPAL: VETA GEOLÓGICA EN ZIGZAG CON REBOTE
-             (FONDO NÍTIDO, DESTELLOS CRISTALINOS & MINERALES RAROS)
-         ───────────────────────────────────────────────────────────── */}
-      <EpicMineralVeinSelector
-        selectedStone={selectedStone}
-        onSelectStone={(stoneId) => {
-          setSelectedStone(stoneId);
-          setSelectedCategory("todos");
-        }}
-        language={language}
-        t={t}
-        filteredCount={filteredProducts.length}
-      />
-
-      {/* Barra de Confianza & Compromisos Sagrados en Tipografía Fina */}
-      <div className="bg-[#0A0A0A] border-b border-neutral-900 py-4 px-4">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-around gap-4 text-center text-xs text-neutral-300 font-serif">
-          <div className="flex items-center gap-2">
-            <span className="text-[#C5A059] text-xs">✦</span>
-            <span className="tracking-wider">{t("Minerales 100% Puros Sin Metales (8mm)", "100% Pure Minerals · Zero Metals (8mm)")}</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="text-[#C5A059] text-xs">✦</span>
-            <span className="tracking-wider">{t("Consagrado en Luna Llena & Hoguera Sagrada", "Consecrated under Full Moon & Sacred Fire")}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[#C5A059] text-xs">✦</span>
-            <span className="tracking-wider">{t("Hecho a Mano a la Medida Exacta de tu Muñeca", "Handcrafted to Your Exact Wrist Size")}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          4. SECCIÓN "LATEST COLLECTIONS" (GALERÍA REDONDEADA AURUM)
-         ───────────────────────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-b border-neutral-900">
-        <h2 className="text-xl sm:text-2xl font-light tracking-[0.25em] text-white text-center mb-10 uppercase">
-          LATEST COLLECTIONS
-        </h2>
-
-        {/* Carousel / Grid de Colecciones */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-          {FEATURED_COLLECTIONS.map((col) => (
-            <div
-              key={col.id}
-              onClick={() => {
-                setSelectedCategory(col.catFilter);
-                setSelectedStone(col.stoneFilter);
-                document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="group relative aspect-square bg-[#0D0D0D] rounded-xl overflow-hidden cursor-pointer border border-neutral-800/80 hover:border-[#C5A059]/60 transition-all duration-300 shadow-md"
-            >
-              <Image
-                src={col.image}
-                alt={col.name}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                className="object-cover filter brightness-[0.85] contrast-[1.1] transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 inset-x-0 p-2.5 text-center">
-                <span className="block text-[11px] font-sans font-medium text-white tracking-wider uppercase group-hover:text-[#C5A059] transition-colors">
-                  {col.name}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-
-      {/* ─────────────────────────────────────────────────────────────
-          5.1. CATÁLOGO PRINCIPAL & INTEGRACIÓN TOTAL DEL FILTRADO
-               (FLOATING CARDS ESTILO AURUM BROTHERS & ARCANO)
-         ───────────────────────────────────────────────────────────── */}
-      <div id="catalogo-top" className="scroll-mt-24" />
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        
-        {/* Título Editorial del Catálogo */}
-        <div className="text-center mb-8">
-          <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.3em] uppercase text-[#C5A059] block mb-2 font-medium">
-            {t("ALTA JOYERÍA MINERAL & ORFEBRERÍA SAGRADA", "FINE MINERAL JEWELRY & SACRED CRAFT")}
+      <div className="bg-[#050505] border-b border-neutral-900/90 py-2 px-4 text-center">
+        <div className="max-w-7xl mx-auto flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light">
+          <span className="hidden sm:inline">ARCANO · BOUTIQUE PRIVADA MONTERREY</span>
+          <span className="mx-auto sm:mx-0">
+            ✦ {t("ENTREGA CONCIERGE SIN COSTO · SAN PEDRO · SAN JERÓNIMO · CUMBRES · LINDA VISTA", "VIP CONCIERGE DELIVERY · SAN PEDRO · SAN JERÓNIMO · CUMBRES · LINDA VISTA")} ✦
           </span>
-          <h2 className="text-2xl sm:text-4xl font-light tracking-[0.22em] text-white uppercase mb-3">
-            {t("CATÁLOGO DE TALISMANES", "TALISMANS CATALOG")}
-          </h2>
-          <p className="text-xs sm:text-sm text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed">
-            {t(
-              "Piezas individuales y colecciones forjadas en minerales puros Grado AAA de 8mm. Consagradas en Luna Llena ante fuego ceremonial sagrado de 1.5 metros.",
-              "Individual pieces and sets crafted from 100% pure AAA Grade 8mm minerals. Consecrated under the Full Moon before a 1.5-meter sacred ceremonial fire."
-            )}
-          </p>
+          <a
+            href={getWhatsAppUrl("Hola ARCANO Concierge, deseo asesoría personalizada para elegir un brazalete mineral.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1.5 text-neutral-300 hover:text-[#C5A059] transition-colors"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
+            <span>Concierge Directo</span>
+          </a>
         </div>
+      </div>
 
-        {/* Banner de Estado Activo si hay un Mineral Filtrado */}
-        {selectedStone !== "todos" && (
-          <div className="mb-8 p-4 sm:p-5 bg-gradient-to-r from-black via-[#111111] to-black border border-[#C5A059] rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn shadow-[0_0_30px_rgba(197,160,89,0.2)]">
-            <div className="flex items-center gap-3.5 text-center sm:text-left">
-              <span className="w-3 h-3 rounded-full bg-[#C5A059] animate-ping" />
-              <div>
-                <span className="text-[10px] font-sans tracking-[0.25em] uppercase text-[#C5A059] block font-medium">
-                  {t("FILTRANDO POR VETA MINERAL:", "FILTERING BY MINERAL VEIN:")}
-                </span>
-                <span className="text-base sm:text-lg font-light text-white tracking-wide">
-                  {selectedStone} ·{" "}
-                  <span className="text-neutral-300 text-xs sm:text-sm font-light">
-                    {filteredProducts.length}{" "}
-                    {filteredProducts.length === 1
-                      ? t("pieza consagrada encontrada", "consecrated piece found")
-                      : t("piezas consagradas encontradas", "consecrated pieces found")}
-                  </span>
-                </span>
+      {/* ─────────────────────────────────────────────────────────────
+          2. BARRA DE FILTROS HORIZONTAL (ESTILO EXACTO AURUM BROTHERS)
+         ───────────────────────────────────────────────────────────── */}
+      <div className="border-b border-neutral-900 bg-black/95 backdrop-blur-md sticky top-16 sm:top-20 z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
+          
+          {/* Categorías a la Izquierda */}
+          <div className="flex items-center gap-6 sm:gap-8 text-[11px] sm:text-xs tracking-[0.15em] uppercase font-light whitespace-nowrap">
+            <button
+              onClick={() => setSelectedCategory("todos")}
+              className={`transition-colors cursor-pointer py-1 ${
+                selectedCategory === "todos"
+                  ? "text-white font-medium border-b border-white"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              {t("All", "All")} ({shopProducts.length})
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory("azules")}
+              className={`transition-colors cursor-pointer py-1 ${
+                selectedCategory === "azules"
+                  ? "text-white font-medium border-b border-white"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              Blues
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory("verdes")}
+              className={`transition-colors cursor-pointer py-1 ${
+                selectedCategory === "verdes"
+                  ? "text-white font-medium border-b border-white"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              Greens
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory("tierra")}
+              className={`transition-colors cursor-pointer py-1 ${
+                selectedCategory === "tierra"
+                  ? "text-white font-medium border-b border-white"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              Earth & Sun
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory("oscuros")}
+              className={`transition-colors cursor-pointer py-1 ${
+                selectedCategory === "oscuros"
+                  ? "text-white font-medium border-b border-white"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              Neutrals & Black
+            </button>
+
+            <button
+              onClick={() => setSelectedCategory("claridad")}
+              className={`transition-colors cursor-pointer py-1 ${
+                selectedCategory === "claridad"
+                  ? "text-white font-medium border-b border-white"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              Light & Moon
+            </button>
+          </div>
+
+          {/* Enlace y Búsqueda a la Derecha */}
+          <div className="hidden md:flex items-center gap-4 text-xs tracking-wider uppercase text-neutral-400">
+            {searchQuery ? (
+              <div className="flex items-center gap-2 bg-[#111111] px-3 py-1 rounded-full border border-neutral-800">
+                <span className="text-[10px] text-white">{searchQuery}</span>
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="text-neutral-400 hover:text-white text-xs cursor-pointer"
+                >
+                  ✕
+                </button>
               </div>
-            </div>
-            <button
-              onClick={() => {
-                setSelectedStone("todos");
-                setSelectedCategory("todos");
-              }}
-              className="px-4 py-2 text-xs font-sans tracking-widest uppercase text-black font-semibold bg-[#C5A059] hover:bg-[#d8b368] rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-md"
-            >
-              <span>✕ {t("Mostrar Todo el Catálogo", "Show All Pieces")}</span>
-            </button>
-          </div>
-        )}
+            ) : null}
 
-        {/* Barra de Filtro de Categorías & Barra de Búsqueda */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 mb-10 pb-4 border-b border-neutral-900 text-xs">
-          <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto scrollbar-none py-1">
             <button
               onClick={() => {
-                setSelectedCategory("todos");
-                setSelectedStone("todos");
+                document.getElementById("arcano-grid")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
-                selectedCategory === "todos" && selectedStone === "todos"
-                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
-                  : "text-neutral-400 hover:text-white"
-              }`}
+              className="hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap text-[11px]"
             >
-              {t("Todos", "All")} ({shopProducts.length})
+              <span>{t("Colección 22 Arcanos", "22 Arcana Collection")}</span>
+              <span>↓</span>
             </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("coleccion-arcanos");
-                setSelectedStone("todos");
-              }}
-              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer flex items-center gap-1.5 ${
-                selectedCategory === "coleccion-arcanos"
-                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              <span>{t("Colección Arcanos", "Arcana Collection")}</span>
-              <span className="text-[#C5A059] text-[10px]">♾️</span>
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("ambar-chiapas");
-                setSelectedStone("Ámbar");
-              }}
-              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
-                selectedCategory === "ambar-chiapas"
-                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {t("Ámbar de Simojovel", "Chiapas Amber")}
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("alta-joyeria-oro");
-                setSelectedStone("todos");
-              }}
-              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
-                selectedCategory === "alta-joyeria-oro"
-                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {t("Alta Joyería Oro 18K", "Fine 18K Gold")}
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("talismanes");
-                setSelectedStone("todos");
-              }}
-              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
-                selectedCategory === "talismanes"
-                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {t("Brazaletes Minerales", "Mineral Talismans")}
-            </button>
-            <button
-              onClick={() => {
-                setSelectedCategory("duos");
-                setSelectedStone("todos");
-              }}
-              className={`px-3 py-1.5 tracking-wider uppercase transition-colors rounded-sm cursor-pointer ${
-                selectedCategory === "duos"
-                  ? "text-[#C5A059] border-b-2 border-[#C5A059] font-medium"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {t("Dúos & Stacks", "Duos & Stacks")}
-            </button>
-          </div>
-
-          {/* Campo de Búsqueda Rápida */}
-          <div className="relative w-full lg:w-64">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("Buscar gema, arcano, intención...", "Search stone, arcana, intention...")}
-              className="w-full bg-[#0D0D0D] border border-neutral-800 px-3.5 py-2 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#C5A059] transition-colors rounded-full"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-2 text-neutral-500 hover:text-white text-xs cursor-pointer"
-              >
-                ✕
-              </button>
-            )}
           </div>
         </div>
+      </div>
 
-        {/* ─────────────────────────────────────────────────────────────
-            GRID DE PRODUCTOS ESTILO AURUM BROTHERS (FLOATING CARDS)
-           ───────────────────────────────────────────────────────────── */}
+      {/* ─────────────────────────────────────────────────────────────
+          3. GRID PRINCIPAL CON RITMO EDITORIAL ESTILO AURUM BROTHERS
+         ───────────────────────────────────────────────────────────── */}
+      <main id="arcano-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        
+        {/* Renderizado de Productos con Bloques Editoriales In-Feed Intercalados */}
         {filteredProducts.length === 0 ? (
-          <div className="py-24 text-center bg-[#0A0A0A] border border-neutral-900 p-8 rounded-2xl">
-            <span className="text-3xl block mb-3 text-neutral-500">🔍</span>
-            <h3 className="text-lg text-white font-light mb-2">
-              {t("No encontramos piezas con ese criterio", "No pieces match your criteria")}
-            </h3>
-            <p className="text-xs text-neutral-400 mb-6 max-w-md mx-auto">
-              {t(
-                "Prueba seleccionando otro mineral en la veta geológica o restablece todos los filtros del catálogo.",
-                "Try picking another mineral on the geological vein or reset all filters."
-              )}
+          <div className="py-24 text-center">
+            <p className="text-sm text-neutral-400 uppercase tracking-widest mb-4">
+              {t("No encontramos arcanos en esta tonalidad", "No arcana found matching this tone")}
             </p>
             <button
               onClick={() => {
                 setSelectedCategory("todos");
-                setSelectedStone("todos");
                 setSearchQuery("");
               }}
-              className="px-6 py-2.5 bg-[#C5A059] text-black text-xs font-sans tracking-widest uppercase font-semibold hover:bg-[#d8b368] rounded-full transition-all cursor-pointer shadow-lg"
+              className="text-xs tracking-widest uppercase text-[#C5A059] border-b border-[#C5A059] pb-0.5 hover:text-white hover:border-white transition-colors cursor-pointer"
             >
-              {t("Ver Todo el Catálogo", "Show All Pieces")}
+              {t("Ver todos los 22 Arcanos", "View all 22 Arcana")}
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-7 gap-y-10 sm:gap-y-12">
-            {filteredProducts.map((product) => {
-              const isHovered = hoveredCardId === product.id;
-              const isAdded = addedProductId === product.id;
-              const isWishlisted = Boolean(wishlist[product.id]);
-              const hasSecondaryImg = Boolean(
-                product.secondaryImageUrl && product.secondaryImageUrl !== product.imageUrl
-              );
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 sm:gap-x-8 gap-y-12 sm:gap-y-16">
+            
+            {/* Si está en 'todos' y sin búsqueda, aplicamos el ritmo editorial exacto de Aurum Brothers */}
+            {selectedCategory === "todos" && !searchQuery.trim() ? (
+              <>
+                {/* ── FILA 1: Arcanos 0, I, II, III (4 Productos) ── */}
+                {filteredProducts.slice(0, 4).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
 
-              return (
-                <div
-                  key={product.id}
-                  onClick={() => setActiveProduct(product)}
-                  onMouseEnter={() => setHoveredCardId(product.id)}
-                  onMouseLeave={() => setHoveredCardId(null)}
-                  className="group flex flex-col cursor-pointer select-none text-left"
-                >
-                  {/* Contenedor de Imagen de Producto: Fondo Negro de Estudio, Borde Invisible */}
-                  <div className="relative aspect-square w-full overflow-hidden bg-[#0A0A0A] rounded-xl border border-neutral-900 group-hover:border-neutral-800 transition-colors">
-                    
-                    {/* Imagen Primaria */}
-                    <Image
-                      src={product.imageUrl}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className={`object-cover transition-opacity duration-500 ${
-                        hasSecondaryImg && isHovered ? "opacity-0" : "opacity-100"
-                      } ${!product.inStock ? "grayscale-[40%] opacity-70" : ""}`}
-                    />
+                {/* ── FILA 2: EDITORIAL 1 (2 Cols Izquierda) + Arcanos IV, V (2 Productos) ── */}
+                <EditorialCard
+                  highlight={EDITORIAL_HIGHLIGHTS[0]}
+                  onSelect={handleOpenProductBySlug}
+                />
+                {filteredProducts.slice(4, 6).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
 
-                    {/* Imagen Secundaria (Efecto Hover de Muñeca / Lifestyle) */}
-                    {hasSecondaryImg && (
-                      <Image
-                        src={product.secondaryImageUrl!}
-                        alt={`${product.name} lifestyle`}
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className={`object-cover transition-opacity duration-500 absolute inset-0 ${
-                          isHovered ? "opacity-100" : "opacity-0"
-                        }`}
-                      />
-                    )}
+                {/* ── FILA 3: Arcanos VI, VII (2 Productos) + EDITORIAL 2 (2 Cols Derecha) ── */}
+                {filteredProducts.slice(6, 8).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
+                <EditorialCard
+                  highlight={EDITORIAL_HIGHLIGHTS[1]}
+                  onSelect={handleOpenProductBySlug}
+                />
 
-                    {/* Badges Estilo Aurum Brothers (Top-Left Outlined Pills) */}
-                    <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10 pointer-events-none">
-                      {product.categoryId === "coleccion-arcanos" && (
-                        <span className="px-2 py-0.5 border border-[#C5A059] text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-semibold bg-black/80 backdrop-blur-sm rounded-sm">
-                          100% PURA PIEDRA
-                        </span>
-                      )}
-                      {product.goldSpecifications && (
-                        <span className="px-2 py-0.5 border border-[#C5A059] text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
-                          ORO 18K
-                        </span>
-                      )}
-                      {product.badge && !product.goldSpecifications && product.categoryId !== "coleccion-arcanos" && (
-                        <span className="px-2 py-0.5 border border-[#C5A059]/70 text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
-                          {product.badge.includes("8mm") ? "8MM AAA" : product.badge.toUpperCase()}
-                        </span>
-                      )}
-                      {product.featured && (
-                        <span className="px-2 py-0.5 border border-white/60 text-white text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
-                          LIMITED
-                        </span>
-                      )}
-                    </div>
+                {/* ── FILA 4: Arcanos VIII, IX, X, XI (4 Productos) ── */}
+                {filteredProducts.slice(8, 12).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
 
-                    {/* Bookmark / Wishlist Icon (Top-Right) */}
-                    <button
-                      onClick={(e) => toggleWishlist(product.id, e)}
-                      className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/60 hover:bg-black/90 flex items-center justify-center transition-colors text-white"
-                      aria-label="Guardar en favoritos"
-                    >
-                      <svg
-                        className={`w-3.5 h-3.5 ${isWishlisted ? "text-[#C5A059] fill-[#C5A059]" : "text-white"}`}
-                        fill={isWishlisted ? "currentColor" : "none"}
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                        />
-                      </svg>
-                    </button>
+                {/* ── FILA 5: EDITORIAL 3 (2 Cols Izquierda) + Arcanos XII, XIII (2 Productos) ── */}
+                <EditorialCard
+                  highlight={EDITORIAL_HIGHLIGHTS[2]}
+                  onSelect={handleOpenProductBySlug}
+                />
+                {filteredProducts.slice(12, 14).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
 
-                    {/* Botón de apertura rápida Concierge */}
-                    {product.inStock && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveProduct(product);
-                        }}
-                        className="absolute bottom-2.5 right-2.5 z-10 px-2.5 py-1 sm:py-1.5 flex items-center gap-1 font-sans font-bold text-[9px] sm:text-[10px] tracking-widest uppercase transition-all duration-300 rounded-sm cursor-pointer shadow-lg bg-[#C5A059] text-black hover:bg-[#d8b368] hover:scale-105"
-                        title="Ver pieza y solicitar por Concierge VIP"
-                      >
-                        <span>Concierge →</span>
-                      </button>
-                    )}
+                {/* ── FILA 6: Arcanos XIV, XV (2 Productos) + EDITORIAL 4 (2 Cols Derecha) ── */}
+                {filteredProducts.slice(14, 16).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
+                <EditorialCard
+                  highlight={EDITORIAL_HIGHLIGHTS[3]}
+                  onSelect={handleOpenProductBySlug}
+                />
 
-                    {/* Badge de Agotado si aplica */}
-                    {!product.inStock && (
-                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10 pointer-events-none">
-                        <span className="px-3 py-1 border border-neutral-500 text-neutral-300 text-[10px] uppercase tracking-[0.25em] font-sans font-medium bg-black/90">
-                          SOLD OUT
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                {/* ── FILA 7: Arcanos XVI, XVII, XVIII, XIX (4 Productos) ── */}
+                {filteredProducts.slice(16, 20).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
 
-                  {/* Información Centrada de la Pieza (Estilo Aurum Brothers) */}
-                  <div className="pt-3 text-center flex flex-col items-center">
-                    
-                    {/* Intención Arquetípica si tiene */}
-                    {product.intentionWords && product.intentionWords.length > 0 && (
-                      <span className="text-[8px] sm:text-[9px] font-sans tracking-[0.2em] uppercase text-[#C5A059] mb-0.5 line-clamp-1">
-                        {product.intentionWords.join(" · ")}
-                      </span>
-                    )}
+                {/* ── FILA 8: Arcanos XX, XXI (2 Productos restantes) ── */}
+                {filteredProducts.slice(20, 22).map((product) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                ))}
+              </>
+            ) : (
+              // Cuando hay filtro de categoría o búsqueda activa, mostramos los productos en grid directo
+              filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+              ))
+            )}
 
-                    {/* Título en tipografía sans-serif limpia */}
-                    <h3 className="text-xs sm:text-sm font-normal text-neutral-200 group-hover:text-[#C5A059] transition-colors line-clamp-1 mb-1">
-                      {product.name}
-                    </h3>
-
-                    {/* Precio Centrado */}
-                    <p className="text-xs sm:text-sm text-neutral-400 font-normal mb-1">
-                      {formatPrice(product.price)}
-                    </p>
-
-                    {/* Reseñas con estrellas doradas Aurum */}
-                    <div className="flex items-center justify-center gap-1 text-[11px] text-[#C5A059]">
-                      <span>★★★★★</span>
-                      <span className="text-neutral-500 text-[10px]">
-                        ({12 + (product.price % 37)})
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         )}
-      </section>
 
-  {/* ─────────────────────────────────────────────────────────────
-          6. SECCIÓN "THE ART OF STACKING" (ESTILO AURUM BROTHERS)
-         ───────────────────────────────────────────────────────────── */}
-      <section id="the-art-of-stacking" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-900 text-center">
-        <h2 className="text-2xl sm:text-3xl font-light tracking-[0.25em] text-white uppercase mb-3">
-          THE ART OF STACKING
-        </h2>
-        <p className="text-xs sm:text-sm text-neutral-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-          Diseñados para lucir con distinción individualmente o en capas junto a tu reloj favorito. Descubre cómo combinar texturas minerales y calibres para elevar tu presencia personal.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Stack 1 */}
-          <div
-            onClick={() => {
-              setSelectedStone("Obsidiana");
-              document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group cursor-pointer text-left"
-          >
-            <div className="relative aspect-[4/5] bg-[#0A0A0A] rounded-sm overflow-hidden mb-4">
-              <Image
-                src="/images/shop/pulseras_arcanos/pulsera_01.jpeg"
-                alt="Stack Escudo Telúrico"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase text-[#C5A059] block mb-1">
-                  STACK #01 · ESCUDO SAGRADO
-                </span>
-                <h3 className="text-lg font-light text-white">Obsidiana & Hematita</h3>
-              </div>
-            </div>
-            <p className="text-xs text-neutral-400 font-light leading-relaxed mb-2">
-              Protección psíquica, sobriedad y enraizamiento telúrico. Ideal para portar junto a un reloj de acero o carátula negra.
-            </p>
-            <span className="text-xs text-[#C5A059] tracking-wider uppercase font-medium group-hover:underline">
-              Explorar Stack →
-            </span>
-          </div>
-
-          {/* Stack 2 */}
-          <div
-            onClick={() => {
-              setSelectedStone("Ámbar");
-              document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group cursor-pointer text-left"
-          >
-            <div className="relative aspect-[4/5] bg-[#0A0A0A] rounded-sm overflow-hidden mb-4">
-              <Image
-                src="/images/shop/pulseras/pulsera-ambar-chiapas-caricias-maternales.jpg"
-                alt="Stack Ámbar Solar"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase text-[#C5A059] block mb-1">
-                  STACK #02 · ORO SOLAR
-                </span>
-                <h3 className="text-lg font-light text-white">Ámbar Fósil & Ojo de Tigre</h3>
-              </div>
-            </div>
-            <p className="text-xs text-neutral-400 font-light leading-relaxed mb-2">
-              Calidez prehistórica de Chiapas, magnetismo personal y abundancia. Acentos solares para proyectar liderazgo.
-            </p>
-            <span className="text-xs text-[#C5A059] tracking-wider uppercase font-medium group-hover:underline">
-              Explorar Stack →
-            </span>
-          </div>
-
-          {/* Stack 3 */}
-          <div
-            onClick={() => {
-              setSelectedStone("Labradorita");
-              document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group cursor-pointer text-left"
-          >
-            <div className="relative aspect-[4/5] bg-[#0A0A0A] rounded-sm overflow-hidden mb-4">
-              <Image
-                src="/images/shop/pulseras_arcanos/pulsera_05.jpeg"
-                alt="Stack Visión & Éter"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase text-[#C5A059] block mb-1">
-                  STACK #03 · VISIÓN & ÉTER
-                </span>
-                <h3 className="text-lg font-light text-white">Labradorita & Lapislázuli</h3>
-              </div>
-            </div>
-            <p className="text-xs text-neutral-400 font-light leading-relaxed mb-2">
-              Destellos espectrales de azul pavo real y pirita dorada. Conexión intuitiva y discernimiento oracular.
-            </p>
-            <span className="text-xs text-[#C5A059] tracking-wider uppercase font-medium group-hover:underline">
-              Explorar Stack →
-            </span>
-          </div>
-        </div>
-      </section>
+      </main>
 
       {/* ─────────────────────────────────────────────────────────────
-          7. PROCESO CREATIVO & MANIFIESTO ARTESANAL
-         ───────────────────────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-900">
-        <CreativeProcessGallery />
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────
-          8. FOOTER CON SELLOS DE CONFIANZA & MÉTODOS DE PAGO (AURUM)
-         ───────────────────────────────────────────────────────────── */}
-      <footer className="bg-[#0A0A0A] border-t border-neutral-900 text-neutral-400 text-xs py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            {/* Columna 1: Brand & Craft */}
-            <div>
-              <span className="font-serif text-lg tracking-[0.25em] text-white block mb-3 uppercase">
-                ARCANO
-              </span>
-              <p className="text-neutral-400 font-light leading-relaxed mb-4">
-                Joyería de alta orfebrería mineral ensamblada a mano con gemas naturales Grado AAA, ámbar fósil de Chiapas y acentos forjados en Oro 18K y Plata .925.
-              </p>
-              <span className="text-[11px] text-[#C5A059] tracking-wider block uppercase">
-                Handmade in Mexico & The Netherlands
-              </span>
-            </div>
-
-            {/* Columna 2: Soporte & Guías */}
-            <div>
-              <span className="text-xs font-medium tracking-[0.2em] text-white uppercase block mb-3">
-                SOPORTE
-              </span>
-              <ul className="space-y-2 font-light">
-                <li>
-                  <a
-                    href={getWhatsAppUrl("Hola ARCANO, tengo dudas sobre cómo medir mi muñeca para mi brazalete.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
-                  >
-                    Guía de Tallas de Muñeca
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={getWhatsAppUrl("Hola ARCANO Concierge, deseo información sobre envíos y garantías.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
-                  >
-                    Envíos Prioritarios & Devoluciones
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={getWhatsAppUrl("Hola ARCANO, deseo cotizar una pieza personalizada a mi medida.")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
-                  >
-                    Brazaletes a Medida (Concierge)
-                  </a>
-                </li>
-                <li>
-                  <Link href="/contacto" className="hover:text-white transition-colors">
-                    Contacto Directo
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Columna 3: Colecciones */}
-            <div>
-              <span className="text-xs font-medium tracking-[0.2em] text-white uppercase block mb-3">
-                COLECCIONES
-              </span>
-              <ul className="space-y-2 font-light">
-                <li><button onClick={() => { setSelectedCategory("ambar-chiapas"); setSelectedStone("Ámbar"); }} className="hover:text-white text-left">Ámbar de Simojovel, Chiapas</button></li>
-                <li><button onClick={() => { setSelectedCategory("talismanes"); setSelectedStone("Obsidiana"); }} className="hover:text-white text-left">Obsidiana Dorada Imperial</button></li>
-                <li><button onClick={() => { setSelectedCategory("talismanes"); setSelectedStone("Labradorita"); }} className="hover:text-white text-left">Labradorita Espectral</button></li>
-                <li><button onClick={() => { setSelectedCategory("alta-joyeria-oro"); setSelectedStone("todos"); }} className="hover:text-white text-left">Oro 18K & Gemas Sagradas</button></li>
-                <li><button onClick={() => { setSelectedCategory("duos"); setSelectedStone("todos"); }} className="hover:text-white text-left">Sets de Dúos Fluviales</button></li>
-              </ul>
-            </div>
-
-            {/* Columna 4: Newsletter Aurum */}
-            <div>
-              <span className="text-xs font-medium tracking-[0.2em] text-white uppercase block mb-3">
-                STAY IN THE LOOP
-              </span>
-              <p className="text-neutral-400 font-light leading-relaxed mb-3">
-                Nuevas piezas de edición limitada cada mes y acceso prioritario a gemas de cantera.
-              </p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Tu correo electrónico..."
-                  className="bg-[#141414] border border-neutral-800 px-3 py-2 text-xs text-white placeholder-neutral-500 w-full rounded-l-sm focus:outline-none"
-                />
-                <button
-                  onClick={() => alert("¡Gracias por unirte al Círculo Exclusivo ARCANO!")}
-                  className="px-4 py-2 bg-[#C5A059] text-black text-xs font-semibold uppercase tracking-wider rounded-r-sm hover:bg-[#d8b368]"
-                >
-                  OK
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Barra Inferior con Métodos de Pago */}
-          <div className="pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500 font-light">
-            <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
-              <span>© 2026 ARCANO · All Rights Reserved. Luxury Beaded Bracelets.</span>
-              <span className="hidden sm:inline">·</span>
-              <span>
-                Desarrollado por{" "}
-                <a
-                  href="https://agenteweb.com.mx/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#C5A059] hover:underline underline-offset-2 font-medium"
-                >
-                  agenteweb.com.mx
-                </a>
-              </span>
-            </div>
-            <div className="flex items-center gap-3 text-neutral-400 text-xs">
-              <span>Visa</span>
-              <span>·</span>
-              <span>Mastercard</span>
-              <span>·</span>
-              <span>AMEX</span>
-              <span>·</span>
-              <span>Apple Pay</span>
-              <span>·</span>
-              <span>Mercado Pago</span>
-              <span>·</span>
-              <span>SPEI</span>
-              <span>·</span>
-              <span>OXXO</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* ─────────────────────────────────────────────────────────────
-          9. MODAL DE PRODUCTO (ESTILO AURUM BROTHERS SIZING & SPECS)
+          4. MODAL CONCIERGE VIP (CIERRE DIRECTO A WHATSAPP)
          ───────────────────────────────────────────────────────────── */}
       {activeProduct && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md overflow-y-auto animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-xl animate-fadeIn"
           onClick={() => setActiveProduct(null)}
+          role="dialog"
+          aria-modal="true"
         >
           <div
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0A0A0A] border border-neutral-800 p-6 sm:p-10 my-auto text-left rounded-sm shadow-2xl"
+            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#0A0A0A] border border-neutral-800 rounded-lg shadow-2xl p-6 sm:p-10 text-white scrollbar-thin"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Botón Cerrar */}
             <button
               onClick={() => setActiveProduct(null)}
-              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-[#141414] border border-neutral-700 flex items-center justify-center text-neutral-400 hover:text-white transition-colors cursor-pointer text-sm"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-neutral-400 hover:text-white text-lg p-2 transition-colors cursor-pointer"
               aria-label="Cerrar modal"
             >
               ✕
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               
-              {/* Columna Izquierda: Imagen y Galería de Ángulos */}
-              <div>
-                <div className="relative aspect-square w-full bg-[#111111] overflow-hidden rounded-sm">
+              {/* Columna Izquierda: Fotografía de la Pieza */}
+              <div className="space-y-4">
+                <div className="relative aspect-square w-full rounded-sm overflow-hidden bg-black border border-neutral-900">
                   <Image
                     src={activeModalImage || activeProduct.imageUrl}
                     alt={activeProduct.name}
                     fill
-                    className="object-cover transition-all duration-300"
-                    sizes="(max-width: 768px) 100vw, 500px"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    priority
                   />
-
-                  {/* Badges en Modal */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1 items-start">
-                    {activeProduct.categoryId === "coleccion-arcanos" && (
-                      <span className="px-2 py-0.5 border border-[#C5A059] bg-black/80 text-[#C5A059] text-[9px] uppercase tracking-widest font-sans font-semibold">
-                        100% PURA PIEDRA · SIN DIJES
-                      </span>
-                    )}
-                    {activeProduct.goldSpecifications && (
-                      <span className="px-2 py-0.5 border border-[#C5A059] bg-black/70 text-[#C5A059] text-[9px] uppercase tracking-widest font-sans font-medium">
-                        ORO 18K
-                      </span>
-                    )}
-                    {activeProduct.badge && (
-                      <span className="px-2 py-0.5 border border-[#C5A059]/70 bg-black/70 text-[#C5A059] text-[9px] uppercase tracking-widest font-sans font-medium">
-                        {activeProduct.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  {!activeProduct.inStock && (
-                    <div className="absolute top-3 right-3 px-3 py-1 bg-neutral-900 border border-neutral-700 text-neutral-300 text-[10px] uppercase tracking-widest font-sans font-medium">
-                      SOLD OUT
-                    </div>
-                  )}
                 </div>
 
-                {/* Vistas en Miniatura si existen imágenes secundarias */}
+                {/* Miniaturas de galería si tiene */}
                 {activeProduct.images && activeProduct.images.length > 1 && (
-                  <div className="flex gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-none">
-                    {activeProduct.images.map((img, i) => {
-                      const isSelected = (activeModalImage || activeProduct.imageUrl) === img;
-                      return (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={() => setActiveModalImage(img)}
-                          className={`relative w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden bg-[#111111] cursor-pointer transition-all ${
-                            isSelected
-                              ? "border-2 border-[#C5A059] scale-105"
-                              : "border border-neutral-800 opacity-60 hover:opacity-100"
-                          }`}
-                        >
-                          <Image src={img} alt="" fill className="object-cover" sizes="64px" />
-                        </button>
-                      );
-                    })}
+                  <div className="flex gap-2.5 overflow-x-auto pb-1">
+                    {activeProduct.images.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveModalImage(img)}
+                        className={`relative w-16 h-16 rounded-sm overflow-hidden border cursor-pointer flex-shrink-0 transition-all ${
+                          (activeModalImage || activeProduct.imageUrl) === img
+                            ? "border-[#C5A059]"
+                            : "border-neutral-800 opacity-60 hover:opacity-100"
+                        }`}
+                      >
+                        <Image src={img} alt={`Vista ${idx + 1}`} fill className="object-cover" />
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
 
-              {/* Columna Derecha: Selector de Talla, Pestañas y Checkout */}
-              <div className="flex flex-col justify-between">
+              {/* Columna Derecha: Especificaciones y Cierre Concierge */}
+              <div className="space-y-6">
+                
+                {/* Encabezado del Arcano */}
                 <div>
-                  <span className="text-[10px] font-sans tracking-[0.25em] uppercase text-[#C5A059] block mb-1">
-                    {activeProduct.stoneType || activeProduct.categoryName}
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-[#C5A059] block mb-1 font-mono">
+                    ARCANO MAYOR {activeProduct.arcanoNumber || "✦"}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-light text-white tracking-wide mb-2">
+                  <h2 className="text-xl sm:text-2xl font-light tracking-wide text-white mb-2">
                     {activeProduct.name}
                   </h2>
+                  <p className="text-xl font-normal text-white tracking-wider">
+                    {formatPrice(activeProduct.price)}
+                  </p>
+                </div>
 
-                  {/* Reseñas y Estrellas */}
-                  <div className="flex items-center gap-2 mb-3 text-[#C5A059] text-xs">
-                    <span>★★★★★</span>
-                    <span className="text-neutral-400 text-[11px]">4.9 (48 reseñas verificadas)</span>
-                  </div>
-
-                  {/* Palabras de Intención Arquetípica */}
-                  {activeProduct.intentionWords && activeProduct.intentionWords.length > 0 && (
-                    <div className="flex items-center gap-2 mb-4 flex-wrap">
-                      <span className="text-[10px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium">
-                        Intención:
-                      </span>
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        {activeProduct.intentionWords.map((word, idx) => (
-                          <span
-                            key={idx}
-                            className="text-[10px] uppercase tracking-wider px-2 py-0.5 bg-[#141414] border border-[#C5A059]/40 text-neutral-200 rounded-sm font-sans"
-                          >
-                            {word}
-                          </span>
-                        ))}
-                      </div>
+                {/* Distintivo Concierge VIP Monterrey */}
+                <div className="p-3.5 bg-neutral-900/70 border border-[#C5A059]/40 rounded-sm">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-[#C5A059] text-sm mt-0.5">✨</span>
+                    <div>
+                      <p className="text-xs text-[#C5A059] font-medium tracking-wide">
+                        Pieza Única Consagrada — Entrega Privada Concierge
+                      </p>
+                      <p className="text-[11px] text-neutral-400 mt-0.5 leading-relaxed">
+                        Servicio en mano sin costo en San Pedro Garza García, San Jerónimo, Cumbres y Linda Vista.
+                      </p>
                     </div>
-                  )}
-
-                  {/* Precio */}
-                  <div className="mb-6 pb-4 border-b border-neutral-800">
-                    <span className="text-2xl sm:text-3xl font-normal text-white">
-                      {formatPrice(activeProduct.price)}
-                    </span>
-                    <span className="text-xs text-neutral-400 block mt-1 font-light">
-                      {activeProduct.shippingNote} · Empaque de Colección & Envío Asegurado
-                    </span>
-                  </div>
-
-                  {/* Selector de Talla de Muñeca (Aurum Sizing Guide) */}
-                  <div className="mb-6 p-4 bg-[#111111] border border-neutral-800 rounded-sm">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-sans uppercase tracking-wider text-neutral-200 font-medium">
-                        Talla de Muñeca (Circunferencia):
-                      </span>
-                      <a
-                        href={getWhatsAppUrl("Hola ARCANO, tengo dudas sobre cómo medir mi muñeca para mi brazalete.")}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] font-sans text-[#C5A059] underline underline-offset-2"
-                      >
-                        Guía de Tallas
-                      </a>
-                    </div>
-                    <div className="grid grid-cols-4 gap-2">
-                      {[
-                        { size: "S", label: "16-17 cm" },
-                        { size: "M", label: "18-19 cm" },
-                        { size: "L", label: "20-21 cm" },
-                        { size: "XL", label: "22 cm" },
-                      ].map((t) => (
-                        <button
-                          key={t.size}
-                          onClick={() => setSelectedWristSize(t.size)}
-                          className={`py-2 px-1 text-center border rounded-sm transition-all cursor-pointer ${
-                            selectedWristSize === t.size
-                              ? "bg-white text-black border-white font-bold shadow-md"
-                              : "bg-[#161616] text-neutral-300 border-neutral-800 hover:border-neutral-600"
-                          }`}
-                        >
-                          <span className="text-xs block font-bold">{t.size}</span>
-                          <span className="text-[9px] block opacity-80">{t.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Pestañas de Información (Detalles / Propiedades / Consagración) */}
-                  <div className="flex border-b border-neutral-800 mb-5 gap-6 text-xs sm:text-sm font-sans uppercase tracking-wider">
-                    <button
-                      onClick={() => setModalTab("detalles")}
-                      className={`pb-2.5 transition-colors cursor-pointer ${
-                        modalTab === "detalles" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
-                      }`}
-                    >
-                      {activeProduct.arcanoStory ? "Historia" : "Detalles"}
-                    </button>
-                    <button
-                      onClick={() => setModalTab("mineral")}
-                      className={`pb-2.5 transition-colors cursor-pointer ${
-                        modalTab === "mineral" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
-                      }`}
-                    >
-                      {activeProduct.arcanoStory ? "Minerales" : "Propiedades"}
-                    </button>
-                    <button
-                      onClick={() => setModalTab("ritual")}
-                      className={`pb-2.5 transition-colors cursor-pointer ${
-                        modalTab === "ritual" ? "border-b-2 border-[#C5A059] text-[#C5A059] font-medium" : "text-neutral-500 hover:text-white"
-                      }`}
-                    >
-                      Consagración
-                    </button>
-                  </div>
-
-                  {/* Contenido de Pestaña con Tipografía Grande y Clara (Mobile First) */}
-                  <div className="min-h-[110px] text-sm sm:text-base font-normal text-neutral-200 leading-relaxed mb-6">
-                    {modalTab === "detalles" && (
-                      <div className="space-y-3.5">
-                        {activeProduct.arcanoStory ? (
-                          <div className="space-y-3">
-                            <div className="p-3.5 bg-gradient-to-br from-[#141414] to-[#0A0A0A] border border-[#C5A059]/30 rounded-sm">
-                              <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">
-                                Mito & Viaje del Alma:
-                              </span>
-                              <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed italic">
-                                "{activeProduct.arcanoStory}"
-                              </p>
-                            </div>
-                            <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
-                              {activeProduct.description}
-                            </p>
-                          </div>
-                        ) : (
-                          <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
-                            {activeProduct.description}
-                          </p>
-                        )}
-                        {activeProduct.details && activeProduct.details.length > 0 && !activeProduct.arcanoStory && (
-                          <ul className="space-y-2 pt-3 border-t border-neutral-800 text-xs sm:text-sm text-neutral-300">
-                            {activeProduct.details.map((d, i) => (
-                              <li key={i} className="flex items-start gap-2.5">
-                                <span className="text-[#C5A059] mt-0.5 font-bold">✦</span>
-                                <span>{d}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    )}
-                    {modalTab === "mineral" && (
-                      <div className="space-y-3 p-4 bg-[#0D0D0D] border border-neutral-800 rounded-sm">
-                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b border-neutral-800 pb-2.5">
-                          <span className="text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium">Gemas 100% Puras:</span>
-                          <span className="text-base sm:text-lg font-medium text-white tracking-wide">{activeProduct.stoneType || "Mineral Natural Grado AAA"}</span>
-                        </div>
-                        <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">{activeProduct.tagline}</p>
-                        {activeProduct.beadMatrix ? (
-                          <div className="pt-3 border-t border-neutral-800 space-y-3">
-                            <div className="flex items-center justify-between">
-                              <span className="text-[10px] font-mono tracking-widest uppercase text-[#C5A059]">
-                                Matriz Técnica Sagrada · 22 Cuentas
-                              </span>
-                              <span className="text-[10px] text-neutral-400 font-sans italic">
-                                {activeProduct.beadMatrix.archetype}
-                              </span>
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
-                              <div className="p-2.5 bg-[#141414] border border-neutral-800 rounded-sm">
-                                <span className="text-[9px] block text-neutral-400 uppercase font-sans mb-1 font-medium">
-                                  Cuerpo Principal (19 ctas - 8mm)
-                                </span>
-                                <span className="text-white font-medium block">
-                                  {activeProduct.beadMatrix.mainBody.replace(/ \(\d+ ctas - \d+ mm\)/, '')}
-                                </span>
-                              </div>
-                              <div className="p-2.5 bg-[#141414] border border-[#C5A059]/40 rounded-sm">
-                                <span className="text-[9px] block text-[#C5A059] uppercase font-sans mb-1 font-medium">
-                                  Laterales (2 ctas - 8mm)
-                                </span>
-                                <span className="text-[#F3EFE6] font-medium block">
-                                  {activeProduct.beadMatrix.lateralBeads.replace(/ \(\d+ ctas - \d+ mm\)/, '')}
-                                </span>
-                              </div>
-                              <div className="p-2.5 bg-[#141414] border border-neutral-800 rounded-sm">
-                                <span className="text-[9px] block text-neutral-400 uppercase font-sans mb-1 font-medium">
-                                  Centro Focal (1 cta - 8mm)
-                                </span>
-                                <span className="text-white font-medium block">
-                                  {activeProduct.beadMatrix.centerPiece.replace(/ \(\d+ cta - \d+ mm\)/, '')}
-                                </span>
-                              </div>
-                            </div>
-
-                            {/* Sello de Autenticidad Pura Piedra */}
-                            <div className="flex items-center justify-center gap-2 p-2.5 bg-[#141414] border border-[#C5A059]/40 rounded-sm text-[10px] text-[#C5A059] uppercase tracking-wider font-sans font-medium text-center">
-                              <span>✦</span>
-                              <span>100% Pura Piedra Grado AAA · Calibre Uniforme 8mm con Elástico · Cero dijes ni metales</span>
-                              <span>✦</span>
-                            </div>
-                          </div>
-                        ) : activeProduct.details && activeProduct.details.length > 0 ? (
-                          <ul className="space-y-2 pt-3 border-t border-neutral-800 text-xs sm:text-sm text-neutral-300">
-                            {activeProduct.details.map((d, i) => (
-                              <li key={i} className="flex items-start gap-2.5">
-                                <span className="text-[#C5A059] mt-0.5 font-bold">✦</span>
-                                <span>{d}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                        <p className="text-xs sm:text-sm text-[#C5A059]/90 italic pt-1">
-                          ✦ Cada esfera es 100% mineral geológico auténtico, tallado a 8mm y sin añadidos metálicos.
-                        </p>
-                      </div>
-                    )}
-                    {modalTab === "ritual" && (
-                      <div className="p-4 bg-gradient-to-br from-[#121212] via-[#0D0D0D] to-black border border-[#C5A059]/40 rounded-sm space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-base text-[#C5A059]">🔥</span>
-                          <span className="text-xs sm:text-sm font-sans uppercase tracking-[0.2em] text-[#C5A059] font-semibold">
-                            Rito de Fuego & Luna Llena:
-                          </span>
-                        </div>
-                        <p className="text-sm sm:text-base text-neutral-200 font-normal leading-relaxed">
-                          {activeProduct.ritualUse || "Consagrado bajo el influjo de la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas para anclar tu intención."}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* ── CIERRE CONCIERGE VIP LOCAL (MONTERREY) ── */}
-                  <div className="space-y-4 pt-2">
-                    {/* a) Distintivo elegante */}
-                    <div className="p-3.5 bg-gradient-to-r from-[#18140B] via-[#0E0C07] to-[#18140B] border border-[#C5A059]/50 rounded-sm text-center shadow-inner">
-                      <span className="text-xs sm:text-[13px] text-[#F3EFE6] font-serif leading-relaxed block tracking-wide">
-                        ✨ Pieza Única — Entrega Privada Concierge sin costo en San Pedro, San Jerónimo, Cumbres y Linda Vista
-                      </span>
-                    </div>
-
-                    {/* b) Selector rápido de Zona de Entrega en MTY */}
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="zona-entrega-concierge"
-                        className="block text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium"
-                      >
-                        📍 Zona de Entrega en MTY:
-                      </label>
-                      <div className="relative">
-                        <select
-                          id="zona-entrega-concierge"
-                          value={selectedDeliveryZone}
-                          onChange={(e) => setSelectedDeliveryZone(e.target.value)}
-                          className="w-full bg-[#121212] border border-[#C5A059]/40 hover:border-[#C5A059] text-white text-xs sm:text-sm py-3 px-3.5 rounded-sm appearance-none focus:outline-none focus:ring-1 focus:ring-[#C5A059] transition-all cursor-pointer font-sans"
-                        >
-                          {CONCIERGE_ZONES.map((zone) => (
-                            <option key={zone} value={zone} className="bg-[#121212] text-white py-1">
-                              {zone}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#C5A059]">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* c) Botón principal de alto contraste dorado/místico */}
-                    {activeProduct.inStock ? (
-                      <a
-                        id="btn-adquirir-whatsapp-concierge"
-                        href={buildConciergeWhatsAppUrl({
-                          product: activeProduct,
-                          selectedZone: selectedDeliveryZone,
-                        })}
-                        onClick={() => {
-                          trackConciergeLead({
-                            product: activeProduct,
-                            selectedZone: selectedDeliveryZone,
-                          });
-                        }}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-4 px-4 bg-gradient-to-r from-[#C5A059] via-[#E5C178] to-[#C5A059] hover:from-[#d8b368] hover:to-[#d8b368] text-black text-xs sm:text-sm font-sans font-bold tracking-[0.22em] uppercase transition-all duration-300 shadow-[0_0_25px_rgba(197,160,89,0.4)] hover:shadow-[0_0_35px_rgba(197,160,89,0.6)] hover:scale-[1.01] flex items-center justify-center gap-2.5 rounded-sm cursor-pointer text-center"
-                      >
-                        <span className="text-base">💬</span>
-                        <span>Adquirir Pieza vía WhatsApp Concierge</span>
-                        <span>·</span>
-                        <span>{formatPrice(activeProduct.price)}</span>
-                      </a>
-                    ) : (
-                      <div className="w-full py-3.5 bg-neutral-800 text-neutral-400 text-xs font-sans tracking-[0.2em] uppercase text-center font-medium">
-                        Pieza Agotada
-                      </div>
-                    )}
-
-                    <p className="text-[10px] text-center text-neutral-400 font-sans tracking-wide">
-                      🔒 Atención personalizada directa · Pago a la entrega o transferencia bancaria protegida.
-                    </p>
                   </div>
                 </div>
+
+                {/* Selector de Zona de Entrega */}
+                <div>
+                  <label className="block text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
+                    Zona de Entrega en Monterrey:
+                  </label>
+                  <select
+                    value={selectedDeliveryZone}
+                    onChange={(e) => setSelectedDeliveryZone(e.target.value)}
+                    className="w-full bg-[#111111] border border-neutral-700 hover:border-[#C5A059] text-white text-xs py-2.5 px-3.5 rounded-sm focus:outline-none focus:border-[#C5A059] transition-colors cursor-pointer"
+                  >
+                    {CONCIERGE_ZONES.map((zone) => (
+                      <option key={zone} value={zone} className="bg-black text-white">
+                        {zone}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Especificaciones Técnicas Fijas */}
+                <div className="space-y-2 border-t border-b border-neutral-800/80 py-4 text-xs text-neutral-300 font-light">
+                  <div className="flex justify-between">
+                    <span className="text-neutral-400">Pureza:</span>
+                    <span className="text-white">100% Pura Piedra Mineral Grado AAA</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-neutral-400">Calibre:</span>
+                    <span className="text-white">Uniforme 8 mm (22 cuentas exactas)</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-neutral-400">Ensamble:</span>
+                    <span className="text-white">Elástico quirúrgico de alta tenacidad (sin metales)</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-neutral-400">Consagración:</span>
+                    <span className="text-white">Luna Llena ante Fuego Sagrado de 1.5 m</span>
+                  </div>
+                </div>
+
+                {/* Descripción / Historia Alquímica */}
+                <p className="text-xs text-neutral-400 leading-relaxed font-light">
+                  {activeProduct.arcanoStory || activeProduct.description}
+                </p>
+
+                {/* Botón Principal WhatsApp Concierge con Tracking */}
+                <a
+                  href={conciergeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleConciergeClick}
+                  className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#d8b368] text-black font-semibold text-xs tracking-[0.2em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg cursor-pointer hover:shadow-[0_0_20px_rgba(197,160,89,0.4)]"
+                >
+                  <span>Adquirir Pieza vía WhatsApp Concierge</span>
+                  <span className="text-sm">↗</span>
+                </a>
+
+                <p className="text-[10px] text-center text-neutral-400 font-mono tracking-wider">
+                  Cierre directo con Asesor Personal · Garantía y autenticidad certificada
+                </p>
+
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          5. FOOTER MINIMALISTA ARCANO
+         ───────────────────────────────────────────────────────────── */}
+      <footer className="border-t border-neutral-900 bg-black py-16 px-4 text-center">
+        <div className="max-w-7xl mx-auto space-y-4">
+          <span className="text-xl text-[#C5A059]">✦</span>
+          <p className="text-xs tracking-[0.3em] uppercase text-white font-serif">
+            ARCANO · SABIDURÍA DE LOS ARCANOS
+          </p>
+          <p className="text-[10px] tracking-widest text-neutral-400 uppercase max-w-lg mx-auto leading-relaxed">
+            22 Talismanes forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme (8 mm). Cero metales, cero dijes, máxima pureza geológica.
+          </p>
+          <p className="text-[9px] text-neutral-400 pt-4 font-mono">
+            © {new Date().getFullYear()} ARCANO SOLUTIONS · MONTERREY, MÉXICO.
+          </p>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <TiendaContent />
+    </Suspense>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// COMPONENTE: TARJETA DE PRODUCTO ESTILO AURUM BROTHERS
+// ─────────────────────────────────────────────────────────────
+function ProductCard({
+  product,
+  onSelect,
+}: {
+  product: ShopProduct;
+  onSelect: (p: ShopProduct) => void;
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(product)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group flex flex-col cursor-pointer select-none text-left w-full focus:outline-none"
+    >
+      {/* Contenedor de Fotografía sobre Negro Absoluto */}
+      <div className="relative aspect-square w-full overflow-hidden bg-[#0A0A0A] mb-3">
+        <Image
+          src={product.imageUrl}
+          alt={product.name}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className={`object-cover transition-transform duration-700 ease-out ${
+            isHovered ? "scale-[1.04]" : "scale-100"
+          }`}
+        />
+
+        {/* Indicador de 2 puntos sutiles estilo Aurum Brothers */}
+        <div className="absolute bottom-2.5 inset-x-0 flex items-center justify-center gap-1.5 opacity-40 group-hover:opacity-80 transition-opacity">
+          <span className="w-1 h-1 rounded-full bg-white" />
+          <span className="w-1 h-1 rounded-full bg-neutral-500" />
+        </div>
+      </div>
+
+      {/* Información de la Pieza (Tipografía Aurum Brothers) */}
+      <div className="space-y-1 w-full">
+        {/* Fila de Título con Flecha Diagonal ↗ */}
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-xs sm:text-[13px] font-normal text-white group-hover:text-[#C5A059] transition-colors truncate">
+            {product.name.replace("Arcano ", "Arcano ").split("(")[0].trim()}
+          </h3>
+          <span className="text-neutral-500 group-hover:text-[#C5A059] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs font-mono">
+            ↗
+          </span>
+        </div>
+
+        {/* Precio */}
+        <p className="text-xs sm:text-[13px] text-neutral-300 font-light">
+          {formatPrice(product.price)}
+        </p>
+
+        {/* Especificación de Calibre y Pureza */}
+        <p className="text-[10px] sm:text-[11px] text-neutral-400 font-light truncate">
+          8mm · Pura piedra natural sobre elástico
+        </p>
+
+        {/* Reseñas con Estrellas Doradas */}
+        <div className="flex items-center gap-1 text-[10px] text-[#C5A059] pt-0.5">
+          <span>★★★★★</span>
+          <span className="text-neutral-400 font-mono text-[9px]">
+            ({15 + ((product.name.length * 7) % 35)})
+          </span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// COMPONENTE: TARJETA EDITORIAL IN-FEED ("IN FOCUS") ESTILO AURUM
+// ─────────────────────────────────────────────────────────────
+function EditorialCard({
+  highlight,
+  onSelect,
+}: {
+  highlight: EditorialHighlight;
+  onSelect: (slug: string) => void;
+}) {
+  return (
+    <div
+      onClick={() => onSelect(highlight.arcanoSlug)}
+      className="col-span-1 md:col-span-2 group flex flex-col cursor-pointer select-none"
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          onSelect(highlight.arcanoSlug);
+        }
+      }}
+    >
+      {/* Fotografía Cinematográfica con Overlay y Texto */}
+      <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-black mb-3">
+        <Image
+          src={highlight.image}
+          alt={highlight.headline}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover brightness-[0.9] group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+        />
+
+        {/* Gradiente Oscuro para Legibilidad */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
+
+        {/* Texto Sobreimpreso estilo Aurum Brothers */}
+        <div className="absolute inset-0 p-5 sm:p-7 flex flex-col justify-end text-left">
+          <span className="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-300 font-medium mb-1">
+            {highlight.eyebrow}
+          </span>
+          <h2 className="text-xl sm:text-3xl font-light text-white tracking-tight mb-2">
+            {highlight.headline}
+          </h2>
+          <div className="flex items-center gap-1.5 text-xs text-white/90 group-hover:text-[#C5A059] transition-colors underline underline-offset-4 decoration-neutral-500">
+            <span>{highlight.ctaText}</span>
+            <span className="text-xs">↗</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Cita de Comprador Verificado Debajo */}
+      <div className="space-y-1 text-left pt-1">
+        <div className="text-[10px] text-[#C5A059]">★★★★★</div>
+        <p className="text-xs sm:text-[13px] text-neutral-200 font-light italic leading-snug">
+          "{highlight.ratingText}"
+        </p>
+        <p className="text-[10px] text-neutral-400 font-light">
+          {highlight.buyerName} · {highlight.buyerLocation}
+        </p>
+      </div>
     </div>
   );
 }

@@ -33,16 +33,16 @@ if (errors.length > 0) {
 // 2. Cargar y verificar Snapshot
 const snapshot = JSON.parse(fs.readFileSync(SNAPSHOT_PATH, 'utf8'));
 
-if (snapshot.totalCollections !== 11) {
-  errors.push(`Se esperaban 11 colecciones, pero hay ${snapshot.totalCollections}`);
+if (snapshot.totalCollections !== 1) {
+  errors.push(`Se esperaba 1 colección oficial (Arcanos Mayores), pero hay ${snapshot.totalCollections}`);
 }
 
-if (snapshot.totalProducts !== 148) {
-  errors.push(`Se esperaban 148 piezas de catálogo, pero hay ${snapshot.totalProducts}`);
+if (snapshot.totalProducts !== 22) {
+  errors.push(`Se esperaban 22 piezas de catálogo (Arcanos Mayores), pero hay ${snapshot.totalProducts}`);
 }
 
-if (snapshot.totalStockUnits !== 11000) {
-  errors.push(`Se esperaban 11,000 unidades globales en inventario, pero hay ${snapshot.totalStockUnits}`);
+if (snapshot.totalStockUnits !== 1000) {
+  errors.push(`Se esperaban 1,000 unidades en inventario para la colección, pero hay ${snapshot.totalStockUnits}`);
 }
 
 // 3. Verificar que cada colección sume exactamente 1,000 unidades

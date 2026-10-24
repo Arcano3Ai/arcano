@@ -296,7 +296,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     ],
     inStock: true,
     badge: "ARCANO VI · AMOR & ARMONÍA",
-    imageUrl: "/images/shop/pulseras_arcanos/pulsera_06.jpeg",
+    imageUrl: "/images/shop/pulseras/brazalete-arcano-vi-los-enamorados-cornalina-cuarzo-rosa.jpg",
     secondaryImageUrl: "/images/cards/ar06.webp",
     images: [
       "/images/shop/pulseras_arcanos/pulsera_06.jpeg",
@@ -341,7 +341,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     ],
     inStock: true,
     badge: "ARCANO VII · DETERMINACIÓN & TRIUNFO",
-    imageUrl: "/images/shop/pulseras_arcanos/pulsera_07.jpeg",
+    imageUrl: "/images/shop/pulseras/brazalete-arcano-vii-el-carro-ojo-tigre-hematita.jpg",
     secondaryImageUrl: "/images/cards/ar07.webp",
     images: [
       "/images/shop/pulseras_arcanos/pulsera_07.jpeg",
@@ -386,7 +386,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     ],
     inStock: true,
     badge: "ARCANO VIII · VALENTÍA & DOMINIO INTERIOR",
-    imageUrl: "/images/shop/pulseras_arcanos/pulsera_08.jpeg",
+    imageUrl: "/images/shop/pulseras/brazalete-arcano-viii-la-fuerza-jaspe-ojo-buey.jpg",
     secondaryImageUrl: "/images/cards/ar08.webp",
     images: [
       "/images/shop/pulseras_arcanos/pulsera_08.jpeg",

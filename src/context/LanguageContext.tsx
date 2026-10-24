@@ -8,7 +8,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
-  t: (es: string, en: string) => string;
+  t: (es: string, en?: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -37,7 +37,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLanguage(language === "es" ? "en" : "es");
   };
 
-  const t = (es: string, en: string) => (language === "es" ? es : en);
+  const t = (es: string, en?: string) => (language === "es" ? es : (en ?? es));
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
@@ -54,7 +54,7 @@ export const useLanguage = (): LanguageContextType => {
       language: "es",
       setLanguage: () => {},
       toggleLanguage: () => {},
-      t: (es: string) => es,
+      t: (es: string, en?: string) => (en ? es : es),
     };
   }
   return context;

@@ -10,17 +10,7 @@ const arcanosContent = fs.readFileSync(ARCANOS_PATH, 'utf8');
 
 // Colecciones oficiales y sus prefijos de SKU
 const COLLECTION_SPECS = [
-  { id: 'coleccion-arcanos', skuPrefix: 'ARC', name: 'Colección Arcanos Mayores', slug: 'coleccion-arcanos', symbol: '♾️', description: '22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme 8 mm Grado AAA sobre elástico. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.' },
-  { id: 'alta-joyeria-oro', skuPrefix: 'ORO', name: 'Alta Joyería & Oro 18K', slug: 'alta-joyeria-oro', symbol: '⚜️', description: 'Talismanes ceremoniales y gargantillas consagradas con herrajes bañados en oro 18K y gemas naturales de Grado AAA.' },
-  { id: 'ambar-chiapas', skuPrefix: 'AMB', name: 'Ámbar de Chiapas & Minerales', slug: 'ambar-chiapas', symbol: '✨', description: 'Talismanes ceremoniales con auténtico ámbar fósil de Simojovel, plata fina Ley .925 y minerales sagrados.' },
-  { id: 'doble-perforacion', skuPrefix: 'DBP', name: 'Doble Perforación (Dual)', slug: 'doble-perforacion', symbol: '⚡', description: 'Soportes de piedra con dos orificios para sahumerio dual y mezcla de aromas.' },
-  { id: 'reiki-sanacion', skuPrefix: 'RKI', name: 'Reiki & Sanación', slug: 'reiki-sanacion', symbol: '🌀', description: 'Símbolos Cho Ku Rei, Hagstones (piedras bruja) y piedras de armonización.' },
-  { id: 'portainciensos-y-runas', skuPrefix: 'RUN', name: 'Quemadores Rúnicos & Aura', slug: 'portainciensos-y-runas', symbol: 'ᚱ', description: 'Soportes de piedra taladrados a mano para incienso y varitas sagradas.' },
-  { id: 'simbolos-y-geometria', skuPrefix: 'GEO', name: 'Símbolos Sagrados & Sol', slug: 'simbolos-y-geometria', symbol: '🜃', description: 'Geometría sagrada, soles alquímicos, lunas y mandalas pintados a mano en piedra.' },
-  { id: 'frecuencias-angelicales', skuPrefix: 'ANG', name: 'Números Angelicales', slug: 'frecuencias-angelicales', symbol: '☉', description: 'Frecuencias sincrónicas (11:11, 777, 444) para anclar intenciones.' },
-  { id: 'sahumerios-y-kits', skuPrefix: 'SAH', name: 'Kits & Bandejas de Altar', slug: 'sahumerios-y-kits', symbol: '🜁', description: 'Inciensos de monte, atados de salvia, bandejas de río y kits de limpieza profunda.' },
-  { id: 'talismanes', skuPrefix: 'TAL', name: 'Talismanes de Muñeca', slug: 'talismanes', symbol: '📿', description: 'Pulseras artesanales consagradas con minerales naturales y amuletos sagrados.' },
-  { id: 'duos', skuPrefix: 'DUO', name: 'Dúos Alquímicos', slug: 'duos', symbol: '✨', description: 'Kits rituales de Altar Fluvial: Piedra Sahumadora + Talismán de Muñeca.' }
+  { id: 'coleccion-arcanos', skuPrefix: 'ARC', name: 'Colección Arcanos Mayores', slug: 'coleccion-arcanos', symbol: '♾️', description: '22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme 8 mm Grado AAA sobre elástico. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.' }
 ];
 
 function extractProducts(content) {
