@@ -29,8 +29,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-0-el-loco-howlita-turquesa.jpg",
     secondaryImageUrl: "/images/cards/ar00.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_01.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-0-el-loco-howlita-turquesa.jpg",
       "/images/cards/ar00.webp",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Howlita Blanca, Ónix Mate & Hematita Metálica",
     beadSize: "8mm",
@@ -72,9 +73,10 @@ export const majorArcanaTalismans: ShopProduct[] = [
     inStock: true,
     badge: "ARCANO I · MANIFESTACIÓN & VOLUNTAD",
     imageUrl: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
-    secondaryImageUrl: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
+    secondaryImageUrl: "/images/cards/ar01.webp",
     images: [
       "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
+      "/images/cards/ar01.webp",
       "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Ónix Negro Brillante, Lapislázuli & Pirita Dorada",
@@ -119,8 +121,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-ii-la-sacerdotisa-piedra-luna-amatista.jpg",
     secondaryImageUrl: "/images/cards/ar02.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-ii-la-sacerdotisa-piedra-luna-amatista.jpg",
       "/images/cards/ar02.webp",
+      "/images/shop/pulseras/lifestyle_wrist_jade_emperatriz.jpg",
     ],
     stoneType: "Cuarzo Blanco Lechoso, Amatista & Piedra Luna / Opalina",
     beadSize: "8mm",
@@ -164,8 +167,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-iii-la-emperatriz-cuarzo-rosa-jade.jpg",
     secondaryImageUrl: "/images/cards/ar03.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_03.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-iii-la-emperatriz-cuarzo-rosa-jade.jpg",
       "/images/cards/ar03.webp",
+      "/images/shop/pulseras/lifestyle_wrist_jade_emperatriz.jpg",
     ],
     stoneType: "Cuarzo Rosa, Jade Verde & Aventurina Verde",
     beadSize: "8mm",
@@ -209,8 +213,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-iv-el-emperador-ojo-tigre-hematita.jpg",
     secondaryImageUrl: "/images/cards/ar04.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_04.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-iv-el-emperador-ojo-tigre-hematita.jpg",
       "/images/cards/ar04.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Jaspe Rojo, Ónix Brillante & Ojo de Tigre Dorado",
     beadSize: "8mm",
@@ -254,8 +259,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-v-el-hierofante-lapislazuli-ojo-halcon.jpg",
     secondaryImageUrl: "/images/cards/ar05.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_05.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-v-el-hierofante-lapislazuli-ojo-halcon.jpg",
       "/images/cards/ar05.webp",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Sodalita Azul, Ojo de Tigre & Hematita Dorada",
     beadSize: "8mm",
@@ -299,8 +305,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-vi-los-enamorados-cornalina-cuarzo-rosa.jpg",
     secondaryImageUrl: "/images/cards/ar06.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_06.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-vi-los-enamorados-cornalina-cuarzo-rosa.jpg",
       "/images/cards/ar06.webp",
+      "/images/shop/pulseras/lifestyle_wrist_jade_emperatriz.jpg",
     ],
     stoneType: "Cornalina Naranja, Cuarzo Rosa & Jaspe Rojo",
     beadSize: "8mm",
@@ -344,8 +351,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-vii-el-carro-ojo-tigre-hematita.jpg",
     secondaryImageUrl: "/images/cards/ar07.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_07.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-vii-el-carro-ojo-tigre-hematita.jpg",
       "/images/cards/ar07.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Ojo de Tigre Dorado, Ónix Brillante & Hematita Gris Metálica",
     beadSize: "8mm",
@@ -389,8 +397,9 @@ export const majorArcanaTalismans: ShopProduct[] = [
     imageUrl: "/images/shop/pulseras/brazalete-arcano-viii-la-fuerza-jaspe-ojo-buey.jpg",
     secondaryImageUrl: "/images/cards/ar08.webp",
     images: [
-      "/images/shop/pulseras_arcanos/pulsera_08.jpeg",
+      "/images/shop/pulseras/brazalete-arcano-viii-la-fuerza-jaspe-ojo-buey.jpg",
       "/images/cards/ar08.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Jaspe Paisaje / Dálmata, Ónix Mate & Ojo de Buey Rojo",
     beadSize: "8mm",
@@ -436,6 +445,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-ix-el-ermitano-cuarzo-ahumado.jpg",
       "/images/cards/ar09.webp",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Cuarzo Ahumado / Ágata Gris, Ónix Mate & Labradorita",
     beadSize: "8mm",
@@ -481,6 +491,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-x-la-rueda-aventurina-citrino.jpg",
       "/images/cards/ar10.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Aventurina Verde, Citrino Dorado & Pirita Dorada",
     beadSize: "8mm",
@@ -526,6 +537,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xi-la-justicia-hematita-onix.jpg",
       "/images/cards/ar11.webp",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Hematita Gris, Howlita Blanca & Ónix Negro Brillante",
     beadSize: "8mm",
@@ -571,6 +583,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xii-el-colgado-cuarzo-azul-sodalita.jpg",
       "/images/cards/ar12.webp",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Ágata Azul Claro / Cuarzo Azul, Cuarzo Lechoso & Sodalita Marina",
     beadSize: "8mm",
@@ -616,6 +629,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xiii-la-muerte-onix-lava.jpg",
       "/images/cards/ar13.webp",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Ónix Brillante, Hematita Oscura & Lava Volcánica / Ónix Mate",
     beadSize: "8mm",
@@ -661,6 +675,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xiv-la-templanza-amatista-cuarzo.jpg",
       "/images/cards/ar14.webp",
+      "/images/shop/pulseras/lifestyle_wrist_jade_emperatriz.jpg",
     ],
     stoneType: "Amatista Púrpura, Howlita Blanca & Cuarzo Cristal Transparente",
     beadSize: "8mm",
@@ -706,6 +721,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xv-el-diablo-jaspe-onix.jpg",
       "/images/cards/ar15.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Jaspe Rojo Oscuro / Ágata Vino, Ónix Brillante & Hematita Negra",
     beadSize: "8mm",
@@ -751,6 +767,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xvi-la-torre-lava-jaspe.jpg",
       "/images/cards/ar16.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Lava Volcánica Negra, Jaspe Rojo & Pirita / Hematita Dorada",
     beadSize: "8mm",
@@ -796,6 +813,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xvii-la-estrella-turquesa-luna.jpg",
       "/images/cards/ar17.webp",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Turquesa / Howlita Azul, Cuarzo Cristal & Piedra Luna / Opalina",
     beadSize: "8mm",
@@ -841,6 +859,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xviii-la-luna-piedra-luna-amatista.jpg",
       "/images/cards/ar18.webp",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Piedra Luna Gris / Ágata Gris, Cuarzo Ahumado & Amatista Púrpura",
     beadSize: "8mm",
@@ -886,6 +905,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xix-el-sol-citrino-ojo-tigre.jpg",
       "/images/cards/ar19.webp",
+      "/images/shop/pulseras/lifestyle_wrist_tiger_eye.jpg",
     ],
     stoneType: "Citrino Solar / Cuarzo Amarillo, Cornalina Naranja & Ojo de Tigre Dorado",
     beadSize: "8mm",
@@ -931,6 +951,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xx-el-juicio-fluorita-amatista.jpg",
       "/images/cards/ar20.webp",
+      "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
     ],
     stoneType: "Fluorita Multicolor / Ágata Musgosa, Amatista & Cuarzo Cristal",
     beadSize: "8mm",
@@ -976,6 +997,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-arcano-xxi-el-mundo-7-minerales.jpg",
       "/images/cards/ar21.webp",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "7 Minerales en Armonía, Ónix Mate & Cuarzo Cristal",
     beadSize: "8mm",

@@ -93,56 +93,32 @@ const EDITORIAL_HIGHLIGHTS: EditorialHighlight[] = [
 
 // Helper para clasificar arcanos en los filtros minimalistas de categoría
 function getArcanoCategory(product: ShopProduct): string[] {
-  const name = (product.name + " " + product.description + " " + (product.stoneType || "")).toLowerCase();
+  const name = (product.name + " " + product.description + " " + (product.stoneType || "") + " " + (product.categoryName || "")).toLowerCase();
   const cats = ["todos"];
 
-  if (
-    name.includes("lapislázuli") ||
-    name.includes("sodalita") ||
-    name.includes("azul") ||
-    name.includes("turquesa")
-  ) {
+  // Palos y Colección Mayor
+  if (product.categoryId === "coleccion-arcanos" || product.categoryName?.includes("Mayores")) {
+    cats.push("mayores");
+  }
+  if (name.includes("bastos")) cats.push("bastos");
+  if (name.includes("copas")) cats.push("copas");
+  if (name.includes("espadas")) cats.push("espadas");
+  if (name.includes("oros") || name.includes("pentáculos")) cats.push("oros");
+
+  // Gamas cromáticas de minerales (Monterrey, N.L.)
+  if (name.includes("lapislázuli") || name.includes("sodalita") || name.includes("azul") || name.includes("turquesa")) {
     cats.push("azules");
   }
-
-  if (
-    name.includes("jade") ||
-    name.includes("aventurina") ||
-    name.includes("malaquita") ||
-    name.includes("verde")
-  ) {
+  if (name.includes("jade") || name.includes("aventurina") || name.includes("malaquita") || name.includes("verde")) {
     cats.push("verdes");
   }
-
-  if (
-    name.includes("tigre") ||
-    name.includes("citrino") ||
-    name.includes("cornalina") ||
-    name.includes("jaspe") ||
-    name.includes("sol")
-  ) {
+  if (name.includes("tigre") || name.includes("citrino") || name.includes("cornalina") || name.includes("jaspe") || name.includes("sol") || name.includes("fuego") || name.includes("buey")) {
     cats.push("tierra");
   }
-
-  if (
-    name.includes("ónix") ||
-    name.includes("onix") ||
-    name.includes("lava") ||
-    name.includes("hematita") ||
-    name.includes("ahumado") ||
-    name.includes("negro")
-  ) {
+  if (name.includes("ónix") || name.includes("onix") || name.includes("lava") || name.includes("hematita") || name.includes("ahumado") || name.includes("negro")) {
     cats.push("oscuros");
   }
-
-  if (
-    name.includes("howlita") ||
-    name.includes("luna") ||
-    name.includes("cuarzo") ||
-    name.includes("amatista") ||
-    name.includes("fluorita") ||
-    name.includes("blanco")
-  ) {
+  if (name.includes("howlita") || name.includes("luna") || name.includes("cuarzo") || name.includes("amatista") || name.includes("fluorita") || name.includes("blanco") || name.includes("opalina")) {
     cats.push("claridad");
   }
 
@@ -408,7 +384,7 @@ function TiendaContent() {
               }}
               className="text-xs tracking-widest uppercase text-[#C5A059] border-b border-[#C5A059] pb-0.5 hover:text-white hover:border-white transition-colors cursor-pointer"
             >
-              {t("Ver todos los 22 Arcanos", "View all 22 Arcana")}
+              {t("Ver los 78 Arcanos de la Baraja", "View all 78 Arcana")}
             </button>
           </div>
         ) : (
@@ -468,8 +444,8 @@ function TiendaContent() {
                   <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
                 ))}
 
-                {/* ── FILA 8: Arcanos XX, XXI (2 Productos restantes) ── */}
-                {filteredProducts.slice(20, 22).map((product) => (
+                {/* ── FILA 8: Arcanos Restantes (XX, XXI y Arcanos Menores) ── */}
+                {filteredProducts.slice(20).map((product) => (
                   <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
                 ))}
               </>

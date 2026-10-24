@@ -33,16 +33,16 @@ if (errors.length > 0) {
 // 2. Cargar y verificar Snapshot
 const snapshot = JSON.parse(fs.readFileSync(SNAPSHOT_PATH, 'utf8'));
 
-if (snapshot.totalCollections !== 1) {
-  errors.push(`Se esperaba 1 colección oficial (Arcanos Mayores), pero hay ${snapshot.totalCollections}`);
+if (snapshot.totalCollections !== 2) {
+  errors.push(`Se esperaban 2 colecciones oficiales (Arcanos Mayores y Menores), pero hay ${snapshot.totalCollections}`);
 }
 
-if (snapshot.totalProducts !== 22) {
-  errors.push(`Se esperaban 22 piezas de catálogo (Arcanos Mayores), pero hay ${snapshot.totalProducts}`);
+if (snapshot.totalProducts !== 78) {
+  errors.push(`Se esperaban 78 piezas de catálogo (22 Mayores + 56 Menores), pero hay ${snapshot.totalProducts}`);
 }
 
-if (snapshot.totalStockUnits !== 1000) {
-  errors.push(`Se esperaban 1,000 unidades en inventario para la colección, pero hay ${snapshot.totalStockUnits}`);
+if (snapshot.totalStockUnits !== 2000) {
+  errors.push(`Se esperaban 2,000 unidades en inventario (1,000 por colección), pero hay ${snapshot.totalStockUnits}`);
 }
 
 // 3. Verificar que cada colección sume exactamente 1,000 unidades
@@ -107,8 +107,9 @@ if (errors.length > 0) {
 }
 
 console.log('✅ AUDITORÍA DE INVENTARIO SUPERADA AL 100%');
-console.log(`  • 11 Colecciones verificadas.`);
-console.log(`  • 148 Piezas con SKUs únicos y sin colisiones.`);
+console.log(`  • ${snapshot.totalCollections} Colecciones verificadas.`);
+console.log(`  • ${snapshot.totalProducts} Piezas con SKUs únicos y sin colisiones.`);
 console.log(`  • Cada colección suma exactamente 1,000 unidades.`);
-console.log(`  • Total global: 11,000 unidades en inventario.`);
+console.log(`  • Total global: ${snapshot.totalStockUnits.toLocaleString('es-MX')} unidades en inventario.`);
 console.log(`  • Snapshot disponible para Agente de WhatsApp Business: public/agent-inventory-snapshot.json\n`);
+

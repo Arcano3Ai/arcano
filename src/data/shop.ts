@@ -1,4 +1,5 @@
 import { majorArcanaTalismans } from "./majorArcanaTalismans";
+import { minorArcanaTalismans } from './minorArcanaTalismans';
 export interface ShopCategory {
   id: string;
   slug: string;
@@ -158,9 +159,44 @@ export const shopCategories: ShopCategory[] = [
   {
     id: "todos",
     slug: "todos",
-    name: "Todos los Arcanos",
-    description: "La serie completa de los 22 Arcanos Mayores en calibre uniforme de 8mm sobre elástico de alta tenacidad.",
+    name: "Baraja Completa (78)",
+    description: "La Gran Obra Hermética: los 78 Arcanos consagrados en pura piedra mineral natural.",
     symbol: "✦",
+  },
+  {
+    id: "mayores",
+    slug: "mayores",
+    name: "Arcanos Mayores (22)",
+    description: "Los 22 Arquetipos del Destino y el gran viaje del alma.",
+    symbol: "👑",
+  },
+  {
+    id: "bastos",
+    slug: "bastos",
+    name: "Bastos · Fuego (14)",
+    description: "Voluntad, pasión, impulso creador y temple guerrero en Lava, Ojo de Tigre y Cornalina.",
+    symbol: "🔥",
+  },
+  {
+    id: "copas",
+    slug: "copas",
+    name: "Copas · Agua (14)",
+    description: "Amor incondicional, intuición, sanación y mística en Cuarzo Rosa, Amatista y Opalina.",
+    symbol: "💧",
+  },
+  {
+    id: "espadas",
+    slug: "espadas",
+    name: "Espadas · Aire (14)",
+    description: "Claridad mental, verdad, discernimiento y estrategia en Sodalita, Howlita y Hematita.",
+    symbol: "⚔️",
+  },
+  {
+    id: "oros",
+    slug: "oros",
+    name: "Oros · Tierra (14)",
+    description: "Abundancia material, prosperidad, riqueza y estabilidad en Aventurina, Jaspe y Pirita.",
+    symbol: "🪙",
   },
   {
     id: "azules",
@@ -201,8 +237,9 @@ export const shopCategories: ShopCategory[] = [
 
 export const shopProducts: ShopProduct[] = [
   // ==========================================
-  // COLECCIÓN EXCLUSIVA DE 22 ARCANOS MAYORES
+  // LA GRAN OBRA HERMÉTICA · BARAJA COMPLETA DE 78 ARCANOS
   // 100% Pura Piedra Mineral Grado AAA · Calibre Uniforme 8mm
   // ==========================================
   ...majorArcanaTalismans,
+  ...minorArcanaTalismans,
 ];

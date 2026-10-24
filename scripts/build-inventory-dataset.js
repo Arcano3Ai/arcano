@@ -4,13 +4,34 @@ const path = require('path');
 const ROOT_DIR = path.resolve(__dirname, '..');
 const SHOP_PATH = path.join(ROOT_DIR, 'src', 'data', 'shop.ts');
 const ARCANOS_PATH = path.join(ROOT_DIR, 'src', 'data', 'majorArcanaTalismans.ts');
+const MINOR_DIR = path.join(ROOT_DIR, 'src', 'data', 'minorArcanaTalismans');
 
-const shopContent = fs.readFileSync(SHOP_PATH, 'utf8');
 const arcanosContent = fs.readFileSync(ARCANOS_PATH, 'utf8');
+
+// Leer los 4 palos de arcanos menores
+const bastosContent = fs.existsSync(path.join(MINOR_DIR, 'bastos.ts')) ? fs.readFileSync(path.join(MINOR_DIR, 'bastos.ts'), 'utf8') : '';
+const copasContent = fs.existsSync(path.join(MINOR_DIR, 'copas.ts')) ? fs.readFileSync(path.join(MINOR_DIR, 'copas.ts'), 'utf8') : '';
+const espadasContent = fs.existsSync(path.join(MINOR_DIR, 'espadas.ts')) ? fs.readFileSync(path.join(MINOR_DIR, 'espadas.ts'), 'utf8') : '';
+const orosContent = fs.existsSync(path.join(MINOR_DIR, 'oros.ts')) ? fs.readFileSync(path.join(MINOR_DIR, 'oros.ts'), 'utf8') : '';
 
 // Colecciones oficiales y sus prefijos de SKU
 const COLLECTION_SPECS = [
-  { id: 'coleccion-arcanos', skuPrefix: 'ARC', name: 'Colección Arcanos Mayores', slug: 'coleccion-arcanos', symbol: '♾️', description: '22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme 8 mm Grado AAA sobre elástico. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.' }
+  {
+    id: 'coleccion-arcanos',
+    skuPrefix: 'ARC',
+    name: 'Colección Arcanos Mayores',
+    slug: 'coleccion-arcanos',
+    symbol: '👑',
+    description: '22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme 8 mm Grado AAA sobre elástico. Diseño ceremonial puro: sin dijes ni piezas metálicas.'
+  },
+  {
+    id: 'coleccion-arcanos-menores',
+    skuPrefix: 'MIN',
+    name: 'Colección Arcanos Menores',
+    slug: 'coleccion-arcanos-menores',
+    symbol: '⚡',
+    description: '56 talismanes de los 4 Palos Elementales (Bastos/Fuego, Copas/Agua, Espadas/Aire, Oros/Tierra) en pura piedra mineral natural de Monterrey de calibre uniforme 8 mm sobre elástico.'
+  }
 ];
 
 function extractProducts(content) {
@@ -46,14 +67,18 @@ function extractProducts(content) {
   }).filter(p => p.id && p.categoryId);
 }
 
-const arcanos = extractProducts(arcanosContent).map(p => ({
+const arcanosMayores = extractProducts(arcanosContent).map(p => ({
   ...p,
-  categoryId: p.categoryId || 'coleccion-arcanos',
-  categoryName: p.categoryName || 'Colección Arcanos Mayores'
+  categoryId: 'coleccion-arcanos',
+  categoryName: 'Colección Arcanos Mayores'
 }));
 
-const shopOthers = extractProducts(shopContent);
-const rawProducts = [...arcanos, ...shopOthers];
+const bastos = extractProducts(bastosContent);
+const copas = extractProducts(copasContent);
+const espadas = extractProducts(espadasContent);
+const oros = extractProducts(orosContent);
+
+const rawProducts = [...arcanosMayores, ...bastos, ...copas, ...espadas, ...oros];
 
 // Deduplicar por id
 const seenIds = new Set();
@@ -144,12 +169,12 @@ console.log(`- Piezas procesadas: ${enrichedItems.length}`);
 const totalStock = enrichedItems.reduce((acc, it) => acc + it.stockQuantity, 0);
 console.log(`- Stock total agregado: ${totalStock} (Exactamente ${TARGET_STOCK_PER_COLLECTION} x ${collectionsOutput.length})`);
 
-// Exportar dataset JSON
+// Exportar dataset JSON para agentes
 const OUT_DIR = path.join(ROOT_DIR, 'public');
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
 const snapshotData = {
-  version: '1.0.0',
+  version: '2.0.0',
   generatedAt: new Date().toISOString(),
   targetPerCollection: TARGET_STOCK_PER_COLLECTION,
   totalStockUnits: totalStock,
@@ -161,6 +186,26 @@ const snapshotData = {
 
 fs.writeFileSync(path.join(OUT_DIR, 'agent-inventory-snapshot.json'), JSON.stringify(snapshotData, null, 2), 'utf8');
 console.log(`✅ Snapshot guardado en: public/agent-inventory-snapshot.json`);
+
+// Actualizar también data/catalogo.json con los 78 productos para SSG y Feeds
+const catalogoPath = path.join(ROOT_DIR, 'data', 'catalogo.json');
+const catalogoProducts = enrichedItems.map(item => ({
+  id: item.id,
+  slug: item.slug,
+  nombre: item.name,
+  descripcion: item.tagline || item.name,
+  precio: item.priceMxn,
+  moneda: "MXN",
+  imagen: item.imageUrl,
+  disponibilidad: "in_stock",
+  esFisico: true,
+  stockQuantity: item.stockQuantity,
+  collectionId: item.collectionId,
+  collectionName: item.collectionName
+}));
+
+fs.writeFileSync(catalogoPath, JSON.stringify(catalogoProducts, null, 2), 'utf8');
+console.log(`✅ Catálogo centralizado actualizado en: data/catalogo.json (${catalogoProducts.length} productos)`);
 
 module.exports = {
   COLLECTION_SPECS,
