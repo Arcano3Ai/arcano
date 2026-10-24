@@ -9,6 +9,7 @@ import {
   shopProducts,
   ShopProduct,
 } from "@/data/shop";
+import { EpicMineralVeinSelector } from "@/components/shop/EpicMineralVeinSelector";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import {
   CONCIERGE_ZONES,
@@ -125,8 +126,116 @@ function getArcanoCategory(product: ShopProduct): string[] {
   return cats;
 }
 
+// Helper para conectar los minerales de la Veta Geológica Sagrada con el catálogo de 78 Arcanos
+function matchesVeinStone(selectedStone: string, product: ShopProduct): boolean {
+  if (selectedStone === "todos") return true;
+  const q = selectedStone.toLowerCase();
+  const prodName = product.name.toLowerCase();
+  const prodDesc = product.description.toLowerCase();
+  const prodStone = (product.stoneType || "").toLowerCase();
+  const prodTag = (product.tagline || "").toLowerCase();
+  const fullText = `${prodName} ${prodDesc} ${prodStone} ${prodTag}`;
+
+  if (q.includes("ónix") || q.includes("onix")) {
+    return fullText.includes("ónix") || fullText.includes("onix") || fullText.includes("lava") || fullText.includes("obsidiana");
+  }
+  if (q.includes("tigre")) {
+    return fullText.includes("tigre") || fullText.includes("halcón");
+  }
+  if (q.includes("buey")) {
+    return fullText.includes("buey") || fullText.includes("granate");
+  }
+  if (q.includes("lapis")) {
+    return fullText.includes("lapis") || fullText.includes("sodalita");
+  }
+  if (q.includes("obsidiana")) {
+    return fullText.includes("obsidiana") || fullText.includes("ónix");
+  }
+  if (q.includes("jade")) {
+    return fullText.includes("jade") || fullText.includes("nefrita") || fullText.includes("aventurina");
+  }
+  if (q.includes("amatista")) {
+    return fullText.includes("amatista");
+  }
+  if (q.includes("citrino")) {
+    return fullText.includes("citrino");
+  }
+  if (q.includes("cuarzo ahumado") || q.includes("ahumado")) {
+    return fullText.includes("ahumado");
+  }
+  if (q.includes("cuarzo rosa")) {
+    return fullText.includes("cuarzo rosa") || fullText.includes("rosa");
+  }
+  if (q.includes("cuarzo cristal") || q.includes("cristal")) {
+    return fullText.includes("cuarzo cristal") || fullText.includes("cristal de roca") || fullText.includes("cuarzo blanco") || fullText.includes("drusa");
+  }
+  if (q.includes("fluorita")) {
+    return fullText.includes("fluorita");
+  }
+  if (q.includes("howlita")) {
+    return fullText.includes("howlita") || fullText.includes("turquesa");
+  }
+  if (q.includes("turquesa")) {
+    return fullText.includes("turquesa") || fullText.includes("howlita azul");
+  }
+  if (q.includes("hematita")) {
+    return fullText.includes("hematita");
+  }
+  if (q.includes("jaspe rojo")) {
+    return fullText.includes("jaspe rojo");
+  }
+  if (q.includes("jaspe")) {
+    return fullText.includes("jaspe");
+  }
+  if (q.includes("luna") || q.includes("selenita")) {
+    return fullText.includes("luna") || fullText.includes("selenita") || fullText.includes("moonstone");
+  }
+  if (q.includes("sodalita")) {
+    return fullText.includes("sodalita") || fullText.includes("lapislázuli");
+  }
+  if (q.includes("malaquita")) {
+    return fullText.includes("malaquita") || fullText.includes("jade");
+  }
+  if (q.includes("pirita")) {
+    return fullText.includes("pirita") || fullText.includes("rutilado");
+  }
+  if (q.includes("lava") || q.includes("volcánica")) {
+    return fullText.includes("lava") || fullText.includes("volcánica") || fullText.includes("volcanica") || fullText.includes("ónix");
+  }
+  if (q.includes("ámbar") || q.includes("ambar")) {
+    return fullText.includes("ámbar") || fullText.includes("ambar");
+  }
+  if (q.includes("cornalina")) {
+    return fullText.includes("cornalina");
+  }
+  if (q.includes("turmalina")) {
+    return fullText.includes("turmalina");
+  }
+  if (q.includes("labradorita")) {
+    return fullText.includes("labradorita");
+  }
+  if (q.includes("aguamarina")) {
+    return fullText.includes("aguamarina");
+  }
+  if (q.includes("rodocrosita")) {
+    return fullText.includes("rodocrosita");
+  }
+  if (q.includes("granate")) {
+    return fullText.includes("granate") || fullText.includes("buey");
+  }
+  if (q.includes("amazonita")) {
+    return fullText.includes("amazonita") || fullText.includes("aventurina");
+  }
+  if (q.includes("aventurina")) {
+    return fullText.includes("aventurina");
+  }
+
+  return fullText.includes(q);
+}
+
 function TiendaContent() {
   const [selectedCategory, setSelectedCategory] = useState<string>("todos");
+  const [selectedStone, setSelectedStone] = useState<string>("todos");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeProduct, setActiveProduct] = useState<ShopProduct | null>(null);
   const [selectedDeliveryZone, setSelectedDeliveryZone] = useState<string>(CONCIERGE_DEFAULT_ZONE);
@@ -188,10 +297,17 @@ function TiendaContent() {
     };
   }, [activeProduct]);
 
-  // Filtrado de productos
+  // Filtrado de productos (Veta Mineral Sagrada + Categorías Horizontales + Búsqueda)
   const filteredProducts = useMemo(() => {
     return shopProducts.filter((product) => {
-      // 1. Filtro por categoría mineral
+      // 1. Filtro por Veta Mineral Sagrada (EpicMineralVeinSelector)
+      if (selectedStone !== "todos") {
+        if (!matchesVeinStone(selectedStone, product)) {
+          return false;
+        }
+      }
+
+      // 2. Filtro por categoría mineral horizontal
       if (selectedCategory !== "todos") {
         const cats = getArcanoCategory(product);
         if (!cats.includes(selectedCategory)) {
@@ -199,7 +315,7 @@ function TiendaContent() {
         }
       }
 
-      // 2. Filtro de búsqueda
+      // 3. Filtro de búsqueda
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase().trim();
         const matchesName = product.name.toLowerCase().includes(q);
@@ -213,7 +329,7 @@ function TiendaContent() {
 
       return true;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, selectedStone, searchQuery]);
 
   // Generador de URL de WhatsApp Concierge para el modal activo
   const conciergeUrl = useMemo(() => {
@@ -265,7 +381,42 @@ function TiendaContent() {
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. BARRA DE FILTROS HORIZONTAL (ESTILO EXACTO AURUM BROTHERS)
+          2. VETA TELÚRICA SAGRADA (SELECTOR GEOLÓGICO DE MINERALES)
+         ───────────────────────────────────────────────────────────── */}
+      <EpicMineralVeinSelector
+        selectedStone={selectedStone}
+        onSelectStone={(stoneId) => {
+          setSelectedStone(stoneId);
+          setSelectedCategory("todos");
+        }}
+        language={language}
+        t={t}
+        filteredCount={filteredProducts.length}
+      />
+
+      {/* Barra de Confianza & Pureza Mineral */}
+      <div className="bg-[#0A0A0A] border-b border-neutral-900 py-3.5 px-4">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-around gap-4 text-center text-xs text-neutral-300 font-serif">
+          <div className="flex items-center gap-2">
+            <span className="text-[#C5A059] text-xs">✦</span>
+            <span className="tracking-wider">{t("Piedras 100% Puras de Calibre Uniforme (8mm)", "100% Pure Minerals · Uniform 8mm Beads")}</span>
+          </div>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-[#C5A059] text-xs">✦</span>
+            <span className="tracking-wider">{t("Sin Metales Ni Dijes Comerciales", "Zero Metals · No Commercial Charms")}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[#C5A059] text-xs">✦</span>
+            <span className="tracking-wider">{t("Consagrado Bajo Fuego Sagrado Ceremonial", "Consecrated under Sacred Ceremonial Fire")}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Ancla para scroll suave desde la Veta */}
+      <div id="catalogo-top" className="scroll-mt-24" />
+
+      {/* ─────────────────────────────────────────────────────────────
+          3. BARRA DE FILTROS HORIZONTAL (ESTILO EXACTO AURUM BROTHERS)
          ───────────────────────────────────────────────────────────── */}
       <div className="border-b border-neutral-900 bg-black/95 backdrop-blur-md sticky top-16 sm:top-20 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
@@ -273,9 +424,12 @@ function TiendaContent() {
           {/* Categorías a la Izquierda */}
           <div className="flex items-center gap-6 sm:gap-8 text-[11px] sm:text-xs tracking-[0.15em] uppercase font-light whitespace-nowrap">
             <button
-              onClick={() => setSelectedCategory("todos")}
+              onClick={() => {
+                setSelectedCategory("todos");
+                setSelectedStone("todos");
+              }}
               className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "todos"
+                selectedCategory === "todos" && selectedStone === "todos"
                   ? "text-white font-medium border-b border-white"
                   : "text-neutral-400 hover:text-white"
               }`}
@@ -284,7 +438,10 @@ function TiendaContent() {
             </button>
 
             <button
-              onClick={() => setSelectedCategory("azules")}
+              onClick={() => {
+                setSelectedCategory("azules");
+                setSelectedStone("todos");
+              }}
               className={`transition-colors cursor-pointer py-1 ${
                 selectedCategory === "azules"
                   ? "text-white font-medium border-b border-white"
@@ -295,7 +452,10 @@ function TiendaContent() {
             </button>
 
             <button
-              onClick={() => setSelectedCategory("verdes")}
+              onClick={() => {
+                setSelectedCategory("verdes");
+                setSelectedStone("todos");
+              }}
               className={`transition-colors cursor-pointer py-1 ${
                 selectedCategory === "verdes"
                   ? "text-white font-medium border-b border-white"
@@ -306,7 +466,10 @@ function TiendaContent() {
             </button>
 
             <button
-              onClick={() => setSelectedCategory("tierra")}
+              onClick={() => {
+                setSelectedCategory("tierra");
+                setSelectedStone("todos");
+              }}
               className={`transition-colors cursor-pointer py-1 ${
                 selectedCategory === "tierra"
                   ? "text-white font-medium border-b border-white"
@@ -317,7 +480,10 @@ function TiendaContent() {
             </button>
 
             <button
-              onClick={() => setSelectedCategory("oscuros")}
+              onClick={() => {
+                setSelectedCategory("oscuros");
+                setSelectedStone("todos");
+              }}
               className={`transition-colors cursor-pointer py-1 ${
                 selectedCategory === "oscuros"
                   ? "text-white font-medium border-b border-white"
@@ -328,7 +494,10 @@ function TiendaContent() {
             </button>
 
             <button
-              onClick={() => setSelectedCategory("claridad")}
+              onClick={() => {
+                setSelectedCategory("claridad");
+                setSelectedStone("todos");
+              }}
               className={`transition-colors cursor-pointer py-1 ${
                 selectedCategory === "claridad"
                   ? "text-white font-medium border-b border-white"
@@ -355,31 +524,64 @@ function TiendaContent() {
 
             <button
               onClick={() => {
-                document.getElementById("arcano-grid")?.scrollIntoView({ behavior: "smooth" });
+                document.getElementById("hero-veta-mineral")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap text-[11px]"
+              className="hover:text-[#C5A059] transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap text-[11px]"
             >
-              <span>{t("Colección 22 Arcanos", "22 Arcana Collection")}</span>
-              <span>↓</span>
+              <span>🌌 {t("Ver Veta Mineral", "View Mineral Vein")}</span>
+              <span>↑</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. GRID PRINCIPAL CON RITMO EDITORIAL ESTILO AURUM BROTHERS
+          4. GRID PRINCIPAL CON RITMO EDITORIAL ESTILO AURUM BROTHERS
          ───────────────────────────────────────────────────────────── */}
       <main id="arcano-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         
+        {/* Banner de Estado Activo si hay un Mineral Filtrado por la Veta */}
+        {selectedStone !== "todos" && (
+          <div className="mb-8 p-4 sm:p-5 bg-gradient-to-r from-black via-[#111111] to-black border border-[#C5A059] rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn shadow-[0_0_30px_rgba(197,160,89,0.2)]">
+            <div className="flex items-center gap-3.5 text-center sm:text-left">
+              <span className="w-3 h-3 rounded-full bg-[#C5A059] animate-ping" />
+              <div>
+                <span className="text-[10px] font-sans tracking-[0.25em] uppercase text-[#C5A059] block font-medium">
+                  {t("FILTRANDO POR VETA MINERAL:", "FILTERING BY MINERAL VEIN:")}
+                </span>
+                <span className="text-base sm:text-lg font-light text-white tracking-wide">
+                  {selectedStone} ·{" "}
+                  <span className="text-neutral-300 text-xs sm:text-sm font-light">
+                    {filteredProducts.length}{" "}
+                    {filteredProducts.length === 1
+                      ? t("pieza consagrada encontrada", "consecrated piece found")
+                      : t("piezas consagradas encontradas", "consecrated pieces found")}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setSelectedStone("todos");
+                setSelectedCategory("todos");
+              }}
+              className="px-4 py-2 text-xs font-sans tracking-widest uppercase text-black font-semibold bg-[#C5A059] hover:bg-[#d8b368] rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-md"
+            >
+              <span>✕ {t("Mostrar Todo el Catálogo", "Show All Pieces")}</span>
+            </button>
+          </div>
+        )}
+
         {/* Renderizado de Productos con Bloques Editoriales In-Feed Intercalados */}
         {filteredProducts.length === 0 ? (
           <div className="py-24 text-center">
             <p className="text-sm text-neutral-400 uppercase tracking-widest mb-4">
-              {t("No encontramos arcanos en esta tonalidad", "No arcana found matching this tone")}
+              {t("No encontramos arcanos con este filtro en este momento", "No arcana found matching this filter")}
             </p>
             <button
               onClick={() => {
                 setSelectedCategory("todos");
+                setSelectedStone("todos");
                 setSearchQuery("");
               }}
               className="text-xs tracking-widest uppercase text-[#C5A059] border-b border-[#C5A059] pb-0.5 hover:text-white hover:border-white transition-colors cursor-pointer"
@@ -390,8 +592,8 @@ function TiendaContent() {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 sm:gap-x-8 gap-y-12 sm:gap-y-16">
             
-            {/* Si está en 'todos' y sin búsqueda, aplicamos el ritmo editorial exacto de Aurum Brothers */}
-            {selectedCategory === "todos" && !searchQuery.trim() ? (
+            {/* Si está en 'todos' en categoría y piedra y sin búsqueda, aplicamos el ritmo editorial */}
+            {selectedCategory === "todos" && selectedStone === "todos" && !searchQuery.trim() ? (
               <>
                 {/* ── FILA 1: Arcanos 0, I, II, III (4 Productos) ── */}
                 {filteredProducts.slice(0, 4).map((product) => (

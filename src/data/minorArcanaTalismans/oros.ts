@@ -18,7 +18,7 @@ export const orosTalismans: ShopProduct[] = [
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita dorada (2 ctas - 8 mm)",
-      "Pieza Central Focal: Jaspe paisaje / madera (1 cta - 8 mm)",
+      "Pieza Central Focal: Jaspe paisaje natural (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
     inStock: true,
@@ -39,7 +39,7 @@ export const orosTalismans: ShopProduct[] = [
       archetype: "Semilla de riqueza · Prosperidad tangible · Manifestación sólida",
       mainBody: "Aventurina verde (19 ctas - 8 mm)",
       lateralBeads: "Hematita dorada (2 ctas - 8 mm)",
-      centerPiece: "Jaspe paisaje / madera (1 cta - 8 mm)",
+      centerPiece: "Jaspe paisaje natural (1 cta - 8 mm)",
       totalBeads: 22,
     },
   },
@@ -58,7 +58,7 @@ export const orosTalismans: ShopProduct[] = [
     arcanoStory: "Un joven vestido de juglar danza frente al oleaje embravecido mientras balancea dos grandes monedas de oro dentro de una cinta infinita con el ocho lemniscata. El jaspe paisaje brinda arraigo en medio del movimiento, la aventurina asegura que los recursos no escaseen y la hematita sostiene el centro de gravedad inmutable.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
-      "Cuerpo Principal: Jaspe paisaje / madera (19 ctas - 8 mm)",
+      "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
       "Pieza Central Focal: Hematita gris metálica (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -79,7 +79,7 @@ export const orosTalismans: ShopProduct[] = [
     intentionWords: ["Equilibrio dinámico","Adaptabilidad financiera","Danza del flujo"],
     beadMatrix: {
       archetype: "Equilibrio dinámico · Adaptabilidad financiera · Danza del flujo",
-      mainBody: "Jaspe paisaje / madera (19 ctas - 8 mm)",
+      mainBody: "Jaspe paisaje natural (19 ctas - 8 mm)",
       lateralBeads: "Aventurina verde (2 ctas - 8 mm)",
       centerPiece: "Hematita gris metálica (1 cta - 8 mm)",
       totalBeads: 22,
@@ -100,7 +100,7 @@ export const orosTalismans: ShopProduct[] = [
     arcanoStory: "En el pórtico de una catedral en construcción, el escultor cincela los arcos con maestría mientras el monje y el arquitecto consultan sus planos con admiración. El jaspe paisaje encarna la piedra de cantera noble, el ónix mate aporta disciplina paciente y la hematita dorada corona la obra con prestigio profesional.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
-      "Cuerpo Principal: Jaspe paisaje / madera (19 ctas - 8 mm)",
+      "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
       "Pieza Central Focal: Hematita dorada (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -121,7 +121,7 @@ export const orosTalismans: ShopProduct[] = [
     intentionWords: ["Maestría artesanal","Trabajo de excelencia","Colaboración noble"],
     beadMatrix: {
       archetype: "Maestría artesanal · Trabajo de excelencia · Colaboración noble",
-      mainBody: "Jaspe paisaje / madera (19 ctas - 8 mm)",
+      mainBody: "Jaspe paisaje natural (19 ctas - 8 mm)",
       lateralBeads: "Ónix negro mate (2 ctas - 8 mm)",
       centerPiece: "Hematita dorada (1 cta - 8 mm)",
       totalBeads: 22,
@@ -228,7 +228,7 @@ export const orosTalismans: ShopProduct[] = [
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris metálica (2 ctas - 8 mm)",
-      "Pieza Central Focal: Cuarzo amarillo / Citrino (1 cta - 8 mm)",
+      "Pieza Central Focal: Citrino Dorado Solar (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
     inStock: true,
@@ -249,7 +249,7 @@ export const orosTalismans: ShopProduct[] = [
       archetype: "Generosidad circular · Balanza de justicia · Flujo de retorno",
       mainBody: "Aventurina verde (19 ctas - 8 mm)",
       lateralBeads: "Hematita gris metálica (2 ctas - 8 mm)",
-      centerPiece: "Cuarzo amarillo / Citrino (1 cta - 8 mm)",
+      centerPiece: "Citrino Dorado Solar (1 cta - 8 mm)",
       totalBeads: 22,
     },
   },
@@ -268,7 +268,7 @@ export const orosTalismans: ShopProduct[] = [
     arcanoStory: "Apoyado en su azadón, el hortelano contempla la frondosa vid colmada de siete grandes oros: la semilla ha germinado y el fruto está a punto de sazón. El jaspe paisaje sintoniza con los tiempos orgánicos de la madre tierra, la aventurina asegura un fruto rollizo y el ojo de tigre aporta la serenidad de quien sabe que su esfuerzo valió la pena.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
-      "Cuerpo Principal: Jaspe paisaje / madera (19 ctas - 8 mm)",
+      "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
       "Pieza Central Focal: Ojo de tigre dorado (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -289,7 +289,7 @@ export const orosTalismans: ShopProduct[] = [
     intentionWords: ["Paciencia fecunda","Maduración del fruto","Confianza en la cosecha"],
     beadMatrix: {
       archetype: "Paciencia fecunda · Maduración del fruto · Confianza en la cosecha",
-      mainBody: "Jaspe paisaje / madera (19 ctas - 8 mm)",
+      mainBody: "Jaspe paisaje natural (19 ctas - 8 mm)",
       lateralBeads: "Aventurina verde (2 ctas - 8 mm)",
       centerPiece: "Ojo de tigre dorado (1 cta - 8 mm)",
       totalBeads: 22,
@@ -311,7 +311,7 @@ export const orosTalismans: ShopProduct[] = [
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Ónix negro mate (19 ctas - 8 mm)",
-      "Laterales Simétricos: Jaspe paisaje / madera (2 ctas - 8 mm)",
+      "Laterales Simétricos: Jaspe paisaje natural (2 ctas - 8 mm)",
       "Pieza Central Focal: Hematita dorada (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
@@ -332,7 +332,7 @@ export const orosTalismans: ShopProduct[] = [
     beadMatrix: {
       archetype: "Dedicación al detalle · Disciplina constante · Maestría técnica",
       mainBody: "Ónix negro mate (19 ctas - 8 mm)",
-      lateralBeads: "Jaspe paisaje / madera (2 ctas - 8 mm)",
+      lateralBeads: "Jaspe paisaje natural (2 ctas - 8 mm)",
       centerPiece: "Hematita dorada (1 cta - 8 mm)",
       totalBeads: 22,
     },
@@ -353,7 +353,7 @@ export const orosTalismans: ShopProduct[] = [
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
-      "Laterales Simétricos: Cuarzo amarillo / Citrino (2 ctas - 8 mm)",
+      "Laterales Simétricos: Citrino Dorado Solar (2 ctas - 8 mm)",
       "Pieza Central Focal: Hematita dorada (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
@@ -374,7 +374,7 @@ export const orosTalismans: ShopProduct[] = [
     beadMatrix: {
       archetype: "Autosuficiencia aristocrática · Refinamiento sereno · Placer merecido",
       mainBody: "Aventurina verde (19 ctas - 8 mm)",
-      lateralBeads: "Cuarzo amarillo / Citrino (2 ctas - 8 mm)",
+      lateralBeads: "Citrino Dorado Solar (2 ctas - 8 mm)",
       centerPiece: "Hematita dorada (1 cta - 8 mm)",
       totalBeads: 22,
     },
@@ -436,7 +436,7 @@ export const orosTalismans: ShopProduct[] = [
     arcanoStory: "En medio de praderas fértiles con el arado al fondo, el joven sostiene una gran moneda de oro entre sus manos con reverencia y concentración total. El jaspe paisaje brinda paciencia y perseverancia en el estudio, la aventurina asegura que el aprendizaje rinda frutos monetarios y el cuarzo cristal afina la comprensión de los secretos del oficio.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
-      "Cuerpo Principal: Jaspe paisaje / madera (19 ctas - 8 mm)",
+      "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
       "Pieza Central Focal: Cuarzo cristal puro (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -457,7 +457,7 @@ export const orosTalismans: ShopProduct[] = [
     intentionWords: ["Estudiante consagrado","Proyecto naciente","Pragmatismo noble"],
     beadMatrix: {
       archetype: "Estudiante consagrado · Proyecto naciente · Pragmatismo noble",
-      mainBody: "Jaspe paisaje / madera (19 ctas - 8 mm)",
+      mainBody: "Jaspe paisaje natural (19 ctas - 8 mm)",
       lateralBeads: "Aventurina verde (2 ctas - 8 mm)",
       centerPiece: "Cuarzo cristal puro (1 cta - 8 mm)",
       totalBeads: 22,
@@ -480,7 +480,7 @@ export const orosTalismans: ShopProduct[] = [
     details: [
       "Cuerpo Principal: Ojo de tigre dorado (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
-      "Pieza Central Focal: Jaspe paisaje / madera (1 cta - 8 mm)",
+      "Pieza Central Focal: Jaspe paisaje natural (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
     inStock: true,
@@ -501,7 +501,7 @@ export const orosTalismans: ShopProduct[] = [
       archetype: "Perseverancia incansable · Paso firme · Lealtad a toda prueba",
       mainBody: "Ojo de tigre dorado (19 ctas - 8 mm)",
       lateralBeads: "Ónix negro mate (2 ctas - 8 mm)",
-      centerPiece: "Jaspe paisaje / madera (1 cta - 8 mm)",
+      centerPiece: "Jaspe paisaje natural (1 cta - 8 mm)",
       totalBeads: 22,
     },
   },
@@ -521,7 +521,7 @@ export const orosTalismans: ShopProduct[] = [
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
-      "Laterales Simétricos: Jaspe paisaje / madera (2 ctas - 8 mm)",
+      "Laterales Simétricos: Jaspe paisaje natural (2 ctas - 8 mm)",
       "Pieza Central Focal: Cuarzo rosa natural (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
@@ -542,7 +542,7 @@ export const orosTalismans: ShopProduct[] = [
     beadMatrix: {
       archetype: "Nutrición maternal · Confort hogareño · Prosperidad telúrica",
       mainBody: "Aventurina verde (19 ctas - 8 mm)",
-      lateralBeads: "Jaspe paisaje / madera (2 ctas - 8 mm)",
+      lateralBeads: "Jaspe paisaje natural (2 ctas - 8 mm)",
       centerPiece: "Cuarzo rosa natural (1 cta - 8 mm)",
       totalBeads: 22,
     },

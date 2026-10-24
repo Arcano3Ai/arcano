@@ -59,7 +59,7 @@ export const copasTalismans: ShopProduct[] = [
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
-      "Laterales Simétricos: Howlita blanca (vetas grises) (2 ctas - 8 mm)",
+      "Laterales Simétricos: Howlita blanca con vetas naturales (2 ctas - 8 mm)",
       "Pieza Central Focal: Amatista púrpura (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
@@ -80,7 +80,7 @@ export const copasTalismans: ShopProduct[] = [
     beadMatrix: {
       archetype: "Unión sagrada · Sintonía de almas · Reciprocidad",
       mainBody: "Cuarzo rosa natural (19 ctas - 8 mm)",
-      lateralBeads: "Howlita blanca (vetas grises) (2 ctas - 8 mm)",
+      lateralBeads: "Howlita blanca con vetas naturales (2 ctas - 8 mm)",
       centerPiece: "Amatista púrpura (1 cta - 8 mm)",
       totalBeads: 22,
     },
@@ -102,7 +102,7 @@ export const copasTalismans: ShopProduct[] = [
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo rosa natural (2 ctas - 8 mm)",
-      "Pieza Central Focal: Cuarzo amarillo / Citrino (1 cta - 8 mm)",
+      "Pieza Central Focal: Citrino Dorado Solar (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
     inStock: true,
@@ -123,7 +123,7 @@ export const copasTalismans: ShopProduct[] = [
       archetype: "Celebración · Amistad entrañable · Júbilo compartido",
       mainBody: "Aventurina verde (19 ctas - 8 mm)",
       lateralBeads: "Cuarzo rosa natural (2 ctas - 8 mm)",
-      centerPiece: "Cuarzo amarillo / Citrino (1 cta - 8 mm)",
+      centerPiece: "Citrino Dorado Solar (1 cta - 8 mm)",
       totalBeads: 22,
     },
   },
@@ -354,7 +354,7 @@ export const copasTalismans: ShopProduct[] = [
     details: [
       "Cuerpo Principal: Opalina blanca lechosa (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
-      "Pieza Central Focal: Cuarzo amarillo / Citrino (1 cta - 8 mm)",
+      "Pieza Central Focal: Citrino Dorado Solar (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
     inStock: true,
@@ -375,7 +375,7 @@ export const copasTalismans: ShopProduct[] = [
       archetype: "Deseo cumplido · Gratitud colmada · Gozo sensorial",
       mainBody: "Opalina blanca lechosa (19 ctas - 8 mm)",
       lateralBeads: "Aventurina verde (2 ctas - 8 mm)",
-      centerPiece: "Cuarzo amarillo / Citrino (1 cta - 8 mm)",
+      centerPiece: "Citrino Dorado Solar (1 cta - 8 mm)",
       totalBeads: 22,
     },
   },

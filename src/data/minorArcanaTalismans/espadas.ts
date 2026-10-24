@@ -58,7 +58,7 @@ export const espadasTalismans: ShopProduct[] = [
     arcanoStory: "Frente al mar nocturno con peñascos silentes, una mujer vendada cruza dos espadas de acero sobre su pecho protegiendo el latido de su corazón. La howlita blanca disuelve la ansiedad mental, el ónix mate resguarda el santuario interior y la hematita sostiene la balanza del equilibrio.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
-      "Cuerpo Principal: Howlita blanca (vetas grises) (19 ctas - 8 mm)",
+      "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
       "Pieza Central Focal: Hematita gris metálica (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -79,7 +79,7 @@ export const espadasTalismans: ShopProduct[] = [
     intentionWords: ["Tregua mental","Paz interna","Silencio ecuánime"],
     beadMatrix: {
       archetype: "Tregua mental · Paz interna · Silencio ecuánime",
-      mainBody: "Howlita blanca (vetas grises) (19 ctas - 8 mm)",
+      mainBody: "Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       lateralBeads: "Ónix negro mate (2 ctas - 8 mm)",
       centerPiece: "Hematita gris metálica (1 cta - 8 mm)",
       totalBeads: 22,
@@ -142,7 +142,7 @@ export const espadasTalismans: ShopProduct[] = [
     arcanoStory: "En la quietud de un claustro gótico con vitrales policromados, la efigie del caballero reposa con las manos en oración mientras tres espadas cuelgan en la pared y una yace a su lado. La howlita sosiega el insomnio, la amatista repara el campo mental y el ónix mate crea una burbuja impenetrable de silencio.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
-      "Cuerpo Principal: Howlita blanca (vetas grises) (19 ctas - 8 mm)",
+      "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
       "Pieza Central Focal: Ónix negro mate (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -163,7 +163,7 @@ export const espadasTalismans: ShopProduct[] = [
     intentionWords: ["Reposo del guerrero","Convalecencia santa","Retiro sagrado"],
     beadMatrix: {
       archetype: "Reposo del guerrero · Convalecencia santa · Retiro sagrado",
-      mainBody: "Howlita blanca (vetas grises) (19 ctas - 8 mm)",
+      mainBody: "Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       lateralBeads: "Amatista púrpura (2 ctas - 8 mm)",
       centerPiece: "Ónix negro mate (1 cta - 8 mm)",
       totalBeads: 22,
@@ -227,7 +227,7 @@ export const espadasTalismans: ShopProduct[] = [
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Sodalita azul marina (19 ctas - 8 mm)",
-      "Laterales Simétricos: Howlita blanca (vetas grises) (2 ctas - 8 mm)",
+      "Laterales Simétricos: Howlita blanca con vetas naturales (2 ctas - 8 mm)",
       "Pieza Central Focal: Cuarzo cristal puro (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
@@ -248,7 +248,7 @@ export const espadasTalismans: ShopProduct[] = [
     beadMatrix: {
       archetype: "Travesía a aguas mansas · Transición serena · Viaje seguro",
       mainBody: "Sodalita azul marina (19 ctas - 8 mm)",
-      lateralBeads: "Howlita blanca (vetas grises) (2 ctas - 8 mm)",
+      lateralBeads: "Howlita blanca con vetas naturales (2 ctas - 8 mm)",
       centerPiece: "Cuarzo cristal puro (1 cta - 8 mm)",
       totalBeads: 22,
     },
@@ -311,7 +311,7 @@ export const espadasTalismans: ShopProduct[] = [
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Ónix negro mate (19 ctas - 8 mm)",
-      "Laterales Simétricos: Cuarzo ahumado / blanco (2 ctas - 8 mm)",
+      "Laterales Simétricos: Cuarzo ahumado natural (2 ctas - 8 mm)",
       "Pieza Central Focal: Howlita blanca (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
     ],
@@ -332,7 +332,7 @@ export const espadasTalismans: ShopProduct[] = [
     beadMatrix: {
       archetype: "Ruptura de cadenas mentales · Liberación del engaño · Salida abierta",
       mainBody: "Ónix negro mate (19 ctas - 8 mm)",
-      lateralBeads: "Cuarzo ahumado / blanco (2 ctas - 8 mm)",
+      lateralBeads: "Cuarzo ahumado natural (2 ctas - 8 mm)",
       centerPiece: "Howlita blanca (1 cta - 8 mm)",
       totalBeads: 22,
     },
@@ -352,7 +352,7 @@ export const espadasTalismans: ShopProduct[] = [
     arcanoStory: "Despertando sobresaltado con las manos en el rostro, el durmiente ve nueve espadas suspendidas en la pared oscura mientras su colcha exhibe rosas y constelaciones: el dolor es mental, la aurora ya despunta. El cuarzo ahumado enraíza la mente dispersa, el ónix desvanece la angustia y la amatista envuelve los sueños en sosiego angelical.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
-      "Cuerpo Principal: Cuarzo ahumado / gris (19 ctas - 8 mm)",
+      "Cuerpo Principal: Cuarzo ahumado natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
       "Pieza Central Focal: Amatista púrpura (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -373,7 +373,7 @@ export const espadasTalismans: ShopProduct[] = [
     intentionWords: ["Amanecer tras la noche oscura","Serenidad mental","Disolución de pesadillas"],
     beadMatrix: {
       archetype: "Amanecer tras la noche oscura · Serenidad mental · Disolución de pesadillas",
-      mainBody: "Cuarzo ahumado / gris (19 ctas - 8 mm)",
+      mainBody: "Cuarzo ahumado natural (19 ctas - 8 mm)",
       lateralBeads: "Ónix negro brillante (2 ctas - 8 mm)",
       centerPiece: "Amatista púrpura (1 cta - 8 mm)",
       totalBeads: 22,
@@ -520,7 +520,7 @@ export const espadasTalismans: ShopProduct[] = [
     arcanoStory: "Sentada en un trono de piedra esculpido con querubines y mariposas bajo un cielo despejado, la Reina alza su espada vertical con la otra mano extendida ofreciendo verdad. La howlita blanca conserva la pureza incorruptible, la sodalita otorga elocuencia magistral y el cuarzo cristal corta cualquier engaño con sabiduría diamantina.",
     ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
-      "Cuerpo Principal: Howlita blanca (vetas grises) (19 ctas - 8 mm)",
+      "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Sodalita azul marina (2 ctas - 8 mm)",
       "Pieza Central Focal: Cuarzo cristal puro (1 cta - 8 mm)",
       "Total: 22 cuentas consagradas ensambladas a mano a tu medida exacta en Monterrey, N.L.",
@@ -541,7 +541,7 @@ export const espadasTalismans: ShopProduct[] = [
     intentionWords: ["Clarividencia intelectual","Discernimiento impecable","Franqueza sabia"],
     beadMatrix: {
       archetype: "Clarividencia intelectual · Discernimiento impecable · Franqueza sabia",
-      mainBody: "Howlita blanca (vetas grises) (19 ctas - 8 mm)",
+      mainBody: "Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       lateralBeads: "Sodalita azul marina (2 ctas - 8 mm)",
       centerPiece: "Cuarzo cristal puro (1 cta - 8 mm)",
       totalBeads: 22,
