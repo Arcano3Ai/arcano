@@ -136,6 +136,7 @@ button, a {
 /* ==========================================================================
    MODO CLARO CEREMONIAL: "LUZ SAGRADA / PAPIRO Y ORO"
    Transformación 100% integral para toda la plataforma con contraste AAA.
+   Tipografía de alta legibilidad en tinta obsidiana y bronce imperial oscuro.
    ========================================================================== */
 html.light {
   color-scheme: light;
@@ -144,7 +145,7 @@ html.light {
 html.light body,
 html.light main {
   background-color: #f7f4ed !important;
-  color: #1a1624 !important;
+  color: #121018 !important;
 }
 
 /* 1. Transformar todos los fondos oscuros hardcodeados a papiro y marfil puro */
@@ -159,7 +160,18 @@ html.light [class*="bg-black"],
 html.light footer {
   background-color: #ffffff !important;
   background-image: none !important;
-  color: #1a1624 !important;
+  color: #121018 !important;
+}
+
+/* Sub-contenedores oscuros (tarjetas, inputs, tags, modal items) */
+html.light [class*="bg-[#0A0A0A]"],
+html.light [class*="bg-[#111111]"],
+html.light [class*="bg-[#141414]"],
+html.light [class*="bg-[#181818]"],
+html.light [class*="bg-[#1c1c1c]"] {
+  background-color: #fcfaf6 !important;
+  border-color: #ded6c6 !important;
+  color: #121018 !important;
 }
 
 /* Secciones y fondos intermedios */
@@ -183,46 +195,149 @@ html.light aside {
   box-shadow: 0 4px 20px rgba(160, 130, 70, 0.08) !important;
 }
 
-/* 3. Gradientes oscuros: convertirlos en gradientes suaves de papiro */
-html.light [class*="from-[#"],
-html.light [class*="via-[#"],
-html.light [class*="to-[#"] {
+/* 3. Gradientes oscuros: convertirlos en gradientes suaves de papiro (excepto bg-clip-text) */
+html.light [class*="from-[#"]:not([class*="bg-clip-text"]),
+html.light [class*="via-[#"]:not([class*="bg-clip-text"]),
+html.light [class*="to-[#"]:not([class*="bg-clip-text"]) {
   background-image: linear-gradient(180deg, #ffffff 0%, #f7f4ed 100%) !important;
 }
 
-/* 4. Textos de alto contraste (cero deslavado, 100% legibles en celular y PC) */
+/* 4. Gradientes de texto con bg-clip-text: contraste oscuro nítido */
+html.light [class*="bg-clip-text"] {
+  background-image: linear-gradient(135deg, #121018 0%, #634006 50%, #121018 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* 5. TÍTULOS Y ENCABEZADOS: Tinta Obsidiana Profunda (Contraste 15:1) */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #121018 !important;
+}
+
+/* 6. TIPOGRAFÍA DORADA Y ACENTOS CÁLIDOS (SOLUCIÓN DE CONTRASTE):
+      En lugar de amarillo/dorado pálido deslavado en fondo blanco,
+      transformar a Bronce Imperial Oscuro / Oro Alquímico Tostado (#634006 y #553504) */
+html.light .text-gold,
+html.light [class*="text-gold"],
+html.light .text-gold-light,
+html.light [class*="text-gold-light"],
+html.light [class*="text-[#C5A059]"],
+html.light [class*="text-[#c5a059]"],
+html.light [class*="text-[#C6A052]"],
+html.light [class*="text-[#c6a052]"],
+html.light [class*="text-[#D4AF37]"],
+html.light [class*="text-[#d4af37]"],
+html.light [class*="text-[#FFE2A4]"],
+html.light [class*="text-[#F3EFE6]"],
+html.light .text-amber-300,
+html.light [class*="text-amber-300"],
+html.light .text-amber-400,
+html.light [class*="text-amber-400"],
+html.light .text-yellow-400 {
+  color: #634006 !important; /* Contraste > 8:1 con blanco y papiro */
+}
+
+/* Tonos ámbar claros que en modo oscuro son casi blancos: volverlos legibles */
+html.light .text-amber-100,
+html.light [class*="text-amber-100"],
+html.light .text-amber-200,
+html.light [class*="text-amber-200"],
+html.light .text-amber-50,
+html.light [class*="text-amber-50"] {
+  color: #3b3020 !important;
+}
+
+/* Tonos ámbar medios/oscuros */
+html.light .text-amber-500,
+html.light [class*="text-amber-500"],
+html.light .text-amber-600,
+html.light .text-amber-700,
+html.light .text-amber-800 {
+  color: #553504 !important;
+}
+
+/* 7. TEXTOS NEUTRALES, PARCHMENT Y GRISES (LECTURA CÓMODA Y NÍTIDA) */
 html.light .text-parchment,
 html.light [class*="text-parchment"],
 html.light .text-white {
-  color: #1a1624 !important;
+  color: #121018 !important;
 }
 
 html.light .text-parchment-muted,
-html.light [class*="text-parchment-muted"] {
-  color: #3b3548 !important;
+html.light [class*="text-parchment-muted"],
+html.light .text-slate-300,
+html.light [class*="text-slate-300"],
+html.light .text-neutral-300,
+html.light [class*="text-neutral-300"] {
+  color: #332d3d !important;
 }
 
 html.light .text-parchment-dim,
-html.light [class*="text-parchment-dim"] {
-  color: #585068 !important;
+html.light [class*="text-parchment-dim"],
+html.light .text-slate-400,
+html.light [class*="text-slate-400"],
+html.light .text-neutral-400,
+html.light [class*="text-neutral-400"] {
+  color: #4b4356 !important;
 }
 
-html.light .text-gold-light {
-  color: #8c6a22 !important;
+html.light .text-slate-500,
+html.light .text-neutral-500 {
+  color: #5c546b !important;
 }
 
-html.light .text-gold {
-  color: #9a7628 !important;
+/* 8. BADGES, CHIPS Y PILLS (TIENDA Y CATÁLOGO) */
+html.light [class*="bg-black/"],
+html.light [class*="bg-black/75"],
+html.light [class*="bg-black/70"],
+html.light [class*="bg-black/60"],
+html.light [class*="bg-black/80"] {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  border-color: #cbb88a !important;
 }
 
-/* 5. Bordes y divisores */
+html.light [class*="border-[#C5A059]"],
+html.light [class*="border-[#c5a059]"],
+html.light [class*="border-gold"] {
+  border-color: #9a7628 !important;
+}
+
+/* 9. ESTADOS HOVER Y GROUP-HOVER */
+html.light [class*="hover:text-gold"]:hover,
+html.light [class*="hover:text-[#C5A059]"]:hover,
+html.light .group:hover [class*="group-hover:text-gold"],
+html.light .group:hover [class*="group-hover:text-[#C5A059]"] {
+  color: #8c6014 !important;
+}
+
+html.light [class*="hover:text-white"]:hover,
+html.light .group:hover [class*="group-hover:text-white"] {
+  color: #121018 !important;
+}
+
+/* 10. ICONOS SVG Y ESTRELLAS (✦, ★★★★★) */
+html.light svg[class*="text-gold"],
+html.light svg[class*="text-[#C5A059]"],
+html.light svg[class*="text-amber"],
+html.light span[class*="text-[#C5A059]"],
+html.light span[class*="text-gold"] {
+  color: #634006 !important;
+}
+
+/* 11. BORDES Y DIVISORES */
 html.light .border-charcoal-border,
 html.light [class*="border-charcoal-border"],
 html.light [class*="border-gold/"] {
   border-color: #ded5c2 !important;
 }
 
-/* 6. Cabecera persistente y navegación */
+/* 12. CABECERA PERSISTENTE Y NAVEGACIÓN */
 html.light header {
   background-color: rgba(247, 244, 237, 0.96) !important;
   border-color: #ded5c2 !important;
@@ -231,41 +346,41 @@ html.light header {
 
 html.light header a,
 html.light header button {
-  color: #1a1624 !important;
+  color: #121018 !important;
 }
 
 html.light header a:hover {
-  color: #9a7628 !important;
+  color: #8c6014 !important;
 }
 
-/* 7. Formularios, inputs y selects */
+/* 13. FORMULARIOS, INPUTS Y SELECTS */
 html.light input,
 html.light select,
 html.light textarea {
   background-color: #fdfbf7 !important;
-  color: #1a1624 !important;
+  color: #121018 !important;
   border-color: #d6caa8 !important;
 }
 
 html.light input::placeholder,
 html.light textarea::placeholder {
-  color: #7a708a !important;
+  color: #6a6078 !important;
 }
 
-/* 8. Botones dorados principales con texto oscuro y alto contraste */
+/* 14. BOTONES DORADOS PRINCIPALES */
 html.light .bg-gold,
 html.light [class*="bg-gradient-to-r from-gold"] {
   background: linear-gradient(135deg, #dfb76c 0%, #c6a052 50%, #9a7836 100%) !important;
   color: #0d0c12 !important;
 }
 
-/* 9. Canvas y partículas cósmicas: suavizadas para evitar ruido visual */
+/* 15. CANVAS Y PARTÍCULAS */
 html.light canvas,
 html.light [class*="bg-[radial-gradient"] {
-  opacity: 0.12 !important;
+  opacity: 0.10 !important;
 }
 
-/* 10. Preservar las imágenes de cartas, cursos y fotos con colores vivos y sin filtros */
+/* 16. PRESERVAR IMÁGENES DE PRODUCTOS, CARTAS Y FOTOS */
 html.light img,
 html.light Image {
   filter: none !important;

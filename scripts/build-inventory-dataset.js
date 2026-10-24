@@ -10,7 +10,7 @@ const arcanosContent = fs.readFileSync(ARCANOS_PATH, 'utf8');
 
 // Colecciones oficiales y sus prefijos de SKU
 const COLLECTION_SPECS = [
-  { id: 'coleccion-arcanos', skuPrefix: 'ARC', name: 'Colección Arcanos Mayores', slug: 'coleccion-arcanos', symbol: '♾️', description: 'Talismanes de muñeca consagrados a los 22 arquetipos del Tarot hermético y la alquimia interior.' },
+  { id: 'coleccion-arcanos', skuPrefix: 'ARC', name: 'Colección Arcanos Mayores', slug: 'coleccion-arcanos', symbol: '♾️', description: '22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de 8 mm y 10 mm Grado AAA de nuestra veta geológica. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.' },
   { id: 'alta-joyeria-oro', skuPrefix: 'ORO', name: 'Alta Joyería & Oro 18K', slug: 'alta-joyeria-oro', symbol: '⚜️', description: 'Talismanes ceremoniales y gargantillas consagradas con herrajes bañados en oro 18K y gemas naturales de Grado AAA.' },
   { id: 'ambar-chiapas', skuPrefix: 'AMB', name: 'Ámbar de Chiapas & Minerales', slug: 'ambar-chiapas', symbol: '✨', description: 'Talismanes ceremoniales con auténtico ámbar fósil de Simojovel, plata fina Ley .925 y minerales sagrados.' },
   { id: 'doble-perforacion', skuPrefix: 'DBP', name: 'Doble Perforación (Dual)', slug: 'doble-perforacion', symbol: '⚡', description: 'Soportes de piedra con dos orificios para sahumerio dual y mezcla de aromas.' },

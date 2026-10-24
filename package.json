@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/verify-payment-integrity.js",
-    "build": "next build",
+    "prebuild": "node scripts/verify-payment-integrity.js && node scripts/generate-product-feeds.js",
+    "build": "next build && node scripts/generate-static-seo.mjs",
+    "build:seo": "node scripts/generate-static-seo.mjs",
+    "feeds:generate": "node scripts/generate-product-feeds.js",
     "verify:payments": "node scripts/verify-payment-integrity.js",
     "verify:inventory": "node scripts/verify-inventory-integrity.js",
     "seed:inventory": "node scripts/generate-sql-seed.js",

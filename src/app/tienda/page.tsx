@@ -9,6 +9,12 @@ import {
   ShopProduct,
 } from "@/data/shop";
 import { getWhatsAppUrl } from "@/config/brandConfig";
+import {
+  CONCIERGE_ZONES,
+  CONCIERGE_DEFAULT_ZONE,
+  buildConciergeWhatsAppUrl,
+  trackConciergeLead,
+} from "@/config/conciergeConfig";
 import { CreativeProcessGallery } from "@/components/shop/CreativeProcessGallery";
 import { useCart } from "@/context/CartContext";
 import { useLanguage, LanguageToggle } from "@/context/LanguageContext";
@@ -272,8 +278,9 @@ export default function ShopPage() {
   const [selectedWristSize, setSelectedWristSize] = useState<string>("M");
   const [modalTab, setModalTab] = useState<"detalles" | "mineral" | "ritual">("detalles");
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
+  const [selectedDeliveryZone, setSelectedDeliveryZone] = useState<string>(CONCIERGE_DEFAULT_ZONE);
 
-  // Escuchar parámetro ?stone=... en la URL para auto-filtrar al venir desde el Menú de la Galería
+  // Escuchar parámetros ?item=... o ?product=... / ?id=... en la URL (crucial para Concierge VIP, Google Ads & Merchant Center)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
@@ -285,6 +292,19 @@ export default function ShopPage() {
           document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
         }, 250);
       }
+
+      const productParam = params.get("item") || params.get("product") || params.get("id");
+      if (productParam) {
+        const found = shopProducts.find(
+          (p) => p.slug === productParam || p.id === productParam
+        );
+        if (found) {
+          setActiveProduct(found);
+          setTimeout(() => {
+            document.getElementById("catalogo-top")?.scrollIntoView({ behavior: "smooth" });
+          }, 300);
+        }
+      }
     }
   }, []);
 
@@ -292,7 +312,7 @@ export default function ShopPage() {
   const { addItem, openCart, totalCount } = useCart();
   const { language, setLanguage, t } = useLanguage();
 
-  // Control de scroll y tecla Escape para el modal
+  // Control de scroll, tecla Escape y sincronización de URL profunda (?item=slug) para el modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -305,10 +325,29 @@ export default function ShopPage() {
       setModalTab("detalles");
       setSelectedWristSize("M");
       setActiveModalImage(activeProduct.imageUrl);
+
+      // Deep linking reactivo al abrir producto en el navegador
+      if (typeof window !== "undefined") {
+        const currentParams = new URLSearchParams(window.location.search);
+        currentParams.set("item", activeProduct.slug);
+        window.history.replaceState(null, "", `?${currentParams.toString()}`);
+      }
     }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
+
+      // Limpiar query params de producto al cerrar modal
+      if (typeof window !== "undefined") {
+        const currentParams = new URLSearchParams(window.location.search);
+        if (currentParams.has("item") || currentParams.has("product") || currentParams.has("id")) {
+          currentParams.delete("item");
+          currentParams.delete("product");
+          currentParams.delete("id");
+          const qs = currentParams.toString();
+          window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
+        }
+      }
     };
   }, [activeProduct]);
 
@@ -1040,12 +1079,17 @@ export default function ShopPage() {
 
                     {/* Badges Estilo Aurum Brothers (Top-Left Outlined Pills) */}
                     <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10 pointer-events-none">
+                      {product.categoryId === "coleccion-arcanos" && (
+                        <span className="px-2 py-0.5 border border-[#C5A059] text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-semibold bg-black/80 backdrop-blur-sm rounded-sm">
+                          100% PURA PIEDRA
+                        </span>
+                      )}
                       {product.goldSpecifications && (
                         <span className="px-2 py-0.5 border border-[#C5A059] text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
                           ORO 18K
                         </span>
                       )}
-                      {product.badge && !product.goldSpecifications && (
+                      {product.badge && !product.goldSpecifications && product.categoryId !== "coleccion-arcanos" && (
                         <span className="px-2 py-0.5 border border-[#C5A059]/70 text-[#C5A059] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-medium bg-black/75 backdrop-blur-sm rounded-sm">
                           {product.badge.includes("8mm") ? "8MM AAA" : product.badge.toUpperCase()}
                         </span>
@@ -1078,21 +1122,17 @@ export default function ShopPage() {
                       </svg>
                     </button>
 
-                    {/* Botón "+" en esquina inferior derecha estilo Aurum Brothers */}
+                    {/* Botón de apertura rápida Concierge */}
                     {product.inStock && (
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleAddToCart(product, undefined, undefined, true);
+                          setActiveProduct(product);
                         }}
-                        className={`absolute bottom-2.5 right-2.5 z-10 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center font-sans font-bold text-sm transition-all duration-300 rounded-sm cursor-pointer shadow-lg ${
-                          isAdded
-                            ? "bg-[#27AE60] text-white scale-110"
-                            : "bg-[#C5A059] text-black hover:bg-[#d8b368] hover:scale-105"
-                        }`}
-                        title="Añadir a la bolsa"
+                        className="absolute bottom-2.5 right-2.5 z-10 px-2.5 py-1 sm:py-1.5 flex items-center gap-1 font-sans font-bold text-[9px] sm:text-[10px] tracking-widest uppercase transition-all duration-300 rounded-sm cursor-pointer shadow-lg bg-[#C5A059] text-black hover:bg-[#d8b368] hover:scale-105"
+                        title="Ver pieza y solicitar por Concierge VIP"
                       >
-                        {isAdded ? "✓" : "+"}
+                        <span>Concierge →</span>
                       </button>
                     )}
 
@@ -1432,6 +1472,11 @@ export default function ShopPage() {
 
                   {/* Badges en Modal */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1 items-start">
+                    {activeProduct.categoryId === "coleccion-arcanos" && (
+                      <span className="px-2 py-0.5 border border-[#C5A059] bg-black/80 text-[#C5A059] text-[9px] uppercase tracking-widest font-sans font-semibold">
+                        100% PURA PIEDRA · SIN DIJES
+                      </span>
+                    )}
                     {activeProduct.goldSpecifications && (
                       <span className="px-2 py-0.5 border border-[#C5A059] bg-black/70 text-[#C5A059] text-[9px] uppercase tracking-widest font-sans font-medium">
                         ORO 18K
@@ -1664,6 +1709,13 @@ export default function ShopPage() {
                                 </span>
                               </div>
                             </div>
+
+                            {/* Sello de Autenticidad Pura Piedra */}
+                            <div className="flex items-center justify-center gap-2 p-2.5 bg-[#141414] border border-[#C5A059]/40 rounded-sm text-[10px] text-[#C5A059] uppercase tracking-wider font-sans font-medium text-center">
+                              <span>✦</span>
+                              <span>100% Pura Piedra Mineral Grado AAA · Cero dijes ni piezas colgantes</span>
+                              <span>✦</span>
+                            </div>
                           </div>
                         ) : activeProduct.details && activeProduct.details.length > 0 ? (
                           <ul className="space-y-2 pt-3 border-t border-neutral-800 text-xs sm:text-sm text-neutral-300">
@@ -1695,54 +1747,76 @@ export default function ShopPage() {
                     )}
                   </div>
 
-                  {/* Botones de Compra */}
-                  <div className="space-y-3">
-                    {activeProduct.inStock ? (
-                      <button
-                        onClick={() => {
-                          const sizeCm =
-                            selectedWristSize === "S"
-                              ? "16-17 cm"
-                              : selectedWristSize === "M"
-                              ? "18-19 cm"
-                              : selectedWristSize === "L"
-                              ? "20-21 cm"
-                              : "22 cm";
-                          handleAddToCart(
-                            activeProduct,
-                            undefined,
-                            {
-                              optionKey: `talla-${selectedWristSize}`,
-                              optionLabel: `Talla ${selectedWristSize} (${sizeCm})`,
-                            },
-                            true
-                          );
-                        }}
-                        className={`w-full py-4 text-xs font-sans tracking-[0.22em] uppercase transition-all duration-300 font-semibold shadow-lg cursor-pointer flex items-center justify-center gap-2 ${
-                          addedProductId === activeProduct.id
-                            ? "bg-[#27AE60] text-white"
-                            : "bg-[#C5A059] text-black hover:bg-[#d8b368]"
-                        }`}
+                  {/* ── CIERRE CONCIERGE VIP LOCAL (MONTERREY) ── */}
+                  <div className="space-y-4 pt-2">
+                    {/* a) Distintivo elegante */}
+                    <div className="p-3.5 bg-gradient-to-r from-[#18140B] via-[#0E0C07] to-[#18140B] border border-[#C5A059]/50 rounded-sm text-center shadow-inner">
+                      <span className="text-xs sm:text-[13px] text-[#F3EFE6] font-serif leading-relaxed block tracking-wide">
+                        ✨ Pieza Única — Entrega Privada Concierge sin costo en San Pedro, San Jerónimo, Cumbres y Linda Vista
+                      </span>
+                    </div>
+
+                    {/* b) Selector rápido de Zona de Entrega en MTY */}
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="zona-entrega-concierge"
+                        className="block text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] font-medium"
                       >
-                        <span>{addedProductId === activeProduct.id ? "¡AÑADIDO A TU BOLSA!" : "AÑADIR A LA BOLSA"}</span>
+                        📍 Zona de Entrega en MTY:
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="zona-entrega-concierge"
+                          value={selectedDeliveryZone}
+                          onChange={(e) => setSelectedDeliveryZone(e.target.value)}
+                          className="w-full bg-[#121212] border border-[#C5A059]/40 hover:border-[#C5A059] text-white text-xs sm:text-sm py-3 px-3.5 rounded-sm appearance-none focus:outline-none focus:ring-1 focus:ring-[#C5A059] transition-all cursor-pointer font-sans"
+                        >
+                          {CONCIERGE_ZONES.map((zone) => (
+                            <option key={zone} value={zone} className="bg-[#121212] text-white py-1">
+                              {zone}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#C5A059]">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* c) Botón principal de alto contraste dorado/místico */}
+                    {activeProduct.inStock ? (
+                      <a
+                        id="btn-adquirir-whatsapp-concierge"
+                        href={buildConciergeWhatsAppUrl({
+                          product: activeProduct,
+                          selectedZone: selectedDeliveryZone,
+                        })}
+                        onClick={() => {
+                          trackConciergeLead({
+                            product: activeProduct,
+                            selectedZone: selectedDeliveryZone,
+                          });
+                        }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 px-4 bg-gradient-to-r from-[#C5A059] via-[#E5C178] to-[#C5A059] hover:from-[#d8b368] hover:to-[#d8b368] text-black text-xs sm:text-sm font-sans font-bold tracking-[0.22em] uppercase transition-all duration-300 shadow-[0_0_25px_rgba(197,160,89,0.4)] hover:shadow-[0_0_35px_rgba(197,160,89,0.6)] hover:scale-[1.01] flex items-center justify-center gap-2.5 rounded-sm cursor-pointer text-center"
+                      >
+                        <span className="text-base">💬</span>
+                        <span>Adquirir Pieza vía WhatsApp Concierge</span>
                         <span>·</span>
                         <span>{formatPrice(activeProduct.price)}</span>
-                      </button>
+                      </a>
                     ) : (
                       <div className="w-full py-3.5 bg-neutral-800 text-neutral-400 text-xs font-sans tracking-[0.2em] uppercase text-center font-medium">
                         Pieza Agotada
                       </div>
                     )}
 
-                    {/* WhatsApp Checkout Directo con Concierge */}
-                    <a
-                      href={getWhatsAppUrl(getProductWhatsAppMessage(activeProduct))}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-3.5 bg-[#111111] border border-[#25D366]/40 text-[#25D366] text-xs font-sans tracking-[0.18em] uppercase font-medium hover:bg-[#25D366]/10 transition-colors flex items-center justify-center gap-2 rounded-sm"
-                    >
-                      <span>💬 COMPRAR POR WHATSAPP CONCIERGE</span>
-                    </a>
+                    <p className="text-[10px] text-center text-neutral-400 font-sans tracking-wide">
+                      🔒 Atención personalizada directa · Pago a la entrega o transferencia bancaria protegida.
+                    </p>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-10-20T02:33:14.605Z",
+  "generatedAt": "2026-10-24T06:59:15.361Z",
   "targetPerCollection": 1000,
   "totalStockUnits": 11000,
   "totalCollections": 11,
@@ -11,7 +11,7 @@
       "name": "Colección Arcanos Mayores",
       "slug": "coleccion-arcanos",
       "symbol": "♾️",
-      "description": "Talismanes de muñeca consagrados a los 22 arquetipos del Tarot hermético y la alquimia interior.",
+      "description": "22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de 8 mm y 10 mm Grado AAA de nuestra veta geológica. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.",
       "targetStock": 1000,
       "currentStock": 1000,
       "itemCount": 22
@@ -499,7 +499,7 @@
     {
       "id": "talisman-arcano-xxi-el-mundo-lapislazuli-cuarzo-malaquita",
       "sku": "ARC-XXI",
-      "name": "Arcano XXI · El Mundo (7 Minerales de Integración & Ónix)",
+      "name": "Arcano XXI · El Mundo (7 Minerales de Integración & Cuarzo Cristal)",
       "slug": "talisman-arcano-xxi-el-mundo-lapislazuli-cuarzo-malaquita",
       "collectionId": "coleccion-arcanos",
       "collectionName": "Colección Arcanos Mayores",
@@ -509,8 +509,8 @@
       "availableQuantity": 45,
       "minStockAlert": 5,
       "isActive": true,
-      "tagline": "Integración · Plenitud · Culminación. Talismán de la danza cósmica y la totalidad consumada.",
-      "stoneType": "7 Minerales en Armonía, Ónix Mate & Conector Sagrado",
+      "tagline": "Integración · Plenitud · Culminación. Talismán de la danza cósmica forjado en 100% pura piedra mineral natural.",
+      "stoneType": "7 Minerales en Armonía, Ónix Mate & Cuarzo Cristal",
       "imageUrl": "/images/shop/pulseras_arcanos/pulsera_21.jpg",
       "arcanoNumber": "XXI"
     },

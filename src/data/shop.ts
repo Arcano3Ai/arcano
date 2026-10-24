@@ -166,7 +166,7 @@ export const shopCategories: ShopCategory[] = [
     id: "coleccion-arcanos",
     slug: "coleccion-arcanos",
     name: "Colección Arcanos Mayores",
-    description: "Talismanes de muñeca consagrados a los 22 arquetipos del Tarot hermético y la alquimia interior.",
+    description: "22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de 8 mm y 10 mm Grado AAA de nuestra veta geológica. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.",
     symbol: "♾️",
   },
   {
