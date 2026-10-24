@@ -1702,7 +1702,7 @@ export default function ShopPage() {
                               </div>
                               <div className="p-2.5 bg-[#141414] border border-neutral-800 rounded-sm">
                                 <span className="text-[9px] block text-neutral-400 uppercase font-sans mb-1 font-medium">
-                                  Centro Focal (1 cta - 10mm)
+                                  Centro Focal (1 cta - 8mm)
                                 </span>
                                 <span className="text-white font-medium block">
                                   {activeProduct.beadMatrix.centerPiece.replace(/ \(\d+ cta - \d+ mm\)/, '')}
@@ -1713,7 +1713,7 @@ export default function ShopPage() {
                             {/* Sello de Autenticidad Pura Piedra */}
                             <div className="flex items-center justify-center gap-2 p-2.5 bg-[#141414] border border-[#C5A059]/40 rounded-sm text-[10px] text-[#C5A059] uppercase tracking-wider font-sans font-medium text-center">
                               <span>✦</span>
-                              <span>100% Pura Piedra Mineral Grado AAA · Cero dijes ni piezas colgantes</span>
+                              <span>100% Pura Piedra Grado AAA · Calibre Uniforme 8mm con Elástico · Cero dijes ni metales</span>
                               <span>✦</span>
                             </div>
                           </div>

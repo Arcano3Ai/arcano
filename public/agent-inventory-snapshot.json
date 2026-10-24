@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-10-24T06:59:15.361Z",
+  "generatedAt": "2026-10-24T08:21:19.280Z",
   "targetPerCollection": 1000,
   "totalStockUnits": 11000,
   "totalCollections": 11,
@@ -11,7 +11,7 @@
       "name": "Colección Arcanos Mayores",
       "slug": "coleccion-arcanos",
       "symbol": "♾️",
-      "description": "22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de 8 mm y 10 mm Grado AAA de nuestra veta geológica. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.",
+      "description": "22 talismanes de muñeca consagrados forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme 8 mm Grado AAA sobre elástico. Diseño ceremonial puro: sin dijes, sin colgantes ni bisutería.",
       "targetStock": 1000,
       "currentStock": 1000,
       "itemCount": 22
@@ -133,7 +133,7 @@
       "isActive": true,
       "tagline": "Nuevos comienzos · Libertad · Aventura. Talismán del salto de fe con howlita blanca y anclaje de ónix y hematita.",
       "stoneType": "Howlita Blanca, Ónix Mate & Hematita Metálica",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_01.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-0-el-loco-howlita-turquesa.jpg",
       "arcanoNumber": "0"
     },
     {
@@ -169,7 +169,7 @@
       "isActive": true,
       "tagline": "Intuición · Misterio · Sabiduría interior. Talismán de quietud y conexión con las aguas sagradas del alma.",
       "stoneType": "Cuarzo Blanco Lechoso, Amatista & Piedra Luna / Opalina",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_02.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-ii-la-sacerdotisa-piedra-luna-amatista.jpg",
       "arcanoNumber": "II"
     },
     {
@@ -187,7 +187,7 @@
       "isActive": true,
       "tagline": "Abundancia · Creatividad · Naturaleza. Talismán de la fertilidad creadora y el amor incondicional.",
       "stoneType": "Cuarzo Rosa, Jade Verde & Aventurina Verde",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_03.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-iii-la-emperatriz-cuarzo-rosa-jade.jpg",
       "arcanoNumber": "III"
     },
     {
@@ -205,7 +205,7 @@
       "isActive": true,
       "tagline": "Autoridad · Estructura · Liderazgo. Talismán de solidez terrenal y dominio consciente.",
       "stoneType": "Jaspe Rojo, Ónix Brillante & Ojo de Tigre Dorado",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_04.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-iv-el-emperador-ojo-tigre-hematita.jpg",
       "arcanoNumber": "IV"
     },
     {
@@ -223,7 +223,7 @@
       "isActive": true,
       "tagline": "Sabiduría tradicional · Guía espiritual · Verdad. Talismán del puente sagrado entre cielo y tierra.",
       "stoneType": "Sodalita Azul, Ojo de Tigre & Hematita Dorada",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_05.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-v-el-hierofante-lapislazuli-ojo-halcon.jpg",
       "arcanoNumber": "V"
     },
     {
