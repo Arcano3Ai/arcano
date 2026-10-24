@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-10-24T10:09:12.245Z",
+  "generatedAt": "2026-10-24T10:35:45.607Z",
   "targetPerCollection": 1000,
   "totalStockUnits": 1000,
   "totalCollections": 1,
@@ -195,7 +195,7 @@
       "isActive": true,
       "tagline": "Introspección · Paciencia · Sabiduría. Talismán de la linterna interior que alumbra en la oscuridad.",
       "stoneType": "Cuarzo Ahumado / Ágata Gris, Ónix Mate & Labradorita",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_09.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-ix-el-ermitano-cuarzo-ahumado.jpg",
       "arcanoNumber": "IX"
     },
     {
@@ -213,7 +213,7 @@
       "isActive": true,
       "tagline": "Ciclos · Oportunidades · Prosperidad. Talismán de la sincronicidad y el giro favorable del destino.",
       "stoneType": "Aventurina Verde, Citrino Dorado & Pirita Dorada",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_10.jpeg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-x-la-rueda-aventurina-citrino.jpg",
       "arcanoNumber": "X"
     },
     {
@@ -231,7 +231,7 @@
       "isActive": true,
       "tagline": "Equilibrio · Verdad · Responsabilidad. Talismán de la espada de la lucidez y la balanza armónica.",
       "stoneType": "Hematita Gris, Howlita Blanca & Ónix Negro Brillante",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_11.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xi-la-justicia-hematita-onix.jpg",
       "arcanoNumber": "XI"
     },
     {
@@ -249,7 +249,7 @@
       "isActive": true,
       "tagline": "Pausa · Perspectiva · Transformación. Talismán de la rendición consciente y la visión invertida.",
       "stoneType": "Ágata Azul Claro / Cuarzo Azul, Cuarzo Lechoso & Sodalita Marina",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_12.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xii-el-colgado-cuarzo-azul-sodalita.jpg",
       "arcanoNumber": "XII"
     },
     {
@@ -267,7 +267,7 @@
       "isActive": true,
       "tagline": "Transformación · Cierre · Renacimiento. Talismán de la poda sagrada que libera espacio a lo nuevo.",
       "stoneType": "Ónix Brillante, Hematita Oscura & Lava Volcánica / Ónix Mate",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_13.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xiii-la-muerte-onix-lava.jpg",
       "arcanoNumber": "XIII"
     },
     {
@@ -285,7 +285,7 @@
       "isActive": true,
       "tagline": "Armonía · Moderación · Equilibrio. Talismán de la alquimia interior que funde opuestos en gracia.",
       "stoneType": "Amatista Púrpura, Howlita Blanca & Cuarzo Cristal Transparente",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_14.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xiv-la-templanza-amatista-cuarzo.jpg",
       "arcanoNumber": "XIV"
     },
     {
@@ -303,7 +303,7 @@
       "isActive": true,
       "tagline": "Deseo · Pasión · Poder material. Talismán del reconocimiento y dominio de las pulsiones primarias.",
       "stoneType": "Jaspe Rojo Oscuro / Ágata Vino, Ónix Brillante & Hematita Negra",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_15.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xv-el-diablo-jaspe-onix.jpg",
       "arcanoNumber": "XV"
     },
     {
@@ -321,7 +321,7 @@
       "isActive": true,
       "tagline": "Ruptura · Revelación · Liberación. Talismán del rayo de la verdad que desmorona lo falso.",
       "stoneType": "Lava Volcánica Negra, Jaspe Rojo & Pirita / Hematita Dorada",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_16.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xvi-la-torre-lava-jaspe.jpg",
       "arcanoNumber": "XVI"
     },
     {
@@ -339,7 +339,7 @@
       "isActive": true,
       "tagline": "Esperanza · Inspiración · Renovación. Talismán del manantial celeste que nutre el espíritu.",
       "stoneType": "Turquesa / Howlita Azul, Cuarzo Cristal & Piedra Luna / Opalina",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_17.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xvii-la-estrella-turquesa-luna.jpg",
       "arcanoNumber": "XVII"
     },
     {
@@ -357,7 +357,7 @@
       "isActive": true,
       "tagline": "Intuición · Sueños · Mundo interior. Talismán del cruce nocturno por las aguas del inconsciente.",
       "stoneType": "Piedra Luna Gris / Ágata Gris, Cuarzo Ahumado & Amatista Púrpura",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_18.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xviii-la-luna-piedra-luna-amatista.jpg",
       "arcanoNumber": "XVIII"
     },
     {
@@ -375,7 +375,7 @@
       "isActive": true,
       "tagline": "Vitalidad · Alegría · Éxito. Talismán de la plenitud radiante, calidez y celebración de la vida.",
       "stoneType": "Citrino Solar / Cuarzo Amarillo, Cornalina Naranja & Ojo de Tigre Dorado",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_19.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xix-el-sol-citrino-ojo-tigre.jpg",
       "arcanoNumber": "XIX"
     },
     {
@@ -393,7 +393,7 @@
       "isActive": true,
       "tagline": "Despertar · Transformación personal · Resurrección. Talismán del clarín que llama a la consciencia superior.",
       "stoneType": "Fluorita Multicolor / Ágata Musgosa, Amatista & Cuarzo Cristal",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_20.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xx-el-juicio-fluorita-amatista.jpg",
       "arcanoNumber": "XX"
     },
     {
@@ -411,7 +411,7 @@
       "isActive": true,
       "tagline": "Integración · Plenitud · Culminación. Talismán de la danza cósmica forjado en 100% pura piedra mineral natural.",
       "stoneType": "7 Minerales en Armonía, Ónix Mate & Cuarzo Cristal",
-      "imageUrl": "/images/shop/pulseras_arcanos/pulsera_21.jpg",
+      "imageUrl": "/images/shop/pulseras/brazalete-arcano-xxi-el-mundo-7-minerales.jpg",
       "arcanoNumber": "XXI"
     }
   ]
