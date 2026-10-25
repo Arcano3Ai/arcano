@@ -10,6 +10,7 @@ import {
   ShopProduct,
 } from "@/data/shop";
 import { EpicMineralVeinSelector } from "@/components/shop/EpicMineralVeinSelector";
+import { VirtualTarotSpreader } from "@/components/shop/VirtualTarotSpreader";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import {
   CONCIERGE_ZONES,
@@ -412,6 +413,39 @@ function TiendaContent() {
         </div>
       </div>
 
+      {/* ─────────────────────────────────────────────────────────────
+          BANNER INVITADOR: ¿DESEAS HACER TU TIRADA VIRTUAL DE 3 CARTAS?
+          (BUNDLES DE 3 TALISMANES CON 20% DE DESCUENTO)
+         ───────────────────────────────────────────────────────────── */}
+      <div className="bg-gradient-to-r from-[#0E0B05] via-[#1A150B] to-[#0E0B05] border-b border-[#C5A059]/40 py-4 px-4 text-center shadow-lg">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3 text-center sm:text-left">
+            <span className="w-3 h-3 rounded-full bg-[#C5A059] animate-ping flex-shrink-0" />
+            <div>
+              <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#C5A059] block font-semibold">
+                ✦ ORÁCULO DE LOS ARCANOS & RECOMENDADOR DE BUNDLES ✦
+              </span>
+              <span className="text-xs sm:text-sm font-serif text-white tracking-wide">
+                ¿Deseas hacer tu <strong className="text-[#FFE2A4]">Tirada Virtual de 3 Cartas</strong> con tu Nombre y Fecha Natal? Revela tu Tríada y llévate tu <strong className="text-[#25D366]">Bundle Sagrado con 20% de Descuento</strong>.
+              </span>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              document.getElementById("tirada-virtual")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="px-6 py-2.5 rounded-full bg-[#C5A059] hover:bg-[#d8b368] text-black font-sans font-bold text-xs tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(197,160,89,0.35)] hover:scale-105 cursor-pointer whitespace-nowrap"
+          >
+            ✦ Iniciar Tirada Virtual ✦
+          </button>
+        </div>
+      </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          SECCIÓN INTERACTIVA: TIRADOR DE 3 CARTAS & RECOMENDADOR DE BUNDLE
+         ───────────────────────────────────────────────────────────── */}
+      <VirtualTarotSpreader onSelectProduct={setActiveProduct} />
+
       {/* Ancla para scroll suave desde la Veta */}
       <div id="catalogo-top" className="scroll-mt-24" />
 
@@ -521,6 +555,15 @@ function TiendaContent() {
                 </button>
               </div>
             ) : null}
+
+            <button
+              onClick={() => {
+                document.getElementById("tirada-virtual")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="text-[#FFE2A4] hover:text-[#C5A059] transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap text-[11px] font-medium"
+            >
+              <span>🔮 {t("Tirada 3 Cartas (-20%)", "3-Card Spread (-20%)")}</span>
+            </button>
 
             <button
               onClick={() => {
