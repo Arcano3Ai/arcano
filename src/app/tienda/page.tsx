@@ -259,6 +259,11 @@ function TiendaContent() {
         setActiveProduct(found);
       }
     }
+
+    const stoneParam = searchParams?.get("stone") || searchParams?.get("mineral");
+    if (stoneParam) {
+      setSelectedStone(stoneParam);
+    }
   }, [searchParams]);
 
   // Manejo de tecla Escape, overflow de body y URL query param al abrir/cerrar modal
@@ -450,100 +455,43 @@ function TiendaContent() {
       <div id="catalogo-top" className="scroll-mt-24" />
 
       {/* ─────────────────────────────────────────────────────────────
-          3. BARRA DE FILTROS HORIZONTAL (ESTILO EXACTO AURUM BROTHERS)
+          3. BARRA DE ESTADO & NAVEGACIÓN RÁPIDA DE LA BOUTIQUE
          ───────────────────────────────────────────────────────────── */}
       <div className="border-b border-neutral-900 bg-black/95 backdrop-blur-md sticky top-16 sm:top-20 z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
           
-          {/* Categorías a la Izquierda */}
-          <div className="flex items-center gap-6 sm:gap-8 text-[11px] sm:text-xs tracking-[0.15em] uppercase font-light whitespace-nowrap">
-            <button
-              onClick={() => {
-                setSelectedCategory("todos");
-                setSelectedStone("todos");
-              }}
-              className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "todos" && selectedStone === "todos"
-                  ? "text-white font-medium border-b border-white"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {t("All", "All")} ({shopProducts.length})
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedCategory("azules");
-                setSelectedStone("todos");
-              }}
-              className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "azules"
-                  ? "text-white font-medium border-b border-white"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Blues
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedCategory("verdes");
-                setSelectedStone("todos");
-              }}
-              className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "verdes"
-                  ? "text-white font-medium border-b border-white"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Greens
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedCategory("tierra");
-                setSelectedStone("todos");
-              }}
-              className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "tierra"
-                  ? "text-white font-medium border-b border-white"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Earth & Sun
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedCategory("oscuros");
-                setSelectedStone("todos");
-              }}
-              className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "oscuros"
-                  ? "text-white font-medium border-b border-white"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Neutrals & Black
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedCategory("claridad");
-                setSelectedStone("todos");
-              }}
-              className={`transition-colors cursor-pointer py-1 ${
-                selectedCategory === "claridad"
-                  ? "text-white font-medium border-b border-white"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Light & Moon
-            </button>
+          {/* Estado de Filtrado por Mineral de la Veta */}
+          <div className="flex items-center gap-3 text-xs tracking-wider uppercase">
+            {selectedStone === "todos" ? (
+              <span className="text-neutral-300 font-serif flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                <span>{t("Colección Completa de Arcanos", "Complete Arcana Collection")}</span>
+                <span className="text-neutral-500 font-mono text-[11px]">({filteredProducts.length} {t("piezas", "pieces")})</span>
+              </span>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse" />
+                <span className="text-[#FFE2A4] font-serif font-medium">
+                  {t("Mineral Seleccionado:", "Selected Gem:")} <strong className="text-white">{selectedStone}</strong>
+                </span>
+                <span className="text-[#C5A059] font-mono text-[11px]">
+                  ({filteredProducts.length} {filteredProducts.length === 1 ? t("pieza", "piece") : t("piezas", "pieces")})
+                </span>
+                <button
+                  onClick={() => {
+                    setSelectedStone("todos");
+                    setSelectedCategory("todos");
+                  }}
+                  className="ml-2 px-2.5 py-0.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-neutral-300 hover:text-white text-[10px] font-sans tracking-widest uppercase transition-colors cursor-pointer"
+                >
+                  ✕ {t("Mostrar Todos", "Show All")}
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Enlace y Búsqueda a la Derecha */}
-          <div className="hidden md:flex items-center gap-4 text-xs tracking-wider uppercase text-neutral-400">
+          {/* Enlaces de Acción Rápida a la Derecha */}
+          <div className="flex items-center gap-4 text-xs tracking-wider uppercase">
             {searchQuery ? (
               <div className="flex items-center gap-2 bg-[#111111] px-3 py-1 rounded-full border border-neutral-800">
                 <span className="text-[10px] text-white">{searchQuery}</span>
@@ -571,7 +519,7 @@ function TiendaContent() {
               }}
               className="hover:text-[#C5A059] transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap text-[11px]"
             >
-              <span>🌌 {t("Ver Veta Mineral", "View Mineral Vein")}</span>
+              <span>🌌 {t("Veta Mineral (32 Gemas)", "Mineral Vein (32 Gems)")}</span>
               <span>↑</span>
             </button>
           </div>
