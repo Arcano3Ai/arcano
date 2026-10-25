@@ -15,6 +15,27 @@ import {
   CONCIERGE_ZONES,
   CONCIERGE_DEFAULT_ZONE,
 } from "@/config/conciergeConfig";
+import { getAssetPath, handleImageError } from "@/lib/utils";
+
+// Mapeo exhaustivo de numerales romanos a índice de dos dígitos para las 22 cartas de Tarot
+const ROMAN_TO_CARD_NUM: Record<string, string> = {
+  "0": "00", "I": "01", "II": "02", "III": "03", "IV": "04",
+  "V": "05", "VI": "06", "VII": "07", "VIII": "08", "IX": "09",
+  "X": "10", "XI": "11", "XII": "12", "XIII": "13", "XIV": "14",
+  "XV": "15", "XVI": "16", "XVII": "17", "XVIII": "18", "XIX": "19",
+  "XX": "20", "XXI": "21",
+};
+
+function getArcanoTarotCardUrl(card: ShopProduct): string {
+  if (card.secondaryImageUrl) {
+    return getAssetPath(card.secondaryImageUrl);
+  }
+  const numStr = card.arcanoNumber ? ROMAN_TO_CARD_NUM[card.arcanoNumber.trim().toUpperCase()] : null;
+  if (numStr) {
+    return getAssetPath(`/images/cards/ar${numStr}.webp`);
+  }
+  return getAssetPath(card.imageUrl);
+}
 
 interface VirtualTarotSpreaderProps {
   onSelectProduct?: (product: ShopProduct) => void;
@@ -249,24 +270,28 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
                       {/* Imagen Dual: Carta del Tarot + Pulsera de Mineral */}
                       <div className="grid grid-cols-2 gap-3 mb-4 items-center">
                         {/* Carta de Tarot */}
-                        <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden border border-neutral-800 shadow-md">
+                        <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden border border-neutral-800 bg-neutral-950 shadow-md">
                           <Image
-                            src={card.secondaryImageUrl || card.imageUrl}
-                            alt={card.name}
+                            src={getArcanoTarotCardUrl(card)}
+                            alt={`Carta de Tarot ${card.name}`}
                             fill
                             sizes="(max-width: 768px) 50vw, 15vw"
                             className="object-cover"
+                            unoptimized
+                            onError={(e) => handleImageError(e)}
                           />
                         </div>
 
                         {/* Pulsera Talismán */}
                         <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-neutral-800 bg-black shadow-md">
                           <Image
-                            src={card.imageUrl}
-                            alt={card.name}
+                            src={getAssetPath(card.imageUrl)}
+                            alt={`Talismán ${card.name}`}
                             fill
                             sizes="(max-width: 768px) 50vw, 15vw"
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            unoptimized
+                            onError={(e) => handleImageError(e)}
                           />
                         </div>
                       </div>
@@ -429,11 +454,13 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
                       {bundle.items.map((item) => (
                         <div key={item.id} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-800 bg-black">
                           <Image
-                            src={item.imageUrl}
+                            src={getAssetPath(item.imageUrl)}
                             alt={item.name}
                             fill
                             sizes="80px"
                             className="object-cover group-hover:scale-105 transition-transform"
+                            unoptimized
+                            onError={(e) => handleImageError(e)}
                           />
                         </div>
                       ))}
