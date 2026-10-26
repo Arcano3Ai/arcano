@@ -11,6 +11,7 @@ import {
 } from "@/data/shop";
 import { EpicMineralVeinSelector } from "@/components/shop/EpicMineralVeinSelector";
 import { VirtualTarotSpreader } from "@/components/shop/VirtualTarotSpreader";
+import { StoreGrandMenu } from "@/components/shop/StoreGrandMenu";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import {
   CONCIERGE_ZONES,
@@ -385,6 +386,11 @@ function TiendaContent() {
           </a>
         </div>
       </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          1.5. MENÚ PRINCIPAL DE ÁREAS DE LA TIENDA
+         ───────────────────────────────────────────────────────────── */}
+      <StoreGrandMenu currentCollection="talismanes" />
 
       {/* ─────────────────────────────────────────────────────────────
           2. VETA TELÚRICA SAGRADA (SELECTOR GEOLÓGICO DE MINERALES)

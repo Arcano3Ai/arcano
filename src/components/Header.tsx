@@ -60,6 +60,61 @@ export const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center space-x-7" aria-label="Principal">
           {headerNavLinks.map((link) => {
             const isActive = pathname === link.href;
+
+            if (link.href === "/tienda/") {
+              return (
+                <div key={link.href} className="relative group py-1">
+                  <Link
+                    href="/tienda/"
+                    className={`text-xs uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-1 ${
+                      isActive || pathname.startsWith("/tienda")
+                        ? "text-gold font-medium"
+                        : "text-parchment-muted hover:text-parchment hover:translate-y-[-1px]"
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <span className="text-[10px] opacity-60 group-hover:rotate-180 transition-transform duration-300">
+                      ▾
+                    </span>
+                    {(isActive || pathname.startsWith("/tienda")) && (
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-[1px] bg-gold" />
+                    )}
+                  </Link>
+
+                  {/* Dropdown de Áreas de la Tienda */}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 w-72 z-50">
+                    <div className="p-2.5 rounded-xl bg-obsidian-deep/98 border border-gold/40 shadow-[0_15px_40px_rgba(0,0,0,0.95)] backdrop-blur-2xl space-y-1">
+                      <div className="px-3 py-1 text-[9px] font-mono tracking-[0.25em] uppercase text-gold/80 border-b border-charcoal-border/50">
+                        Colecciones Ancestrales
+                      </div>
+                      {[
+                        { label: "Talismanes & Tarot", href: "/tienda/", icon: "🔮", desc: "78 Arcanos y 32 Minerales" },
+                        { label: "Barro Negro Oaxaqueño", href: "/tienda/barro-negro/", icon: "🏺", desc: "Alquimia de San Bartolo Coyotepec" },
+                        { label: "Alebrijes & Nahuales", href: "/tienda/alebrijes/", icon: "🐆", desc: "Talla sagrada en copal" },
+                        { label: "Arte Huichol · Wixárika", href: "/tienda/arte-huichol/", icon: "🦌", desc: "Cosmogonía de Wirikuta" },
+                      ].map((cat) => (
+                        <Link
+                          key={cat.href}
+                          href={cat.href}
+                          className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-left transition-all ${
+                            pathname === cat.href
+                              ? "bg-gold/15 text-gold border border-gold/40"
+                              : "text-parchment-dim hover:text-parchment hover:bg-charcoal/60"
+                          }`}
+                        >
+                          <span className="text-base">{cat.icon}</span>
+                          <div>
+                            <div className="text-xs font-serif text-white tracking-wide">{cat.label}</div>
+                            <div className="text-[9px] font-sans text-neutral-400">{cat.desc}</div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={link.href}
@@ -158,13 +213,37 @@ export const Header: React.FC = () => {
               <LanguageToggle />
             </div>
             {headerNavLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-serif text-2xl tracking-[0.15em] text-parchment hover:text-gold transition-colors text-center py-2"
-              >
-                {link.label}
-              </Link>
+              <React.Fragment key={link.href}>
+                <Link
+                  href={link.href}
+                  className="font-serif text-2xl tracking-[0.15em] text-parchment hover:text-gold transition-colors text-center py-2"
+                >
+                  {link.label}
+                </Link>
+                {link.href === "/tienda/" && (
+                  <div className="grid grid-cols-2 gap-2 px-2 py-1 -mt-2 mb-2">
+                    {[
+                      { label: "Talismanes & Tarot", href: "/tienda/", icon: "🔮" },
+                      { label: "Barro Negro", href: "/tienda/barro-negro/", icon: "🏺" },
+                      { label: "Alebrijes & Nahuales", href: "/tienda/alebrijes/", icon: "🐆" },
+                      { label: "Arte Huichol", href: "/tienda/arte-huichol/", icon: "🦌" },
+                    ].map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all ${
+                          pathname === sub.href
+                            ? "bg-gold/15 border-gold/40 text-gold"
+                            : "bg-charcoal/40 border-charcoal-border/40 text-neutral-300"
+                        }`}
+                      >
+                        <span className="text-sm">{sub.icon}</span>
+                        <span className="text-[11px] font-serif leading-tight">{sub.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
 
