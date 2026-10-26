@@ -1003,9 +1003,9 @@ export const EpicMineralVeinSelector: React.FC<EpicMineralVeinSelectorProps> = (
                         </span>
                       </div>
 
-                      <h3 className="font-serif text-base font-light text-white tracking-widest uppercase">
+                      <p className="font-serif text-base font-light text-white tracking-widest uppercase font-medium">
                         {language === "es" ? gem.nameEs : gem.titleEn}
-                      </h3>
+                      </p>
 
                       <p className="text-[11px] text-neutral-300 font-light italic mb-2 tracking-wide max-w-xs whitespace-normal">
                         {language === "es" ? gem.vibeEs : gem.vibeEn}

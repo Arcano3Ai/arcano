@@ -13,7 +13,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
     if (!audioRef.current && typeof window !== "undefined") {
       const primaryUrl = getAudioPath("/audio/druidic-dance.mp3");
       const audio = new Audio(primaryUrl);
-      audio.preload = "auto";
+      audio.preload = "none";
       audio.loop = true;
       audio.volume = 0.28; // Volumen sutil ceremonial
       audioRef.current = audio;
@@ -24,50 +24,34 @@ export const AtmosphereAudioPlayer: React.FC = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const isExplicitlyMuted = localStorage.getItem("arcano_ambient_muted") === "true";
-    const audio = getOrCreateAudio();
+    // Solo reanudar audio si el usuario lo activó explícitamente en una sesión previa
+    const isExplicitlyEnabled = localStorage.getItem("arcano_ambient_enabled") === "true";
 
-    if (audio && !isExplicitlyMuted) {
-      // Intentar reproducción inmediata al entrar a la página
-      const playPromise = audio.play();
+    if (isExplicitlyEnabled) {
+      const handleFirstGesture = () => {
+        const audio = getOrCreateAudio();
+        if (audio && audio.paused) {
+          audio.preload = "auto";
+          audio
+            .play()
+            .then(() => {
+              setIsPlaying(true);
+              setHasInteracted(true);
+            })
+            .catch(() => {});
+        }
+        cleanupGestures();
+      };
 
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-            setHasInteracted(true);
-          })
-          .catch(() => {
-            // Si la política de autoplay del navegador restringe audio sin gesto previo,
-            // activar la música en el primer clic, toque o desplazamiento en cualquier parte de la pantalla.
-            const handleFirstGesture = () => {
-              if (audioRef.current && audioRef.current.paused && localStorage.getItem("arcano_ambient_muted") !== "true") {
-                audioRef.current
-                  .play()
-                  .then(() => {
-                    setIsPlaying(true);
-                    setHasInteracted(true);
-                  })
-                  .catch(() => {});
-              }
-              cleanupGestures();
-            };
+      const cleanupGestures = () => {
+        window.removeEventListener("click", handleFirstGesture);
+        window.removeEventListener("touchstart", handleFirstGesture);
+        window.removeEventListener("pointerdown", handleFirstGesture);
+      };
 
-            const cleanupGestures = () => {
-              window.removeEventListener("click", handleFirstGesture);
-              window.removeEventListener("touchstart", handleFirstGesture);
-              window.removeEventListener("pointerdown", handleFirstGesture);
-              window.removeEventListener("scroll", handleFirstGesture);
-              window.removeEventListener("keydown", handleFirstGesture);
-            };
-
-            window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
-            window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
-            window.addEventListener("pointerdown", handleFirstGesture, { once: true, passive: true });
-            window.addEventListener("scroll", handleFirstGesture, { once: true, passive: true });
-            window.addEventListener("keydown", handleFirstGesture, { once: true, passive: true });
-          });
-      }
+      window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
+      window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
+      window.addEventListener("pointerdown", handleFirstGesture, { once: true, passive: true });
     }
 
     let wasPlayingBeforeArcano = false;
@@ -112,14 +96,15 @@ export const AtmosphereAudioPlayer: React.FC = () => {
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
-      localStorage.setItem("arcano_ambient_muted", "true");
+      localStorage.setItem("arcano_ambient_enabled", "false");
     } else {
+      audio.preload = "auto";
       audio
         .play()
         .then(() => {
           setIsPlaying(true);
           setHasInteracted(true);
-          localStorage.removeItem("arcano_ambient_muted");
+          localStorage.setItem("arcano_ambient_enabled", "true");
         })
         .catch((err) => {
           console.warn("Audio playback issue:", err);

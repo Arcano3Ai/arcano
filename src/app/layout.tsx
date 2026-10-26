@@ -286,6 +286,10 @@ export default function RootLayout({
   return (
     <html lang="es" className={`scroll-smooth ${cinzel.variable} ${cormorant.variable} ${plusJakarta.variable}`}>
       <head>
+        {/* Preconnect optimizado para analítica */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18219380453" />
         <script

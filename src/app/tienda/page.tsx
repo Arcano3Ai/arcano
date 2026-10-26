@@ -529,7 +529,7 @@ function TiendaContent() {
       {/* ─────────────────────────────────────────────────────────────
           4. GRID PRINCIPAL CON RITMO EDITORIAL ESTILO AURUM BROTHERS
          ───────────────────────────────────────────────────────────── */}
-      <main id="arcano-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <section id="arcano-grid" aria-label="Catálogo de Arcanos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         
         {/* Banner de Estado Activo si hay un Mineral Filtrado por la Veta */}
         {selectedStone !== "todos" && (
@@ -587,8 +587,8 @@ function TiendaContent() {
             {selectedCategory === "todos" && selectedStone === "todos" && !searchQuery.trim() ? (
               <>
                 {/* ── FILA 1: Arcanos 0, I, II, III (4 Productos) ── */}
-                {filteredProducts.slice(0, 4).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                {filteredProducts.slice(0, 4).map((product, idx) => (
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} priority={idx < 2} />
                 ))}
 
                 {/* ── FILA 2: EDITORIAL 1 (2 Cols Izquierda) + Arcanos IV, V (2 Productos) ── */}
@@ -644,15 +644,15 @@ function TiendaContent() {
               </>
             ) : (
               // Cuando hay filtro de categoría o búsqueda activa, mostramos los productos en grid directo
-              filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+              filteredProducts.map((product, idx) => (
+                <ProductCard key={product.id} product={product} onSelect={setActiveProduct} priority={idx < 2} />
               ))
             )}
 
           </div>
         )}
 
-      </main>
+      </section>
 
       {/* ─────────────────────────────────────────────────────────────
           4. MODAL CONCIERGE VIP (CIERRE DIRECTO A WHATSAPP)
@@ -844,9 +844,11 @@ export default function ShopPage() {
 function ProductCard({
   product,
   onSelect,
+  priority = false,
 }: {
   product: ShopProduct;
   onSelect: (p: ShopProduct) => void;
+  priority?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -864,6 +866,8 @@ function ProductCard({
           src={product.imageUrl}
           alt={product.name}
           fill
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className={`object-cover transition-transform duration-700 ease-out ${
             isHovered ? "scale-[1.04]" : "scale-100"
@@ -939,6 +943,7 @@ function EditorialCard({
           src={highlight.image}
           alt={highlight.headline}
           fill
+          loading="lazy"
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover brightness-[0.9] group-hover:scale-[1.03] transition-transform duration-700 ease-out"
         />

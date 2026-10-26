@@ -163,29 +163,35 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
               
               {/* Campo Nombre */}
               <div>
-                <label className="block text-[10px] sm:text-[11px] font-sans tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
+                <label htmlFor="consultante-name" className="block text-[10px] sm:text-[11px] font-sans tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
                   Nombre Completo
                 </label>
                 <input
+                  id="consultante-name"
+                  name="consultanteName"
                   type="text"
                   required
                   value={consultanteName}
                   onChange={(e) => setConsultanteName(e.target.value)}
                   placeholder="Ej. Mauricio Garza"
+                  aria-label="Nombre Completo"
                   className="w-full px-4 py-3 bg-black/90 border border-neutral-800 rounded-lg text-white text-xs sm:text-sm focus:border-[#C5A059] focus:outline-none focus:ring-1 focus:ring-[#C5A059] transition-all font-serif placeholder:text-neutral-600"
                 />
               </div>
 
               {/* Campo Fecha de Nacimiento */}
               <div>
-                <label className="block text-[10px] sm:text-[11px] font-sans tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
+                <label htmlFor="consultante-birthdate" className="block text-[10px] sm:text-[11px] font-sans tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
                   Fecha de Nacimiento
                 </label>
                 <input
+                  id="consultante-birthdate"
+                  name="birthDate"
                   type="date"
                   required
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
+                  aria-label="Fecha de Nacimiento"
                   className="w-full px-4 py-3 bg-black/90 border border-neutral-800 rounded-lg text-white text-xs sm:text-sm focus:border-[#C5A059] focus:outline-none focus:ring-1 focus:ring-[#C5A059] transition-all font-serif [color-scheme:dark]"
                 />
               </div>
@@ -476,7 +482,7 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
                   <div className="pt-4 border-t border-neutral-900 mt-6 space-y-3">
                     <div className="flex items-baseline justify-between">
                       <div>
-                        <span className="text-[10px] text-neutral-500 font-serif line-through block">
+                        <span className="text-[10px] text-neutral-400 font-serif line-through block">
                           ${bundle.originalPrice.toLocaleString("es-MX")} MXN
                         </span>
                         <span className="text-xl font-serif text-white font-medium">
