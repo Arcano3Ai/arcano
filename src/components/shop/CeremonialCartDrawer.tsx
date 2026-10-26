@@ -277,15 +277,21 @@ export function CeremonialCartDrawer() {
 }
 
 export function FloatingCartButton() {
-  const { totalCount, subtotal, openCart } = useCart();
+  const { totalCount, subtotal, openCart, isCartOpen } = useCart();
 
-  if (totalCount === 0) return null;
+  if (totalCount === 0 || isCartOpen) return null;
 
   return (
     <button
       onClick={openCart}
       aria-label="Ver carrito ceremonial"
-      className="fixed bottom-24 right-5 sm:right-6 z-40 px-4 py-2.5 rounded-full bg-charcoal/95 border border-gold/70 text-parchment shadow-[0_0_25px_rgba(198,160,82,0.4)] backdrop-blur-md hover:scale-105 hover:border-gold transition-all hidden md:flex items-center gap-2.5 cursor-pointer group"
+      style={{
+        position: "fixed",
+        bottom: "max(9.5rem, calc(env(safe-area-inset-bottom, 0px) + 9.5rem))",
+        right: "max(1.25rem, calc(env(safe-area-inset-right, 0px) + 1.25rem))",
+        top: "auto",
+      }}
+      className="z-40 px-4 py-2.5 rounded-full bg-[#14121d]/95 border border-gold/70 text-parchment shadow-[0_0_25px_rgba(198,160,82,0.45)] backdrop-blur-md hover:scale-105 hover:border-gold transition-all hidden md:flex items-center gap-2.5 cursor-pointer group"
     >
       <span className="text-lg group-hover:scale-110 transition-transform text-gold">🛒</span>
       <div className="flex flex-col text-left">

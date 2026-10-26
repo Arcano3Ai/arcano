@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { GRAND_COLLECTIONS } from "@/data/artisanCrafts";
 
 interface StoreGrandMenuProps {
-  currentCollection?: "talismanes" | "barro-negro" | "alebrijes" | "arte-huichol";
+  currentCollection?: "talismanes" | "barro-negro" | "alebrijes" | "arte-huichol" | "dorodangos";
 }
 
 export const StoreGrandMenu: React.FC<StoreGrandMenuProps> = ({ currentCollection }) => {
@@ -21,6 +21,8 @@ export const StoreGrandMenu: React.FC<StoreGrandMenuProps> = ({ currentCollectio
       ? "alebrijes"
       : pathname.includes("/arte-huichol")
       ? "arte-huichol"
+      : pathname.includes("/dorodangos")
+      ? "dorodangos"
       : "talismanes");
 
   return (
@@ -39,8 +41,8 @@ export const StoreGrandMenu: React.FC<StoreGrandMenuProps> = ({ currentCollectio
           <span className="hidden md:inline text-neutral-400">ENVIOS CONCIERGE VIP</span>
         </div>
 
-        {/* 4 Tabs Principales de Colecciones */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 py-2.5">
+        {/* 5 Tabs Principales de Colecciones */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 py-2.5">
           {GRAND_COLLECTIONS.map((col) => {
             const isActive = activeId === col.id;
 

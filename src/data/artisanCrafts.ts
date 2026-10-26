@@ -19,7 +19,7 @@ export interface ArtisanCollection {
 export interface ArtisanProduct {
   id: string;
   slug: string;
-  collectionId: "barro-negro" | "alebrijes" | "arte-huichol" | "talismanes";
+  collectionId: "barro-negro" | "alebrijes" | "arte-huichol" | "talismanes" | "dorodangos";
   name: string;
   artisanName: string;
   community: string;
@@ -107,6 +107,23 @@ export const GRAND_COLLECTIONS: ArtisanCollection[] = [
     heroSubheadline: "Cada cuenta de cristal es un rezo depositado sobre cera virgen: la visión del sol naciente, el venado mensajero y la floración del desierto sagrado.",
     badge: "Cosmogonía Sagrada",
     bannerImage: "/images/shop/arte-huichol/craneo-venado-kauyumari.jpg",
+  },
+  {
+    id: "dorodangos",
+    slug: "dorodangos",
+    name: "Dorodangos Sagrados",
+    subtitle: "Hikaru Dorodango · Esferas de Tierra Espejo",
+    descriptor: "Alquimia Zen Japonesa & Polvos Minerales Alquímicos",
+    symbol: "🌕",
+    accentColor: "#E5C158",
+    href: "/tienda/dorodangos/",
+    heritageRegion: "Tradición Zen de Kioto & Tierras Sagradas Minerales",
+    masterTechnique: "Moldeado concéntrico a mano, enriquecido con polvos minerales y bruñido con cristal y seda",
+    shortDescription: "La transmutación de la tierra fértil en orbes planetarios de brillo espejo absoluto mediante semanas de bruñido meditativo.",
+    heroHeadline: "El cosmos contenido en una esfera de tierra.",
+    heroSubheadline: "Hikaru Dorodango: arcilla pura, polvo de cuarzo y minerales cósmicos pulidos a mano durante semanas hasta alcanzar el reflejo de un espejo negro sagrado.",
+    badge: "Alquimia Zen",
+    bannerImage: "/images/shop/dorodangos/dorodango-oro-kintsugi.jpg",
   },
 ];
 
@@ -295,3 +312,109 @@ export const ARTE_HUICHOL_PRODUCTS: ArtisanProduct[] = [
     tags: ["Jaguar", "Fuego", "Tatewari", "Chaquira", "Fuerza"],
   },
 ];
+
+// ─────────────────────────────────────────────────────────────
+// CATÁLOGO DE PIEZAS MAESTRAS DE HIKARU DORODANGOS
+// ─────────────────────────────────────────────────────────────
+export const DORODANGOS_PRODUCTS: ArtisanProduct[] = [
+  {
+    id: "doro-oro-kintsugi",
+    slug: "dorodango-oro-kintsugi",
+    collectionId: "dorodangos",
+    name: "Dorodango Solar con Vetas de Oro 24K & Cuarzo Citrino",
+    artisanName: "Maestro Ceramista de la Veta Alquímica",
+    community: "Taller Hermético ARCANO",
+    price: 4600,
+    formattedPrice: "$4,600 MXN",
+    dimensions: "Diámetro: 95 mm · Peso: 580 g · Circunferencia: 29.8 cm",
+    materials: "Arcilla volcánica mineralizada, polvo de cuarzo citrino, hojas de oro fino 24 quilates y aceite de camelia natural",
+    technique: "Hikaru Dorodango: 18 días de sedimentación concéntrica y pulido a mano con copa de cristal y seda salvaje",
+    consecrationDetails: "Infundido con resina de copal y oro en el solsticio, sellado en cera natural virgen",
+    story: "Representa el principio hermético del Sol interior. Cada microgrieta fue sanada con la técnica milenaria del Kintsugi japonés, exaltando la belleza de la imperfección transmutada en oro.",
+    description: "Esfera de tierra pura bruñida hasta alcanzar un brillo vítreo insuperable. Incluye cojín ceremonial de seda negra y base torneada en madera maciza de nogal.",
+    imageUrl: "/images/shop/dorodangos/dorodango-oro-kintsugi.jpg",
+    badge: "Obra Maestra",
+    inStock: true,
+    featured: true,
+    tags: ["Dorodango", "Kintsugi", "Oro 24K", "Tierra Espejo", "Altar Zen"],
+  },
+  {
+    id: "doro-obsidiana-meteorito",
+    slug: "dorodango-obsidiana-meteorito",
+    collectionId: "dorodangos",
+    name: "Dorodango Espejo de Obsidiana Negra & Polvo de Meteorito",
+    artisanName: "Maestro Ceramista de la Veta Alquímica",
+    community: "Taller Hermético ARCANO",
+    price: 4900,
+    formattedPrice: "$4,900 MXN",
+    dimensions: "Diámetro: 100 mm · Peso: 640 g · Circunferencia: 31.4 cm",
+    materials: "Arcilla negra rica en sílice, polvo de obsidiana dorada, micropartículas de condrita meteorítica",
+    technique: "Bruñido ultrafino con cuarzo ahumado y lienzo de lino durante 21 días de secado lento en cámara húmeda",
+    consecrationDetails: "Sahumado en luna nueva y activado con cantos armónicos en 432 Hz",
+    story: "Un portal reflectante de introspección profunda. La superficie de la esfera actúa como un espejo negro de adivinación (scrying mirror), atrapando la luz del entorno con una nitidez desconcertante.",
+    description: "Orbe telúrico de absorción energética y meditación. Su superficie reflectante negra pura no posee barnices ni químicos, sólo la perfecta alineación de partículas minerales.",
+    imageUrl: "/images/shop/dorodangos/dorodango-obsidiana.jpg",
+    badge: "Espejo Negro",
+    inStock: true,
+    featured: true,
+    tags: ["Dorodango", "Obsidiana", "Meteorito", "Espejo Ritual", "Grounding"],
+  },
+  {
+    id: "doro-lapis-cosmico",
+    slug: "dorodango-lapis-cosmico",
+    collectionId: "dorodangos",
+    name: "Dorodango Celestial de Lapislázuli & Polvo de Pirita",
+    artisanName: "Maestro Ceramista de la Veta Alquímica",
+    community: "Taller Hermético ARCANO",
+    price: 4400,
+    formattedPrice: "$4,400 MXN",
+    dimensions: "Diámetro: 92 mm · Peso: 550 g · Circunferencia: 28.9 cm",
+    materials: "Arcilla blanca de caolín, polvo ultramar de lapislázuli afgano natural, pirita áurea",
+    technique: "Superposición de capas minerales pigmentadas y pulido con borde de vidrio curvado de precisión",
+    consecrationDetails: "Consagrado ante la estrella fija Spica y ungido con mirra egipcia",
+    story: "Evoca la vista del planeta Tierra suspendido en el vacío cósmico. Las motas de pirita destellan como galaxias distantes bajo el reflejo del sol.",
+    description: "Pieza de alto coleccionismo mineral. Viene acompañada de plato ritual japonés de gres cocido con textura de ceniza y rocas guía de lapislázuli y pirita en bruto.",
+    imageUrl: "/images/shop/dorodangos/dorodango-lapis.jpg",
+    badge: "Orbe Cósmico",
+    inStock: true,
+    featured: true,
+    tags: ["Dorodango", "Lapislázuli", "Pirita", "Cosmos", "Meditación"],
+  },
+  {
+    id: "doro-jade-esmeralda",
+    slug: "dorodango-jade-esmeralda",
+    collectionId: "dorodangos",
+    name: "Dorodango de Arcilla Verde Imperial & Jade de Río",
+    artisanName: "Maestro Ceramista de la Veta Alquímica",
+    community: "Taller Hermético ARCANO",
+    price: 3950,
+    formattedPrice: "$3,950 MXN",
+    dimensions: "Diámetro: 90 mm · Peso: 520 g · Circunferencia: 28.3 cm",
+    materials: "Arcilla verde de río de montaña, polvo de jadeíta de serpentina y malaquita",
+    technique: "Compactación gradual en tres semanas, bruñido con piedra de ágata verde y acabado con aceite puro de nuez",
+    consecrationDetails: "Inmerso en agua viva de manantial y sahumado con cedro sagrado",
+    story: "Un talismán de abundancia y conexión telúrica con el corazón de los bosques. Sus patrones arremolinados verdes evocan las corrientes fluviales y el crecimiento eterno de la naturaleza.",
+    description: "Esfera de meditación zen con vetas marmoladas en verde esmeralda y musgo. Incluye base de madera quemada Shou Sugi Ban (cedro carbonizado tradicional).",
+    imageUrl: "/images/shop/dorodangos/dorodango-jade.jpg",
+    badge: "Tierra Viva",
+    inStock: true,
+    featured: false,
+    tags: ["Dorodango", "Jade", "Malaquita", "Zen", "Abundancia"],
+  },
+];
+
+export function getArtisanProducts(collectionId: "barro-negro" | "alebrijes" | "arte-huichol" | "dorodangos"): ArtisanProduct[] {
+  switch (collectionId) {
+    case "barro-negro":
+      return BARRO_NEGRO_PRODUCTS;
+    case "alebrijes":
+      return ALEBRIJES_PRODUCTS;
+    case "arte-huichol":
+      return ARTE_HUICHOL_PRODUCTS;
+    case "dorodangos":
+      return DORODANGOS_PRODUCTS;
+    default:
+      return [];
+  }
+}
+

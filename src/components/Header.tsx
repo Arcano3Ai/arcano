@@ -92,6 +92,7 @@ export const Header: React.FC = () => {
                         { label: "Barro Negro Oaxaqueño", href: "/tienda/barro-negro/", icon: "🏺", desc: "Alquimia de San Bartolo Coyotepec" },
                         { label: "Alebrijes & Nahuales", href: "/tienda/alebrijes/", icon: "🐆", desc: "Talla sagrada en copal" },
                         { label: "Arte Huichol · Wixárika", href: "/tienda/arte-huichol/", icon: "🦌", desc: "Cosmogonía de Wirikuta" },
+                        { label: "Dorodangos Sagrados", href: "/tienda/dorodangos/", icon: "🌕", desc: "Hikaru Dorodango · Esferas Espejo" },
                       ].map((cat) => (
                         <Link
                           key={cat.href}
@@ -158,11 +159,11 @@ export const Header: React.FC = () => {
             <span className="text-gold text-xs">✦</span>
           </Link>
 
-          {/* Botón Carrito Rápido Móvil */}
+          {/* Botón Carrito en Header (Móvil y Escritorio) */}
           <button
             onClick={openCart}
             aria-label={`Abrir carrito ceremonial (${totalCount} artículos)`}
-            className="lg:hidden p-2 text-parchment hover:text-gold transition-colors relative focus:outline-none focus:ring-1 focus:ring-gold/50 rounded"
+            className="p-2 text-parchment hover:text-gold transition-colors relative focus:outline-none focus:ring-1 focus:ring-gold/50 rounded flex items-center justify-center cursor-pointer"
           >
             <span className="text-base">🛍️</span>
             {totalCount > 0 && (
@@ -227,6 +228,7 @@ export const Header: React.FC = () => {
                       { label: "Barro Negro", href: "/tienda/barro-negro/", icon: "🏺" },
                       { label: "Alebrijes & Nahuales", href: "/tienda/alebrijes/", icon: "🐆" },
                       { label: "Arte Huichol", href: "/tienda/arte-huichol/", icon: "🦌" },
+                      { label: "Dorodangos", href: "/tienda/dorodangos/", icon: "🌕" },
                     ].map((sub) => (
                       <Link
                         key={sub.href}
