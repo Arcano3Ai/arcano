@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { brandConfig, getWhatsAppUrl } from "@/config/brandConfig";
 import { SectionHeader } from "@/components/SectionHeader";
 import { TarotSocialIcons } from "@/components/TarotSocialIcons";
+import { CommutesWidget } from "@/components/maps";
 import { trackEvent } from "@/lib/analytics";
 
 export default function ContactoPage() {
@@ -224,6 +225,31 @@ export default function ContactoPage() {
             )}
           </div>
         </div>
+      </div>
+
+      {/* Sección de Rutas y Cómo Llegar con Google Maps */}
+      <div className="mt-16 sm:mt-24">
+        <CommutesWidget
+          title="Cómo Llegar al Santuario"
+          subtitle="Calcula tu ruta y tiempo estimado de viaje en auto, transporte público, bicicleta o a pie"
+          origin={{ lat: 25.8129896, lng: -100.1340545 }}
+          originName="Santuario Arcano"
+          theme="arcano"
+          initialDestinations={[
+            {
+              name: "Aeropuerto Internacional de Monterrey (MTY)",
+              travelMode: "DRIVING",
+            },
+            {
+              name: "San Pedro Garza García, N.L.",
+              travelMode: "DRIVING",
+            },
+            {
+              name: "Macroplaza, Centro de Monterrey",
+              travelMode: "DRIVING",
+            },
+          ]}
+        />
       </div>
     </div>
   );
