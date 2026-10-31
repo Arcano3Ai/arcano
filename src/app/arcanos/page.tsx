@@ -8,8 +8,10 @@ import { ArcanaModal } from "@/components/ArcanaModal";
 import { MinorArcanaCardView } from "@/components/MinorArcanaCardView";
 import { MinorArcanaModal } from "@/components/MinorArcanaModal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ArcanosIndexPage() {
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<"mayores" | "menores">("mayores");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedElement, setSelectedElement] = useState<string>("Todos");
@@ -17,8 +19,21 @@ export default function ArcanosIndexPage() {
   const [modalArcana, setModalArcana] = useState<Arcana | null>(null);
   const [modalMinor, setModalMinor] = useState<MinorArcanaCard | null>(null);
 
-  const majorElements = ["Todos", "Fuego", "Agua", "Aire", "Tierra"];
-  const suits = ["Todos", "Bastos", "Copas", "Espadas", "Oros"];
+  const majorElements = [
+    { id: "Todos", label: t("Todos", "All") },
+    { id: "Fuego", label: t("Fuego", "Fire") },
+    { id: "Agua", label: t("Agua", "Water") },
+    { id: "Aire", label: t("Aire", "Air") },
+    { id: "Tierra", label: t("Tierra", "Earth") },
+  ];
+
+  const suits = [
+    { id: "Todos", label: t("Todos", "All") },
+    { id: "Bastos", label: t("Bastos", "Wands") },
+    { id: "Copas", label: t("Copas", "Cups") },
+    { id: "Espadas", label: t("Espadas", "Swords") },
+    { id: "Oros", label: t("Oros", "Pentacles") },
+  ];
 
   const filteredMajors = arcanaList.filter((arcana) => {
     const matchesSearch =
@@ -48,9 +63,12 @@ export default function ArcanosIndexPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
         as="h1"
-        subtitle="Las 78 Puertas del Tarot"
-        title="La Baraja Sagrada Completa"
-        description="Explora las setenta y ocho cartas tradicionales ilustradas originalmente por Pamela Colman Smith bajo la guía de Arthur Edward Waite (1909). Desde los misterios cósmicos de los Arcanos Mayores hasta las encrucijadas cotidianas de los Arcanos Menores."
+        subtitle={t("Las 78 Puertas del Tarot", "The 78 Portals of Tarot")}
+        title={t("La Baraja Sagrada Completa", "The Complete Sacred Deck")}
+        description={t(
+          "Explora las setenta y ocho cartas tradicionales ilustradas originalmente por Pamela Colman Smith bajo la guía de Arthur Edward Waite (1909). Desde los misterios cósmicos de los Arcanos Mayores hasta las encrucijadas cotidianas de los Arcanos Menores.",
+          "Explore the seventy-eight traditional cards originally illustrated by Pamela Colman Smith under the guidance of Arthur Edward Waite (1909). From the cosmic mysteries of the Major Arcana to the everyday crossroads of the Minor Arcana."
+        )}
         symbol="✦"
       />
 
@@ -67,7 +85,7 @@ export default function ArcanosIndexPage() {
               : "bg-charcoal/60 text-parchment-dim hover:text-parchment border border-charcoal-border hover:border-gold/40"
           }`}
         >
-          Arcanos Mayores (XXII) ✦
+          {t("Arcanos Mayores (XXII) ✦", "Major Arcana (XXII) ✦")}
         </button>
 
         <button
@@ -81,7 +99,7 @@ export default function ArcanosIndexPage() {
               : "bg-charcoal/60 text-parchment-dim hover:text-parchment border border-charcoal-border hover:border-gold/40"
           }`}
         >
-          Arcanos Menores (LVI) ☾
+          {t("Arcanos Menores (LVI) ☾", "Minor Arcana (LVI) ☾")}
         </button>
       </div>
 
@@ -94,8 +112,8 @@ export default function ArcanosIndexPage() {
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={
               activeTab === "mayores"
-                ? "Buscar arcano mayor (ej: Mago, Loco)..."
-                : "Buscar arcano menor (ej: As de Copas, Reina)..."
+                ? t("Buscar arcano mayor (ej: Mago, Loco)...", "Search major arcana (e.g. Magician, Fool)...")
+                : t("Buscar arcano menor (ej: As de Copas, Reina)...", "Search minor arcana (e.g. Ace of Cups, Queen)...")
             }
             className="w-full px-4 py-2 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans"
           />
@@ -105,38 +123,38 @@ export default function ArcanosIndexPage() {
         {activeTab === "mayores" ? (
           <div className="flex flex-wrap items-center justify-center gap-1.5">
             <span className="text-[10px] uppercase tracking-wider text-parchment-dim font-sans mr-1">
-              Elemento:
+              {t("Elemento:", "Element:")}
             </span>
             {majorElements.map((elem) => (
               <button
-                key={elem}
-                onClick={() => setSelectedElement(elem)}
+                key={elem.id}
+                onClick={() => setSelectedElement(elem.id)}
                 className={`px-3 py-1 rounded text-[10px] uppercase tracking-wider font-sans transition-all ${
-                  selectedElement === elem
+                  selectedElement === elem.id
                     ? "bg-gold text-obsidian font-medium"
                     : "bg-charcoal/60 text-parchment-dim hover:text-parchment border border-charcoal-border"
                 }`}
               >
-                {elem}
+                {elem.label}
               </button>
             ))}
           </div>
         ) : (
           <div className="flex flex-wrap items-center justify-center gap-1.5">
             <span className="text-[10px] uppercase tracking-wider text-parchment-dim font-sans mr-1">
-              Palo:
+              {t("Palo:", "Suit:")}
             </span>
             {suits.map((suit) => (
               <button
-                key={suit}
-                onClick={() => setSelectedSuit(suit)}
+                key={suit.id}
+                onClick={() => setSelectedSuit(suit.id)}
                 className={`px-3 py-1 rounded text-[10px] uppercase tracking-wider font-sans transition-all ${
-                  selectedSuit === suit
+                  selectedSuit === suit.id
                     ? "bg-gold text-obsidian font-medium"
                     : "bg-charcoal/60 text-parchment-dim hover:text-parchment border border-charcoal-border"
                 }`}
               >
-                {suit}
+                {suit.label}
               </button>
             ))}
           </div>
@@ -148,16 +166,16 @@ export default function ArcanosIndexPage() {
         <>
           <div className="flex items-center justify-between text-xs text-parchment-dim font-sans mb-6 px-1">
             <span>
-              Mostrando {filteredMajors.length} de {arcanaList.length} arcanos mayores
+              {t("Mostrando", "Showing")} {filteredMajors.length} {t("de", "of")} {arcanaList.length} {t("arcanos mayores", "major arcana")}
             </span>
             <span className="font-serif italic text-gold/80">
-              Las 22 Llaves de la Conciencia
+              {t("Las 22 Llaves de la Conciencia", "The 22 Keys of Consciousness")}
             </span>
           </div>
 
           {filteredMajors.length === 0 ? (
             <div className="text-center py-16 text-parchment-dim font-sans text-xs">
-              No hemos encontrado ningún arcano mayor que coincida con tu búsqueda.
+              {t("No hemos encontrado ningún arcano mayor que coincida con tu búsqueda.", "No major arcana matched your search.")}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -179,10 +197,10 @@ export default function ArcanosIndexPage() {
         <>
           <div className="flex items-center justify-between text-xs text-parchment-dim font-sans mb-6 px-1">
             <span>
-              Mostrando {filteredMinors.length} de {minorArcanaList.length} arcanos menores
+              {t("Mostrando", "Showing")} {filteredMinors.length} {t("de", "of")} {minorArcanaList.length} {t("arcanos menores", "minor arcana")}
             </span>
             <span className="font-serif italic text-gold/80">
-              Los 4 Palos Alquímicos
+              {t("Los 4 Palos Alquímicos", "The 4 Alchemical Suits")}
             </span>
           </div>
 
@@ -190,7 +208,8 @@ export default function ArcanosIndexPage() {
           {selectedSuit !== "Todos" && suitsInfo[selectedSuit as keyof typeof suitsInfo] && (
             <div className="mb-6 p-4 rounded-lg bg-gold/5 border border-gold/20 text-center max-w-2xl mx-auto">
               <span className="text-xs uppercase tracking-widest text-gold font-sans block mb-1">
-                Palo de {selectedSuit} · Elemento {suitsInfo[selectedSuit as keyof typeof suitsInfo].element} {suitsInfo[selectedSuit as keyof typeof suitsInfo].symbol}
+                {t("Palo de", "Suit of")} {suits.find(s => s.id === selectedSuit)?.label} · {t("Elemento", "Element")}{" "}
+                {suitsInfo[selectedSuit as keyof typeof suitsInfo].element} {suitsInfo[selectedSuit as keyof typeof suitsInfo].symbol}
               </span>
               <p className="text-xs text-parchment-muted font-serif italic">
                 &ldquo;{suitsInfo[selectedSuit as keyof typeof suitsInfo].essence}&rdquo;
@@ -200,7 +219,7 @@ export default function ArcanosIndexPage() {
 
           {filteredMinors.length === 0 ? (
             <div className="text-center py-16 text-parchment-dim font-sans text-xs">
-              No hemos encontrado ningún arcano menor que coincida con tu búsqueda.
+              {t("No hemos encontrado ningún arcano menor que coincida con tu búsqueda.", "No minor arcana matched your search.")}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">

@@ -5,6 +5,7 @@ import { servicesList, Service } from "@/data/services";
 import { formatCurrency } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import { brandConfig } from "@/config/brandConfig";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface BookingFormState {
   name: string;
@@ -21,6 +22,7 @@ interface BookingFormState {
 export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
   initialServiceSlug,
 }) => {
+  const { t, language } = useLanguage();
   const defaultService =
     servicesList.find((s) => s.slug === initialServiceSlug) || servicesList[0];
 
@@ -60,23 +62,43 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
 
     // Validaciones estrictas
     if (!formData.name.trim() || !formData.email.trim()) {
-      setErrorMessage("Por favor ingresa tu nombre y correo electrónico.");
+      setErrorMessage(
+        t(
+          "Por favor ingresa tu nombre y correo electrónico.",
+          "Please enter your name and email address."
+        )
+      );
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setErrorMessage("El formato del correo electrónico no parece válido.");
+      setErrorMessage(
+        t(
+          "El formato del correo electrónico no parece válido.",
+          "The email format does not seem valid."
+        )
+      );
       return;
     }
 
     if (!formData.preferredDate) {
-      setErrorMessage("Por favor selecciona una fecha deseada para tu sesión.");
+      setErrorMessage(
+        t(
+          "Por favor selecciona una fecha deseada para tu sesión.",
+          "Please select a preferred date for your session."
+        )
+      );
       return;
     }
 
     if (!formData.termsAccepted) {
-      setErrorMessage("Debes aceptar los términos y condiciones para continuar.");
+      setErrorMessage(
+        t(
+          "Debes aceptar los términos y condiciones para continuar.",
+          "You must accept the terms and conditions to proceed."
+        )
+      );
       return;
     }
 
@@ -98,7 +120,10 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
     } catch {
       setStatus("error");
       setErrorMessage(
-        "No fue posible procesar tu solicitud en este momento. Por favor intenta vía WhatsApp."
+        t(
+          "No fue posible procesar tu solicitud en este momento. Por favor intenta vía WhatsApp.",
+          "Could not process your request at this time. Please try via WhatsApp."
+        )
       );
     }
   };
@@ -109,10 +134,10 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
       <div className="p-4 rounded-lg bg-charcoal/70 border border-charcoal-border/70 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans">
-            Lectura Seleccionada
+            {t("Lectura Seleccionada", "Selected Reading")}
           </span>
           <h4 className="font-serif text-lg text-parchment font-medium">
-            {selectedService.title} ({selectedService.durationMinutes} min)
+            {selectedService.title} ({selectedService.durationMinutes} {t("min", "min")})
           </h4>
           <span className="text-xs text-parchment-dim font-sans">
             {selectedService.modality}
@@ -120,7 +145,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
         </div>
         <div className="text-right">
           <span className="text-[10px] uppercase tracking-[0.2em] text-parchment-dim block">
-            Inversión
+            {t("Inversión", "Investment")}
           </span>
           <span className="font-serif text-xl sm:text-2xl text-gold font-light">
             {formatCurrency(selectedService.priceMXN)}
@@ -134,25 +159,32 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
             ✦
           </div>
           <h3 className="font-serif text-2xl text-parchment tracking-wide">
-            Solicitud Recibida en el Santuario
+            {t("Solicitud Recibida en el Santuario", "Request Received at the Sanctuary")}
           </h3>
           <p className="text-sm text-parchment-muted max-w-lg mx-auto font-sans leading-relaxed">
-            Gracias por confiar en ARCANO,{" "}
-            <span className="text-gold font-medium">{formData.name}</span>. Hemos
-            recibido tu intención para la lectura{" "}
-            <strong>{selectedService.title}</strong> el día{" "}
-            <strong>{formData.preferredDate}</strong>.
+            {t("Gracias por confiar en ARCANO,", "Thank you for trusting in ARCANO,")}{" "}
+            <span className="text-gold font-medium">{formData.name}</span>.{" "}
+            {t(
+              "Hemos recibido tu intención para la lectura",
+              "We have received your intention for the reading"
+            )}{" "}
+            <strong>{selectedService.title}</strong>{" "}
+            {t("el día", "on")} <strong>{formData.preferredDate}</strong>.
           </p>
           <p className="text-xs text-parchment-dim font-sans">
-            Te hemos enviado un correo a <strong>{formData.email}</strong> con los
-            detalles de confirmación y el enlace seguro de tu sala ceremonial.
+            {t("Te hemos enviado un correo a", "We have sent an email to")}{" "}
+            <strong>{formData.email}</strong>{" "}
+            {t(
+              "con los detalles de confirmación y el enlace seguro de tu sala ceremonial.",
+              "with the confirmation details and secure link to your ceremonial room."
+            )}
           </p>
           <div className="pt-4">
             <button
               onClick={() => setStatus("idle")}
               className="text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light border-b border-gold/40 pb-0.5"
             >
-              Realizar otra solicitud
+              {t("Realizar otra solicitud", "Submit another request")}
             </button>
           </div>
         </div>
@@ -171,7 +203,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 htmlFor="name"
                 className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
               >
-                Nombre completo *
+                {t("Nombre completo *", "Full Name *")}
               </label>
               <input
                 id="name"
@@ -179,7 +211,10 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Tu nombre o cómo deseas que te nombremos"
+                placeholder={t(
+                  "Tu nombre o cómo deseas que te nombremos",
+                  "Your name or how you wish to be addressed"
+                )}
                 className="w-full px-4 py-2.5 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans"
               />
             </div>
@@ -190,7 +225,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 htmlFor="email"
                 className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
               >
-                Correo electrónico *
+                {t("Correo electrónico *", "Email Address *")}
               </label>
               <input
                 id="email"
@@ -211,7 +246,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 htmlFor="service"
                 className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
               >
-                Tipo de lectura *
+                {t("Tipo de lectura *", "Reading Type *")}
               </label>
               <select
                 id="service"
@@ -221,7 +256,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
               >
                 {servicesList.map((svc) => (
                   <option key={svc.id} value={svc.id}>
-                    {svc.title} — {formatCurrency(svc.priceMXN)} ({svc.durationMinutes} min)
+                    {svc.title} — {formatCurrency(svc.priceMXN)} ({svc.durationMinutes} {t("min", "min")})
                   </option>
                 ))}
               </select>
@@ -233,7 +268,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 htmlFor="modality"
                 className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
               >
-                Modalidad
+                {t("Modalidad", "Modality")}
               </label>
               <input
                 id="modality"
@@ -252,7 +287,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 htmlFor="preferredDate"
                 className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
               >
-                Fecha preferida *
+                {t("Fecha preferida *", "Preferred Date *")}
               </label>
               <input
                 id="preferredDate"
@@ -272,7 +307,7 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 htmlFor="preferredTime"
                 className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
               >
-                Horario aproximado
+                {t("Horario aproximado", "Approximate Time")}
               </label>
               <select
                 id="preferredTime"
@@ -282,10 +317,10 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
                 }
                 className="w-full px-4 py-2.5 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans"
               >
-                <option value="11:00">Mañana (11:00 AM)</option>
-                <option value="14:00">Mediodía (02:00 PM)</option>
-                <option value="17:00">Tarde (05:00 PM)</option>
-                <option value="19:00">Noche / Crepúsculo (07:00 PM)</option>
+                <option value="11:00">{t("Mañana (11:00 AM)", "Morning (11:00 AM)")}</option>
+                <option value="14:00">{t("Mediodía (02:00 PM)", "Midday (02:00 PM)")}</option>
+                <option value="17:00">{t("Tarde (05:00 PM)", "Afternoon (05:00 PM)")}</option>
+                <option value="19:00">{t("Noche / Crepúsculo (07:00 PM)", "Night / Twilight (07:00 PM)")}</option>
               </select>
             </div>
           </div>
@@ -296,7 +331,10 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
               htmlFor="intention"
               className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-2 font-sans"
             >
-              Pregunta o intención de la consulta (opcional)
+              {t(
+                "Pregunta o intención de la consulta (opcional)",
+                "Question or intention for the consultation (optional)"
+              )}
             </label>
             <textarea
               id="intention"
@@ -305,7 +343,10 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
               onChange={(e) =>
                 setFormData({ ...formData, intention: e.target.value })
               }
-              placeholder="Comparte brevemente qué área o inquietud deseas que exploren los símbolos..."
+              placeholder={t(
+                "Comparte brevemente qué área o inquietud deseas que exploren los símbolos...",
+                "Briefly share what area or question you wish the symbols to illuminate..."
+              )}
               className="w-full px-4 py-2.5 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans leading-relaxed"
             />
           </div>
@@ -323,11 +364,14 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
               className="mt-0.5 rounded border-charcoal-border text-gold focus:ring-gold bg-charcoal"
             />
             <label htmlFor="terms" className="text-[11px] text-parchment-muted font-sans leading-relaxed">
-              Acepto los{" "}
+              {t("Acepto los", "I accept the")}{" "}
               <a href="/terminos/" className="text-gold underline" target="_blank">
-                términos del servicio
+                {t("términos del servicio", "terms of service")}
               </a>{" "}
-              y reconozco que las lecturas son un ejercicio simbólico de introspección personal y no sustituyen asesoría médica, legal ni financiera.
+              {t(
+                "y reconozco que las lecturas son un ejercicio simbólico de introspección personal y no sustituyen asesoría médica, legal ni financiera.",
+                "and acknowledge that tarot readings are a symbolic introspective exercise and do not replace medical, legal, or financial advice."
+              )}
             </label>
           </div>
 
@@ -337,11 +381,16 @@ export const BookingWidget: React.FC<{ initialServiceSlug?: string }> = ({
             disabled={status === "loading"}
             className="w-full py-3.5 px-6 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.35)] disabled:opacity-50"
           >
-            {status === "loading" ? "Conectando con el Santuario..." : "Solicitar lectura ✦"}
+            {status === "loading"
+              ? t("Conectando con el Santuario...", "Connecting to Sanctuary...")
+              : t("Solicitar lectura ✦", "Request Reading ✦")}
           </button>
 
           <p className="text-[10px] text-center text-parchment-dim font-sans">
-            Garantía de privacidad absoluta · Tus datos jamás serán transferidos a terceros
+            {t(
+              "Garantía de privacidad absoluta · Tus datos jamás serán transferidos a terceros",
+              "Absolute privacy guarantee · Your information will never be shared with third parties"
+            )}
           </p>
         </form>
       )}

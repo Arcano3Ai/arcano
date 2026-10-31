@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const NewsletterSection: React.FC = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,31 +37,34 @@ export const NewsletterSection: React.FC = () => {
         </div>
 
         <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans">
-          El Círculo de la Luna
+          {t("El Círculo de la Luna", "The Moon Circle")}
         </span>
 
         <h3 className="font-serif text-2xl sm:text-4xl text-parchment tracking-[0.1em] mt-2 font-light">
-          Recibe una carta para tu camino
+          {t("Recibe una carta para tu camino", "Receive a letter for your journey")}
         </h3>
 
         <p className="mt-3 text-xs sm:text-sm text-parchment-muted font-sans font-light max-w-lg mx-auto leading-relaxed">
-          Cada plenilunio compartimos reflexiones arquetípicas, tiradas estacionales y meditaciones simbólicas. Sin excesos ni promociones invasivas.
+          {t(
+            "Cada plenilunio compartimos reflexiones arquetípicas, tiradas estacionales y meditaciones simbólicas. Sin excesos ni promociones invasivas.",
+            "Each Full Moon we share archetypal reflections, seasonal spreads, and symbolic meditations. Without spam or invasive promotions."
+          )}
         </p>
 
         {status === "success" ? (
           <div className="mt-8 p-4 rounded bg-gold/10 border border-gold/30 text-parchment font-sans text-xs animate-fadeIn">
-            ✦ Tu presencia ha sido integrada al Círculo. En el próximo ciclo lunar recibirás tu primera epístola ceremonial.
+            ✦ {t("Tu presencia ha sido integrada al Círculo. En el próximo ciclo lunar recibirás tu primera epístola ceremonial.", "Your presence has been joined to the Circle. With the next lunar cycle you will receive your first ceremonial epistle.")}
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <label htmlFor="newsletter-email" className="sr-only">
-              Correo electrónico para suscribirse al Círculo de la Luna
+              {t("Correo electrónico para suscribirse al Círculo de la Luna", "Email address to subscribe to the Moon Circle")}
             </label>
             <input
               id="newsletter-email"
               type="email"
               required
-              aria-label="Correo electrónico para suscribirse al Círculo de la Luna"
+              aria-label={t("Correo electrónico para suscribirse al Círculo de la Luna", "Email address to subscribe to the Moon Circle")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="tu.correo@ejemplo.com"
@@ -70,13 +75,13 @@ export const NewsletterSection: React.FC = () => {
               disabled={status === "loading"}
               className="py-3 px-6 text-xs uppercase tracking-[0.2em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_15px_rgba(198,160,82,0.3)] shrink-0 disabled:opacity-50"
             >
-              {status === "loading" ? "Conectando..." : "Entrar al círculo ✦"}
+              {status === "loading" ? t("Conectando...", "Connecting...") : t("Entrar al círculo ✦", "Enter the Circle ✦")}
             </button>
           </form>
         )}
 
         <p className="mt-4 text-[10px] text-parchment-dim font-sans">
-          Respetamos tu serenidad. Puedes retirar tu suscripción en cualquier instante con un solo clic.
+          {t("Respetamos tu serenidad. Puedes retirar tu suscripción en cualquier instante con un solo clic.", "We honor your peace. You can unsubscribe at any time with a single click.")}
         </p>
       </div>
     </section>

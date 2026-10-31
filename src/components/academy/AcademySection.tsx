@@ -20,12 +20,14 @@ import { ProgressTracker } from "./ProgressTracker";
 import { brandConfig } from "@/config/brandConfig";
 import { getAssetPath, handleImageError } from "@/lib/utils";
 import { useStudent } from "@/lib/academy/studentContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface AcademySectionProps {
   asHeading?: "h1" | "h2";
 }
 
 export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: HeadingTag = "h2" }) => {
+  const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<AcademyCategoryId | "todos">("todos");
   const [selectedCourse, setSelectedCourse] = useState<AcademyCourse | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -68,34 +70,34 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
           <div className="lg:col-span-7 text-center lg:text-left space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-deep/80 border border-gold/40 text-gold-light text-[11px] uppercase tracking-[0.25em] font-sans shadow-[0_0_15px_rgba(198,160,82,0.15)]">
               <span>✦</span>
-              <span>PLATAFORMA EDUCATIVA ESOTÉRICA PREMIUM</span>
+              <span>{t("PLATAFORMA EDUCATIVA ESOTÉRICA PREMIUM", "PREMIUM ESOTERIC EDUCATION PLATFORM")}</span>
             </div>
 
             <HeadingTag className="font-serif text-4xl sm:text-5xl lg:text-6xl text-parchment tracking-[0.05em] font-light leading-[1.15]">
-              ACADEMIA <br />
+              {t("ACADEMIA", "ACADEMY")} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold drop-shadow-[0_0_25px_rgba(198,160,82,0.3)]">
-                ESOTÉRICA
+                {t("ESOTÉRICA", "ESOTERIC")}
               </span>
             </HeadingTag>
 
             <p className="font-serif text-lg sm:text-xl text-parchment-dim italic max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              &ldquo;Explora el conocimiento ancestral, desarrolla tu intuición y transforma tu pasión espiritual en una nueva forma de crecimiento.&rdquo;
+              &ldquo;{t("Explora el conocimiento ancestral, desarrolla tu intuición y transforma tu pasión espiritual en una nueva forma de crecimiento.", "Explore ancestral wisdom, awaken your intuition, and transform your spiritual devotion into elevated mastery.")}&rdquo;
             </p>
 
             <p className="text-sm sm:text-base text-parchment-muted font-sans font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Aprende Tarot, Astrología, Numerología, Reiki y Energía a través de rutas de formación diseñadas para avanzar paso a paso.
+              {t("Aprende Tarot, Astrología, Numerología, Reiki y Energía a través de rutas de formación diseñadas para avanzar paso a paso.", "Learn Tarot, Astrology, Numerology, Reiki, and Energy through rigorous pathways structured step by step.")}
             </p>
 
             {/* Badges de Garantía */}
             <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-sans text-parchment-dim">
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#100e18] border border-gold/40 text-gold-light shadow-inner">
-                <span className="text-gold">✦</span> Inversión por Nivel: <strong className="text-gold font-bold ml-1">$799 MXN</strong>
+                <span className="text-gold">✦</span> {t("Inversión por Nivel:", "Investment per Level:")} <strong className="text-gold font-bold ml-1">$799 MXN</strong>
               </span>
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#100e18] border border-charcoal-border shadow-inner">
-                <span className="text-gold">🔓</span> Al completar Nivel 5: <strong className="text-gold-light ml-1 font-semibold">Web Propia con Dominio</strong>
+                <span className="text-gold">🔓</span> {t("Al completar Nivel 5:", "Upon completing Level 5:")} <strong className="text-gold-light ml-1 font-semibold">{t("Web Propia con Dominio", "Custom Web & Domain")}</strong>
               </span>
               <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#100e18] border border-charcoal-border shadow-inner">
-                <span className="text-gold">📜</span> Formación con <strong className="text-gold-light ml-1 font-semibold">Certificación Oficial</strong>
+                <span className="text-gold">📜</span> {t("Formación con", "Accredited with")} <strong className="text-gold-light ml-1 font-semibold">{t("Certificación Oficial", "Official Certificate")}</strong>
               </span>
             </div>
 
@@ -106,13 +108,13 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
                 className="w-full sm:w-auto px-8 py-3.5 rounded-sm bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 text-black text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:shadow-[0_0_35px_rgba(212,175,55,0.6)] transition-all duration-300 hover:scale-[1.03] text-center flex items-center justify-center gap-2"
               >
                 <span>🗝️</span>
-                <span>{student ? "MI AULA VIRTUAL (PANEL)" : "INGRESAR AL AULA VIRTUAL"}</span>
+                <span>{student ? t("MI AULA VIRTUAL (PANEL)", "MY VIRTUAL CAMPUS") : t("INGRESAR AL AULA VIRTUAL", "ENTER VIRTUAL CAMPUS")}</span>
               </Link>
               <a
                 href="#cursos-academia"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-sm border border-gold/40 text-gold-light hover:text-parchment hover:border-gold text-xs uppercase tracking-[0.2em] font-sans font-medium transition-all duration-300 hover:bg-gold/10 text-center"
               >
-                EXPLORAR CURSOS
+                {t("EXPLORAR CURSOS", "EXPLORE COURSES")}
               </a>
             </div>
           </div>
@@ -188,10 +190,10 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
         <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
           <span className="text-gold text-xl font-serif">✦</span>
           <p className="font-serif text-2xl sm:text-3xl lg:text-4xl text-parchment font-light tracking-wide leading-snug">
-            &ldquo;EL CONOCIMIENTO SE CONVIERTE EN INTUICIÓN CUANDO APRENDES A INTERPRETARLO.&rdquo;
+            &ldquo;{t("EL CONOCIMIENTO SE CONVIERTE EN INTUICIÓN CUANDO APRENDES A INTERPRETARLO.", "KNOWLEDGE TURNS INTO INTUITION WHEN YOU LEARN TO INTERPRET IT.")}&rdquo;
           </p>
           <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-gold-light font-sans font-medium">
-            Elige tu disciplina y comienza tu camino.
+            {t("Elige tu disciplina y comienza tu camino.", "Choose your discipline and begin your journey.")}
           </p>
         </div>
       </div>
@@ -203,13 +205,13 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-deep border border-gold/30 text-gold-light text-[11px] uppercase tracking-[0.2em] font-sans">
             <span>✧</span>
-            <span>RUTAS DE FORMACIÓN SAGRADA</span>
+            <span>{t("RUTAS DE FORMACIÓN SAGRADA", "SACRED LEARNING PATHS")}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light">
-            ELIGE TU CAMINO
+            {t("ELIGE TU CAMINO", "CHOOSE YOUR PATH")}
           </h2>
           <p className="font-serif text-base sm:text-lg text-parchment-dim italic">
-            &ldquo;Cuatro caminos. Un universo de conocimiento.&rdquo;
+            &ldquo;{t("Cuatro caminos. Un universo de conocimiento.", "Four paths. One universe of knowledge.")}&rdquo;
           </p>
         </div>
 
@@ -243,13 +245,13 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
 
               <div className="pt-6 mt-4 border-t border-charcoal-border/60 flex items-center justify-between">
                 <span className="text-[11px] font-sans text-gold/80">
-                  {category.activeCount} Niveles • <span className="text-gold-light font-medium">$799 MXN c/u</span>
+                  {category.activeCount} {t("Niveles", "Levels")} • <span className="text-gold-light font-medium">$799 MXN {t("c/u", "ea")}</span>
                 </span>
                 <button
                   onClick={() => handleSelectDiscipline(category.id)}
                   className="px-3.5 py-1.5 rounded bg-obsidian-deep border border-gold/40 text-gold-light hover:border-gold hover:text-parchment text-[11px] uppercase tracking-widest font-sans font-semibold transition-all group-hover:bg-gold/15"
                 >
-                  VER CURSOS →
+                  {t("VER CURSOS →", "VIEW COURSES →")}
                 </button>
               </div>
             </div>
@@ -265,11 +267,18 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
           {/* Header de la sección de cursos */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
             <h2 className="font-serif text-3xl sm:text-4xl text-parchment font-light">
-              CATÁLOGO DE CURSOS
+              {t("CATÁLOGO DE CURSOS", "COURSE CATALOG")}
             </h2>
             <p className="text-sm sm:text-base text-parchment-muted font-sans font-light">
-              Explora todos los niveles disponibles. Cada curso tiene una inversión accesible de{" "}
-              <strong className="text-gold-light font-semibold">$799 MXN</strong> con acceso completo a lecciones en video, manuales y tutoría oficial.
+              {t(
+                "Explora todos los niveles disponibles. Cada curso tiene una inversión accesible de",
+                "Explore all available levels. Each course features an accessible investment of"
+              )}{" "}
+              <strong className="text-gold-light font-semibold">$799 MXN</strong>{" "}
+              {t(
+                "con acceso completo a lecciones en video, manuales y tutoría oficial.",
+                "with full access to video lessons, ceremonial handbooks, and official mentorship."
+              )}
             </p>
           </div>
 
@@ -285,7 +294,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
                       : "bg-obsidian-deep border border-charcoal-border text-parchment-dim hover:text-parchment hover:border-gold/40"
                   }`}
                 >
-                  ✦ TODOS ({academyCourses.length})
+                  ✦ {t("TODOS", "ALL")} ({academyCourses.length})
                 </button>
 
                 {academyCategories.map((cat) => (
@@ -342,22 +351,25 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/40 text-gold-light text-[11px] uppercase tracking-[0.2em] font-sans">
                 <span>🎁</span>
-                <span>BENEFICIO EXCLUSIVO DE GRADUACIÓN</span>
+                <span>{t("BENEFICIO EXCLUSIVO DE GRADUACIÓN", "EXCLUSIVE GRADUATION BENEFIT")}</span>
               </div>
 
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light leading-tight">
-                TU CONOCIMIENTO MERECE <br />
+                {t("TU CONOCIMIENTO MERECE", "YOUR KNOWLEDGE DESERVES")} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold drop-shadow-[0_0_20px_rgba(198,160,82,0.4)]">
-                  SU PROPIO ESPACIO
+                  {t("SU PROPIO ESPACIO", "ITS OWN SANCTUARY")}
                 </span>
               </h2>
 
               <p className="font-serif text-lg sm:text-xl text-gold-light italic">
-                &ldquo;Completa los 5 niveles y recibe una página web personalizada GRATIS.&rdquo;
+                &ldquo;{t("Completa los 5 niveles y recibe una página web personalizada GRATIS.", "Complete all 5 levels and receive a personalized website for FREE.")}&rdquo;
               </p>
 
               <p className="text-sm sm:text-base text-parchment-dim font-sans font-light leading-relaxed">
-                Queremos ayudarte a transformar lo que aprendes en una presencia profesional en internet. Ya sea en Tarot, Astrología, Numerología o Reiki, saldrás listo para recibir consultantes.
+                {t(
+                  "Queremos ayudarte a transformar lo que aprendes en una presencia profesional en internet. Ya sea en Tarot, Astrología, Numerología o Reiki, saldrás listo para recibir consultantes.",
+                  "We empower you to translate your sacred knowledge into a high-resonance professional online presence. In Tarot, Astrology, Numerology or Reiki, emerge fully prepared to guide clients."
+                )}
               </p>
 
               {/* Lista de 9 Beneficios con Check */}
@@ -381,7 +393,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
                   href="/academia/registro/?promo=web-gratis-nivel-5"
                   className="w-full sm:w-auto px-8 py-3.5 rounded bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-center"
                 >
-                  <span>INICIAR MI RUTA HACIA EL NIVEL 5</span>
+                  <span>{t("INICIAR MI RUTA HACIA EL NIVEL 5", "BEGIN MY PATH TO LEVEL 5")}</span>
                   <span>→</span>
                 </Link>
               </div>
@@ -415,25 +427,25 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
                     />
                   </div>
                   <div className="font-serif text-xl sm:text-2xl text-parchment">
-                    Tu Espacio Profesional
+                    {t("Tu Espacio Profesional", "Your Sacred Sanctuary")}
                   </div>
                   <p className="text-xs text-parchment-dim font-sans max-w-xs mx-auto">
-                    Lecturas de Tarot • Carta Natal • Consultas Online
+                    {t("Lecturas de Tarot • Carta Natal • Consultas Online", "Tarot Readings • Natal Chart • Online Consultations")}
                   </p>
                   <div className="pt-2 flex items-center justify-center gap-2">
                     <span className="px-3 py-1 rounded bg-green-950/80 border border-green-600/40 text-green-300 text-[10px] font-sans font-semibold flex items-center gap-1">
                       <span>WhatsApp Directo</span>
                     </span>
                     <span className="px-3 py-1 rounded bg-obsidian-deep border border-gold/30 text-gold-light text-[10px] font-sans">
-                      Agenda Abierta
+                      {t("Agenda Abierta", "Bookings Open")}
                     </span>
                   </div>
                 </div>
 
                 {/* Pie del Mockup */}
                 <div className="pt-3 border-t border-charcoal-border flex items-center justify-between text-[10px] font-sans text-parchment-muted">
-                  <span>100% Responsive (Móvil & Escritorio)</span>
-                  <span className="text-gold font-medium">Incluye 1 año de dominio</span>
+                  <span>{t("100% Responsive (Móvil & Escritorio)", "100% Responsive (Mobile & Desktop)")}</span>
+                  <span className="text-gold font-medium">{t("Incluye 1 año de dominio", "Includes 1 yr custom domain")}</span>
                 </div>
               </div>
             </div>
@@ -448,13 +460,16 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-deep border border-gold/30 text-gold-light text-[11px] uppercase tracking-[0.2em] font-sans">
             <span>✦</span>
-            <span>TRANSFORMACIÓN PERSONAL</span>
+            <span>{t("TRANSFORMACIÓN PERSONAL", "PERSONAL TRANSFORMATION")}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light">
-            ¿QUÉ VAS A DESARROLLAR?
+            {t("¿QUÉ VAS A DESARROLLAR?", "WHAT WILL YOU DEVELOP?")}
           </h2>
           <p className="text-sm sm:text-base text-parchment-muted font-sans font-light">
-            Un marco integral que combina la sabiduría simbólica tradicional con la aplicación profesional.
+            {t(
+              "Un marco integral que combina la sabiduría simbólica tradicional con la aplicación profesional.",
+              "A comprehensive framework blending traditional symbolic wisdom with modern professional practice."
+            )}
           </p>
         </div>
 
@@ -487,13 +502,16 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-deep border border-gold/30 text-gold-light text-[11px] uppercase tracking-[0.2em] font-sans">
               <span>01 - 04</span>
-              <span>METODOLOGÍA CLARA</span>
+              <span>{t("METODOLOGÍA CLARA", "CLEAR METHODOLOGY")}</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light">
-              TU CAMINO COMIENZA AQUÍ
+              {t("TU CAMINO COMIENZA AQUÍ", "YOUR JOURNEY BEGINS HERE")}
             </h2>
             <p className="text-sm sm:text-base text-parchment-muted font-sans font-light">
-              Un proceso simple, transparente y diseñado para que alcances tu máxima autonomía espiritual y profesional.
+              {t(
+                "Un proceso simple, transparente y diseñado para que alcances tu máxima autonomía espiritual y profesional.",
+                "A transparent, streamlined journey crafted for you to attain complete spiritual and professional sovereignty."
+              )}
             </p>
           </div>
 
@@ -526,10 +544,10 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
       <div className="relative py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light">
-            ENCUENTRA TU CAMINO
+            {t("ENCUENTRA TU CAMINO", "FIND YOUR PATH")}
           </h2>
           <p className="text-sm sm:text-base text-parchment-muted font-sans font-light">
-            Descubre cuál de nuestras disciplinas resuena con tu búsqueda actual.
+            {t("Descubre cuál de nuestras disciplinas resuena con tu búsqueda actual.", "Discover which of our sacred disciplines resonates with your current quest.")}
           </p>
         </div>
 
@@ -553,7 +571,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
                 onClick={() => handleSelectDiscipline(cat.id)}
                 className="w-full py-2.5 rounded bg-obsidian-deep border border-gold/40 text-gold-light hover:border-gold hover:text-parchment hover:bg-gold/15 text-xs uppercase tracking-widest font-sans font-semibold transition-colors text-center"
               >
-                EXPLORAR
+                {t("EXPLORAR", "EXPLORE")}
               </button>
             </div>
           ))}
@@ -568,10 +586,10 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
           <div className="text-center space-y-4 mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-deep border border-gold/30 text-gold-light text-[11px] uppercase tracking-[0.2em] font-sans">
               <span>✦</span>
-              <span>RESOLUCIÓN DE DUDAS</span>
+              <span>{t("RESOLUCIÓN DE DUDAS", "DOUBTS RESOLUTION")}</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-parchment font-light">
-              PREGUNTAS FRECUENTES
+              {t("PREGUNTAS FRECUENTES", "FREQUENTLY ASKED QUESTIONS")}
             </h2>
           </div>
 
@@ -616,10 +634,10 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
         <div className="relative z-10 max-w-3xl mx-auto px-4 space-y-6">
           <span className="text-gold text-2xl font-serif">✦</span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchment font-light leading-snug">
-            TU CAMINO COMIENZA CON EL CONOCIMIENTO.
+            {t("TU CAMINO COMIENZA CON EL CONOCIMIENTO.", "YOUR JOURNEY BEGINS WITH KNOWLEDGE.")}
           </h2>
           <p className="font-serif text-base sm:text-lg text-parchment-dim italic max-w-2xl mx-auto leading-relaxed">
-            &ldquo;Elige una disciplina. Abre una nueva puerta. Aprende a interpretar un universo de símbolos.&rdquo;
+            &ldquo;{t("Elige una disciplina. Abre una nueva puerta. Aprende a interpretar un universo de símbolos.", "Choose a discipline. Open a new portal. Learn to interpret an infinite universe of symbols.")}&rdquo;
           </p>
 
           <div className="pt-4">
@@ -627,7 +645,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
               href="#cursos-academia"
               className="inline-block px-10 py-4 rounded-sm bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian text-xs uppercase tracking-[0.25em] font-sans font-bold shadow-[0_0_30px_rgba(198,160,82,0.5)] hover:shadow-[0_0_45px_rgba(198,160,82,0.75)] hover:scale-105 transition-all duration-300"
             >
-              EXPLORAR LA ACADEMIA
+              {t("EXPLORAR LA ACADEMIA", "EXPLORE THE ACADEMY")}
             </a>
           </div>
         </div>

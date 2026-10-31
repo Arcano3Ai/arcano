@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { MinorArcanaCard, suitsInfo } from "@/data/minorArcana";
 import { getAssetPath, handleImageError } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MinorArcanaCardViewProps {
   card: MinorArcanaCard;
@@ -16,6 +17,7 @@ export const MinorArcanaCardView: React.FC<MinorArcanaCardViewProps> = ({
   onSelect,
   priority = false,
 }) => {
+  const { t } = useLanguage();
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const suitMeta = suitsInfo[card.suit];
@@ -73,10 +75,28 @@ export const MinorArcanaCardView: React.FC<MinorArcanaCardViewProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian-deep/85 via-transparent to-obsidian/30 pointer-events-none" />
           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gold/90 font-sans bg-obsidian/85 px-2 py-0.5 rounded border border-charcoal-border">
-              {card.suitElement}
+              {t(
+                card.suitElement,
+                card.suitElement === "Fuego"
+                  ? "Fire"
+                  : card.suitElement === "Agua"
+                  ? "Water"
+                  : card.suitElement === "Aire"
+                  ? "Air"
+                  : "Earth"
+              )}
             </span>
             <span className="text-[11px] text-parchment-dim font-serif">
-              {card.suit}
+              {t(
+                card.suit,
+                card.suit === "Bastos"
+                  ? "Wands"
+                  : card.suit === "Copas"
+                  ? "Cups"
+                  : card.suit === "Espadas"
+                  ? "Swords"
+                  : "Pentacles"
+              )}
             </span>
           </div>
         </div>
@@ -105,7 +125,7 @@ export const MinorArcanaCardView: React.FC<MinorArcanaCardViewProps> = ({
       {/* Acción */}
       <div className="relative z-10 mt-4 pt-2.5 border-t border-charcoal-border/70 flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.18em] text-gold/80 group-hover:text-gold font-sans">
-          Revelar significado ✧
+          {t("Revelar significado ✧", "Reveal meaning ✧")}
         </span>
         <span className="text-gold text-xs">→</span>
       </div>

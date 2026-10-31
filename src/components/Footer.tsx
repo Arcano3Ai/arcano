@@ -1,11 +1,15 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { brandConfig } from "@/config/brandConfig";
 import { footerNavLinks } from "@/config/navigation";
 import { TarotSocialIcons } from "@/components/TarotSocialIcons";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const { dict, t } = useLanguage();
 
   return (
     <footer className="relative bg-obsidian-deep text-parchment border-t border-charcoal-border pt-16 sm:pt-20 pb-12 overflow-hidden">
@@ -27,7 +31,7 @@ export const Footer: React.FC = () => {
             </Link>
 
             <p className="font-serif italic text-sm text-parchment-muted max-w-sm leading-relaxed">
-              &ldquo;Los símbolos no deciden tu camino. Te ayudan a mirarlo.&rdquo;
+              &ldquo;{dict.footer.quote}&rdquo;
             </p>
 
             <div className="pt-2 text-xs text-parchment-dim font-sans space-y-1">
@@ -39,7 +43,7 @@ export const Footer: React.FC = () => {
             {/* Redes sociales estilo Tarot: Instagram, Facebook, YouTube, TikTok */}
             <div className="pt-4">
               <span className="text-[10px] uppercase tracking-[0.25em] text-gold/80 font-sans block mb-2.5">
-                Presencia Sagrada ✦
+                {dict.footer.presence}
               </span>
               <TarotSocialIcons size="sm" />
             </div>
@@ -47,7 +51,9 @@ export const Footer: React.FC = () => {
 
           {/* Columna Explorar */}
           <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">Explorar</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">
+              {dict.footer.exploreTitle}
+            </p>
             <ul className="space-y-2.5">
               {footerNavLinks.explorar.map((link) => (
                 <li key={link.href}>
@@ -55,7 +61,7 @@ export const Footer: React.FC = () => {
                     href={link.href}
                     className="text-xs text-parchment-muted hover:text-parchment transition-colors font-sans"
                   >
-                    {link.label}
+                    {link.key ? t(link.key) : link.label}
                   </Link>
                 </li>
               ))}
@@ -64,7 +70,9 @@ export const Footer: React.FC = () => {
 
           {/* Columna Santuario */}
           <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">Santuario</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">
+              {dict.footer.sanctuaryTitle}
+            </p>
             <ul className="space-y-2.5">
               {footerNavLinks.santuario.map((link) => (
                 <li key={link.href}>
@@ -72,7 +80,7 @@ export const Footer: React.FC = () => {
                     href={link.href}
                     className="text-xs text-parchment-muted hover:text-parchment transition-colors font-sans"
                   >
-                    {link.label}
+                    {link.key ? t(link.key) : link.label}
                   </Link>
                 </li>
               ))}
@@ -81,7 +89,9 @@ export const Footer: React.FC = () => {
 
           {/* Columna Legal y Ética */}
           <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">Legal & Ética</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-sans mb-4 font-semibold">
+              {dict.footer.legalTitle}
+            </p>
             <ul className="space-y-2.5">
               {footerNavLinks.legal.map((link) => (
                 <li key={link.href}>
@@ -89,7 +99,7 @@ export const Footer: React.FC = () => {
                     href={link.href}
                     className="text-xs text-parchment-muted hover:text-parchment transition-colors font-sans"
                   >
-                    {link.label}
+                    {link.key ? t(link.key) : link.label}
                   </Link>
                 </li>
               ))}
@@ -100,10 +110,10 @@ export const Footer: React.FC = () => {
         {/* Barra de Copyright inferior */}
         <div className="pt-8 border-t border-charcoal-border/40 text-center text-xs text-parchment-dim font-sans leading-relaxed space-y-1.5">
           <p>
-            © {currentYear} ARCANO • Todos los derechos reservados • El conocimiento está en los símbolos. El camino, en ti.
+            © {currentYear} ARCANO • {dict.footer.copyright}
           </p>
           <p className="text-[11px] text-parchment-dim/90">
-            Desarrollado por{" "}
+            {dict.footer.developedBy}{" "}
             <a
               href="https://agenteweb.com.mx/"
               target="_blank"

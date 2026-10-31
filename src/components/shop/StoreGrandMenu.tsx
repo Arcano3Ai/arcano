@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GRAND_COLLECTIONS } from "@/data/artisanCrafts";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface StoreGrandMenuProps {
   currentCollection?: "talismanes" | "barro-negro" | "alebrijes" | "arte-huichol" | "dorodangos";
@@ -11,6 +12,40 @@ interface StoreGrandMenuProps {
 
 export const StoreGrandMenu: React.FC<StoreGrandMenuProps> = ({ currentCollection }) => {
   const pathname = usePathname();
+  const { dict, t } = useLanguage();
+
+  // Helper para títulos y subtítulos traducidos
+  const getCollectionTexts = (id: string, fallbackName: string, fallbackSubtitle: string) => {
+    switch (id) {
+      case "talismanes":
+        return {
+          name: dict.nav.categories.talismansTitle,
+          subtitle: dict.nav.categories.talismansDesc,
+        };
+      case "barro-negro":
+        return {
+          name: dict.nav.categories.barroNegroTitle,
+          subtitle: dict.nav.categories.barroNegroDesc,
+        };
+      case "alebrijes":
+        return {
+          name: dict.nav.categories.alebrijesTitle,
+          subtitle: dict.nav.categories.alebrijesDesc,
+        };
+      case "arte-huichol":
+        return {
+          name: dict.nav.categories.arteHuicholTitle,
+          subtitle: dict.nav.categories.arteHuicholDesc,
+        };
+      case "dorodangos":
+        return {
+          name: dict.nav.categories.dorodangosTitle,
+          subtitle: dict.nav.categories.dorodangosDesc,
+        };
+      default:
+        return { name: fallbackName, subtitle: fallbackSubtitle };
+    }
+  };
 
   // Detect active if not explicitly provided
   const activeId =
@@ -34,17 +69,22 @@ export const StoreGrandMenu: React.FC<StoreGrandMenuProps> = ({ currentCollectio
         
         {/* Encabezado sutil de la galería */}
         <div className="pt-2.5 pb-1 flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-mono">
-          <span className="hidden sm:inline">✦ GALERÍA DE ARTE SAGRADO & ALQUIMIA ✦</span>
-          <span className="text-[#C5A059] mx-auto sm:mx-0">
-            SELECCIONA UNA DISCIPLINA ARTESANAL ANCESTRAL
+          <span className="hidden sm:inline">
+            ✦ {t("GALERÍA DE ARTE SAGRADO & ALQUIMIA", "SACRED ART & ALCHEMY GALLERY")} ✦
           </span>
-          <span className="hidden md:inline text-neutral-400">ENVIOS CONCIERGE VIP</span>
+          <span className="text-[#C5A059] mx-auto sm:mx-0">
+            {t("SELECCIONA UNA DISCIPLINA ARTESANAL ANCESTRAL", "SELECT AN ANCESTRAL ARTISAN CRAFT")}
+          </span>
+          <span className="hidden md:inline text-neutral-400">
+            {t("ENVIOS CONCIERGE VIP", "VIP CONCIERGE DELIVERY")}
+          </span>
         </div>
 
         {/* 5 Tabs Principales de Colecciones */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 py-2.5">
           {GRAND_COLLECTIONS.map((col) => {
             const isActive = activeId === col.id;
+            const texts = getCollectionTexts(col.id, col.name, col.subtitle);
 
             return (
               <Link
@@ -91,10 +131,10 @@ export const StoreGrandMenu: React.FC<StoreGrandMenuProps> = ({ currentCollectio
                       isActive ? "text-white font-medium" : "text-neutral-300 group-hover:text-white"
                     }`}
                   >
-                    {col.name}
+                    {texts.name}
                   </h3>
                   <p className="text-[10px] text-neutral-400 font-sans truncate hidden sm:block">
-                    {col.subtitle}
+                    {texts.subtitle}
                   </p>
                 </div>
 

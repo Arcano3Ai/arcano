@@ -4,19 +4,19 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 
 export const MobileBottomNav: React.FC = () => {
   const pathname = usePathname();
   const { totalCount, openCart } = useCart();
+  const { dict } = useLanguage();
 
   const isTienda = pathname?.startsWith("/tienda");
   const isLecturas = pathname?.startsWith("/lecturas");
   const isSantuario = pathname === "/" || pathname?.startsWith("/arcanos");
 
-  const whatsappConciergeUrl = getWhatsAppUrl(
-    "Hola Malachai, visito la Boutique ARCANO desde el móvil y deseo asesoría personalizada sobre una pieza o lectura."
-  );
+  const whatsappConciergeUrl = getWhatsAppUrl(dict.mobileNav.whatsappMessage);
 
   return (
     <nav
@@ -33,7 +33,7 @@ export const MobileBottomNav: React.FC = () => {
         >
           <span className="text-lg leading-none mb-1 filter drop-shadow">🛍️</span>
           <span className="text-[10px] font-sans tracking-wider uppercase font-medium">
-            Boutique
+            {dict.mobileNav.boutique}
           </span>
           {isTienda && (
             <span className="w-1.5 h-1.5 rounded-full bg-gold absolute -top-1 shadow-[0_0_8px_rgba(198,160,82,0.8)]" />
@@ -49,7 +49,7 @@ export const MobileBottomNav: React.FC = () => {
         >
           <span className="text-lg leading-none mb-1 filter drop-shadow">🔮</span>
           <span className="text-[10px] font-sans tracking-wider uppercase font-medium">
-            Lecturas
+            {dict.mobileNav.readings}
           </span>
           {isLecturas && (
             <span className="w-1.5 h-1.5 rounded-full bg-gold absolute -top-1 shadow-[0_0_8px_rgba(198,160,82,0.8)]" />
@@ -60,7 +60,7 @@ export const MobileBottomNav: React.FC = () => {
         <button
           onClick={openCart}
           className="flex flex-col items-center justify-center flex-1 py-1 text-parchment hover:text-gold transition-colors relative cursor-pointer group"
-          aria-label={`Ver carrito ceremonial (${totalCount} artículos)`}
+          aria-label={`${dict.nav.openCartLabel} (${totalCount})`}
         >
           <div className="relative">
             <span className="text-lg leading-none mb-1 block group-hover:scale-110 transition-transform">
@@ -73,7 +73,7 @@ export const MobileBottomNav: React.FC = () => {
             )}
           </div>
           <span className="text-[10px] font-sans tracking-wider uppercase font-medium">
-            Carrito
+            {dict.cart.title.split(" ")[0]}
           </span>
         </button>
 
@@ -86,7 +86,7 @@ export const MobileBottomNav: React.FC = () => {
         >
           <span className="text-lg leading-none mb-1 filter drop-shadow">💬</span>
           <span className="text-[10px] font-sans tracking-wider uppercase font-medium">
-            Concierge
+            {dict.mobileNav.concierge}
           </span>
         </a>
 
@@ -99,7 +99,7 @@ export const MobileBottomNav: React.FC = () => {
         >
           <span className="text-lg leading-none mb-1 filter drop-shadow">✦</span>
           <span className="text-[10px] font-sans tracking-wider uppercase font-medium">
-            Santuario
+            {dict.mobileNav.sanctuary}
           </span>
         </Link>
       </div>

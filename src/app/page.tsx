@@ -26,9 +26,11 @@ import { AcademySection } from "@/components/academy/AcademySection";
 import { VolcanicVeinGalleryMenu } from "@/components/VolcanicVeinGalleryMenu";
 import { trackEvent } from "@/lib/analytics";
 import { getAssetPath } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function HomePage() {
   const router = useRouter();
+  const { t, dict } = useLanguage();
   const [selectedArcanaForModal, setSelectedArcanaForModal] =
     useState<Arcana | null>(null);
 
@@ -111,7 +113,7 @@ export default function HomePage() {
           {/* Sello superior */}
           <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-gold/30 bg-charcoal/80 backdrop-blur text-gold text-xs tracking-[0.25em] uppercase font-sans shadow-[0_0_15px_rgba(198,160,82,0.15)]">
             <span>✦</span>
-            <span>Santuario de Sabiduría Simbólica</span>
+            <span>{dict.home.sanctuaryBadge}</span>
             <span>✦</span>
           </div>
 
@@ -121,14 +123,14 @@ export default function HomePage() {
           </h1>
 
           <p className="text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase text-gold/90 font-sans font-light">
-            {brandConfig.descriptor}
+            {t(brandConfig.descriptor, "PROFESSIONAL TAROT · ESOTERIC ACADEMY · SACRED JEWELRY")}
           </p>
 
           <div className="h-[1px] w-24 mx-auto bg-gradient-to-r from-transparent via-gold/60 to-transparent my-6" />
 
           {/* Frase Editorial */}
           <p className="font-serif italic text-lg sm:text-2xl md:text-3xl text-parchment-muted max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
-            &ldquo;{brandConfig.philosophicalQuote}&rdquo;
+            &ldquo;{dict.home.quote}&rdquo;
           </p>
 
           {/* CTAs */}
@@ -138,28 +140,28 @@ export default function HomePage() {
               onClick={() => handleBookingCta("hero_primary")}
               className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_25px_rgba(198,160,82,0.45)] hover:scale-105"
             >
-              Reservar una lectura ✦
+              {dict.home.bookCta}
             </Link>
 
             <a
               href="#menu-galeria-mineral"
               className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-parchment hover:text-gold border border-gold/40 hover:border-gold transition-all duration-300 rounded-sm bg-charcoal/60 backdrop-blur shadow-md"
             >
-              Menú de la Galería ✦
+              {dict.home.galleryMenuCta}
             </a>
 
             <Link
               href="/arcanos/"
               className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-[0.25em] font-sans text-parchment-muted hover:text-gold transition-all duration-300 rounded-sm text-center"
             >
-              Los Arcanos
+              {t("Los Arcanos", "The Arcana")}
             </Link>
           </div>
 
           {/* Indicador de Desliza para entrar */}
           <div className="pt-12 sm:pt-16 animate-pulse-subtle">
             <span className="text-[10px] tracking-[0.3em] uppercase text-parchment-dim font-sans block mb-2">
-              Desliza para explorar la galería
+              {t("Desliza para explorar la galería", "Scroll to explore the gallery")}
             </span>
             <span className="text-gold text-sm block">↓</span>
           </div>
@@ -175,27 +177,30 @@ export default function HomePage() {
       <div className="block md:hidden border-y border-neutral-900 bg-[#050505] py-8 px-4 text-center">
         <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-black border border-gold/40 text-[10px] uppercase font-serif tracking-widest text-gold shadow-md">
           <span>✦</span>
-          <span>Boutique de Talismanes Minerales</span>
+          <span>{t("Boutique de Talismanes Minerales", "Mineral Talismans Boutique")}</span>
         </div>
         <h3 className="font-serif text-lg tracking-[0.15em] uppercase text-white mb-2">
-          Gemas Forjadas en Volcanes
+          {t("Gemas Forjadas en Volcanes", "Gems Forged in Volcanoes")}
         </h3>
         <p className="text-xs text-neutral-400 max-w-sm mx-auto mb-4 font-sans leading-relaxed">
-          Descubre la colección de pulseras y talismanes 100% de mineral puro, consagrados bajo Luna Llena.
+          {t(
+            "Descubre la colección de pulseras y talismanes 100% de mineral puro, consagrados bajo Luna Llena.",
+            "Discover our 100% pure mineral bracelets and talismans, consecrated under the Full Moon."
+          )}
         </p>
         <Link
           href="/tienda/"
           className="inline-block px-6 py-2.5 rounded-full bg-gold hover:bg-gold-light text-black text-xs font-bold tracking-widest uppercase transition-all shadow-lg"
         >
-          Entrar a la Boutique →
+          {t("Entrar a la Boutique →", "Enter the Boutique →")}
         </Link>
       </div>
 
       {/* 3. SECCIÓN INTRODUCCIÓN: EL TAROT COMO ESPEJO CON CÁLIZ DE HUMO */}
       <section className="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          subtitle="Fundamentos del Santuario"
-          title="El Tarot como Espejo"
+          subtitle={t("Fundamentos del Santuario", "Sanctuary Foundations")}
+          title={t("El Tarot como Espejo", "Tarot as a Mirror")}
           symbol="☾"
         />
 
@@ -212,31 +217,34 @@ export default function HomePage() {
 
           <div className="relative z-10 space-y-6">
             <p className="font-serif text-xl sm:text-2xl text-parchment font-light leading-relaxed">
-              &ldquo;El tarot es un lenguaje de símbolos. Una forma de observar aquello que a veces permanece oculto entre nuestras preguntas, emociones y decisiones.&rdquo;
+              &ldquo;{t("El tarot es un lenguaje de símbolos. Una forma de observar aquello que a veces permanece oculto entre nuestras preguntas, emociones y decisiones.", "Tarot is a language of symbols. A way of contemplating that which sometimes remains veiled beneath our questions, emotions, and choices.")}&rdquo;
             </p>
 
             <div className="h-[1px] w-16 mx-auto bg-gold/40" />
 
             <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light leading-relaxed max-w-xl mx-auto">
-              En ARCANO concebimos cada tirada como una herramienta noble de reflexión, introspección y orientación psicológica y existencial. No prometemos milagros inevitables, lecturas del futuro inmutables ni soluciones mágicas. La verdadera magia reside en la lucidez con la que decides responder a lo que los símbolos te revelan.
+              {t(
+                "En ARCANO concebimos cada tirada como una herramienta noble de reflexión, introspección y orientación psicológica y existencial. No prometemos milagros inevitables, lecturas del futuro inmutables ni soluciones mágicas. La verdadera magia reside en la lucidez con la que decides responder a lo que los símbolos te revelan.",
+                "At ARCANO, every spread is honored as a noble vessel of reflection, introspection, and existential clarity. We do not promise immutable fortunes or illusions. True alchemy lies in the lucidity with which you choose to respond to what the symbols illuminate."
+              )}
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-charcoal-border/70 text-xs font-sans text-parchment-dim">
               <div className="p-2">
                 <span className="text-gold block text-base mb-1">✦</span>
-                Introspección
+                {t("Introspección", "Introspection")}
               </div>
               <div className="p-2">
                 <span className="text-gold block text-base mb-1">✧</span>
-                Confidencialidad
+                {t("Confidencialidad", "Confidentiality")}
               </div>
               <div className="p-2">
                 <span className="text-gold block text-base mb-1">☾</span>
-                Ética Rigurosa
+                {t("Ética Rigurosa", "Rigorous Ethics")}
               </div>
               <div className="p-2">
                 <span className="text-gold block text-base mb-1">◇</span>
-                Claridad Práctica
+                {t("Claridad Práctica", "Practical Clarity")}
               </div>
             </div>
           </div>
@@ -249,8 +257,8 @@ export default function HomePage() {
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <SectionHeader
-          subtitle="La Mirada detrás de las Cartas"
-          title="Quien Lee los Arcanos"
+          subtitle={t("La Mirada detrás de las Cartas", "The Vision behind the Cards")}
+          title={t("Quien Lee los Arcanos", "Reader of the Arcana")}
           symbol="✦"
         />
 
@@ -349,9 +357,12 @@ export default function HomePage() {
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <SectionHeader
-          subtitle="Consultas y Encuentros"
-          title="Lecturas de los Arcanos"
-          description="Cada sesión con El Señor de los Arcanos es un espacio ceremonial concebido como una carta viva: con tiempo, respeto y orientación profunda."
+          subtitle={t("Consultas y Encuentros", "Consultations & Encounters")}
+          title={t("Lecturas de los Arcanos", "Readings of the Arcana")}
+          description={t(
+            "Cada sesión con El Señor de los Arcanos es un espacio ceremonial concebido como una carta viva: con tiempo, respeto y orientación profunda.",
+            "Each session with The Lord of the Arcana is a ceremonial space conceived as a living card: with patience, honor, and deep orientation."
+          )}
           symbol="✧"
         />
 
@@ -366,7 +377,7 @@ export default function HomePage() {
             href="/lecturas/"
             className="text-xs uppercase tracking-[0.25em] text-gold hover:text-gold-light border-b border-gold/40 hover:border-gold pb-1 font-sans transition-colors"
           >
-            Ver detalles exhaustivos de todas las lecturas →
+            {t("Ver detalles exhaustivos de todas las lecturas →", "View full reading details →")}
           </Link>
         </div>
       </section>
@@ -384,9 +395,12 @@ export default function HomePage() {
         </div>
 
         <SectionHeader
-          subtitle="El Camino Ceremonial"
-          title="Tu Experiencia en ARCANO"
-          description="Un proceso cuidado desde el primer instante para garantizar sosiego, respeto y confidencialidad absoluta."
+          subtitle={t("El Camino Ceremonial", "The Ceremonial Path")}
+          title={t("Tu Experiencia en ARCANO", "Your ARCANO Experience")}
+          description={t(
+            "Un proceso cuidado desde el primer instante para garantizar sosiego, respeto y confidencialidad absoluta.",
+            "A carefully curated journey from the first moment to ensure serenity, respect, and absolute confidentiality."
+          )}
           symbol="◇"
         />
 
@@ -436,9 +450,12 @@ export default function HomePage() {
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <SectionHeader
-          subtitle="Compendio Arquetípico"
-          title="Los XXII Arcanos Mayores"
-          description="XXII caminos. Una sola pregunta. Tu propia interpretación."
+          subtitle={t("Compendio Arquetípico", "Archetypal Compendium")}
+          title={t("Los XXII Arcanos Mayores", "The XXII Major Arcana")}
+          description={t(
+            "XXII caminos. Una sola pregunta. Tu propia interpretación.",
+            "XXII paths. A single inquiry. Your own sovereign interpretation."
+          )}
           symbol="✦"
         />
 
@@ -458,7 +475,7 @@ export default function HomePage() {
             href="/arcanos/"
             className="px-8 py-3 text-xs uppercase tracking-[0.25em] font-sans text-parchment hover:text-gold border border-gold/40 hover:border-gold rounded-sm bg-charcoal/60 transition-all inline-block"
           >
-            Explorar los 22 Arcanos Completos ✦
+            {t("Explorar los 22 Arcanos Completos ✦", "Explore all 22 Arcana ✦")}
           </Link>
         </div>
       </section>
@@ -470,16 +487,19 @@ export default function HomePage() {
           <div className="rounded-xl border border-charcoal-border bg-gradient-to-b from-[#180f15] via-[#100a0e] to-[#07070a] p-8 sm:p-10 flex flex-col justify-between shadow-lg">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-gold font-sans">
-                Vínculos & Espejos
+                {t("Vínculos & Espejos", "Bonds & Mirrors")}
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl text-parchment tracking-wide mt-2 font-light">
-                Tarot del Amor y Relaciones
+                {t("Tarot del Amor y Relaciones", "Love & Relationship Tarot")}
               </h3>
               <p className="font-serif italic text-sm text-parchment-muted mt-2">
-                &ldquo;Explora los símbolos detrás de tus vínculos más profundos.&rdquo;
+                &ldquo;{t("Explora los símbolos detrás de tus vínculos más profundos.", "Explore the sacred symbols behind your deepest bonds.")}&rdquo;
               </p>
               <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light mt-4 leading-relaxed">
-                Abordamos las relaciones no desde el miedo a la pérdida, sino desde la madurez afectiva, la comunicación honesta y la comprensión de las heridas que buscan sanar a través del encuentro.
+                {t(
+                  "Abordamos las relaciones no desde el miedo a la pérdida, sino desde la madurez afectiva, la comunicación honesta y la comprensión de las heridas que buscan sanar a través del encuentro.",
+                  "We approach sacred bonds not out of fear, but from emotional maturity, authentic dialogue, and deep understanding of the wounds seeking healing."
+                )}
               </p>
             </div>
             <div className="mt-8 pt-6 border-t border-charcoal-border/80">
@@ -487,7 +507,7 @@ export default function HomePage() {
                 href="/tarot-del-amor/"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light font-sans font-medium"
               >
-                <span>Conocer el enfoque del Tarot del Amor</span>
+                <span>{t("Conocer el enfoque del Tarot del Amor", "Explore the Love Tarot approach")}</span>
                 <span>→</span>
               </Link>
             </div>
@@ -497,16 +517,19 @@ export default function HomePage() {
           <div className="rounded-xl border border-charcoal-border bg-gradient-to-b from-[#10141a] via-[#0a0d12] to-[#07070a] p-8 sm:p-10 flex flex-col justify-between shadow-lg">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-gold font-sans">
-                Estrategia & Vocación
+                {t("Estrategia & Vocación", "Strategy & Vocation")}
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl text-parchment tracking-wide mt-2 font-light">
-                Tarot Profesional y Propósito
+                {t("Tarot Profesional y Propósito", "Professional & Purpose Tarot")}
               </h3>
               <p className="font-serif italic text-sm text-parchment-muted mt-2">
-                &ldquo;Claridad estratégica para momentos de encrucijada y cambio.&rdquo;
+                &ldquo;{t("Claridad estratégica para momentos de encrucijada y cambio.", "Strategic clarity for moments of crossroads and change.")}&rdquo;
               </p>
               <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light mt-4 leading-relaxed">
-                Una mirada despojada de ilusiones sobre tus proyectos, toma de decisiones críticas, alineación de talentos y superación de bloqueos creativos sin falsas promesas de éxito instantáneo.
+                {t(
+                  "Una mirada despojada de ilusiones sobre tus proyectos, toma de decisiones críticas, alineación de talentos y superación de bloqueos creativos sin falsas promesas de éxito instantáneo.",
+                  "An illusion-free perspective on your ventures, decisive moments, talent alignment, and creative breakthroughs without false promises."
+                )}
               </p>
             </div>
             <div className="mt-8 pt-6 border-t border-charcoal-border/80">
@@ -514,7 +537,7 @@ export default function HomePage() {
                 href="/tarot-profesional/"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light font-sans font-medium"
               >
-                <span>Explorar la consulta vocacional</span>
+                <span>{t("Explorar la consulta vocacional", "Explore the vocational consultation")}</span>
                 <span>→</span>
               </Link>
             </div>
@@ -528,9 +551,12 @@ export default function HomePage() {
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <SectionHeader
-          subtitle="Voces del Camino"
-          title="Quienes han Pasado por ARCANO"
-          description="Ecos y experiencias de consultantes en sus propias palabras."
+          subtitle={t("Voces del Camino", "Voices of the Path")}
+          title={t("Quienes han Pasado por ARCANO", "Those Who Have Walked ARCANO")}
+          description={t(
+            "Ecos y experiencias de consultantes en sus propias palabras.",
+            "Echoes and experiences of seekers in their own words."
+          )}
           symbol="✦"
         />
 
@@ -573,9 +599,12 @@ export default function HomePage() {
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <SectionHeader
-          subtitle="Sabiduría Escrita"
-          title="Crónicas de los Símbolos"
-          description="Ensayos, reflexiones arquetípicas y guías para el buscador consciente escritas por El Señor de los Arcanos."
+          subtitle={t("Sabiduría Escrita", "Written Wisdom")}
+          title={t("Crónicas de los Símbolos", "Chronicles of the Symbols")}
+          description={t(
+            "Ensayos, reflexiones arquetípicas y guías para el buscador consciente escritas por El Señor de los Arcanos.",
+            "Essays, archetypal reflections, and guides for the conscious seeker written by The Lord of the Arcana."
+          )}
           symbol="☾"
         />
 
@@ -617,7 +646,7 @@ export default function HomePage() {
                   href={`/blog/${post.slug}`}
                   className="text-xs uppercase tracking-[0.18em] text-gold hover:text-gold-light font-sans inline-flex items-center gap-1"
                 >
-                  <span>Leer crónica completa</span>
+                  <span>{t("Leer crónica completa", "Read full chronicle")}</span>
                   <span>→</span>
                 </Link>
               </div>
@@ -630,7 +659,7 @@ export default function HomePage() {
             href="/blog/"
             className="text-xs uppercase tracking-[0.25em] text-parchment hover:text-gold border-b border-gold/40 pb-1 font-sans transition-colors"
           >
-            Ver todos los artículos de la revista →
+            {t("Ver todos los artículos de la revista →", "View all magazine articles →")}
           </Link>
         </div>
       </section>
@@ -644,9 +673,12 @@ export default function HomePage() {
         className="py-20 sm:py-28 border-t border-charcoal-border/50 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <SectionHeader
-          subtitle="Claridad y Transparencia"
-          title="Preguntas Frecuentes"
-          description="Respuestas honestas y éticas a las dudas habituales de nuestros consultantes."
+          subtitle={t("Claridad y Transparencia", "Clarity & Transparency")}
+          title={t("Preguntas Frecuentes", "Frequently Asked Questions")}
+          description={t(
+            "Respuestas honestas y éticas a las dudas habituales de nuestros consultantes.",
+            "Honest and ethical answers to the common questions of our seekers."
+          )}
           symbol="✧"
         />
 
@@ -697,19 +729,22 @@ export default function HomePage() {
           </div>
 
           <span className="text-xs uppercase tracking-[0.3em] text-gold font-sans block">
-            El Umbral de la Sabiduría ✦
+            {t("El Umbral de la Sabiduría ✦", "The Threshold of Wisdom ✦")}
           </span>
 
           <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-parchment tracking-[0.08em] font-light leading-tight drop-shadow-md">
-            &ldquo;Quizá la pregunta no sea qué va a suceder.
+            &ldquo;{t("Quizá la pregunta no sea qué va a suceder.", "Perhaps the question is not what will happen.")}
             <br />
-            Quizá sea qué estás preparado para ver.&rdquo;
+            {t("Quizá sea qué estás preparado para ver.", "Perhaps it is what you are truly prepared to see.")}&rdquo;
           </h2>
 
           <div className="h-[1px] w-20 mx-auto bg-gold/50 my-6" />
 
           <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light max-w-lg mx-auto leading-relaxed">
-            Te invitamos a una conversación lúcida, confidencial y sin prejuicios frente a los arcanos con El Señor de los Arcanos.
+            {t(
+              "Te invitamos a una conversación lúcida, confidencial y sin prejuicios frente a los arcanos con El Señor de los Arcanos.",
+              "We invite you to a lucid, confidential, and judgment-free dialogue before the sacred arcana with The Lord of the Arcana."
+            )}
           </p>
 
           <div className="pt-6">
@@ -718,7 +753,7 @@ export default function HomePage() {
               onClick={() => handleBookingCta("footer_final_cta")}
               className="inline-block px-10 py-4 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_30px_rgba(198,160,82,0.5)] hover:scale-105"
             >
-              Reservar una lectura con El Señor de los Arcanos ✦
+              {t("Reservar una lectura con El Señor de los Arcanos ✦", "Book a reading with The Lord of the Arcana ✦")}
             </Link>
           </div>
         </div>

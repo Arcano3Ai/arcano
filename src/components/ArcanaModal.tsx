@@ -7,6 +7,7 @@ import { Arcana } from "@/data/arcana";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
 import { ArcanaImageZoom } from "@/components/ArcanaImageZoom";
 import { getAssetPath } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ArcanaModalProps {
   arcana: Arcana | null;
@@ -14,6 +15,7 @@ interface ArcanaModalProps {
 }
 
 export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => {
+  const { t } = useLanguage();
   if (!arcana) return null;
 
   return (
@@ -26,7 +28,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
         {/* Botón cerrar */}
         <button
           onClick={onClose}
-          aria-label="Cerrar ventana"
+          aria-label={t("Cerrar ventana", "Close window")}
           className="absolute top-4 right-4 text-parchment-dim hover:text-gold p-2 text-lg focus:outline-none"
         >
           ✕
@@ -35,7 +37,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
         {/* Encabezado del Arcano */}
         <div className="text-center pb-4 border-b border-charcoal-border">
           <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans">
-            Arcano Mayor {arcana.number} · {arcana.element}
+            {t("Arcano Mayor", "Major Arcana")} {arcana.number} · {t(arcana.element, arcana.element === "Fuego" ? "Fire" : arcana.element === "Agua" ? "Water" : arcana.element === "Aire" ? "Air" : arcana.element === "Tierra" ? "Earth" : "Aether")}
           </span>
           <h3 className="font-serif text-2xl sm:text-3xl tracking-[0.1em] text-parchment mt-1 font-light">
             {arcana.name}
@@ -60,7 +62,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
               <span className="text-gold text-lg">{arcana.glyph}</span>
               <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans font-medium">
-                Arquetipo
+                {t("Arquetipo", "Archetype")}
               </span>
             </div>
             <p className="text-xs sm:text-sm text-parchment font-medium font-sans">
@@ -89,7 +91,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-t border-charcoal-border">
           <div className="bg-charcoal/50 p-3 rounded border border-charcoal-border/50">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block mb-1">
-              Aspectos de Luz ✧
+              {t("Aspectos de Luz ✧", "Light Aspects ✧")}
             </span>
             <ul className="text-xs text-parchment-muted space-y-1 font-sans">
               {arcana.keywordsLight.map((kw, i) => (
@@ -100,7 +102,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
 
           <div className="bg-charcoal/50 p-3 rounded border border-charcoal-border/50">
             <span className="text-[10px] uppercase tracking-[0.2em] text-silver font-sans block mb-1">
-              Aspectos de Sombra ☾
+              {t("Aspectos de Sombra ☾", "Shadow Aspects ☾")}
             </span>
             <ul className="text-xs text-parchment-muted space-y-1 font-sans">
               {arcana.keywordsShadow.map((kw, i) => (
@@ -113,7 +115,7 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
         {/* Pregunta de reflexión */}
         <div className="my-4 p-4 rounded bg-gold/5 border border-gold/20 text-center">
           <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block mb-1">
-            Pregunta de Reflexión:
+            {t("Pregunta de Reflexión:", "Reflection Inquiry:")}
           </span>
           <p className="text-xs sm:text-sm text-parchment font-serif italic">
             &ldquo;{arcana.reflectionQuestion}&rdquo;
@@ -126,14 +128,14 @@ export const ArcanaModal: React.FC<ArcanaModalProps> = ({ arcana, onClose }) => 
             href={`/arcanos/${arcana.slug}`}
             className="text-xs uppercase tracking-[0.2em] text-gold hover:text-gold-light font-sans py-2"
           >
-            Ver análisis completo del arcano →
+            {t("Ver análisis completo del arcano →", "View complete arcana analysis →")}
           </Link>
 
           <Link
             href={`/reservar?arcano=${arcana.slug}`}
             className="w-full sm:w-auto px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium font-sans text-center"
           >
-            Reservar lectura vinculada ✦
+            {t("Reservar lectura vinculada ✦", "Book linked reading ✦")}
           </Link>
         </div>
       </div>

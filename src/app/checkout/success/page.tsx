@@ -4,8 +4,10 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { brandConfig } from "@/config/brandConfig";
+import { useLanguage } from "@/context/LanguageContext";
 
 function SuccessContent() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const orderId =
     searchParams.get("order_id") ||
@@ -14,9 +16,14 @@ function SuccessContent() {
   const paymentId = searchParams.get("payment_id");
 
   const whatsappMessage = encodeURIComponent(
-    `¡Hola ARCANO! He completado mi orden ceremonial *${orderId}*${
-      paymentId ? ` (ID Pago: ${paymentId})` : ""
-    }. Deseo confirmar los detalles de consagración y seguimiento de envío.`
+    t(
+      `¡Hola ARCANO! He completado mi orden ceremonial *${orderId}*${
+        paymentId ? ` (ID Pago: ${paymentId})` : ""
+      }. Deseo confirmar los detalles de consagración y seguimiento de envío.`,
+      `Hello ARCANO! I have completed my ceremonial order *${orderId}*${
+        paymentId ? ` (Payment ID: ${paymentId})` : ""
+      }. I would like to confirm consecration details and shipping tracking.`
+    )
   );
   const whatsappUrl = `https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`;
 
@@ -32,13 +39,16 @@ function SuccessContent() {
             ⚜️
           </div>
           <p className="text-xs font-sans uppercase tracking-[0.3em] text-gold/90 font-semibold mb-2">
-            ARCANO · Círculo de Consagración
+            {t("ARCANO · Círculo de Consagración", "ARCANO · Consecration Circle")}
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl text-parchment tracking-wide">
-            Tu Pedido ha Sido Consagrado
+            {t("Tu Pedido ha Sido Consagrado", "Your Order Has Been Consecrated")}
           </h1>
           <p className="font-sans text-sm text-parchment-muted mt-2 max-w-lg mx-auto">
-            La transacción fue procesada con éxito. Tu talismán ceremonial ha sido reservado y entra a la fase de preparación energética.
+            {t(
+              "La transacción fue procesada con éxito. Tu talismán ceremonial ha sido reservado y entra a la fase de preparación energética.",
+              "The transaction was processed successfully. Your ceremonial talisman has been reserved and enters the energetic preparation phase."
+            )}
           </p>
         </div>
 
@@ -47,7 +57,7 @@ function SuccessContent() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gold/15 gap-4">
             <div>
               <span className="text-[11px] font-sans uppercase tracking-widest text-parchment-muted">
-                Referencia de Orden
+                {t("Referencia de Orden", "Order Reference")}
               </span>
               <p className="font-mono text-xl sm:text-2xl text-gold font-bold tracking-wider mt-0.5">
                 {orderId}
@@ -55,32 +65,41 @@ function SuccessContent() {
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/40 text-emerald-400 text-xs font-sans font-medium self-start sm:self-auto">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Pago Acreditado · En Preparación</span>
+              <span>{t("Pago Acreditado · En Preparación", "Payment Approved · In Preparation")}</span>
             </div>
           </div>
 
           {/* Fases del Ritual de Preparación */}
           <div className="space-y-4">
             <h3 className="font-serif text-sm text-gold tracking-widest uppercase">
-              Proceso de Entrega Sagrada
+              {t("Proceso de Entrega Sagrada", "Sacred Delivery Process")}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-sans">
               <div className="p-3.5 rounded-lg bg-obsidian/60 border border-gold/15 space-y-1">
-                <span className="text-gold font-serif text-sm">1. Limpieza</span>
+                <span className="text-gold font-serif text-sm">{t("1. Limpieza", "1. Cleansing")}</span>
                 <p className="text-parchment-muted text-[11px] leading-relaxed">
-                  Purificación mineral con humo de copal blanco y salvia silvestre.
+                  {t(
+                    "Purificación mineral con humo de copal blanco y salvia silvestre.",
+                    "Mineral purification with white copal smoke and mountain sage."
+                  )}
                 </p>
               </div>
               <div className="p-3.5 rounded-lg bg-obsidian/60 border border-gold/15 space-y-1">
-                <span className="text-gold font-serif text-sm">2. Consagración</span>
+                <span className="text-gold font-serif text-sm">{t("2. Consagración", "2. Consecration")}</span>
                 <p className="text-parchment-muted text-[11px] leading-relaxed">
-                  Impronta de intención según el Arcano y ajuste milimétrico a tu muñeca.
+                  {t(
+                    "Impronta de intención según el Arcano y ajuste milimétrico a tu muñeca.",
+                    "Intention imprinting according to the Arcana and bespoke wrist fitting."
+                  )}
                 </p>
               </div>
               <div className="p-3.5 rounded-lg bg-obsidian/60 border border-gold/15 space-y-1">
-                <span className="text-gold font-serif text-sm">3. Envío Seguro</span>
+                <span className="text-gold font-serif text-sm">{t("3. Envío Seguro", "3. Secure Shipping")}</span>
                 <p className="text-parchment-muted text-[11px] leading-relaxed">
-                  Caja rígida con lacre ceremonial negro y guía rastreable DHL/Estafeta.
+                  {t(
+                    "Caja rígida con lacre ceremonial negro y guía rastreable DHL/Estafeta.",
+                    "Rigid ceremonial box with black wax seal and tracked express courier."
+                  )}
                 </p>
               </div>
             </div>
@@ -90,10 +109,16 @@ function SuccessContent() {
           <div className="p-4 rounded-lg bg-gold/5 border border-gold/20 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-xs font-serif text-gold font-semibold">
-                ¿Deseas personalizar tu consagración o confirmar la talla?
+                {t(
+                  "¿Deseas personalizar tu consagración o confirmar la talla?",
+                  "Wish to customize your consecration or confirm your size?"
+                )}
               </p>
               <p className="text-[11px] font-sans text-parchment-muted mt-0.5">
-                Nuestro Concierge ceremonial está disponible en tiempo real en Monterrey.
+                {t(
+                  "Nuestro Concierge ceremonial está disponible en tiempo real en Monterrey.",
+                  "Our ceremonial Concierge is available in real time."
+                )}
               </p>
             </div>
             <a
@@ -103,7 +128,7 @@ function SuccessContent() {
               className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-sans text-xs uppercase tracking-wider font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 whitespace-nowrap cursor-pointer"
             >
               <span>💬</span>
-              <span>Notificar por WhatsApp</span>
+              <span>{t("Notificar por WhatsApp", "Notify via WhatsApp")}</span>
             </a>
           </div>
         </div>
@@ -114,13 +139,13 @@ function SuccessContent() {
             href="/tienda"
             className="w-full sm:w-auto px-6 py-3 rounded-lg border border-gold/40 hover:border-gold hover:bg-gold/10 text-gold font-sans text-xs uppercase tracking-[0.2em] font-semibold transition-all text-center cursor-pointer"
           >
-            ← Volver a la Boutique
+            {t("← Volver a la Boutique", "← Return to Boutique")}
           </Link>
           <Link
             href="/lecturas"
             className="w-full sm:w-auto px-6 py-3 rounded-lg bg-charcoal border border-gold/20 hover:border-gold/50 text-parchment font-sans text-xs uppercase tracking-[0.2em] transition-all text-center cursor-pointer"
           >
-            Explorar Lecturas de Tarot →
+            {t("Explorar Lecturas de Tarot →", "Explore Tarot Readings →")}
           </Link>
         </div>
       </div>
@@ -129,11 +154,12 @@ function SuccessContent() {
 }
 
 export default function CheckoutSuccessPage() {
+  const { t } = useLanguage();
   return (
     <Suspense
       fallback={
         <div className="min-h-screen bg-obsidian flex items-center justify-center text-gold font-serif">
-          Cargando confirmación sagrada...
+          {t("Cargando confirmación sagrada...", "Loading sacred confirmation...")}
         </div>
       }
     >

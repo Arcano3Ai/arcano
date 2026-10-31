@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { loadGoogleMaps } from "@/lib/googleMapsLoader";
 import { mapStyles } from "@/lib/mapStyles";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   CommuteDestination,
   CommutesWidgetConfig,
@@ -56,9 +57,13 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
   zoom = 14,
   theme = "arcano",
   className = "",
-  title = "Tiempo de Traslado y Rutas",
-  subtitle = "Calcula el tiempo estimado y las direcciones desde tu ubicación hacia el santuario",
+  title,
+  subtitle,
 }) => {
+  const { dict } = useLanguage();
+  const displayTitle = title || dict.commutes.mainTitle;
+  const displaySubtitle = subtitle || dict.commutes.mainSubtitle;
+
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -508,7 +513,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
     const listener = autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (!place || !place.geometry) {
-        setModalError("Por favor selecciona un lugar válido de la lista.");
+        setModalError(dict.commutes.validPlaceError);
         return;
       }
       setSelectedPlace(place);
@@ -518,7 +523,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
     return () => {
       if (listener) google.maps.event.removeListener(listener);
     };
-  }, [isModalOpen, biasBoundDistance, origin.lat, origin.lng]);
+  }, [isModalOpen, biasBoundDistance, origin.lat, origin.lng, dict.commutes.validPlaceError]);
 
   /**
    * Control de scroll del carrusel de tarjetas
@@ -582,7 +587,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
    */
   const handleSaveModal = async () => {
     if (!selectedPlace || !selectedPlace.place_id || !selectedPlace.name) {
-      setModalError("Ingresa y selecciona un destino válido.");
+      setModalError(dict.commutes.validPlaceError);
       return;
     }
 
@@ -590,7 +595,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
       // Verificar duplicados
       const isDuplicate = destinations.some((d) => d.placeId === selectedPlace.place_id);
       if (isDuplicate) {
-        setModalError("Este destino ya ha sido agregado.");
+        setModalError(dict.commutes.duplicateError);
         return;
       }
 
@@ -610,7 +615,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
         const newIdx = nextList.length - 1;
         setTimeout(() => handleSelectRoute(newIdx), 150);
       } else {
-        setModalError("No se pudo calcular la ruta hacia ese lugar. Intenta otro modo.");
+        setModalError(dict.commutes.routeError);
       }
     } else if (modalMode === "EDIT" && editingIndex !== null) {
       const current = destinations[editingIndex];
@@ -636,7 +641,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
         setIsModalOpen(false);
         setTimeout(() => handleSelectRoute(editingIndex), 150);
       } else {
-        setModalError("Error al actualizar la ruta con esos parámetros.");
+        setModalError(dict.commutes.routeError);
       }
     }
   };
@@ -678,13 +683,13 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
         <div>
           <div className="flex items-center gap-2 text-gold text-xs uppercase tracking-widest font-sans font-medium">
             <Navigation className="w-3.5 h-3.5" />
-            <span>Navegación & Estimaciones</span>
+            <span>{dict.commutes.badgeTitle}</span>
           </div>
           <h3 className="font-serif text-xl sm:text-2xl text-parchment font-light mt-1">
-            {title}
+            {displayTitle}
           </h3>
           <p className="text-xs sm:text-sm text-parchment-dim mt-0.5 max-w-xl">
-            {subtitle}
+            {displaySubtitle}
           </p>
         </div>
 
@@ -693,7 +698,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gold hover:bg-gold-light text-obsidian-deep font-sans font-semibold text-xs sm:text-sm tracking-wide transition-all shadow-md hover:shadow-gold/20 active:scale-95"
         >
           <Plus className="w-4 h-4" />
-          <span>Agregar Destino</span>
+          <span>{dict.commutes.addDestinationBtn}</span>
         </button>
       </div>
 
@@ -703,7 +708,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-obsidian/90 text-parchment gap-3">
             <Loader2 className="w-8 h-8 text-gold animate-spin" />
             <span className="text-sm font-sans tracking-wide">
-              Cargando mapa interactivo...
+              {dict.commutes.loadingMap}
             </span>
           </div>
         )}
@@ -713,7 +718,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
             <AlertCircle className="w-10 h-10 text-wine" />
             <div className="max-w-md">
               <h4 className="font-serif text-lg text-parchment font-normal mb-1">
-                Configuración de Google Maps requerida
+                {dict.commutes.apiKeyErrorTitle}
               </h4>
               <p className="text-xs text-parchment-dim">{errorStatus}</p>
               <div className="mt-4 p-3 bg-charcoal rounded-lg border border-charcoal-border text-left text-[11px] font-mono text-gold-light">
@@ -736,11 +741,10 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
               </div>
               <div>
                 <h4 className="text-sm font-sans font-medium text-parchment">
-                  Comienza agregando un destino
+                  {dict.commutes.emptyTitle}
                 </h4>
                 <p className="text-xs text-parchment-dim">
-                  Ingresa tu hotel, aeropuerto, domicilio o punto de interés para ver la ruta
-                  y el tiempo de traslado en tiempo real.
+                  {dict.commutes.emptySubtitle}
                 </p>
               </div>
             </div>
@@ -748,7 +752,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
               onClick={handleOpenAddModal}
               className="px-4 py-2 rounded-lg bg-charcoal border border-gold/40 hover:border-gold text-gold hover:text-gold-light text-xs font-sans font-semibold tracking-wider transition-colors"
             >
-              + Agregar Punto
+              {dict.commutes.addPointBtn}
             </button>
           </div>
         ) : (
@@ -820,14 +824,14 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          title="Abrir en Google Maps"
+                          title={dict.commutes.openInMaps}
                           className="p-1 rounded text-parchment-dim hover:text-gold transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                         <button
                           onClick={(e) => handleOpenEditModal(idx, e)}
-                          title="Editar destino"
+                          title={dict.commutes.editDestination}
                           className="p-1 rounded text-parchment-dim hover:text-parchment transition-colors"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
@@ -843,7 +847,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
                         {dest.name}
                       </h5>
                       <div className="mt-1 flex items-baseline justify-between">
-                        <span className="text-[11px] text-parchment-dim">Tiempo estimado:</span>
+                        <span className="text-[11px] text-parchment-dim">{dict.commutes.estimatedTime}</span>
                         <span
                           className={`text-sm sm:text-base font-serif font-bold ${
                             isActive ? "text-gold" : "text-parchment"
@@ -864,7 +868,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
                   className="flex-shrink-0 w-32 h-[100px] border border-dashed border-charcoal-border hover:border-gold/50 rounded-xl flex flex-col items-center justify-center gap-1.5 text-parchment-dim hover:text-gold transition-all bg-obsidian/20 hover:bg-gold/5"
                 >
                   <Plus className="w-5 h-5" />
-                  <span className="text-xs font-sans font-medium">+ Destino</span>
+                  <span className="text-xs font-sans font-medium">{dict.commutes.addPointBtn}</span>
                 </button>
               )}
             </div>
@@ -893,23 +897,23 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
             </button>
 
             <h3 className="font-serif text-xl text-parchment font-light">
-              {modalMode === "ADD" ? "Agregar Nuevo Destino" : "Editar Destino"}
+              {modalMode === "ADD" ? dict.commutes.modalAddTitle : dict.commutes.modalEditTitle}
             </h3>
             <p className="text-xs text-parchment-dim mt-1">
-              Busca una dirección, monumento o negocio cercano.
+              {dict.commutes.modalSearchSubtitle}
             </p>
 
             <div className="mt-4 space-y-4">
               {/* Input Autocomplete */}
               <div>
                 <label className="block text-[11px] uppercase tracking-wider text-gold font-sans font-semibold mb-1">
-                  Ubicación o Lugar
+                  {dict.commutes.locationLabel}
                 </label>
                 <input
                   ref={inputRef}
                   type="text"
                   defaultValue={selectedPlace?.name || ""}
-                  placeholder="Ej. Aeropuerto MTY, Barrio Antiguo, Hotel..."
+                  placeholder={dict.commutes.locationPlaceholder}
                   className="w-full px-3.5 py-2.5 rounded-lg bg-obsidian border border-charcoal-border text-parchment placeholder-parchment-dim/50 text-sm focus:outline-none focus:border-gold transition-colors"
                   autoFocus
                 />
@@ -924,15 +928,15 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
               {/* Selector de Modo de Transporte */}
               <div>
                 <label className="block text-[11px] uppercase tracking-wider text-gold font-sans font-semibold mb-2">
-                  Modo de Transporte
+                  {dict.commutes.travelModeLabel}
                 </label>
                 <div className="grid grid-cols-4 gap-2">
                   {(
                     [
-                      { id: "DRIVING", label: "Auto", icon: Car },
-                      { id: "TRANSIT", label: "Tránsito", icon: Bus },
-                      { id: "BICYCLING", label: "Bici", icon: Bike },
-                      { id: "WALKING", label: "A pie", icon: Footprints },
+                      { id: "DRIVING", label: dict.commutes.modes.driving, icon: Car },
+                      { id: "TRANSIT", label: dict.commutes.modes.transit, icon: Bus },
+                      { id: "BICYCLING", label: dict.commutes.modes.bicycling, icon: Bike },
+                      { id: "WALKING", label: dict.commutes.modes.walking, icon: Footprints },
                     ] as const
                   ).map((mode) => {
                     const Icon = mode.icon;
@@ -966,7 +970,7 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
                   className="inline-flex items-center gap-1.5 text-xs text-rose-400 hover:text-rose-300 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
-                  <span>Eliminar</span>
+                  <span>{dict.commutes.deleteBtn}</span>
                 </button>
               ) : (
                 <div />
@@ -978,14 +982,14 @@ export const CommutesWidget: React.FC<CommutesWidgetProps> = ({
                   onClick={() => setIsModalOpen(false)}
                   className="px-3 py-1.5 text-xs text-parchment-dim hover:text-parchment transition-colors font-sans"
                 >
-                  Cancelar
+                  {dict.commutes.cancelBtn}
                 </button>
                 <button
                   type="button"
                   onClick={handleSaveModal}
                   className="px-4 py-2 rounded-lg bg-gold hover:bg-gold-light text-obsidian-deep text-xs font-sans font-semibold tracking-wide transition-all shadow-md active:scale-95"
                 >
-                  {modalMode === "ADD" ? "Calcular Ruta" : "Guardar Cambios"}
+                  {modalMode === "ADD" ? dict.commutes.calculateRouteBtn : dict.commutes.saveChangesBtn}
                 </button>
               </div>
             </div>

@@ -6,8 +6,10 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { TarotSocialIcons } from "@/components/TarotSocialIcons";
 import { CommutesWidget } from "@/components/maps";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ContactoPage() {
+  const { dict } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,9 +40,9 @@ export default function ContactoPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
       <SectionHeader
         as="h1"
-        subtitle="Correspondencia Directa"
-        title="Contacto con el Santuario"
-        description="Si tienes inquietudes sobre alguna lectura, eventos privados o colaboraciones, comunícate a través de nuestro formulario o por canales directos."
+        subtitle={dict.contact.headerSubtitle}
+        title={dict.contact.headerTitle}
+        description={dict.contact.headerDesc}
         symbol="✦"
       />
 
@@ -49,13 +51,13 @@ export default function ContactoPage() {
         <div className="lg:col-span-5 space-y-6">
           <div className="rounded-xl border border-charcoal-border bg-charcoal/50 p-6 sm:p-8 space-y-6">
             <h3 className="font-serif text-xl text-parchment font-light">
-              Canales de Comunicación
+              {dict.contact.channelsTitle}
             </h3>
 
             {/* WhatsApp */}
             <div className="space-y-1">
               <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block">
-                Atención Rápida por WhatsApp
+                {dict.contact.whatsappAttention}
               </span>
               <a
                 href={whatsappUrl}
@@ -74,7 +76,7 @@ export default function ContactoPage() {
             {/* Correo Electrónico */}
             <div className="space-y-1 pt-4 border-t border-charcoal-border">
               <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block">
-                Correo Electrónico Oficial
+                {dict.contact.officialEmail}
               </span>
               <a
                 href={`mailto:${brandConfig.contact.email}`}
@@ -87,7 +89,7 @@ export default function ContactoPage() {
             {/* Presencia en Redes Sociales (Tarot Style) */}
             <div className="space-y-2 pt-4 border-t border-charcoal-border">
               <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block">
-                Canales Esotéricos Oficiales
+                {dict.contact.officialSocial}
               </span>
               <TarotSocialIcons size="sm" />
             </div>
@@ -95,7 +97,7 @@ export default function ContactoPage() {
             {/* Ubicación */}
             <div className="space-y-1 pt-4 border-t border-charcoal-border">
               <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block">
-                Modalidad
+                {dict.contact.modality}
               </span>
               <p className="text-xs text-parchment-muted font-sans">
                 {brandConfig.contact.location}
@@ -113,22 +115,22 @@ export default function ContactoPage() {
                   ✦
                 </div>
                 <h3 className="font-serif text-2xl text-parchment">
-                  Mensaje Enviado al Santuario
+                  {dict.contact.formSuccessTitle}
                 </h3>
                 <p className="text-xs sm:text-sm text-parchment-muted font-sans max-w-md mx-auto leading-relaxed">
-                  Agradecemos tus palabras. Te responderemos a la brevedad con la serenidad y atención que merece tu mensaje.
+                  {dict.contact.formSuccessDesc}
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
                   className="mt-4 text-xs uppercase tracking-widest text-gold hover:text-gold-light border-b border-gold/40 pb-0.5"
                 >
-                  Enviar otro mensaje
+                  {dict.contact.formSendAnother}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <h3 className="font-serif text-xl text-parchment font-light mb-4">
-                  Envíanos una Correspondencia
+                  {dict.contact.formTitle}
                 </h3>
 
                 <div>
@@ -136,7 +138,7 @@ export default function ContactoPage() {
                     htmlFor="contact-name"
                     className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-1.5 font-sans"
                   >
-                    Nombre *
+                    {dict.contact.formName}
                   </label>
                   <input
                     id="contact-name"
@@ -146,7 +148,7 @@ export default function ContactoPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    placeholder="Tu nombre completo"
+                    placeholder="Tu nombre / Your name"
                     className="w-full px-4 py-2.5 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans"
                   />
                 </div>
@@ -156,7 +158,7 @@ export default function ContactoPage() {
                     htmlFor="contact-email"
                     className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-1.5 font-sans"
                   >
-                    Correo electrónico *
+                    {dict.contact.formEmail}
                   </label>
                   <input
                     id="contact-email"
@@ -176,7 +178,7 @@ export default function ContactoPage() {
                     htmlFor="contact-subject"
                     className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-1.5 font-sans"
                   >
-                    Motivo de la consulta
+                    {dict.contact.formSubject}
                   </label>
                   <select
                     id="contact-subject"
@@ -186,11 +188,11 @@ export default function ContactoPage() {
                     }
                     className="w-full px-4 py-2.5 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans"
                   >
-                    <option value="Consulta general">Consulta general</option>
-                    <option value="Dudas sobre una lectura">Dudas sobre una lectura</option>
-                    <option value="Eventos o sesiones privadas">Eventos o sesiones privadas</option>
-                    <option value="Certificados de regalo">Certificados de regalo</option>
-                    <option value="Prensa o colaboraciones">Prensa o colaboraciones</option>
+                    <option value="Consulta general">{dict.contact.formSubjectOptions.general}</option>
+                    <option value="Dudas sobre una lectura">{dict.contact.formSubjectOptions.readingDoubts}</option>
+                    <option value="Eventos o sesiones privadas">{dict.contact.formSubjectOptions.privateEvents}</option>
+                    <option value="Certificados de regalo">{dict.contact.formSubjectOptions.giftCertificates}</option>
+                    <option value="Prensa o colaboraciones">{dict.contact.formSubjectOptions.press}</option>
                   </select>
                 </div>
 
@@ -199,7 +201,7 @@ export default function ContactoPage() {
                     htmlFor="contact-message"
                     className="block text-[11px] uppercase tracking-[0.18em] text-parchment-dim mb-1.5 font-sans"
                   >
-                    Mensaje *
+                    {dict.contact.formMessage}
                   </label>
                   <textarea
                     id="contact-message"
@@ -209,7 +211,7 @@ export default function ContactoPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    placeholder="Escribe tu mensaje con tranquilidad..."
+                    placeholder={dict.contact.formPlaceholder}
                     className="w-full px-4 py-2.5 rounded bg-charcoal border border-charcoal-border focus:border-gold/60 focus:outline-none text-xs text-parchment font-sans leading-relaxed"
                   />
                 </div>
@@ -217,9 +219,9 @@ export default function ContactoPage() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full py-3 px-6 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.3)] disabled:opacity-50"
+                  className="w-full py-3 px-6 text-xs uppercase tracking-[0.25em] font-sans text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.3)] disabled:opacity-50 cursor-pointer"
                 >
-                  {status === "loading" ? "Enviando correspondencia..." : "Enviar mensaje ✦"}
+                  {status === "loading" ? dict.contact.formSending : dict.contact.formSubmit}
                 </button>
               </form>
             )}
@@ -230,8 +232,8 @@ export default function ContactoPage() {
       {/* Sección de Rutas y Cómo Llegar con Google Maps */}
       <div className="mt-16 sm:mt-24">
         <CommutesWidget
-          title="Cómo Llegar al Santuario"
-          subtitle="Calcula tu ruta y tiempo estimado de viaje en auto, transporte público, bicicleta o a pie"
+          title={dict.commutes.sectionTitle}
+          subtitle={dict.commutes.sectionSubtitle}
           origin={{ lat: 25.8129896, lng: -100.1340545 }}
           originName="Santuario Arcano"
           theme="arcano"

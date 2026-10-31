@@ -1,8 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { SectionHeader } from '@/components/SectionHeader';
 import { siteConfig } from '@/config/siteConfig';
-import SynastryApp from '@/components/astrology/SynastryApp';
+import { SinastriaContent } from '@/components/pages/SinastriaContent';
 
 export const metadata: Metadata = {
   title: 'Calculadora de Sinastría y Compatibilidad de Pareja Gratis · Bi-Wheel | ARCANO',
@@ -49,23 +48,12 @@ export default function SinastriaPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 print:p-0 print:m-0 print:max-w-none">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(synastrySchema) }}
       />
-
-      <div className="print:hidden">
-        <SectionHeader
-          as="h1"
-          subtitle="Alquimia Relacional"
-          title="Sinastría y Compatibilidad de Almas"
-          description="Cuando dos universos se encuentran, sus estrellas trazan un diálogo único de atracción, complicidad y evolución compartida. Explora los aspectos cruzados de su vínculo cósmico."
-          symbol="⚭"
-        />
-      </div>
-
-      <SynastryApp />
-    </div>
+      <SinastriaContent />
+    </>
   );
 }

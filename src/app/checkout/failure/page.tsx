@@ -4,13 +4,18 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { brandConfig } from "@/config/brandConfig";
+import { useLanguage } from "@/context/LanguageContext";
 
 function FailureContent() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order_id") || "ARC-SESION";
 
   const whatsappMessage = encodeURIComponent(
-    `¡Hola ARCANO! Tuve un inconveniente al pagar mi orden ceremonial *${orderId}*. ¿Me podrían ayudar a completar mi compra por transferencia o enlace directo?`
+    t(
+      `¡Hola ARCANO! Tuve un inconveniente al pagar mi orden ceremonial *${orderId}*. ¿Me podrían ayudar a completar mi compra por transferencia o enlace directo?`,
+      `Hello ARCANO! I encountered an issue paying for my ceremonial order *${orderId}*. Could you help me complete my purchase via transfer or direct link?`
+    )
   );
   const whatsappUrl = `https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`;
 
@@ -26,13 +31,16 @@ function FailureContent() {
             ⚔️
           </div>
           <p className="text-xs font-sans uppercase tracking-[0.3em] text-red-400/90 font-semibold mb-2">
-            ARCANO · Transacción Interrumpida
+            {t("ARCANO · Transacción Interrumpida", "ARCANO · Transaction Interrupted")}
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl text-parchment tracking-wide">
-            El Pago No Pudo Completarse
+            {t("El Pago No Pudo Completarse", "Payment Could Not Be Completed")}
           </h1>
           <p className="font-sans text-sm text-parchment-muted mt-2 max-w-lg mx-auto">
-            La entidad emisora o pasarela declinó la operación. No se ha realizado ningún cobro a tu cuenta y tus piezas siguen reservadas en tu carrito.
+            {t(
+              "La entidad emisora o pasarela declinó la operación. No se ha realizado ningún cobro a tu cuenta y tus piezas siguen reservadas en tu carrito.",
+              "The issuing bank or gateway declined the transaction. No charge was made to your account and your ceremonial pieces remain reserved in your cart."
+            )}
           </p>
         </div>
 
@@ -40,20 +48,35 @@ function FailureContent() {
         <div className="bg-charcoal/90 border border-gold/30 rounded-xl p-6 sm:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.8)] backdrop-blur-md mb-8 space-y-6">
           <div className="space-y-3">
             <h3 className="font-serif text-sm text-gold tracking-widest uppercase">
-              Causas Habituales & Soluciones
+              {t("Causas Habituales & Soluciones", "Common Causes & Solutions")}
             </h3>
             <ul className="space-y-2 text-xs font-sans text-parchment-muted">
               <li className="flex items-start gap-2">
                 <span className="text-gold">•</span>
-                <span>Bloqueo de seguridad bancario para compras en línea (autoriza en tu App bancaria e intenta de nuevo).</span>
+                <span>
+                  {t(
+                    "Bloqueo de seguridad bancario para compras en línea (autoriza en tu App bancaria e intenta de nuevo).",
+                    "Bank security hold on online purchases (authorize in your banking app and try again)."
+                  )}
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-gold">•</span>
-                <span>Límite de crédito o fondos insuficientes en la tarjeta seleccionada.</span>
+                <span>
+                  {t(
+                    "Límite de crédito o fondos insuficientes en la tarjeta seleccionada.",
+                    "Credit limit reached or insufficient funds on selected card."
+                  )}
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-gold">•</span>
-                <span>Alternativa inmediata: Pagar mediante transferencia SPEI directa o saldo Mercado Pago / PayPal.</span>
+                <span>
+                  {t(
+                    "Alternativa inmediata: Pagar mediante transferencia SPEI directa o saldo Mercado Pago / PayPal.",
+                    "Instant alternative: Pay via direct bank transfer or PayPal balance."
+                  )}
+                </span>
               </li>
             </ul>
           </div>
@@ -62,10 +85,13 @@ function FailureContent() {
           <div className="p-4 rounded-lg bg-emerald-950/20 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-xs font-serif text-emerald-400 font-semibold">
-                ¿Prefieres pagar con ayuda de un Asesor?
+                {t("¿Prefieres pagar con ayuda de un Asesor?", "Prefer to complete with a live Advisor?")}
               </p>
               <p className="text-[11px] font-sans text-parchment-muted mt-0.5">
-                Te enviamos un enlace de pago alternativo o datos SPEI en segundos.
+                {t(
+                  "Te enviamos un enlace de pago alternativo o datos SPEI en segundos.",
+                  "We can send an alternative payment link or bank details in seconds."
+                )}
               </p>
             </div>
             <a
@@ -75,7 +101,7 @@ function FailureContent() {
               className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-sans text-xs uppercase tracking-wider font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 whitespace-nowrap cursor-pointer"
             >
               <span>💬</span>
-              <span>Asistencia por WhatsApp</span>
+              <span>{t("Asistencia por WhatsApp", "WhatsApp Concierge")}</span>
             </a>
           </div>
         </div>
@@ -86,7 +112,7 @@ function FailureContent() {
             href="/tienda"
             className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gold hover:bg-amber-400 text-obsidian font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all text-center shadow-[0_0_20px_rgba(198,160,82,0.35)] cursor-pointer"
           >
-            ← Reintentar desde la Boutique
+            {t("← Reintentar desde la Boutique", "← Retry from Boutique")}
           </Link>
         </div>
       </div>
@@ -95,11 +121,12 @@ function FailureContent() {
 }
 
 export default function CheckoutFailurePage() {
+  const { t } = useLanguage();
   return (
     <Suspense
       fallback={
         <div className="min-h-screen bg-obsidian flex items-center justify-center text-gold font-serif">
-          Cargando estado...
+          {t("Cargando estado...", "Loading status...")}
         </div>
       }
     >

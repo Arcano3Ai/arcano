@@ -7,7 +7,7 @@ import { brandConfig } from "@/config/brandConfig";
 import { headerNavLinks } from "@/config/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { LanguageToggle } from "@/context/LanguageContext";
+import { LanguageToggle, useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
 
 export const Header: React.FC = () => {
@@ -15,6 +15,7 @@ export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { totalCount, openCart } = useCart();
+  const { dict, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,6 +61,7 @@ export const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center space-x-7" aria-label="Principal">
           {headerNavLinks.map((link) => {
             const isActive = pathname === link.href;
+            const translatedLabel = link.key ? t(link.key) : link.label;
 
             if (link.href === "/tienda/") {
               return (
@@ -72,7 +74,7 @@ export const Header: React.FC = () => {
                         : "text-parchment-muted hover:text-parchment hover:translate-y-[-1px]"
                     }`}
                   >
-                    <span>{link.label}</span>
+                    <span>{translatedLabel}</span>
                     <span className="text-[10px] opacity-60 group-hover:rotate-180 transition-transform duration-300">
                       ▾
                     </span>
@@ -85,14 +87,14 @@ export const Header: React.FC = () => {
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 w-72 z-50">
                     <div className="p-2.5 rounded-xl bg-obsidian-deep/98 border border-gold/40 shadow-[0_15px_40px_rgba(0,0,0,0.95)] backdrop-blur-2xl space-y-1">
                       <div className="px-3 py-1 text-[9px] font-mono tracking-[0.25em] uppercase text-gold/80 border-b border-charcoal-border/50">
-                        Colecciones Ancestrales
+                        {dict.nav.ancestralCollections}
                       </div>
                       {[
-                        { label: "Talismanes & Tarot", href: "/tienda/", icon: "🔮", desc: "78 Arcanos y 32 Minerales" },
-                        { label: "Barro Negro Oaxaqueño", href: "/tienda/barro-negro/", icon: "🏺", desc: "Alquimia de San Bartolo Coyotepec" },
-                        { label: "Alebrijes & Nahuales", href: "/tienda/alebrijes/", icon: "🐆", desc: "Talla sagrada en copal" },
-                        { label: "Arte Huichol · Wixárika", href: "/tienda/arte-huichol/", icon: "🦌", desc: "Cosmogonía de Wirikuta" },
-                        { label: "Dorodangos Sagrados", href: "/tienda/dorodangos/", icon: "🌕", desc: "Hikaru Dorodango · Esferas Espejo" },
+                        { label: dict.nav.categories.talismansTitle, href: "/tienda/", icon: "🔮", desc: dict.nav.categories.talismansDesc },
+                        { label: dict.nav.categories.barroNegroTitle, href: "/tienda/barro-negro/", icon: "🏺", desc: dict.nav.categories.barroNegroDesc },
+                        { label: dict.nav.categories.alebrijesTitle, href: "/tienda/alebrijes/", icon: "🐆", desc: dict.nav.categories.alebrijesDesc },
+                        { label: dict.nav.categories.arteHuicholTitle, href: "/tienda/arte-huichol/", icon: "🦌", desc: dict.nav.categories.arteHuicholDesc },
+                        { label: dict.nav.categories.dorodangosTitle, href: "/tienda/dorodangos/", icon: "🌕", desc: dict.nav.categories.dorodangosDesc },
                       ].map((cat) => (
                         <Link
                           key={cat.href}
@@ -126,7 +128,7 @@ export const Header: React.FC = () => {
                     : "text-parchment-muted hover:text-parchment hover:translate-y-[-1px]"
                 }`}
               >
-                {link.label}
+                {translatedLabel}
                 {isActive && (
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-[1px] bg-gold" />
                 )}
@@ -147,7 +149,7 @@ export const Header: React.FC = () => {
             className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] uppercase font-serif tracking-wider hover:bg-amber-500/20 hover:border-amber-400 transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)]"
           >
             <span>🗝️</span>
-            <span>Aula Virtual</span>
+            <span>{dict.nav.virtualClassroom}</span>
           </Link>
 
           <Link
@@ -155,14 +157,14 @@ export const Header: React.FC = () => {
             onClick={handleBookingClick}
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2 text-xs font-sans uppercase tracking-[0.2em] text-parchment bg-charcoal hover:bg-gold/10 border border-gold/40 hover:border-gold transition-all duration-500 rounded-sm shadow-[0_0_15px_rgba(198,160,82,0.12)] hover:shadow-[0_0_20px_rgba(198,160,82,0.3)] hover:text-gold"
           >
-            <span>Reservar lectura</span>
+            <span>{dict.nav.bookReading}</span>
             <span className="text-gold text-xs">✦</span>
           </Link>
 
           {/* Botón Carrito en Header (Móvil y Escritorio) */}
           <button
             onClick={openCart}
-            aria-label={`Abrir carrito ceremonial (${totalCount} artículos)`}
+            aria-label={`${dict.nav.openCartLabel} (${totalCount})`}
             className="p-2 text-parchment hover:text-gold transition-colors relative focus:outline-none focus:ring-1 focus:ring-gold/50 rounded flex items-center justify-center cursor-pointer"
           >
             <span className="text-base">🛍️</span>
@@ -210,49 +212,52 @@ export const Header: React.FC = () => {
         >
           <div className="flex flex-col space-y-6 pt-4">
             <div className="flex items-center justify-between text-xs tracking-[0.3em] uppercase text-gold/70 pb-4 border-b border-charcoal-border">
-              <span>Santuario ARCANO</span>
+              <span>{dict.nav.sanctuaryTitle}</span>
               <LanguageToggle />
             </div>
-            {headerNavLinks.map((link) => (
-              <React.Fragment key={link.href}>
-                <Link
-                  href={link.href}
-                  className="font-serif text-2xl tracking-[0.15em] text-parchment hover:text-gold transition-colors text-center py-2"
-                >
-                  {link.label}
-                </Link>
-                {link.href === "/tienda/" && (
-                  <div className="grid grid-cols-2 gap-2 px-2 py-1 -mt-2 mb-2">
-                    {[
-                      { label: "Talismanes & Tarot", href: "/tienda/", icon: "🔮" },
-                      { label: "Barro Negro", href: "/tienda/barro-negro/", icon: "🏺" },
-                      { label: "Alebrijes & Nahuales", href: "/tienda/alebrijes/", icon: "🐆" },
-                      { label: "Arte Huichol", href: "/tienda/arte-huichol/", icon: "🦌" },
-                      { label: "Dorodangos", href: "/tienda/dorodangos/", icon: "🌕" },
-                    ].map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all ${
-                          pathname === sub.href
-                            ? "bg-gold/15 border-gold/40 text-gold"
-                            : "bg-charcoal/40 border-charcoal-border/40 text-neutral-300"
-                        }`}
-                      >
-                        <span className="text-sm">{sub.icon}</span>
-                        <span className="text-[11px] font-serif leading-tight">{sub.label}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
+            {headerNavLinks.map((link) => {
+              const translatedLabel = link.key ? t(link.key) : link.label;
+              return (
+                <React.Fragment key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-serif text-2xl tracking-[0.15em] text-parchment hover:text-gold transition-colors text-center py-2"
+                  >
+                    {translatedLabel}
+                  </Link>
+                  {link.href === "/tienda/" && (
+                    <div className="grid grid-cols-2 gap-2 px-2 py-1 -mt-2 mb-2">
+                      {[
+                        { label: dict.nav.categories.talismansTitle, href: "/tienda/", icon: "🔮" },
+                        { label: dict.nav.categories.barroNegroTitle, href: "/tienda/barro-negro/", icon: "🏺" },
+                        { label: dict.nav.categories.alebrijesTitle, href: "/tienda/alebrijes/", icon: "🐆" },
+                        { label: dict.nav.categories.arteHuicholTitle, href: "/tienda/arte-huichol/", icon: "🦌" },
+                        { label: dict.nav.categories.dorodangosTitle, href: "/tienda/dorodangos/", icon: "🌕" },
+                      ].map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all ${
+                            pathname === sub.href
+                              ? "bg-gold/15 border-gold/40 text-gold"
+                              : "bg-charcoal/40 border-charcoal-border/40 text-neutral-300"
+                          }`}
+                        >
+                          <span className="text-sm">{sub.icon}</span>
+                          <span className="text-[11px] font-serif leading-tight">{sub.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </div>
 
           <div className="pt-8 border-t border-charcoal-border flex flex-col items-center space-y-4">
             <div className="flex items-center justify-between w-full px-4 py-2 rounded-lg bg-charcoal/40 border border-charcoal-border/50">
               <span className="text-xs uppercase tracking-wider text-parchment-dim font-sans">
-                Iluminación del Santuario
+                {dict.nav.sanctuaryLighting}
               </span>
               <ThemeToggle />
             </div>
@@ -262,7 +267,7 @@ export const Header: React.FC = () => {
               className="w-full text-center py-3 text-xs font-serif uppercase tracking-[0.2em] text-amber-300 bg-amber-500/15 border border-amber-500/40 hover:bg-amber-500/25 transition-all duration-300 rounded-sm font-semibold flex items-center justify-center gap-2"
             >
               <span>🗝️</span>
-              <span>Mi Aula Virtual (Estudiantes)</span>
+              <span>{dict.nav.virtualClassroomStudents}</span>
             </Link>
 
             <Link
@@ -270,10 +275,10 @@ export const Header: React.FC = () => {
               onClick={handleBookingClick}
               className="w-full text-center py-3.5 text-xs font-sans uppercase tracking-[0.2em] text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_20px_rgba(198,160,82,0.4)]"
             >
-              Reservar lectura ✦
+              {dict.nav.bookReading} ✦
             </Link>
             <p className="text-[11px] text-parchment-dim font-serif italic text-center">
-              &ldquo;{brandConfig.philosophicalQuote}&rdquo;
+              &ldquo;{dict.footer.quote}&rdquo;
             </p>
           </div>
         </div>

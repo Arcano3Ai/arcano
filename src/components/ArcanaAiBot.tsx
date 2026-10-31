@@ -5,6 +5,7 @@ import { arcanaList, Arcana } from "@/data/arcana";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { getAssetPath, handleImageError } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ChatMessage {
   id: string;
@@ -16,6 +17,7 @@ interface ChatMessage {
 }
 
 export const ArcanaAiBot: React.FC = () => {
+  const { language, t } = useLanguage();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputMessage, setInputMessage] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
@@ -26,18 +28,39 @@ export const ArcanaAiBot: React.FC = () => {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Bienvenido al santuario digital. Soy el Custodio de ARCANO. Puedo orientarte sobre la sabiduría simbólica de los 22 Arcanos Mayores, calcular tu Arcano de Nacimiento o guiarte hacia las lecturas y consultas oraculares.",
-      quickReplies: [
-        "¿Cómo es una lectura de Tarot?",
-        "¿Qué significa El Loco?",
-        "Calcular mi Arcano de Nacimiento",
-        "Ver lecturas disponibles",
-      ],
-      timestamp: "Ahora",
+      text:
+        language === "en"
+          ? "Welcome to the digital sanctuary. I am the Custodian of ARCANO. I can guide you through the symbolic wisdom of the 22 Major Arcana, calculate your Birth Arcana, or guide you toward our ceremonial readings and consultations."
+          : "Bienvenido al santuario digital. Soy el Custodio de ARCANO. Puedo orientarte sobre la sabiduría simbólica de los 22 Arcanos Mayores, calcular tu Arcano de Nacimiento o guiarte hacia las lecturas y consultas oraculares.",
+      quickReplies:
+        language === "en"
+          ? [
+              "What is a Tarot reading like?",
+              "What does The Fool mean?",
+              "Calculate my Birth Arcana",
+              "View available readings",
+            ]
+          : [
+              "¿Cómo es una lectura de Tarot?",
+              "¿Qué significa El Loco?",
+              "Calcular mi Arcano de Nacimiento",
+              "Ver lecturas disponibles",
+            ],
+      timestamp: language === "en" ? "Now" : "Ahora",
     },
   ];
 
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+
+  // Update initial message when language changes if no conversation started
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 1 && prev[0].id === "welcome-1") {
+        return initialMessages;
+      }
+      return prev;
+    });
+  }, [language]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -267,7 +290,7 @@ export const ArcanaAiBot: React.FC = () => {
       {/* Botón flotante ceremonial: El Sello de ARCANO (arriba del botón de WhatsApp, anclado abajo) */}
       <aside
         id="arcana-bot-floating-btn"
-        aria-label="El Sello de ARCANO — Custodio y Oráculo"
+        aria-label={t("El Sello de ARCANO — Custodio y Oráculo", "The Seal of ARCANO — Custodian and Oracle")}
         style={{
           position: "fixed",
           bottom: "max(5rem, calc(env(safe-area-inset-bottom, 0px) + 5rem))",
@@ -283,7 +306,7 @@ export const ArcanaAiBot: React.FC = () => {
           }`}
         >
           <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-gold-light bg-obsidian-deep/95 border border-gold/50 px-3 py-1.5 rounded shadow-[0_0_15px_rgba(198,160,82,0.3)] backdrop-blur">
-            El Sello de ARCANO ✦
+            {t("El Sello de ARCANO ✦", "The Seal of ARCANO ✦")}
           </span>
         </div>
 
@@ -295,7 +318,7 @@ export const ArcanaAiBot: React.FC = () => {
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          aria-label="Abrir asistente de Arcanos"
+          aria-label={t("Abrir asistente de Arcanos", "Open Arcana Assistant")}
           className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-gold/80 bg-gradient-to-br from-[#262014] via-[#15131e] to-[#090810] text-gold hover:text-gold-light flex items-center justify-center shadow-[0_0_24px_rgba(218,165,32,0.55)] hover:shadow-[0_0_35px_rgba(255,215,0,0.85)] transition-all duration-300 hover:scale-105 active:scale-95"
         >
           {/* Anillo de pulso místico */}
@@ -335,7 +358,7 @@ export const ArcanaAiBot: React.FC = () => {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Ventana de consulta del Custodio de ARCANO"
+          aria-label={t("Ventana de consulta del Custodio de ARCANO", "ARCANO Custodian consultation window")}
           style={{
             position: "fixed",
             bottom: "max(5rem, calc(env(safe-area-inset-bottom, 0px) + 5rem))",
@@ -352,19 +375,20 @@ export const ArcanaAiBot: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-serif text-sm text-parchment font-medium tracking-wide flex items-center gap-1.5">
-                  <span>Custodio de ARCANO</span>
+                  <span>{t("Custodio de ARCANO", "ARCANO Custodian")}</span>
                   <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-gold/20 text-gold-light border border-gold/40 font-sans">
-                    ORÁCULO DIGITAL
+                    {t("ORÁCULO DIGITAL", "DIGITAL ORACLE")}
                   </span>
                 </h3>
                 <span className="text-[10px] text-parchment-dim font-sans block">
-                  Sabiduría de los Arcanos & Guía Simbólica
+                  {t("Sabiduría de los Arcanos & Guía Simbólica", "Wisdom of the Arcana & Symbolic Guidance")}
                 </span>
               </div>
             </div>
 
             <button
               onClick={() => setIsOpen(false)}
+              aria-label={t("Cerrar", "Close")}
               className="w-8 h-8 rounded-full border border-charcoal-border hover:border-gold/60 text-parchment-dim hover:text-gold flex items-center justify-center transition-colors text-sm"
             >
               ✕
@@ -409,7 +433,7 @@ export const ArcanaAiBot: React.FC = () => {
                           href={`/arcanos/${msg.arcanaCard.slug}`}
                           className="text-[10px] text-gold hover:underline inline-flex items-center gap-1 mt-0.5"
                         >
-                          Ver tratado completo →
+                          {t("Ver tratado completo →", "View complete treatise →")}
                         </a>
                       </div>
                     </div>
@@ -424,7 +448,7 @@ export const ArcanaAiBot: React.FC = () => {
                         key={i}
                         onClick={() => {
                           if (reply.includes("WhatsApp")) {
-                            window.open(getWhatsAppUrl(`Hola ARCANO, tengo una consulta sobre las lecturas y los arcanos.`), "_blank");
+                            window.open(getWhatsAppUrl(t(`Hola ARCANO, tengo una consulta sobre las lecturas y los arcanos.`, `Hello ARCANO, I have a question regarding tarot readings and the arcana.`)), "_blank");
                           } else {
                             handleSendMessage(reply);
                           }
@@ -442,7 +466,7 @@ export const ArcanaAiBot: React.FC = () => {
             {isTyping && (
               <div className="flex items-center gap-2 text-gold/60 text-xs p-2">
                 <span className="animate-spin text-sm">✧</span>
-                <span className="font-serif italic text-[11px]">Consultando los registros sagrados...</span>
+                <span className="font-serif italic text-[11px]">{t("Consultando los registros sagrados...", "Consulting the sacred records...")}</span>
               </div>
             )}
 
@@ -453,16 +477,16 @@ export const ArcanaAiBot: React.FC = () => {
           <div className="px-4 py-2 bg-[#12101c] border-t border-charcoal-border/50 text-[10px] text-parchment-dim flex items-center justify-between font-sans">
             <a href="/lecturas/" className="text-parchment-muted hover:text-gold flex items-center gap-1">
               <span>🔮</span>
-              <span>Ver Lecturas de Tarot</span>
+              <span>{t("Ver Lecturas de Tarot", "View Tarot Readings")}</span>
             </a>
             <span className="text-gold/40">✦</span>
             <a
-              href={getWhatsAppUrl("Hola, deseo consultar sobre una lectura personalizada con El Señor de los Arcanos en ARCANO.")}
+              href={getWhatsAppUrl(t("Hola, deseo consultar sobre una lectura personalizada con El Señor de los Arcanos en ARCANO.", "Hello, I wish to inquire about a personalized reading with the Master of the Arcana at ARCANO."))}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold hover:text-gold-light font-medium underline flex items-center gap-1"
             >
-              <span>Consultar por WhatsApp</span>
+              <span>{t("Consultar por WhatsApp", "Consult via WhatsApp")}</span>
               <span>→</span>
             </a>
           </div>
@@ -470,23 +494,23 @@ export const ArcanaAiBot: React.FC = () => {
           {/* Formulario de Entrada */}
           <div className="p-3 border-t border-charcoal-border bg-[#0b0a10] flex items-center gap-2">
             <label htmlFor="arcana_ai_input" className="sr-only">
-              Pregunta o consulta sobre el tarot para el custodio
+              {t("Pregunta o consulta sobre el tarot para el custodio", "Question or tarot inquiry for the custodian")}
             </label>
             <input
               id="arcana_ai_input"
               type="text"
-              aria-label="Pregunta o consulta sobre el tarot para el custodio"
+              aria-label={t("Pregunta o consulta sobre el tarot para el custodio", "Question or tarot inquiry for the custodian")}
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Pregunta por un arcano, tu fecha o una tirada..."
+              placeholder={t("Pregunta por un arcano, tu fecha o una tirada...", "Ask about an arcana, your birthdate or a spread...")}
               className="flex-1 bg-[#151320] border border-charcoal-border rounded-lg px-3.5 py-2.5 text-xs text-parchment placeholder-parchment-dim/60 focus:outline-none focus:border-gold transition-colors"
             />
             <button
               onClick={() => handleSendMessage()}
               disabled={!inputMessage.trim()}
               className="p-2.5 rounded-lg bg-gold hover:bg-gold-light text-obsidian disabled:opacity-40 disabled:hover:bg-gold transition-all shadow-[0_0_12px_rgba(198,160,82,0.3)] active:scale-95"
-              aria-label="Enviar pregunta al custodio"
+              aria-label={t("Enviar pregunta al custodio", "Send question to custodian")}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />

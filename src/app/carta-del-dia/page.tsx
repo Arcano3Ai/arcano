@@ -28,6 +28,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { CartaDelDiaContent } from "@/components/pages/CartaDelDiaContent";
+
 export default function CartaDelDiaPage() {
   const oracleSchema = {
     "@context": "https://schema.org",
@@ -46,20 +48,12 @@ export default function CartaDelDiaPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(oracleSchema) }}
       />
-      <SectionHeader
-        as="h1"
-        subtitle="Oráculo Cotidiano"
-        title="Tu Carta para el Día de Hoy"
-        description="El tarot diario no busca predecir eventos con rigidez; actúa como una brújula reflexiva para recordarte en qué actitud sabia puedes habitar los retos y oportunidades de hoy."
-        symbol="☾"
-      />
-
-      <DailyCardModule />
-    </div>
+      <CartaDelDiaContent />
+    </>
   );
 }

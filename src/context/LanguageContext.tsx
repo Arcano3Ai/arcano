@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { translations, TranslationKeys } from "@/data/translations";
 
 export type Language = "es" | "en";
 
@@ -8,10 +9,26 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
-  t: (es: string, en?: string) => string;
+  t: (keyOrEs: string, enFallback?: string) => string;
+  dict: TranslationKeys;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+// Helper para navegar objetos con dot notation segura tipo "nav.home"
+function getNestedTranslation(obj: any, path: string): string | undefined {
+  if (!obj || typeof obj !== "object") return undefined;
+  const parts = path.split(".");
+  let current: any = obj;
+  for (const part of parts) {
+    if (current && typeof current === "object" && part in current) {
+      current = current[part];
+    } else {
+      return undefined;
+    }
+  }
+  return typeof current === "string" ? current : undefined;
+}
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>("es");
@@ -22,6 +39,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const saved = localStorage.getItem("arcano_language") as Language | null;
     if (saved === "es" || saved === "en") {
       setLanguageState(saved);
+      document.documentElement.lang = saved;
     }
   }, []);
 
@@ -37,10 +55,39 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLanguage(language === "es" ? "en" : "es");
   };
 
-  const t = (es: string, en?: string) => (language === "es" ? es : (en ?? es));
+  const dict = useMemo(() => translations[language], [language]);
+
+  /**
+   * Función de traducción inteligente `t`:
+   * 1. Soporta Dot-Notation de diccionario: `t("nav.home")` o `t("shop.addToCart")`
+   * 2. Soporta formato ad-hoc: `t("Texto en español", "Text in English")`
+   */
+  const t = (keyOrEs: string, enFallback?: string): string => {
+    // Si viene con enFallback explícito, actúa en modo ad-hoc
+    if (enFallback !== undefined) {
+      return language === "es" ? keyOrEs : enFallback;
+    }
+
+    // Intentar buscar en diccionario por notación de punto
+    const resolved = getNestedTranslation(translations[language], keyOrEs);
+    if (resolved !== undefined) {
+      return resolved;
+    }
+
+    // Si no está en el idioma actual, buscar en el fallback en español
+    if (language !== "es") {
+      const spanishFallback = getNestedTranslation(translations.es, keyOrEs);
+      if (spanishFallback !== undefined) {
+        return spanishFallback;
+      }
+    }
+
+    // Si era texto plano sin clave de diccionario, devolverlo tal cual
+    return keyOrEs;
+  };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t, dict }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -54,7 +101,8 @@ export const useLanguage = (): LanguageContextType => {
       language: "es",
       setLanguage: () => {},
       toggleLanguage: () => {},
-      t: (es: string, en?: string) => (en ? es : es),
+      t: (keyOrEs: string, enFallback?: string) => (enFallback && keyOrEs ? keyOrEs : keyOrEs),
+      dict: translations.es,
     };
   }
   return context;

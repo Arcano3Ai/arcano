@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Service } from "@/data/services";
 import { formatCurrency } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceCardProps {
   service: Service;
@@ -13,6 +14,7 @@ interface ServiceCardProps {
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onSelectBooking }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useLanguage();
 
   const handleBooking = () => {
     trackEvent({
@@ -47,7 +49,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onSelectBooki
       {/* Cabecera de la Carta */}
       <div className="relative z-10 pt-2">
         <div className="flex items-center justify-between text-xs tracking-[0.25em] text-gold/75 mb-3 font-sans">
-          <span>ARCANO {service.numberRoman}</span>
+          <span>{t("ARCANO", "ARCANA")} {service.numberRoman}</span>
           <span className="text-sm font-serif">{service.symbol}</span>
         </div>
 
@@ -83,16 +85,16 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onSelectBooki
         <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
             <span className="text-[10px] uppercase tracking-[0.2em] text-parchment-dim">
-              Duración
+              {t("Duración", "Duration")}
             </span>
             <span className="text-xs text-parchment font-medium font-sans">
-              {service.durationMinutes} minutos
+              {service.durationMinutes} {t("minutos", "minutes")}
             </span>
           </div>
 
           <div className="flex flex-col text-right">
             <span className="text-[10px] uppercase tracking-[0.2em] text-parchment-dim">
-              Inversión
+              {t("Inversión", "Investment")}
             </span>
             <span className="font-serif text-lg sm:text-xl text-gold font-light tracking-wide">
               {formatCurrency(service.priceMXN)}
@@ -102,7 +104,15 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onSelectBooki
 
         {/* Modalidad */}
         <div className="mb-4 text-[11px] text-parchment-dim/80 text-center font-sans tracking-wider">
-          Modalidad: {service.modality}
+          {t("Modalidad:", "Modality:")}{" "}
+          {t(
+            service.modality,
+            service.modality === "Presencial / En línea"
+              ? "In-Person / Online"
+              : service.modality === "Audio personalizado & PDF"
+              ? "Personalized Audio & PDF"
+              : "Online (HD Video)"
+          )}
         </div>
 
         {/* Botón Reservar */}
@@ -111,7 +121,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onSelectBooki
           onClick={handleBooking}
           className="w-full flex items-center justify-center gap-2 py-2.5 px-4 text-xs uppercase tracking-[0.2em] font-sans text-parchment bg-charcoal/90 hover:bg-gold hover:text-obsidian border border-gold/35 hover:border-gold transition-all duration-500 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(198,160,82,0.25)]"
         >
-          <span>Reservar sesión</span>
+          <span>{t("Reservar sesión", "Book session")}</span>
           <span className="text-xs">✦</span>
         </Link>
       </div>

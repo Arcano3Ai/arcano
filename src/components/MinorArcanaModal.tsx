@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MinorArcanaCard, suitsInfo } from "@/data/minorArcana";
 import { ArcanaImageZoom } from "@/components/ArcanaImageZoom";
 import { getAssetPath } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
   card: MinorArcanaCard | null;
@@ -13,9 +14,32 @@ interface Props {
 }
 
 export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
+  const { t } = useLanguage();
   if (!card) return null;
 
   const suitMeta = suitsInfo[card.suit];
+
+  const suitName = t(
+    card.suit,
+    card.suit === "Bastos"
+      ? "Wands"
+      : card.suit === "Copas"
+      ? "Cups"
+      : card.suit === "Espadas"
+      ? "Swords"
+      : "Pentacles"
+  );
+
+  const elementName = t(
+    card.suitElement,
+    card.suitElement === "Fuego"
+      ? "Fire"
+      : card.suitElement === "Agua"
+      ? "Water"
+      : card.suitElement === "Aire"
+      ? "Air"
+      : "Earth"
+  );
 
   return (
     <div
@@ -27,7 +51,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
         {/* Botón cerrar */}
         <button
           onClick={onClose}
-          aria-label="Cerrar ventana"
+          aria-label={t("Cerrar ventana", "Close window")}
           className="absolute top-4 right-4 text-parchment-dim hover:text-gold p-2 text-lg focus:outline-none"
         >
           ✕
@@ -36,7 +60,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
         {/* Encabezado */}
         <div className="text-center pb-4 border-b border-charcoal-border">
           <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans">
-            Arcano Menor · Palo de {card.suit} · Elemento {card.suitElement}
+            {t("Arcano Menor", "Minor Arcana")} · {t("Palo de", "Suit of")} {suitName} · {t("Elemento", "Element")} {elementName}
           </span>
           <h3 className="font-serif text-2xl sm:text-3xl tracking-[0.08em] text-parchment mt-1 font-light">
             {card.name}
@@ -52,7 +76,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
             imageUrl={card.imageUrl}
             name={card.name}
             glyph={suitMeta.symbol}
-            subtitle={`Palo de ${card.suit} · ${card.suitElement}`}
+            subtitle={`${t("Palo de", "Suit of")} ${suitName} · ${elementName}`}
             priority={true}
             className="relative w-32 sm:w-36 min-w-[128px] min-h-[199px] aspect-[9/14] rounded overflow-hidden border border-gold/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shrink-0 bg-obsidian-deep"
           />
@@ -60,11 +84,11 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
             <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
               <span className="text-gold text-lg">{suitMeta.symbol}</span>
               <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans font-medium">
-                Palo y Elemento
+                {t("Palo y Elemento", "Suit & Element")}
               </span>
             </div>
             <p className="text-xs sm:text-sm text-parchment font-medium font-sans">
-              {card.suit} ({card.suitElement})
+              {suitName} ({elementName})
             </p>
             <p className="text-xs text-parchment-muted font-sans font-light mt-2 leading-relaxed">
               {card.description}
@@ -76,7 +100,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-t border-charcoal-border">
           <div className="bg-charcoal/50 p-3.5 rounded border border-charcoal-border/50">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block mb-1 font-medium">
-              Manifestación en Luz ✧
+              {t("Manifestación en Luz ✧", "Manifestation in Light ✧")}
             </span>
             <ul className="text-xs text-parchment-muted space-y-1 font-sans">
               {card.keywordsLight.map((kw, i) => (
@@ -87,7 +111,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
 
           <div className="bg-charcoal/50 p-3.5 rounded border border-charcoal-border/50">
             <span className="text-[10px] uppercase tracking-[0.2em] text-silver font-sans block mb-1 font-medium">
-              Manifestación en Sombra ☾
+              {t("Manifestación en Sombra ☾", "Manifestation in Shadow ☾")}
             </span>
             <ul className="text-xs text-parchment-muted space-y-1 font-sans">
               {card.keywordsShadow.map((kw, i) => (
@@ -100,7 +124,7 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
         {/* Pregunta de reflexión */}
         <div className="my-4 p-4 rounded bg-gold/5 border border-gold/20 text-center">
           <span className="text-[10px] uppercase tracking-[0.2em] text-gold font-sans block mb-1 font-medium">
-            Pregunta de Indagación:
+            {t("Pregunta de Indagación:", "Inquiry Question:")}
           </span>
           <p className="text-xs sm:text-sm text-parchment font-serif italic">
             &ldquo;{card.reflectionQuestion}&rdquo;
@@ -113,14 +137,14 @@ export const MinorArcanaModal: React.FC<Props> = ({ card, onClose }) => {
             onClick={onClose}
             className="text-xs uppercase tracking-[0.2em] text-parchment-dim hover:text-parchment font-sans py-2"
           >
-            ← Volver a la galería
+            {t("← Volver a la galería", "← Back to gallery")}
           </button>
 
           <Link
             href={`/reservar?carta=${card.id}`}
             className="w-full sm:w-auto px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-obsidian bg-gold hover:bg-gold-light transition-all rounded-sm font-medium font-sans text-center"
           >
-            Consultar con El Señor de los Arcanos ✦
+            {t("Consultar con El Señor de los Arcanos ✦", "Consult with El Señor de los Arcanos ✦")}
           </Link>
         </div>
       </div>

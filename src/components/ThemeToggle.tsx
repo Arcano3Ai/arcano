@@ -3,9 +3,11 @@
 import React from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { sacredAudio } from "@/lib/sacredAudio";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const ThemeToggle: React.FC<{ className?: string }> = ({ className = "" }) => {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
   const isLight = theme === "light";
 
   const handleToggle = () => {
@@ -17,12 +19,19 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className = "" }
     toggleTheme();
   };
 
+  const labelText = isLight
+    ? t("Cambiar a Modo Noche Mística (Oscuro)", "Switch to Mystic Night Mode (Dark)")
+    : t("Cambiar a Modo Luz Sagrada (Claro)", "Switch to Sacred Light Mode (Light)");
+  const titleText = isLight
+    ? t("Modo Noche Mística", "Mystic Night Mode")
+    : t("Modo Luz Sagrada", "Sacred Light Mode");
+
   return (
     <button
       onClick={handleToggle}
       type="button"
-      aria-label={isLight ? "Cambiar a Modo Noche Mística (Oscuro)" : "Cambiar a Modo Luz Sagrada (Claro)"}
-      title={isLight ? "Modo Noche Mística" : "Modo Luz Sagrada"}
+      aria-label={labelText}
+      title={titleText}
       className={`relative inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border transition-all duration-300 group focus:outline-none focus:ring-1 focus:ring-gold/60 ${
         isLight
           ? "bg-amber-50/90 border-amber-600/40 text-amber-700 hover:border-amber-600 shadow-[0_0_12px_rgba(217,119,6,0.25)] hover:scale-105"

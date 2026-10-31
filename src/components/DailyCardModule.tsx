@@ -8,17 +8,19 @@ import { trackEvent } from "@/lib/analytics";
 import { sacredAudio } from "@/lib/sacredAudio";
 import { ArcanaAudioPlayer } from "@/components/ArcanaAudioPlayer";
 import { getAssetPath, handleImageError } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const DailyCardModule: React.FC = () => {
   const [revealed, setRevealed] = useState<boolean>(false);
   const [dailyArcana, setDailyArcana] = useState<Arcana>(arcanaList[0]);
   const [todayDateString, setTodayDateString] = useState<string>("");
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const today = new Date();
     const dateKey = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setTodayDateString(
-      today.toLocaleDateString("es-MX", {
+      today.toLocaleDateString(language === "en" ? "en-US" : "es-MX", {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -53,7 +55,7 @@ export const DailyCardModule: React.FC = () => {
       const preloadImg = new window.Image();
       preloadImg.src = getAssetPath(selected.imageUrl);
     }
-  }, []);
+  }, [language]);
 
   const handleReveal = () => {
     sacredAudio.playCardFlip();
@@ -80,13 +82,16 @@ export const DailyCardModule: React.FC = () => {
 
         <div className="text-center mb-8">
           <span className="text-xs uppercase tracking-[0.25em] text-gold/80 font-sans">
-            Oráculo Cotidiano · {todayDateString}
+            {t("Oráculo Cotidiano", "Daily Oracle")} · {todayDateString}
           </span>
           <h3 className="font-serif text-2xl sm:text-4xl text-parchment tracking-[0.1em] mt-2 font-light">
-            La Carta del Día
+            {t("La Carta del Día", "Daily Card")}
           </h3>
           <p className="text-xs sm:text-sm text-parchment-muted max-w-xl mx-auto mt-2 font-sans font-light">
-            Un arquetipo para observar tu jornada desde una perspectiva lúcida. Esta carta es una invitación a la reflexión, no una profecía fija.
+            {t(
+              "Un arquetipo para observar tu jornada desde una perspectiva lúcida. Esta carta es una invitación a la reflexión, no una profecía fija.",
+              "An archetype to contemplate your day with clarity. This card is an invitation to reflection, not an unchangeable prophecy."
+            )}
           </p>
         </div>
 
@@ -119,7 +124,7 @@ export const DailyCardModule: React.FC = () => {
                     ARCANO
                   </span>
                   <span className="text-[10px] tracking-[0.2em] text-gold/60 mt-1 uppercase">
-                    Sabiduría Oculta
+                    {t("Sabiduría Oculta", "Hidden Wisdom")}
                   </span>
                 </div>
 
@@ -160,7 +165,7 @@ export const DailyCardModule: React.FC = () => {
                     {dailyArcana.name}
                   </h4>
                   <span className="text-[9px] uppercase tracking-[0.2em] text-gold/70 block mt-0.5">
-                    {dailyArcana.element} · {dailyArcana.archetype.split("/")[0].trim()}
+                    {t(dailyArcana.element, dailyArcana.element === "Fuego" ? "Fire" : dailyArcana.element === "Agua" ? "Water" : dailyArcana.element === "Aire" ? "Air" : dailyArcana.element === "Tierra" ? "Earth" : "Aether")} · {dailyArcana.archetype.split("/")[0].trim()}
                   </span>
                 </div>
               </div>
@@ -172,19 +177,22 @@ export const DailyCardModule: React.FC = () => {
             {!revealed ? (
               <div className="space-y-5 py-4">
                 <p className="text-sm text-parchment/80 font-sans font-light leading-relaxed">
-                  Tómate unos segundos. Haz una respiración profunda, suelta la tensión en tus hombros y pulsa para descubrir el símbolo que acompaña tu día.
+                  {t(
+                    "Tómate unos segundos. Haz una respiración profunda, suelta la tensión en tus hombros y pulsa para descubrir el símbolo que acompaña tu día.",
+                    "Take a few moments. Breathe deeply, release the tension in your shoulders, and tap to unveil the symbol guiding your day."
+                  )}
                 </p>
                 <button
                   onClick={handleReveal}
                   className="px-8 py-3.5 text-xs font-sans uppercase tracking-[0.25em] text-obsidian bg-gold hover:bg-gold-light transition-all duration-300 rounded-sm font-medium shadow-[0_0_25px_rgba(198,160,82,0.35)] hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gold"
                 >
-                  Revelar mi carta ✦
+                  {t("Revelar mi carta ✦", "Reveal my card ✦")}
                 </button>
               </div>
             ) : (
               <div className="space-y-4 animate-fadeIn">
                 <div className="inline-block px-3 py-1 bg-gold/10 border border-gold/30 rounded text-[11px] uppercase tracking-[0.2em] text-gold font-sans">
-                  {dailyArcana.name} · Arcano {dailyArcana.number}
+                  {dailyArcana.name} · {t("Arcano", "Arcana")} {dailyArcana.number}
                 </div>
 
                 <p className="text-xs sm:text-sm text-parchment-muted font-sans font-light leading-relaxed">
@@ -194,7 +202,7 @@ export const DailyCardModule: React.FC = () => {
                 {/* Pregunta para reflexionar */}
                 <div className="p-4 rounded border-l-2 border-gold bg-charcoal/60">
                   <span className="block text-[10px] uppercase tracking-[0.2em] text-gold font-sans font-medium mb-1">
-                    Pregunta para reflexionar hoy:
+                    {t("Pregunta para reflexionar hoy:", "Reflection for today:")}
                   </span>
                   <p className="text-xs sm:text-sm text-parchment font-serif italic">
                     &ldquo;{dailyArcana.reflectionQuestion}&rdquo;
@@ -216,13 +224,13 @@ export const DailyCardModule: React.FC = () => {
 
                 <div className="pt-3 flex flex-col sm:flex-row items-center gap-4">
                   <span className="text-xs text-parchment-dim font-sans">
-                    ¿Deseas profundizar en esta energía?
+                    {t("¿Deseas profundizar en esta energía?", "Would you like to delve deeper into this energy?")}
                   </span>
                   <Link
                     href="/reservar/"
                     className="text-xs uppercase tracking-[0.18em] text-gold hover:text-gold-light border-b border-gold/40 hover:border-gold pb-0.5 transition-colors font-sans"
                   >
-                    Quiero una lectura personal →
+                    {t("Quiero una lectura personal →", "Book a personal reading →")}
                   </Link>
                 </div>
               </div>

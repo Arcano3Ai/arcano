@@ -22,8 +22,8 @@ import {
 import { useLanguage, LanguageToggle } from "@/context/LanguageContext";
 
 // Formateador estilo Aurum Brothers: $X,XXX MXN
-function formatPrice(price: number): string {
-  return `$${price.toLocaleString("es-MX", {
+function formatPrice(price: number, lang: "es" | "en" = "es"): string {
+  return `$${price.toLocaleString(lang === "en" ? "en-US" : "es-MX", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })} MXN`;
@@ -371,7 +371,9 @@ function TiendaContent() {
          ───────────────────────────────────────────────────────────── */}
       <div className="bg-[#050505] border-b border-neutral-900/90 py-2 px-4 text-center">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light">
-          <span className="hidden sm:inline">ARCANO · BOUTIQUE PRIVADA MONTERREY</span>
+          <span className="hidden sm:inline">
+            {t("ARCANO · BOUTIQUE PRIVADA MONTERREY", "ARCANO · PRIVATE MONTERREY BOUTIQUE")}
+          </span>
           <span className="mx-auto sm:mx-0">
             ✦ {t("ENTREGA CONCIERGE SIN COSTO · SAN PEDRO · SAN JERÓNIMO · CUMBRES · LINDA VISTA", "VIP CONCIERGE DELIVERY · SAN PEDRO · SAN JERÓNIMO · CUMBRES · LINDA VISTA")} ✦
           </span>
@@ -382,7 +384,7 @@ function TiendaContent() {
             className="hidden sm:flex items-center gap-1.5 text-neutral-300 hover:text-[#C5A059] transition-colors"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-            <span>Concierge Directo</span>
+            <span>{t("Concierge Directo", "Direct Concierge")}</span>
           </a>
         </div>
       </div>
@@ -434,10 +436,13 @@ function TiendaContent() {
             <span className="w-3 h-3 rounded-full bg-[#C5A059] animate-ping flex-shrink-0" />
             <div>
               <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#C5A059] block font-semibold">
-                ✦ ORÁCULO DE LOS ARCANOS & RECOMENDADOR DE BUNDLES ✦
+                ✦ {t("ORÁCULO DE LOS ARCANOS & RECOMENDADOR DE BUNDLES", "ARCANA ORACLE & BUNDLE RECOMMENDER")} ✦
               </span>
               <span className="text-xs sm:text-sm font-serif text-white tracking-wide">
-                ¿Deseas hacer tu <strong className="text-[#FFE2A4]">Tirada Virtual de 3 Cartas</strong> con tu Nombre y Fecha Natal? Revela tu Tríada y llévate tu <strong className="text-[#25D366]">Bundle Sagrado con 20% de Descuento</strong>.
+                {t(
+                  "¿Deseas hacer tu Tirada Virtual de 3 Cartas con tu Nombre y Fecha Natal? Revela tu Tríada y llévate tu Bundle Sagrado con 20% de Descuento.",
+                  "Would you like to perform your Virtual 3-Card Spread with your Name and Birthdate? Reveal your Triad and claim your Sacred Bundle with 20% Discount."
+                )}
               </span>
             </div>
           </div>
@@ -447,7 +452,7 @@ function TiendaContent() {
             }}
             className="px-6 py-2.5 rounded-full bg-[#C5A059] hover:bg-[#d8b368] text-black font-sans font-bold text-xs tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(197,160,89,0.35)] hover:scale-105 cursor-pointer whitespace-nowrap"
           >
-            ✦ Iniciar Tirada Virtual ✦
+            ✦ {t("Iniciar Tirada Virtual", "Start Virtual Spread")} ✦
           </button>
         </div>
       </div>
@@ -724,13 +729,13 @@ function TiendaContent() {
                 {/* Encabezado del Arcano */}
                 <div>
                   <span className="text-[10px] tracking-[0.3em] uppercase text-[#C5A059] block mb-1 font-mono">
-                    ARCANO MAYOR {activeProduct.arcanoNumber || "✦"}
+                    {t("ARCANO MAYOR", "MAJOR ARCANA")} {activeProduct.arcanoNumber || "✦"}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-light tracking-wide text-white mb-2">
                     {activeProduct.name}
                   </h2>
                   <p className="text-xl font-normal text-white tracking-wider">
-                    {formatPrice(activeProduct.price)}
+                    {formatPrice(activeProduct.price, language)}
                   </p>
                 </div>
 
@@ -740,10 +745,13 @@ function TiendaContent() {
                     <span className="text-[#C5A059] text-sm mt-0.5">✨</span>
                     <div>
                       <p className="text-xs text-[#C5A059] font-medium tracking-wide">
-                        Pieza Única Consagrada — Entrega Privada Concierge
+                        {t("Pieza Única Consagrada — Entrega Privada Concierge", "Unique Consecrated Piece — Private Concierge Delivery")}
                       </p>
                       <p className="text-[11px] text-neutral-400 mt-0.5 leading-relaxed">
-                        Servicio en mano sin costo en San Pedro Garza García, San Jerónimo, Cumbres y Linda Vista.
+                        {t(
+                          "Servicio en mano sin costo en San Pedro Garza García, San Jerónimo, Cumbres y Linda Vista.",
+                          "Complimentary white-glove delivery in San Pedro, San Jerónimo, Cumbres, and Linda Vista."
+                        )}
                       </p>
                     </div>
                   </div>
@@ -752,7 +760,7 @@ function TiendaContent() {
                 {/* Selector de Zona de Entrega */}
                 <div>
                   <label className="block text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
-                    Zona de Entrega en Monterrey:
+                    {t("Zona de Entrega en Monterrey:", "Monterrey Delivery Zone:")}
                   </label>
                   <select
                     value={selectedDeliveryZone}
@@ -770,20 +778,20 @@ function TiendaContent() {
                 {/* Especificaciones Técnicas Fijas */}
                 <div className="space-y-2 border-t border-b border-neutral-800/80 py-4 text-xs text-neutral-300 font-light">
                   <div className="flex justify-between">
-                    <span className="text-neutral-400">Pureza:</span>
-                    <span className="text-white">100% Pura Piedra Mineral Grado AAA</span>
+                    <span className="text-neutral-400">{t("Pureza:", "Purity:")}</span>
+                    <span className="text-white">{t("100% Pura Piedra Mineral Grado AAA", "100% Pure AAA Grade Natural Gemstone")}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-400">Calibre:</span>
-                    <span className="text-white">Uniforme 8 mm (22 cuentas exactas)</span>
+                    <span className="text-neutral-400">{t("Calibre:", "Bead Size:")}</span>
+                    <span className="text-white">{t("Uniforme 8 mm (22 cuentas exactas)", "Uniform 8 mm (22 exact beads)")}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-400">Ensamble:</span>
-                    <span className="text-white">Elástico quirúrgico de alta tenacidad (sin metales)</span>
+                    <span className="text-neutral-400">{t("Ensamble:", "Assembly:")}</span>
+                    <span className="text-white">{t("Elástico quirúrgico de alta tenacidad (sin metales)", "High-tenacity surgical elastic (zero metals)")}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-400">Consagración:</span>
-                    <span className="text-white">Luna Llena ante Fuego Sagrado de 1.5 m</span>
+                    <span className="text-neutral-400">{t("Consagración:", "Consecration:")}</span>
+                    <span className="text-white">{t("Luna Llena ante Fuego Sagrado de 1.5 m", "Full Moon before 1.5m Sacred Fire")}</span>
                   </div>
                 </div>
 
@@ -800,12 +808,15 @@ function TiendaContent() {
                   onClick={handleConciergeClick}
                   className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#d8b368] text-black font-semibold text-xs tracking-[0.2em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg cursor-pointer hover:shadow-[0_0_20px_rgba(197,160,89,0.4)]"
                 >
-                  <span>Adquirir Pieza vía WhatsApp Concierge</span>
+                  <span>{t("Adquirir Pieza vía WhatsApp Concierge", "Acquire Piece via WhatsApp Concierge")}</span>
                   <span className="text-sm">↗</span>
                 </a>
 
                 <p className="text-[10px] text-center text-neutral-400 font-mono tracking-wider">
-                  Cierre directo con Asesor Personal · Garantía y autenticidad certificada
+                  {t(
+                    "Cierre directo con Asesor Personal · Garantía y autenticidad certificada",
+                    "Direct inquiry with Personal Advisor · Certified authenticity guarantee"
+                  )}
                 </p>
 
               </div>
@@ -821,10 +832,13 @@ function TiendaContent() {
         <div className="max-w-7xl mx-auto space-y-4">
           <span className="text-xl text-[#C5A059]">✦</span>
           <p className="text-xs tracking-[0.3em] uppercase text-white font-serif">
-            ARCANO · SABIDURÍA DE LOS ARCANOS
+            ARCANO · {t("SABIDURÍA DE LOS ARCANOS", "WISDOM OF THE ARCANA")}
           </p>
           <p className="text-[10px] tracking-widest text-neutral-400 uppercase max-w-lg mx-auto leading-relaxed">
-            22 Talismanes forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme (8 mm). Cero metales, cero dijes, máxima pureza geológica.
+            {t(
+              "22 Talismanes forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme (8 mm). Cero metales, cero dijes, máxima pureza geológica.",
+              "22 Talismans forged exclusively from 100% pure natural mineral stones of uniform 8mm caliber. Zero metals, zero charms, maximum geological purity."
+            )}
           </p>
           <p className="text-[9px] text-neutral-400 pt-4 font-mono">
             © {new Date().getFullYear()} ARCANO SOLUTIONS · MONTERREY, MÉXICO.
@@ -857,6 +871,7 @@ function ProductCard({
   priority?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const { language, t } = useLanguage();
 
   return (
     <button
@@ -901,12 +916,12 @@ function ProductCard({
 
         {/* Precio */}
         <p className="text-xs sm:text-[13px] text-neutral-300 font-light">
-          {formatPrice(product.price)}
+          {formatPrice(product.price, language)}
         </p>
 
         {/* Especificación de Calibre y Pureza */}
         <p className="text-[10px] sm:text-[11px] text-neutral-400 font-light truncate">
-          8mm · Pura piedra natural sobre elástico
+          {t("8mm · Pura piedra natural sobre elástico", "8mm · Pure natural stones on elastic")}
         </p>
 
         {/* Reseñas con Estrellas Doradas */}
@@ -931,6 +946,8 @@ function EditorialCard({
   highlight: EditorialHighlight;
   onSelect: (slug: string) => void;
 }) {
+  const { t } = useLanguage();
+
   return (
     <div
       onClick={() => onSelect(highlight.arcanoSlug)}
@@ -966,7 +983,7 @@ function EditorialCard({
             {highlight.headline}
           </h2>
           <div className="flex items-center gap-1.5 text-xs text-white/90 group-hover:text-[#C5A059] transition-colors underline underline-offset-4 decoration-neutral-500">
-            <span>{highlight.ctaText}</span>
+            <span>{t(highlight.ctaText, highlight.ctaText.replace("Descubrir", "Discover"))}</span>
             <span className="text-xs">↗</span>
           </div>
         </div>

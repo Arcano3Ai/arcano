@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Arcana } from "@/data/arcana";
 import { getAssetPath, handleImageError } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ArcanaCardProps {
   arcana: Arcana;
@@ -15,6 +16,7 @@ interface ArcanaCardProps {
 export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, priority = false }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <div
@@ -70,13 +72,13 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, pri
             <div className="absolute top-2 left-2 flex items-center gap-1 bg-obsidian-deep/90 border border-gold/40 px-2 py-0.5 rounded shadow-md pointer-events-none">
               <span className="text-gold text-[10px]">🎜</span>
               <span className="text-[8px] font-sans uppercase tracking-[0.15em] text-gold/90 font-medium">
-                Música Sacra
+                {t("Música Sacra", "Sacred Music")}
               </span>
             </div>
           )}
           <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between pointer-events-none">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gold/90 font-sans bg-obsidian/85 px-2 py-0.5 rounded border border-charcoal-border">
-              {arcana.element}
+              {t(arcana.element, arcana.element === "Fuego" ? "Fire" : arcana.element === "Agua" ? "Water" : arcana.element === "Aire" ? "Air" : arcana.element === "Tierra" ? "Earth" : "Aether")}
             </span>
             <span className="text-xs text-gold/90 font-serif">
               {arcana.glyph}
@@ -113,7 +115,7 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, pri
             onClick={() => onQuickView(arcana)}
             className="text-[10px] uppercase tracking-[0.18em] text-parchment-dim hover:text-gold transition-colors font-sans py-1"
           >
-            Vista rápida ✧
+            {t("Vista rápida ✧", "Quick view ✧")}
           </button>
         )}
 
@@ -122,7 +124,7 @@ export const ArcanaCard: React.FC<ArcanaCardProps> = ({ arcana, onQuickView, pri
           aria-label={`Explorar arcano ${arcana.name} (${arcana.number})`}
           className="text-[10px] uppercase tracking-[0.18em] text-gold hover:text-gold-light transition-colors font-sans ml-auto py-1"
         >
-          Explorar arcano →
+          {t("Explorar arcano →", "Explore arcana →")}
         </Link>
       </div>
     </div>

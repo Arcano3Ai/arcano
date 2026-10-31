@@ -3,10 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { CeremonialCheckoutModal } from "./CeremonialCheckoutModal";
 
 export function CeremonialCartDrawer() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const { dict } = useLanguage();
   const {
     items,
     isCartOpen,
@@ -63,10 +65,10 @@ export function CeremonialCartDrawer() {
             <span className="text-xl text-gold">🛒</span>
             <div>
               <h3 className="font-serif text-lg sm:text-xl text-parchment font-light">
-                Carrito Ceremonial
+                {dict.cart.title}
               </h3>
               <span className="text-[11px] text-parchment-muted font-sans uppercase tracking-widest">
-                {totalCount} {totalCount === 1 ? "pieza seleccionada" : "piezas seleccionadas"}
+                {totalCount} {totalCount === 1 ? dict.cart.selectedPieces_one : dict.cart.selectedPieces_other}
               </span>
             </div>
           </div>
@@ -74,7 +76,7 @@ export function CeremonialCartDrawer() {
           <button
             onClick={closeCart}
             className="w-9 h-9 rounded-full bg-obsidian/80 border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-obsidian transition-all text-sm cursor-pointer"
-            aria-label="Cerrar carrito"
+            aria-label={dict.cart.closeCart}
           >
             ✕
           </button>
@@ -85,12 +87,16 @@ export function CeremonialCartDrawer() {
           {hasFreeShipping ? (
             <div className="flex items-center gap-2 text-gold font-medium">
               <span>✨</span>
-              <span>¡Felicidades! Tu pedido califica para <strong>Envío Express Gratis</strong> a todo México.</span>
+              <span>{dict.cart.freeShippingSuccess}</span>
             </div>
           ) : (
             <div>
               <div className="flex justify-between items-center text-parchment-muted mb-1.5 text-[11px]">
-                <span>Agrega <strong>MXN ${amountNeededForFreeShipping.toLocaleString("es-MX")}</strong> más para <strong>Envío Gratis</strong></span>
+                <span>
+                  {dict.cart.freeShippingProgressPrefix}{" "}
+                  <strong>MXN ${amountNeededForFreeShipping.toLocaleString("es-MX")}</strong>{" "}
+                  {dict.cart.freeShippingProgressSuffix}
+                </span>
                 <span className="text-gold font-medium">{Math.round(freeShippingProgress)}%</span>
               </div>
               <div className="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-gold/20">
@@ -108,15 +114,15 @@ export function CeremonialCartDrawer() {
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center p-6 text-parchment-muted">
               <span className="text-4xl text-gold/40 mb-3">ᛟ</span>
-              <p className="font-serif text-lg text-parchment mb-2">Tu altar está vacío</p>
+              <p className="font-serif text-lg text-parchment mb-2">{dict.cart.emptyTitle}</p>
               <p className="text-xs font-sans leading-relaxed max-w-xs mb-6">
-                Añade quemadores de río, talismanes de alta joyería o dúos sagrados para armar tu pedido ceremonial.
+                {dict.cart.emptySubtitle}
               </p>
               <button
                 onClick={closeCart}
                 className="px-5 py-2.5 rounded text-xs uppercase tracking-[0.2em] font-sans font-medium text-obsidian bg-gold hover:bg-gold-light transition-all shadow-md"
               >
-                Explorar Colección
+                {dict.cart.exploreBoutique}
               </button>
             </div>
           ) : (
@@ -201,17 +207,17 @@ export function CeremonialCartDrawer() {
           <div className="p-5 sm:p-6 border-t border-gold/25 bg-obsidian/90 space-y-4">
             <div className="space-y-1.5 text-xs font-sans">
               <div className="flex justify-between text-parchment-muted">
-                <span>Subtotal ({totalCount} {totalCount === 1 ? "artículo" : "artículos"})</span>
+                <span>{dict.cart.subtotal} ({totalCount} {totalCount === 1 ? dict.cart.selectedPieces_one : dict.cart.selectedPieces_other})</span>
                 <span>MXN ${subtotal.toLocaleString("es-MX")}</span>
               </div>
               <div className="flex justify-between text-parchment-muted">
-                <span>Envío</span>
+                <span>{hasFreeShipping ? dict.cart.freeShippingBadge : "Envío"}</span>
                 <span className={hasFreeShipping ? "text-gold font-medium" : "text-parchment-muted"}>
-                  {hasFreeShipping ? "Gratis (Express)" : "Por cotizar a tu CP"}
+                  {hasFreeShipping ? "Gratis (Express)" : dict.cart.freeShippingNote}
                 </span>
               </div>
               <div className="flex justify-between text-base font-serif text-parchment pt-2 border-t border-gold/15">
-                <span className="text-gold">Total Estimado</span>
+                <span className="text-gold">Total</span>
                 <span className="font-medium text-gold">MXN ${subtotal.toLocaleString("es-MX")}</span>
               </div>
             </div>
@@ -222,7 +228,7 @@ export function CeremonialCartDrawer() {
               className="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-gold via-amber-400 to-gold text-obsidian font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-[0_0_25px_rgba(198,160,82,0.4)] hover:shadow-[0_0_35px_rgba(198,160,82,0.6)] hover:scale-[1.01] flex items-center justify-center gap-2 text-center group cursor-pointer"
             >
               <span className="text-base group-hover:scale-110 transition-transform">🔒</span>
-              <span>Proceder al Pago Seguro</span>
+              <span>{dict.cart.proceedToCheckout}</span>
               <span>→</span>
             </button>
 
@@ -247,7 +253,7 @@ export function CeremonialCartDrawer() {
               className="w-full py-2.5 px-4 rounded-lg border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/40 text-emerald-400 font-sans text-[11px] uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 text-center group cursor-pointer"
             >
               <span className="text-sm group-hover:scale-110 transition-transform">💬</span>
-              <span>O pedir con un Asesor por WhatsApp</span>
+              <span>{dict.cart.orderViaWhatsApp}</span>
               <span>↗</span>
             </a>
 
@@ -257,10 +263,11 @@ export function CeremonialCartDrawer() {
                 onClick={clearCart}
                 className="hover:text-red-400 transition-colors underline cursor-pointer"
               >
-                Vaciar carrito
+                {dict.cart.clearCart}
               </button>
-              <span className="flex items-center gap-1 text-[10px] text-gold/80">
-                🛡️ Transacciones Cifradas SSL 256-bit
+              <span className="text-[10px] text-parchment-dim flex items-center gap-1">
+                <span>🛡️</span>
+                <span>{dict.cart.secureCheckoutNote}</span>
               </span>
             </div>
           </div>

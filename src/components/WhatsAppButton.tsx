@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const WhatsAppButton: React.FC = () => {
+  const { t } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
@@ -16,7 +18,7 @@ export const WhatsAppButton: React.FC = () => {
   return (
     <aside
       id="whatsapp-floating-btn"
-      aria-label="Atención directa por WhatsApp"
+      aria-label={t("Atención directa por WhatsApp", "Direct attention via WhatsApp")}
       style={{
         position: "fixed",
         bottom: "max(1.25rem, calc(env(safe-area-inset-bottom, 0px) + 1.25rem))",
@@ -32,14 +34,14 @@ export const WhatsAppButton: React.FC = () => {
         }`}
       >
         <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-parchment bg-obsidian-deep/95 border border-gold/40 px-3 py-1.5 rounded shadow-lg backdrop-blur">
-          Hablar con ARCANO ✦
+          {t("Hablar con ARCANO ✦", "Speak with ARCANO ✦")}
         </span>
       </div>
 
       {/* Botón flotante ceremonial */}
       <a
         href={whatsappUrl}
-        aria-label="Contactar a ARCANO por WhatsApp"
+        aria-label={t("Contactar a ARCANO por WhatsApp", "Contact ARCANO via WhatsApp")}
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
@@ -47,7 +49,7 @@ export const WhatsAppButton: React.FC = () => {
         onMouseLeave={() => setIsHovered(false)}
         className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-gold/60 hover:border-gold bg-gradient-to-br from-[#1c1810] via-[#121118] to-[#08080a] text-gold hover:text-gold-light flex items-center justify-center shadow-[0_0_20px_rgba(198,160,82,0.3)] hover:shadow-[0_0_35px_rgba(198,160,82,0.6)] transition-all duration-500 hover:scale-105"
       >
-        <span className="sr-only">Contactar a ARCANO por WhatsApp</span>
+        <span className="sr-only">{t("Contactar a ARCANO por WhatsApp", "Contact ARCANO via WhatsApp")}</span>
         <svg
           aria-hidden="true"
           className="w-6 h-6 fill-current"

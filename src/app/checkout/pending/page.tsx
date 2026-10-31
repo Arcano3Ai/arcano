@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { paymentConfig } from "@/config/paymentConfig";
 import { brandConfig } from "@/config/brandConfig";
+import { useLanguage } from "@/context/LanguageContext";
 
 function PendingContent() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const orderId =
     searchParams.get("order_id") ||
@@ -14,7 +16,10 @@ function PendingContent() {
     "ARC-CEREMONIAL";
 
   const whatsappMessage = encodeURIComponent(
-    `¡Hola ARCANO! Adjunto el comprobante de pago para mi orden ceremonial *${orderId}*. Deseo que inicien la preparación.`
+    t(
+      `¡Hola ARCANO! Adjunto el comprobante de pago para mi orden ceremonial *${orderId}*. Deseo que inicien la preparación.`,
+      `Hello ARCANO! I attach the payment proof for my ceremonial order *${orderId}*. I look forward to beginning the preparation.`
+    )
   );
   const whatsappUrl = `https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMessage}`;
 
@@ -30,13 +35,16 @@ function PendingContent() {
             ⏳
           </div>
           <p className="text-xs font-sans uppercase tracking-[0.3em] text-amber-300/90 font-semibold mb-2">
-            ARCANO · Orden Registrada
+            {t("ARCANO · Orden Registrada", "ARCANO · Order Registered")}
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl text-parchment tracking-wide">
-            Pago en Proceso de Confirmación
+            {t("Pago en Proceso de Confirmación", "Payment Confirmation in Progress")}
           </h1>
           <p className="font-sans text-sm text-parchment-muted mt-2 max-w-lg mx-auto">
-            Hemos reservado tus piezas ceremoniales. Para iniciar el ritual de consagración, completa tu transferencia SPEI o abono en OXXO.
+            {t(
+              "Hemos reservado tus piezas ceremoniales. Para iniciar el ritual de consagración, completa tu transferencia SPEI o abono en OXXO.",
+              "We have reserved your ceremonial pieces. To begin the consecration ritual, please complete your bank transfer or deposit."
+            )}
           </p>
         </div>
 
@@ -45,7 +53,7 @@ function PendingContent() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gold/15 gap-4">
             <div>
               <span className="text-[11px] font-sans uppercase tracking-widest text-parchment-muted">
-                Referencia Ceremonial
+                {t("Referencia Ceremonial", "Ceremonial Reference")}
               </span>
               <p className="font-mono text-xl sm:text-2xl text-gold font-bold tracking-wider mt-0.5">
                 {orderId}
@@ -53,7 +61,7 @@ function PendingContent() {
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-950/40 border border-amber-500/40 text-amber-300 text-xs font-sans font-medium self-start sm:self-auto">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>Esperando Acreditación</span>
+              <span>{t("Esperando Acreditación", "Awaiting Clearance")}</span>
             </div>
           </div>
 
@@ -61,26 +69,26 @@ function PendingContent() {
           <div className="space-y-4">
             <h3 className="font-serif text-sm text-gold tracking-widest uppercase flex items-center gap-2">
               <span>🏦</span>
-              <span>Datos Oficiales para Transferencia Directa (SPEI)</span>
+              <span>{t("Datos Oficiales para Transferencia Directa (SPEI)", "Official Direct Bank Transfer Details (SPEI)")}</span>
             </h3>
 
             <div className="p-4 rounded-lg bg-obsidian/70 border border-gold/20 space-y-3 font-mono text-xs">
               <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1 border-b border-gold/10">
-                <span className="text-parchment-muted font-sans text-xs">Banco Destino:</span>
+                <span className="text-parchment-muted font-sans text-xs">{t("Banco Destino:", "Receiving Bank:")}</span>
                 <span className="text-parchment font-bold">{paymentConfig.speiDirect.bank}</span>
               </div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1 border-b border-gold/10">
-                <span className="text-parchment-muted font-sans text-xs">Beneficiario / Titular:</span>
+                <span className="text-parchment-muted font-sans text-xs">{t("Beneficiario / Titular:", "Beneficiary / Account Holder:")}</span>
                 <span className="text-gold font-semibold">{paymentConfig.speiDirect.beneficiary}</span>
               </div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1 border-b border-gold/10">
-                <span className="text-parchment-muted font-sans text-xs">CLABE Interbancaria:</span>
+                <span className="text-parchment-muted font-sans text-xs">{t("CLABE Interbancaria:", "CLABE / Account Number:")}</span>
                 <span className="text-amber-300 font-bold tracking-wider select-all text-sm">
                   {paymentConfig.speiDirect.clabe}
                 </span>
               </div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1">
-                <span className="text-parchment-muted font-sans text-xs">Concepto de Transferencia:</span>
+                <span className="text-parchment-muted font-sans text-xs">{t("Concepto de Transferencia:", "Payment Reference / Note:")}</span>
                 <span className="text-gold font-bold">{orderId}</span>
               </div>
             </div>
@@ -90,10 +98,13 @@ function PendingContent() {
           <div className="p-4 rounded-lg bg-obsidian/40 border border-gold/15 text-xs font-sans space-y-1.5">
             <p className="font-semibold text-parchment flex items-center gap-1.5">
               <span>🏪</span>
-              <span>¿Elegiste pagar en efectivo OXXO?</span>
+              <span>{t("¿Elegiste pagar en efectivo OXXO?", "Paying in cash via retail deposit?")}</span>
             </p>
             <p className="text-parchment-muted text-[11px] leading-relaxed">
-              Descarga o presenta en caja de cualquier tienda OXXO el código de barras generado por Mercado Pago / Spin. El pago se acredita automáticamente en minutos.
+              {t(
+                "Descarga o presenta en caja de cualquier tienda OXXO el código de barras generado por Mercado Pago / Spin. El pago se acredita automáticamente en minutos.",
+                "Download or present at the checkout counter the barcode generated by the checkout gateway. Payment clears automatically within minutes."
+              )}
             </p>
           </div>
 
@@ -101,10 +112,13 @@ function PendingContent() {
           <div className="p-4 rounded-lg bg-emerald-950/20 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-xs font-serif text-emerald-400 font-semibold">
-                ¿Ya realizaste tu transferencia o depósito?
+                {t("¿Ya realizaste tu transferencia o depósito?", "Already transferred or deposited?")}
               </p>
               <p className="text-[11px] font-sans text-parchment-muted mt-0.5">
-                Envía tu comprobante con el número {orderId} para acelerar el empaque.
+                {t(
+                  `Envía tu comprobante con el número ${orderId} para acelerar el empaque.`,
+                  `Send your receipt citing reference ${orderId} to fast-track packaging.`
+                )}
               </p>
             </div>
             <a
@@ -114,7 +128,7 @@ function PendingContent() {
               className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-sans text-xs uppercase tracking-wider font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2 whitespace-nowrap cursor-pointer"
             >
               <span>💬</span>
-              <span>Enviar Comprobante</span>
+              <span>{t("Enviar Comprobante", "Send Proof of Payment")}</span>
             </a>
           </div>
         </div>
@@ -125,7 +139,7 @@ function PendingContent() {
             href="/tienda"
             className="w-full sm:w-auto px-6 py-3 rounded-lg border border-gold/40 hover:border-gold hover:bg-gold/10 text-gold font-sans text-xs uppercase tracking-[0.2em] font-semibold transition-all text-center cursor-pointer"
           >
-            ← Volver a la Boutique
+            {t("← Volver a la Boutique", "← Return to Boutique")}
           </Link>
         </div>
       </div>
@@ -134,11 +148,12 @@ function PendingContent() {
 }
 
 export default function CheckoutPendingPage() {
+  const { t } = useLanguage();
   return (
     <Suspense
       fallback={
         <div className="min-h-screen bg-obsidian flex items-center justify-center text-gold font-serif">
-          Cargando datos de orden...
+          {t("Cargando datos de orden...", "Loading order details...")}
         </div>
       }
     >
