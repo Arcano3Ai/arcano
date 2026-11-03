@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { brandConfig } from "@/config/brandConfig";
+import { ArcanoLogo } from "@/components/ArcanoLogo";
 
 export const IntroScreen: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -70,30 +71,18 @@ export const IntroScreen: React.FC = () => {
         Entrar al santuario ✦
       </button>
 
-      {/* Luna tenue y resplandor cósmico */}
+      {/* Emblema Ceremonial y Logotipo ARCANO */}
       <div
-        className={`relative flex items-center justify-center transition-all duration-1000 ease-out transform ${
+        className={`relative flex flex-col items-center justify-center transition-all duration-1000 ease-out transform ${
           step >= 1 ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       >
-        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-b from-parchment/30 to-gold/10 blur-xl absolute" />
-        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-gold/40 flex items-center justify-center shadow-[0_0_25px_rgba(198,160,82,0.25)] relative overflow-hidden bg-obsidian/60">
-          <span className="text-gold text-2xl sm:text-3xl filter drop-shadow-[0_0_8px_rgba(198,160,82,0.6)]">
-            ☾
-          </span>
-        </div>
-      </div>
-
-      {/* Logotipo ARCANO */}
-      <div
-        className={`mt-8 text-center transition-all duration-1000 ease-out transform ${
-          step >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
-      >
-        <p className="font-serif text-3xl sm:text-5xl md:text-6xl tracking-[0.3em] text-parchment font-light drop-shadow-md">
-          {brandConfig.name}
-        </p>
-        <div className="h-[1px] w-16 mx-auto mt-4 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+        <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-gradient-to-b from-parchment/20 to-gold/10 blur-2xl absolute" />
+        <ArcanoLogo
+          variant="vertical"
+          showDescriptor={false}
+          className="w-64 sm:w-80 h-auto relative z-10"
+        />
       </div>
 
       {/* Descriptor y Frase mística */}

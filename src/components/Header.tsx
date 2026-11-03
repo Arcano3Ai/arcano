@@ -7,6 +7,7 @@ import { brandConfig } from "@/config/brandConfig";
 import { headerNavLinks } from "@/config/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { LanguageToggle, useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
 
@@ -46,15 +47,9 @@ export const Header: React.FC = () => {
         {/* LOGO */}
         <Link
           href="/"
-          className="group flex flex-col items-start focus:outline-none focus:ring-1 focus:ring-gold/50 rounded"
+          className="group flex items-center focus:outline-none focus:ring-1 focus:ring-gold/50 rounded"
         >
-          <span className="font-serif text-xl sm:text-2xl tracking-[0.25em] text-parchment group-hover:text-gold transition-colors duration-300 font-light flex items-center gap-2">
-            <span className="text-gold text-xs opacity-75">✦</span>
-            {brandConfig.name}
-          </span>
-          <span className="text-[9px] tracking-[0.28em] uppercase text-parchment-dim group-hover:text-parchment-muted transition-colors duration-300">
-            {brandConfig.descriptor}
-          </span>
+          <ArcanoLogo variant="horizontal" />
         </Link>
 
         {/* NAVEGACIÓN DESKTOP */}

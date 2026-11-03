@@ -1,6 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#08080a"/>
-  <circle cx="16" cy="16" r="14" stroke="#c6a052" stroke-width="1" stroke-opacity="0.4"/>
-  <path d="M18 9C13.5817 9 10 12.5817 10 17C10 21.4183 13.5817 25 18 25C19.7424 25 21.3503 24.4435 22.6644 23.4988C18.9179 23.0039 16 19.8052 16 16C16 12.1948 18.9179 8.99614 22.6644 8.50116C21.3503 7.55648 19.7424 7 18 7V9Z" fill="#c6a052"/>
-  <circle cx="21" cy="11" r="1" fill="#dfb76c"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" fill="none">
+  <defs>
+    <linearGradient id="gold3D" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff6d1" />
+      <stop offset="25%" stop-color="#ebd07e" />
+      <stop offset="55%" stop-color="#c59638" />
+      <stop offset="80%" stop-color="#f7df94" />
+      <stop offset="100%" stop-color="#875c14" />
+    </linearGradient>
+    <radialGradient id="moonRadial" cx="50%" cy="34%" r="54%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="35%" stop-color="#ffeaac" />
+      <stop offset="70%" stop-color="#cf9f3e" />
+      <stop offset="100%" stop-color="#7a5110" />
+    </radialGradient>
+  </defs>
+  <rect width="240" height="260" rx="48" fill="#07060b" />
+  <path d="M 107 37 A 88 88 0 1 0 133 37" fill="none" stroke="url(#gold3D)" stroke-width="2.4" opacity="0.92" />
+  <circle cx="32" cy="124" r="3.5" fill="#fff6d1" />
+  <circle cx="208" cy="124" r="3.5" fill="#fff6d1" />
+  <circle cx="107" cy="37" r="2.5" fill="#ebd07e" />
+  <circle cx="133" cy="37" r="2.5" fill="#ebd07e" />
+  <rect x="119" y="14" width="2" height="52" fill="url(#gold3D)" />
+  <circle cx="120" cy="14" r="2.5" fill="#fff6d1" />
+  <circle cx="120" cy="66" r="2.5" fill="#f7df94" />
+  <path d="M 64 78 A 68 68 0 1 0 176 78 A 56.5 55 0 1 1 64 78 Z" fill="url(#moonRadial)" stroke="url(#gold3D)" stroke-width="1.5" />
+  <path d="M 64 78 A 56.5 55 0 1 0 176 78" fill="none" stroke="#fffdf2" stroke-width="1.5" opacity="0.9" />
+  <g transform="translate(120, 102)">
+    <path d="M 0 -16 L 2.5 -2.5 L 16 0 L 2.5 2.5 L 0 16 L -2.5 2.5 L -16 0 L -2.5 -2.5 Z" fill="url(#gold3D)" transform="rotate(45)" />
+    <path d="M 0 -28 L 3.4 -3.4 L 26 0 L 3.4 3.4 L 0 28 L -3.4 3.4 L -26 0 L -3.4 -3.4 Z" fill="#fff6d1" />
+    <circle cx="0" cy="0" r="2.5" fill="#ffffff" />
+  </g>
+  <circle cx="120" cy="136" r="2.6" fill="#fff6d1" />
+  <circle cx="120" cy="144" r="1.8" fill="#ebd07e" />
+  <rect x="119" y="191" width="2" height="27" fill="url(#gold3D)" />
+  <path d="M 120 218 L 128 230 L 120 242 L 112 230 Z" fill="#07060b" stroke="url(#gold3D)" stroke-width="2.4" />
 </svg>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { brandConfig } from "@/config/brandConfig";
 import { footerNavLinks } from "@/config/navigation";
 import { TarotSocialIcons } from "@/components/TarotSocialIcons";
+import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const Footer: React.FC = () => {
@@ -20,14 +21,8 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-charcoal-border/70">
           {/* Columna Marca e Identidad */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="font-serif text-2xl tracking-[0.25em] text-parchment font-light flex items-center gap-2">
-                <span className="text-gold text-xs">✦</span>
-                {brandConfig.name}
-              </span>
-              <span className="block text-[9px] tracking-[0.28em] uppercase text-parchment-dim mt-0.5">
-                {brandConfig.descriptor}
-              </span>
+            <Link href="/" className="group inline-block">
+              <ArcanoLogo variant="horizontal" />
             </Link>
 
             <p className="font-serif italic text-sm text-parchment-muted max-w-sm leading-relaxed">
