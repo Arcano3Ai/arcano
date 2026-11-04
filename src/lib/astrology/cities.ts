@@ -68,9 +68,22 @@ export const CITIES_DATABASE: CityLocation[] = [
 ];
 
 export function searchCities(query: string): CityLocation[] {
-  if (!query || query.trim().length === 0) return CITIES_DATABASE.slice(0, 10);
-  const clean = query.toLowerCase().trim();
-  return CITIES_DATABASE.filter(
-    c => c.name.toLowerCase().includes(clean) || c.country.toLowerCase().includes(clean)
-  ).slice(0, 10);
+  if (!query || query.trim().length === 0) return CITIES_DATABASE.slice(0, 15);
+  const clean = query
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+
+  return CITIES_DATABASE.filter(c => {
+    const nameNorm = c.name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+    const countryNorm = c.country
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+    return nameNorm.includes(clean) || countryNorm.includes(clean);
+  }).slice(0, 15);
 }

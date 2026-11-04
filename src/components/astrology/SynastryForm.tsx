@@ -14,16 +14,16 @@ export default function SynastryForm({ onSubmit, isLoading = false }: SynastryFo
   const [nameA, setNameA] = useState('Primera Persona');
   const [dateA, setDateA] = useState('1992-03-15');
   const [timeA, setTimeA] = useState('10:00');
-  const [citySearchA, setCitySearchA] = useState('Madrid, España');
-  const [selectedCityA, setSelectedCityA] = useState<CityLocation>(CITIES_DATABASE[0]);
+  const [citySearchA, setCitySearchA] = useState('');
+  const [selectedCityA, setSelectedCityA] = useState<CityLocation | null>(null);
   const [showDropdownA, setShowDropdownA] = useState(false);
 
   // Persona B
   const [nameB, setNameB] = useState('Segunda Persona');
   const [dateB, setDateB] = useState('1994-08-22');
   const [timeB, setTimeB] = useState('16:30');
-  const [citySearchB, setCitySearchB] = useState('Buenos Aires, Argentina');
-  const [selectedCityB, setSelectedCityB] = useState<CityLocation>(CITIES_DATABASE[7]);
+  const [citySearchB, setCitySearchB] = useState('');
+  const [selectedCityB, setSelectedCityB] = useState<CityLocation | null>(null);
   const [showDropdownB, setShowDropdownB] = useState(false);
 
   const filteredA = searchCities(citySearchA);
@@ -37,6 +37,9 @@ export default function SynastryForm({ onSubmit, isLoading = false }: SynastryFo
     const [yB, mB, dB] = dateB.split('-');
     const [hB, minB] = timeB.split(':');
 
+    const resA = selectedCityA || filteredA[0] || CITIES_DATABASE[0];
+    const resB = selectedCityB || filteredB[0] || CITIES_DATABASE[7];
+
     const inputA: BirthDataInput = {
       name: nameA.trim() || 'Persona A',
       year: parseInt(yA, 10),
@@ -44,10 +47,10 @@ export default function SynastryForm({ onSubmit, isLoading = false }: SynastryFo
       day: parseInt(dA, 10),
       hour: parseInt(hA, 10),
       minute: parseInt(minA, 10),
-      cityName: `${selectedCityA.name}, ${selectedCityA.country}`,
-      latitude: selectedCityA.latitude,
-      longitude: selectedCityA.longitude,
-      timezoneOffsetHours: selectedCityA.defaultOffset,
+      cityName: selectedCityA ? `${selectedCityA.name}, ${selectedCityA.country}` : citySearchA || `${resA.name}, ${resA.country}`,
+      latitude: resA.latitude,
+      longitude: resA.longitude,
+      timezoneOffsetHours: resA.defaultOffset,
       houseSystem: 'placidus',
     };
 
@@ -58,10 +61,10 @@ export default function SynastryForm({ onSubmit, isLoading = false }: SynastryFo
       day: parseInt(dB, 10),
       hour: parseInt(hB, 10),
       minute: parseInt(minB, 10),
-      cityName: `${selectedCityB.name}, ${selectedCityB.country}`,
-      latitude: selectedCityB.latitude,
-      longitude: selectedCityB.longitude,
-      timezoneOffsetHours: selectedCityB.defaultOffset,
+      cityName: selectedCityB ? `${selectedCityB.name}, ${selectedCityB.country}` : citySearchB || `${resB.name}, ${resB.country}`,
+      latitude: resB.latitude,
+      longitude: resB.longitude,
+      timezoneOffsetHours: resB.defaultOffset,
       houseSystem: 'placidus',
     };
 

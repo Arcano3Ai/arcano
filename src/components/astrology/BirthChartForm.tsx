@@ -13,8 +13,8 @@ export default function BirthChartForm({ onSubmit, isLoading = false }: BirthCha
   const [name, setName] = useState('Consultante');
   const [dateStr, setDateStr] = useState('1995-07-20');
   const [timeStr, setTimeStr] = useState('14:30');
-  const [citySearch, setCitySearch] = useState('Madrid, España');
-  const [selectedCity, setSelectedCity] = useState<CityLocation>(CITIES_DATABASE[0]);
+  const [citySearch, setCitySearch] = useState('');
+  const [selectedCity, setSelectedCity] = useState<CityLocation | null>(null);
   const [houseSystem, setHouseSystem] = useState<HouseSystem>('placidus');
   const [showCityDropdown, setShowCityDropdown] = useState(false);
 
@@ -26,6 +26,13 @@ export default function BirthChartForm({ onSubmit, isLoading = false }: BirthCha
     const [yearStr, monthStr, dayStr] = dateStr.split('-');
     const [hourStr, minuteStr] = timeStr.split(':');
 
+    // Si no ha seleccionado de la lista, intentar match exacto o fallback
+    const resolvedCity: CityLocation =
+      selectedCity ||
+      filteredCities[0] ||
+      CITIES_DATABASE.find(c => c.name.toLowerCase() === 'monterrey') ||
+      CITIES_DATABASE[0];
+
     const inputData: BirthDataInput = {
       name: name.trim() || 'Consultante',
       year: parseInt(yearStr, 10),
@@ -33,10 +40,10 @@ export default function BirthChartForm({ onSubmit, isLoading = false }: BirthCha
       day: parseInt(dayStr, 10),
       hour: parseInt(hourStr, 10),
       minute: parseInt(minuteStr, 10),
-      cityName: `${selectedCity.name}, ${selectedCity.country}`,
-      latitude: selectedCity.latitude,
-      longitude: selectedCity.longitude,
-      timezoneOffsetHours: selectedCity.defaultOffset,
+      cityName: selectedCity ? `${selectedCity.name}, ${selectedCity.country}` : citySearch || `${resolvedCity.name}, ${resolvedCity.country}`,
+      latitude: resolvedCity.latitude,
+      longitude: resolvedCity.longitude,
+      timezoneOffsetHours: resolvedCity.defaultOffset,
       houseSystem,
     };
 
