@@ -28,7 +28,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-as.jpg",
       "/images/cards/peac.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Aventurina Verde, Hematita Dorada & Jaspe Paisaje",
     beadSize: "8mm",
@@ -70,7 +70,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-2.jpg",
       "/images/cards/pe02.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Jaspe Paisaje, Aventurina Verde & Hematita Gris",
     beadSize: "8mm",
@@ -112,7 +112,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-3.jpg",
       "/images/cards/pe03.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Jaspe Paisaje, Ónix Negro Mate & Hematita Dorada",
     beadSize: "8mm",
@@ -154,7 +154,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-4.jpg",
       "/images/cards/pe04.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Ónix Negro Brillante, Jaspe Rojo & Hematita",
     beadSize: "8mm",
@@ -196,7 +196,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-5.jpg",
       "/images/cards/pe05.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Lava Volcánica, Ónix Mate & Aventurina Verde",
     beadSize: "8mm",
@@ -238,7 +238,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-6.jpg",
       "/images/cards/pe06.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Aventurina Verde, Hematita Gris & Citrino Solar",
     beadSize: "8mm",
@@ -280,7 +280,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-7.jpg",
       "/images/cards/pe07.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Jaspe Paisaje, Aventurina Verde & Ojo de Tigre",
     beadSize: "8mm",
@@ -322,7 +322,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-8.jpg",
       "/images/cards/pe08.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Ónix Negro Mate, Jaspe Paisaje & Hematita Dorada",
     beadSize: "8mm",
@@ -364,7 +364,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-9.jpg",
       "/images/cards/pe09.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Aventurina Verde, Citrino Solar & Hematita Dorada",
     beadSize: "8mm",
@@ -406,7 +406,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-10.jpg",
       "/images/cards/pe10.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Ojo de Tigre Dorado, Aventurina Verde & Hematita Dorada",
     beadSize: "8mm",
@@ -448,7 +448,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-sota.jpg",
       "/images/cards/pepa.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Jaspe Paisaje, Aventurina Verde & Cuarzo Cristal",
     beadSize: "8mm",
@@ -490,7 +490,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-caballero.jpg",
       "/images/cards/pekn.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Ojo de Tigre Dorado, Ónix Negro Mate & Jaspe Paisaje",
     beadSize: "8mm",
@@ -532,7 +532,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-reina.jpg",
       "/images/cards/pequ.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Aventurina Verde, Jaspe Paisaje & Cuarzo Rosa",
     beadSize: "8mm",
@@ -574,7 +574,7 @@ export const orosTalismans: ShopProduct[] = [
     images: [
       "/images/shop/pulseras/brazalete-menor-oros-rey.jpg",
       "/images/cards/peki.webp",
-      "/images/shop/pulseras/aurum_hero_wrist.jpg",
+      "/images/shop/aurum_hero_wrist.jpg",
     ],
     stoneType: "Ónix Negro Brillante, Ojo de Tigre & Hematita Dorada",
     beadSize: "8mm",

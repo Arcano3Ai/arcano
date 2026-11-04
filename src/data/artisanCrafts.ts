@@ -188,7 +188,7 @@ export const BARRO_NEGRO_PRODUCTS: ArtisanProduct[] = [
     consecrationDetails: "Activado como tótem guardián del umbral doméstico contra energías densas",
     story: "El Jaguar (*Bidxaa*) en la cosmología zapoteca es el sol nocturno que atraviesa el inframundo sin ser derrotado. Su piel negra refleja la noche estrellada y su mirada fija protege el recinto sagrado.",
     description: "Imponente escultura de jaguar en posición de acecho. Cada roseta y cada músculo han sido pulidos con piedra de cuarzo antes del secado al cuero, logrando un lustre carbón intenso de presencia magnética.",
-    imageUrl: "/images/shop/barro-negro/jaguar-ceremonial-bruñido.jpg",
+    imageUrl: "/images/shop/barro-negro/jaguar-ceremonial-brunido.jpg",
     badge: "Guardián de Umbral",
     inStock: true,
     featured: true,
