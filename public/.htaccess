@@ -1,0 +1,28 @@
+# Arcano Web - Hostinger Apache Configuration
+RewriteEngine On
+RewriteBase /
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Force Trailing Slash on directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !index.html$
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [L,R=301]
+
+# Security Headers & Caching
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  
+  # Cache static assets
+  <FilesMatch "\.(ico|jpg|jpeg|png|gif|webp|svg|css|js|woff|woff2|ttf|mp3)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+</IfModule>
+
+# Custom Error Documents
+ErrorDocument 404 /404.html
