@@ -3,11 +3,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getAudioPath } from "@/lib/utils";
 
+const TARGET_VOLUME = 0.28; // Volumen sutil ceremonial
+
 export const AtmosphereAudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const getOrCreateAudio = () => {
     if (!audioRef.current && typeof window !== "undefined") {
@@ -15,43 +18,72 @@ export const AtmosphereAudioPlayer: React.FC = () => {
       const audio = new Audio(primaryUrl);
       audio.preload = "none";
       audio.loop = true;
-      audio.volume = 0.28; // Volumen sutil ceremonial
+      audio.volume = TARGET_VOLUME;
       audioRef.current = audio;
     }
     return audioRef.current;
   };
 
+  const startFadeIn = (audio: HTMLAudioElement) => {
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+    audio.volume = 0;
+    let vol = 0;
+    fadeIntervalRef.current = setInterval(() => {
+      vol = Math.min(TARGET_VOLUME, Math.round((vol + 0.03) * 100) / 100);
+      if (audioRef.current) {
+        audioRef.current.volume = vol;
+      }
+      if (vol >= TARGET_VOLUME) {
+        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      }
+    }, 150);
+  };
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Solo reanudar audio si el usuario lo activó explícitamente en una sesión previa
-    const isExplicitlyEnabled = localStorage.getItem("arcano_ambient_enabled") === "true";
+    // Si el usuario silenció explícitamente el audio en el pasado, no iniciamos automáticamente
+    const isExplicitlyDisabled = localStorage.getItem("arcano_ambient_enabled") === "false";
 
-    if (isExplicitlyEnabled) {
+    if (!isExplicitlyDisabled) {
+      let triggered = false;
+
       const handleFirstGesture = () => {
+        if (triggered) return;
+        triggered = true;
+        cleanupGestures();
+
         const audio = getOrCreateAudio();
         if (audio && audio.paused) {
           audio.preload = "auto";
+          startFadeIn(audio);
           audio
             .play()
             .then(() => {
               setIsPlaying(true);
               setHasInteracted(true);
             })
-            .catch(() => {});
+            .catch(() => {
+              // Si el navegador bloqueó el intento, permitir que el próximo toque lo reintente
+              triggered = false;
+            });
         }
-        cleanupGestures();
       };
 
       const cleanupGestures = () => {
-        window.removeEventListener("click", handleFirstGesture);
+        window.removeEventListener("scroll", handleFirstGesture);
         window.removeEventListener("touchstart", handleFirstGesture);
+        window.removeEventListener("touchmove", handleFirstGesture);
         window.removeEventListener("pointerdown", handleFirstGesture);
+        window.removeEventListener("click", handleFirstGesture);
       };
 
-      window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
+      // Escuchar el primer gesto táctil, scroll o toque de pantalla
       window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
+      window.addEventListener("touchmove", handleFirstGesture, { once: true, passive: true });
+      window.addEventListener("scroll", handleFirstGesture, { once: true, passive: true });
       window.addEventListener("pointerdown", handleFirstGesture, { once: true, passive: true });
+      window.addEventListener("click", handleFirstGesture, { once: true, passive: true });
     }
 
     let wasPlayingBeforeArcano = false;
@@ -82,6 +114,7 @@ export const AtmosphereAudioPlayer: React.FC = () => {
     return () => {
       window.removeEventListener("arcano_pause_ambient", handleArcanoPauseAmbient);
       window.removeEventListener("arcano_resume_ambient", handleArcanoResumeAmbient);
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
@@ -93,12 +126,15 @@ export const AtmosphereAudioPlayer: React.FC = () => {
     const audio = getOrCreateAudio();
     if (!audio) return;
 
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
       localStorage.setItem("arcano_ambient_enabled", "false");
     } else {
       audio.preload = "auto";
+      audio.volume = TARGET_VOLUME;
       audio
         .play()
         .then(() => {
