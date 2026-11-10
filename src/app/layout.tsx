@@ -169,7 +169,7 @@ export default function RootLayout({
         email: brandConfig.contact.email,
         priceRange: "$$",
         currenciesAccepted: "MXN",
-        paymentAccepted: "Efectivo, Tarjeta de Crédito/Débito, Mercado Pago, Stripe, Transferencia SPEI",
+        paymentAccepted: "Transferencia SPEI a Mercado Pago, WhatsApp Concierge",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Calzada San Pedro / Zona Metropolitana",
