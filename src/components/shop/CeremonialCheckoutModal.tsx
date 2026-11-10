@@ -11,12 +11,12 @@ interface CeremonialCheckoutModalProps {
   onClose: () => void;
 }
 
-type PaymentGateway = "mercadopago" | "stripe" | "paypal" | "spei_direct" | "whatsapp";
+type PaymentGateway = "spei_mercadopago" | "whatsapp";
 
 export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutModalProps) {
   const { items, totalCount, subtotal, hasFreeShipping, getWhatsAppOrderUrl, clearCart } = useCart();
 
-  const [selectedGateway, setSelectedGateway] = useState<PaymentGateway>("mercadopago");
+  const [selectedGateway, setSelectedGateway] = useState<PaymentGateway>("spei_mercadopago");
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -83,41 +83,29 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
         },
       };
 
-      // 1. Caso SPEI Directo (Cero Comisiones a cuenta oficial de Sergio Adrián Pérez Villarreal)
-      if (selectedGateway === "spei_direct") {
-        window.location.href = `/checkout/pending?gateway=spei_direct&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
+      // 1. Caso Transferencia SPEI a Mercado Pago W (Cero Comisiones a cuenta oficial de Sergio Adrián Pérez Villarreal)
+      if (selectedGateway === "spei_mercadopago") {
+        window.location.href = `/checkout/pending?gateway=spei_mercadopago&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
         return;
       }
 
-      // 2. Caso WhatsApp Concierge
+      // 2. Caso WhatsApp Concierge Oficial
       if (selectedGateway === "whatsapp") {
-        window.open(getWhatsAppOrderUrl(), "_blank");
+        const customWhatsAppMessage = encodeURIComponent(
+          `¡Hola ARCANO! Deseo acordar mi orden ceremonial *${orderId}* directamente por WhatsApp.\n\n` +
+          `📦 *Resumen de Orden:*\n` +
+          items.map(item => `• ${item.quantity}x ${item.name} (${item.optionLabel || "Edición Sagrada"}) - $${(item.price * item.quantity).toLocaleString("es-MX")} MXN`).join("\n") +
+          `\n\n💰 *Total a pagar:* $${finalTotal.toLocaleString("es-MX")} MXN\n` +
+          `📍 *Destino:* ${shippingForm.street} #${shippingForm.number}, Col. ${shippingForm.colonia}, ${shippingForm.city}, ${shippingForm.state} CP ${shippingForm.zipCode}\n` +
+          `📏 *Talla de muñeca:* ${shippingForm.wristSize}\n` +
+          `👤 *Titular:* ${shippingForm.name} (${shippingForm.phone})\n\n` +
+          `¿Me podrían proporcionar los datos para completar la transferencia SPEI a Mercado Pago?`
+        );
+
+        window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${customWhatsAppMessage}`, "_blank");
         onClose();
         return;
       }
-
-      // 3. Caso Mercado Pago, Stripe o PayPal en arquitectura estática (GitHub Pages)
-      // Generar orden ceremonial y conectar con el Concierge Oficial para enlace seguro
-      const gatewayNames: Record<string, string> = {
-        mercadopago: "Mercado Pago (Tarjetas, OXXO, hasta 12 MSI)",
-        stripe: "Stripe (Apple Pay, Google Pay, Tarjetas Internacionales)",
-        paypal: "PayPal Express",
-      };
-
-      const selectedName = gatewayNames[selectedGateway] || "Pago Digital";
-      const customWhatsAppMessage = encodeURIComponent(
-        `¡Hola ARCANO! He generado mi orden ceremonial *${orderId}* por *${selectedName}*.\n\n` +
-        `📦 *Resumen de Orden:*\n` +
-        items.map(item => `• ${item.quantity}x ${item.name} (${item.optionLabel || "Edición Sagrada"}) - $${(item.price * item.quantity).toLocaleString("es-MX")} MXN`).join("\n") +
-        `\n\n💰 *Total a pagar:* $${finalTotal.toLocaleString("es-MX")} MXN\n` +
-        `📍 *Destino:* ${shippingForm.street} #${shippingForm.number}, Col. ${shippingForm.colonia}, ${shippingForm.city}, ${shippingForm.state} CP ${shippingForm.zipCode}\n` +
-        `👤 *Titular:* ${shippingForm.name} (${shippingForm.phone})\n\n` +
-        `¿Me podrían proporcionar el enlace de pago oficial para completar la consagración?`
-      );
-
-      window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${customWhatsAppMessage}`, "_blank");
-      window.location.href = `/checkout/pending?gateway=${selectedGateway}&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
-      return;
     } catch (err: any) {
       console.error("Error al procesar pago:", err);
       setErrorMessage(err.message || "Ocurrió un error inesperado al iniciar el pago.");
@@ -340,136 +328,62 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
               <span className="w-8 h-[1px] bg-[#C5A059]/40" />
             </h3>
 
-            <div className="space-y-2.5">
-              
-              {/* Opción 1: Mercado Pago (Líder México) */}
+            <div className="space-y-3">
+              {/* Opción 1: Transferencia SPEI a Mercado Pago W */}
               <label
-                onClick={() => setSelectedGateway("mercadopago")}
-                className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${
-                  selectedGateway === "mercadopago"
-                    ? "bg-[#009EE3]/10 border-[#009EE3] shadow-[0_0_20px_rgba(0,158,227,0.3)] ring-1 ring-[#009EE3]"
+                onClick={() => setSelectedGateway("spei_mercadopago")}
+                className={`block p-4 rounded-xl border transition-all cursor-pointer ${
+                  selectedGateway === "spei_mercadopago"
+                    ? "bg-[#C5A059]/10 border-[#C5A059] shadow-[0_0_25px_rgba(197,160,89,0.3)] ring-1 ring-[#C5A059]"
                     : "bg-[#111111] border-neutral-800 hover:border-neutral-700"
                 }`}
               >
-                <input
-                  type="radio"
-                  name="paymentGateway"
-                  checked={selectedGateway === "mercadopago"}
-                  onChange={() => setSelectedGateway("mercadopago")}
-                  className="mt-1 accent-[#009EE3]"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-white flex items-center gap-1.5">
-                      <span>💙 Mercado Pago</span>
-                    </span>
-                    <span className="px-2 py-0.5 rounded-full bg-[#009EE3]/20 text-[#009EE3] text-[9px] font-mono font-bold">
-                      MÁS POPULAR MX
-                    </span>
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="paymentGateway"
+                    checked={selectedGateway === "spei_mercadopago"}
+                    onChange={() => setSelectedGateway("spei_mercadopago")}
+                    className="mt-1 accent-[#C5A059]"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-white flex items-center gap-1.5">
+                        <span>🏛️ Transferencia SPEI (Mercado Pago W)</span>
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#C5A059] text-[9px] font-mono font-bold">
+                        0% COMISIÓN
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
+                      Transfiere desde cualquier app bancaria a nuestra cuenta oficial y envía tu comprobante.
+                    </p>
+
+                    {/* Ficha bancaria oficial blindada */}
+                    <div className="mt-3 p-3 rounded-lg bg-black/60 border border-[#C5A059]/30 text-[11px] font-mono space-y-1.5">
+                      <div className="flex justify-between items-center text-neutral-400">
+                        <span>Banco:</span>
+                        <span className="text-white font-bold">Mercado Pago W</span>
+                      </div>
+                      <div className="flex justify-between items-center text-neutral-400">
+                        <span>Titular:</span>
+                        <span className="text-amber-200 font-medium">Sergio Adrián Pérez Villarreal</span>
+                      </div>
+                      <div className="flex justify-between items-center text-neutral-400 pt-1 border-t border-neutral-800">
+                        <span>CLABE:</span>
+                        <span className="text-[#C5A059] font-bold text-xs tracking-wider select-all">
+                          722969017074087021
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
-                    Tarjetas Débito/Crédito, <strong>SPEI Inmediato</strong>, <strong>OXXO Efectivo</strong> y hasta 12 MSI.
-                  </p>
                 </div>
               </label>
 
-              {/* Opción 2: Stripe (Google Pay / Apple Pay & Tarjetas) */}
-              <label
-                onClick={() => setSelectedGateway("stripe")}
-                className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${
-                  selectedGateway === "stripe"
-                    ? "bg-[#635BFF]/10 border-[#635BFF] shadow-[0_0_20px_rgba(99,91,255,0.3)] ring-1 ring-[#635BFF]"
-                    : "bg-[#111111] border-neutral-800 hover:border-neutral-700"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="paymentGateway"
-                  checked={selectedGateway === "stripe"}
-                  onChange={() => setSelectedGateway("stripe")}
-                  className="mt-1 accent-[#635BFF]"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-white flex items-center gap-1.5">
-                      <span>💳 Stripe · Google Pay / Apple Pay</span>
-                    </span>
-                    <span className="px-2 py-0.5 rounded-full bg-[#635BFF]/20 text-[#9B95FF] text-[9px] font-mono font-bold">
-                      1 CLIC
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
-                    Pago instantáneo con huella/FaceID (Google Pay / Apple Pay) o tarjetas internacionales.
-                  </p>
-                </div>
-              </label>
-
-              {/* Opción 3: PayPal */}
-              <label
-                onClick={() => setSelectedGateway("paypal")}
-                className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${
-                  selectedGateway === "paypal"
-                    ? "bg-[#0070BA]/10 border-[#0070BA] shadow-[0_0_20px_rgba(0,112,186,0.3)] ring-1 ring-[#0070BA]"
-                    : "bg-[#111111] border-neutral-800 hover:border-neutral-700"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="paymentGateway"
-                  checked={selectedGateway === "paypal"}
-                  onChange={() => setSelectedGateway("paypal")}
-                  className="mt-1 accent-[#0070BA]"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-white">
-                      🅿️ PayPal
-                    </span>
-                    <span className="px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-400 text-[9px] font-mono font-bold">
-                      PROTEGIDO
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
-                    Paga con saldo o tarjetas vinculadas a tu cuenta PayPal con Protección al Comprador.
-                  </p>
-                </div>
-              </label>
-
-              {/* Opción 4: Transferencia SPEI Directa (Cero Comisiones) */}
-              <label
-                onClick={() => setSelectedGateway("spei_direct")}
-                className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${
-                  selectedGateway === "spei_direct"
-                    ? "bg-[#C5A059]/10 border-[#C5A059] shadow-[0_0_20px_rgba(197,160,89,0.3)] ring-1 ring-[#C5A059]"
-                    : "bg-[#111111] border-neutral-800 hover:border-neutral-700"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="paymentGateway"
-                  checked={selectedGateway === "spei_direct"}
-                  onChange={() => setSelectedGateway("spei_direct")}
-                  className="mt-1 accent-[#C5A059]"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-white">
-                      🏛️ Transferencia SPEI Directa
-                    </span>
-                    <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#C5A059] text-[9px] font-mono font-bold">
-                      0% COMISIÓN
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
-                    Transfiere desde tu app bancaria a nuestra cuenta oficial <strong>Mercado Pago W</strong> y envía tu comprobante.
-                  </p>
-                </div>
-              </label>
-
-              {/* Opción 5: WhatsApp Concierge */}
+              {/* Opción 2: WhatsApp Concierge */}
               <label
                 onClick={() => setSelectedGateway("whatsapp")}
-                className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${
+                className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
                   selectedGateway === "whatsapp"
                     ? "bg-[#25D366]/10 border-[#25D366] shadow-[0_0_20px_rgba(37,211,102,0.3)] ring-1 ring-[#25D366]"
                     : "bg-[#111111] border-neutral-800 hover:border-neutral-700"
@@ -484,15 +398,15 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                 />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-white">
-                      💬 WhatsApp Concierge
+                    <span className="text-sm font-semibold text-white flex items-center gap-1.5">
+                      <span>💬 Pedido Asistido por WhatsApp</span>
                     </span>
                     <span className="px-2 py-0.5 rounded-full bg-[#25D366]/20 text-[#25D366] text-[9px] font-mono font-bold">
-                      PERSONALIZADO
+                      CONCIERGE
                     </span>
                   </div>
                   <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
-                    Atención personalizada uno a uno con un maestro de la orden para asesoría y pago manual.
+                    Atención personalizada uno a uno para acordar tu pedido, confirmar medidas y recibir asistencia directa por chat.
                   </p>
                 </div>
               </label>
@@ -523,13 +437,7 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
               className={`w-full py-4 rounded-xl font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-xl flex items-center justify-center gap-2 cursor-pointer ${
                 isProcessing
                   ? "bg-neutral-800 text-neutral-400 cursor-not-allowed"
-                  : selectedGateway === "mercadopago"
-                  ? "bg-[#009EE3] hover:bg-[#0089C7] text-white shadow-[0_0_25px_rgba(0,158,227,0.4)]"
-                  : selectedGateway === "stripe"
-                  ? "bg-[#635BFF] hover:bg-[#5349E0] text-white shadow-[0_0_25px_rgba(99,91,255,0.4)]"
-                  : selectedGateway === "paypal"
-                  ? "bg-[#FFC439] hover:bg-[#E5AF32] text-black shadow-[0_0_25px_rgba(255,196,57,0.4)]"
-                  : selectedGateway === "spei_direct"
+                  : selectedGateway === "spei_mercadopago"
                   ? "bg-[#C5A059] hover:bg-[#d8b368] text-black shadow-[0_0_25px_rgba(197,160,89,0.4)]"
                   : "bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-[0_0_25px_rgba(37,211,102,0.4)]"
               }`}
@@ -537,26 +445,11 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
               {isProcessing ? (
                 <>
                   <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Conectando Pasarela...</span>
+                  <span>Procesando Orden...</span>
                 </>
-              ) : selectedGateway === "mercadopago" ? (
+              ) : selectedGateway === "spei_mercadopago" ? (
                 <>
-                  <span>Pagar con Mercado Pago · MXN ${finalTotal.toLocaleString("es-MX")}</span>
-                  <span>↗</span>
-                </>
-              ) : selectedGateway === "stripe" ? (
-                <>
-                  <span>Pagar con Google Pay / Tarjeta · MXN ${finalTotal.toLocaleString("es-MX")}</span>
-                  <span>🔒</span>
-                </>
-              ) : selectedGateway === "paypal" ? (
-                <>
-                  <span>Pagar con PayPal · MXN ${finalTotal.toLocaleString("es-MX")}</span>
-                  <span>↗</span>
-                </>
-              ) : selectedGateway === "spei_direct" ? (
-                <>
-                  <span>Generar Ficha SPEI (CLABE Oficial)</span>
+                  <span>Ficha SPEI Mercado Pago · MXN ${finalTotal.toLocaleString("es-MX")}</span>
                   <span>🏛️</span>
                 </>
               ) : (

@@ -232,17 +232,13 @@ export function CeremonialCartDrawer() {
               <span>→</span>
             </button>
 
-            {/* Micro-badges de Pasarelas Soportadas */}
+            {/* Micro-badges de Métodos Oficiales */}
             <div className="flex items-center justify-center gap-2 text-[10px] text-parchment-muted/80 font-sans tracking-wider py-0.5">
-              <span>💳 Tarjetas</span>
+              <span>🏛️ SPEI Mercado Pago</span>
               <span>•</span>
-              <span>⚡ SPEI</span>
+              <span>💬 WhatsApp Concierge</span>
               <span>•</span>
-              <span>🏪 OXXO</span>
-              <span>•</span>
-              <span>🅿️ PayPal</span>
-              <span>•</span>
-              <span>GPay</span>
+              <span>🔒 0% Comisión</span>
             </div>
 
             {/* Botón Secundario de Asistencia WhatsApp */}
