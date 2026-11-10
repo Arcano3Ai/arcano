@@ -134,16 +134,16 @@ export default function InviernoLandingPage() {
           
           <div className="flex items-center justify-center gap-2">
             <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 line-through">
-              Precio Regular: $1,490 MXN
+              Precio Regular: $1,990 MXN
             </span>
             <span className="text-[10px] font-mono tracking-widest uppercase text-[#25D366] bg-[#25D366]/10 px-2 py-0.5 rounded-full border border-[#25D366]/30 font-semibold">
-              40% OFF
+              35% OFF
             </span>
           </div>
 
           <div>
             <div className="text-3xl sm:text-5xl font-serif text-[#FFE2A4] font-medium tracking-tight">
-              $890 <span className="text-xl font-light text-neutral-300">MXN</span>
+              $1,299 <span className="text-xl font-light text-neutral-300">MXN</span>
             </div>
             <p className="text-[11px] text-[#D4AF37] font-serif italic mt-1">
               ✦ Incluye Consagración Personalizada + Caja de Resguardo + Envío Asegurado ✦
@@ -365,7 +365,7 @@ export default function InviernoLandingPage() {
               <div className="text-left leading-tight">
                 <span className="block font-black text-xs sm:text-sm">APARTAR MI ARCANO</span>
                 <span className="block text-[10px] font-medium text-black/85">
-                  $890 MXN · Envío Express Gratis
+                  $1,299 MXN · Envío Express Gratis
                 </span>
               </div>
             </div>

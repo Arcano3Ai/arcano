@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Colección de Invierno: El Arcano que te Elige | ARCANO Sabiduría",
     description:
-      "Pulsera sagrada de Lapislázuli Afgano y Pirita. $890 MXN con Envío Express Asegurado sin costo a todo México.",
+      "Pulsera sagrada de Lapislázuli Afgano y Pirita. $1,299 MXN con Envío Express Asegurado sin costo a todo México.",
     images: [
       {
         url: "https://arcanosolutions.com/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Colección de Invierno: El Arcano que te Elige | ARCANO",
     description:
-      "Lapislázuli Afgano ceremonial con pirita dorada. $890 MXN con envío gratis.",
+      "Lapislázuli Afgano ceremonial con pirita dorada. $1,299 MXN con envío gratis.",
     images: ["https://arcanosolutions.com/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg"],
   },
 };
