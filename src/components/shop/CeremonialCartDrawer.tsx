@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { CeremonialCheckoutModal } from "./CeremonialCheckoutModal";
@@ -280,9 +281,10 @@ export function CeremonialCartDrawer() {
 }
 
 export function FloatingCartButton() {
+  const pathname = usePathname();
   const { totalCount, subtotal, openCart, isCartOpen } = useCart();
 
-  if (totalCount === 0 || isCartOpen) return null;
+  if (pathname?.startsWith("/invierno") || totalCount === 0 || isCartOpen) return null;
 
   return (
     <button

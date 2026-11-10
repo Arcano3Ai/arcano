@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { getAssetPath } from "@/lib/utils";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -9,7 +10,13 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const PwaRegister: React.FC = () => {
+  const pathname = usePathname();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+
+  // Ocultar banner de instalación en la landing de invierno (cero fugas de conversión)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
   const [showInstallBanner, setShowInstallBanner] = useState<boolean>(false);
   const [showIosGuide, setShowIosGuide] = useState<boolean>(false);
   const [isStandalone, setIsStandalone] = useState<boolean>(false);

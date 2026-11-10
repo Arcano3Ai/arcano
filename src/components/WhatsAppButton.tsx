@@ -1,13 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const WhatsAppButton: React.FC = () => {
+  const pathname = usePathname();
   const { t } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
+
+  // La landing /invierno tiene su propio Mega Sticky Button de WhatsApp
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   const handleClick = () => {
     trackEvent({ name: "click_whatsapp", params: { source: "floating_button" } });

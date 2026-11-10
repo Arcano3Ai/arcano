@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { brandConfig } from "@/config/brandConfig";
 import { footerNavLinks } from "@/config/navigation";
 import { TarotSocialIcons } from "@/components/TarotSocialIcons";
@@ -9,8 +10,14 @@ import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
   const { dict, t } = useLanguage();
+
+  // Aislar landing page de conversión de invierno (cero fugas)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   return (
     <footer className="relative bg-obsidian-deep text-parchment border-t border-charcoal-border pt-16 sm:pt-20 pb-12 overflow-hidden">

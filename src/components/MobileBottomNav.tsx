@@ -9,6 +9,12 @@ import { getWhatsAppUrl } from "@/config/brandConfig";
 
 export const MobileBottomNav: React.FC = () => {
   const pathname = usePathname();
+
+  // Aislar landing page de conversión de invierno (evita tapar el Sticky WhatsApp CTA)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
+
   const { totalCount, openCart } = useCart();
   const { dict } = useLanguage();
 

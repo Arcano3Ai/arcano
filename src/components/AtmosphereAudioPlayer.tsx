@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { getAudioPath } from "@/lib/utils";
 
 const TARGET_VOLUME = 0.28; // Volumen ceremonial sutil
 
 export const AtmosphereAudioPlayer: React.FC = () => {
+  const pathname = usePathname();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [hasInteracted, setHasInteracted] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -140,6 +142,10 @@ export const AtmosphereAudioPlayer: React.FC = () => {
         });
     }
   };
+
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   return (
     <div

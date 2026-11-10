@@ -18,6 +18,11 @@ export const Header: React.FC = () => {
   const { totalCount, openCart } = useCart();
   const { dict, t } = useLanguage();
 
+  // Aislar landing page de conversión de invierno (cero menús ni fugas)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);

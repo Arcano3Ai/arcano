@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { arcanaList, Arcana } from "@/data/arcana";
 import { getWhatsAppUrl } from "@/config/brandConfig";
 import { sacredAudio } from "@/lib/sacredAudio";
@@ -17,7 +18,13 @@ interface ChatMessage {
 }
 
 export const ArcanaAiBot: React.FC = () => {
+  const pathname = usePathname();
   const { language, t } = useLanguage();
+
+  // Aislar landing de invierno para evitar distracciones CRO
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputMessage, setInputMessage] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);

@@ -2,11 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const CookieConsentBanner: React.FC = () => {
+  const pathname = usePathname();
   const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  // Ocultar en la landing de conversión de invierno (cero obstrucciones CRO)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   useEffect(() => {
     // Comprobar si el usuario ya dio su consentimiento
