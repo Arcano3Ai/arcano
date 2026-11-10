@@ -10,7 +10,7 @@ export const metadata: Metadata = {
       "Pulsera sagrada de Lapislázuli Afgano y Pirita. $1,299 MXN con Envío Express Asegurado sin costo a todo México.",
     images: [
       {
-        url: "https://arcanosolutions.com/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
+        url: "https://arcanosolutions.com/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg",
         width: 1200,
         height: 1200,
         alt: "Pulsera de Lapislázuli Colección de Invierno - Arcano Sabiduría",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: "Colección de Invierno: El Arcano que te Elige | ARCANO",
     description:
       "Lapislázuli Afgano ceremonial con pirita dorada. $1,299 MXN con envío gratis.",
-    images: ["https://arcanosolutions.com/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg"],
+    images: ["https://arcanosolutions.com/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg"],
   },
 };
 

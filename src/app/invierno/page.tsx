@@ -12,14 +12,28 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
 
 const IMAGES = [
   {
-    src: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Detalle mineral y pirita",
-    title: "Detalle Mineral",
+    src: "/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Detalle mineral sagrado",
+    title: "Mineral y Pirita",
+    icon: "💎",
   },
   {
-    src: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Vista en muñeca de alta gama",
-    title: "Vista en Muñeca",
+    src: "/images/shop/invierno/pulsera-lapislazuli-marmol-lifestyle.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Vista en muñeca sobre mármol",
+    title: "En Muñeca",
+    icon: "🖐️",
+  },
+  {
+    src: "/images/shop/invierno/pulsera-lapislazuli-elegancia-traje.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Porte y alta joyería con traje",
+    title: "Alta Joyería",
+    icon: "👔",
+  },
+  {
+    src: "/images/shop/invierno/pulsera-lapislazuli-naturaleza-arbol.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — En madera sagrada y naturaleza",
+    title: "Naturaleza Viva",
+    icon: "🌿",
   },
 ];
 
@@ -37,7 +51,7 @@ export default function InviernoLandingPage() {
       <div className="bg-gradient-to-r from-[#120F08] via-[#2A210E] to-[#120F08] border-b border-[#D4AF37]/30 py-2.5 px-4 text-center sticky top-0 z-40 backdrop-blur-md">
         <div className="max-w-md mx-auto flex items-center justify-center gap-2 text-[11px] sm:text-xs font-serif tracking-[0.2em] uppercase text-[#FFE2A4]">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-          <span>✦ EDICIÓN DE SOLSTICIO · SÓLO 11 PIEZAS DISPONIBLES ✦</span>
+          <span>✦ ENVÍO GRATIS A TODO MÉXICO · EDICIÓN DE SOLSTICIO (11 DISPONIBLES) ✦</span>
         </div>
       </div>
 
@@ -91,8 +105,8 @@ export default function InviernoLandingPage() {
           </div>
 
           <div className="absolute top-5 right-5 z-20">
-            <span className="inline-block px-2.5 py-1 rounded-full bg-[#25D366]/20 backdrop-blur-md border border-[#25D366]/50 text-[9px] font-mono tracking-widest text-[#25D366] uppercase font-bold shadow-lg">
-              Envío Gratis
+            <span className="inline-block px-3 py-1 rounded-full bg-[#25D366]/25 backdrop-blur-md border border-[#25D366]/60 text-[9px] font-mono tracking-widest text-[#25D366] uppercase font-bold shadow-lg">
+              🚚 Envío Gratis a Todo México
             </span>
           </div>
 
@@ -108,21 +122,21 @@ export default function InviernoLandingPage() {
             />
           </div>
 
-          {/* Selector de Ángulos (2 tomas limpias) */}
-          <div className="grid grid-cols-2 gap-2 mt-3">
+          {/* Selector de Ángulos (4 tomas reales) */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3">
             {IMAGES.map((img, idx) => (
               <button
                 key={img.src}
                 type="button"
                 onClick={() => setActiveImageIndex(idx)}
-                className={`py-2 px-3 rounded-lg text-[11px] font-serif transition-all border flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-[11px] font-serif transition-all border flex items-center justify-center gap-1.5 cursor-pointer ${
                   activeImageIndex === idx
-                    ? "bg-[#D4AF37]/15 border-[#D4AF37] text-[#FFE2A4] shadow-[0_0_12px_rgba(212,175,55,0.25)]"
+                    ? "bg-[#D4AF37]/20 border-[#D4AF37] text-[#FFE2A4] shadow-[0_0_12px_rgba(212,175,55,0.3)] font-semibold"
                     : "bg-neutral-900/60 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700"
                 }`}
               >
-                <span>{idx === 0 ? "🔍" : "🖐️"}</span>
-                <span>{img.title}</span>
+                <span>{img.icon}</span>
+                <span className="truncate">{img.title}</span>
               </button>
             ))}
           </div>
@@ -145,9 +159,18 @@ export default function InviernoLandingPage() {
             <div className="text-3xl sm:text-5xl font-serif text-[#FFE2A4] font-medium tracking-tight">
               $1,299 <span className="text-xl font-light text-neutral-300">MXN</span>
             </div>
-            <p className="text-[11px] text-[#D4AF37] font-serif italic mt-1">
-              ✦ Incluye Consagración Personalizada + Caja de Resguardo + Envío Asegurado ✦
+            <p className="text-[11px] text-[#25D366] font-mono uppercase tracking-wider font-semibold mt-1">
+              ✦ ENVÍO GRATIS A TODO MÉXICO INCLUIDO ✦
             </p>
+            <p className="text-[11px] text-[#D4AF37] font-serif italic mt-0.5">
+              Consagración Personalizada + Estuche de Terciopelo + Empaque de Resguardo
+            </p>
+          </div>
+
+          {/* Banner de Envío Express */}
+          <div className="p-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center gap-2 text-[11px] text-[#25D366] font-serif font-medium">
+            <span>🚚</span>
+            <span>Entrega Express Asegurada sin costo a cualquier código postal del país (24-48 hrs)</span>
           </div>
 
           {/* CTA Principal de la Sección */}
@@ -240,6 +263,38 @@ export default function InviernoLandingPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
+            GALERÍA EDITORIAL: PORTE, DISTINCIÓN Y MÍSTICA
+           ───────────────────────────────────────────────────────────── */}
+        <section className="mb-10 space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-neutral-800 bg-neutral-950">
+              <Image
+                src={getAssetPath("/images/shop/invierno/pulsera-lapislazuli-blazer-porte.jpg")}
+                alt="Porte y distinción con Lapislázuli"
+                fill
+                sizes="(max-width: 640px) 50vw, 280px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
+                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Elegancia Sobria</span>
+              </div>
+            </div>
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-neutral-800 bg-neutral-950">
+              <Image
+                src={getAssetPath("/images/shop/invierno/pulsera-lapislazuli-editorial-2.jpg")}
+                alt="Detalle editorial de lapislázuli con pirita"
+                fill
+                sizes="(max-width: 640px) 50vw, 280px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
+                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Pirita & Cuarzo Vivo</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─────────────────────────────────────────────────────────────
             5. QUÉ RECIBIRÁS EN TU HOGAR (UNBOXING CEREMONIAL)
            ───────────────────────────────────────────────────────────── */}
         <section className="bg-[#0E0D14] border border-[#D4AF37]/30 rounded-2xl p-5 sm:p-6 mb-10 text-center space-y-4">
@@ -270,6 +325,13 @@ export default function InviernoLandingPage() {
               <span className="text-sm">🔮</span>
               <p className="text-xs font-serif text-white font-medium">Oráculo Personal</p>
               <p className="text-[10px] text-neutral-400 font-serif">Mensaje del Arcano que te eligió</p>
+            </div>
+            <div className="col-span-2 p-3 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-center gap-3">
+              <span className="text-xl">🚚</span>
+              <div>
+                <p className="text-xs font-serif text-[#25D366] font-semibold">Envío Gratis a Todo México</p>
+                <p className="text-[10px] text-neutral-300 font-serif">Paquetería express asegurada con guía directa a tu celular (24-48 hrs)</p>
+              </div>
             </div>
           </div>
         </section>
@@ -364,8 +426,8 @@ export default function InviernoLandingPage() {
               <span className="text-2xl sm:text-3xl">💬</span>
               <div className="text-left leading-tight">
                 <span className="block font-black text-xs sm:text-sm">APARTAR MI ARCANO</span>
-                <span className="block text-[10px] font-medium text-black/85">
-                  $1,299 MXN · Envío Express Gratis
+                <span className="block text-[10px] font-bold text-black/90">
+                  $1,299 MXN · ENVÍO GRATIS A TODO MÉXICO
                 </span>
               </div>
             </div>
