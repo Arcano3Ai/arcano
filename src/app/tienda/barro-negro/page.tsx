@@ -7,7 +7,6 @@ import { StoreGrandMenu } from "@/components/shop/StoreGrandMenu";
 import { BarroNegroParallaxHero } from "@/components/shop/BarroNegroParallaxHero";
 import { BARRO_NEGRO_PRODUCTS, ArtisanProduct } from "@/data/artisanCrafts";
 import { getWhatsAppUrl } from "@/config/brandConfig";
-import { CONCIERGE_ZONES, CONCIERGE_DEFAULT_ZONE } from "@/config/conciergeConfig";
 
 function formatPrice(price: number): string {
   return `$${price.toLocaleString("es-MX", {
@@ -18,7 +17,6 @@ function formatPrice(price: number): string {
 
 function BarroNegroContent() {
   const [activeProduct, setActiveProduct] = useState<ArtisanProduct | null>(null);
-  const [selectedDeliveryZone, setSelectedDeliveryZone] = useState<string>(CONCIERGE_DEFAULT_ZONE);
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
 
   // Manejo de tecla Escape y overflow del body
@@ -44,21 +42,21 @@ function BarroNegroContent() {
   // URL Concierge WhatsApp personalizada
   const conciergeUrl = useMemo(() => {
     if (!activeProduct) return "";
-    const msg = `Hola ARCANO Concierge, deseo adquirir la pieza maestra de Barro Negro: "${activeProduct.name}" (${activeProduct.formattedPrice}) de ${activeProduct.artisanName} en ${activeProduct.community}. Mi zona de entrega en Monterrey es: ${selectedDeliveryZone}. ¿Me podrían orientar con la entrega privada?`;
+    const msg = `Hola ARCANO Concierge, deseo adquirir la pieza maestra de Barro Negro: "${activeProduct.name}" (${activeProduct.formattedPrice}) de ${activeProduct.artisanName} en ${activeProduct.community}. Deseo coordinar el envío asegurado a mi domicilio en México. ¿Me podrían orientar con la compra?`;
     return getWhatsAppUrl(msg);
-  }, [activeProduct, selectedDeliveryZone]);
+  }, [activeProduct]);
 
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#C5A059] selection:text-black pt-20 sm:pt-24">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP BAR DISCRETO · CONCIERGE VIP MONTERREY
+          1. TOP BAR DISCRETO · COBERTURA MÉXICO
          ───────────────────────────────────────────────────────────── */}
       <div className="bg-[#050505] border-b border-neutral-900/90 py-2 px-4 text-center">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light">
           <span className="hidden sm:inline">ARCANO · ALFARERÍA ANCESTRAL OAXAQUEÑA</span>
           <span className="mx-auto sm:mx-0">
-            ✦ PIEZAS ÚNICAS DE SAN BARTOLO COYOTEPEC · CONCIERGE VIP MONTERREY ✦
+            ✦ PIEZAS ÚNICAS DE SAN BARTOLO COYOTEPEC · ENVÍO ASEGURADO A TODO MÉXICO ✦
           </span>
           <a
             href={getWhatsAppUrl("Hola ARCANO Concierge, deseo asesoría sobre las piezas maestras de Barro Negro Oaxaqueño.")}
@@ -255,38 +253,19 @@ function BarroNegroContent() {
                   </p>
                 </div>
 
-                {/* Distintivo Concierge VIP Monterrey */}
+                {/* Distintivo Cobertura Todo México */}
                 <div className="p-3.5 bg-neutral-900/70 border border-[#C5A059]/40 rounded-sm">
                   <div className="flex items-start gap-2.5">
-                    <span className="text-[#C5A059] text-sm mt-0.5">🏺</span>
+                    <span className="text-[#C5A059] text-sm mt-0.5">📦</span>
                     <div>
                       <p className="text-xs text-[#C5A059] font-medium tracking-wide">
-                        Pieza Única de Colección — Entrega Personal Concierge
+                        Pieza Única de Colección — Envío Asegurado a Todo México
                       </p>
                       <p className="text-[11px] text-neutral-400 mt-0.5 leading-relaxed">
-                        Transporte especializado acolchado sin costo en San Pedro Garza García, San Jerónimo, Cumbres y Linda Vista.
+                        Transporte especializado acolchado con envío express asegurado sin costo a cualquier código postal del país.
                       </p>
                     </div>
                   </div>
-                </div>
-
-                {/* Selector de Zona de Entrega */}
-                <div>
-                  <label htmlFor="delivery-zone-select" className="block text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
-                    Zona de Entrega en Monterrey:
-                  </label>
-                  <select
-                    id="delivery-zone-select"
-                    value={selectedDeliveryZone}
-                    onChange={(e) => setSelectedDeliveryZone(e.target.value)}
-                    className="w-full bg-[#111111] border border-neutral-700 hover:border-[#C5A059] text-white text-xs py-2.5 px-3.5 rounded-sm focus:outline-none focus:border-[#C5A059] transition-colors cursor-pointer"
-                  >
-                    {CONCIERGE_ZONES.map((zone) => (
-                      <option key={zone} value={zone} className="bg-black text-white">
-                        {zone}
-                      </option>
-                    ))}
-                  </select>
                 </div>
 
                 {/* Especificaciones Técnicas */}

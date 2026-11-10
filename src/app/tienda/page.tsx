@@ -367,15 +367,15 @@ function TiendaContent() {
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#C5A059] selection:text-black pt-20 sm:pt-24">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP BAR DISCRETO · CONCIERGE VIP MONTERREY
+          1. TOP BAR DISCRETO · COBERTURA NACIONAL
          ───────────────────────────────────────────────────────────── */}
       <div className="bg-[#050505] border-b border-neutral-900/90 py-2 px-4 text-center">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light">
           <span className="hidden sm:inline">
-            {t("ARCANO · BOUTIQUE PRIVADA MONTERREY", "ARCANO · PRIVATE MONTERREY BOUTIQUE")}
+            {t("ARCANO · ALTA JOYERÍA MINERAL", "ARCANO · SACRED MINERAL JEWELRY")}
           </span>
           <span className="mx-auto sm:mx-0">
-            ✦ {t("ENTREGA CONCIERGE SIN COSTO · SAN PEDRO · SAN JERÓNIMO · CUMBRES · LINDA VISTA", "VIP CONCIERGE DELIVERY · SAN PEDRO · SAN JERÓNIMO · CUMBRES · LINDA VISTA")} ✦
+            ✦ {t("ENVÍO EXPRESS ASEGURADO SIN COSTO A TODO MÉXICO", "INSURED COMPLIMENTARY EXPRESS SHIPPING ACROSS ALL MEXICO")} ✦
           </span>
           <a
             href={getWhatsAppUrl("Hola ARCANO Concierge, deseo asesoría personalizada para elegir un brazalete mineral.")}
@@ -739,40 +739,22 @@ function TiendaContent() {
                   </p>
                 </div>
 
-                {/* Distintivo Concierge VIP Monterrey */}
+                {/* Distintivo de Envío Asegurado Todo México */}
                 <div className="p-3.5 bg-neutral-900/70 border border-[#C5A059]/40 rounded-sm">
                   <div className="flex items-start gap-2.5">
                     <span className="text-[#C5A059] text-sm mt-0.5">✨</span>
                     <div>
                       <p className="text-xs text-[#C5A059] font-medium tracking-wide">
-                        {t("Pieza Única Consagrada — Entrega Privada Concierge", "Unique Consecrated Piece — Private Concierge Delivery")}
+                        {t("Pieza Única Consagrada — Envío Asegurado a Todo México", "Unique Consecrated Piece — Insured Shipping Across Mexico")}
                       </p>
                       <p className="text-[11px] text-neutral-400 mt-0.5 leading-relaxed">
                         {t(
-                          "Servicio en mano sin costo en San Pedro Garza García, San Jerónimo, Cumbres y Linda Vista.",
-                          "Complimentary white-glove delivery in San Pedro, San Jerónimo, Cumbres, and Linda Vista."
+                          "Envío express sin costo a cualquier código postal de la República Mexicana. Empaque de resguardo ceremonial incluido.",
+                          "Complimentary express shipping to any postal code in Mexico. Ceremonial gift packaging included."
                         )}
                       </p>
                     </div>
                   </div>
-                </div>
-
-                {/* Selector de Zona de Entrega */}
-                <div>
-                  <label className="block text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
-                    {t("Zona de Entrega en Monterrey:", "Monterrey Delivery Zone:")}
-                  </label>
-                  <select
-                    value={selectedDeliveryZone}
-                    onChange={(e) => setSelectedDeliveryZone(e.target.value)}
-                    className="w-full bg-[#111111] border border-neutral-700 hover:border-[#C5A059] text-white text-xs py-2.5 px-3.5 rounded-sm focus:outline-none focus:border-[#C5A059] transition-colors cursor-pointer"
-                  >
-                    {CONCIERGE_ZONES.map((zone) => (
-                      <option key={zone} value={zone} className="bg-black text-white">
-                        {zone}
-                      </option>
-                    ))}
-                  </select>
                 </div>
 
                 {/* Especificaciones Técnicas Fijas */}

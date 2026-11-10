@@ -7,7 +7,6 @@ import { StoreGrandMenu } from "@/components/shop/StoreGrandMenu";
 import { WixarikaVisionExperience } from "@/components/shop/WixarikaVisionExperience";
 import { ARTE_HUICHOL_PRODUCTS, ArtisanProduct } from "@/data/artisanCrafts";
 import { getWhatsAppUrl } from "@/config/brandConfig";
-import { CONCIERGE_ZONES, CONCIERGE_DEFAULT_ZONE } from "@/config/conciergeConfig";
 
 function formatPrice(price: number): string {
   return `$${price.toLocaleString("es-MX", {
@@ -18,7 +17,6 @@ function formatPrice(price: number): string {
 
 function ArteHuicholContent() {
   const [activeProduct, setActiveProduct] = useState<ArtisanProduct | null>(null);
-  const [selectedDeliveryZone, setSelectedDeliveryZone] = useState<string>(CONCIERGE_DEFAULT_ZONE);
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,21 +40,21 @@ function ArteHuicholContent() {
 
   const conciergeUrl = useMemo(() => {
     if (!activeProduct) return "";
-    const msg = `Hola ARCANO Concierge, deseo adquirir la pieza sagrada de Arte Huichol / Wixárika: "${activeProduct.name}" (${activeProduct.formattedPrice}) creada por ${activeProduct.artisanName} en ${activeProduct.community}. Mi zona de entrega en Monterrey es: ${selectedDeliveryZone}. ¿Me podrían orientar con la entrega privada?`;
+    const msg = `Hola ARCANO Concierge, deseo adquirir la pieza sagrada de Arte Huichol / Wixárika: "${activeProduct.name}" (${activeProduct.formattedPrice}) creada por ${activeProduct.artisanName} en ${activeProduct.community}. Deseo coordinar el envío asegurado a mi domicilio en México. ¿Me podrían orientar con la compra?`;
     return getWhatsAppUrl(msg);
-  }, [activeProduct, selectedDeliveryZone]);
+  }, [activeProduct]);
 
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#FF9100] selection:text-black pt-20 sm:pt-24">
       
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP BAR DISCRETO · CONCIERGE VIP MONTERREY
+          1. TOP BAR DISCRETO · COBERTURA MÉXICO
          ───────────────────────────────────────────────────────────── */}
       <div className="bg-[#050505] border-b border-neutral-900/90 py-2 px-4 text-center">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light">
           <span className="hidden sm:inline">ARCANO · ARTE CEREMONIAL WIXÁRIKA</span>
           <span className="mx-auto sm:mx-0">
-            ✦ OBRAS SAGRADAS DE WIRIKUTA · CONCIERGE VIP MONTERREY ✦
+            ✦ OBRAS SAGRADAS DE WIRIKUTA · ENVÍO ASEGURADO A TODO MÉXICO ✦
           </span>
           <a
             href={getWhatsAppUrl("Hola ARCANO Concierge, deseo asesoría sobre las piezas ceremoniales de Arte Huichol.")}
@@ -224,34 +222,16 @@ function ArteHuicholContent() {
 
                 <div className="p-3.5 bg-neutral-900/70 border border-[#FF9100]/40 rounded-sm">
                   <div className="flex items-start gap-2.5">
-                    <span className="text-[#FF9100] text-sm mt-0.5">🦌</span>
+                    <span className="text-[#FF9100] text-sm mt-0.5">📦</span>
                     <div>
                       <p className="text-xs text-[#FF9100] font-medium tracking-wide">
-                        Obra Sagrada de Colección — Entrega Personal Concierge
+                        Obra Sagrada de Colección — Envío Asegurado a Todo México
                       </p>
                       <p className="text-[11px] text-neutral-400 mt-0.5 leading-relaxed">
-                        Transporte museográfico especializado para entrega en mano en San Pedro Garza García, San Jerónimo, Cumbres y Linda Vista.
+                        Transporte museográfico especializado con envío express asegurado sin costo a cualquier código postal de la República Mexicana.
                       </p>
                     </div>
                   </div>
-                </div>
-
-                <div>
-                  <label htmlFor="delivery-zone-select" className="block text-[11px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
-                    Zona de Entrega en Monterrey:
-                  </label>
-                  <select
-                    id="delivery-zone-select"
-                    value={selectedDeliveryZone}
-                    onChange={(e) => setSelectedDeliveryZone(e.target.value)}
-                    className="w-full bg-[#111111] border border-neutral-700 hover:border-[#FF9100] text-white text-xs py-2.5 px-3.5 rounded-sm focus:outline-none focus:border-[#FF9100] transition-colors cursor-pointer"
-                  >
-                    {CONCIERGE_ZONES.map((zone) => (
-                      <option key={zone} value={zone} className="bg-black text-white">
-                        {zone}
-                      </option>
-                    ))}
-                  </select>
                 </div>
 
                 <div className="space-y-2 border-t border-b border-neutral-800/80 py-4 text-xs text-neutral-300 font-light">

@@ -357,22 +357,12 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
                     Calibre uniforme de 8mm, consagradas a tu medida en Monterrey, N.L.
                   </p>
 
-                  {/* Selector de Zona VIP Monterrey */}
+                  {/* Distintivo de Envío Asegurado Todo México */}
                   <div className="pt-2">
-                    <label className="block text-[10px] font-sans tracking-widest uppercase text-neutral-400 mb-2 font-medium">
-                      Zona de Entrega Concierge Privada en MTY:
-                    </label>
-                    <select
-                      value={selectedZone}
-                      onChange={(e) => setSelectedZone(e.target.value)}
-                      className="w-full sm:w-auto px-4 py-2.5 bg-neutral-900 border border-neutral-700 rounded-lg text-xs font-serif text-white focus:border-[#C5A059] focus:outline-none cursor-pointer"
-                    >
-                      {CONCIERGE_ZONES.map((zone) => (
-                        <option key={zone} value={zone}>
-                          {zone}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-neutral-900/90 border border-[#C5A059]/40 text-xs font-serif text-neutral-200">
+                      <span className="text-[#C5A059]">✨</span>
+                      <span>Envío Express Asegurado sin costo a cualquier código postal de México</span>
+                    </div>
                   </div>
                 </div>
 
@@ -401,7 +391,7 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
                   </a>
 
                   <div className="text-[10px] text-neutral-400 font-serif">
-                    Entrega VIP sin costo en San Pedro, San Jerónimo, Cumbres y Linda Vista
+                    ✦ Envío Express Asegurado sin costo a todo México
                   </div>
                 </div>
 

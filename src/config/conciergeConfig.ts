@@ -59,14 +59,16 @@ export function buildConciergeWhatsAppUrl(payload: ConciergeWhatsAppPayload): st
 
   const sku = product.id.toUpperCase();
   const productLink = `https://arcanosolutions.com/tienda/?item=${encodeURIComponent(product.slug)}`;
+  const destinationText = selectedZone && !selectedZone.includes("Monterrey") && selectedZone !== "San Pedro Garza García"
+    ? `\n📍 *Destino:* ${selectedZone}`
+    : `\n📍 *Cobertura:* Envío Express Asegurado a Todo México`;
 
   const message = `✨ Hola ARCANO, me interesa adquirir esta pieza de su colección:
 💎 *Pieza:* ${product.name} (${sku})
-💰 *Inversión:* $${formattedPrice} MXN
-📍 *Entrega Concierge en:* ${selectedZone}
+💰 *Inversión:* $${formattedPrice} MXN${destinationText}
 🔗 *Link de la pieza:* ${productLink}
 
-¿Está disponible para entrega privada?`;
+¿Tienen disponibilidad para coordinar el envío express?`;
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

@@ -208,8 +208,8 @@ export function buildBundleWhatsAppUrl(
     `• Precio Regular (3 piezas): $${bundle.originalPrice.toLocaleString("es-MX")} MXN\n` +
     `• Precio Especial Tríada (20% OFF): $${bundle.bundlePrice.toLocaleString("es-MX")} MXN\n` +
     `• Ahorro de la Tríada: $${bundle.savings.toLocaleString("es-MX")} MXN\n` +
-    `📍 Zona de Entrega VIP en MTY: ${selectedZone}\n\n` +
-    `Por favor confírmenme para coordinar la entrega privada de mis tres piezas consagradas.`;
+    `📍 Cobertura: Envío Express Asegurado a Todo México\n\n` +
+    `Por favor confírmenme para coordinar el envío asegurado de mis tres piezas consagradas.`;
 
   return getWhatsAppUrl(msg);
 }
