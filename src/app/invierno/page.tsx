@@ -163,7 +163,7 @@ export default function InviernoLandingPage() {
               ✦ ENVÍO GRATIS A TODO MÉXICO INCLUIDO ✦
             </p>
             <p className="text-[11px] text-[#D4AF37] font-serif italic mt-0.5">
-              Consagración Personalizada + Estuche de Terciopelo + Empaque de Resguardo
+              ✦ Consagración Ritual Personalizada con tu Nombre y Fecha ✦
             </p>
           </div>
 
@@ -305,7 +305,7 @@ export default function InviernoLandingPage() {
             Tu Paquete Ceremonial Incluye
           </h3>
 
-          <div className="grid grid-cols-2 gap-3 text-left pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left pt-2">
             <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-sm">💎</span>
               <p className="text-xs font-serif text-white font-medium">Pulsera de Lapislázuli</p>
@@ -317,16 +317,11 @@ export default function InviernoLandingPage() {
               <p className="text-[10px] text-neutral-400 font-serif">Garantía mineral firmada</p>
             </div>
             <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
-              <span className="text-sm">🌑</span>
-              <p className="text-xs font-serif text-white font-medium">Bolsa de Terciopelo</p>
-              <p className="text-[10px] text-neutral-400 font-serif">Resguardo sagrado con sello áureo</p>
-            </div>
-            <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-sm">🔮</span>
               <p className="text-xs font-serif text-white font-medium">Oráculo Personal</p>
               <p className="text-[10px] text-neutral-400 font-serif">Mensaje del Arcano que te eligió</p>
             </div>
-            <div className="col-span-2 p-3 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-center gap-3">
+            <div className="sm:col-span-3 p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-center gap-3">
               <span className="text-xl">🚚</span>
               <div>
                 <p className="text-xs font-serif text-[#25D366] font-semibold">Envío Gratis a Todo México</p>
