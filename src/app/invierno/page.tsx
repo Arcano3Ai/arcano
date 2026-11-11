@@ -167,10 +167,17 @@ export default function InviernoLandingPage() {
             </p>
           </div>
 
-          {/* Banner de Envío Express */}
-          <div className="p-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center gap-2 text-[11px] text-[#25D366] font-serif font-medium">
-            <span>🚚</span>
-            <span>Entrega Express Asegurada sin costo a cualquier código postal del país (24-48 hrs)</span>
+          {/* Banner de Envío Express y Recolección */}
+          <div className="p-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-[11px] text-[#25D366] font-serif font-medium text-center">
+            <span className="flex items-center gap-1.5">
+              <span>🚚</span>
+              <span>Envío Gratis a Todo México (24-48 hrs)</span>
+            </span>
+            <span className="hidden sm:inline text-neutral-500">•</span>
+            <span className="flex items-center gap-1.5 text-[#FFE2A4]">
+              <span>📍</span>
+              <span>Recolección en Persona en Arcano Sabiduría (Agua Fría, N.L.)</span>
+            </span>
           </div>
 
           {/* CTA Principal de la Sección */}
@@ -305,27 +312,69 @@ export default function InviernoLandingPage() {
             Tu Paquete Ceremonial Incluye
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left pt-2">
+          <div className="grid grid-cols-2 gap-3 text-left pt-2">
             <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-sm">💎</span>
               <p className="text-xs font-serif text-white font-medium">Pulsera de Lapislázuli</p>
               <p className="text-[10px] text-neutral-400 font-serif">Calibrada exacta a tu muñeca</p>
             </div>
             <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
-              <span className="text-sm">📜</span>
-              <p className="text-xs font-serif text-white font-medium">Certificado Foliado</p>
-              <p className="text-[10px] text-neutral-400 font-serif">Garantía mineral firmada</p>
-            </div>
-            <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-sm">🔮</span>
               <p className="text-xs font-serif text-white font-medium">Oráculo Personal</p>
               <p className="text-[10px] text-neutral-400 font-serif">Mensaje del Arcano que te eligió</p>
             </div>
-            <div className="sm:col-span-3 p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-center gap-3">
-              <span className="text-xl">🚚</span>
+
+            {/* Modalidad 1: Envío Gratis a Domicilio */}
+            <div className="col-span-2 p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-start gap-3">
+              <span className="text-xl flex-shrink-0">🚚</span>
               <div>
-                <p className="text-xs font-serif text-[#25D366] font-semibold">Envío Gratis a Todo México</p>
-                <p className="text-[10px] text-neutral-300 font-serif">Paquetería express asegurada con guía directa a tu celular (24-48 hrs)</p>
+                <p className="text-xs font-serif text-[#25D366] font-semibold">Opción 1: Envío Gratis Express a Todo México</p>
+                <p className="text-[10px] text-neutral-300 font-serif">Paquetería express asegurada (DHL / FedEx / Estafeta) con guía directa a tu WhatsApp (24-48 hrs).</p>
+              </div>
+            </div>
+
+            {/* Modalidad 2: Recolección en Persona en Arcano Sabiduría */}
+            <div className="col-span-2 p-3.5 rounded-xl bg-black/70 border border-[#D4AF37]/50 space-y-3">
+              <div className="flex items-start gap-2.5">
+                <span className="text-xl flex-shrink-0">📍</span>
+                <div>
+                  <p className="text-xs font-serif text-[#FFE2A4] font-semibold">
+                    Opción 2: Recolección en Persona en Arcano Sabiduría
+                  </p>
+                  <p className="text-[11px] text-neutral-300 font-serif">
+                    Morelos 654, Sector San Jorge, 66620 Agua Fría, N.L.
+                  </p>
+                  <p className="text-[10px] text-neutral-400 font-serif mt-0.5">
+                    Entrega personal en mano con tu pieza consagrada a tu medida (previa cita por WhatsApp).
+                  </p>
+                </div>
+              </div>
+
+              {/* Google Maps Embed */}
+              <div className="w-full rounded-lg overflow-hidden border border-neutral-800/80 shadow-inner bg-[#0C0B10]">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14366.457051368692!2d-100.1367173!3d25.816296949999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662eee5ad0365d9%3A0x756c78f54dbd4e77!2sMorelos%20654%2C%20Sector%20San%20Jorge%2C%2066620%20Agua%20Fr%C3%ADa%2C%20N.L.!5e0!3m2!1ses-419!2smx!4v1794356140047!5m2!1ses-419!2smx"
+                  width="100%"
+                  height="220"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Recolección en persona en Arcano Sabiduría - Morelos 654, Agua Fría, N.L."
+                  className="w-full aspect-video sm:h-[220px]"
+                />
+              </div>
+
+              <div className="flex items-center justify-between pt-0.5">
+                <span className="text-[10px] text-neutral-400 font-mono">Agua Fría, Apodaca / N.L.</span>
+                <a
+                  href="https://maps.google.com/?q=Morelos+654,+Sector+San+Jorge,+66620+Agua+Fr%C3%ADa,+N.L."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] text-[#D4AF37] hover:underline font-mono inline-flex items-center gap-1 font-semibold"
+                >
+                  Abrir en Google Maps ↗
+                </a>
               </div>
             </div>
           </div>
@@ -380,7 +429,11 @@ export default function InviernoLandingPage() {
               <p className="text-neutral-400 text-[11px]">Aceptamos Transferencia SPEI a Mercado Pago o por WhatsApp Concierge directo con confirmación inmediata.</p>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
-              <p className="text-white font-medium">¿Cuánto tarda el envío?</p>
+              <p className="text-white font-medium">¿Puedo recogerla en persona?</p>
+              <p className="text-neutral-400 text-[11px]">Sí, con gusto. Puedes recogerla directamente en nuestro taller ceremonial en Morelos 654, Sector San Jorge, Agua Fría, N.L. Al apartar por WhatsApp, coordinamos tu horario para entregártela en mano lista y consagrada a tu medida.</p>
+            </div>
+            <div className="pt-2 border-t border-neutral-800/70">
+              <p className="text-white font-medium">¿Cuánto tarda el envío a domicilio?</p>
               <p className="text-neutral-400 text-[11px]">Enviamos por paquetería express asegurada (FedEx / DHL / Estafeta) con entrega en 24 a 48 horas en cualquier código postal de México.</p>
             </div>
           </div>
@@ -391,7 +444,7 @@ export default function InviernoLandingPage() {
            ───────────────────────────────────────────────────────────── */}
         <footer className="text-center text-[10px] font-serif text-neutral-400 pb-12 space-y-2 border-t border-neutral-900 pt-6">
           <p className="tracking-widest uppercase text-neutral-300">
-            ARCANO SABIDURÍA · MONTERREY, MÉXICO
+            ARCANO SABIDURÍA · MORELOS 654, AGUA FRÍA, N.L. · MÉXICO
           </p>
           <p>
             Colección Oficial de Invierno · Todos los derechos reservados © {new Date().getFullYear()}
