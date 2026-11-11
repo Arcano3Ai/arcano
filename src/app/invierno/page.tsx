@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { getAssetPath } from "@/lib/utils";
+import { trackWhatsAppConversion } from "@/lib/analytics";
 
 // Mensaje directo y sin fricción para el enlace wa.me
 const WHATSAPP_PHONE = "528121912778";
@@ -39,6 +40,15 @@ const IMAGES = [
 
 export default function InviernoLandingPage() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const handleWhatsAppClick = (source: string) => {
+    trackWhatsAppConversion({
+      source,
+      value: 1299,
+      currency: "MXN",
+      item_name: "Pulsera de Lapislázuli Invierno + Porta Incienso Áurico",
+    });
+  };
 
   return (
     <div
@@ -182,9 +192,12 @@ export default function InviernoLandingPage() {
 
           {/* CTA Principal de la Sección */}
           <a
+            id="btn-whatsapp-invierno-hero"
+            data-gtm="whatsapp-conversion"
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => handleWhatsAppClick("hero_price_card")}
             className="w-full py-4 px-6 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-bold text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(37,211,102,0.5)] flex items-center justify-center gap-3 cursor-pointer group"
           >
             <span className="text-2xl group-hover:scale-110 transition-transform">💬</span>
@@ -276,9 +289,12 @@ export default function InviernoLandingPage() {
 
           {/* Mini CTA hacia WhatsApp con la promoción */}
           <a
+            id="btn-whatsapp-invierno-promo"
+            data-gtm="whatsapp-conversion"
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => handleWhatsAppClick("promo_porta_incienso")}
             className="w-full py-3 px-4 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/50 text-[#25D366] font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <span>💬 Apartar Pulsera + Reclamar Porta Incienso Gratis</span>
@@ -555,9 +571,12 @@ export default function InviernoLandingPage() {
       >
         <div className="max-w-md mx-auto">
           <a
+            id="btn-whatsapp-invierno-sticky"
+            data-gtm="whatsapp-conversion"
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => handleWhatsAppClick("sticky_bottom_cta")}
             className="w-full py-3.5 sm:py-4 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-extrabold text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(37,211,102,0.6)] flex items-center justify-between gap-3 cursor-pointer"
           >
             <div className="flex items-center gap-2.5">
