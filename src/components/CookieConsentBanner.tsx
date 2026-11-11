@@ -10,11 +10,6 @@ export const CookieConsentBanner: React.FC = () => {
   const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  // Ocultar en la landing de conversión de invierno (cero obstrucciones CRO)
-  if (pathname?.startsWith("/invierno")) {
-    return null;
-  }
-
   useEffect(() => {
     // Comprobar si el usuario ya dio su consentimiento
     const consent = localStorage.getItem("arcano_cookies_consent");
@@ -36,6 +31,12 @@ export const CookieConsentBanner: React.FC = () => {
     localStorage.setItem("arcano_cookies_consent", "necessary");
     setIsVisible(false);
   };
+
+  // Ocultar en la landing de conversión de invierno (cero obstrucciones CRO)
+  // IMPORTANTE: Situado después de todos los hooks para respetar las Reglas de React (React Error #310)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   if (!isVisible) return null;
 

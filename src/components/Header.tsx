@@ -18,11 +18,6 @@ export const Header: React.FC = () => {
   const { totalCount, openCart } = useCart();
   const { dict, t } = useLanguage();
 
-  // Aislar landing page de conversión de invierno (cero menús ni fugas)
-  if (pathname?.startsWith("/invierno")) {
-    return null;
-  }
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
@@ -39,6 +34,12 @@ export const Header: React.FC = () => {
   const handleBookingClick = () => {
     trackEvent({ name: "click_booking", params: { source: "header_cta" } });
   };
+
+  // Aislar landing page de conversión de invierno (cero menús ni fugas)
+  // IMPORTANTE: Situado después de todos los hooks para respetar las Reglas de React (React Error #310)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   return (
     <header

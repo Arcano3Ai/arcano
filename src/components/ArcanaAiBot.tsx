@@ -21,10 +21,6 @@ export const ArcanaAiBot: React.FC = () => {
   const pathname = usePathname();
   const { language, t } = useLanguage();
 
-  // Aislar landing de invierno para evitar distracciones CRO
-  if (pathname?.startsWith("/invierno")) {
-    return null;
-  }
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputMessage, setInputMessage] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
@@ -291,6 +287,12 @@ export const ArcanaAiBot: React.FC = () => {
       handleSendMessage();
     }
   };
+
+  // Aislar landing de invierno para evitar distracciones CRO
+  // IMPORTANTE: Situado después de todos los hooks para respetar las Reglas de React (React Error #310)
+  if (pathname?.startsWith("/invierno")) {
+    return null;
+  }
 
   return (
     <>
