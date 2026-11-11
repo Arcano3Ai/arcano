@@ -238,10 +238,10 @@ export default function InviernoLandingPage() {
             </div>
             <div className="space-y-1">
               <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Liga de Alta Tenacidad & Tapa-Nudo Protector
+                Liga Elástica de Alta Tenacidad
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                Armada sobre polímero elastómero alemán reforzado con memoria perpetua. El nudo central queda sellado bajo un cilindro protector de acero bañado en oro ritual para una durabilidad indestructible.
+                Armada artesanalmente sobre polímero elastómero reforzado con memoria perpetua. Resistente, sumamente cómoda al contacto con tu piel y diseñada para conservar su elasticidad sagrada día tras día.
               </p>
             </div>
           </div>
