@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArcanoLogo } from "@/components/ArcanoLogo";
@@ -9,7 +9,7 @@ import { trackWhatsAppConversion } from "@/lib/analytics";
 
 // Mensaje directo y sin fricción para el enlace wa.me
 const WHATSAPP_PHONE = "528121912778";
-const WHATSAPP_RAW_MESSAGE = "Hola, vi el video del Arcano de Invierno en YouTube y quiero apartar mi pulsera con la promoción del Porta Incienso Áurico. ¿Me ayudas con mi medida?";
+const WHATSAPP_RAW_MESSAGE = "Hola, quiero apartar mi pulsera Arcano de Invierno ($1,299 MXN) con el Porta Incienso Áurico de regalo";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_RAW_MESSAGE)}`;
 
 const IMAGES = [
@@ -48,6 +48,16 @@ const IMAGES = [
 export default function InviernoLandingPage() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  // Asegurar compatibilidad estricta con Google Ads Tag Assistant y atributos onclick nativos
+  useEffect(() => {
+    const buttons = document.querySelectorAll<HTMLAnchorElement>(
+      "#btn-whatsapp-invierno-hero, #btn-whatsapp-invierno-promo, #btn-whatsapp-invierno-sticky"
+    );
+    buttons.forEach((btn) => {
+      btn.setAttribute("onclick", "return gtag_report_conversion(this.href);");
+    });
+  }, []);
+
   const handleWhatsAppClick = (source: string) => {
     trackWhatsAppConversion({
       source,
@@ -55,6 +65,18 @@ export default function InviernoLandingPage() {
       currency: "MXN",
       item_name: "Pulsera de Lapislázuli Invierno + Porta Incienso Áurico",
     });
+  };
+
+  const handleWhatsAppCta = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    source: string
+  ) => {
+    handleWhatsAppClick(source);
+    if (typeof window !== "undefined" && typeof (window as any).gtag_report_conversion === "function") {
+      e.preventDefault();
+      (window as any).gtag_report_conversion(WHATSAPP_URL);
+      return false;
+    }
   };
 
   return (
@@ -204,7 +226,7 @@ export default function InviernoLandingPage() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => handleWhatsAppClick("hero_price_card")}
+            onClick={(e) => handleWhatsAppCta(e, "hero_price_card")}
             className="w-full py-4 px-6 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-bold text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(37,211,102,0.5)] flex items-center justify-center gap-3 cursor-pointer group"
           >
             <span className="text-2xl group-hover:scale-110 transition-transform">💬</span>
@@ -301,7 +323,7 @@ export default function InviernoLandingPage() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => handleWhatsAppClick("promo_porta_incienso")}
+            onClick={(e) => handleWhatsAppCta(e, "promo_porta_incienso")}
             className="w-full py-3 px-4 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/50 text-[#25D366] font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <span>💬 Apartar Pulsera + Reclamar Porta Incienso Gratis</span>
@@ -613,7 +635,7 @@ export default function InviernoLandingPage() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => handleWhatsAppClick("sticky_bottom_cta")}
+            onClick={(e) => handleWhatsAppCta(e, "sticky_bottom_cta")}
             className="w-full py-3.5 sm:py-4 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-extrabold text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(37,211,102,0.6)] flex items-center justify-between gap-3 cursor-pointer"
           >
             <div className="flex items-center gap-2.5">

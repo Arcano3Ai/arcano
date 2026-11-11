@@ -103,9 +103,9 @@ export function trackWhatsAppConversion(params: {
       currency: currency,
     });
 
-    // Evento de conversión explícito de Google Ads
+    // Evento de conversión explícito de Google Ads (Demand Gen Invierno)
     window.gtag("event", "conversion", {
-      send_to: "AW-18219380453",
+      send_to: "AW-18219380453/Ro8pCNn5tsgcEOXd1u9D",
       value: value,
       currency: currency,
       transaction_id: `lead_${Date.now()}`,

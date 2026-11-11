@@ -39,5 +39,44 @@ export default function InviernoLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {/* 1. Google tag (gtag.js) y función de conversión para Google Ads */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18219380453" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18219380453');
+
+  function gtag_report_conversion(url) {
+    var redirected = false;
+    var callback = function () {
+      if (!redirected && typeof(url) !== 'undefined') {
+        redirected = true;
+        window.location.href = url;
+      }
+    };
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18219380453/Ro8pCNn5tsgcEOXd1u9D',
+        'value': 1299.0,
+        'currency': 'MXN',
+        'event_callback': callback
+      });
+      // Fallback de seguridad (800ms) por si el navegador bloquea el callback
+      setTimeout(callback, 800);
+    } else {
+      window.location.href = url;
+    }
+    return false;
+  }
+          `,
+        }}
+      />
+      {children}
+    </>
+  );
 }
