@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { getAssetPath } from "@/lib/utils";
 import { trackWhatsAppConversion } from "@/lib/analytics";
@@ -552,11 +553,41 @@ export default function InviernoLandingPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
+            7.5 DESCUBRIR OTRAS PIEZAS (SALIDA SECUNDARIA SEGURA / ZERO DISTRACCIÓN HERO)
+           ───────────────────────────────────────────────────────────── */}
+        <section className="bg-[#0B0A0F] border border-neutral-800/80 rounded-xl p-4 sm:p-5 mb-10 text-center space-y-2">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#D4AF37] font-mono">
+            ¿Buscas otra piedra o talismán?
+          </p>
+          <p className="text-xs text-neutral-400 font-serif max-w-sm mx-auto leading-relaxed">
+            Explora las colecciones completas de alta joyería mineral, cuarzos y piezas de arte sagrado en nuestra boutique oficial.
+          </p>
+          <div className="pt-1">
+            <Link
+              href="/tienda/"
+              className="inline-flex items-center gap-1.5 text-xs font-serif text-[#FFE2A4] hover:text-white border-b border-[#D4AF37]/50 hover:border-[#D4AF37] pb-0.5 transition-colors"
+            >
+              <span>Explorar Catálogo de la Tienda</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* ─────────────────────────────────────────────────────────────
             8. FOOTER MINIMALISTA
            ───────────────────────────────────────────────────────────── */}
         <footer className="text-center text-[10px] font-serif text-neutral-400 pb-12 space-y-2 border-t border-neutral-900 pt-6">
           <p className="tracking-widest uppercase text-neutral-300">
             ARCANO SABIDURÍA · MORELOS 654, AGUA FRÍA, N.L. · MÉXICO
+          </p>
+          <p className="space-x-3 text-neutral-500 text-[11px]">
+            <Link href="/tienda/" className="hover:text-[#D4AF37] transition-colors underline">
+              Boutique Completa
+            </Link>
+            <span>•</span>
+            <Link href="/contacto/" className="hover:text-[#D4AF37] transition-colors underline">
+              Contacto
+            </Link>
           </p>
           <p>
             Colección Oficial de Invierno · Todos los derechos reservados © {new Date().getFullYear()}
