@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg`,
+        url: `${siteConfig.url}/images/shop/invierno/pulsera-lapislazuli-producto-marmol.jpg`,
         width: 1200,
         height: 1200,
         alt: "Pulsera de Lapislázuli Colección de Invierno - ARCANO Sabiduría",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Colección de Invierno: Pulsera de Lapislázuli Natural | ARCANO",
     description:
       "Lapislázuli mineral 8mm con pirita dorada. $1,299 MXN con Envío Gratis y Porta Incienso Áurico de regalo.",
-    images: [`${siteConfig.url}/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg`],
+    images: [`${siteConfig.url}/images/shop/invierno/pulsera-lapislazuli-producto-marmol.jpg`],
   },
 };
 

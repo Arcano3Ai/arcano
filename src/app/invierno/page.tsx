@@ -13,28 +13,34 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
 
 const IMAGES = [
   {
-    src: "/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Detalle mineral y pirita",
-    title: "Mineral y Pirita",
+    src: "/images/shop/invierno/pulsera-lapislazuli-producto-marmol.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Vista completa sobre mármol blanco",
+    title: "Pulsera",
     icon: "💎",
   },
   {
-    src: "/images/shop/invierno/pulsera-lapislazuli-marmol-lifestyle.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Vista en muñeca sobre mármol",
+    src: "/images/shop/invierno/pulsera-lapislazuli-en-muneca.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Puesta en muñeca con blazer",
     title: "En Muñeca",
     icon: "🖐️",
   },
   {
-    src: "/images/shop/invierno/pulsera-lapislazuli-elegancia-traje.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Porte y elegancia para uso diario",
-    title: "Elegancia",
+    src: "/images/shop/invierno/pulsera-lapislazuli-porte-traje.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Porte elegante con traje y mancuernillas",
+    title: "Con Traje",
     icon: "👔",
   },
   {
-    src: "/images/shop/invierno/pulsera-lapislazuli-naturaleza-arbol.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — En madera y naturaleza",
-    title: "Piedra Viva",
-    icon: "🌿",
+    src: "/images/shop/invierno/pulsera-lapislazuli-macro-pirita.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — Detalle macro de las cuentas con pirita dorada",
+    title: "Macro Pirita",
+    icon: "🔍",
+  },
+  {
+    src: "/images/shop/invierno/pulsera-lapislazuli-sahumado-palosanto.jpg",
+    alt: "Pulsera de Lapislázuli de Invierno — En mano con palo santo humeante",
+    title: "Palo Santo",
+    icon: "🔥",
   },
 ];
 
@@ -132,20 +138,20 @@ export default function InviernoLandingPage() {
             />
           </div>
 
-          {/* Selector de Ángulos (4 tomas reales) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3">
+          {/* Selector de Ángulos (5 tomas reales verificadas) */}
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5 sm:gap-2 mt-3">
             {IMAGES.map((img, idx) => (
               <button
                 key={img.src}
                 type="button"
                 onClick={() => setActiveImageIndex(idx)}
-                className={`py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-[11px] font-serif transition-all border flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-2 px-1.5 sm:px-2 rounded-lg text-[10px] sm:text-[11px] font-serif transition-all border flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer ${
                   activeImageIndex === idx
                     ? "bg-[#D4AF37]/20 border-[#D4AF37] text-[#FFE2A4] shadow-[0_0_12px_rgba(212,175,55,0.3)] font-semibold"
                     : "bg-neutral-900/60 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700"
                 }`}
               >
-                <span>{img.icon}</span>
+                <span className="text-xs">{img.icon}</span>
                 <span className="truncate">{img.title}</span>
               </button>
             ))}
