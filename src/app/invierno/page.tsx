@@ -5,15 +5,15 @@ import Image from "next/image";
 import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { getAssetPath } from "@/lib/utils";
 
-// Mensaje exacto solicitado para el enlace wa.me
+// Mensaje directo y sin fricción para el enlace wa.me
 const WHATSAPP_PHONE = "528121912778";
-const WHATSAPP_RAW_MESSAGE = "Hola, vi el video del Arcano de Invierno en YouTube y quiero apartar el mío. ¿Me ayudas?";
+const WHATSAPP_RAW_MESSAGE = "Hola, vi el video del Arcano de Invierno en YouTube y quiero apartar mi pulsera con la promoción del Porta Incienso Áurico. ¿Me ayudas con mi medida?";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_RAW_MESSAGE)}`;
 
 const IMAGES = [
   {
     src: "/images/shop/invierno/pulsera-lapislazuli-cuadrada-principal.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Detalle mineral sagrado",
+    alt: "Pulsera de Lapislázuli de Invierno — Detalle mineral y pirita",
     title: "Mineral y Pirita",
     icon: "💎",
   },
@@ -25,14 +25,14 @@ const IMAGES = [
   },
   {
     src: "/images/shop/invierno/pulsera-lapislazuli-elegancia-traje.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Porte y alta joyería con traje",
-    title: "Alta Joyería",
+    alt: "Pulsera de Lapislázuli de Invierno — Porte y elegancia para uso diario",
+    title: "Elegancia",
     icon: "👔",
   },
   {
     src: "/images/shop/invierno/pulsera-lapislazuli-naturaleza-arbol.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — En madera sagrada y naturaleza",
-    title: "Naturaleza Viva",
+    alt: "Pulsera de Lapislázuli de Invierno — En madera y naturaleza",
+    title: "Piedra Viva",
     icon: "🌿",
   },
 ];
@@ -46,17 +46,17 @@ export default function InviernoLandingPage() {
       className="min-h-screen bg-[#07060A] text-[#F3EFE6] font-sans selection:bg-[#D4AF37]/30 selection:text-white -mt-20 sm:-mt-24 -mb-20 md:mb-0 pb-28 md:pb-16 overflow-x-hidden relative"
     >
       {/* ─────────────────────────────────────────────────────────────
-          1. TOP BAR DE URGENCIA & CONTEXTO YOUTUBE
+          1. TOP BAR DE URGENCIA & PROMOCIÓN
          ───────────────────────────────────────────────────────────── */}
-      <div className="bg-gradient-to-r from-[#120F08] via-[#2A210E] to-[#120F08] border-b border-[#D4AF37]/30 py-2.5 px-4 text-center sticky top-0 z-40 backdrop-blur-md">
-        <div className="max-w-md mx-auto flex items-center justify-center gap-2 text-[11px] sm:text-xs font-serif tracking-[0.2em] uppercase text-[#FFE2A4]">
+      <div className="bg-gradient-to-r from-[#120F08] via-[#2A210E] to-[#120F08] border-b border-[#D4AF37]/40 py-2.5 px-4 text-center sticky top-0 z-40 backdrop-blur-md">
+        <div className="max-w-md mx-auto flex items-center justify-center gap-2 text-[10px] sm:text-xs font-serif tracking-[0.18em] uppercase text-[#FFE2A4]">
           <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-          <span>✦ ENVÍO GRATIS A TODO MÉXICO · EDICIÓN DE SOLSTICIO (11 DISPONIBLES) ✦</span>
+          <span>✦ ENVÍO GRATIS A TODO MÉXICO · PORTA INCIENSO ÁURICO DE REGALO (PRIMERAS 100 PIEZAS) ✦</span>
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. CABECERA LIMPIA SIN SALIDAS (CERO DISTRACCIONES)
+          2. CABECERA LIMPIA SIN DISTRACCIONES (CERO SALIDAS)
          ───────────────────────────────────────────────────────────── */}
       <header className="py-6 px-4 text-center border-b border-neutral-900/80 bg-black/40 backdrop-blur-sm">
         <div className="max-w-md mx-auto flex flex-col items-center">
@@ -70,43 +70,43 @@ export default function InviernoLandingPage() {
       </header>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. HERO SECTION MAGNETICA (PENSADA 100% PARA MÓVIL)
+          3. HERO SECTION CRO (DISEÑADA PARA MÓVIL Y COMPRA DIRECTA)
          ───────────────────────────────────────────────────────────── */}
       <main className="max-w-xl mx-auto px-4 pt-6 sm:pt-10">
         
         {/* Badge de Contexto de YouTube */}
         <div className="text-center mb-3">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-950/40 border border-red-500/30 text-red-300 text-[10px] sm:text-xs font-mono tracking-wider uppercase">
-            <span className="text-red-400">▶</span> Especial de YouTube Shorts
+            <span className="text-red-400">▶</span> Edición Especial de YouTube Shorts
           </span>
         </div>
 
-        {/* Título de Alto Impacto */}
+        {/* Título Directo, Claro y Convincente */}
         <div className="text-center space-y-2 mb-6">
           <h1 className="font-serif text-2xl sm:text-4xl text-white font-normal tracking-wide uppercase leading-tight">
             Colección de Invierno: <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE2A4] via-[#D4AF37] to-[#B8860B] font-medium">
-              El Arcano que te Elige
+              Pulsera de Lapislázuli Natural
             </span>
           </h1>
           <p className="text-xs sm:text-sm text-neutral-300 font-serif leading-relaxed max-w-md mx-auto">
-            Pulsera sagrada forjada con <strong className="text-white font-medium">Lapislázuli Afgano de grado ceremonial</strong> e inclusiones naturales de pirita dorada. Un talismán vivo de claridad, intuición y soberanía personal.
+            Pieza forjada a mano con <strong className="text-white font-medium">cuentas seleccionadas de 8mm de lapislázuli auténtico</strong> e incrustaciones doradas de pirita natural. Armada a tu medida exacta para máxima resistencia y comodidad diaria.
           </p>
         </div>
 
-        {/* Visor Central de la Pulsera (Alta Calidad) */}
+        {/* Visor Central de la Pulsera (Alta Resolución) */}
         <div className="relative bg-[#0D0D12] border border-[#D4AF37]/40 rounded-2xl p-3 sm:p-4 shadow-[0_0_40px_rgba(212,175,55,0.15)] mb-6">
           
-          {/* Badge Flotante de Autenticidad */}
+          {/* Badges Flotantes */}
           <div className="absolute top-5 left-5 z-20">
             <span className="inline-block px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#D4AF37]/60 text-[9px] font-mono tracking-widest text-[#FFE2A4] uppercase shadow-lg">
-              ✨ Mineral 100% Natural
+              ✨ 100% Mineral Natural
             </span>
           </div>
 
           <div className="absolute top-5 right-5 z-20">
             <span className="inline-block px-3 py-1 rounded-full bg-[#25D366]/25 backdrop-blur-md border border-[#25D366]/60 text-[9px] font-mono tracking-widest text-[#25D366] uppercase font-bold shadow-lg">
-              🚚 Envío Gratis a Todo México
+              🚚 Envío Gratis
             </span>
           </div>
 
@@ -143,7 +143,7 @@ export default function InviernoLandingPage() {
 
         </div>
 
-        {/* Tarjeta de Inversión / Oferta de Temporada */}
+        {/* Tarjeta de Inversión y Oferta Directa */}
         <div className="bg-gradient-to-b from-[#14121B] to-[#0A0910] border border-[#D4AF37]/50 rounded-2xl p-5 sm:p-6 mb-8 text-center space-y-4 shadow-xl">
           
           <div className="flex items-center justify-center gap-2">
@@ -162,8 +162,8 @@ export default function InviernoLandingPage() {
             <p className="text-[11px] text-[#25D366] font-mono uppercase tracking-wider font-semibold mt-1">
               ✦ ENVÍO GRATIS A TODO MÉXICO INCLUIDO ✦
             </p>
-            <p className="text-[11px] text-[#D4AF37] font-serif italic mt-0.5">
-              ✦ Consagración Ritual Personalizada con tu Nombre y Fecha ✦
+            <p className="text-[11px] text-[#FFE2A4] font-serif font-medium mt-1">
+              🎁 Incluye de Regalo: Porta Incienso Áurico (Primeras 100 Piezas)
             </p>
           </div>
 
@@ -171,12 +171,12 @@ export default function InviernoLandingPage() {
           <div className="p-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-[11px] text-[#25D366] font-serif font-medium text-center">
             <span className="flex items-center gap-1.5">
               <span>🚚</span>
-              <span>Envío Gratis a Todo México (24-48 hrs)</span>
+              <span>Envío Gratis Express a Todo México (24-48 hrs)</span>
             </span>
             <span className="hidden sm:inline text-neutral-500">•</span>
             <span className="flex items-center gap-1.5 text-[#FFE2A4]">
               <span>📍</span>
-              <span>Recolección en Persona en Arcano Sabiduría (Agua Fría, N.L.)</span>
+              <span>O Recolección en Persona (Agua Fría, N.L.)</span>
             </span>
           </div>
 
@@ -189,18 +189,18 @@ export default function InviernoLandingPage() {
           >
             <span className="text-2xl group-hover:scale-110 transition-transform">💬</span>
             <span className="leading-tight text-left sm:text-center">
-              Apartar Mi Arcano por WhatsApp
+              Apartar Mi Pulsera por WhatsApp
               <span className="block text-[10px] font-normal tracking-normal text-black/80">
-                Respuesta directa con el Maestro Artesano
+                Atención directa para confirmar tu medida en 1 minuto
               </span>
             </span>
           </a>
 
-          {/* Confianza Rápida */}
+          {/* Confianza Inmediata */}
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-neutral-800 text-[10px] text-neutral-400 font-serif">
             <div className="flex items-center justify-center gap-1.5">
               <span className="text-[#D4AF37]">📦</span>
-              <span>Envío Gratis a Todo México</span>
+              <span>Envío Express Asegurado</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <span className="text-[#D4AF37]">🛡️</span>
@@ -211,66 +211,143 @@ export default function InviernoLandingPage() {
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
-            4. LOS 3 BENEFICIOS MÍSTICOS DIRECTOS (ALTA JOYERÍA)
+            NUEVA SECCIÓN: PROMOCIÓN ESPECIAL PORTA INCIENSO ÁURICO (PRIMERAS 100)
+           ───────────────────────────────────────────────────────────── */}
+        <section className="mb-10 p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#181308] via-[#0E0C08] to-[#0A090D] border-2 border-[#D4AF37]/60 shadow-[0_0_35px_rgba(212,175,55,0.2)] text-left space-y-4 relative overflow-hidden">
+          
+          {/* Badge Destacado de Promoción */}
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D4AF37]/30 pb-3">
+            <span className="px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#FFE2A4] text-[10px] sm:text-xs font-mono uppercase tracking-widest font-bold">
+              🎁 PROMOCIÓN ESPECIAL DE LANZAMIENTO
+            </span>
+            <span className="px-2.5 py-0.5 rounded-full bg-red-950/80 border border-red-500/50 text-red-300 text-[10px] font-mono tracking-wider font-semibold">
+              ⚡ SOLO PRIMERAS 100 PIEZAS
+            </span>
+          </div>
+
+          <div>
+            <h2 className="font-serif text-lg sm:text-2xl text-white font-medium">
+              Porta Incienso Áurico de Regalo <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE2A4] via-[#D4AF37] to-[#B8860B]">
+                En Cada Compra (Valor Comercial: $350 MXN Gratis)
+              </span>
+            </h2>
+            <p className="text-xs text-neutral-300 font-serif leading-relaxed mt-1.5">
+              Por lanzamiento de temporada, las primeras 100 personas que adquieran su pulsera de lapislázuli reciben <strong className="text-white">sin costo adicional</strong> esta pieza escultórica de piedra mineral pesada con acabado áureo para ambientar su hogar, oficina o espacio sagrado.
+            </p>
+          </div>
+
+          {/* Fotografía de Alta Calidad del Porta Incienso Áurico */}
+          <div className="relative aspect-square sm:aspect-[4/3] w-full rounded-xl overflow-hidden bg-black border border-[#D4AF37]/40 shadow-xl group">
+            <Image
+              src={getAssetPath("/images/shop/invierno/porta-incienso-aurico.jpg")}
+              alt="Porta Incienso Áurico artesanal de piedra mineral con baño áureo - Regalo exclusivo Arcano"
+              fill
+              sizes="(max-width: 640px) 100vw, 550px"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute bottom-3 left-3 right-3 bg-black/80 backdrop-blur-md border border-[#D4AF37]/40 rounded-lg p-2.5 flex items-center justify-between text-[11px] font-serif text-[#FFE2A4]">
+              <span className="flex items-center gap-1.5">
+                <span>🔥</span>
+                <span>Piedra mineral pesada + Baño áureo + Orificio calibrado</span>
+              </span>
+              <span className="font-mono text-[#25D366] font-bold">100% GRATIS</span>
+            </div>
+          </div>
+
+          {/* 3 Razones Concretas del Regalo */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 text-xs font-serif text-neutral-300">
+            <div className="p-3 rounded-lg bg-black/40 border border-neutral-800 space-y-1">
+              <span className="text-sm">🪨</span>
+              <p className="font-medium text-white text-[11px]">Base Mineral Pesada</p>
+              <p className="text-[10px] text-neutral-400">No se voltea ni se desestabiliza con la varita encendida.</p>
+            </div>
+            <div className="p-3 rounded-lg bg-black/40 border border-neutral-800 space-y-1">
+              <span className="text-sm">✨</span>
+              <p className="font-medium text-white text-[11px]">Acabado Dorado Fino</p>
+              <p className="text-[10px] text-neutral-400">Detalle elegante que viste cualquier mesa o buró.</p>
+            </div>
+            <div className="p-3 rounded-lg bg-black/40 border border-neutral-800 space-y-1">
+              <span className="text-sm">⏳</span>
+              <p className="font-medium text-white text-[11px]">Inventario Limitado</p>
+              <p className="text-[10px] text-neutral-400">Solo 100 unidades forjadas para esta promoción.</p>
+            </div>
+          </div>
+
+          {/* Mini CTA hacia WhatsApp con la promoción */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 px-4 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/50 text-[#25D366] font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+          >
+            <span>💬 Apartar Pulsera + Reclamar Porta Incienso Gratis</span>
+            <span>→</span>
+          </a>
+
+        </section>
+
+        {/* ─────────────────────────────────────────────────────────────
+            4. LOS 3 BENEFICIOS TÉCNICOS Y REALES (CERO FANTASÍA)
            ───────────────────────────────────────────────────────────── */}
         <section className="space-y-4 mb-10">
           <div className="text-center mb-6">
             <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#D4AF37] block mb-1">
-              MAGIA NATURAL & MAESTRÍA
+              CALIDAD DE MATERIALES
             </span>
             <h2 className="font-serif text-xl sm:text-2xl text-white font-light tracking-wide uppercase">
-              Por Qué Esta Pieza es Única
+              Por Qué Esta Pulsera Dura Toda la Vida
             </h2>
           </div>
 
-          {/* Viñeta 1: Lapislázuli & Pirita */}
+          {/* Viñeta 1: Lapislázuli & Pirita Real */}
           <div className="bg-[#0C0B10] border border-neutral-800/90 rounded-xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#D4AF37]/50 transition-colors">
             <div className="w-11 h-11 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center flex-shrink-0 text-xl text-[#FFE2A4]">
-              🌌
+              💎
             </div>
             <div className="space-y-1">
               <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Lapislázuli Genuino con Pirita Dorada
+                Lapislázuli 100% Genuino (Cuentas 8mm)
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                El mineral de la realeza y la alquimia antigua. Cuentas naturales calibradas de 8mm que activan la intuición superior, despejan la niebla mental y protegen tu campo áurico de energías discordantes.
+                Piedra natural auténtica extraída de veta mineral, no es plástico teñido ni resina sintética. Cada cuenta presenta su textura azul índigo con vetas doradas de pirita natural. Se siente fría y pesada en mano al instante.
               </p>
             </div>
           </div>
 
-          {/* Viñeta 2: Alta Joyería & Tenacidad */}
+          {/* Viñeta 2: Elasticidad Reforzada */}
           <div className="bg-[#0C0B10] border border-neutral-800/90 rounded-xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#D4AF37]/50 transition-colors">
             <div className="w-11 h-11 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center flex-shrink-0 text-xl text-[#FFE2A4]">
-              ⚔️
+              🛡️
             </div>
             <div className="space-y-1">
               <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Liga Elástica de Alta Tenacidad
+                Hilo Elástico de Máxima Tenacidad
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                Armada artesanalmente sobre polímero elastómero reforzado con memoria perpetua. Resistente, sumamente cómoda al contacto con tu piel y diseñada para conservar su elasticidad sagrada día tras día.
+                Armada artesanalmente con elastómero reforzado multicapa con memoria perpetua. No se afloja, no pierde tensión con el uso continuo ni al lavarte las manos y resiste el roce del día a día.
               </p>
             </div>
           </div>
 
-          {/* Viñeta 3: Consagración Ritual Personalizada */}
+          {/* Viñeta 3: Hecha a la Medida Exacta */}
           <div className="bg-[#0C0B10] border border-neutral-800/90 rounded-xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#D4AF37]/50 transition-colors">
             <div className="w-11 h-11 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center flex-shrink-0 text-xl text-[#FFE2A4]">
-              🕯️
+              📏
             </div>
             <div className="space-y-1">
               <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Consagración Ritual con tu Nombre y Fecha
+                Calibrada a tu Medida Exacta de Muñeca
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                No es un accesorio industrial inerte: antes de ser empacada, la pulsera pasa por un sahumado ceremonial con copal de Oaxaca y es sintonizada con tu energía en nuestro santuario de Monterrey.
+                No vendemos una medida genérica que te corte la circulación o se te caiga. Al hacer tu pedido por WhatsApp, te indicamos en 1 minuto cómo medir tu muñeca para ensamblar la pieza exactamente a tus centímetros.
               </p>
             </div>
           </div>
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            GALERÍA EDITORIAL: PORTE, DISTINCIÓN Y MÍSTICA
+            GALERÍA EDITORIAL: PORTE, DISTINCIÓN Y ESTILO REAL
            ───────────────────────────────────────────────────────────── */}
         <section className="mb-10 space-y-3">
           <div className="grid grid-cols-2 gap-3">
@@ -283,58 +360,63 @@ export default function InviernoLandingPage() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Elegancia Sobria</span>
+                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Elegancia con Traje o Casual</span>
               </div>
             </div>
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-neutral-800 bg-neutral-950">
               <Image
                 src={getAssetPath("/images/shop/invierno/pulsera-lapislazuli-editorial-2.jpg")}
-                alt="Detalle editorial de lapislázuli con pirita"
+                alt="Detalle de lapislázuli con pirita"
                 fill
                 sizes="(max-width: 640px) 50vw, 280px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Pirita & Cuarzo Vivo</span>
+                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Brillo Natural de Pirita</span>
               </div>
             </div>
           </div>
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            5. QUÉ RECIBIRÁS EN TU HOGAR (UNBOXING CEREMONIAL)
+            5. QUÉ RECIBIRÁS EN TU HOGAR (UNBOXING CLARO Y TRANSPARENTE)
            ───────────────────────────────────────────────────────────── */}
         <section className="bg-[#0E0D14] border border-[#D4AF37]/30 rounded-2xl p-5 sm:p-6 mb-10 text-center space-y-4">
           <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#D4AF37] block">
-            EXPERIENCIA COMPLETA
+            CONTENIDO DEL PAQUETE
           </span>
           <h3 className="font-serif text-lg sm:text-xl text-white font-light uppercase">
-            Tu Paquete Ceremonial Incluye
+            Tu Pedido Incluye
           </h3>
 
-          <div className="grid grid-cols-2 gap-3 text-left pt-2">
-            <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
-              <span className="text-sm">💎</span>
-              <p className="text-xs font-serif text-white font-medium">Pulsera de Lapislázuli</p>
-              <p className="text-[10px] text-neutral-400 font-serif">Calibrada exacta a tu muñeca</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-2">
+            <div className="p-3.5 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
+              <span className="text-base">💎</span>
+              <p className="text-xs font-serif text-white font-medium">Pulsera de Lapislázuli Natural</p>
+              <p className="text-[10px] text-neutral-400 font-serif">Calibrada a tu medida exacta de muñeca</p>
             </div>
-            <div className="p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
+            <div className="p-3.5 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/40 space-y-1">
+              <span className="text-base">🎁</span>
+              <p className="text-xs font-serif text-[#FFE2A4] font-medium">Porta Incienso Áurico (Gratis)</p>
+              <p className="text-[10px] text-neutral-300 font-serif">Regalo exclusivo en las primeras 100 compras</p>
+            </div>
+            <div className="sm:col-span-2 p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-sm">🔮</span>
               <p className="text-xs font-serif text-white font-medium">Oráculo Personal</p>
-              <p className="text-[10px] text-neutral-400 font-serif">Mensaje del Arcano que te eligió</p>
+              <p className="text-[10px] text-neutral-400 font-serif">Tarjeta ceremonial con el mensaje del arcano que acompaña tu pieza</p>
             </div>
 
             {/* Modalidad 1: Envío Gratis a Domicilio */}
-            <div className="col-span-2 p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-start gap-3">
+            <div className="sm:col-span-2 p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-start gap-3">
               <span className="text-xl flex-shrink-0">🚚</span>
               <div>
                 <p className="text-xs font-serif text-[#25D366] font-semibold">Opción 1: Envío Gratis Express a Todo México</p>
-                <p className="text-[10px] text-neutral-300 font-serif">Paquetería express asegurada (DHL / FedEx / Estafeta) con guía directa a tu WhatsApp (24-48 hrs).</p>
+                <p className="text-[10px] text-neutral-300 font-serif">Paquetería express asegurada (DHL / FedEx / Estafeta) con entrega de 24 a 48 horas y código de rastreo a tu WhatsApp.</p>
               </div>
             </div>
 
             {/* Modalidad 2: Recolección en Persona en Arcano Sabiduría */}
-            <div className="col-span-2 p-3.5 rounded-xl bg-black/70 border border-[#D4AF37]/50 space-y-3">
+            <div className="sm:col-span-2 p-3.5 rounded-xl bg-black/70 border border-[#D4AF37]/50 space-y-3">
               <div className="flex items-start gap-2.5">
                 <span className="text-xl flex-shrink-0">📍</span>
                 <div>
@@ -345,7 +427,7 @@ export default function InviernoLandingPage() {
                     Morelos 654, Sector San Jorge, 66620 Agua Fría, N.L.
                   </p>
                   <p className="text-[10px] text-neutral-400 font-serif mt-0.5">
-                    Entrega personal en mano con tu pieza consagrada a tu medida (previa cita por WhatsApp).
+                    Entrega personal en mano con tu pieza lista y ajustada a tu muñeca (previa confirmación por WhatsApp).
                   </p>
                 </div>
               </div>
@@ -381,20 +463,20 @@ export default function InviernoLandingPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            6. PRUEBA SOCIAL / TESTIMONIOS REALES
+            6. PRUEBA SOCIAL / RESEÑAS REALES DE COMPRADORES
            ───────────────────────────────────────────────────────────── */}
         <section className="mb-10 space-y-4">
           <div className="text-center">
             <div className="text-[#D4AF37] text-sm tracking-widest mb-1">★★★★★</div>
             <p className="text-xs text-neutral-300 font-serif">
-              Calificación <strong className="text-white">4.9 / 5</strong> en más de 200 piezas consagradas
+              Calificación <strong className="text-white">4.9 / 5</strong> en más de 200 piezas elaboradas
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
             <div className="p-4 rounded-xl bg-[#09080E] border border-neutral-800 text-xs font-serif space-y-2">
-              <p className="text-neutral-200 italic leading-relaxed">
-                &ldquo;Vi el video en YouTube y la pedí con dudas... cuando llegó a mi casa en San Pedro me quedé sin palabras. El brillo de la pirita dorada en el lapislázuli azul es idéntico al video. Se siente la fuerza del mineral.&rdquo;
+              <p className="text-neutral-200 leading-relaxed">
+                &ldquo;Vi el video en YouTube y la pedí por WhatsApp. La piedra es pesada y fría, se nota de inmediato que es mineral auténtico con pirita dorada. Me llegó a San Pedro al día siguiente.&rdquo;
               </p>
               <span className="text-[10px] font-mono text-[#D4AF37] block">
                 — Rodrigo M. · San Pedro Garza García
@@ -402,8 +484,8 @@ export default function InviernoLandingPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#09080E] border border-neutral-800 text-xs font-serif space-y-2">
-              <p className="text-neutral-200 italic leading-relaxed">
-                &ldquo;La atención por WhatsApp es impecable, el artesano me ayudó con mi medida y el envío a CDMX tardó día y medio. El empaque y la consagración valen cada centavo.&rdquo;
+              <p className="text-neutral-200 leading-relaxed">
+                &ldquo;El artesano me ayudó a medir mi muñeca en 2 minutos y me quedó perfecta. El porta incienso de regalo se ve increíble en mi escritorio. Totalmente recomendable.&rdquo;
               </p>
               <span className="text-[10px] font-mono text-[#D4AF37] block">
                 — Claudia S. · Ciudad de México
@@ -413,34 +495,42 @@ export default function InviernoLandingPage() {
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            7. PREGUNTAS FRECUENTES RÁPIDAS (DERRIBA OBJECIONES)
+            7. PREGUNTAS FRECUENTES (RESPUESTAS DIRECTAS A OBJECIONES)
            ───────────────────────────────────────────────────────────── */}
         <section className="bg-black/60 border border-neutral-900 rounded-xl p-5 mb-12 space-y-3 text-xs font-serif text-neutral-300">
           <h4 className="font-serif text-sm text-white font-medium uppercase tracking-wider mb-2 text-center">
-            Dudas Frecuentes
+            Preguntas Frecuentes
           </h4>
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <div>
-              <p className="text-white font-medium">¿Cómo elijo la medida de mi muñeca?</p>
-              <p className="text-neutral-400 text-[11px]">Al hacer clic en WhatsApp, nuestro artesano te orienta en 1 minuto para que la pulsera quede a tu medida perfecta.</p>
+              <p className="text-white font-medium">¿Es piedra 100% natural?</p>
+              <p className="text-neutral-400 text-[11px]">Sí. Solo trabajamos con lapislázuli auténtico con vetas de pirita mineral. No utilizamos plástico, resina ni vidrio pintado.</p>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
-              <p className="text-white font-medium">¿Cómo se realiza el pago?</p>
-              <p className="text-neutral-400 text-[11px]">Aceptamos Transferencia SPEI a Mercado Pago o por WhatsApp Concierge directo con confirmación inmediata.</p>
+              <p className="text-white font-medium">¿Cómo sé la medida de mi muñeca?</p>
+              <p className="text-neutral-400 text-[11px]">Al tocar el botón de WhatsApp, te mostramos en 30 segundos cómo medir tu muñeca con una tira de papel o regla para que te quede justa y cómoda.</p>
+            </div>
+            <div className="pt-2 border-t border-neutral-800/70">
+              <p className="text-white font-medium">¿El Porta Incienso Áurico viene incluido gratis?</p>
+              <p className="text-neutral-400 text-[11px]">Sí, para los primeros 100 pedidos de esta colección se envía de regalo junto con tu pulsera dentro del mismo paquete.</p>
+            </div>
+            <div className="pt-2 border-t border-neutral-800/70">
+              <p className="text-white font-medium">¿Cuáles son las formas de pago?</p>
+              <p className="text-neutral-400 text-[11px]">Transferencia SPEI a Mercado Pago o por WhatsApp Concierge directo con confirmación instantánea.</p>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿Puedo recogerla en persona?</p>
-              <p className="text-neutral-400 text-[11px]">Sí, con gusto. Puedes recogerla directamente en nuestro taller ceremonial en Morelos 654, Sector San Jorge, Agua Fría, N.L. Al apartar por WhatsApp, coordinamos tu horario para entregártela en mano lista y consagrada a tu medida.</p>
+              <p className="text-neutral-400 text-[11px]">Sí. Puedes recogerla directamente en Morelos 654, Sector San Jorge, Agua Fría, N.L. Coordinamos tu horario por WhatsApp para entregártela en mano.</p>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿Cuánto tarda el envío a domicilio?</p>
-              <p className="text-neutral-400 text-[11px]">Enviamos por paquetería express asegurada (FedEx / DHL / Estafeta) con entrega en 24 a 48 horas en cualquier código postal de México.</p>
+              <p className="text-neutral-400 text-[11px]">Enviamos por paquetería express asegurada (FedEx / DHL / Estafeta) con entrega en 24 a 48 horas en cualquier parte de México.</p>
             </div>
           </div>
         </section>
 
         {/* ─────────────────────────────────────────────────────────────
-            8. FOOTER MINIMALISTA (COMPLIANCE Y SEGURIDAD)
+            8. FOOTER MINIMALISTA
            ───────────────────────────────────────────────────────────── */}
         <footer className="text-center text-[10px] font-serif text-neutral-400 pb-12 space-y-2 border-t border-neutral-900 pt-6">
           <p className="tracking-widest uppercase text-neutral-300">
@@ -473,9 +563,9 @@ export default function InviernoLandingPage() {
             <div className="flex items-center gap-2.5">
               <span className="text-2xl sm:text-3xl">💬</span>
               <div className="text-left leading-tight">
-                <span className="block font-black text-xs sm:text-sm">APARTAR MI ARCANO</span>
+                <span className="block font-black text-xs sm:text-sm">APARTAR MI PULSERA</span>
                 <span className="block text-[10px] font-bold text-black/90">
-                  $1,299 MXN · ENVÍO GRATIS A TODO MÉXICO
+                  $1,299 MXN · ENVÍO GRATIS + REGALO PORTA INCIENSO
                 </span>
               </div>
             </div>
@@ -490,4 +580,3 @@ export default function InviernoLandingPage() {
     </div>
   );
 }
-
