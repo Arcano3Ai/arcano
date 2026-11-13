@@ -19,8 +19,8 @@ const INVIERNO_SHOP_PRODUCT = {
   categoryName: "Colección de Invierno",
   formattedPrice: "$1,299 MXN",
   shippingNote: "Envío Gratis a Todo México",
-  tagline: "Lapislázuli 100% Natural 8mm con Pirita Dorada + Porta Incienso Áurico de Regalo",
-  description: "Pulsera artesanal forjada con cuentas esféricas seleccionadas de lapislázuli natural de 8mm y pirita dorada. $1,299 MXN con Envío Gratis a Todo México y Porta Incienso Áurico de regalo.",
+  tagline: "100% Puro Lapislázuli Natural en Cuentas de 8mm + Porta Incienso Áurico de Regalo",
+  description: "Pulsera artesanal forjada exclusivamente con cuentas esféricas de 100% puro lapislázuli natural de 8mm. $1,299 MXN con Envío Gratis a Todo México y Porta Incienso Áurico de regalo.",
   ritualUse: "Activación del tercer ojo y serenidad invernal.",
   categoryId: "coleccion-invierno",
 };
@@ -51,8 +51,8 @@ const IMAGES = [
   },
   {
     src: "/images/shop/invierno/pulsera-lapislazuli-macro-pirita.jpg",
-    alt: "Pulsera de Lapislázuli de Invierno — Detalle macro de las cuentas con pirita dorada",
-    title: "Macro Pirita",
+    alt: "Pulsera de Lapislázuli de Invierno — Detalle macro de las cuentas de puro lapislázuli",
+    title: "Lapislázuli",
     icon: "🔍",
   },
   {
@@ -156,7 +156,7 @@ export default function InviernoLandingPage() {
             </span>
           </h1>
           <p className="text-xs sm:text-sm text-neutral-300 font-serif leading-relaxed max-w-md mx-auto">
-            Pieza forjada a mano con <strong className="text-white font-medium">cuentas seleccionadas de 8mm de lapislázuli auténtico</strong> e incrustaciones doradas de pirita natural. Armada a tu medida exacta para máxima resistencia y comodidad diaria.
+            Pieza forjada a mano exclusivamente con <strong className="text-white font-medium">cuentas seleccionadas de 8mm de 100% puro lapislázuli natural</strong>. Armada a tu medida exacta para máxima resistencia y distinción diaria.
           </p>
         </div>
 
@@ -433,17 +433,17 @@ export default function InviernoLandingPage() {
             </h2>
           </div>
 
-          {/* Viñeta 1: Lapislázuli & Pirita Real */}
+          {/* Viñeta 1: 100% Puro Lapislázuli Natural */}
           <div className="bg-[#0C0B10] border border-neutral-800/90 rounded-xl p-4 sm:p-5 flex items-start gap-4 hover:border-[#D4AF37]/50 transition-colors">
             <div className="w-11 h-11 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center flex-shrink-0 text-xl text-[#FFE2A4]">
               💎
             </div>
             <div className="space-y-1">
               <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Lapislázuli 100% Genuino (Cuentas 8mm)
+                100% Puro Lapislázuli Natural (Cuentas 8mm)
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                Piedra natural auténtica extraída de veta mineral, no es plástico teñido ni resina sintética. Cada cuenta presenta su textura azul índigo con vetas doradas de pirita natural. Se siente fría y pesada en mano al instante.
+                Piedra mineral natural auténtica en azul índigo profundo. Todas las cuentas de la pieza son exclusivamente de puro lapislázuli genuino de veta, sin mezclas con otras piedras ni materiales sintéticos. Se siente fría y pesada en mano al instante.
               </p>
             </div>
           </div>
@@ -499,13 +499,13 @@ export default function InviernoLandingPage() {
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-neutral-800 bg-neutral-950">
               <Image
                 src={getAssetPath("/images/shop/invierno/pulsera-lapislazuli-editorial-2.jpg")}
-                alt="Detalle de lapislázuli con pirita"
+                alt="Detalle de puro lapislázuli natural"
                 fill
                 sizes="(max-width: 640px) 50vw, 280px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">Brillo Natural de Pirita</span>
+                <span className="text-[10px] font-serif text-[#FFE2A4] font-light">100% Puro Lapislázuli</span>
               </div>
             </div>
           </div>
@@ -525,7 +525,7 @@ export default function InviernoLandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-2">
             <div className="p-3.5 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-base">💎</span>
-              <p className="text-xs font-serif text-white font-medium">Pulsera de Lapislázuli Natural</p>
+              <p className="text-xs font-serif text-white font-medium">Pulsera de 100% Puro Lapislázuli Natural</p>
               <p className="text-[10px] text-neutral-400 font-serif">Ajustada a tu medida exacta de muñeca</p>
             </div>
             <div className="p-3.5 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/40 space-y-1">
@@ -566,7 +566,7 @@ export default function InviernoLandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
             <div className="p-4 rounded-xl bg-[#09080E] border border-neutral-800 text-xs font-serif space-y-2">
               <p className="text-neutral-200 leading-relaxed">
-                &ldquo;Vi el video en YouTube y la pedí por WhatsApp. La piedra es pesada y fría, se nota de inmediato que es mineral auténtico con pirita dorada. Me llegó a San Pedro al día siguiente.&rdquo;
+                &ldquo;Vi el video en YouTube y la pedí por WhatsApp. La piedra es pesada y fría, se nota de inmediato que es 100% puro lapislázuli natural. Me llegó a San Pedro al día siguiente.&rdquo;
               </p>
               <span className="text-[10px] font-mono text-[#D4AF37] block">
                 — Rodrigo M. · San Pedro Garza García
@@ -594,7 +594,7 @@ export default function InviernoLandingPage() {
           <div className="space-y-2.5">
             <div>
               <p className="text-white font-medium">¿Es piedra 100% natural?</p>
-              <p className="text-neutral-400 text-[11px]">Sí. Solo trabajamos con lapislázuli auténtico con vetas de pirita mineral. No utilizamos plástico, resina ni vidrio pintado.</p>
+              <p className="text-neutral-400 text-[11px]">Sí. La pulsera está forjada exclusivamente en 100% puro lapislázuli natural en todas sus cuentas. No utilizamos combinaciones con otros minerales, plástico, resina ni vidrio pintado.</p>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿Cómo sé la medida de mi muñeca?</p>
