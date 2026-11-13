@@ -7,6 +7,7 @@ import { brandConfig } from "@/config/brandConfig";
 import { paymentConfig } from "@/config/paymentConfig";
 import { ShopProduct } from "@/data/shop";
 import { WristSizeGuideModal } from "./WristSizeGuideModal";
+import { MercadoPagoLogo, VisaLogo, MastercardLogo, AmexLogo, SpeiLogo } from "./PaymentMethodsBadges";
 
 interface ProductCheckoutModalProps {
   isOpen: boolean;
@@ -331,20 +332,10 @@ export function ProductCheckoutModal({
                   </p>
                   <div className="mt-2 pt-2 border-t border-neutral-800/80 flex items-center justify-between flex-wrap gap-1.5">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-[#009EE3]/20 border border-[#009EE3]/50 text-[#009EE3] text-[9px] font-bold">
-                        Mercado Pago
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-white text-[#1A1F71] font-black italic text-[9px] tracking-wider leading-none">
-                        VISA
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-neutral-900 border border-neutral-700 leading-none">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#EB001B] inline-block"></span>
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#F79E1B] -ml-1 inline-block"></span>
-                        <span className="text-[8px] text-white font-bold ml-1">mastercard</span>
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-[#006FCF] text-white font-bold text-[8px] tracking-wider leading-none">
-                        AMEX
-                      </span>
+                      <MercadoPagoLogo />
+                      <VisaLogo />
+                      <MastercardLogo />
+                      <AmexLogo />
                     </div>
                     <span className="text-[8px] text-emerald-400 font-mono">🔒 Cifrado 3DS</span>
                   </div>
@@ -371,10 +362,7 @@ export function ProductCheckoutModal({
                   </p>
                   <div className="mt-2 pt-2 border-t border-neutral-800/80 flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-neutral-900 border border-neutral-700 text-[#C5A059] text-[9px] font-mono font-bold">
-                        <span>🏛️</span>
-                        <span>SPEI</span>
-                      </span>
+                      <SpeiLogo />
                       <span className="text-[9px] text-neutral-400 font-mono">Banca Móvil / Spin by OXXO</span>
                     </div>
                     <span className="text-[8px] text-neutral-400 font-mono">Sin comisiones</span>

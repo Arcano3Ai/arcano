@@ -8,6 +8,7 @@ import { footerNavLinks } from "@/config/navigation";
 import { TarotSocialIcons } from "@/components/TarotSocialIcons";
 import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { useLanguage } from "@/context/LanguageContext";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 
 export const Footer: React.FC = () => {
   const pathname = usePathname();
@@ -116,26 +117,7 @@ export const Footer: React.FC = () => {
               <span>🔒</span>
               <span>Métodos de Pago Seguros</span>
             </span>
-            <div className="flex items-center flex-wrap justify-center gap-1.5">
-              <span className="px-2 py-0.5 bg-[#009EE3]/20 border border-[#009EE3]/40 rounded text-[#009EE3] text-[10px] font-bold">
-                Mercado Pago
-              </span>
-              <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[10px] font-mono">
-                VISA
-              </span>
-              <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[10px] font-mono">
-                Mastercard
-              </span>
-              <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[10px] font-mono">
-                AMEX
-              </span>
-              <span className="px-2 py-0.5 bg-emerald-950/40 border border-emerald-500/30 rounded text-emerald-400 text-[10px] font-mono font-medium">
-                🏛️ SPEI
-              </span>
-              <span className="px-2 py-0.5 bg-red-950/30 border border-red-500/30 rounded text-red-300 text-[10px] font-mono">
-                🏪 OXXO
-              </span>
-            </div>
+            <PaymentMethodsBadges />
           </div>
 
           <div className="flex items-center gap-4 text-[11px] text-parchment-muted/80">

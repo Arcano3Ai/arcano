@@ -22,6 +22,7 @@ import {
 import { useLanguage, LanguageToggle } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
 import { ProductCheckoutModal } from "@/components/shop/ProductCheckoutModal";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 
 // Formateador estilo Aurum Brothers: $X,XXX MXN
 function formatPrice(price: number, lang: "es" | "en" = "es"): string {
@@ -839,19 +840,8 @@ function TiendaContent() {
                       <span className="text-[#C5A059] font-semibold tracking-wider uppercase">Métodos Aceptados</span>
                       <span className="text-emerald-400">🔒 100% Cifrado 3DS</span>
                     </div>
-                    <div className="flex items-center justify-between flex-wrap gap-1 text-[9px] font-mono">
-                      <span className="px-1.5 py-0.5 bg-[#009EE3]/15 border border-[#009EE3]/30 rounded text-[#009EE3] font-bold">
-                        Mercado Pago
-                      </span>
-                      <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">
-                        VISA · Mastercard · AMEX
-                      </span>
-                      <span className="px-1.5 py-0.5 bg-emerald-950/40 border border-emerald-500/30 rounded text-emerald-400 font-medium">
-                        SPEI Inmediato
-                      </span>
-                      <span className="px-1.5 py-0.5 bg-red-950/30 border border-red-500/30 rounded text-red-300">
-                        OXXO
-                      </span>
+                    <div className="pt-1">
+                      <PaymentMethodsBadges />
                     </div>
                   </div>
                 </div>

@@ -9,6 +9,7 @@ import { trackWhatsAppConversion } from "@/lib/analytics";
 import { useCart } from "@/context/CartContext";
 import { InviernoCheckoutModal } from "@/components/shop/InviernoCheckoutModal";
 import { WristSizeGuideModal } from "@/components/shop/WristSizeGuideModal";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 
 // Objeto de producto oficial para Carrito Ceremonial
 const INVIERNO_SHOP_PRODUCT = {
@@ -264,19 +265,8 @@ export default function InviernoLandingPage() {
                 <span className="text-[#D4AF37] font-semibold tracking-wider uppercase">Métodos de Pago Oficiales</span>
                 <span className="text-emerald-400 font-bold">🔒 100% Cifrado 3DS</span>
               </div>
-              <div className="flex items-center justify-center flex-wrap gap-1.5 text-[9px] font-mono">
-                <span className="px-2 py-0.5 bg-[#009EE3]/20 border border-[#009EE3]/50 rounded text-[#009EE3] font-bold">
-                  Mercado Pago
-                </span>
-                <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">
-                  💳 VISA · Mastercard · AMEX
-                </span>
-                <span className="px-2 py-0.5 bg-emerald-950/50 border border-emerald-500/40 rounded text-emerald-400 font-medium">
-                  🏛️ SPEI Inmediato
-                </span>
-                <span className="px-2 py-0.5 bg-red-950/40 border border-red-500/40 rounded text-red-300">
-                  🏪 OXXO
-                </span>
+              <div className="pt-1">
+                <PaymentMethodsBadges />
               </div>
             </div>
 

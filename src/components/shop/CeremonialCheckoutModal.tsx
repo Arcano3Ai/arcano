@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { paymentConfig } from "@/config/paymentConfig";
 import { brandConfig } from "@/config/brandConfig";
 import { WristSizeGuideModal } from "./WristSizeGuideModal";
+import { MercadoPagoLogo, VisaLogo, MastercardLogo, AmexLogo, SpeiLogo } from "./PaymentMethodsBadges";
 
 interface CeremonialCheckoutModalProps {
   isOpen: boolean;
@@ -405,20 +406,10 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                     {/* Logos Oficiales Mercado Pago & Tarjetas Aceptadas */}
                     <div className="mt-2.5 pt-2 border-t border-neutral-800/80 flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-[#009EE3]/20 border border-[#009EE3]/50 text-[#009EE3] text-[9px] font-bold">
-                          Mercado Pago
-                        </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-white text-[#1A1F71] font-black italic text-[9px] tracking-wider leading-none">
-                          VISA
-                        </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-neutral-900 border border-neutral-700 leading-none">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#EB001B] inline-block"></span>
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#F79E1B] -ml-1 inline-block"></span>
-                          <span className="text-[8px] text-white font-bold ml-1">mastercard</span>
-                        </span>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-[#006FCF] text-white font-bold text-[8px] tracking-wider leading-none">
-                          AMEX
-                        </span>
+                        <MercadoPagoLogo />
+                        <VisaLogo />
+                        <MastercardLogo />
+                        <AmexLogo />
                       </div>
                       <span className="text-[9px] text-emerald-400 font-mono flex items-center gap-1">
                         🔒 Cifrado SSL 256-bit 3DS
