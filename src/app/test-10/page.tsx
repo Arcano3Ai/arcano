@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCheckoutModal } from "@/components/shop/ProductCheckoutModal";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 import { ShopProduct } from "@/data/shop";
 
 // Producto oculto de prueba exclusivamente para validación técnica de conciliación
@@ -112,6 +113,14 @@ export default function TestDiezPesosPage() {
             >
               Comprar & Probar Pago ($10 MXN) →
             </button>
+          </div>
+
+          {/* Cintillo de Métodos de Pago Oficiales */}
+          <div className="mt-4 pt-4 border-t border-neutral-800/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <span className="text-[10px] font-mono text-[#C5A059] uppercase tracking-wider">
+              MÉTODOS DE PAGO OFICIALES:
+            </span>
+            <PaymentMethodsBadges />
           </div>
         </div>
 
