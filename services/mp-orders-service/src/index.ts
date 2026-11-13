@@ -174,10 +174,12 @@ async function handleCreateOrder(req: Request, res: Response, isTestMode: boolea
         processing_mode: "manual",
         total_amount: finalTotal.toFixed(2),
         external_reference: externalReference,
+        expiration_time: "P2D", // Vigencia estricta de 48 horas (evita retención prolongada)
         payer: payerPayload,
         items: mpItems,
         config: {
           statement_descriptor: "ARCANO",
+          default_payment_due_date: "P2D", // 48 horas límite para medios offline (OXXO/PayCash)
           online: {
             success_url: "https://arcanosolutions.com/checkout/success",
             pending_url: "https://arcanosolutions.com/checkout/pending",
