@@ -7,6 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     "/academia/login/",
     "/academia/registro/",
     "/academia/cursos/*/aprender/",
+    "/test-10",
   ];
 
   return {
