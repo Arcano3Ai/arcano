@@ -50,13 +50,13 @@ CREATE INDEX IF NOT EXISTS idx_orders_buyer_email ON public.orders(buyer_email);
 CREATE TABLE IF NOT EXISTS public.order_items (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   order_id UUID NOT NULL REFERENCES public.orders(id) ON DELETE CASCADE,
-  item_id TEXT REFERENCES public.inventory_items(id) ON DELETE SET NULL,
-  sku TEXT,
+  item_id TEXT,                                             -- ID o Slug de la pieza en el catálogo
+  sku TEXT,                                                 -- Código SKU o variante
   title TEXT NOT NULL,
   unit_price NUMERIC(18, 2) NOT NULL,
   quantity INTEGER NOT NULL CHECK (quantity > 0),
   line_total NUMERIC(18, 2) NOT NULL,
-  option_label TEXT,
+  option_label TEXT,                                        -- Ej. 'Edición Sagrada', 'Talla M'
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -175,10 +175,14 @@ BEGIN
     SET status = 'paid', updated_at = NOW()
     WHERE id = v_order.id;
 
-    -- Descontar inventario físico de forma atómica para cada pieza
+    -- Descontar inventario físico de forma atómica para cada pieza si existe el módulo
     FOR v_item IN (SELECT * FROM public.order_items WHERE order_id = v_order.id) LOOP
       IF v_item.item_id IS NOT NULL THEN
-        PERFORM public.rpc_confirm_sale(v_item.item_id, v_item.quantity, v_order.external_reference);
+        BEGIN
+          PERFORM public.rpc_confirm_sale(v_item.item_id, v_item.quantity, v_order.external_reference);
+        EXCEPTION WHEN OTHERS THEN
+          NULL;
+        END;
       END IF;
     END LOOP;
 
@@ -190,7 +194,11 @@ BEGIN
     -- Liberar reservas de inventario
     FOR v_item IN (SELECT * FROM public.order_items WHERE order_id = v_order.id) LOOP
       IF v_item.item_id IS NOT NULL THEN
-        PERFORM public.rpc_release_stock(v_item.item_id, v_item.quantity, v_order.external_reference);
+        BEGIN
+          PERFORM public.rpc_release_stock(v_item.item_id, v_item.quantity, v_order.external_reference);
+        EXCEPTION WHEN OTHERS THEN
+          NULL;
+        END;
       END IF;
     END LOOP;
   END IF;
