@@ -157,6 +157,66 @@ app.post("/create-order", async (req: Request, res: Response) => {
   }
 });
 
+// Helpers para validación de Webhook de Mercado Pago
+function parseXSignature(xSignature: string | null | undefined) {
+  if (!xSignature) return null;
+  // Formato esperado: ts=<TIMESTAMP>,v1=<SIGNATURE>
+  const parts = Object.fromEntries(
+    xSignature.split(",").map((kv) => {
+      const [k, v] = kv.split("=");
+      return [k?.trim(), v?.trim()];
+    })
+  );
+  if (!parts.ts || !parts.v1) return null;
+  return { ts: parts.ts as string, v1: parts.v1 as string };
+}
+
+function hmacSHA256(secret: string, manifest: string) {
+  return crypto.createHmac("sha256", secret).update(manifest).digest("hex");
+}
+
+// Handler de Webhook de Mercado Pago
+export async function webhookHandler(req: Request, res: Response) {
+  try {
+    const xRequestId = req.header("x-request-id") || "";
+    const xSignature = parseXSignature(req.header("x-signature"));
+
+    // En Webhooks de Mercado Pago, el identificador del recurso viene en data.id o query.id
+    const dataId = (req.body?.data?.id || req.query?.["data.id"] || req.query?.id) ? String(req.body?.data?.id || req.query?.["data.id"] || req.query?.id) : "";
+
+    // Validación de firma HMAC SHA-256 (si MP_WEBHOOK_SECRET está configurado)
+    const webhookSecret = process.env.MP_WEBHOOK_SECRET;
+    if (webhookSecret && xSignature && dataId && xRequestId) {
+      const manifest = `id:${dataId};request-id:${xRequestId};ts:${xSignature.ts};`;
+      const expected = hmacSHA256(webhookSecret, manifest);
+
+      if (expected !== xSignature.v1) {
+        console.warn("[MP Webhook] Firma inválida rechazada:", { dataId, xRequestId });
+        return res.status(401).json({ error: "invalid signature" });
+      }
+    }
+
+    // Log estructurado del evento
+    console.log("[MP Webhook Event Recibido]:", {
+      type: req.body?.type || req.query?.type,
+      action: req.body?.action || req.query?.topic,
+      dataId,
+      live_mode: req.body?.live_mode,
+      timestamp: new Date().toISOString(),
+    });
+
+    // ACK rápido (Mercado Pago espera 200/201 para confirmar la entrega y evitar reintentos)
+    return res.status(200).json({ received: true, id: dataId });
+  } catch (err: any) {
+    console.error("[MP Webhook] Error procesando notificación:", err);
+    return res.status(500).json({ error: "internal webhook error" });
+  }
+}
+
+// Endpoint Webhook (soportamos tanto /webhook como /webhook/mp)
+app.post("/webhook", webhookHandler);
+app.post("/webhook/mp", webhookHandler);
+
 app.listen(port, () => {
   console.log(`[ARCANO MP-ORDERS-SERVICE] Escuchando en el puerto ${port}`);
 });
