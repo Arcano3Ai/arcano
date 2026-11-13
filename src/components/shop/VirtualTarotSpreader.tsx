@@ -354,7 +354,7 @@ export const VirtualTarotSpreader: React.FC<VirtualTarotSpreaderProps> = ({
                   <p className="text-xs sm:text-sm text-neutral-300 font-serif leading-relaxed">
                     Adquiere en una sola entrega ceremonial las 3 pulseras minerales de tu tirada: 
                     <strong className="text-[#C5A059]"> {customBundle.tagline}</strong>. 
-                    Calibre uniforme de 8mm, consagradas a tu medida en Monterrey, N.L.
+                    Esferas uniformes de 8mm en pura piedra natural, consagradas a tu medida en Monterrey, N.L.
                   </p>
 
                   {/* Distintivo de Envío Asegurado Todo México */}

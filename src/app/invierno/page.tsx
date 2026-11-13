@@ -348,7 +348,7 @@ export default function InviernoLandingPage() {
             <div className="absolute bottom-3 left-3 right-3 bg-black/80 backdrop-blur-md border border-[#D4AF37]/40 rounded-lg p-2.5 flex items-center justify-between text-[11px] font-serif text-[#FFE2A4]">
               <span className="flex items-center gap-1.5">
                 <span>🔥</span>
-                <span>Piedra mineral pesada + Baño áureo + Orificio calibrado</span>
+                <span>Piedra mineral pesada + Baño áureo + Orificio para incienso</span>
               </span>
               <span className="font-mono text-[#25D366] font-bold">100% GRATIS</span>
             </div>
@@ -436,7 +436,7 @@ export default function InviernoLandingPage() {
                 Hilo Elástico de Máxima Tenacidad
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                Armada artesanalmente con elastómero reforzado multicapa con memoria perpetua. No se afloja, no pierde tensión con el uso continuo ni al lavarte las manos y resiste el roce del día a día.
+                Armada artesanalmente con elastómero reforzado multicapa de alta resistencia.
               </p>
             </div>
           </div>
@@ -448,10 +448,10 @@ export default function InviernoLandingPage() {
             </div>
             <div className="space-y-1">
               <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Calibrada a tu Medida Exacta de Muñeca
+                Ajustada a tu Medida Exacta de Muñeca
               </h3>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                No vendemos una medida genérica que te corte la circulación o se te caiga. Al hacer tu pedido por WhatsApp, te indicamos en 1 minuto cómo medir tu muñeca para ensamblar la pieza exactamente a tus centímetros.
+                No vendemos una medida genérica. Al hacer tu pedido, te indicamos en 1 minuto cómo medir tu muñeca para ensamblar la pieza exactamente a tus centímetros.
               </p>
             </div>
           </div>
@@ -504,7 +504,7 @@ export default function InviernoLandingPage() {
             <div className="p-3.5 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
               <span className="text-base">💎</span>
               <p className="text-xs font-serif text-white font-medium">Pulsera de Lapislázuli Natural</p>
-              <p className="text-[10px] text-neutral-400 font-serif">Calibrada a tu medida exacta de muñeca</p>
+              <p className="text-[10px] text-neutral-400 font-serif">Ajustada a tu medida exacta de muñeca</p>
             </div>
             <div className="p-3.5 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/40 space-y-1">
               <span className="text-base">🎁</span>

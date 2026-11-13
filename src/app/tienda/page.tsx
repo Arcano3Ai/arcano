@@ -54,7 +54,7 @@ const EDITORIAL_HIGHLIGHTS: EditorialHighlight[] = [
     subheadline: "Como es arriba, es abajo. Manifestación y dominio creador de los cuatro elementos en ónix brillante y lapislázuli real.",
     ctaText: "Descubrir Arcano I",
     image: "/images/shop/pulseras/brazalete-arcano-i-el-mago-onix-lapislazuli-lifestyle.jpg",
-    ratingText: "Aún más impresionante en persona. El calibre uniforme de 8mm y el peso del ónix y lapislázuli se sienten excepcionales.",
+    ratingText: "Aún más impresionante en persona. El diámetro uniforme de 8mm y el peso del ónix y lapislázuli se sienten excepcionales.",
     buyerName: "Mauricio G.",
     buyerLocation: "San Pedro Garza García · Comprador verificado",
   },
@@ -427,7 +427,7 @@ function TiendaContent() {
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-around gap-4 text-center text-xs text-neutral-300 font-serif">
           <div className="flex items-center gap-2">
             <span className="text-[#C5A059] text-xs">✦</span>
-            <span className="tracking-wider">{t("Piedras 100% Puras de Calibre Uniforme (8mm)", "100% Pure Minerals · Uniform 8mm Beads")}</span>
+            <span className="tracking-wider">{t("Piedras 100% Puras en Esferas de 8mm", "100% Pure Minerals · Uniform 8mm Beads")}</span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
             <span className="text-[#C5A059] text-xs">✦</span>
@@ -778,7 +778,7 @@ function TiendaContent() {
                     <span className="text-white">{t("100% Pura Piedra Mineral Grado AAA", "100% Pure AAA Grade Natural Gemstone")}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-400">{t("Calibre:", "Bead Size:")}</span>
+                    <span className="text-neutral-400">{t("Medida:", "Bead Size:")}</span>
                     <span className="text-white">{t("Uniforme 8 mm (22 cuentas exactas)", "Uniform 8 mm (22 exact beads)")}</span>
                   </div>
                   <div className="flex justify-between">
@@ -898,8 +898,8 @@ function TiendaContent() {
           </p>
           <p className="text-[10px] tracking-widest text-neutral-400 uppercase max-w-lg mx-auto leading-relaxed">
             {t(
-              "22 Talismanes forjados exclusivamente en 100% pura piedra mineral natural de calibre uniforme (8 mm). Cero metales, cero dijes, máxima pureza geológica.",
-              "22 Talismans forged exclusively from 100% pure natural mineral stones of uniform 8mm caliber. Zero metals, zero charms, maximum geological purity."
+              "22 Talismanes forjados exclusivamente en 100% pura piedra mineral natural en esferas de 8 mm. Cero metales, cero dijes, máxima pureza geológica.",
+              "22 Talismans forged exclusively from 100% pure natural mineral stones of uniform 8mm beads. Zero metals, zero charms, maximum geological purity."
             )}
           </p>
           <p className="text-[9px] text-neutral-400 pt-4 font-mono">
