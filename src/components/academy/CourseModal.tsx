@@ -6,6 +6,7 @@ import { AcademyCourse } from "@/data/academy";
 import { brandConfig } from "@/config/brandConfig";
 import { getAssetPath, handleImageError } from "@/lib/utils";
 import { getLMSCourseBySlug } from "@/lib/academy/courseRepository";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 
 interface CourseModalProps {
   course: AcademyCourse | null;
@@ -109,23 +110,34 @@ export const CourseModal: React.FC<CourseModalProps> = ({
             </p>
           </div>
 
-          {/* Tarjeta de Precio & Inversión */}
-          <div className="p-4 rounded-xl bg-[#130f21] border border-gold/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans font-medium">
-                Inversión por Nivel
+          {/* Tarjeta de Precio, Inversión & Métodos de Pago Oficiales */}
+          <div className="p-4 sm:p-5 rounded-xl bg-[#130f21] border border-gold/25 space-y-3.5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="text-[10px] uppercase tracking-widest text-parchment-muted font-sans font-medium">
+                  Inversión por Nivel
+                </div>
+                <div className="font-serif text-3xl text-gold-light font-medium tracking-wide">
+                  {course.formattedPrice}
+                </div>
               </div>
-              <div className="font-serif text-3xl text-gold-light font-medium tracking-wide">
-                {course.formattedPrice}
+              <div className="text-left sm:text-right text-xs text-parchment-dim font-sans space-y-0.5">
+                <div className="text-gold font-medium flex items-center gap-1.5 sm:justify-end">
+                  <span>✦</span> Formación 100% Online & Asincrónica
+                </div>
+                <p className="text-parchment-muted text-[11px]">
+                  Incluye manuales ceremoniales en PDF descargables y certificado al finalizar
+                </p>
               </div>
             </div>
-            <div className="text-left sm:text-right text-xs text-parchment-dim font-sans space-y-0.5">
-              <div className="text-gold font-medium flex items-center gap-1.5 sm:justify-end">
-                <span>✦</span> Formación 100% Online & Asincrónica
+
+            {/* Cintillo de Formas de Pago Aceptadas */}
+            <div className="pt-3 border-t border-charcoal-border/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+              <div className="flex items-center gap-2 text-[10px] font-mono text-parchment-muted">
+                <span className="text-gold font-semibold uppercase tracking-wider">Formas de Pago:</span>
+                <span className="text-emerald-400">🔒 100% Cifrado 3DS</span>
               </div>
-              <p className="text-parchment-muted text-[11px]">
-                Incluye manuales ceremoniales en PDF descargables y certificado al finalizar
-              </p>
+              <PaymentMethodsBadges />
             </div>
           </div>
 
@@ -281,31 +293,40 @@ export const CourseModal: React.FC<CourseModalProps> = ({
         </div>
 
         {/* Barra Inferior Fija de Acciones (Checkout & WhatsApp) */}
-        <div className="p-4 sm:p-6 bg-[#0a0713] border-t border-charcoal-border flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
-          <div className="hidden sm:block">
-            <div className="text-[10px] uppercase tracking-widest text-parchment-muted">
-              Inscripción Inmediata
+        <div className="p-4 sm:p-5 bg-[#0a0713] border-t border-charcoal-border flex flex-col gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="hidden sm:block">
+              <div className="text-[10px] uppercase tracking-widest text-parchment-muted">
+                Inscripción Inmediata
+              </div>
+              <div className="font-serif text-lg text-gold font-medium">
+                {course.formattedPrice} • Acceso Total
+              </div>
             </div>
-            <div className="font-serif text-lg text-gold font-medium">
-              {course.formattedPrice} • Acceso Total
+
+            <div className="w-full sm:w-auto flex items-center justify-end gap-3">
+              <button
+                onClick={handleEnrollWhatsapp}
+                className="w-full sm:w-auto px-4 py-3 rounded-xl border border-charcoal-border text-parchment-muted hover:text-parchment text-xs font-sans transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span>💬 Dudas por WhatsApp</span>
+              </button>
+              <a
+                href={`/academia/registro?curso=${course.id}`}
+                onClick={onClose}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-center bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02] cursor-pointer"
+              >
+                <span>INSCRIBIRME AHORA</span>
+                <span>→</span>
+              </a>
             </div>
           </div>
 
-          <div className="w-full sm:w-auto flex items-center justify-end gap-3">
-            <button
-              onClick={handleEnrollWhatsapp}
-              className="w-full sm:w-auto px-4 py-3 rounded-xl border border-charcoal-border text-parchment-muted hover:text-parchment text-xs font-sans transition-colors flex items-center justify-center gap-1.5"
-            >
-              <span>💬 Dudas por WhatsApp</span>
-            </button>
-            <a
-              href={`/academia/registro?curso=${course.id}`}
-              onClick={onClose}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-xs uppercase tracking-[0.2em] font-sans font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-center bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_25px_rgba(198,160,82,0.5)] hover:shadow-[0_0_35px_rgba(198,160,82,0.7)] hover:scale-[1.02]"
-            >
-              <span>INSCRIBIRME AHORA</span>
-              <span>→</span>
-            </a>
+          <div className="pt-2 border-t border-charcoal-border/50 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-parchment-muted">
+            <span className="flex items-center gap-1.5 text-gold/90 font-medium">
+              <span>💳</span> Mercado Pago • Tarjetas de Crédito/Débito • SPEI Inmediato • OXXO
+            </span>
+            <span className="text-emerald-400 font-semibold">🔒 Acreditación y Activación Inmediata</span>
           </div>
         </div>
       </div>

@@ -21,6 +21,7 @@ import { brandConfig } from "@/config/brandConfig";
 import { getAssetPath, handleImageError } from "@/lib/utils";
 import { useStudent } from "@/lib/academy/studentContext";
 import { useLanguage } from "@/context/LanguageContext";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 
 interface AcademySectionProps {
   asHeading?: "h1" | "h2";
@@ -280,6 +281,14 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ asHeading: Headi
                 "with full access to video lessons, ceremonial handbooks, and official mentorship."
               )}
             </p>
+
+            {/* Barra de Formas de Pago Aceptadas en la Academia */}
+            <div className="pt-3 flex flex-wrap items-center justify-center gap-2.5">
+              <span className="text-xs font-mono text-parchment-dim uppercase tracking-wider">
+                💳 Formas de Pago Aceptadas:
+              </span>
+              <PaymentMethodsBadges />
+            </div>
           </div>
 
           {/* Barra de Filtros / Navegación por Disciplina */}

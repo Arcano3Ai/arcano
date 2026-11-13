@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useStudent } from '@/lib/academy/studentContext';
 import { LMS_COURSES } from '@/lib/academy/courseRepository';
 import { brandConfig } from '@/config/brandConfig';
+import { PaymentMethodsBadges, MercadoPagoLogo, SpeiLogo, OxxoLogo } from '@/components/shop/PaymentMethodsBadges';
 
 function RegisterFormContent() {
   const router = useRouter();
@@ -178,47 +179,61 @@ function RegisterFormContent() {
 
         {/* Opciones de Modalidad / Pago */}
         <div className="pt-2">
-          <label className="block text-xs font-serif text-parchment-dim mb-2 uppercase tracking-wider">
-            Método de Pago Preferido ($799 MXN)
-          </label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-xs font-serif text-parchment-dim uppercase tracking-wider">
+              Forma de Pago Oficial ($799 MXN)
+            </label>
+            <span className="text-[10px] text-emerald-400 font-mono">🔒 Cifrado 3DS</span>
+          </div>
+
+          <div className="mb-3">
+            <PaymentMethodsBadges />
+          </div>
+
           <div className="grid grid-cols-3 gap-2 text-xs">
             <button
               type="button"
               onClick={() => setPaymentOption('spei')}
-              className={`p-3 rounded-xl border text-left transition-all ${
+              className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                 paymentOption === 'spei'
                   ? 'bg-gold/20 border-gold text-gold-light'
                   : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
               }`}
             >
-              <div className="font-semibold text-xs">🏪 Spin OXXO</div>
+              <div className="flex items-center gap-1 font-semibold text-xs">
+                <span>🏪</span> Spin OXXO
+              </div>
               <div className="text-[10px] text-parchment-dim mt-0.5">Tienda / SPEI</div>
             </button>
 
             <button
               type="button"
               onClick={() => setPaymentOption('mercadopago')}
-              className={`p-3 rounded-xl border text-left transition-all ${
+              className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                 paymentOption === 'mercadopago'
                   ? 'bg-gold/20 border-gold text-gold-light'
                   : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
               }`}
             >
-              <div className="font-semibold text-xs">💳 Mercado Pago</div>
-              <div className="text-[10px] text-parchment-dim mt-0.5">SPEI / Saldo</div>
+              <div className="flex items-center gap-1 font-semibold text-xs">
+                <span>💳</span> Mercado Pago
+              </div>
+              <div className="text-[10px] text-parchment-dim mt-0.5">SPEI / Tarjeta</div>
             </button>
 
             <button
               type="button"
               onClick={() => setPaymentOption('whatsapp')}
-              className={`p-3 rounded-xl border text-left transition-all ${
+              className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                 paymentOption === 'whatsapp'
                   ? 'bg-gold/20 border-gold text-gold-light'
                   : 'bg-black/40 border-charcoal-border text-parchment-muted hover:border-gold/30'
               }`}
             >
-              <div className="font-semibold text-xs">🟢 WhatsApp</div>
-              <div className="text-[10px] text-parchment-dim mt-0.5">Atención humana</div>
+              <div className="flex items-center gap-1 font-semibold text-xs">
+                <span>🟢</span> Concierge
+              </div>
+              <div className="text-[10px] text-parchment-dim mt-0.5">WhatsApp VIP</div>
             </button>
           </div>
 
@@ -226,8 +241,11 @@ function RegisterFormContent() {
           <div className="mt-3 p-3.5 rounded-2xl bg-black/70 border border-gold/30 text-xs space-y-1.5 font-sans">
             {paymentOption === 'spei' && (
               <>
-                <div className="font-serif font-bold text-gold-light flex items-center gap-1.5">
-                  <span>🏪</span> Spin by OXXO ({brandConfig.payments.spinOxxo.modalidad})
+                <div className="font-serif font-bold text-gold-light flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <span>🏪</span> Spin by OXXO ({brandConfig.payments.spinOxxo.modalidad})
+                  </span>
+                  <OxxoLogo className="scale-90" />
                 </div>
                 <div className="text-parchment-dim text-[11px] font-mono space-y-1 pt-1">
                   <div><span className="text-parchment-muted font-sans">Número de Cuenta / Tarjeta:</span> <strong className="text-gold select-all font-bold">{brandConfig.payments.spinOxxo.cuenta}</strong></div>
@@ -240,8 +258,14 @@ function RegisterFormContent() {
 
             {paymentOption === 'mercadopago' && (
               <>
-                <div className="font-serif font-bold text-gold-light flex items-center gap-1.5">
-                  <span>💳</span> {brandConfig.payments.mercadoPago.banco} (Transferencia SPEI)
+                <div className="font-serif font-bold text-gold-light flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <span>💳</span> {brandConfig.payments.mercadoPago.banco} (Transferencia SPEI)
+                  </span>
+                  <div className="flex items-center gap-1 scale-90 origin-right">
+                    <MercadoPagoLogo />
+                    <SpeiLogo />
+                  </div>
                 </div>
                 <div className="text-parchment-dim text-[11px] font-mono space-y-1 pt-1">
                   <div><span className="text-parchment-muted font-sans">Banco Destinatario:</span> {brandConfig.payments.mercadoPago.banco}</div>

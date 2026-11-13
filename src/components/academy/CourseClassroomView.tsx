@@ -8,6 +8,7 @@ import { getLMSCourseBySlug, getLMSLesson } from '@/lib/academy/courseRepository
 import { getLessonStudyGuide } from '@/data/academyStudyGuides';
 import { brandConfig } from '@/config/brandConfig';
 import { ArcanaAudioPlayer } from '@/components/ArcanaAudioPlayer';
+import { PaymentMethodsBadges } from '@/components/shop/PaymentMethodsBadges';
 
 const ARCANA_SONGS = [
   { slug: 'el-loco', name: '0. El Loco', title: 'Himno Sagrado de El Loco — El Salto al Vacío', url: '/audio/arcanos/el-loco.mp3' },
@@ -132,9 +133,12 @@ export default function CourseClassroomView({ slug }: CourseClassroomViewProps) 
 
             {/* Métodos de Pago y Verificación */}
             <div className="space-y-6">
-              <h3 className="text-xs font-serif uppercase tracking-widest text-gold-light flex items-center gap-2">
-                <span>✦</span> Métodos Oficiales para Activar tu Acceso
-              </h3>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <h3 className="text-xs font-serif uppercase tracking-widest text-gold-light flex items-center gap-2">
+                  <span>✦</span> Métodos Oficiales para Activar tu Acceso
+                </h3>
+                <PaymentMethodsBadges />
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Opción 1: Mercado Pago */}

@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { AcademyCourse } from "@/data/academy";
 import { getAssetPath, handleImageError } from "@/lib/utils";
+import { PaymentMethodsBadges } from "@/components/shop/PaymentMethodsBadges";
 
 interface CourseCardProps {
   course: AcademyCourse;
@@ -106,27 +107,37 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           </div>
         </div>
 
-        {/* Precio y Botón de Acción */}
-        <div className="pt-4 border-t border-charcoal-border/60 flex items-center justify-between gap-3">
-          <div>
-            <div className="text-[10px] font-sans uppercase tracking-widest text-parchment-muted">
-              Inversión
+        {/* Precio, Botón de Acción y Métodos de Pago */}
+        <div className="pt-4 border-t border-charcoal-border/60 space-y-2.5">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="text-[10px] font-sans uppercase tracking-widest text-parchment-muted">
+                Inversión
+              </div>
+              <div className="font-serif text-xl sm:text-2xl text-gold-light font-medium tracking-wide">
+                {course.formattedPrice}
+              </div>
             </div>
-            <div className="font-serif text-xl sm:text-2xl text-gold-light font-medium tracking-wide">
-              {course.formattedPrice}
-            </div>
+
+            <button
+              onClick={() => onSelectCourse(course)}
+              className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded text-xs uppercase tracking-[0.15em] font-sans font-semibold transition-all duration-300 cursor-pointer ${
+                isWebUnlock
+                  ? "bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_15px_rgba(198,160,82,0.4)] hover:shadow-[0_0_25px_rgba(198,160,82,0.6)] hover:scale-105"
+                  : "bg-obsidian-deep border border-gold/40 text-gold-light hover:border-gold hover:text-parchment hover:bg-gold/10"
+              }`}
+            >
+              VER CURSO
+            </button>
           </div>
 
-          <button
-            onClick={() => onSelectCourse(course)}
-            className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded text-xs uppercase tracking-[0.15em] font-sans font-semibold transition-all duration-300 ${
-              isWebUnlock
-                ? "bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-[0_0_15px_rgba(198,160,82,0.4)] hover:shadow-[0_0_25px_rgba(198,160,82,0.6)] hover:scale-105"
-                : "bg-obsidian-deep border border-gold/40 text-gold-light hover:border-gold hover:text-parchment hover:bg-gold/10"
-            }`}
-          >
-            VER CURSO
-          </button>
+          {/* Cintillo de Formas de Pago Aceptadas */}
+          <div className="pt-2 border-t border-charcoal-border/40 flex items-center justify-between gap-1 text-[9px] font-mono text-parchment-muted">
+            <span className="text-gold/90 font-medium">Pago Seguro:</span>
+            <div className="scale-90 origin-right">
+              <PaymentMethodsBadges />
+            </div>
+          </div>
         </div>
       </div>
     </article>
