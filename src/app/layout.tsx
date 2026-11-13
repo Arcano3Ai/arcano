@@ -328,7 +328,7 @@ export default function RootLayout({
               <Header />
 
               {/* Contenido principal */}
-              <main className="flex-1 relative z-10 pt-20 sm:pt-24 pb-20 md:pb-0">{children}</main>
+              <main className="flex-1 relative pt-20 sm:pt-24 pb-20 md:pb-0">{children}</main>
 
               {/* Drawer y botón flotante del Carrito Ceremonial */}
               <CeremonialCartDrawer />

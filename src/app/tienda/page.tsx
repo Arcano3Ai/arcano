@@ -684,13 +684,13 @@ function TiendaContent() {
          ───────────────────────────────────────────────────────────── */}
       {activeProduct && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-xl animate-fadeIn"
+          className="fixed inset-0 z-[90] flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-xl animate-fadeIn"
           onClick={() => setActiveProduct(null)}
           role="dialog"
           aria-modal="true"
         >
           <div
-            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#0A0A0A] border border-neutral-800 rounded-lg shadow-2xl p-6 sm:p-10 text-white scrollbar-thin"
+            className="relative w-full max-w-4xl max-h-[90vh] my-auto overflow-y-auto bg-[#0A0A0A] border border-neutral-800 rounded-lg shadow-2xl p-6 sm:p-10 text-white scrollbar-thin"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Botón Cerrar */}

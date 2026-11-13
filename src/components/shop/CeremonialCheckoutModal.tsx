@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { paymentConfig } from "@/config/paymentConfig";
@@ -20,6 +21,13 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copiedClabe, setCopiedClabe] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const CLABE_OFICIAL = "722969017074087021";
   const TITULAR_OFICIAL = "Sergio Adrian Perez Villarreal";
@@ -151,10 +159,10 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md overflow-y-auto animate-fadeIn text-left font-sans">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-xl overflow-y-auto animate-fadeIn text-left font-sans">
       <div
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#0A0A0A] border border-[#C5A059]/40 p-5 sm:p-8 rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.95),0_0_30px_rgba(197,160,89,0.25)] text-white"
+        className="relative w-full max-w-4xl max-h-[90vh] my-auto overflow-y-auto bg-[#0A0A0A] border border-[#C5A059]/40 p-5 sm:p-8 rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.95),0_0_30px_rgba(197,160,89,0.25)] text-white"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Botón Cerrar */}
@@ -563,6 +571,7 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

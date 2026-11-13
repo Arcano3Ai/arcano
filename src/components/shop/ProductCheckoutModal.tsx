@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { brandConfig } from "@/config/brandConfig";
 import { paymentConfig } from "@/config/paymentConfig";
@@ -37,8 +38,13 @@ export function ProductCheckoutModal({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [generatedOrderId, setGeneratedOrderId] = useState("");
+  const [mounted, setMounted] = useState(false);
 
-  if (!isOpen || !product) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !product || !mounted) return null;
 
   const CLABE_OFICIAL = "722969017074087021";
   const TITULAR_OFICIAL = "Sergio Adrian Perez Villarreal";
@@ -158,10 +164,10 @@ export function ProductCheckoutModal({
     window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMsg}`, "_blank");
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md overflow-y-auto animate-fadeIn text-left font-sans">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-xl overflow-y-auto animate-fadeIn text-left font-sans">
       <div
-        className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-[#0A0A0A] border border-[#C5A059]/50 p-5 sm:p-8 rounded-2xl shadow-[0_0_50px_rgba(197,160,89,0.3)] text-white"
+        className="relative w-full max-w-2xl max-h-[90vh] my-auto overflow-y-auto bg-[#0A0A0A] border border-[#C5A059]/50 p-5 sm:p-8 rounded-2xl shadow-[0_0_60px_rgba(0,0,0,0.95)] text-white"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Botón Cerrar */}
@@ -622,7 +628,8 @@ export function ProductCheckoutModal({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
