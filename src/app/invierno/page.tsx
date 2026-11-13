@@ -233,17 +233,10 @@ export default function InviernoLandingPage() {
             </p>
           </div>
 
-          {/* Banner de Envío Express y Recolección */}
-          <div className="p-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-[11px] text-[#25D366] font-serif font-medium text-center">
-            <span className="flex items-center gap-1.5">
-              <span>🚚</span>
-              <span>Envío Gratis Express a Todo México (24-48 hrs)</span>
-            </span>
-            <span className="hidden sm:inline text-neutral-500">•</span>
-            <span className="flex items-center gap-1.5 text-[#FFE2A4]">
-              <span>📍</span>
-              <span>O Recolección en Persona (Agua Fría, N.L.)</span>
-            </span>
+          {/* Banner de Envío Express Asegurado */}
+          <div className="p-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center gap-2 text-[11px] text-[#25D366] font-serif font-medium text-center">
+            <span>🚚</span>
+            <span>Envío Gratis Express Asegurado a Todo México (24-48 hrs con Guía)</span>
           </div>
 
           {/* Opciones de Compra y Pago */}
@@ -524,57 +517,19 @@ export default function InviernoLandingPage() {
               <p className="text-[10px] text-neutral-400 font-serif">Tarjeta ceremonial con el mensaje del arcano que acompaña tu pieza</p>
             </div>
 
-            {/* Modalidad 1: Envío Gratis a Domicilio */}
-            <div className="sm:col-span-2 p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/40 flex items-start gap-3">
-              <span className="text-xl flex-shrink-0">🚚</span>
-              <div>
-                <p className="text-xs font-serif text-[#25D366] font-semibold">Opción 1: Envío Gratis Express a Todo México</p>
-                <p className="text-[10px] text-neutral-300 font-serif">Paquetería express asegurada (DHL / FedEx / Estafeta) con entrega de 24 a 48 horas y código de rastreo a tu WhatsApp.</p>
-              </div>
-            </div>
-
-            {/* Modalidad 2: Recolección en Persona en Arcano Sabiduría */}
-            <div className="sm:col-span-2 p-3.5 rounded-xl bg-black/70 border border-[#D4AF37]/50 space-y-3">
-              <div className="flex items-start gap-2.5">
-                <span className="text-xl flex-shrink-0">📍</span>
-                <div>
-                  <p className="text-xs font-serif text-[#FFE2A4] font-semibold">
-                    Opción 2: Recolección en Persona en Arcano Sabiduría
-                  </p>
-                  <p className="text-[11px] text-neutral-300 font-serif">
-                    Morelos 654, Sector San Jorge, 66620 Agua Fría, N.L.
-                  </p>
-                  <p className="text-[10px] text-neutral-400 font-serif mt-0.5">
-                    Entrega personal en mano con tu pieza lista y ajustada a tu muñeca (previa confirmación por WhatsApp).
-                  </p>
+            {/* Envío Gratis Express Asegurado a Domicilio */}
+            <div className="sm:col-span-2 p-4 rounded-xl bg-gradient-to-r from-[#25D366]/15 via-[#25D366]/5 to-transparent border border-[#25D366]/40 flex items-start gap-3.5">
+              <span className="text-2xl flex-shrink-0">🚚</span>
+              <div className="space-y-1">
+                <p className="text-xs font-serif text-[#25D366] font-bold tracking-wide">Envío Gratis Express Asegurado a Todo México</p>
+                <p className="text-[11px] text-neutral-300 font-serif leading-relaxed">
+                  Entrega de 24 a 48 horas mediante paqueterías de alta seguridad (DHL / FedEx / Estafeta) con empaque ceremonial sellado y código de rastreo en tiempo real a tu WhatsApp.
+                </p>
+                <div className="flex items-center gap-3 pt-1 text-[10px] text-neutral-400 font-mono">
+                  <span>🔒 Cobertura 100% Asegurada</span>
+                  <span>•</span>
+                  <span>📦 Empaque Blindado</span>
                 </div>
-              </div>
-
-              {/* Google Maps Embed */}
-              <div className="w-full rounded-lg overflow-hidden border border-neutral-800/80 shadow-inner bg-[#0C0B10]">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14366.457051368692!2d-100.1367173!3d25.816296949999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662eee5ad0365d9%3A0x756c78f54dbd4e77!2sMorelos%20654%2C%20Sector%20San%20Jorge%2C%2066620%20Agua%20Fr%C3%ADa%2C%20N.L.!5e0!3m2!1ses-419!2smx!4v1794356140047!5m2!1ses-419!2smx"
-                  width="100%"
-                  height="220"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="Recolección en persona en Arcano Sabiduría - Morelos 654, Agua Fría, N.L."
-                  className="w-full aspect-video sm:h-[220px]"
-                />
-              </div>
-
-              <div className="flex items-center justify-between pt-0.5">
-                <span className="text-[10px] text-neutral-400 font-mono">Agua Fría, Apodaca / N.L.</span>
-                <a
-                  href="https://maps.google.com/?q=Morelos+654,+Sector+San+Jorge,+66620+Agua+Fr%C3%ADa,+N.L."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[10px] text-[#D4AF37] hover:underline font-mono inline-flex items-center gap-1 font-semibold"
-                >
-                  Abrir en Google Maps ↗
-                </a>
               </div>
             </div>
           </div>
@@ -634,15 +589,11 @@ export default function InviernoLandingPage() {
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿Cuáles son las formas de pago?</p>
-              <p className="text-neutral-400 text-[11px]">Transferencia SPEI a Mercado Pago o por WhatsApp Concierge directo con confirmación instantánea.</p>
-            </div>
-            <div className="pt-2 border-t border-neutral-800/70">
-              <p className="text-white font-medium">¿Puedo recogerla en persona?</p>
-              <p className="text-neutral-400 text-[11px]">Sí. Puedes recogerla directamente en Morelos 654, Sector San Jorge, Agua Fría, N.L. Coordinamos tu horario por WhatsApp para entregártela en mano.</p>
+              <p className="text-neutral-400 text-[11px]">Tarjetas de crédito (con opción a Meses Sin Intereses), débito, saldo Mercado Pago, OXXO o transferencia SPEI directa con confirmación instantánea.</p>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿Cuánto tarda el envío a domicilio?</p>
-              <p className="text-neutral-400 text-[11px]">Enviamos por paquetería express asegurada (FedEx / DHL / Estafeta) con entrega en 24 a 48 horas en cualquier parte de México.</p>
+              <p className="text-neutral-400 text-[11px]">Enviamos por paquetería express asegurada (FedEx / DHL / Estafeta) con entrega en 24 a 48 horas en cualquier parte de México y código de rastreo a tu WhatsApp.</p>
             </div>
           </div>
         </section>
