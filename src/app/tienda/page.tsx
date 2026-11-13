@@ -779,7 +779,7 @@ function TiendaContent() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-neutral-400">{t("Medida:", "Bead Size:")}</span>
-                    <span className="text-white">{t("Uniforme 8 mm (22 cuentas exactas)", "Uniform 8 mm (22 exact beads)")}</span>
+                    <span className="text-white">{t("Uniforme 8 mm (20 a 22 cuentas según tamaño de muñeca)", "Uniform 8 mm (20 to 22 beads depending on wrist size)")}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-neutral-400">{t("Ensamble:", "Assembly:")}</span>

@@ -21,7 +21,7 @@ export interface BeadMatrixSpecification {
   mainBody: string;      // 19 cuentas - 8 mm
   lateralBeads: string;  // 2 cuentas - 8 mm
   centerPiece: string;   // 1 cuenta - 10 mm
-  totalBeads: number;    // 22 cuentas
+  totalBeads: number;    // 20 a 22 cuentas según talla de muñeca
 }
 
 export interface ShopProduct {
