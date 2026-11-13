@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { paymentConfig } from "@/config/paymentConfig";
@@ -10,10 +10,22 @@ import { useLanguage } from "@/context/LanguageContext";
 function PendingContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
+  const [copiedClabe, setCopiedClabe] = useState(false);
   const orderId =
     searchParams.get("order_id") ||
     searchParams.get("external_reference") ||
     "ARC-CEREMONIAL";
+
+  const handleCopyClabe = async () => {
+    try {
+      await navigator.clipboard.writeText(paymentConfig.speiDirect.clabe);
+      setCopiedClabe(true);
+      setTimeout(() => setCopiedClabe(false), 3000);
+    } catch {
+      setCopiedClabe(true);
+      setTimeout(() => setCopiedClabe(false), 3000);
+    }
+  };
 
   const whatsappMessage = encodeURIComponent(
     t(
@@ -81,11 +93,20 @@ function PendingContent() {
                 <span className="text-parchment-muted font-sans text-xs">{t("Beneficiario / Titular:", "Beneficiary / Account Holder:")}</span>
                 <span className="text-gold font-semibold">{paymentConfig.speiDirect.beneficiary}</span>
               </div>
-              <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1 border-b border-gold/10">
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1 border-b border-gold/10 gap-2">
                 <span className="text-parchment-muted font-sans text-xs">{t("CLABE Interbancaria:", "CLABE / Account Number:")}</span>
-                <span className="text-amber-300 font-bold tracking-wider select-all text-sm">
-                  {paymentConfig.speiDirect.clabe}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-amber-300 font-bold tracking-wider select-all text-sm">
+                    {paymentConfig.speiDirect.clabe}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleCopyClabe}
+                    className="px-2 py-0.5 rounded bg-gold/20 hover:bg-gold/30 border border-gold/40 text-gold text-[10px] font-sans transition-all cursor-pointer"
+                  >
+                    {copiedClabe ? t("✓ ¡Copiada!", "✓ Copied!") : t("📋 Copiar CLABE", "📋 Copy CLABE")}
+                  </button>
+                </div>
               </div>
               <div className="flex flex-col sm:flex-row justify-between sm:items-center py-1">
                 <span className="text-parchment-muted font-sans text-xs">{t("Concepto de Transferencia:", "Payment Reference / Note:")}</span>

@@ -20,6 +20,8 @@ import {
   trackConciergeLead,
 } from "@/config/conciergeConfig";
 import { useLanguage, LanguageToggle } from "@/context/LanguageContext";
+import { useCart } from "@/context/CartContext";
+import { ProductCheckoutModal } from "@/components/shop/ProductCheckoutModal";
 
 // Formateador estilo Aurum Brothers: $X,XXX MXN
 function formatPrice(price: number, lang: "es" | "en" = "es"): string {
@@ -242,8 +244,20 @@ function TiendaContent() {
   const [activeProduct, setActiveProduct] = useState<ShopProduct | null>(null);
   const [selectedDeliveryZone, setSelectedDeliveryZone] = useState<string>(CONCIERGE_DEFAULT_ZONE);
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
+  const [isDirectCheckoutOpen, setIsDirectCheckoutOpen] = useState(false);
+  const [cartToastMessage, setCartToastMessage] = useState<string | null>(null);
   const { language, t } = useLanguage();
   const searchParams = useSearchParams();
+  const { addItem, openCart } = useCart();
+
+  const handleAddToCart = (product: ShopProduct, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    addItem(product);
+    setCartToastMessage(`✦ ${product.name} añadido al Carrito`);
+    setTimeout(() => {
+      setCartToastMessage(null);
+    }, 4000);
+  };
 
   // Escuchar parámetros ?item=... reactivamente con useSearchParams (para Concierge VIP & Ads Deep Linking)
   useEffect(() => {
@@ -599,7 +613,7 @@ function TiendaContent() {
               <>
                 {/* ── FILA 1: Arcanos 0, I, II, III (4 Productos) ── */}
                 {filteredProducts.slice(0, 4).map((product, idx) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} priority={idx < 2} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} priority={idx < 2} />
                 ))}
 
                 {/* ── FILA 2: EDITORIAL 1 (2 Cols Izquierda) + Arcanos IV, V (2 Productos) ── */}
@@ -608,12 +622,12 @@ function TiendaContent() {
                   onSelect={handleOpenProductBySlug}
                 />
                 {filteredProducts.slice(4, 6).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
 
                 {/* ── FILA 3: Arcanos VI, VII (2 Productos) + EDITORIAL 2 (2 Cols Derecha) ── */}
                 {filteredProducts.slice(6, 8).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
                 <EditorialCard
                   highlight={EDITORIAL_HIGHLIGHTS[1]}
@@ -622,7 +636,7 @@ function TiendaContent() {
 
                 {/* ── FILA 4: Arcanos VIII, IX, X, XI (4 Productos) ── */}
                 {filteredProducts.slice(8, 12).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
 
                 {/* ── FILA 5: EDITORIAL 3 (2 Cols Izquierda) + Arcanos XII, XIII (2 Productos) ── */}
@@ -631,12 +645,12 @@ function TiendaContent() {
                   onSelect={handleOpenProductBySlug}
                 />
                 {filteredProducts.slice(12, 14).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
 
                 {/* ── FILA 6: Arcanos XIV, XV (2 Productos) + EDITORIAL 4 (2 Cols Derecha) ── */}
                 {filteredProducts.slice(14, 16).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
                 <EditorialCard
                   highlight={EDITORIAL_HIGHLIGHTS[3]}
@@ -645,18 +659,18 @@ function TiendaContent() {
 
                 {/* ── FILA 7: Arcanos XVI, XVII, XVIII, XIX (4 Productos) ── */}
                 {filteredProducts.slice(16, 20).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
 
                 {/* ── FILA 8: Arcanos Restantes (XX, XXI y Arcanos Menores) ── */}
                 {filteredProducts.slice(20).map((product) => (
-                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} />
+                  <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} />
                 ))}
               </>
             ) : (
               // Cuando hay filtro de categoría o búsqueda activa, mostramos los productos en grid directo
               filteredProducts.map((product, idx) => (
-                <ProductCard key={product.id} product={product} onSelect={setActiveProduct} priority={idx < 2} />
+                <ProductCard key={product.id} product={product} onSelect={setActiveProduct} onAddToCart={handleAddToCart} priority={idx < 2} />
               ))
             )}
 
@@ -782,28 +796,79 @@ function TiendaContent() {
                   {activeProduct.arcanoStory || activeProduct.description}
                 </p>
 
-                {/* Botón Principal WhatsApp Concierge con Tracking */}
-                <a
-                  href={conciergeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleConciergeClick}
-                  className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#d8b368] text-black font-semibold text-xs tracking-[0.2em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg cursor-pointer hover:shadow-[0_0_20px_rgba(197,160,89,0.4)]"
-                >
-                  <span>{t("Adquirir Pieza vía WhatsApp Concierge", "Acquire Piece via WhatsApp Concierge")}</span>
-                  <span className="text-sm">↗</span>
-                </a>
+                {/* Opciones de Adquisición Multicanal: SPEI Directo + Carrito + WhatsApp */}
+                <div className="space-y-2.5 pt-2">
+                  {/* Botón Principal: Transferencia SPEI Directa (Formulario de Envío + CLABE Inmutable) */}
+                  <button
+                    type="button"
+                    onClick={() => setIsDirectCheckoutOpen(true)}
+                    className="w-full py-3.5 px-6 bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 text-black font-bold text-xs tracking-[0.18em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(197,160,89,0.35)] cursor-pointer"
+                  >
+                    <span>🏛️</span>
+                    <span>{t("Pagar con Transferencia SPEI (0% Comisión)", "Pay via Bank Transfer SPEI (0% Fee)")}</span>
+                    <span className="text-sm">→</span>
+                  </button>
 
-                <p className="text-[10px] text-center text-neutral-400 font-mono tracking-wider">
+                  {/* Fila Dual: Agregar al Carrito Ceremonial + WhatsApp Concierge */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(activeProduct)}
+                      className="w-full py-3 px-4 bg-neutral-900 hover:bg-neutral-800 border border-[#C5A059]/40 hover:border-[#C5A059] text-[#FFE2A4] font-semibold text-xs tracking-wider uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <span>🛒</span>
+                      <span>{t("Agregar al Carrito", "Add to Cart")}</span>
+                    </button>
+
+                    <a
+                      href={conciergeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleConciergeClick}
+                      className="w-full py-3 px-4 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/50 text-[#25D366] font-semibold text-xs tracking-wider uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <span>💬</span>
+                      <span>{t("WhatsApp Concierge", "WhatsApp Concierge")}</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  </div>
+                </div>
+
+                <p className="text-[10px] text-center text-neutral-400 font-mono tracking-wider pt-1">
                   {t(
-                    "Cierre directo con Asesor Personal · Garantía y autenticidad certificada",
-                    "Direct inquiry with Personal Advisor · Certified authenticity guarantee"
+                    "Transferencia directa a cuenta oficial Arcano Solutions · Garantía y autenticidad certificada",
+                    "Direct transfer to Arcano Solutions official account · Certified authenticity guarantee"
                   )}
                 </p>
 
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Modal de Pago SPEI para el Producto Seleccionado */}
+      <ProductCheckoutModal
+        isOpen={isDirectCheckoutOpen}
+        onClose={() => setIsDirectCheckoutOpen(false)}
+        product={activeProduct}
+      />
+
+      {/* Toast de confirmación de Carrito */}
+      {cartToastMessage && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-[#0A0A0A] border border-[#C5A059] text-white px-5 py-3 rounded-full shadow-[0_0_30px_rgba(197,160,89,0.5)] flex items-center gap-3 animate-fadeIn text-xs">
+          <span className="text-[#C5A059] text-sm">✦</span>
+          <span>{cartToastMessage}</span>
+          <button
+            type="button"
+            onClick={() => {
+              setCartToastMessage(null);
+              openCart();
+            }}
+            className="px-2.5 py-1 rounded bg-[#C5A059] text-black font-bold text-[10px] uppercase tracking-wider hover:bg-[#d8b368] transition-colors cursor-pointer"
+          >
+            {t("Ver Carrito", "View Cart")}
+          </button>
         </div>
       )}
 
@@ -846,21 +911,29 @@ export default function ShopPage() {
 function ProductCard({
   product,
   onSelect,
+  onAddToCart,
   priority = false,
 }: {
   product: ShopProduct;
   onSelect: (p: ShopProduct) => void;
+  onAddToCart?: (p: ShopProduct) => void;
   priority?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const { language, t } = useLanguage();
 
   return (
-    <button
-      type="button"
+    <div
       onClick={() => onSelect(product)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          onSelect(product);
+        }
+      }}
       className="group flex flex-col cursor-pointer select-none text-left w-full focus:outline-none"
     >
       {/* Contenedor de Fotografía sobre Negro Absoluto */}
@@ -906,15 +979,32 @@ function ProductCard({
           {t("8mm · Pura piedra natural sobre elástico", "8mm · Pure natural stones on elastic")}
         </p>
 
-        {/* Reseñas con Estrellas Doradas */}
-        <div className="flex items-center gap-1 text-[10px] text-[#C5A059] pt-0.5">
-          <span>★★★★★</span>
-          <span className="text-neutral-400 font-mono text-[9px]">
-            ({15 + ((product.name.length * 7) % 35)})
-          </span>
+        {/* Reseñas con Estrellas Doradas y Botón + Carrito */}
+        <div className="flex items-center justify-between pt-0.5">
+          <div className="flex items-center gap-1 text-[10px] text-[#C5A059]">
+            <span>★★★★★</span>
+            <span className="text-neutral-400 font-mono text-[9px]">
+              ({15 + ((product.name.length * 7) % 35)})
+            </span>
+          </div>
+
+          {onAddToCart && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToCart(product);
+              }}
+              className="px-2.5 py-1 rounded bg-neutral-900/90 hover:bg-[#C5A059] border border-neutral-800 hover:border-[#C5A059] text-neutral-300 hover:text-black text-[10px] font-sans uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-sm"
+              title={t("Agregar al Carrito", "Add to Cart")}
+            >
+              <span>🛒</span>
+              <span>+</span>
+            </button>
+          )}
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 

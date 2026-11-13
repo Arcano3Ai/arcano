@@ -19,6 +19,23 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
   const [selectedGateway, setSelectedGateway] = useState<PaymentGateway>("spei_mercadopago");
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [copiedClabe, setCopiedClabe] = useState(false);
+
+  const CLABE_OFICIAL = "722969017074087021";
+  const TITULAR_OFICIAL = "Sergio Adrian Perez Villarreal";
+  const BANCO_OFICIAL = "Mercado Pago W";
+
+  const handleCopyClabe = async (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(CLABE_OFICIAL);
+      setCopiedClabe(true);
+      setTimeout(() => setCopiedClabe(false), 3000);
+    } catch {
+      setCopiedClabe(true);
+      setTimeout(() => setCopiedClabe(false), 3000);
+    }
+  };
 
   // Formulario de Envío
   const [shippingForm, setShippingForm] = useState({
@@ -363,17 +380,26 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                     <div className="mt-3 p-3 rounded-lg bg-black/60 border border-[#C5A059]/30 text-[11px] font-mono space-y-1.5">
                       <div className="flex justify-between items-center text-neutral-400">
                         <span>Banco:</span>
-                        <span className="text-white font-bold">Mercado Pago W</span>
+                        <span className="text-white font-bold">{BANCO_OFICIAL}</span>
                       </div>
                       <div className="flex justify-between items-center text-neutral-400">
                         <span>Titular:</span>
-                        <span className="text-amber-200 font-medium">Sergio Adrián Pérez Villarreal</span>
+                        <span className="text-[#FFE2A4] font-medium">{TITULAR_OFICIAL}</span>
                       </div>
-                      <div className="flex justify-between items-center text-neutral-400 pt-1 border-t border-neutral-800">
-                        <span>CLABE:</span>
-                        <span className="text-[#C5A059] font-bold text-xs tracking-wider select-all">
-                          722969017074087021
-                        </span>
+                      <div className="pt-1 border-t border-neutral-800">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-neutral-400">CLABE (SPEI):</span>
+                          <button
+                            type="button"
+                            onClick={handleCopyClabe}
+                            className="px-2 py-0.5 rounded bg-[#C5A059]/20 hover:bg-[#C5A059]/30 border border-[#C5A059]/60 text-[#FFE2A4] text-[10px] font-sans transition-all cursor-pointer"
+                          >
+                            {copiedClabe ? "✓ ¡Copiada!" : "📋 Copiar CLABE"}
+                          </button>
+                        </div>
+                        <div className="text-[#FFE2A4] font-bold text-xs tracking-wider select-all">
+                          {CLABE_OFICIAL}
+                        </div>
                       </div>
                     </div>
                   </div>
