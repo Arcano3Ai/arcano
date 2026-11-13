@@ -114,8 +114,11 @@ async function handleCreateOrder(req: Request, res: Response, isTestMode: boolea
     const externalReference = orderId || (cartId ? `${prefix}-${cartId}` : `${prefix}-${Date.now().toString(36).toUpperCase()}`);
 
     // 3. Preparar items para la API de Mercado Pago (Orders API v1 requiere unit_price como string decimal)
-    const mpItems = items.map((item) => ({
+    const mpItems = items.map((item, idx) => ({
       title: item.title,
+      description: item.description || item.title || "Pieza de autor ARCANO",
+      category_id: "fashion",
+      external_code: `SKU-${idx + 1}`,
       unit_price: Number(item.unit_price).toFixed(2),
       quantity: Number(item.quantity),
     }));
@@ -123,6 +126,9 @@ async function handleCreateOrder(req: Request, res: Response, isTestMode: boolea
     if (shippingCost > 0) {
       mpItems.push({
         title: "Envío Express Asegurado",
+        description: "Envío con guía y seguro de entrega",
+        category_id: "services",
+        external_code: "SHIPPING-EXPRESS",
         unit_price: Number(shippingCost).toFixed(2),
         quantity: 1,
       });
@@ -155,7 +161,7 @@ async function handleCreateOrder(req: Request, res: Response, isTestMode: boolea
       };
     }
 
-    // 5. Llamada a la API de Mercado Pago (Orders API v1)
+    // 5. Llamada a la API de Mercado Pago (Orders API v1 con cumplimiento estricto de Calidad y 3DS)
     const mpResponse = await fetch("https://api.mercadopago.com/v1/orders", {
       method: "POST",
       headers: {
@@ -171,11 +177,16 @@ async function handleCreateOrder(req: Request, res: Response, isTestMode: boolea
         payer: payerPayload,
         items: mpItems,
         config: {
+          statement_descriptor: "ARCANO",
           online: {
             success_url: "https://arcanosolutions.com/checkout/success",
             pending_url: "https://arcanosolutions.com/checkout/pending",
             failure_url: "https://arcanosolutions.com/checkout/failure",
             auto_return: "approved",
+            transaction_security: {
+              liability_shift: "required",
+              validation: "on_fraud_risk",
+            },
           },
         },
       }),
