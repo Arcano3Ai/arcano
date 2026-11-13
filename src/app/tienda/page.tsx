@@ -253,11 +253,15 @@ function TiendaContent() {
 
   const handleAddToCart = (product: ShopProduct, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    addItem(product);
-    setCartToastMessage(`✦ ${product.name} añadido al Carrito`);
-    setTimeout(() => {
-      setCartToastMessage(null);
-    }, 4000);
+    try {
+      addItem(product);
+      setCartToastMessage(`✦ ${product.name} añadido al Carrito`);
+      setTimeout(() => {
+        setCartToastMessage(null);
+      }, 4000);
+    } catch (err) {
+      console.error("Error al añadir al carrito:", err);
+    }
   };
 
   // Escuchar parámetros ?item=... reactivamente con useSearchParams (para Concierge VIP & Ads Deep Linking)
@@ -814,7 +818,10 @@ function TiendaContent() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <button
                       type="button"
-                      onClick={() => handleAddToCart(activeProduct)}
+                      onClick={() => {
+                        handleAddToCart(activeProduct);
+                        setActiveProduct(null);
+                      }}
                       className="w-full py-3 px-4 bg-neutral-900 hover:bg-neutral-800 border border-[#C5A059]/40 hover:border-[#C5A059] text-[#FFE2A4] font-semibold text-xs tracking-wider uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <span>🛒</span>

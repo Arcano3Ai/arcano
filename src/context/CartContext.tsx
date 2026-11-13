@@ -79,7 +79,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, isHydrated]);
 
   const addItem = (product: ShopProduct, options?: AddItemOptions, quantity = 1) => {
-    const itemPrice = options?.price ?? product.price;
+    if (!product || !product.id) return;
+    const itemPrice = Number(options?.price ?? product.price) || 0;
+    const itemQty = Math.max(1, Number(quantity) || 1);
     const itemId = options?.optionKey ? `${product.id}-${options.optionKey}` : product.id;
 
     setItems((prev) => {
@@ -88,20 +90,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
         const updated = [...prev];
         updated[existingIndex] = {
           ...updated[existingIndex],
-          quantity: updated[existingIndex].quantity + quantity,
+          quantity: (Number(updated[existingIndex].quantity) || 0) + itemQty,
         };
         return updated;
       }
       const newItem: CartItem = {
         id: itemId,
         productId: product.id,
-        name: product.name,
+        name: product.name || "Pieza Ceremonial",
         price: itemPrice,
-        quantity,
-        imageUrl: product.imageUrl,
-        categoryName: product.categoryName,
+        quantity: itemQty,
+        imageUrl: product.imageUrl || "/images/shop/pulseras/brazalete-arcano-i-el-mago-amatista-obsidiana.jpg",
+        categoryName: product.categoryName || "Colección Arcanos",
         optionLabel: options?.optionLabel,
-        isDoublePerforation: product.isDoublePerforation,
+        isDoublePerforation: Boolean(product.isDoublePerforation),
         hasGoldSpecs: product.goldSpecifications !== undefined,
       };
       return [...prev, newItem];
@@ -119,7 +121,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return prev
         .map((item) => {
           if (item.id === itemId) {
-            const newQty = item.quantity + delta;
+            const newQty = (Number(item.quantity) || 1) + delta;
             return newQty > 0 ? { ...item, quantity: newQty } : null;
           }
           return item;
@@ -132,12 +134,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   };
 
-  const totalCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalCount = items.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
+  const subtotal = items.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
 
   // Si tiene algún Dúo o el subtotal supera el umbral, aplica envío gratis
   const hasDuoItem = items.some(
-    (item) => item.id.includes("duo") || (item.optionLabel && item.optionLabel.toLowerCase().includes("dúo"))
+    (item) => item.id?.includes("duo") || (item.optionLabel && item.optionLabel.toLowerCase().includes("dúo"))
   );
   const hasFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD || hasDuoItem;
   const amountNeededForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
