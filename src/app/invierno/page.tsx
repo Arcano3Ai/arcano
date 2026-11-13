@@ -511,11 +511,6 @@ export default function InviernoLandingPage() {
               <p className="text-xs font-serif text-[#FFE2A4] font-medium">Porta Incienso Áurico (Gratis)</p>
               <p className="text-[10px] text-neutral-300 font-serif">Regalo exclusivo en las primeras 100 compras</p>
             </div>
-            <div className="sm:col-span-2 p-3 rounded-lg bg-black/50 border border-neutral-800/80 space-y-1">
-              <span className="text-sm">🔮</span>
-              <p className="text-xs font-serif text-white font-medium">Oráculo Personal</p>
-              <p className="text-[10px] text-neutral-400 font-serif">Tarjeta ceremonial con el mensaje del arcano que acompaña tu pieza</p>
-            </div>
 
             {/* Envío Gratis Express Asegurado a Domicilio */}
             <div className="sm:col-span-2 p-4 rounded-xl bg-gradient-to-r from-[#25D366]/15 via-[#25D366]/5 to-transparent border border-[#25D366]/40 flex items-start gap-3.5">
