@@ -14,7 +14,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Semilla de riqueza · Prosperidad tangible · Manifestación sólida. Talismán del regalo terrenal de la fortuna abundante.",
     description: "Atrae prosperidad material, éxito en inversiones, oportunidades financieras y salud floreciente. 19 cuentas de aventurina verde, dos laterales de hematita dorada y centro focal de jaspe paisaje de 8 mm.",
     arcanoStory: "Una mano celestial emerge entre nubes resplandecientes sosteniendo una gran moneda de oro sobre un jardín florido con lirios y un arco vegetal que conduce a cumbres nevadas. La aventurina atrae la buena ventura financiera, la hematita dorada concentra el magnetismo del oro y el jaspe paisaje enraíza la riqueza en la tierra sólida.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita dorada (2 ctas - 8 mm)",
@@ -56,7 +56,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Equilibrio dinámico · Adaptabilidad financiera · Danza del flujo. Talismán para malabarear recursos y tiempo con destreza jovial.",
     description: "Ayuda a mantener la agilidad financiera, conciliar múltiples proyectos sin estrés y surfear las olas del mercado con gracia. 19 cuentas de jaspe paisaje, dos laterales de aventurina verde y centro focal de hematita metálica de 8 mm.",
     arcanoStory: "Un joven vestido de juglar danza frente al oleaje embravecido mientras balancea dos grandes monedas de oro dentro de una cinta infinita con el ocho lemniscata. El jaspe paisaje brinda arraigo en medio del movimiento, la aventurina asegura que los recursos no escaseen y la hematita sostiene el centro de gravedad inmutable.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
@@ -98,7 +98,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Maestría artesanal · Trabajo de excelencia · Colaboración noble. Talismán del maestro constructor cuyos planos se erigen en templo.",
     description: "Consagrado para el perfeccionamiento profesional, reconocimiento de clientes distinguidos y alianzas productivas impecables. 19 cuentas de jaspe paisaje, dos laterales de ónix negro mate y centro focal de hematita dorada de 8 mm.",
     arcanoStory: "En el pórtico de una catedral en construcción, el escultor cincela los arcos con maestría mientras el monje y el arquitecto consultan sus planos con admiración. El jaspe paisaje encarna la piedra de cantera noble, el ónix mate aporta disciplina paciente y la hematita dorada corona la obra con prestigio profesional.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -140,7 +140,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Seguridad patrimonial · Blindaje financiero · Estabilidad sólida. Talismán para consolidar el capital y resguardar lo edificado.",
     description: "Un escudo de protección patrimonial para conservar la riqueza, establecer límites financieros y evitar despilfarros. 19 cuentas de ónix negro brillante, dos laterales de jaspe rojo y centro focal de hematita metálica de 8 mm.",
     arcanoStory: "Sentado en lo alto sobre la vista panorámica de su ciudadela, el soberano asegura una moneda sobre su corona, otra en sus brazos y dos bajo sus pies firmes. El ónix brillante blinda el patrimonio contra fugas o envidias, el jaspe rojo aporta solidez telúrica inexpugnable y la hematita ancla la estabilidad económica a largo plazo.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Ónix negro brillante (19 ctas - 8 mm)",
       "Laterales Simétricos: Jaspe rojo telúrico (2 ctas - 8 mm)",
@@ -182,7 +182,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Resguardo en la tormenta · Luz en la ventana · Salida de la estrechez. Talismán para encontrar el santuario cálido en tiempos difíciles.",
     description: "Protección en momentos de austeridad material o incertidumbre, atrayendo auxilio oportuno y resiliencia tenaz. 19 cuentas de lava volcánica negra, dos laterales de ónix mate y centro focal de aventurina verde de 8 mm.",
     arcanoStory: "Dos peregrinos caminan sobre la nieve invernal frente a la ventana iluminada de un santuario cuyos vitrales muestran cinco monedas de oro: el abrigo está a la vuelta de la esquina. La lava volcánica absorbe la pesadumbre del frío exterior, el ónix preserva el calor interno y la aventurina verde central alumbra la puerta que reabre la abundancia.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Lava volcánica negra (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -224,7 +224,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Generosidad circular · Balanza de justicia · Flujo de retorno. Talismán del intercambio próspero donde el dar multiplica el recibir.",
     description: "Sintoniza con el equilibrio financiero kármico: pagar con alegría, recibir con gratitud y multiplicar el flujo de capital noble. 19 cuentas de aventurina verde, dos laterales de hematita gris y centro focal de citrino solar de 8 mm.",
     arcanoStory: "Con una balanza de precisión en una mano y monedas de oro en la otra, el benefactor distribuye recursos con equidad a quienes lo necesitan. La aventurina bendice las arcas para que nunca queden vacías, la hematita mantiene la medida justa en las cuentas y el citrino enciende el imán del retorno multiplicado.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris metálica (2 ctas - 8 mm)",
@@ -266,7 +266,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Paciencia fecunda · Maduración del fruto · Confianza en la cosecha. Talismán de quien siembra con rigor y aguarda con paz.",
     description: "Para emprendimientos e inversiones a mediano y largo plazo, protegiendo contra la prisa ansiosa y garantizando cosechas colmadas. 19 cuentas de jaspe paisaje, dos laterales de aventurina verde y centro focal de ojo de tigre dorado de 8 mm.",
     arcanoStory: "Apoyado en su azadón, el hortelano contempla la frondosa vid colmada de siete grandes oros: la semilla ha germinado y el fruto está a punto de sazón. El jaspe paisaje sintoniza con los tiempos orgánicos de la madre tierra, la aventurina asegura un fruto rollizo y el ojo de tigre aporta la serenidad de quien sabe que su esfuerzo valió la pena.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
@@ -308,7 +308,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Dedicación al detalle · Disciplina constante · Maestría técnica. Talismán del artesano que convierte la rutina en obra maestra.",
     description: "Potencia el enfoque en los detalles, la productividad minuciosa y la creación de piezas de alta gama. 19 cuentas de ónix negro mate, laterales de jaspe paisaje y centro focal de hematita dorada de 8 mm.",
     arcanoStory: "Sentado en su banco de trabajo con cincel y martillo, el orfebre graba una a una las ocho monedas de oro con precisión geométrica impecable. El ónix mate enfoca la atención sin distracciones, el jaspe paisaje otorga destreza manual y la hematita dorada eleva el valor final de cada creación.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Ónix negro mate (19 ctas - 8 mm)",
       "Laterales Simétricos: Jaspe paisaje natural (2 ctas - 8 mm)",
@@ -350,7 +350,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Autosuficiencia aristocrática · Refinamiento sereno · Placer merecido. Talismán de la dama rodeada de viñedos que goza de su independencia.",
     description: "Consagrado para celebrar la libertad económica conquistada por mérito propio, el confort elegante y el lujo discreto. 19 cuentas de aventurina verde, dos laterales de citrino solar y centro focal de hematita dorada de 8 mm.",
     arcanoStory: "Paseando por sus viñedos cargados de racimos y nueve monedas de oro, la dama engalanada sostiene un halcón encapuchado en su puño con porte soberano. La aventurina atrae belleza y distinción, el citrino irradia felicidad autosuficiente y la hematita dorada consagra su independencia financiera inatacable.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Citrino Dorado Solar (2 ctas - 8 mm)",
@@ -392,7 +392,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Legado generacional · Patrimonio familiar · Abundancia eterna. Talismán de la dinastía floreciente y el linaje honorable.",
     description: "El ápice de la riqueza terrenal: bienes raíces consolidados, bendición familiar duradera y transmisión de patrimonio a las futuras generaciones. 19 cuentas de ojo de tigre dorado, laterales de aventurina verde y centro focal de hematita dorada de 8 mm.",
     arcanoStory: "Bajo el portal blasonado de la hacienda familiar, tres generaciones conversan en armonía mientras los sabuesos descansan y diez monedas doradas forman el árbol cabalístico de la vida. El ojo de tigre preserva la herencia contra infortunios, la aventurina nutre el bienestar de los descendientes y la hematita dorada sella la eternidad del legado.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Ojo de tigre dorado (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
@@ -434,7 +434,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Estudiante consagrado · Proyecto naciente · Pragmatismo noble. Talismán de quien admira la semilla con humildad y hambre de aprender.",
     description: "Ideal para iniciar carreras universitarias, certificaciones, nuevos negocios o adquirir habilidades técnicas de alto valor. 19 cuentas de jaspe paisaje, dos laterales de aventurina verde y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "En medio de praderas fértiles con el arado al fondo, el joven sostiene una gran moneda de oro entre sus manos con reverencia y concentración total. El jaspe paisaje brinda paciencia y perseverancia en el estudio, la aventurina asegura que el aprendizaje rinda frutos monetarios y el cuarzo cristal afina la comprensión de los secretos del oficio.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
@@ -476,7 +476,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Perseverancia incansable · Paso firme · Lealtad a toda prueba. Talismán del ejecutor que jamás abandona hasta ver culminada la misión.",
     description: "Otorga tenacidad férrea, puntualidad, ética laboral inquebrantable y la certeza de que paso a paso se conquista cualquier cima. 19 cuentas de ojo de tigre dorado, laterales de ónix negro mate y centro focal de jaspe paisaje de 8 mm.",
     arcanoStory: "Montado sobre un corcel negro de labranza plantado con firmeza sobre la tierra arada, el caballero contempla su moneda de oro sin prisa pero sin pausa. El ojo de tigre enfoca la meta con determinación implacable, el ónix mate elimina la fatiga física y el jaspe paisaje garantiza raíces indestructibles.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Ojo de tigre dorado (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -518,7 +518,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Nutrición maternal · Confort hogareño · Prosperidad telúrica. Talismán del trono de la generosidad terrenal y el cuidado sagrado.",
     description: "Canaliza amor práctico, hospitalidad exquisita, buen gusto culinario y financiero, creando un refugio de prosperidad donde todos florecen. 19 cuentas de aventurina verde, laterales de jaspe paisaje y centro focal de cuarzo rosa de 8 mm.",
     arcanoStory: "Sentada en un trono de piedra tallada con frutos, ángeles y cabras monteses en medio de un vergel donde corretea una liebre salvaje, la Reina contempla el pentáculo sobre su regazo. La aventurina provee abundancia inagotable, el jaspe paisaje nutre las raíces familiares y el cuarzo rosa envuelve a los suyos en cariño incondicional.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Jaspe paisaje natural (2 ctas - 8 mm)",
@@ -560,7 +560,7 @@ export const orosTalismans: ShopProduct[] = [
     tagline: "Imperio consolidado · Soberanía financiera · Rey Midas. Talismán del gran patriarca que convierte en oro todo lo que toca.",
     description: "La máxima jerarquía del elemento tierra: sabiduría mercantil, éxito empresarial duradero, generosidad señorial y estabilidad inexpugnable. 19 cuentas de ónix negro brillante, laterales de ojo de tigre dorado y centro focal de hematita dorada de 8 mm.",
     arcanoStory: "Con manto de uvas y vides y cetro de mando sobre su trono flanqueado por toros de bronce en el patio de su castillo, el Rey de Oros sostiene su pentáculo con la naturalidad de quien domina las leyes de la materia. El ónix brillante protege sus dominios, el ojo de tigre agudiza su olfato comercial y la hematita dorada atrae fortuna continua a su linaje.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Tierra.",
     details: [
       "Cuerpo Principal: Ónix negro brillante (19 ctas - 8 mm)",
       "Laterales Simétricos: Ojo de tigre dorado (2 ctas - 8 mm)",

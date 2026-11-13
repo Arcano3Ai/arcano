@@ -184,8 +184,8 @@ export default function HomePage() {
         </h3>
         <p className="text-xs text-neutral-400 max-w-sm mx-auto mb-4 font-sans leading-relaxed">
           {t(
-            "Descubre la colección de pulseras y talismanes 100% de mineral puro, consagrados bajo Luna Llena.",
-            "Discover our 100% pure mineral bracelets and talismans, consecrated under the Full Moon."
+            "Descubre la colección de pulseras y talismanes forjados exclusivamente en 100% pura piedra mineral natural.",
+            "Discover our collection of bracelets and talismans forged exclusively from 100% pure natural mineral stones."
           )}
         </p>
         <Link

@@ -3,16 +3,16 @@ import { siteConfig } from "@/config/siteConfig";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: "Boutique de Alta Joyería Mineral & Talismanes Sagrados | ARCANO",
+  title: "Boutique de Alta Joyería Mineral & Talismanes | ARCANO",
   description:
-    "Colección exclusiva de talismanes y pulseras en minerales 100% puros Grado AAA de 8mm. Consagrados en Luna Llena ante fuego ceremonial. Veta Sagrada de 32 cristales y piezas hechas a mano a la medida exacta de tu muñeca.",
+    "Colección exclusiva de talismanes y pulseras en minerales 100% puros Grado AAA de 8mm. Veta Mineral de 32 cristales naturales seleccionados y piezas hechas a mano a la medida exacta de tu muñeca en Monterrey, México.",
   alternates: {
     canonical: `${siteConfig.url}/tienda/`,
   },
   openGraph: {
-    title: "Boutique Ceremonial ARCANO · Alta Joyería Mineral & Talismanes Sagrados",
+    title: "Boutique ARCANO · Alta Joyería Mineral & Talismanes",
     description:
-      "Pulseras y talismanes forjados en minerales 100% puros de 8mm Grado AAA (Amatista, Ámbar de Chiapas, Malaquita, Pirita, Turquesa). Consagradas en Luna Llena ante fuego sagrado. Hechas a mano a tu medida.",
+      "Pulseras y talismanes forjados en minerales 100% puros de 8mm Grado AAA (Amatista, Ámbar de Chiapas, Malaquita, Lapislázuli, Ojo de Tigre). Hechas a mano a tu medida exacta.",
     url: `${siteConfig.url}/tienda/`,
     type: "website",
     locale: "es_MX",
@@ -23,16 +23,16 @@ export const metadata: Metadata = {
         secureUrl: `${siteConfig.url}/og-tienda.jpg`,
         width: 1200,
         height: 630,
-        alt: "Boutique Ceremonial ARCANO · Alta Joyería Mineral & Talismanes Sagrados de 8mm",
+        alt: "Boutique ARCANO · Alta Joyería Mineral de 8mm",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boutique Ceremonial ARCANO · Alta Joyería Mineral & Talismanes Sagrados",
+    title: "Boutique ARCANO · Alta Joyería Mineral & Talismanes",
     description:
-      "Talismanes y pulseras en minerales 100% puros de 8mm Grado AAA. Consagradas en Luna Llena ante fuego sagrado. Hechas a mano a tu medida.",
+      "Talismanes y pulseras en minerales 100% puros de 8mm Grado AAA. Hechas a mano a tu medida exacta en Monterrey, México.",
     images: [`${siteConfig.url}/og-tienda.jpg`],
   },
 };

@@ -14,7 +14,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Nuevos comienzos · Libertad · Aventura. Talismán del salto de fe con howlita blanca y anclaje de ónix y hematita.",
     description: "Una pieza consagrada para recordar la valentía de emprender nuevos caminos sin temor al abismo. 19 cuentas de howlita blanca con vetas naturales, dos laterales de equilibrio en ónix negro mate y una cuenta central focal de hematita gris metálica de 8 mm.",
     arcanoStory: "En los antiguos misterios herméticos, El Loco encarna el alma primordial antes de descender a la materia: la chispa pura que no teme al abismo porque sabe que el cosmos la sostiene. La Howlita blanca calma la mente en el umbral de lo desconocido, el Ónix negro mate ancla los pies en la tierra y la Hematita metálica central refleja las dudas para dar el paso con certeza absoluta.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). El viaje del alma comienza al soltar la necesidad de certezas mundanas y confiar plenamente en el Gran Misterio.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. El viaje del alma comienza al soltar la necesidad de certezas mundanas y confiar plenamente en el Gran Misterio.",
     details: [
       "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -56,7 +56,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Manifestación · Voluntad · Concentración. Talismán del poder creador que une cielo y tierra.",
     description: "Una joya ceremonial que sintoniza con la capacidad de canalizar la voluntad en obra viva. 19 cuentas de ónix negro brillante de alta protección, dos laterales de lapislázuli real y una pieza central focal de pirita dorada de 8 mm.",
     arcanoStory: "El Mago se yergue entre el Cielo y la Tierra, canalizando el rayo creador con su mano alzada hacia el suelo fértil: «Como es arriba, es abajo». El Ónix Negro Brillante enraíza la voluntad en la tierra para que la mente no vacile, el Lapislázuli despierta la visión soberana del tercer ojo, y la Pirita dorada central concentra la chispa alquímica de la manifestación.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para anclar tu voluntad inquebrantable.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para anclar tu voluntad inquebrantable.",
     details: [
       "Cuerpo Principal: Ónix negro brillante (19 ctas - 8 mm)",
       "Laterales Simétricos: Lapislázuli real (2 ctas - 8 mm)",
@@ -98,7 +98,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Intuición · Misterio · Sabiduría interior. Talismán de la guardiana del velo entre lo visible y lo oculto.",
     description: "Diseñado para aquietar la mente y escuchar la voz del templo interior. 19 cuentas de cuarzo blanco lechoso de pureza lunar, dos laterales de amatista púrpura mística y una cuenta central de opalina lunar de 8 mm.",
     arcanoStory: "Sentada entre las columnas de la luz y la sombra, La Sacerdotisa custodia el rollo de la sabiduría perenne. El Cuarzo blanco lechoso despeja el ruido mental para dar paso al silencio receptor, la Amatista transmuta los apegos mundanos en devoción intuitiva y la Opalina lunar refracta la luz misteriosa del inconsciente.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado mediante el silencio absoluto de la noche para despertar tus dones de clarividencia e intuición certera.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado mediante el silencio absoluto de la noche para despertar tus dones de clarividencia e intuición certera.",
     details: [
       "Cuerpo Principal: Cuarzo blanco lechoso (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -140,7 +140,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Abundancia · Creatividad · Fertilidad sagrada. Talismán del amor incondicional y la gracia de la Madre Naturaleza.",
     description: "Canaliza el pulso nutridor de la Madre Tierra y la fertilidad creadora. 19 cuentas de cuarzo rosa natural de alta vibración afectiva, dos cuentas laterales de jade nefrita verde y una cuenta central de aventurina verde de 8 mm.",
     arcanoStory: "La Emperatriz corona la fertilidad de la tierra florecida, rodeada de trigales dorados y manantiales vivos bajo las doce estrellas de Venus. El Cuarzo rosa abre el centro cordial a la belleza y el merecimiento, el Jade verde nefrita atrae prosperidad y vitalidad física, y la Aventurina verde central sella el florecimiento de tus proyectos con gracia perenne.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Ofrendado con flores frescas y miel para consagrar tu vida a la belleza, la nutrición y la abundancia infinita.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Ofrendado con flores frescas y miel para consagrar tu vida a la belleza, la nutrición y la abundancia infinita.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Jade nefrita verde (2 ctas - 8 mm)",
@@ -182,7 +182,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Autoridad · Estructura · Liderazgo firme. Talismán del trono de piedra que impone orden y protege su reino.",
     description: "Representa el trono de la estabilidad y la disciplina rectora. 19 cuentas de jaspe rojo telúrico para arraigar la fuerza vital, dos laterales de ónix negro brillante y un ojo de tigre dorado central de 8 mm.",
     arcanoStory: "Sentado sobre su trono cúbico de piedra labrada con cuatro cabezas de carnero, El Emperador rige con justicia y determinación inquebrantable. El Jaspe rojo telúrico aporta vigor físico y resistencia ante la adversidad, el Ónix negro brillante provee el escudo protector de la autoridad firme, y el Ojo de tigre dorado enfoca el liderazgo estratégico hacia el triunfo perdurable.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Sellado con decretos de soberanía y fortaleza para afianzar tus dominios y proteger a tu linaje.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Sellado con decretos de soberanía y fortaleza para afianzar tus dominios y proteger a tu linaje.",
     details: [
       "Cuerpo Principal: Jaspe rojo telúrico (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
@@ -224,7 +224,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Sabiduría ancestral · Guía espiritual · Tradición sagrada. Talismán del puente entre la palabra divina y la ley de los hombres.",
     description: "Simboliza las enseñanzas ancestrales y la alineación con la verdad superior. 19 cuentas de sodalita azul de claridad mental, dos laterales de ojo de tigre dorado y una cuenta focal de hematita dorada de 8 mm.",
     arcanoStory: "El Hierofante bendice a los buscadores con las dos llaves cruzadas de San Pedro: la llave del conocimiento exotérico y la del misterio esotérico. La Sodalita azul marina alinea la mente racional con el orden cósmico y la palabra justa, el Ojo de tigre confiere visión ética, y la Hematita dorada corona el talismán con la autoridad espiritual del maestro sagrado.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Sahumado con palo santo y sándalo para abrir los canales de la enseñanza y la mentoría superior.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Sahumado con palo santo y sándalo para abrir los canales de la enseñanza y la mentoría superior.",
     details: [
       "Cuerpo Principal: Sodalita azul marina (19 ctas - 8 mm)",
       "Laterales Simétricos: Ojo de tigre dorado (2 ctas - 8 mm)",
@@ -266,7 +266,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Amor · Unión consciente · Elección armónica. Talismán de la devoción verdadera y la concordia del corazón.",
     description: "La sagrada comunión entre el deseo creador y la ternura incondicional. 19 cuentas de cornalina naranja de fuego creador, dos laterales de cuarzo rosa natural y una cuenta central focal de jaspe rojo de 8 mm.",
     arcanoStory: "Bajo las alas extendidas del arcángel Rafael, el hombre y la mujer se contemplan ante el Árbol de la Vida y el Árbol de la Ciencia: el amor es la libre elección del alma que une los polos en una sola llama. La Cornalina naranja enciende la pasión creadora, el Cuarzo rosa sana y suaviza los afectos, y el Jaspe rojo ancla el vínculo en lealtad inquebrantable.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Ungido con aceites sagrados de rosas y jazmín para atraer y bendecir relaciones nobles y duraderas.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Ungido con aceites sagrados de rosas y jazmín para atraer y bendecir relaciones nobles y duraderas.",
     details: [
       "Cuerpo Principal: Cornalina naranja viva (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo rosa natural (2 ctas - 8 mm)",
@@ -308,7 +308,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Determinación · Avance · Triunfo. Talismán de la victoria sobre los impulsos opuestos.",
     description: "El vehículo del triunfo forjado con riendas de acero y voluntad invencible. 19 cuentas de ojo de tigre dorado de avance decidido, dos laterales de ónix negro brillante y una hematita gris metálica central de 8 mm.",
     arcanoStory: "El príncipe coronado con la estrella de ocho puntas conduce su carruaje tirado por dos esfinges que miran en direcciones opuestas: la victoria no radica en forzar, sino en domar las contradicciones internas con mente soberana. El Ojo de tigre enfoca la mira hacia la meta, el Ónix negro brillante blinda contra distracciones, y la Hematita metálica aporta el filo implacable del conquistador.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado con el pulso marcial de avance para derribar obstáculos y conquistar tus más altas ambiciones.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado con el pulso marcial de avance para derribar obstáculos y conquistar tus más altas ambiciones.",
     details: [
       "Cuerpo Principal: Ojo de tigre dorado (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
@@ -350,7 +350,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Dominio interior · Paciencia · Valentía serena. Talismán de la compasión que doma al león interno.",
     description: "La fuerza que no destruye sino que transfigura la naturaleza instintiva en nobleza pura. 19 cuentas de jaspe paisaje de temple paciente, dos laterales de ónix negro mate y un ojo de buey rojo central de 8 mm.",
     arcanoStory: "La doncella coronada con la lemniscata infinita abre con delicadeza las fauces del león rojo: no usa cadenas ni espadas, sino la caricia de quien no teme porque ama su propia naturaleza instintiva. El Jaspe paisaje fundamenta el autocontrol sereno, el Ónix negro mate absorbe la ira desbordada, y el Ojo de buey rojo canaliza el coraje indomable del león despierto.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado para convertir la impulsividad en paciencia regia y maestría emocional.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado para convertir la impulsividad en paciencia regia y maestría emocional.",
     details: [
       "Cuerpo Principal: Jaspe paisaje natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -392,7 +392,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Introspección · Paciencia · Sabiduría íntima. Talismán de la linterna interior que alumbra en la oscuridad.",
     description: "El retiro sagrado de quien camina con su propia lámpara en la noche del mundo. 19 cuentas de cuarzo ahumado de arraigo sereno, dos laterales de ónix negro mate y una hematita gris metálica central de 8 mm.",
     arcanoStory: "El anciano sabio asciende la cumbre nevada cubierto con su manto gris, sosteniendo la linterna que aloja la estrella de seis puntas de la verdad y el báculo del iniciado. El Cuarzo ahumado asienta el pensamiento profundo y disuelve ilusiones mundanas, el Ónix negro mate protege el espacio sagrado del retiro, y la Hematita metálica sostiene el paso seguro del maestro que no necesita aplausos ajenos.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas de mirra en contemplación silenciosa para encender la luz de tu propia guía interior.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas de mirra en contemplación silenciosa para encender la luz de tu propia guía interior.",
     details: [
       "Cuerpo Principal: Cuarzo ahumado natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -434,7 +434,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Ciclos favorables · Sincronicidad · Prosperidad. Talismán del giro benéfico del destino y las puertas que se abren.",
     description: "El constante devenir del cosmos sintonizado con la fortuna y la abundancia. 19 cuentas de aventurina verde de buena ventura, dos laterales de citrino dorado solar y una hematita dorada central de 8 mm.",
     arcanoStory: "Flotando en el éter entre los cuatro seres celestiales del tetramorfo, la rueda gira incesante custodiada por Anubis y Tifón, coronada por la esfinge del discernimiento. La Aventurina verde atrae sincronicidades afortunadas y bendición material, el Citrino dorado despierta la mentalidad de riqueza, y la Hematita dorada ancla la prosperidad en el centro inmóvil de la rueda.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado para abrir caminos de abundancia y sintonizar con los ciclos más fértiles de tu destino.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado para abrir caminos de abundancia y sintonizar con los ciclos más fértiles de tu destino.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Citrino dorado solar (2 ctas - 8 mm)",
@@ -476,7 +476,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Equilibrio · Verdad incorruptible · Rectitud. Talismán de la espada de la lucidez y la balanza armónica.",
     description: "El fiel de la balanza que sopesa causas y consecuencias con objetividad incorruptible. 19 cuentas de hematita gris metálica de mente fría, dos laterales de howlita blanca de rectitud y un ónix negro brillante central de 8 mm.",
     arcanoStory: "Sentada entre dos columnas que sostienen el velo purpúreo, La Justicia blande la espada de doble filo con la mano derecha y sopesa la balanza de oro con la izquierda. La Hematita gris metálica refleja la verdad objetiva sin titubeos, la Howlita blanca aporta templanza y neutralidad en el juicio, y el Ónix negro brillante sella la responsabilidad kármica de actuar con honor.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Sellado con decretos de rectitud para resolver litigios con honor, ordenar pactos y vivir con consciencia impecable.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Sellado con decretos de rectitud para resolver litigios con honor, ordenar pactos y vivir con consciencia impecable.",
     details: [
       "Cuerpo Principal: Hematita gris metálica (19 ctas - 8 mm)",
       "Laterales Simétricos: Howlita blanca con vetas (2 ctas - 8 mm)",
@@ -518,7 +518,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Pausa consciente · Nueva perspectiva · Rendición iluminada. Talismán para soltar el control y contemplar el mundo al revés.",
     description: "La sabiduría de soltar el control para que la perspectiva sagrada ilumine lo esencial. 19 cuentas de cuarzo azul de rendición pacífica, dos laterales de cuarzo blanco lechoso y una sodalita azul marina central de 8 mm.",
     arcanoStory: "Suspendido de un árbol vivo con brotes verdes, el iniciado sonríe en serenidad mística con un halo dorado alrededor de su cabeza: ha detenido el ajetreo mundano para descubrir que al invertir la mirada, lo accesorio cae y lo sagrado resplandece. El Cuarzo azul sosiega la resistencia egoica, el Cuarzo blanco purifica la intención de entrega, y la Sodalita marina ilumina la mente superior con comprensión mística.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado para momentos de encrucijada donde la mejor acción es el aquietamiento fértil y la contemplación profunda.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado para momentos de encrucijada donde la mejor acción es el aquietamiento fértil y la contemplación profunda.",
     details: [
       "Cuerpo Principal: Cuarzo azul claro (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo blanco lechoso (2 ctas - 8 mm)",
@@ -560,7 +560,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Transformación radical · Poda sagrada · Renacimiento. Talismán del corte liberador que abre espacio al nuevo sol.",
     description: "La alquimia del soltar para renacer renovado desde la raíz. 19 cuentas de ónix negro brillante de liberación profunda, dos laterales de hematita oscura y una cuenta central de lava volcánica negra de 8 mm.",
     arcanoStory: "El caballero de armadura oscura porta el estandarte de la rosa mística de cinco pétalos sobre fondo negro: no siega para destruir, sino para despejar la maleza marchita. En el horizonte distante despunta el sol radiante entre las dos torres de la inmortalidad. El Ónix negro brillante absorbe y disuelve apegos obsoletos, la Hematita oscura reconstituye la energía vital, y la Lava volcánica sella el renacimiento desde las cenizas.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Ofrendado al fuego que consume lo viejo para resurgir invencible con tu verdadera esencia liberada.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Ofrendado al fuego que consume lo viejo para resurgir invencible con tu verdadera esencia liberada.",
     details: [
       "Cuerpo Principal: Ónix negro brillante (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris oscura (2 ctas - 8 mm)",
@@ -602,7 +602,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Alquimia interior · Moderación · Armonía celestial. Talismán de quien funde opuestos en gracia y paz.",
     description: "El ángel de las dos copas vertiendo las aguas de la serenidad entre cielo y tierra. 19 cuentas de amatista púrpura de transmutación, dos laterales de howlita blanca de ecuanimidad y un cuarzo cristal puro central de 8 mm.",
     arcanoStory: "El ángel solar con un pie en el agua de las emociones y otro en la tierra firme vierte el líquido sagrado entre dos cálices sin derramar una sola gota: es la gran alquimia de fundir lo divino con lo humano en perfecta medida. La Amatista púrpura eleva la vibración sutil, la Howlita blanca calma las prisas mundanas, y el Cuarzo cristal puro refracta la armonía perfecta de tu espíritu en equilibrio.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Armonizado con esencias de lavanda y agua de manantial para traer sosiego y salud integral a tu día a día.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Armonizado con esencias de lavanda y agua de manantial para traer sosiego y salud integral a tu día a día.",
     details: [
       "Cuerpo Principal: Amatista púrpura (19 ctas - 8 mm)",
       "Laterales Simétricos: Howlita blanca con vetas (2 ctas - 8 mm)",
@@ -644,7 +644,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Poder instintivo · Integración de sombras · Magnetismo visceral. Talismán del dominio consciente sobre las pasiones primarias.",
     description: "Integración de las sombras y el fuego instintivo para convertirlos en fuerza creadora. 19 cuentas de jaspe rojo oscuro de anclaje visceral, dos laterales de ónix negro brillante y una hematita metálica central de 8 mm.",
     arcanoStory: "Sentado sobre el pedestal cúbico con la antorcha que alumbra hacia abajo, Baphomet sostiene la fuerza generativa de la materia: las cadenas en el cuello de las figuras son holgadas y pueden removerse en cuanto se despierta la consciencia. El Jaspe rojo oscuro canaliza la fuerza física y el deseo sin culpa, el Ónix negro brillante protege contra manipulaciones y dependencias, y la Hematita metálica afianza la maestría personal sobre las tentaciones vanas.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado para reconocer tu sombra, liberar cadenas autoimpuestas y convertir tu fuego vital en combustible de poder.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado para reconocer tu sombra, liberar cadenas autoimpuestas y convertir tu fuego vital en combustible de poder.",
     details: [
       "Cuerpo Principal: Jaspe rojo oscuro (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
@@ -686,7 +686,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Ruptura liberadora · Rayo de lucidez · Caída de lo falso. Talismán que desmorona viejos esquemas para revelar la verdad.",
     description: "El rayo de la lucidez que derriba las estructuras rígidas para permitir que nazca la verdad. 19 cuentas de lava volcánica negra nacidas del magma, dos laterales de jaspe rojo de coraje y una hematita dorada central de 8 mm.",
     arcanoStory: "El rayo celestial fulmina la corona de la torre de soberbia edificada sobre cimientos falsos: caen las piedras del orgullo y se precipitan los dogmas caducos, liberando a los cautivos hacia la luz. La Lava volcánica negra absorbe el shock del cambio súbito y transmuta la conmoción en fuerza, el Jaspe rojo provee anclaje para reconstruir con firmeza, y la Hematita dorada simboliza la chispa de la iluminación divina.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Consagrado al fuego destructor de lo ilusorio para limpiar tu camino de cualquier prisión mental.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Consagrado al fuego destructor de lo ilusorio para limpiar tu camino de cualquier prisión mental.",
     details: [
       "Cuerpo Principal: Lava volcánica negra (19 ctas - 8 mm)",
       "Laterales Simétricos: Jaspe rojo telúrico (2 ctas - 8 mm)",
@@ -728,7 +728,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Fe inquebrantable · Esperanza renovada · Inspiración divina. Talismán del manantial celeste que nutre el alma sedienta.",
     description: "El bálsamo de las estrellas que infunde fe luminosa en el porvenir. 19 cuentas de howlita azul turquesa de serenidad, dos laterales de cuarzo cristal de claridad estelar y una opalina lunar central de 8 mm.",
     arcanoStory: "Desnuda bajo la estrella de ocho puntas y las siete estrellas del destino, la doncella derrama el agua viva de dos ánforas: un chorro nutre la tierra fértil y el otro fecunda el manantial. La Howlita azul turquesa pacifica las aguas de la ansiedad devolviendo la calma serena, el Cuarzo cristal proyecta tus plegarias al cosmos, y la Opalina lunar irradia la certeza tibia de que tu destino está bendecido.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Consagrado al cielo nocturno despejado para devolverte la esperanza, la gracia y la confianza total en tu propio porvenir.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Consagrado al cielo nocturno despejado para devolverte la esperanza, la gracia y la confianza total en tu propio porvenir.",
     details: [
       "Cuerpo Principal: Howlita azul turquesa (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo cristal transparente (2 ctas - 8 mm)",
@@ -770,7 +770,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Viaje onírico · Intuición profunda · Misterio del alma. Talismán para cruzar la noche del inconsciente sin extraviarse.",
     description: "El descenso a las profundidades del inconsciente y el misterio onírico. 19 cuentas de piedra luna gris de reflejos nocturnos, dos laterales de cuarzo ahumado protector y una amatista púrpura central de 8 mm.",
     arcanoStory: "Bajo la faz serena de la luna llena que gotea gotas de rocío dorado, el crustáceo primordial emerge del agua pantanosa entre el aullido del perro fiel y el lobo salvaje custodiando el sendero entre las dos torres. La Piedra luna gris afina la visión psíquica y el recuerdo de los sueños, el Cuarzo ahumado disuelve los fantasmas del miedo a lo desconocido, y la Amatista púrpura corona la psique con protección divina.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado a medianoche para navegar el mundo de los sueños, superar temores ocultos y descifrar las señales del inconsciente.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado a medianoche para navegar el mundo de los sueños, superar temores ocultos y descifrar las señales del inconsciente.",
     details: [
       "Cuerpo Principal: Piedra luna gris (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo ahumado (2 ctas - 8 mm)",
@@ -812,7 +812,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Vitalidad radiante · Éxito rotundo · Dicha plena. Talismán del mediodía sagrado que disipa cualquier tiniebla.",
     description: "El abrazo del sol estival que ilumina el sendero con dicha y éxito rotundo. 19 cuentas de citrino dorado solar de júbilo, dos laterales de cornalina naranja creadora y un ojo de tigre dorado central de 8 mm.",
     arcanoStory: "El sol de rostro benévolo derrama sus rayos rectos y ondulantes sobre los cuatro girasoles florecidos, mientras el niño coronado de plumas cabalga jubiloso sobre el caballo blanco sosteniendo el estandarte escarlata de la vida invicta. El Citrino solar despierta la alegría de vivir y la confianza magnética, la Cornalina naranja infunde vitalidad desbordante, y el Ojo de tigre dorado corona tu presencia con éxito y calor humano.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Expuesto a los primeros rayos del amanecer para recargar tu campo áurico de júbilo, salud y prosperidad plena.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Expuesto a los primeros rayos del amanecer para recargar tu campo áurico de júbilo, salud y prosperidad plena.",
     details: [
       "Cuerpo Principal: Citrino dorado solar (19 ctas - 8 mm)",
       "Laterales Simétricos: Cornalina naranja (2 ctas - 8 mm)",
@@ -854,7 +854,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Despertar del alma · Llamado sagrado · Resurrección espiritual. Talismán del clarín que convoca a vivir con autenticidad absoluta.",
     description: "El llamado inapelable del espíritu a despertar del letargo y vivir con autenticidad. 19 cuentas de fluorita multicolor de apertura dimensional, dos laterales de amatista y un cuarzo cristal de pureza renovada de 8 mm.",
     arcanoStory: "El arcángel Gabriel desciende entre las nubes celestiales haciendo sonar el clarín con la cruz solar: de los sepulcros emergen el hombre, la mujer y el niño con los brazos alzados en éxtasis de alabanza. No es juicio punitivo, sino el despertar jubiloso de la consciencia que comprende su vocación eterna. La Fluorita multicolor ordena la mente en frecuencias superiores, la Amatista transmuta viejas culpas, y el Cuarzo cristal abre la puerta a tu renacimiento espiritual.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Activado para responder al llamado de tu propósito vital y soltar cualquier juicio que ate tu alma al pasado.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Activado para responder al llamado de tu propósito vital y soltar cualquier juicio que ate tu alma al pasado.",
     details: [
       "Cuerpo Principal: Fluorita multicolor mística (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -896,7 +896,7 @@ export const majorArcanaTalismans: ShopProduct[] = [
     tagline: "Plenitud absoluta · Danza cósmica · Gran Obra culminada. Talismán de la armonía perfecta de los cuatro elementos integrados.",
     description: "La corona de la Gran Obra alquímica: todos los elementos integrados en un círculo perfecto de pura piedra mineral. 19 cuentas que armonizan 7 minerales sagrados de la baraja, dos laterales de ónix negro mate y una cuenta focal de cuarzo cristal puro transparente de 8 mm.",
     arcanoStory: "La danzante cósmica danza desnuda envuelta en el velo escarlata dentro de la guirnalda de laurel verde ceñida con cintas rojas del infinito, escoltada en las cuatro esquinas por el Ángel del Aire, el Águila del Agua, el León del Fuego y el Toro de la Tierra. El viaje del Loco ha concluido en victoria cósmica: el espíritu reina soberano sobre la materia. La combinación de los 7 minerales sagrados (Ónix, Jaspe Rojo, Ojo de Tigre, Aventurina, Sodalita, Amatista y Citrino) unifica todos los planos de existencia, y el Cuarzo cristal central sella la Gran Obra con iluminación perenne.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas de incienso puro y copal blanco para celebrar la culminación de tus grandes metas y el inicio de un ciclo de plenitud sin sombras.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas de incienso puro y copal blanco para celebrar la culminación de tus grandes metas y el inicio de un ciclo de plenitud sin sombras.",
     details: [
       "Cuerpo Principal: 7 Minerales en Armonía (Ónix, Jaspe Rojo, Ojo de Tigre, Aventurina, Sodalita, Amatista y Citrino) (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",

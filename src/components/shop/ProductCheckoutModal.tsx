@@ -6,6 +6,7 @@ import Image from "next/image";
 import { brandConfig } from "@/config/brandConfig";
 import { paymentConfig } from "@/config/paymentConfig";
 import { ShopProduct } from "@/data/shop";
+import { WristSizeGuideModal } from "./WristSizeGuideModal";
 
 interface ProductCheckoutModalProps {
   isOpen: boolean;
@@ -38,6 +39,7 @@ export function ProductCheckoutModal({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [generatedOrderId, setGeneratedOrderId] = useState("");
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -556,9 +558,18 @@ export function ProductCheckoutModal({
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase tracking-wider text-neutral-400 mb-1 font-mono">
-                    Talla de Muñeca (Ajuste Personalizado)
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-[10px] uppercase tracking-wider text-neutral-400 font-mono">
+                      Talla de Muñeca (Ajuste Personalizado)
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setIsSizeGuideOpen(true)}
+                      className="text-[10px] font-mono text-[#C5A059] hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>📏</span> ¿Cómo medir mi muñeca?
+                    </button>
+                  </div>
                   <select
                     name="wristSize"
                     value={formData.wristSize}
@@ -628,6 +639,12 @@ export function ProductCheckoutModal({
           </div>
         )}
       </div>
+
+      {/* Modal Independiente de Guía de Medición de Muñeca */}
+      <WristSizeGuideModal
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
+      />
     </div>,
     document.body
   );

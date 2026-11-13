@@ -435,7 +435,7 @@ function TiendaContent() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-[#C5A059] text-xs">✦</span>
-            <span className="tracking-wider">{t("Consagrado Bajo Fuego Sagrado Ceremonial", "Consecrated under Sacred Ceremonial Fire")}</span>
+            <span className="tracking-wider">{t("Elaboración Artesanal Hecha en México", "Master Handcrafted in Mexico")}</span>
           </div>
         </div>
       </div>
@@ -786,12 +786,12 @@ function TiendaContent() {
                     <span className="text-white">{t("Elástico quirúrgico de alta tenacidad (sin metales)", "High-tenacity surgical elastic (zero metals)")}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-400">{t("Consagración:", "Consecration:")}</span>
-                    <span className="text-white">{t("Luna Llena ante Fuego Sagrado de 1.5 m", "Full Moon before 1.5m Sacred Fire")}</span>
+                    <span className="text-neutral-400">{t("Origen y Forja:", "Origin & Workshop:")}</span>
+                    <span className="text-white">{t("Taller Arcano · Monterrey, N.L. (Hecho a mano)", "Arcano Workshop · Monterrey, Mexico")}</span>
                   </div>
                 </div>
 
-                {/* Descripción / Historia Alquímica */}
+                {/* Simbología y Significado del Arcano */}
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   {activeProduct.arcanoStory || activeProduct.description}
                 </p>

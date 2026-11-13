@@ -14,7 +14,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Claridad diamantina · Espada de la verdad · Triunfo del intelecto. Talismán de la lucidez que corta toda niebla y falsedad.",
     description: "Diseñado para tomar decisiones definitivas con objetividad tajante y mente brillante. 19 cuentas de cuarzo cristal transparente, dos laterales de hematita gris metálica y centro focal de sodalita azul marina de 8 mm.",
     arcanoStory: "Una mano celeste empuña la espada de doble filo coronada por palmas y olivo sobre un paisaje montañoso impoluto. El cuarzo cristal purifica la cognición humana, la hematita confiere filo quirúrgico a las resoluciones y la sodalita guía la palabra con rigor y elocuencia.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Cuarzo cristal puro transparente (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris metálica (2 ctas - 8 mm)",
@@ -56,7 +56,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Tregua mental · Paz interna · Silencio ecuánime. Talismán para vendar los ojos al caos exterior y sopesar en calma.",
     description: "Un refugio para apagar debates desgastantes, encontrar neutralidad objetiva y serenar el sistema nervioso. 19 cuentas de howlita blanca, dos laterales de ónix negro mate y centro focal de hematita metálica de 8 mm.",
     arcanoStory: "Frente al mar nocturno con peñascos silentes, una mujer vendada cruza dos espadas de acero sobre su pecho protegiendo el latido de su corazón. La howlita blanca disuelve la ansiedad mental, el ónix mate resguarda el santuario interior y la hematita sostiene la balanza del equilibrio.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro mate (2 ctas - 8 mm)",
@@ -98,7 +98,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Cirugía del alma · Liberación de la pena · Sanación de la herida. Talismán para extraer los clavos del dolor y regenerar el corazón.",
     description: "Consagrado para atravesar el desengaño o la pena con dignidad estoica, permitiendo que la tormenta limpie lo marchito. 19 cuentas de hematita metálica, laterales de ónix negro brillante y centro focal de cuarzo rosa sanador de 8 mm.",
     arcanoStory: "Un corazón atravesado por tres espadas late bajo nubes tempestuosas de lluvia catártica. La hematita plateada absorbe y corta la punzada del dolor agudo, el ónix negro transmuta la tristeza en temple interior y el cuarzo rosa central infunde amor incondicional para cerrar la cicatriz con nobleza.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Hematita gris metálica (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
@@ -140,7 +140,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Reposo del guerrero · Convalecencia santa · Retiro sagrado. Talismán de la tregua necesaria antes de la siguiente contienda.",
     description: "Ideal para el descanso profundo, recuperación de energía tras el agotamiento intelectual y meditación serena. 19 cuentas de howlita blanca, laterales de amatista y centro focal de ónix negro mate de 8 mm.",
     arcanoStory: "En la quietud de un claustro gótico con vitrales policromados, la efigie del caballero reposa con las manos en oración mientras tres espadas cuelgan en la pared y una yace a su lado. La howlita sosiega el insomnio, la amatista repara el campo mental y el ónix mate crea una burbuja impenetrable de silencio.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -182,7 +182,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Trascendencia del conflicto · Desapego del ego · Sabiduría táctica. Talismán para reconocer qué batallas no merecen tu energía.",
     description: "Protección contra traiciones, rencillas mezquinas y discusiones estériles, blindando tu integridad moral. 19 cuentas de ónix negro mate, laterales de hematita gris y centro focal de lava volcánica de 8 mm.",
     arcanoStory: "Bajo un cielo rasgado por nubes grises, el vencedor sonríe con tres espadas mientras los vencidos se alejan cabizbajos: una victoria pírrica que no nutre el alma. El ónix mate repele ataques verbales o envidias, la hematita aporta sobriedad mental y la lava volcánica transmuta el rencor ajeno en combustible de superación.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Ónix negro mate (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris metálica (2 ctas - 8 mm)",
@@ -224,7 +224,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Travesía a aguas mansas · Transición serena · Viaje seguro. Talismán para navegar de la turbulencia hacia la orilla de la paz.",
     description: "Acompaña mudanzas, cambios de ciclo difíciles y traslados físicos o laborales con protección absoluta. 19 cuentas de sodalita azul marina, laterales de howlita blanca y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "El barquero impulsa su góndola llevando a una madre y su hijo envueltos en mantos: dejan atrás las aguas picadas para adentrarse en la calma chicha de la otra orilla. La sodalita despeja la ruta con serenidad, la howlita suaviza el duelo del cambio y el cuarzo cristal alumbra el puerto seguro que te espera.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Sodalita azul marina (19 ctas - 8 mm)",
       "Laterales Simétricos: Howlita blanca con vetas naturales (2 ctas - 8 mm)",
@@ -266,7 +266,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Sigilo inteligente · Estrategia sutil · Autocuidado perspicaz. Talismán del estratega que avanza con astucia impecable.",
     description: "Diseñado para actuar con reserva, proteger tus ideas antes del lanzamiento y cuidarse de miradas indiscretas. 19 cuentas de ónix negro brillante, laterales de howlita blanca y centro focal de hematita metálica de 8 mm.",
     arcanoStory: "De puntillas y mirando hacia atrás sobre el campamento enemigo, el estratega rescata cinco espadas dejando dos plantadas en el suelo. El ónix brillante otorga discreción protectora, la howlita blanca mantiene el pensamiento táctico y la hematita metálica asegura pasos firmes sin dejar rastro.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Ónix negro brillante (19 ctas - 8 mm)",
       "Laterales Simétricos: Howlita blanca (2 ctas - 8 mm)",
@@ -308,7 +308,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Ruptura de cadenas mentales · Liberación del engaño · Salida abierta. Talismán para desatar las ataduras de la duda.",
     description: "Desmantela limitaciones autoimpuestas, miedos irracionales y sensación de parálisis, recordando que la salida está a un paso. 19 cuentas de ónix negro mate, laterales de cuarzo ahumado y centro focal de howlita blanca de 8 mm.",
     arcanoStory: "Una figura con vendas flojas camina entre ocho espadas clavadas en el lodo: ninguna espada la toca y el sendero hacia el castillo está libre frente a ella. El ónix mate neutraliza el pánico infundado, el cuarzo ahumado disuelve pensamientos circulares y la howlita blanca reabre los ojos a la libertad real.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Ónix negro mate (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo ahumado natural (2 ctas - 8 mm)",
@@ -350,7 +350,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Amanecer tras la noche oscura · Serenidad mental · Disolución de pesadillas. Talismán del alba que disipa los fantasmas de la mente.",
     description: "Un escudo balsámico contra el insomnio, la sobre-preocupación y los miedos nocturnos, restaurando la paz interior. 19 cuentas de cuarzo ahumado, laterales de ónix negro brillante y centro focal de amatista púrpura de 8 mm.",
     arcanoStory: "Despertando sobresaltado con las manos en el rostro, el durmiente ve nueve espadas suspendidas en la pared oscura mientras su colcha exhibe rosas y constelaciones: el dolor es mental, la aurora ya despunta. El cuarzo ahumado enraíza la mente dispersa, el ónix desvanece la angustia y la amatista envuelve los sueños en sosiego angelical.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Cuarzo ahumado natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
@@ -392,7 +392,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Fin del ciclo doloroso · Tocar fondo para resurgir · Nuevo sol. Talismán del renacimiento definitivo: lo peor ya pasó.",
     description: "Consagrado para dar carpetazo a las etapas más amargas con certeza absoluta de que el horizonte dorado ya amanece. 19 cuentas de ónix negro brillante, laterales de hematita gris metálica y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "Tumbado sobre la arena con diez espadas que marcan el cierre irrevocable de una larga batalla, el horizonte distante resplandece en oro puro sobre el mar en calma. El ónix sella la terminación de la vieja pesadilla, la hematita reconstruye el cuerpo físico y el cuarzo cristal proclama el amanecer invencible del nuevo ser.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Ónix negro brillante (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris metálica (2 ctas - 8 mm)",
@@ -434,7 +434,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Agudeza mental · Vigilancia perspicaz · Curiosidad insaciable. Talismán del centinela joven que escudriña la verdad sin pestañear.",
     description: "Estimula la rapidez mental, el análisis crítico, el aprendizaje veloz y la defensa verbal precisa. 19 cuentas de sodalita azul marina, laterales de hematita metálica y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "Sobre una colina azotada por el viento fresco con bandadas de pájaros en vuelo, la joven guardia empuña su espada a dos manos con mirada vivaz y postura ágil. La sodalita expande la inteligencia lógica, la hematita afila el sentido común y el cuarzo cristal aporta destellos de comprensión fulgurante.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Sodalita azul marina (19 ctas - 8 mm)",
       "Laterales Simétricos: Hematita gris metálica (2 ctas - 8 mm)",
@@ -476,7 +476,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Velocidad de pensamiento · Valentía tajante · Determinación imparable. Talismán del jinete de la razón que embiste los obstáculos.",
     description: "Otorga coraje intelectual, capacidad de respuesta fulminante en debates complejos y avance decidido sin titubeos. 19 cuentas de hematita plateada, laterales de sodalita marina y centro focal de ónix negro brillante de 8 mm.",
     arcanoStory: "Galopando a rienda suelta con la espada en alto contra las ráfagas tempestuosas, el Caballero de Espadas personifica la fuerza avasalladora de la mente decidida. La hematita brinda armadura contra dudas, la sodalita canaliza la convicción de la verdad y el ónix enfoca el ataque en un solo punto letal.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Hematita gris metálica (19 ctas - 8 mm)",
       "Laterales Simétricos: Sodalita azul marina (2 ctas - 8 mm)",
@@ -518,7 +518,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Clarividencia intelectual · Discernimiento impecable · Franqueza sabia. Talismán de la soberana que mira a través de las máscaras.",
     description: "Para mentes agudas, líderes justas, juezas y creadoras que exigen transparencia absoluta y verdad sin edulcorar. 19 cuentas de howlita blanca, laterales de sodalita marina y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "Sentada en un trono de piedra esculpido con querubines y mariposas bajo un cielo despejado, la Reina alza su espada vertical con la otra mano extendida ofreciendo verdad. La howlita blanca conserva la pureza incorruptible, la sodalita otorga elocuencia magistral y el cuarzo cristal corta cualquier engaño con sabiduría diamantina.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Howlita blanca con vetas naturales (19 ctas - 8 mm)",
       "Laterales Simétricos: Sodalita azul marina (2 ctas - 8 mm)",
@@ -560,7 +560,7 @@ export const espadasTalismans: ShopProduct[] = [
     tagline: "Autoridad de la ley · Juicio supremo · Maestría estratégica. Talismán del magistrado y consejero de Estado inquebrantable.",
     description: "La cumbre del pensamiento estratégico, orden constitucional y liderazgo guiado por la ética, la lógica y la justicia imparcial. 19 cuentas de sodalita marina, laterales de ónix negro brillante y centro focal de hematita metálica de 8 mm.",
     arcanoStory: "El Rey de Espadas sostiene su hoja de justicia con serenidad implacable desde su trono encumbrado: su palabra es ley porque nace del examen riguroso de la verdad. La sodalita despierta el intelecto superior, el ónix resguarda la autoridad inmutable y la hematita consagra la rectitud de cada veredicto.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Aire.",
     details: [
       "Cuerpo Principal: Sodalita azul marina (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",

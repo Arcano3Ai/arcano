@@ -8,6 +8,7 @@ import { getAssetPath } from "@/lib/utils";
 import { trackWhatsAppConversion } from "@/lib/analytics";
 import { useCart } from "@/context/CartContext";
 import { InviernoCheckoutModal } from "@/components/shop/InviernoCheckoutModal";
+import { WristSizeGuideModal } from "@/components/shop/WristSizeGuideModal";
 
 // Objeto de producto oficial para Carrito Ceremonial
 const INVIERNO_SHOP_PRODUCT = {
@@ -66,6 +67,7 @@ const IMAGES = [
 export default function InviernoLandingPage() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const { addItem, openCart } = useCart();
 
@@ -468,12 +470,21 @@ export default function InviernoLandingPage() {
             <div className="w-11 h-11 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center flex-shrink-0 text-xl text-[#FFE2A4]">
               📏
             </div>
-            <div className="space-y-1">
-              <h3 className="font-serif text-sm sm:text-base text-white font-medium">
-                Ajustada a tu Medida Exacta de Muñeca
-              </h3>
+            <div className="space-y-1.5 flex-1">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <h3 className="font-serif text-sm sm:text-base text-white font-medium">
+                  Ajustada a tu Medida Exacta de Muñeca
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setIsSizeGuideOpen(true)}
+                  className="text-[11px] font-mono text-[#D4AF37] hover:underline flex items-center gap-1 cursor-pointer"
+                >
+                  <span>📏</span> Ver Guía de Medición
+                </button>
+              </div>
               <p className="text-xs text-neutral-300 font-serif leading-relaxed">
-                No vendemos una medida genérica. Al hacer tu pedido, te indicamos en 1 minuto cómo medir tu muñeca para ensamblar la pieza exactamente a tus centímetros.
+                No vendemos una medida genérica. Puedes seleccionar tu talla exacta (S, M, L o XL) en el checkout o consultar la guía visual en 30 segundos con una simple regla.
               </p>
             </div>
           </div>
@@ -598,7 +609,16 @@ export default function InviernoLandingPage() {
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿Cómo sé la medida de mi muñeca?</p>
-              <p className="text-neutral-400 text-[11px]">Al tocar el botón de WhatsApp, te mostramos en 30 segundos cómo medir tu muñeca con una tira de papel o regla para que te quede justa y cómoda.</p>
+              <p className="text-neutral-400 text-[11px] leading-relaxed">
+                Es muy simple: pasa una tira de papel o hilo alrededor de tu muñeca a la altura del hueso, marca el cruce y mídela con una regla. 16-17 cm es S, 18-19 cm es M (estándar unisex, 90% de personas), y 20-21 cm es L.
+              </p>
+              <button
+                type="button"
+                onClick={() => setIsSizeGuideOpen(true)}
+                className="mt-1.5 text-[11px] font-mono text-[#D4AF37] hover:underline flex items-center gap-1 cursor-pointer font-medium"
+              >
+                <span>📐</span> Ver Guía Visual de Tallas (30 segundos)
+              </button>
             </div>
             <div className="pt-2 border-t border-neutral-800/70">
               <p className="text-white font-medium">¿El Porta Incienso Áurico viene incluido gratis?</p>
@@ -706,6 +726,12 @@ export default function InviernoLandingPage() {
         onClose={() => setIsCheckoutModalOpen(false)}
         productTitle="Pulsera de Lapislázuli Natural 8mm + Porta Incienso Áurico"
         price={1299}
+      />
+
+      {/* Modal Guía de Medición de Muñeca */}
+      <WristSizeGuideModal
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
       />
 
       {/* NOTIFICACIÓN TOAST FLOTANTE AL AGREGAR AL CARRITO */}

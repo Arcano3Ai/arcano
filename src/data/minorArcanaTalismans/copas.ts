@@ -14,7 +14,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Amor incondicional · Gracia divina · Sanación emocional. Talismán del manantial inagotable del corazón abierto.",
     description: "Canaliza el flujo más puro de los afectos, la compasión y la renovación espiritual. 19 cuentas de cuarzo rosa natural, laterales de opalina lechosa y pieza central focal de cuarzo cristal de 8 mm.",
     arcanoStory: "El As de Copas es el Santo Grial del que brotan cinco surtidores celestiales alimentando el lago de la consciencia. El cuarzo rosa disuelve el resentimiento y cura heridas afectivas, la opalina refleja la pureza de las emociones primigenias y el cuarzo cristal sella la bendición divina.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Opalina blanca lechosa (2 ctas - 8 mm)",
@@ -56,7 +56,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Unión sagrada · Sintonía de almas · Reciprocidad. Talismán del pacto armónico y el encuentro entre iguales.",
     description: "Consagrado para atraer y bendecir relaciones de mutuo respeto, complicidad y ternura. 19 cuentas de cuarzo rosa, dos laterales de howlita blanca y centro focal de amatista púrpura de 8 mm.",
     arcanoStory: "Dos amantes brindan bajo el caduceo alado de Hermes coronado por la cabeza de león. El cuarzo rosa atrae ternura honesta, la howlita blanca garantiza una comunicación diáfana sin juicios y la amatista transmuta cualquier discordia en comprensión mutua.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Howlita blanca con vetas naturales (2 ctas - 8 mm)",
@@ -98,7 +98,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Celebración · Amistad entrañable · Júbilo compartido. Talismán de la danza fraterna y las risas que sanan el alma.",
     description: "Invoca la alegría de pertenecer a una tribu leal, brindar por la buena fortuna y compartir los triunfos. 19 cuentas de aventurina verde, laterales de cuarzo rosa y centro focal de citrino solar de 8 mm.",
     arcanoStory: "Tres doncellas danzan entrelazadas alzando sus copas entre racimos dorados y flores silvestres. La aventurina aporta abundancia y salud social, el cuarzo rosa estrecha los lazos de lealtad sincera y el citrino enciende la chispa festiva de la gratitud.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Aventurina verde (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo rosa natural (2 ctas - 8 mm)",
@@ -140,7 +140,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Introspección · Retiro sagrado · Discernimiento íntimo. Talismán para pausar el ruido del mundo y escuchar la propia verdad.",
     description: "Un bálsamo para momentos de saturación emocional o desencanto temporal, reencontrando la motivación interior. 19 cuentas de cuarzo blanco lechoso, laterales de amatista y centro focal de ónix negro mate de 8 mm.",
     arcanoStory: "Sentado al pie de un árbol, el joven declina tres copas terrenales mientras una mano etérea le ofrece la cuarta copa del cielo. El cuarzo lechoso aquietta las agitaciones del ego, la amatista eleva la percepción hacia lo sagrado y el ónix mate resguarda la privacidad del alma.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo blanco lechoso (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -182,7 +182,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Aceptación · Cierre de duelo · Esperanza renaciente. Talismán para mirar las dos copas que aún permanecen de pie.",
     description: "Diseñado para sanar pérdidas dolorosas, desilusiones o rupturas, recordando que el amor esencial permanece intacto. 19 cuentas de amatista, laterales de ónix negro y centro focal de cuarzo rosa de 8 mm.",
     arcanoStory: "Envuelto en un manto oscuro, el peregrino contempla tres copas derramadas, sin percatarse aún de las dos copas intactas a su espalda y el puente hacia el castillo. La amatista consuela el espíritu dolido, el ónix absorbe la tristeza densa y el cuarzo rosa reabre la esperanza en el porvenir.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Amatista púrpura (19 ctas - 8 mm)",
       "Laterales Simétricos: Ónix negro brillante (2 ctas - 8 mm)",
@@ -224,7 +224,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Nostalgia dulce · Inocencia recuperada · Generosidad pura. Talismán de los recuerdos bellos que perfuman el presente.",
     description: "Reconecta con la pureza de la infancia, los viejos amigos leales y los gestos desinteresados de bondad. 19 cuentas de cuarzo rosa, dos laterales de aventurina verde y centro focal de howlita blanca de 8 mm.",
     arcanoStory: "En el patio de una antigua mansión, un niño ofrece a una niña una copa colmada de flores blancas. El cuarzo rosa reconecta con el niño interior y la dulzura primordial, la aventurina revitaliza la ternura y la howlita blanca preserva la inocencia del corazón.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
@@ -266,7 +266,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Visión oracular · Elección acertada · Claridad entre ilusiones. Talismán para disolver espejismos y elegir con sabiduría.",
     description: "Un escudo de lucidez mística ante múltiples opciones tentadoras o fantasías engañosas. 19 cuentas de amatista púrpura, dos laterales de opalina y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "Siete copas flotan entre las nubes cargadas de joyas, castillos, serpientes y dragones: el reino de los anhelos y espejismos. La amatista despeja la niebla del deseo ciego, la opalina sintoniza los sueños auténticos y el cuarzo cristal actúa como prisma de verdad irrebatible.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Amatista púrpura (19 ctas - 8 mm)",
       "Laterales Simétricos: Opalina blanca lechosa (2 ctas - 8 mm)",
@@ -308,7 +308,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Desapego consciente · Peregrinaje interior · Madurez. Talismán de quien tiene el valor de marcharse en busca de algo mayor.",
     description: "Consagrado para soltar etapas caducas, relaciones que ya no nutren y emprender el camino hacia la plenitud espiritual. 19 cuentas de cuarzo lechoso, laterales de amatista y centro focal de hematita metálica de 8 mm.",
     arcanoStory: "Bajo la mirada silente de la luna menguante, el buscador deja atrás las ocho copas apiladas y escala la montaña escarpada. El cuarzo blanco otorga paz en la despedida, la amatista ilumina el sendero iniciático y la hematita brinda pasos firmes sin mirar atrás.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo blanco lechoso (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -350,7 +350,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Deseo cumplido · Gratitud colmada · Gozo sensorial. El talismán de la buena vida, la satisfacción y el bienestar integral.",
     description: "Conocida como la carta de los deseos concedidos, atrae abundancia emocional, deleite y regocijo merecido. 19 cuentas de opalina lechosa, laterales de aventurina verde y centro focal de citrino solar de 8 mm.",
     arcanoStory: "El anfitrión de túnica blanca sonríe con los brazos cruzados frente a un banco semicircular con nueve copas de oro reluciente. La opalina expande el aura de satisfacción pacífica, la aventurina asegura prosperidad continua y el citrino irradia alegría de vivir.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Opalina blanca lechosa (19 ctas - 8 mm)",
       "Laterales Simétricos: Aventurina verde (2 ctas - 8 mm)",
@@ -392,7 +392,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Plenitud hogareña · Arcoíris de bendición · Paz perpetua. Talismán de la felicidad duradera compartida con quienes amamos.",
     description: "El ápice del elemento agua: amor consumado, lealtad familiar inquebrantable y serenidad en el hogar. 19 cuentas de cuarzo rosa, dos laterales de amatista y centro focal de aventurina verde de 8 mm.",
     arcanoStory: "Una pareja abraza el horizonte mientras dos niños danzan bajo el arcoíris de diez copas sagradas sobre su morada campestre. El cuarzo rosa bendice los afectos diarios, la amatista consagra la armonía del hogar y la aventurina atrae salud y longevidad compartida.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -434,7 +434,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Sensibilidad poética · Mensaje amoroso · Magia intuitiva. Talismán del soñador gentil que conversa con las señales del cosmos.",
     description: "Despierta la empatía intuitiva, la inspiración artística y la llegada de noticias gratas del corazón. 19 cuentas de cuarzo rosa, dos laterales de opalina y centro focal de howlita blanca de 8 mm.",
     arcanoStory: "A orillas del mar, un joven de túnica floral mira con dulce asombro a un pez que asoma de su copa para entregarle un secreto. El cuarzo rosa abre el canal del amor sincero, la opalina potencia la intuición mística y la howlita purifica la intención de cualquier malicia.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Cuarzo rosa natural (19 ctas - 8 mm)",
       "Laterales Simétricos: Opalina blanca lechosa (2 ctas - 8 mm)",
@@ -476,7 +476,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Romanticismo noble · Misión del alma · Búsqueda del Grial. Talismán del caballero poeta guiado por los ideales más puros.",
     description: "Canaliza elegancia, diplomacia seductora y entrega incondicional a los proyectos más amados. 19 cuentas de amatista, dos laterales de cuarzo rosa y centro focal de hematita gris metálica de 8 mm.",
     arcanoStory: "Montado sobre un corcel blanco que cruza un río calmo con paso sereno, el caballero ofrece su copa como ofrenda de paz. La amatista refina los anhelos espirituales, el cuarzo rosa aporta caballerosidad magnética y la hematita ancla los pies en la realidad para consumar la promesa.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Amatista púrpura (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo rosa natural (2 ctas - 8 mm)",
@@ -518,7 +518,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Intuición oracular · Océano compasivo · Sanadora mística. Talismán del trono de las aguas profundas del inconsciente.",
     description: "Sintoniza con dones psíquicos, clarividencia onírica y una presencia tierna capaz de sosegar cualquier tormenta. 19 cuentas de opalina lechosa, laterales de amatista y centro focal de cuarzo cristal de 8 mm.",
     arcanoStory: "Sentada en un trono tallado con sirenas y conchas al borde de las mareas, la Reina sostiene una copa cerrada con ángeles querubines. La opalina despierta la telepatía afectiva, la amatista conecta con los planos astrales y el cuarzo cristal protege la pureza de su templo interior.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Opalina blanca lechosa (19 ctas - 8 mm)",
       "Laterales Simétricos: Amatista púrpura (2 ctas - 8 mm)",
@@ -560,7 +560,7 @@ export const copasTalismans: ShopProduct[] = [
     tagline: "Maestría emocional · Sabiduría compasiva · Templanza soberana. Talismán del patriarca que navega mares bravos con serenidad absoluta.",
     description: "Otorga madurez afectiva, autocontrol en momentos de crisis y liderazgo guiado por la empatía e inteligencia emocional. 19 cuentas de sodalita marina, laterales de cuarzo rosa y centro focal de amatista de 8 mm.",
     arcanoStory: "El Rey de Copas flota sobre las olas embravecidas en un trono de piedra firme mientras un pez salta a su derecha y un navío navega seguro a su izquierda. La sodalita ordena la mente lúcida, el cuarzo rosa sostiene la calidez del consejero sabio y la amatista corona su espíritu con nobleza inalterable.",
-    ritualUse: "Consagrado bajo la Luna Llena frente a una hoguera sagrada de fuego creador y destructor (1.5 m de alto por 1 m de base). Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
+    ritualUse: "Forjado artesanalmente en pura piedra mineral natural de veta y ensamblado a tu medida exacta en Monterrey, N.L. Purificado con resinas vivas de copal y mirra para sintonizar con el elemento Agua.",
     details: [
       "Cuerpo Principal: Sodalita azul marina (19 ctas - 8 mm)",
       "Laterales Simétricos: Cuarzo rosa natural (2 ctas - 8 mm)",

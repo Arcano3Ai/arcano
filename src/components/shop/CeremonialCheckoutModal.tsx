@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { paymentConfig } from "@/config/paymentConfig";
 import { brandConfig } from "@/config/brandConfig";
+import { WristSizeGuideModal } from "./WristSizeGuideModal";
 
 interface CeremonialCheckoutModalProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copiedClabe, setCopiedClabe] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -334,19 +336,28 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-wider text-neutral-400 mb-1 font-mono">
-                  Talla de Muñeca (Brazaletes)
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-[10px] uppercase tracking-wider text-neutral-400 font-mono">
+                    Talla de Muñeca (Brazaletes)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setIsSizeGuideOpen(true)}
+                    className="text-[10px] font-mono text-[#C5A059] hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>📏</span> ¿Cómo medir mi muñeca?
+                  </button>
+                </div>
                 <select
                   name="wristSize"
                   value={shippingForm.wristSize}
                   onChange={handleInputChange}
                   className="w-full bg-[#111111] border border-neutral-800 focus:border-[#C5A059] rounded-lg px-3 py-2 text-white outline-none transition-colors"
                 >
-                  <option value="S (16-17 cm)">S (16-17 cm) — Fina</option>
-                  <option value="M (18-19 cm)">M (18-19 cm) — Estándar</option>
-                  <option value="L (20-21 cm)">L (20-21 cm) — Amplia</option>
-                  <option value="XL (22 cm)">XL (22 cm) — Extra</option>
+                  <option value="S (16-17 cm) — Muñeca delgada">S (16-17 cm) — Muñeca delgada</option>
+                  <option value="M (18-19 cm) — Estándar unisex">M (18-19 cm) — Estándar unisex (Recomendada)</option>
+                  <option value="L (20-21 cm) — Muñeca amplia">L (20-21 cm) — Muñeca amplia</option>
+                  <option value="XL (22 cm) — Extra amplia">XL (22 cm) — Extra amplia</option>
                 </select>
               </div>
 
@@ -571,6 +582,12 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
           </div>
         </div>
       </div>
+
+      {/* Modal Independiente de Guía de Medición de Muñeca */}
+      <WristSizeGuideModal
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
+      />
     </div>,
     document.body
   );
