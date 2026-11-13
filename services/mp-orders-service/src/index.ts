@@ -9,7 +9,14 @@ const port = process.env.PORT || 8080;
 // Inicialización de Supabase PostgreSQL
 const supabaseUrl = process.env.SUPABASE_URL || "https://myxwjlgyxmuqwnevloav.supabase.co";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+const supabase = supabaseUrl && supabaseKey
+  ? createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    })
+  : null;
 
 // Configuración de CORS permitiendo dominios autorizados de ARCANO
 const allowedOrigins = [
