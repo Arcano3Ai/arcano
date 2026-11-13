@@ -233,13 +233,26 @@ export function CeremonialCartDrawer() {
               <span>→</span>
             </button>
 
-            {/* Micro-badges de Métodos Oficiales */}
-            <div className="flex items-center justify-center gap-2 text-[10px] text-parchment-muted/80 font-sans tracking-wider py-0.5">
-              <span>🏛️ SPEI Mercado Pago</span>
-              <span>•</span>
-              <span>💬 WhatsApp Concierge</span>
-              <span>•</span>
-              <span>🔒 0% Comisión</span>
+            {/* Micro-badges de Métodos Oficiales con Logos */}
+            <div className="p-2.5 rounded-lg bg-obsidian/70 border border-gold/20 space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] text-parchment font-mono">
+                <span className="text-gold/90 font-semibold uppercase tracking-wider">Métodos Aceptados:</span>
+                <span className="text-emerald-400 font-bold">🔒 100% SEGURO</span>
+              </div>
+              <div className="flex items-center justify-center flex-wrap gap-1.5">
+                <span className="px-1.5 py-0.5 bg-[#009EE3]/20 border border-[#009EE3]/40 rounded text-[#009EE3] text-[9px] font-bold">
+                  Mercado Pago
+                </span>
+                <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[9px] font-mono">
+                  💳 Tarjetas (Crédito/Débito)
+                </span>
+                <span className="px-1.5 py-0.5 bg-emerald-950/40 border border-emerald-500/30 rounded text-emerald-400 text-[9px] font-mono">
+                  🏛️ SPEI
+                </span>
+                <span className="px-1.5 py-0.5 bg-red-950/30 border border-red-500/30 rounded text-red-300 text-[9px] font-mono">
+                  🏪 OXXO
+                </span>
+              </div>
             </div>
 
             {/* Botón Secundario de Asistencia WhatsApp */}

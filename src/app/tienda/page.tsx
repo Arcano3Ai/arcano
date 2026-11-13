@@ -798,15 +798,15 @@ function TiendaContent() {
 
                 {/* Opciones de Adquisición Multicanal: SPEI Directo + Carrito + WhatsApp */}
                 <div className="space-y-2.5 pt-2">
-                  {/* Botón Principal: Transferencia SPEI Directa (Formulario de Envío + CLABE Inmutable) */}
+                  {/* Botón Principal: Checkout Multicanal Oficial (Tarjeta, SPEI, OXXO) */}
                   <button
                     type="button"
                     onClick={() => setIsDirectCheckoutOpen(true)}
-                    className="w-full py-3.5 px-6 bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 text-black font-bold text-xs tracking-[0.18em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(197,160,89,0.35)] cursor-pointer"
+                    className="w-full py-3.5 px-6 bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 text-black font-bold text-xs tracking-[0.16em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(197,160,89,0.35)] cursor-pointer group"
                   >
-                    <span>🏛️</span>
-                    <span>{t("Pagar con Transferencia SPEI (0% Comisión)", "Pay via Bank Transfer SPEI (0% Fee)")}</span>
-                    <span className="text-sm">→</span>
+                    <span>💳</span>
+                    <span>{t("Comprar Ahora · Tarjeta / SPEI / OXXO", "Buy Now · Card / SPEI / OXXO")}</span>
+                    <span className="text-sm group-hover:translate-x-1 transition-transform">→</span>
                   </button>
 
                   {/* Fila Dual: Agregar al Carrito Ceremonial + WhatsApp Concierge */}
@@ -832,14 +832,29 @@ function TiendaContent() {
                       <span className="text-xs">↗</span>
                     </a>
                   </div>
-                </div>
 
-                <p className="text-[10px] text-center text-neutral-400 font-mono tracking-wider pt-1">
-                  {t(
-                    "Transferencia directa a cuenta oficial Arcano Solutions · Garantía y autenticidad certificada",
-                    "Direct transfer to Arcano Solutions official account · Certified authenticity guarantee"
-                  )}
-                </p>
+                  {/* Cintillo de Métodos de Pago y Confianza Oficial */}
+                  <div className="pt-2 border-t border-neutral-800/80 space-y-1.5">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                      <span className="text-[#C5A059] font-semibold tracking-wider uppercase">Métodos Aceptados</span>
+                      <span className="text-emerald-400">🔒 100% Cifrado 3DS</span>
+                    </div>
+                    <div className="flex items-center justify-between flex-wrap gap-1 text-[9px] font-mono">
+                      <span className="px-1.5 py-0.5 bg-[#009EE3]/15 border border-[#009EE3]/30 rounded text-[#009EE3] font-bold">
+                        Mercado Pago
+                      </span>
+                      <span className="px-1.5 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">
+                        VISA · Mastercard · AMEX
+                      </span>
+                      <span className="px-1.5 py-0.5 bg-emerald-950/40 border border-emerald-500/30 rounded text-emerald-400 font-medium">
+                        SPEI Inmediato
+                      </span>
+                      <span className="px-1.5 py-0.5 bg-red-950/30 border border-red-500/30 rounded text-red-300">
+                        OXXO
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
               </div>
             </div>

@@ -109,6 +109,48 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Franja de Métodos de Pago Seguros y Confianza */}
+        <div className="py-8 my-2 border-b border-charcoal-border/50 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-gold/90 font-semibold flex items-center gap-1.5">
+              <span>🔒</span>
+              <span>Métodos de Pago Seguros</span>
+            </span>
+            <div className="flex items-center flex-wrap justify-center gap-1.5">
+              <span className="px-2 py-0.5 bg-[#009EE3]/20 border border-[#009EE3]/40 rounded text-[#009EE3] text-[10px] font-bold">
+                Mercado Pago
+              </span>
+              <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[10px] font-mono">
+                VISA
+              </span>
+              <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[10px] font-mono">
+                Mastercard
+              </span>
+              <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-parchment text-[10px] font-mono">
+                AMEX
+              </span>
+              <span className="px-2 py-0.5 bg-emerald-950/40 border border-emerald-500/30 rounded text-emerald-400 text-[10px] font-mono font-medium">
+                🏛️ SPEI
+              </span>
+              <span className="px-2 py-0.5 bg-red-950/30 border border-red-500/30 rounded text-red-300 text-[10px] font-mono">
+                🏪 OXXO
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 text-[11px] text-parchment-muted/80">
+            <span className="flex items-center gap-1">
+              <span>🛡️</span>
+              <span>Cifrado SSL 256-bit & 3DS</span>
+            </span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <span>📦</span>
+              <span>Envíos Asegurados a todo México</span>
+            </span>
+          </div>
+        </div>
+
         {/* Barra de Copyright inferior */}
         <div className="pt-8 border-t border-charcoal-border/40 text-center text-xs text-parchment-dim font-sans leading-relaxed space-y-1.5">
           <p>

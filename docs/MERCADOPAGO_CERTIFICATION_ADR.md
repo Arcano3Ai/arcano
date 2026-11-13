@@ -57,3 +57,4 @@ Para habilitar el cobro seguro con tarjetas de crédito/débito y transferencias
 - **Frontend (`arcanosolutions.com`):** Conectado al endpoint de producción con badges oficiales de Mercado Pago y sellos 3DS.
 - **Backend (Cloud Run):** Desplegado en `us-central1` (`mp-orders-service`).
 - **Base de Datos (Supabase):** Tablas relacionales `orders`, `order_items`, `mp_orders`, `mp_payments`, `webhook_events` operativas.
+
