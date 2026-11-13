@@ -80,14 +80,17 @@ app.get("/health", (_req: Request, res: Response) => {
   });
 });
 
-// Endpoint principal: Crear Orden / Preferencia en Mercado Pago
-app.post("/create-order", async (req: Request, res: Response) => {
+// Función reutilizable para crear órdenes en Producción o Sandbox (Pruebas)
+async function handleCreateOrder(req: Request, res: Response, isTestMode: boolean) {
   try {
-    const accessToken = process.env.MP_ACCESS_TOKEN;
+    const accessToken = isTestMode
+      ? (process.env.MP_ACCESS_TOKEN_TEST || req.headers["x-mp-test-token"] as string || process.env.MP_ACCESS_TOKEN)
+      : process.env.MP_ACCESS_TOKEN;
+
     if (!accessToken) {
-      console.error("CRITICAL: MP_ACCESS_TOKEN no está configurado en las variables de entorno.");
+      console.error(`CRITICAL: Falta token de Mercado Pago (${isTestMode ? "MP_ACCESS_TOKEN_TEST" : "MP_ACCESS_TOKEN"}).`);
       return res.status(500).json({
-        error: "Configuración incompleta: falta MP_ACCESS_TOKEN en el servidor.",
+        error: `Configuración incompleta: falta token de Mercado Pago (${isTestMode ? "Pruebas" : "Producción"}).`,
       });
     }
 
@@ -107,7 +110,8 @@ app.post("/create-order", async (req: Request, res: Response) => {
 
     // 2. Idempotencia y Referencia Externa
     const idempotencyKey = crypto.randomUUID();
-    const externalReference = orderId || (cartId ? `ARC-CART-${cartId}` : `ARC-ORD-${Date.now().toString(36).toUpperCase()}`);
+    const prefix = isTestMode ? "ARC-TEST" : "ARC-ORD";
+    const externalReference = orderId || (cartId ? `${prefix}-${cartId}` : `${prefix}-${Date.now().toString(36).toUpperCase()}`);
 
     // 3. Preparar items para la API de Mercado Pago (Orders API v1 requiere unit_price como string decimal)
     const mpItems = items.map((item) => ({
@@ -180,7 +184,7 @@ app.post("/create-order", async (req: Request, res: Response) => {
     const mpData = await mpResponse.json();
 
     if (!mpResponse.ok) {
-      console.error("Error devuelto por Mercado Pago Orders API:", mpData);
+      console.error(`Error devuelto por Mercado Pago Orders API (${isTestMode ? "TEST" : "PROD"}):`, mpData);
       return res.status(mpResponse.status).json({
         error: "Mercado Pago no pudo crear la orden.",
         details: mpData,
@@ -194,6 +198,7 @@ app.post("/create-order", async (req: Request, res: Response) => {
       checkout_url: mpData.checkout_url || mpData.init_point,
       external_reference: externalReference,
       total_amount: finalTotal,
+      is_test_mode: isTestMode,
     };
 
     // 6. Persistencia Full E-Commerce en Supabase PostgreSQL (asíncrona / segura)
@@ -261,13 +266,19 @@ app.post("/create-order", async (req: Request, res: Response) => {
 
     return res.json(responsePayload);
   } catch (error: any) {
-    console.error("Error no controlado en /create-order:", error);
+    console.error(`Error no controlado en create-order (${isTestMode ? "TEST" : "PROD"}):`, error);
     return res.status(500).json({
       error: "Error interno del servidor al procesar la orden.",
       message: error?.message || "Error desconocido",
     });
   }
-});
+}
+
+// Endpoint Principal (Producción)
+app.post("/create-order", (req: Request, res: Response) => handleCreateOrder(req, res, false));
+
+// Endpoint Sandbox para Certificación de Pruebas en el Wizard de Mercado Pago
+app.post("/create-order-test", (req: Request, res: Response) => handleCreateOrder(req, res, true));
 
 // Helpers para validación de Webhook de Mercado Pago
 function parseXSignature(xSignature: string | null | undefined) {
