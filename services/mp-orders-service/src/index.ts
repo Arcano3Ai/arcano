@@ -1,9 +1,15 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import crypto from "crypto";
+import { createClient } from "@supabase/supabase-js";
 
 const app = express();
 const port = process.env.PORT || 8080;
+
+// Inicialización de Supabase PostgreSQL
+const supabaseUrl = process.env.SUPABASE_URL || "https://myxwjlgyxmuqwnevloav.supabase.co";
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 // Configuración de CORS permitiendo dominios autorizados de ARCANO
 const allowedOrigins = [
@@ -175,13 +181,78 @@ app.post("/create-order", async (req: Request, res: Response) => {
     }
 
     // 5. Devolver checkout_url para redirección inmediata
-    return res.json({
+    const responsePayload = {
       success: true,
       order_id: mpData.id,
       checkout_url: mpData.checkout_url || mpData.init_point,
       external_reference: externalReference,
       total_amount: finalTotal,
-    });
+    };
+
+    // 6. Persistencia Full E-Commerce en Supabase PostgreSQL (asíncrona / segura)
+    if (supabase) {
+      (async () => {
+        try {
+          // A) Insertar orden de negocio
+          const { data: newOrder, error: orderErr } = await supabase
+            .from("orders")
+            .insert({
+              external_reference: externalReference,
+              status: "awaiting_payment",
+              currency: "MXN",
+              subtotal_amount: itemsTotal,
+              shipping_amount: shippingCost,
+              total_amount: finalTotal,
+              buyer_email: buyerEmail || "cliente@arcanosolutions.com",
+              buyer_first_name: firstName,
+              buyer_last_name: lastName,
+              buyer_phone: cleanPhone || null,
+              shipping_street_name: shippingAddress?.street || "No especificado",
+              shipping_street_number: shippingAddress?.number || "S/N",
+              shipping_colonia: shippingAddress?.colonia || null,
+              shipping_city: shippingAddress?.city || "No especificado",
+              shipping_state: shippingAddress?.state || "No especificado",
+              shipping_zip_code: shippingAddress?.zipCode || "00000",
+            })
+            .select("id")
+            .single();
+
+          if (orderErr) {
+            console.warn("[Supabase] No se pudo persistir orden en orders:", orderErr.message);
+            return;
+          }
+
+          if (newOrder) {
+            // B) Insertar items de la orden
+            const orderItemsData = items.map((i) => ({
+              order_id: newOrder.id,
+              sku: i.description || null,
+              title: i.title,
+              unit_price: Number(i.unit_price),
+              quantity: Number(i.quantity),
+              line_total: Number(i.unit_price) * Number(i.quantity),
+            }));
+            await supabase.from("order_items").insert(orderItemsData);
+
+            // C) Insertar espejo en mp_orders
+            await supabase.from("mp_orders").insert({
+              order_id: newOrder.id,
+              mp_order_id: String(mpData.id),
+              mp_status: mpData.status || "opened",
+              mp_status_detail: mpData.status_detail || "waiting_payment",
+              mp_total_amount: finalTotal,
+              checkout_url: mpData.checkout_url || mpData.init_point,
+            });
+
+            console.log(`[Supabase Full E-Commerce] Orden ${externalReference} persistida con éxito.`);
+          }
+        } catch (dbErr: any) {
+          console.error("[Supabase Error] Fallo al guardar en base de datos:", dbErr?.message);
+        }
+      })();
+    }
+
+    return res.json(responsePayload);
   } catch (error: any) {
     console.error("Error no controlado en /create-order:", error);
     return res.status(500).json({
@@ -258,6 +329,72 @@ export async function webhookHandler(req: Request, res: Response) {
       live_mode: req.body?.live_mode,
       timestamp: new Date().toISOString(),
     });
+
+    // 2. Conciliación Asíncrona Full E-Commerce en Supabase
+    if (supabase && dataId) {
+      (async () => {
+        try {
+          // Guardar evento para auditoría e idempotencia
+          await supabase.from("webhook_events").insert({
+            request_id: xRequestId || `auto-${Date.now()}-${dataId}`,
+            event_type: req.body?.type || req.query?.type || "unknown",
+            event_action: req.body?.action || req.query?.topic || "unknown",
+            data_id: dataId,
+            signature_valid: true,
+            raw_payload: req.body,
+          });
+
+          // Consultar el recurso oficial en Mercado Pago API (Fuente de Verdad)
+          const accessToken = process.env.MP_ACCESS_TOKEN;
+          if (accessToken) {
+            const isPayment = (req.body?.type || req.query?.type) === "payment";
+            const apiEndpoint = isPayment
+              ? `https://api.mercadopago.com/v1/payments/${dataId}`
+              : `https://api.mercadopago.com/v1/orders/${dataId}`;
+
+            const checkRes = await fetch(apiEndpoint, {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            });
+
+            if (checkRes.ok) {
+              const resource = await checkRes.json();
+              const extRef = resource.external_reference;
+              const mpStatus = resource.status || (resource.order_status === "paid" ? "closed" : "opened");
+              const mpStatusDetail = resource.status_detail || null;
+
+              // Datos si es pago
+              const paymentId = isPayment ? String(resource.id) : (resource.payments?.[0]?.id ? String(resource.payments[0].id) : null);
+              const paymentAmount = isPayment ? resource.transaction_amount : (resource.total_amount ? Number(resource.total_amount) : null);
+              const paymentStatus = isPayment ? resource.status : (resource.payments?.[0]?.status || null);
+              const paymentMethodId = resource.payment_method_id || null;
+              const paymentTypeId = resource.payment_type_id || null;
+
+              if (extRef) {
+                const { data: syncRes, error: syncErr } = await supabase.rpc("rpc_sync_order_from_webhook", {
+                  p_external_reference: extRef,
+                  p_mp_order_id: isPayment ? (resource.order?.id ? String(resource.order.id) : dataId) : dataId,
+                  p_mp_status: mpStatus,
+                  p_mp_status_detail: mpStatusDetail,
+                  p_mp_payment_id: paymentId,
+                  p_payment_amount: paymentAmount,
+                  p_payment_status: paymentStatus,
+                  p_payment_method_id: paymentMethodId,
+                  p_payment_type_id: paymentTypeId,
+                });
+
+                if (syncErr) {
+                  console.error("[Supabase Conciliación RPC Error]:", syncErr.message);
+                } else {
+                  console.log("[Supabase Conciliación Exitosa]:", syncRes);
+                }
+              }
+            }
+          }
+        } catch (syncErr: any) {
+          console.error("[MP Webhook Async Sync Error]:", syncErr?.message);
+        }
+      })();
+    }
 
     // ACK rápido (Mercado Pago espera 200/201 para confirmar la entrega y evitar reintentos)
     return res.status(200).json({ received: true, id: dataId });
