@@ -347,9 +347,6 @@ export function ProductCheckoutModal({
                       <span>🏛️</span>
                       <span>Transferencia SPEI</span>
                     </span>
-                    <span className="px-1.5 py-0.5 rounded bg-[#C5A059]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
-                      0% COMISIÓN
-                    </span>
                   </div>
                   <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
                     Transfiere desde la app de tu banco a nuestra cuenta oficial y envía comprobante.
@@ -364,9 +361,6 @@ export function ProductCheckoutModal({
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[11px] font-mono uppercase tracking-widest text-[#FFE2A4] font-bold flex items-center gap-1.5">
                     <span>🏛️ DATOS PARA RECIBIR TU TRANSFERENCIA SPEI</span>
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
-                    0% COMISIÓN
                   </span>
                 </div>
 

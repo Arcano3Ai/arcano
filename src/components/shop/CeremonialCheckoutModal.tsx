@@ -437,9 +437,6 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                       <span className="text-sm font-semibold text-white flex items-center gap-1.5">
                         <span>🏛️ Transferencia SPEI (Directa)</span>
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#C5A059] text-[9px] font-mono font-bold">
-                        0% COMISIÓN
-                      </span>
                     </div>
                     <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
                       Transfiere desde cualquier app bancaria a nuestra cuenta oficial y envía tu comprobante.
