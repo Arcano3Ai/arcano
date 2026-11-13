@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { brandConfig } from "@/config/brandConfig";
+import { paymentConfig } from "@/config/paymentConfig";
 import { ShopProduct } from "@/data/shop";
 
 interface ProductCheckoutModalProps {
@@ -16,6 +17,8 @@ export function ProductCheckoutModal({
   onClose,
   product,
 }: ProductCheckoutModalProps) {
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "spei">("card");
+  const [isProcessingCard, setIsProcessingCard] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -59,14 +62,10 @@ export function ProductCheckoutModal({
     }
   };
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage(null);
-
-    // Validaciones rigurosas de contacto y dirección
+  const validateShippingForm = (): boolean => {
     if (!formData.name.trim() || !formData.phone.trim()) {
       setErrorMessage("Por favor ingresa tu Nombre y Teléfono / WhatsApp de contacto.");
-      return;
+      return false;
     }
     if (
       !formData.street.trim() ||
@@ -75,14 +74,65 @@ export function ProductCheckoutModal({
       !formData.city.trim()
     ) {
       setErrorMessage("Por favor completa los datos de tu dirección para generar la guía de envío.");
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const handlePayWithCard = async () => {
+    setErrorMessage(null);
+    if (!validateShippingForm()) return;
+
+    setIsProcessingCard(true);
+    const orderId = `ARC-PROD-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    try {
+      const response = await fetch(paymentConfig.mercadoPago.checkoutApiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cartId: product.id || product.slug,
+          orderId,
+          buyerEmail: formData.email.trim() || "cliente@arcanosolutions.com",
+          buyerName: formData.name.trim(),
+          buyerPhone: formData.phone.trim(),
+          items: [
+            {
+              title: product.name,
+              unit_price: product.price,
+              quantity: 1,
+            },
+          ],
+          shippingCost: 0,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.checkout_url) {
+        throw new Error(data?.error || "No se pudo conectar con Mercado Pago. Intenta nuevamente o usa SPEI.");
+      }
+
+      // Redirigir inmediatamente a Mercado Pago Checkout Pro
+      window.location.href = data.checkout_url;
+    } catch (err: any) {
+      console.error("Error al iniciar checkout con Mercado Pago:", err);
+      setErrorMessage(err?.message || "Ocurrió un error al conectar con la pasarela de pago.");
+      setIsProcessingCard(false);
+    }
+  };
+
+  const handlePayWithSpei = (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage(null);
+    if (!validateShippingForm()) return;
 
     const orderId = `ARC-${Math.floor(100000 + Math.random() * 900000)}`;
     setGeneratedOrderId(orderId);
     setOrderConfirmed(true);
 
-    // Preparar mensaje de WhatsApp prellenado para adjuntar comprobante
     const whatsappMsg = encodeURIComponent(
       `¡Hola ARCANO! He registrado mi orden ceremonial (Folio: *${orderId}*).\n\n` +
       `📦 *Pieza:* ${product.name}\n` +
@@ -97,7 +147,6 @@ export function ProductCheckoutModal({
       `Adjunto mi comprobante de transferencia para programar el despacho de mi paquete.`
     );
 
-    // Abrir WhatsApp con el resumen de la orden
     window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMsg}`, "_blank");
   };
 
@@ -119,10 +168,10 @@ export function ProductCheckoutModal({
         {/* Encabezado Ceremonial */}
         <div className="text-center mb-6 pb-4 border-b border-neutral-800">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-[#C5A059]/60 text-[10px] uppercase tracking-widest text-[#C5A059] mb-2 font-mono">
-            <span>🔒 PAGO DIRECTO POR TRANSFERENCIA SPEI</span>
+            <span>🔒 CHECKOUT SEGURO & ENVÍO EXPRESS A TODO MÉXICO</span>
           </div>
           <h2 className="font-serif text-xl sm:text-2xl text-white tracking-wide uppercase font-light">
-            Datos de Envío & Transferencia
+            Selecciona Pago & Datos de Envío
           </h2>
           
           {/* Tarjeta de Producto en Checkout */}
@@ -234,60 +283,118 @@ export function ProductCheckoutModal({
             </div>
           </div>
         ) : (
-          /* FORMULARIO DE ENVÍO Y DATOS DE TRANSFERENCIA */
-          <form onSubmit={handleSubmitOrder} className="space-y-5">
-            {/* 1. FICHA BANCARIA OFICIAL DE TRANSFERENCIA (DESTACADA AL INICIO) */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-black via-[#161208] to-black border border-[#C5A059]/50 shadow-inner">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#FFE2A4] font-bold flex items-center gap-1.5">
-                  <span>🏛️ DATOS PARA RECIBIR TU TRANSFERENCIA SPEI</span>
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
-                  0% COMISIÓN
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono pt-1">
-                <div className="p-2 rounded bg-black/50 border border-neutral-800">
-                  <span className="text-[10px] text-neutral-400 block font-sans">Banco Receptor:</span>
-                  <span className="text-white font-bold">{BANCO_OFICIAL}</span>
-                </div>
-                <div className="p-2 rounded bg-black/50 border border-neutral-800">
-                  <span className="text-[10px] text-neutral-400 block font-sans">Titular de la Cuenta:</span>
-                  <span className="text-[#FFE2A4] font-semibold">{TITULAR_OFICIAL}</span>
-                </div>
-              </div>
-
-              <div className="mt-2.5 p-2.5 rounded-lg bg-black/70 border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-2">
-                <div className="text-center sm:text-left">
-                  <span className="text-[10px] text-neutral-400 block font-sans">CLABE Interbancaria (SPEI):</span>
-                  <span className="font-mono text-sm sm:text-base font-extrabold text-[#FFE2A4] tracking-widest select-all">
-                    {CLABE_OFICIAL}
-                  </span>
-                </div>
+          /* FORMULARIO DE ENVÍO Y SELECCIÓN DE MÉTODO DE PAGO */
+          <div className="space-y-5">
+            {/* 1. SELECTOR DE MÉTODO DE PAGO */}
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2 block">
+                SELECCIONA TU MÉTODO DE PAGO PREFERIDO:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {/* Opción Tarjeta / Mercado Pago (Recomendada / Cero Fricción) */}
                 <button
                   type="button"
-                  onClick={handleCopyClabe}
-                  className="px-3 py-1.5 rounded-md bg-[#C5A059] hover:bg-[#d8b368] text-black font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  onClick={() => setPaymentMethod("card")}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    paymentMethod === "card"
+                      ? "bg-[#C5A059]/15 border-[#C5A059] ring-1 ring-[#C5A059] shadow-[0_0_20px_rgba(197,160,89,0.25)]"
+                      : "bg-[#111] border-neutral-800 hover:border-neutral-700 opacity-75"
+                  }`}
                 >
-                  {copiedClabe ? (
-                    <>
-                      <span>✓</span>
-                      <span>¡CLABE Copiada!</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>📋</span>
-                      <span>Copiar CLABE</span>
-                    </>
-                  )}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                      <span>💳</span>
+                      <span>Tarjeta / Mercado Pago</span>
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-400 text-[9px] font-mono font-bold">
+                      INSTANTÁNEO
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
+                    Crédito, Débito, Meses sin intereses, Saldo Mercado Pago o Mercado Crédito.
+                  </p>
+                </button>
+
+                {/* Opción Transferencia SPEI */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod("spei")}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    paymentMethod === "spei"
+                      ? "bg-[#C5A059]/15 border-[#C5A059] ring-1 ring-[#C5A059] shadow-[0_0_20px_rgba(197,160,89,0.25)]"
+                      : "bg-[#111] border-neutral-800 hover:border-neutral-700 opacity-75"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>Transferencia SPEI</span>
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-[#C5A059]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
+                      0% COMISIÓN
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
+                    Transfiere desde la app de tu banco a nuestra cuenta oficial y envía comprobante.
+                  </p>
                 </button>
               </div>
-
-              <p className="text-[10px] text-neutral-400 mt-2 font-mono text-center sm:text-left">
-                💡 Puedes realizar tu transferencia antes o después de llenar tus datos de envío. Tu pedido queda registrado con un folio único al enviar este formulario.
-              </p>
             </div>
+
+            {/* SI SELECCIONÓ SPEI: MOSTRAR FICHA BANCARIA INMUTABLE */}
+            {paymentMethod === "spei" && (
+              <div className="p-4 rounded-xl bg-gradient-to-r from-black via-[#161208] to-black border border-[#C5A059]/50 shadow-inner animate-fadeIn">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#FFE2A4] font-bold flex items-center gap-1.5">
+                    <span>🏛️ DATOS PARA RECIBIR TU TRANSFERENCIA SPEI</span>
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
+                    0% COMISIÓN
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono pt-1">
+                  <div className="p-2 rounded bg-black/50 border border-neutral-800">
+                    <span className="text-[10px] text-neutral-400 block font-sans">Banco Receptor:</span>
+                    <span className="text-white font-bold">{BANCO_OFICIAL}</span>
+                  </div>
+                  <div className="p-2 rounded bg-black/50 border border-neutral-800">
+                    <span className="text-[10px] text-neutral-400 block font-sans">Titular de la Cuenta:</span>
+                    <span className="text-[#FFE2A4] font-semibold">{TITULAR_OFICIAL}</span>
+                  </div>
+                </div>
+
+                <div className="mt-2.5 p-2.5 rounded-lg bg-black/70 border border-[#C5A059]/40 flex flex-col sm:flex-row items-center justify-between gap-2">
+                  <div className="text-center sm:text-left">
+                    <span className="text-[10px] text-neutral-400 block font-sans">CLABE Interbancaria (SPEI):</span>
+                    <span className="font-mono text-sm sm:text-base font-extrabold text-[#FFE2A4] tracking-widest select-all">
+                      {CLABE_OFICIAL}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyClabe}
+                    className="px-3 py-1.5 rounded-md bg-[#C5A059] hover:bg-[#d8b368] text-black font-semibold text-xs tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    {copiedClabe ? (
+                      <>
+                        <span>✓</span>
+                        <span>¡CLABE Copiada!</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>📋</span>
+                        <span>Copiar CLABE</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <p className="text-[10px] text-neutral-400 mt-2 font-mono text-center sm:text-left">
+                  💡 Llena tus datos de entrega y haz clic en &quot;Confirmar Pedido&quot;. Se abrirá WhatsApp para que adjuntes tu comprobante.
+                </p>
+              </div>
+            )}
 
             {/* 2. CAMPOS DE ENTREGA */}
             <div>
@@ -464,20 +571,44 @@ export function ProductCheckoutModal({
               </div>
             </div>
 
-            {/* BOTÓN SUBMIT DE PEDIDO */}
+            {/* BOTÓN DE ACCIÓN DINÁMICO */}
             <div className="pt-2">
-              <button
-                type="submit"
-                className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] text-black font-bold text-xs uppercase tracking-[0.2em] shadow-[0_0_25px_rgba(197,160,89,0.4)] hover:shadow-[0_0_35px_rgba(197,160,89,0.6)] transition-all cursor-pointer flex items-center justify-center gap-2"
-              >
-                <span>Registrar Pedido y Enviar Comprobante</span>
-                <span className="text-sm">→</span>
-              </button>
+              {paymentMethod === "card" ? (
+                <button
+                  type="button"
+                  onClick={handlePayWithCard}
+                  disabled={isProcessingCard}
+                  className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(197,160,89,0.4)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                >
+                  {isProcessingCard ? (
+                    <>
+                      <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                      <span>Conectando con Mercado Pago...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>💳 Pagar con Tarjeta / Mercado Pago (${product.price.toLocaleString("es-MX")} MXN)</span>
+                      <span>→</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handlePayWithSpei}
+                  className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(197,160,89,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>🏛️ Confirmar Pedido y Enviar Comprobante por WhatsApp</span>
+                  <span>→</span>
+                </button>
+              )}
               <p className="text-[10px] text-center text-neutral-400 mt-2 font-mono">
-                Al hacer clic, se registrará tu folio y se abrirá WhatsApp para que adjuntes tu comprobante bancario.
+                {paymentMethod === "card"
+                  ? "Al hacer clic, serás redirigido a la pasarela segura oficial de Mercado Pago para completar tu pago."
+                  : "Al confirmar, se guardan tus datos de envío y se abre WhatsApp para recibir la foto de tu comprobante."}
               </p>
             </div>
-          </form>
+          </div>
         )}
       </div>
     </div>

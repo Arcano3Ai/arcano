@@ -14,6 +14,7 @@ export interface PaymentGatewayConfig {
     publicKey: string;
     hasAccessToken: boolean;
     statementDescriptor: string;
+    checkoutApiUrl: string;
   };
   stripe: {
     enabled: boolean;
@@ -60,6 +61,7 @@ export const paymentConfig: PaymentGatewayConfig = {
     publicKey: process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY || "TEST-e613045d-7524-4f81-9b16-419b48625902",
     hasAccessToken: Boolean(process.env.MERCADOPAGO_ACCESS_TOKEN),
     statementDescriptor: "ARCANO*JOYAS",
+    checkoutApiUrl: process.env.NEXT_PUBLIC_MP_CHECKOUT_API_URL || "https://mp-orders-service-17712184364.us-central1.run.app/create-order",
   },
   stripe: {
     enabled: true,

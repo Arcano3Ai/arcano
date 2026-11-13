@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { brandConfig } from "@/config/brandConfig";
+import { paymentConfig } from "@/config/paymentConfig";
 
 interface InviernoCheckoutModalProps {
   isOpen: boolean;
@@ -16,6 +17,8 @@ export function InviernoCheckoutModal({
   productTitle = "Pulsera de Lapislázuli Natural 8mm + Porta Incienso Áurico",
   price = 1299,
 }: InviernoCheckoutModalProps) {
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "spei">("card");
+  const [isProcessingCard, setIsProcessingCard] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -54,31 +57,77 @@ export function InviernoCheckoutModal({
       setCopiedClabe(true);
       setTimeout(() => setCopiedClabe(false), 3000);
     } catch {
-      // Fallback
       setCopiedClabe(true);
       setTimeout(() => setCopiedClabe(false), 3000);
     }
   };
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage(null);
-
-    // Validaciones
+  const validateShippingForm = (): boolean => {
     if (!formData.name.trim() || !formData.phone.trim()) {
       setErrorMessage("Por favor ingresa tu Nombre y Teléfono / WhatsApp de contacto.");
-      return;
+      return false;
     }
     if (!formData.street.trim() || !formData.number.trim() || !formData.zipCode.trim() || !formData.city.trim()) {
-      setErrorMessage("Por favor completa los datos de tu dirección para la guía de envío.");
-      return;
+      setErrorMessage("Por favor completa los datos de tu dirección para la entrega.");
+      return false;
     }
+    return true;
+  };
+
+  const handlePayWithCard = async () => {
+    setErrorMessage(null);
+    if (!validateShippingForm()) return;
+
+    setIsProcessingCard(true);
+    const orderId = `ARC-INV-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    try {
+      const response = await fetch(paymentConfig.mercadoPago.checkoutApiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cartId: "invierno-1299",
+          orderId,
+          buyerEmail: formData.email.trim() || "cliente@arcanosolutions.com",
+          buyerName: formData.name.trim(),
+          buyerPhone: formData.phone.trim(),
+          items: [
+            {
+              title: productTitle,
+              unit_price: price,
+              quantity: 1,
+            },
+          ],
+          shippingCost: 0,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.checkout_url) {
+        throw new Error(data?.error || "No se pudo conectar con Mercado Pago. Intenta nuevamente o usa SPEI.");
+      }
+
+      // Redirigir a Mercado Pago Checkout Pro
+      window.location.href = data.checkout_url;
+    } catch (err: any) {
+      console.error("Error al iniciar checkout con Mercado Pago:", err);
+      setErrorMessage(err?.message || "Ocurrió un error al conectar con la pasarela de pago.");
+      setIsProcessingCard(false);
+    }
+  };
+
+  const handlePayWithSpei = (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage(null);
+    if (!validateShippingForm()) return;
 
     const orderId = `ARC-INV-${Math.floor(1000 + Math.random() * 9000)}`;
     setGeneratedOrderId(orderId);
     setOrderConfirmed(true);
 
-    // Preparar mensaje de WhatsApp prellenado para adjuntar comprobante
     const whatsappMsg = encodeURIComponent(
       `¡Hola ARCANO! He registrado mi pedido para la *Colección de Invierno* (Folio: *${orderId}*).\n\n` +
       `📦 *Pieza:* ${productTitle}\n` +
@@ -93,7 +142,6 @@ export function InviernoCheckoutModal({
       `Adjunto mi comprobante de transferencia para programar el despacho de mi paquete.`
     );
 
-    // Abrir WhatsApp con el resumen de la orden
     window.open(`https://wa.me/${brandConfig.contact.whatsappNumber}?text=${whatsappMsg}`, "_blank");
   };
 
@@ -214,18 +262,75 @@ export function InviernoCheckoutModal({
             </div>
           </div>
         ) : (
-          /* FORMULARIO DE ENVÍO Y DATOS DE TRANSFERENCIA */
-          <form onSubmit={handleSubmitOrder} className="space-y-5">
-            {/* 1. FICHA BANCARIA OFICIAL DE TRANSFERENCIA (DESTACADA AL INICIO) */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-black via-[#161208] to-black border border-[#D4AF37]/50 shadow-inner">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#FFE2A4] font-bold flex items-center gap-1.5">
-                  <span>🏛️ DATOS PARA RECIBIR TU TRANSFERENCIA SPEI</span>
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
-                  0% COMISIÓN
-                </span>
+          /* FORMULARIO DE ENVÍO Y SELECCIÓN DE MÉTODO DE PAGO */
+          <div className="space-y-5">
+            {/* 1. SELECTOR DE MÉTODO DE PAGO */}
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2 block">
+                SELECCIONA TU MÉTODO DE PAGO PREFERIDO:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {/* Opción Tarjeta / Mercado Pago (Recomendada / Cero Fricción) */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod("card")}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    paymentMethod === "card"
+                      ? "bg-[#D4AF37]/15 border-[#D4AF37] ring-1 ring-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.25)]"
+                      : "bg-[#111] border-neutral-800 hover:border-neutral-700 opacity-75"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                      <span>💳</span>
+                      <span>Tarjeta / Mercado Pago</span>
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-400 text-[9px] font-mono font-bold">
+                      INSTANTÁNEO
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
+                    Crédito, Débito, Meses sin intereses, Saldo Mercado Pago o Mercado Crédito.
+                  </p>
+                </button>
+
+                {/* Opción Transferencia SPEI */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod("spei")}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                    paymentMethod === "spei"
+                      ? "bg-[#D4AF37]/15 border-[#D4AF37] ring-1 ring-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.25)]"
+                      : "bg-[#111] border-neutral-800 hover:border-neutral-700 opacity-75"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>Transferencia SPEI</span>
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
+                      0% COMISIÓN
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
+                    Transfiere desde la app de tu banco a nuestra cuenta oficial y envía comprobante.
+                  </p>
+                </button>
               </div>
+            </div>
+
+            {/* SI SELECCIONÓ SPEI: MOSTRAR FICHA BANCARIA INMUTABLE */}
+            {paymentMethod === "spei" && (
+              <div className="p-4 rounded-xl bg-gradient-to-r from-black via-[#161208] to-black border border-[#D4AF37]/50 shadow-inner animate-fadeIn">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#FFE2A4] font-bold flex items-center gap-1.5">
+                    <span>🏛️ DATOS PARA RECIBIR TU TRANSFERENCIA SPEI</span>
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#FFE2A4] text-[9px] font-mono font-bold">
+                    0% COMISIÓN
+                  </span>
+                </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono pt-1">
                 <div className="p-2 rounded bg-black/50 border border-neutral-800">
@@ -259,6 +364,26 @@ export function InviernoCheckoutModal({
                 <span className="text-emerald-400">✓ Envío Gratis a Todo México</span>
               </div>
             </div>
+            )}
+
+            {/* SI SELECCIONÓ TARJETA: MICRO-BADGES DE CONFIANZA MERCADO PAGO */}
+            {paymentMethod === "card" && (
+              <div className="p-3 rounded-xl bg-gradient-to-r from-emerald-950/20 via-black to-emerald-950/20 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs animate-fadeIn">
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400 text-base">🔒</span>
+                  <div>
+                    <p className="font-medium text-white text-[11px]">Checkout Pro Seguro con Mercado Pago</p>
+                    <p className="text-[10px] text-neutral-400">Cifrado SSL de 256 bits · Protección al Comprador Arcano</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 text-[9px] font-mono text-neutral-300">
+                  <span className="px-1.5 py-0.5 rounded bg-black/60 border border-neutral-800">VISA</span>
+                  <span className="px-1.5 py-0.5 rounded bg-black/60 border border-neutral-800">MC</span>
+                  <span className="px-1.5 py-0.5 rounded bg-black/60 border border-neutral-800">AMEX</span>
+                  <span className="px-1.5 py-0.5 rounded bg-black/60 border border-neutral-800">DÉBITO</span>
+                </div>
+              </div>
+            )}
 
             {/* 2. DATOS DE DESTINO / ENVÍO */}
             <div className="space-y-3 pt-1">
@@ -435,20 +560,44 @@ export function InviernoCheckoutModal({
               </div>
             </div>
 
-            {/* BOTÓN DE CONFIRMACIÓN */}
+            {/* BOTÓN DE ACCIÓN DINÁMICO */}
             <div className="pt-2">
-              <button
-                type="submit"
-                className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>🏛️ Confirmar Pedido y Abrir WhatsApp para Comprobante</span>
-                <span>→</span>
-              </button>
+              {paymentMethod === "card" ? (
+                <button
+                  type="button"
+                  onClick={handlePayWithCard}
+                  disabled={isProcessingCard}
+                  className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                >
+                  {isProcessingCard ? (
+                    <>
+                      <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                      <span>Conectando con Mercado Pago...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>💳 Pagar con Tarjeta / Mercado Pago (${price.toLocaleString("es-MX")} MXN)</span>
+                      <span>→</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handlePayWithSpei}
+                  className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>🏛️ Confirmar Pedido y Enviar Comprobante por WhatsApp</span>
+                  <span>→</span>
+                </button>
+              )}
               <p className="text-[10px] text-center text-neutral-500 mt-2 font-mono">
-                Al confirmar, se guardan tus datos de envío y se abre el chat para recibir la foto de tu comprobante.
+                {paymentMethod === "card"
+                  ? "Al hacer clic, serás redirigido a la pasarela segura oficial de Mercado Pago para completar tu pago."
+                  : "Al confirmar, se guardan tus datos de envío y se abre el chat para recibir la foto de tu comprobante."}
               </p>
             </div>
-          </form>
+          </div>
         )}
       </div>
     </div>

@@ -11,12 +11,12 @@ interface CeremonialCheckoutModalProps {
   onClose: () => void;
 }
 
-type PaymentGateway = "spei_mercadopago" | "whatsapp";
+type PaymentGateway = "card_mercadopago" | "spei_mercadopago" | "whatsapp";
 
 export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutModalProps) {
   const { items, totalCount, subtotal, hasFreeShipping, getWhatsAppOrderUrl, clearCart } = useCart();
 
-  const [selectedGateway, setSelectedGateway] = useState<PaymentGateway>("spei_mercadopago");
+  const [selectedGateway, setSelectedGateway] = useState<PaymentGateway>("card_mercadopago");
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copiedClabe, setCopiedClabe] = useState(false);
@@ -79,34 +79,46 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
     setIsProcessing(true);
 
     try {
-      const payload = {
-        orderId,
-        items,
-        shippingCost,
-        payer: {
-          name: shippingForm.name,
-          email: shippingForm.email,
-          phone: shippingForm.phone,
-          address: {
-            street: shippingForm.street,
-            number: shippingForm.number,
-            colonia: shippingForm.colonia,
-            city: shippingForm.city,
-            state: shippingForm.state,
-            zipCode: shippingForm.zipCode,
+      // 1. Caso Tarjeta / Mercado Pago Checkout Pro
+      if (selectedGateway === "card_mercadopago") {
+        const response = await fetch(paymentConfig.mercadoPago.checkoutApiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          wristSize: shippingForm.wristSize,
-          notes: shippingForm.notes,
-        },
-      };
+          body: JSON.stringify({
+            cartId: `cart-${orderId}`,
+            orderId,
+            buyerEmail: shippingForm.email.trim(),
+            buyerName: shippingForm.name.trim(),
+            buyerPhone: shippingForm.phone.trim(),
+            items: items.map((item) => ({
+              title: `${item.name} (${item.optionLabel || "Edición Sagrada"})`,
+              unit_price: item.price,
+              quantity: item.quantity,
+            })),
+            shippingCost,
+          }),
+        });
 
-      // 1. Caso Transferencia SPEI a Mercado Pago W (Cero Comisiones a cuenta oficial de Sergio Adrián Pérez Villarreal)
+        const data = await response.json();
+
+        if (!response.ok || !data.checkout_url) {
+          throw new Error(data?.error || "No se pudo conectar con Mercado Pago. Intenta nuevamente o usa SPEI.");
+        }
+
+        // Redirigir directamente a la pantalla oficial de Mercado Pago
+        window.location.href = data.checkout_url;
+        return;
+      }
+
+      // 2. Caso Transferencia SPEI a Mercado Pago W (Cero Comisiones a cuenta oficial de Sergio Adrián Pérez Villarreal)
       if (selectedGateway === "spei_mercadopago") {
         window.location.href = `/checkout/pending?gateway=spei_mercadopago&order_id=${orderId}&amount=${finalTotal}&name=${encodeURIComponent(shippingForm.name)}`;
         return;
       }
 
-      // 2. Caso WhatsApp Concierge Oficial
+      // 3. Caso WhatsApp Concierge Oficial
       if (selectedGateway === "whatsapp") {
         const customWhatsAppMessage = encodeURIComponent(
           `¡Hola ARCANO! Deseo acordar mi orden ceremonial *${orderId}* directamente por WhatsApp.\n\n` +
@@ -346,7 +358,40 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
             </h3>
 
             <div className="space-y-3">
-              {/* Opción 1: Transferencia SPEI a Mercado Pago W */}
+              {/* Opción 1: Tarjeta / Mercado Pago (Recomendada / Cero Fricción) */}
+              <label
+                onClick={() => setSelectedGateway("card_mercadopago")}
+                className={`block p-4 rounded-xl border transition-all cursor-pointer ${
+                  selectedGateway === "card_mercadopago"
+                    ? "bg-[#C5A059]/10 border-[#C5A059] shadow-[0_0_25px_rgba(197,160,89,0.3)] ring-1 ring-[#C5A059]"
+                    : "bg-[#111111] border-neutral-800 hover:border-neutral-700"
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="paymentGateway"
+                    checked={selectedGateway === "card_mercadopago"}
+                    onChange={() => setSelectedGateway("card_mercadopago")}
+                    className="mt-1 accent-[#C5A059]"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-white flex items-center gap-1.5">
+                        <span>💳 Tarjeta / Mercado Pago</span>
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-400 text-[9px] font-mono font-bold">
+                        INSTANTÁNEO
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
+                      Tarjetas de crédito (con opción a Meses Sin Intereses), débito, saldo Mercado Pago o Mercado Crédito.
+                    </p>
+                  </div>
+                </div>
+              </label>
+
+              {/* Opción 2: Transferencia SPEI a Mercado Pago W */}
               <label
                 onClick={() => setSelectedGateway("spei_mercadopago")}
                 className={`block p-4 rounded-xl border transition-all cursor-pointer ${
@@ -366,7 +411,7 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-white flex items-center gap-1.5">
-                        <span>🏛️ Transferencia SPEI (Mercado Pago W)</span>
+                        <span>🏛️ Transferencia SPEI (Directa)</span>
                       </span>
                       <span className="px-2 py-0.5 rounded-full bg-[#C5A059]/20 text-[#C5A059] text-[9px] font-mono font-bold">
                         0% COMISIÓN
@@ -376,37 +421,39 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                       Transfiere desde cualquier app bancaria a nuestra cuenta oficial y envía tu comprobante.
                     </p>
 
-                    {/* Ficha bancaria oficial blindada */}
-                    <div className="mt-3 p-3 rounded-lg bg-black/60 border border-[#C5A059]/30 text-[11px] font-mono space-y-1.5">
-                      <div className="flex justify-between items-center text-neutral-400">
-                        <span>Banco:</span>
-                        <span className="text-white font-bold">{BANCO_OFICIAL}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-neutral-400">
-                        <span>Titular:</span>
-                        <span className="text-[#FFE2A4] font-medium">{TITULAR_OFICIAL}</span>
-                      </div>
-                      <div className="pt-1 border-t border-neutral-800">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-neutral-400">CLABE (SPEI):</span>
-                          <button
-                            type="button"
-                            onClick={handleCopyClabe}
-                            className="px-2 py-0.5 rounded bg-[#C5A059]/20 hover:bg-[#C5A059]/30 border border-[#C5A059]/60 text-[#FFE2A4] text-[10px] font-sans transition-all cursor-pointer"
-                          >
-                            {copiedClabe ? "✓ ¡Copiada!" : "📋 Copiar CLABE"}
-                          </button>
+                    {/* Ficha bancaria oficial blindada cuando está seleccionado */}
+                    {selectedGateway === "spei_mercadopago" && (
+                      <div className="mt-3 p-3 rounded-lg bg-black/60 border border-[#C5A059]/30 text-[11px] font-mono space-y-1.5 animate-fadeIn">
+                        <div className="flex justify-between items-center text-neutral-400">
+                          <span>Banco:</span>
+                          <span className="text-white font-bold">{BANCO_OFICIAL}</span>
                         </div>
-                        <div className="text-[#FFE2A4] font-bold text-xs tracking-wider select-all">
-                          {CLABE_OFICIAL}
+                        <div className="flex justify-between items-center text-neutral-400">
+                          <span>Titular:</span>
+                          <span className="text-[#FFE2A4] font-medium">{TITULAR_OFICIAL}</span>
+                        </div>
+                        <div className="pt-1 border-t border-neutral-800">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-neutral-400">CLABE (SPEI):</span>
+                            <button
+                              type="button"
+                              onClick={handleCopyClabe}
+                              className="px-2 py-0.5 rounded bg-[#C5A059]/20 hover:bg-[#C5A059]/30 border border-[#C5A059]/60 text-[#FFE2A4] text-[10px] font-sans transition-all cursor-pointer"
+                            >
+                              {copiedClabe ? "✓ ¡Copiada!" : "📋 Copiar CLABE"}
+                            </button>
+                          </div>
+                          <div className="text-[#FFE2A4] font-bold text-xs tracking-wider select-all">
+                            {CLABE_OFICIAL}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </label>
 
-              {/* Opción 2: WhatsApp Concierge */}
+              {/* Opción 3: WhatsApp Concierge */}
               <label
                 onClick={() => setSelectedGateway("whatsapp")}
                 className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
@@ -463,6 +510,8 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
               className={`w-full py-4 rounded-xl font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-xl flex items-center justify-center gap-2 cursor-pointer ${
                 isProcessing
                   ? "bg-neutral-800 text-neutral-400 cursor-not-allowed"
+                  : selectedGateway === "card_mercadopago"
+                  ? "bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 active:scale-98 text-black shadow-[0_0_25px_rgba(197,160,89,0.4)]"
                   : selectedGateway === "spei_mercadopago"
                   ? "bg-[#C5A059] hover:bg-[#d8b368] text-black shadow-[0_0_25px_rgba(197,160,89,0.4)]"
                   : "bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-[0_0_25px_rgba(37,211,102,0.4)]"
@@ -471,17 +520,22 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
               {isProcessing ? (
                 <>
                   <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Procesando Orden...</span>
+                  <span>Conectando Pasarela Segura...</span>
+                </>
+              ) : selectedGateway === "card_mercadopago" ? (
+                <>
+                  <span>💳 Pagar con Tarjeta / Mercado Pago · MXN ${finalTotal.toLocaleString("es-MX")}</span>
+                  <span>→</span>
                 </>
               ) : selectedGateway === "spei_mercadopago" ? (
                 <>
-                  <span>Ficha SPEI Mercado Pago · MXN ${finalTotal.toLocaleString("es-MX")}</span>
-                  <span>🏛️</span>
+                  <span>🏛️ Ficha SPEI Mercado Pago · MXN ${finalTotal.toLocaleString("es-MX")}</span>
+                  <span>→</span>
                 </>
               ) : (
                 <>
-                  <span>Completar por WhatsApp con un Asesor</span>
-                  <span>💬</span>
+                  <span>💬 Completar por WhatsApp con un Asesor</span>
+                  <span>→</span>
                 </>
               )}
             </button>
