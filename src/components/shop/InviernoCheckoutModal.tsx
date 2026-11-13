@@ -93,6 +93,14 @@ export function InviernoCheckoutModal({
           buyerEmail: formData.email.trim() || "cliente@arcanosolutions.com",
           buyerName: formData.name.trim(),
           buyerPhone: formData.phone.trim(),
+          shippingAddress: {
+            street: formData.street.trim(),
+            number: formData.number.trim(),
+            colonia: formData.colonia.trim(),
+            city: formData.city.trim(),
+            state: formData.state.trim(),
+            zipCode: formData.zipCode.trim(),
+          },
           items: [
             {
               title: productTitle,

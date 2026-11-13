@@ -92,6 +92,14 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
             buyerEmail: shippingForm.email.trim(),
             buyerName: shippingForm.name.trim(),
             buyerPhone: shippingForm.phone.trim(),
+            shippingAddress: {
+              street: shippingForm.street.trim(),
+              number: shippingForm.number.trim(),
+              colonia: shippingForm.colonia.trim(),
+              city: shippingForm.city.trim(),
+              state: shippingForm.state.trim(),
+              zipCode: shippingForm.zipCode.trim(),
+            },
             items: items.map((item) => ({
               title: `${item.name} (${item.optionLabel || "Edición Sagrada"})`,
               unit_price: item.price,

@@ -38,12 +38,22 @@ interface CartItem {
   picture_url?: string;
 }
 
+interface ShippingAddress {
+  street?: string;
+  number?: string;
+  colonia?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+}
+
 interface CreateOrderBody {
   cartId?: string;
   orderId?: string;
   buyerEmail?: string;
   buyerName?: string;
   buyerPhone?: string;
+  shippingAddress?: ShippingAddress;
   items: CartItem[];
   shippingCost?: number;
 }
@@ -68,7 +78,7 @@ app.post("/create-order", async (req: Request, res: Response) => {
       });
     }
 
-    const { cartId, orderId, buyerEmail, buyerName, items, shippingCost = 0 } = req.body as CreateOrderBody;
+    const { cartId, orderId, buyerEmail, buyerName, buyerPhone, shippingAddress, items, shippingCost = 0 } = req.body as CreateOrderBody;
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: "El carrito no contiene productos." });
@@ -101,7 +111,34 @@ app.post("/create-order", async (req: Request, res: Response) => {
       });
     }
 
-    // 4. Llamada a la API de Mercado Pago (Orders API v1)
+    // 4. Desglose enriquecido de datos del pagador (Maximiza aprobación y antifraude)
+    const nameParts = (buyerName || "Cliente Arcano").trim().split(/\s+/);
+    const firstName = nameParts[0] || "Cliente";
+    const lastName = nameParts.slice(1).join(" ") || "Arcano";
+
+    const cleanPhone = (buyerPhone || "").replace(/\D/g, "");
+    const areaCode = cleanPhone.length === 10 ? cleanPhone.slice(0, 2) : "52";
+    const phoneNumber = cleanPhone.length === 10 ? cleanPhone.slice(2) : cleanPhone || "12345678";
+
+    const payerPayload: any = {
+      email: buyerEmail || "cliente@arcanosolutions.com",
+      first_name: firstName,
+      last_name: lastName,
+      phone: {
+        area_code: areaCode,
+        number: phoneNumber,
+      },
+    };
+
+    if (shippingAddress && shippingAddress.street) {
+      payerPayload.address = {
+        street_name: shippingAddress.street,
+        street_number: shippingAddress.number || "S/N",
+        zip_code: shippingAddress.zipCode || "64000",
+      };
+    }
+
+    // 5. Llamada a la API de Mercado Pago (Orders API v1)
     const mpResponse = await fetch("https://api.mercadopago.com/v1/orders", {
       method: "POST",
       headers: {
@@ -114,10 +151,7 @@ app.post("/create-order", async (req: Request, res: Response) => {
         processing_mode: "manual",
         total_amount: finalTotal.toFixed(2),
         external_reference: externalReference,
-        payer: {
-          email: buyerEmail || "cliente@arcanosolutions.com",
-          first_name: buyerName || "Cliente Arcano",
-        },
+        payer: payerPayload,
         items: mpItems,
         config: {
           online: {
@@ -175,6 +209,19 @@ function hmacSHA256(secret: string, manifest: string) {
   return crypto.createHmac("sha256", secret).update(manifest).digest("hex");
 }
 
+// Control de Idempotencia en memoria para Webhooks (evita procesar duplicados)
+const processedEvents = new Set<string>();
+function isEventProcessed(eventKey: string): boolean {
+  if (!eventKey) return false;
+  if (processedEvents.has(eventKey)) return true;
+  if (processedEvents.size > 2000) {
+    const firstKey = processedEvents.values().next().value;
+    if (firstKey) processedEvents.delete(firstKey);
+  }
+  processedEvents.add(eventKey);
+  return false;
+}
+
 // Handler de Webhook de Mercado Pago
 export async function webhookHandler(req: Request, res: Response) {
   try {
@@ -194,6 +241,13 @@ export async function webhookHandler(req: Request, res: Response) {
         console.warn("[MP Webhook] Firma inválida rechazada:", { dataId, xRequestId });
         return res.status(401).json({ error: "invalid signature" });
       }
+    }
+
+    // Idempotencia: Verificar si este evento ya fue recibido
+    const eventKey = `${xRequestId || 'no-req'}:${dataId}`;
+    if (isEventProcessed(eventKey)) {
+      console.log("[MP Webhook] Evento ya procesado previamente (Idempotencia ACK):", eventKey);
+      return res.status(200).json({ received: true, id: dataId, deduplicated: true });
     }
 
     // Log estructurado del evento
