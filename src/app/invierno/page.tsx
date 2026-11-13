@@ -6,6 +6,24 @@ import Link from "next/link";
 import { ArcanoLogo } from "@/components/ArcanoLogo";
 import { getAssetPath } from "@/lib/utils";
 import { trackWhatsAppConversion } from "@/lib/analytics";
+import { useCart } from "@/context/CartContext";
+import { InviernoCheckoutModal } from "@/components/shop/InviernoCheckoutModal";
+
+// Objeto de producto oficial para Carrito Ceremonial
+const INVIERNO_SHOP_PRODUCT = {
+  id: "pulsera-invierno-lapislazuli-natural",
+  slug: "pulsera-invierno-lapislazuli",
+  name: "Pulsera de Lapislázuli Natural 8mm (Colección Invierno) + Porta Incienso Áurico",
+  price: 1299,
+  imageUrl: "/images/shop/invierno/pulsera-lapislazuli-producto-marmol.jpg",
+  categoryName: "Colección de Invierno",
+  formattedPrice: "$1,299 MXN",
+  shippingNote: "Envío Gratis a Todo México",
+  tagline: "Lapislázuli 100% Natural 8mm con Pirita Dorada + Porta Incienso Áurico de Regalo",
+  description: "Pulsera artesanal forjada con cuentas esféricas seleccionadas de lapislázuli natural de 8mm y pirita dorada. $1,299 MXN con Envío Gratis a Todo México y Porta Incienso Áurico de regalo.",
+  ritualUse: "Activación del tercer ojo y serenidad invernal.",
+  categoryId: "coleccion-invierno",
+};
 
 // Mensaje directo y sin fricción para el enlace wa.me
 const WHATSAPP_PHONE = "528121912778";
@@ -47,6 +65,15 @@ const IMAGES = [
 
 export default function InviernoLandingPage() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const { addItem, openCart } = useCart();
+
+  const handleAddToCart = () => {
+    addItem(INVIERNO_SHOP_PRODUCT as any);
+    setToastMessage("✓ ¡Pulsera agregada al Carrito Ceremonial!");
+    setTimeout(() => setToastMessage(null), 3500);
+  };
 
   // Asegurar compatibilidad estricta con Google Ads Tag Assistant y atributos onclick nativos
   useEffect(() => {
@@ -219,24 +246,61 @@ export default function InviernoLandingPage() {
             </span>
           </div>
 
-          {/* CTA Principal de la Sección */}
-          <a
-            id="btn-whatsapp-invierno-hero"
-            data-gtm="whatsapp-conversion"
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => handleWhatsAppCta(e, "hero_price_card")}
-            className="w-full py-4 px-6 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-bold text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(37,211,102,0.5)] flex items-center justify-center gap-3 cursor-pointer group"
-          >
-            <span className="text-2xl group-hover:scale-110 transition-transform">💬</span>
-            <span className="leading-tight text-left sm:text-center">
-              Apartar Mi Pulsera por WhatsApp
-              <span className="block text-[10px] font-normal tracking-normal text-black/80">
-                Atención directa para confirmar tu medida en 1 minuto
+          {/* Opciones de Compra y Pago */}
+          <div className="space-y-3 pt-2">
+            {/* Opción 1: Pagar por Transferencia SPEI Directa (Formulario de Envío + Ficha Oficial) */}
+            <button
+              type="button"
+              onClick={() => setIsCheckoutModalOpen(true)}
+              className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center gap-3 cursor-pointer group"
+            >
+              <span className="text-xl sm:text-2xl group-hover:scale-110 transition-transform">🏛️</span>
+              <span className="leading-tight text-left sm:text-center">
+                Pagar con Transferencia SPEI ($1,299 MXN)
+                <span className="block text-[10px] font-semibold tracking-normal text-black/80 font-mono">
+                  Llena tus datos de envío · 0% comisión · Envío Gratis Incluido
+                </span>
               </span>
-            </span>
-          </a>
+            </button>
+
+            {/* Opción 2: Atención y Compra Directa por WhatsApp (Con Google Ads Conversion Tag) */}
+            <a
+              id="btn-whatsapp-invierno-hero"
+              data-gtm="whatsapp-conversion"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => handleWhatsAppCta(e, "hero_price_card")}
+              className="w-full py-3.5 px-6 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-bold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(37,211,102,0.4)] flex items-center justify-center gap-2.5 cursor-pointer group"
+            >
+              <span className="text-xl group-hover:scale-110 transition-transform">💬</span>
+              <span className="leading-tight text-left sm:text-center">
+                Comprar / Apartar por WhatsApp
+                <span className="block text-[10px] font-normal tracking-normal text-black/80">
+                  Atención humana inmediata para dudas y medidas
+                </span>
+              </span>
+            </a>
+
+            {/* Opción 3: Agregar al Carrito Ceremonial */}
+            <div className="pt-1 flex items-center justify-center gap-3 text-xs">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="inline-flex items-center gap-1.5 text-xs font-serif text-[#FFE2A4] hover:text-white transition-colors cursor-pointer py-1 px-3 rounded-lg border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-black/40"
+              >
+                <span>🛒</span>
+                <span>Agregar al Carrito</span>
+              </button>
+              <button
+                type="button"
+                onClick={openCart}
+                className="text-[11px] font-mono text-neutral-400 hover:text-white underline underline-offset-4 transition-colors cursor-pointer"
+              >
+                Ver Mi Carrito
+              </button>
+            </div>
+          </div>
 
           {/* Confianza Inmediata */}
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-neutral-800 text-[10px] text-neutral-400 font-serif">
@@ -316,19 +380,28 @@ export default function InviernoLandingPage() {
             </div>
           </div>
 
-          {/* Mini CTA hacia WhatsApp con la promoción */}
-          <a
-            id="btn-whatsapp-invierno-promo"
-            data-gtm="whatsapp-conversion"
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => handleWhatsAppCta(e, "promo_porta_incienso")}
-            className="w-full py-3 px-4 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/50 text-[#25D366] font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
-          >
-            <span>💬 Apartar Pulsera + Reclamar Porta Incienso Gratis</span>
-            <span>→</span>
-          </a>
+          {/* Botones de Acción para la Promoción */}
+          <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
+            <button
+              type="button"
+              onClick={() => setIsCheckoutModalOpen(true)}
+              className="flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] hover:brightness-110 text-black font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+            >
+              <span>🏛️ Pagar $1,299 SPEI + Regalo</span>
+              <span>→</span>
+            </button>
+            <a
+              id="btn-whatsapp-invierno-promo"
+              data-gtm="whatsapp-conversion"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => handleWhatsAppCta(e, "promo_porta_incienso")}
+              className="flex-1 py-3.5 px-4 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/60 text-[#25D366] hover:text-white font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <span>💬 Apartar por WhatsApp</span>
+            </a>
+          </div>
 
         </section>
 
@@ -622,13 +695,26 @@ export default function InviernoLandingPage() {
       </main>
 
       {/* ─────────────────────────────────────────────────────────────
-          9. STICKY BOTTOM CTA MASIVO (PERMANENTE EN MÓVIL)
+          9. STICKY BOTTOM CTA DUAL (SPEI + WHATSAPP)
          ───────────────────────────────────────────────────────────── */}
       <aside
         id="sticky-mobile-cta"
-        className="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 bg-[#07060B]/95 backdrop-blur-xl border-t border-[#D4AF37]/50 shadow-[0_-8px_35px_rgba(0,0,0,0.95)] safe-area-bottom"
+        className="fixed bottom-0 left-0 right-0 z-40 p-2.5 sm:p-3.5 bg-[#07060B]/95 backdrop-blur-xl border-t border-[#D4AF37]/50 shadow-[0_-8px_35px_rgba(0,0,0,0.95)] safe-area-bottom"
       >
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto grid grid-cols-2 gap-2">
+          {/* Botón Pagar por SPEI */}
+          <button
+            type="button"
+            onClick={() => setIsCheckoutModalOpen(true)}
+            className="py-2.5 sm:py-3 px-2 sm:px-3 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] flex flex-col items-center justify-center leading-tight cursor-pointer"
+          >
+            <span className="flex items-center gap-1 font-black text-[11px] sm:text-xs">
+              <span>🏛️</span> PAGAR SPEI
+            </span>
+            <span className="text-[9px] font-mono text-black/85 font-bold">$1,299 · ENVÍO GRATIS</span>
+          </button>
+
+          {/* Botón WhatsApp */}
           <a
             id="btn-whatsapp-invierno-sticky"
             data-gtm="whatsapp-conversion"
@@ -636,24 +722,36 @@ export default function InviernoLandingPage() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => handleWhatsAppCta(e, "sticky_bottom_cta")}
-            className="w-full py-3.5 sm:py-4 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-extrabold text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(37,211,102,0.6)] flex items-center justify-between gap-3 cursor-pointer"
+            className="py-2.5 sm:py-3 px-2 sm:px-3 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:scale-98 text-black font-sans font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(37,211,102,0.5)] flex flex-col items-center justify-center leading-tight cursor-pointer"
           >
-            <div className="flex items-center gap-2.5">
-              <span className="text-2xl sm:text-3xl">💬</span>
-              <div className="text-left leading-tight">
-                <span className="block font-black text-xs sm:text-sm">APARTAR MI PULSERA</span>
-                <span className="block text-[10px] font-bold text-black/90">
-                  $1,299 MXN · ENVÍO GRATIS + REGALO PORTA INCIENSO
-                </span>
-              </div>
-            </div>
-            <div className="bg-black/15 px-3 py-1.5 rounded-full text-[11px] font-mono tracking-widest font-bold flex items-center gap-1">
-              <span>WHATSAPP</span>
-              <span>→</span>
-            </div>
+            <span className="flex items-center gap-1 font-black text-[11px] sm:text-xs">
+              <span>💬</span> WHATSAPP
+            </span>
+            <span className="text-[9px] font-mono text-black/85 font-bold">APARTAR EN CHAT</span>
           </a>
         </div>
       </aside>
+
+      {/* MODAL OFICIAL DE PAGO POR TRANSFERENCIA SPEI CON FORMULARIO DE ENVÍO */}
+      <InviernoCheckoutModal
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+        productTitle="Pulsera de Lapislázuli Natural 8mm + Porta Incienso Áurico"
+        price={1299}
+      />
+
+      {/* NOTIFICACIÓN TOAST FLOTANTE AL AGREGAR AL CARRITO */}
+      {toastMessage && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-[#121018]/95 border border-[#D4AF37] text-[#FFE2A4] px-5 py-3 rounded-full shadow-[0_0_25px_rgba(212,175,55,0.45)] text-xs font-serif backdrop-blur-md flex items-center gap-3 animate-fadeIn">
+          <span>{toastMessage}</span>
+          <button
+            onClick={openCart}
+            className="px-2 py-0.5 rounded bg-[#D4AF37] text-black font-sans font-bold text-[10px] uppercase hover:bg-white transition-colors cursor-pointer"
+          >
+            Ver Carrito
+          </button>
+        </div>
+      )}
 
     </div>
   );
