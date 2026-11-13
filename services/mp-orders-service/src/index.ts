@@ -378,15 +378,18 @@ export async function webhookHandler(req: Request, res: Response) {
 
               if (extRef) {
                 const { data: syncRes, error: syncErr } = await supabase.rpc("rpc_sync_order_from_webhook", {
-                  p_external_reference: extRef,
-                  p_mp_order_id: isPayment ? (resource.order?.id ? String(resource.order.id) : dataId) : dataId,
-                  p_mp_status: mpStatus,
-                  p_mp_status_detail: mpStatusDetail,
-                  p_mp_payment_id: paymentId,
-                  p_payment_amount: paymentAmount,
-                  p_payment_status: paymentStatus,
-                  p_payment_method_id: paymentMethodId,
-                  p_payment_type_id: paymentTypeId,
+                  p_event: {
+                    request_id: xRequestId || `auto-${Date.now()}-${dataId}`,
+                    event_type: req.body?.type || req.query?.type || "unknown",
+                    event_action: req.body?.action || req.query?.topic || "unknown",
+                    data_id: dataId,
+                    external_reference: extRef,
+                    mp_order_id: isPayment ? (resource.order?.id ? String(resource.order.id) : dataId) : dataId,
+                    mp_payment_id: paymentId,
+                    mp_status: mpStatus,
+                    mp_status_detail: mpStatusDetail,
+                    dispute_type: (req.body?.type === "claim" || req.body?.type === "chargebacks") ? req.body.type : null,
+                  },
                 });
 
                 if (syncErr) {
