@@ -386,15 +386,31 @@ export function CeremonialCheckoutModal({ isOpen, onClose }: CeremonialCheckoutM
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-white flex items-center gap-1.5">
-                        <span>💳 Tarjeta / Mercado Pago</span>
+                        <span>💳 Tarjeta de Crédito / Débito</span>
                       </span>
                       <span className="px-2 py-0.5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-400 text-[9px] font-mono font-bold">
                         INSTANTÁNEO
                       </span>
                     </div>
                     <p className="text-[11px] text-neutral-300 mt-1 leading-snug">
-                      Tarjetas de crédito (con opción a Meses Sin Intereses), débito, saldo Mercado Pago o Mercado Crédito.
+                      Meses Sin Intereses, débito o saldo en cuenta. Procesado con la seguridad de Mercado Pago.
                     </p>
+                    {/* Logos Oficiales Mercado Pago & Tarjetas Aceptadas */}
+                    <div className="mt-2.5 pt-2 border-t border-neutral-800/80 flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 bg-[#009EE3]/15 border border-[#009EE3]/40 rounded text-[#009EE3] text-[10px] font-bold tracking-tight">
+                          Mercado Pago
+                        </span>
+                        <div className="flex items-center gap-1 text-[10px] text-neutral-400 font-mono">
+                          <span className="px-1 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">VISA</span>
+                          <span className="px-1 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">Mastercard</span>
+                          <span className="px-1 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">AMEX</span>
+                        </div>
+                      </div>
+                      <span className="text-[9px] text-emerald-400 font-mono flex items-center gap-1">
+                        🔒 Cifrado SSL 256-bit 3DS
+                      </span>
+                    </div>
                   </div>
                 </div>
               </label>

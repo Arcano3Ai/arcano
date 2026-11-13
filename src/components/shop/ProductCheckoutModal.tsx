@@ -312,7 +312,7 @@ export function ProductCheckoutModal({
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-white flex items-center gap-1.5">
                       <span>💳</span>
-                      <span>Tarjeta / Mercado Pago</span>
+                      <span>Tarjeta de Crédito / Débito</span>
                     </span>
                     <span className="px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-400 text-[9px] font-mono font-bold">
                       INSTANTÁNEO
@@ -321,6 +321,15 @@ export function ProductCheckoutModal({
                   <p className="text-[10px] text-neutral-400 mt-1 leading-snug">
                     Crédito, Débito, Meses sin intereses, Saldo Mercado Pago o Mercado Crédito.
                   </p>
+                  <div className="mt-2 pt-2 border-t border-neutral-800/80 flex items-center justify-between flex-wrap gap-1.5">
+                    <div className="flex items-center gap-1.5">
+                      <span className="px-1.5 py-0.5 bg-[#009EE3]/15 border border-[#009EE3]/40 rounded text-[#009EE3] text-[9px] font-bold">
+                        Mercado Pago
+                      </span>
+                      <span className="text-[9px] text-neutral-400 font-mono">VISA · Mastercard · AMEX</span>
+                    </div>
+                    <span className="text-[8px] text-emerald-400 font-mono">🔒 Cifrado 3DS</span>
+                  </div>
                 </button>
 
                 {/* Opción Transferencia SPEI */}
