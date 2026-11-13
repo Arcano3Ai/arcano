@@ -241,20 +241,42 @@ export default function InviernoLandingPage() {
 
           {/* Opciones de Compra y Pago */}
           <div className="space-y-3 pt-2">
-            {/* Opción 1: Pagar por Transferencia SPEI Directa (Formulario de Envío + Ficha Oficial) */}
+            {/* Opción 1: Comprar Ahora con Mercado Pago / Tarjeta / SPEI / OXXO */}
             <button
               type="button"
               onClick={() => setIsCheckoutModalOpen(true)}
               className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center gap-3 cursor-pointer group"
             >
-              <span className="text-xl sm:text-2xl group-hover:scale-110 transition-transform">🏛️</span>
+              <span className="text-xl sm:text-2xl group-hover:scale-110 transition-transform">💳</span>
               <span className="leading-tight text-left sm:text-center">
-                Pagar con Transferencia SPEI ($1,299 MXN)
+                Comprar Ahora · Mercado Pago / Tarjeta / SPEI ($1,299 MXN)
                 <span className="block text-[10px] font-semibold tracking-normal text-black/80 font-mono">
-                  Llena tus datos de envío · 0% comisión · Envío Gratis Incluido
+                  Tarjetas (Crédito/Débito) · Hasta 3 MSI · SPEI u OXXO · Envío Gratis
                 </span>
               </span>
             </button>
+
+            {/* Cintillo de Métodos de Pago Oficiales Mercado Pago */}
+            <div className="p-2.5 rounded-xl bg-black/60 border border-[#D4AF37]/30 space-y-1.5">
+              <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                <span className="text-[#D4AF37] font-semibold tracking-wider uppercase">Métodos de Pago Oficiales</span>
+                <span className="text-emerald-400 font-bold">🔒 100% Cifrado 3DS</span>
+              </div>
+              <div className="flex items-center justify-center flex-wrap gap-1.5 text-[9px] font-mono">
+                <span className="px-2 py-0.5 bg-[#009EE3]/20 border border-[#009EE3]/50 rounded text-[#009EE3] font-bold">
+                  Mercado Pago
+                </span>
+                <span className="px-2 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-300">
+                  💳 VISA · Mastercard · AMEX
+                </span>
+                <span className="px-2 py-0.5 bg-emerald-950/50 border border-emerald-500/40 rounded text-emerald-400 font-medium">
+                  🏛️ SPEI Inmediato
+                </span>
+                <span className="px-2 py-0.5 bg-red-950/40 border border-red-500/40 rounded text-red-300">
+                  🏪 OXXO
+                </span>
+              </div>
+            </div>
 
             {/* Opción 2: Atención y Compra Directa por WhatsApp (Con Google Ads Conversion Tag) */}
             <a
@@ -380,7 +402,7 @@ export default function InviernoLandingPage() {
               onClick={() => setIsCheckoutModalOpen(true)}
               className="flex-1 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] hover:brightness-110 text-black font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-[0_0_20px_rgba(212,175,55,0.3)]"
             >
-              <span>🏛️ Pagar $1,299 SPEI + Regalo</span>
+              <span>💳 Comprar $1,299 · Mercado Pago / SPEI</span>
               <span>→</span>
             </button>
             <a
@@ -648,16 +670,16 @@ export default function InviernoLandingPage() {
         className="fixed bottom-0 left-0 right-0 z-40 p-2.5 sm:p-3.5 bg-[#07060B]/95 backdrop-blur-xl border-t border-[#D4AF37]/50 shadow-[0_-8px_35px_rgba(0,0,0,0.95)] safe-area-bottom"
       >
         <div className="max-w-md mx-auto grid grid-cols-2 gap-2">
-          {/* Botón Pagar por SPEI */}
+          {/* Botón Comprar por Mercado Pago / SPEI */}
           <button
             type="button"
             onClick={() => setIsCheckoutModalOpen(true)}
             className="py-2.5 sm:py-3 px-2 sm:px-3 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] hover:brightness-110 active:scale-98 text-black font-sans font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] flex flex-col items-center justify-center leading-tight cursor-pointer"
           >
             <span className="flex items-center gap-1 font-black text-[11px] sm:text-xs">
-              <span>🏛️</span> PAGAR SPEI
+              <span>💳</span> COMPRAR AHORA
             </span>
-            <span className="text-[9px] font-mono text-black/85 font-bold">$1,299 · ENVÍO GRATIS</span>
+            <span className="text-[9px] font-mono text-black/85 font-bold">MERCADO PAGO · SPEI · OXXO</span>
           </button>
 
           {/* Botón WhatsApp */}

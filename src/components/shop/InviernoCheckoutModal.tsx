@@ -291,7 +291,7 @@ export function InviernoCheckoutModal({
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-white flex items-center gap-1.5">
                       <span>💳</span>
-                      <span>Tarjeta de Crédito / Débito</span>
+                      <span>Mercado Pago · Tarjeta Crédito / Débito</span>
                     </span>
                     <span className="px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-400 text-[9px] font-mono font-bold">
                       INSTANTÁNEO
@@ -593,7 +593,7 @@ export function InviernoCheckoutModal({
                     </>
                   ) : (
                     <>
-                      <span>💳 Pagar con Tarjeta / Mercado Pago (${price.toLocaleString("es-MX")} MXN)</span>
+                      <span>💳 Pagar con Mercado Pago / Tarjeta (${price.toLocaleString("es-MX")} MXN)</span>
                       <span>→</span>
                     </>
                   )}

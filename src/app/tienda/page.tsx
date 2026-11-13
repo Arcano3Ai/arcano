@@ -805,7 +805,7 @@ function TiendaContent() {
                     className="w-full py-3.5 px-6 bg-gradient-to-r from-[#C5A059] via-[#d8b368] to-[#C5A059] hover:brightness-110 text-black font-bold text-xs tracking-[0.16em] uppercase rounded-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(197,160,89,0.35)] cursor-pointer group"
                   >
                     <span>💳</span>
-                    <span>{t("Comprar Ahora · Tarjeta / SPEI / OXXO", "Buy Now · Card / SPEI / OXXO")}</span>
+                    <span>{t("Comprar Ahora · Mercado Pago / Tarjeta / SPEI", "Buy Now · Mercado Pago / Card / SPEI")}</span>
                     <span className="text-sm group-hover:translate-x-1 transition-transform">→</span>
                   </button>
 
