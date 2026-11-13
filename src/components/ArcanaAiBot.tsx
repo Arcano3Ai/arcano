@@ -148,6 +148,31 @@ export const ArcanaAiBot: React.FC = () => {
       };
     }
 
+    // 1.5 Consultas sobre Métodos de Pago, Transferencias SPEI y CLABE Oficial
+    if (
+      q.includes("pago") ||
+      q.includes("pagar") ||
+      q.includes("clabe") ||
+      q.includes("cuenta") ||
+      q.includes("transferencia") ||
+      q.includes("transferir") ||
+      q.includes("spei") ||
+      q.includes("stp") ||
+      q.includes("mercado pago") ||
+      q.includes("oxxo") ||
+      q.includes("tarjeta") ||
+      q.includes("banco")
+    ) {
+      return {
+        response: `💳 Métodos de Pago Oficiales en ARCANO:\n\nAceptamos Tarjetas de Crédito/Débito (con opción a Meses Sin Intereses), Mercado Pago, OXXO y Transferencia SPEI.\n\n🏛️ ¿Por qué puedes ver 2 tipos de CLABE?\n\n1. Vía Mercado Pago (Acreditación Automática al instante):\nSi compras en la web eligiendo SPEI, Mercado Pago genera una CLABE Virtual única de STP a nombre de «Arcano Sabiduria» exclusiva para tu pedido. Tu pago se valida en automático en 2 segundos y no necesitas enviar foto de comprobante.\n\n2. Transferencia Directa a Cuenta ARCANO (Validación Manual):\nSi deseas transferir directo a nuestra cuenta bancaria fija:\n• Banco: Mercado Pago W\n• CLABE: 722969017074087021\n• Beneficiario: Sergio Adrián Pérez Villarreal\nAl transferir a esta cuenta, solo nos compartes tu comprobante a nuestro WhatsApp para procesar tu guía express asegurada.\n\nAmbas opciones son 100% oficiales, blindadas y sin comisión extra.`,
+        quickReplies: [
+          "Ver Brazaletes en Tienda",
+          "Colección de Invierno ($1,299)",
+          "Hablar con Asesor en WhatsApp",
+        ],
+      };
+    }
+
     // 2. Cálculo de arcano de nacimiento
     if (q.includes("nacimiento") || q.includes("cumpleaños") || q.includes("fecha") || /\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b/.test(q)) {
       const dateMatch = q.match(/(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})/);
